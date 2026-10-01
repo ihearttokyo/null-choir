@@ -24,7 +24,7 @@ Launch/header evidence confirms `gpt-6.1-sol`, `xhigh`, read-only sandbox, and a
 
 ## Proposed engine and asset pipeline
 
-Retain Godot: no evidenced blocker warrants replacing it. First evaluate the existing SoundFont-synthesizing [Godot MIDI Player](https://godotengine.org/asset-library/asset/1667), pinned to a reviewed revision. Its compatibility, sound quality, timing, and loops on Godot 4.7.2 are untested. Any selected runtime add-on and soundbank must be project-local and pinned for reproducible, self-contained application behavior.
+Retain Godot: no evidenced blocker warrants replacing it. First evaluate the existing SoundFont-synthesizing [Godot MIDI Player](https://godotengine.org/asset-library/asset/1667), pinned to a reviewed revision. At research time, its compatibility, sound quality, timing, and loops on Godot 4.7.2 were untested. [CHECKPOINT.md](CHECKPOINT.md) records subsequent implementation evidence. Any selected runtime add-on and soundbank must be project-local and pinned for reproducible, self-contained application behavior.
 
 If representative playback fails, evaluate a narrowly scoped native synth, such as [TinySoundFont](https://github.com/schellingb/TinySoundFont), rather than replacing the game engine. Verify the selected bank's redistribution terms and actual instruments. [GeneralUser GS compatibility guidance](https://www.schristiancollins.com/generaluser) warns against assuming that partial synth implementations reproduce its programming correctly.
 
@@ -36,4 +36,4 @@ Package an Apple Silicon application with all music, soundbank, and runtime depe
 
 Build one offline Mac export that synthesizes a representative MIDI loop. Check tempo changes, dense notes, drums, pitch bend, repeated loop boundaries, volume/mute, pause/resume, level switching, and independence from host-installed libraries. Audition the instruments before composing all eight final tracks. Then implement the first finished level with its original Blender art.
 
-NOT RUN: MIDI playback, game tests, compilation, export, performance benchmarks, signing/notarization, and computer-use GUI validation. Implementation was approved on 2026-09-30; these gates remain open.
+At the research boundary, MIDI playback, game tests, compilation, export, performance benchmarks, signing/notarization, and computer-use GUI validation had not run. Implementation was approved on 2026-09-30. Consult [CHECKPOINT.md](CHECKPOINT.md) for current completed checks and remaining gates.

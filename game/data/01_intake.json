@@ -1,0 +1,586 @@
+{
+  "id": "intake",
+  "title": "THE INTAKE",
+  "subtitle": "01 / RECEIVE THE INSTRUCTION",
+  "cell_size": 4,
+  "spawn": [
+    14.5,
+    28.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      11,
+      26,
+      17,
+      30
+    ],
+    [
+      11,
+      20,
+      17,
+      25
+    ],
+    [
+      5,
+      23,
+      11,
+      24
+    ],
+    [
+      5,
+      19,
+      6,
+      23
+    ],
+    [
+      2,
+      12,
+      9,
+      18
+    ],
+    [
+      5,
+      7,
+      6,
+      12
+    ],
+    [
+      4,
+      7,
+      12,
+      9
+    ],
+    [
+      13,
+      7,
+      14,
+      10
+    ],
+    [
+      11,
+      10,
+      17,
+      19
+    ],
+    [
+      17,
+      22,
+      23,
+      23
+    ],
+    [
+      22,
+      18,
+      23,
+      23
+    ],
+    [
+      20,
+      11,
+      26,
+      18
+    ],
+    [
+      23,
+      9,
+      24,
+      11
+    ],
+    [
+      17,
+      7,
+      24,
+      9
+    ],
+    [
+      13,
+      5,
+      14,
+      9
+    ],
+    [
+      10,
+      0,
+      18,
+      4
+    ],
+    [
+      1,
+      15,
+      2,
+      16
+    ]
+  ],
+  "loops": [
+    {
+      "id": "intake_loop_bell",
+      "route": [
+        [
+          14,
+          23
+        ],
+        [
+          6,
+          23
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          23
+        ]
+      ],
+      "hero": "skin_bell"
+    },
+    {
+      "id": "intake_loop_siphon",
+      "route": [
+        [
+          14,
+          23
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          23,
+          14
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          23
+        ]
+      ],
+      "hero": "siphon_heart"
+    }
+  ],
+  "heroes": [
+    {
+      "id": "skin_bell",
+      "cell": [
+        6,
+        16
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "siphon_heart",
+      "cell": [
+        23.5,
+        14.5
+      ],
+      "yaw": 180
+    }
+  ],
+  "doors": [
+    {
+      "id": "containment_gate",
+      "cell": [
+        14,
+        5.75
+      ],
+      "size": [
+        8.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "blood_key",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        3.5,
+        13.5
+      ],
+      "text": "BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "ivory_key",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        25,
+        12.5
+      ],
+      "text": "IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "bell_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        13.5,
+        10.5
+      ],
+      "text": "RECOVERY IMAGE STORED",
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    },
+    {
+      "id": "intake_story",
+      "kind": "story",
+      "cell": [
+        1.5,
+        15.5
+      ],
+      "text": "A maintenance plate beneath the skin: DO NOT RESTART. The order is older than the cathedral."
+    },
+    {
+      "id": "exit",
+      "kind": "exit",
+      "cell": [
+        14.5,
+        1.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "CONTAINMENT RESTORED / DESCEND"
+    }
+  ],
+  "pickups": [
+    {
+      "id": "entry_ammo",
+      "kind": "ammo",
+      "amount": 35,
+      "weapon": 1,
+      "cell": [
+        12,
+        27
+      ]
+    },
+    {
+      "id": "west_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        7.5,
+        23.5
+      ]
+    },
+    {
+      "id": "bell_armor",
+      "kind": "armor",
+      "amount": 40,
+      "cell": [
+        8.5,
+        13.5
+      ]
+    },
+    {
+      "id": "upper_ammo",
+      "kind": "ammo",
+      "amount": 45,
+      "weapon": 1,
+      "cell": [
+        5,
+        8
+      ]
+    },
+    {
+      "id": "nave_health",
+      "kind": "health",
+      "amount": 30,
+      "cell": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "siphon_ammo",
+      "kind": "ammo",
+      "amount": 40,
+      "weapon": 1,
+      "cell": [
+        25,
+        17
+      ]
+    },
+    {
+      "id": "siphon_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        21,
+        13
+      ]
+    },
+    {
+      "id": "gate_ammo",
+      "kind": "ammo",
+      "amount": 50,
+      "weapon": 1,
+      "cell": [
+        12,
+        3
+      ]
+    },
+    {
+      "id": "gate_health",
+      "kind": "health",
+      "amount": 40,
+      "cell": [
+        17,
+        3
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "intake_enemy_00",
+      "kind": "worker",
+      "cell": [
+        13,
+        22
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "intake_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        16,
+        21
+      ],
+      "yaw": 73
+    },
+    {
+      "id": "intake_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        22
+      ],
+      "yaw": 146
+    },
+    {
+      "id": "intake_enemy_03",
+      "kind": "worker",
+      "cell": [
+        6,
+        17
+      ],
+      "yaw": 219
+    },
+    {
+      "id": "intake_enemy_04",
+      "kind": "crawler",
+      "cell": [
+        3.5,
+        15
+      ],
+      "yaw": 292
+    },
+    {
+      "id": "intake_enemy_05",
+      "kind": "crawler",
+      "cell": [
+        8,
+        14
+      ],
+      "yaw": 5
+    },
+    {
+      "id": "intake_enemy_06",
+      "kind": "worker",
+      "cell": [
+        8,
+        18
+      ],
+      "yaw": 78
+    },
+    {
+      "id": "intake_enemy_07",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        9
+      ],
+      "yaw": 151
+    },
+    {
+      "id": "intake_enemy_08",
+      "kind": "worker",
+      "cell": [
+        12,
+        8
+      ],
+      "yaw": 224
+    },
+    {
+      "id": "intake_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        12,
+        12
+      ],
+      "yaw": 297
+    },
+    {
+      "id": "intake_enemy_10",
+      "kind": "worker",
+      "cell": [
+        16,
+        15
+      ],
+      "yaw": 10
+    },
+    {
+      "id": "intake_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        15,
+        18
+      ],
+      "yaw": 83
+    },
+    {
+      "id": "intake_enemy_12",
+      "kind": "crawler",
+      "cell": [
+        23,
+        22
+      ],
+      "yaw": 156
+    },
+    {
+      "id": "intake_enemy_13",
+      "kind": "worker",
+      "cell": [
+        21,
+        17
+      ],
+      "yaw": 229
+    },
+    {
+      "id": "intake_enemy_14",
+      "kind": "crawler",
+      "cell": [
+        25,
+        16
+      ],
+      "yaw": 302
+    },
+    {
+      "id": "intake_enemy_15",
+      "kind": "worker",
+      "cell": [
+        25,
+        12
+      ],
+      "yaw": 15
+    },
+    {
+      "id": "intake_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        21,
+        12
+      ],
+      "yaw": 88
+    },
+    {
+      "id": "intake_enemy_17",
+      "kind": "worker",
+      "cell": [
+        23,
+        9
+      ],
+      "yaw": 161
+    },
+    {
+      "id": "intake_enemy_18",
+      "kind": "crawler",
+      "cell": [
+        19,
+        8
+      ],
+      "yaw": 234
+    },
+    {
+      "id": "intake_enemy_19",
+      "kind": "worker",
+      "cell": [
+        12,
+        2
+      ],
+      "yaw": 307
+    },
+    {
+      "id": "intake_enemy_20",
+      "kind": "worker",
+      "cell": [
+        17,
+        2
+      ],
+      "yaw": 20
+    },
+    {
+      "id": "intake_enemy_21",
+      "kind": "crawler",
+      "cell": [
+        13,
+        3
+      ],
+      "yaw": 93
+    },
+    {
+      "id": "intake_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        16,
+        3
+      ],
+      "yaw": 166
+    }
+  ],
+  "mission": "RECOVERY ORDER 01: restore both intake seals. Do not examine the membrane.",
+  "color": [
+    0.29,
+    0.075,
+    0.08
+  ],
+  "fog": [
+    0.027,
+    0.018,
+    0.026
+  ]
+}

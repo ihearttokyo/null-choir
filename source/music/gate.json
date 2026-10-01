@@ -1,0 +1,9 @@
+{
+  "title": "Containment pulse — original synth gate fixture",
+  "author": "NULL CHOIR project, authored 2026-09-30",
+  "ppq": 480,
+  "beats": 16,
+  "tempos": [[0, 400000], [8, 500000]],
+  "riff": [40, 40, 43, 41, 40, 46, 43, 41],
+  "programs": {"guitar": 30, "bass": 34, "organ": 19, "synth": 81}
+}

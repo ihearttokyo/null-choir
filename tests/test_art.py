@@ -1,0 +1,118 @@
+"""Direct, stdlib-only Intake art contract: python3 tests/test_art.py."""
+import hashlib
+import json
+from pathlib import Path
+import struct
+import zlib
+
+ROOT = Path(__file__).resolve().parents[1]
+EXPECTED = {'crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
+            'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall'}
+
+
+def png(path):
+    data = path.read_bytes()
+    assert data[:8] == b'\x89PNG\r\n\x1a\n', path
+    pos, compressed, size = 8, bytearray(), None
+    while pos < len(data):
+        length = struct.unpack_from('>I', data, pos)[0]
+        kind, payload = data[pos + 4:pos + 8], data[pos + 8:pos + 8 + length]
+        crc = struct.unpack_from('>I', data, pos + 8 + length)[0]
+        assert zlib.crc32(kind + payload) & 0xffffffff == crc, path
+        if kind == b'IHDR':
+            w, h, depth, color, compression, filtering, interlace = struct.unpack('>IIBBBBB', payload)
+            assert (depth, color, compression, filtering, interlace) == (8, 6, 0, 0, 0), path
+            size = (w, h)
+        elif kind == b'IDAT':
+            compressed.extend(payload)
+        pos += 12 + length
+        if kind == b'IEND':
+            break
+    assert size, path
+    w, h = size
+    raw, stride = zlib.decompress(compressed), w * 4
+    assert len(raw) == h * (stride + 1), path
+    # The source-owned PNG writer emits unfiltered RGBA rows.
+    assert all(raw[y * (stride + 1)] == 0 for y in range(h)), path
+    rows = [raw[y * (stride + 1) + 1:(y + 1) * (stride + 1)] for y in range(h)]
+    return size, b''.join(rows)
+
+
+def check():
+    path = ROOT / 'source/art/manifest.json'
+    assert path.is_file(), 'required art manifest absent (intended RED)'
+    manifest = json.loads(path.read_text())
+    assert manifest['schema_version'] == 1
+    assets = manifest['assets']
+    assert {a['id'] for a in assets} == EXPECTED
+    assert len(assets) == len(EXPECTED)
+    assert len(manifest['palette']) >= 4
+    owned_outputs = set()
+    for a in assets:
+        assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
+        source = ROOT / a['source']
+        assert source.is_relative_to(ROOT / 'source/art') and source.suffix == '.blend'
+        assert source.is_file() and source.read_bytes()[:7] == b'BLENDER', a['id']
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == a['source_sha256'], a['id']
+        for output in a['outputs']:
+            file = ROOT / output['path']
+            assert file.is_relative_to(ROOT / 'game/assets/art')
+            assert file.is_file(), file
+            assert file not in owned_outputs, file
+            owned_outputs.add(file)
+            assert hashlib.sha256(file.read_bytes()).hexdigest() == output['sha256'], file
+            if file.suffix == '.png':
+                size, pixels = png(file)
+                assert list(size) == output['dimensions'], file
+                if a['id'] in ('crawler', 'worker', 'impact_tool', 'rivet_pistol'):
+                    assert 0 in pixels[3::4] and 255 in pixels[3::4], file
+                    assert set(pixels[3::4]) == {0, 255}, 'sprite edges must be pixel-crisp'
+                    cw, ch = a['cell_size']
+                    enemy = a['id'] in ('crawler', 'worker')
+                    rows = len(a['frames']) if enemy else 1
+                    assert size == (a['columns'] * cw, rows * ch)
+                    assert a['filter'] == 'nearest'
+                    assert a['origin_px'] == ([cw // 2, ch - 8] if enemy else [160, 200])
+                    cells = []
+                    for frame in range(rows):
+                        for column in range(a['columns']):
+                            cell = b''.join(pixels[((frame * ch + y) * size[0] + column * cw) * 4:((frame * ch + y) * size[0] + (column + 1) * cw) * 4] for y in range(ch))
+                            assert sum(v != 0 for v in cell[3::4]) >= 80, (a['id'], column, frame)
+                            if enemy:
+                                bottom = max(y for y in range(ch) if any(cell[(y * cw + x) * 4 + 3] for x in range(cw)))
+                                assert bottom == 119, 'every enemy pose must meet its documented baseline'
+                            cells.append(cell)
+                    if enemy:
+                        for column in range(a['columns']):
+                            assert len(set(cells[column::a['columns']])) == rows, 'enemy poses cannot be duplicate cells'
+                    else:
+                        assert len(set(cells)) == len(a['frames']), 'weapon poses cannot be duplicate cells'
+            elif file.suffix == '.glb':
+                assert 'gltf/embedded_image_handling=3' in file.with_suffix('.glb.import').read_text(), 'Godot must keep authored images embedded'
+                data = file.read_bytes()
+                magic, version, length = struct.unpack_from('<4sII', data)
+                assert (magic, version, length) == (b'glTF', 2, len(data)), file
+                n, kind = struct.unpack_from('<I4s', data, 12)
+                assert kind == b'JSON'
+                gltf = json.loads(data[20:20 + n])
+                assert gltf['asset']['version'] == '2.0' and gltf.get('meshes') and gltf.get('nodes'), file
+                assert gltf.get('materials') and gltf.get('buffers'), file
+                assert all('uri' not in buf for buf in gltf['buffers']), 'GLB must be self-contained'
+                for mesh in gltf['meshes']:
+                    for primitive in mesh['primitives']:
+                        assert 'POSITION' in primitive['attributes']
+                assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
+        if a['id'] in ('crawler', 'worker'):
+            assert a['columns'] == 8 and a['cell_size'] == [128, 128]
+            assert a['frames'] == ['idle', 'walk_a', 'walk_b', 'attack', 'dead']
+            assert a['yaw_degrees'] == list(range(0, 360, 45))
+        if a['id'] in ('impact_tool', 'rivet_pistol'):
+            assert a['columns'] == 3 and a['cell_size'] == [320, 200]
+            assert a['frames'] == ['idle', 'fire', 'recover']
+    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
+    assert actual == owned_outputs, 'manifest/output parity'
+    print(f'PASS: {len(assets)} assets; {len(owned_outputs)} exports; PNG alpha/pose/dimensions, GLB structure, blend provenance and SHA-256 parity')
+
+
+if __name__ == '__main__':
+    check()

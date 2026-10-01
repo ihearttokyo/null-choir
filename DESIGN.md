@@ -4,7 +4,7 @@ Status: Jared approved this brief and implementation start on 2026-09-30. The ei
 
 ## Outcome and value
 
-Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in a new private repository at `ihearttokyo/null-choir`, with private downloadable releases. The authenticated personal account was verified; the candidate repository query returned HTTP 404 on 2026-09-30. Do not overwrite an existing repository if that changes.
+Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in a new private repository at `ihearttokyo/null-choir`, with private downloadable releases.
 
 The value hypothesis is that fast, readable combat, distinct level architecture, memorable live MIDI compositions, and discoverable environmental storytelling make a replayable eight-level game. Acceptance requires the full campaign, its original assets and music, actual Mac playability, and measured load-speed evidence—not merely a working first level.
 
@@ -62,7 +62,7 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 
 ## Authority, ownership, and rollback
 
-Jared permits necessary tools, unlimited spending, incremental autonomous work after confirmation, and useful named CLI child tasks. All testing and child work must use verified `gpt-6.1-sol`, `xhigh`, Fast off, and explicitly pinned `service_tier="default"`. Follow the successful bundled-CLI runtime receipt in [RESEARCH.md](RESEARCH.md). Bound concurrency and preserve other work; serialize heavy jobs until observed headroom supports more.
+Jared permits necessary tools, unlimited spending, incremental autonomous work after confirmation, and useful named CLI child tasks. All testing and child work must use `gpt-6.1-sol`, `xhigh`, Fast off, and explicitly pinned `service_tier="default"`. Inspect available runtime evidence; missing telemetry is a reporting limitation, not a blocker. Follow the successful bundled-CLI runtime receipt in [RESEARCH.md](RESEARCH.md). Bound concurrency and preserve other work; serialize heavy jobs until observed headroom supports more.
 
 The parent owns integration. Give children bounded missions and nonoverlapping files, verify task identity/tool state, preserve receipts, and archive unneeded finished children. Exact encounter layouts, animation details, palettes, composition structure, clue wording, and balancing may be authored within this agreed brief; material scope or authority changes require Jared.
 

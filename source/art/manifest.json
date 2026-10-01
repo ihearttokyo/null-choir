@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "palette": {
+    "burgundy": "#713d48",
+    "ivory": "#d1ba8f",
+    "petrol": "#172e32",
+    "amber": "#e9a347",
+    "scar": "#aa6763",
+    "iron": "#536265",
+    "black": "#12151b"
+  },
+  "assets": [
+    {
+      "id": "crawler",
+      "source": "source/art/crawler.blend",
+      "source_sha256": "9a42c5332ee16dc714a1444d357a332c014aabaef2668a7a3be22799e78dc8ec",
+      "outputs": [
+        {
+          "path": "game/assets/art/sprites/crawler.png",
+          "sha256": "15ffb89c68e4f2e65fc5083d774656785da409a1364b6d69507dd20863577315",
+          "bytes": 187591,
+          "dimensions": [
+            1024,
+            640
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        128,
+        128
+      ],
+      "columns": 8,
+      "frames": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ],
+      "yaw_degrees": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "facing": "column0 sees front (-Y); camera orbits clockwise viewed from +Z, column2 sees right (+X)",
+      "origin_px": [
+        64,
+        120
+      ],
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -1.248,
+          -2.123,
+          -0.239
+        ],
+        "max": [
+          1.311,
+          1.676,
+          1.896
+        ],
+        "size": [
+          2.559,
+          3.799,
+          2.135
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ]
+    },
+    {
+      "id": "worker",
+      "source": "source/art/worker.blend",
+      "source_sha256": "1605aa373c11d7ee745bc75dc7b3821f8f54294fe3950cd73062d36c44debed6",
+      "outputs": [
+        {
+          "path": "game/assets/art/sprites/worker.png",
+          "sha256": "b32b6228fe77cbd5d16abca23984b34964e359ec0b972526cf741e0e3201f869",
+          "bytes": 191370,
+          "dimensions": [
+            1024,
+            640
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        128,
+        128
+      ],
+      "columns": 8,
+      "frames": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ],
+      "yaw_degrees": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "facing": "column0 sees front (-Y); camera orbits clockwise viewed from +Z, column2 sees right (+X)",
+      "origin_px": [
+        64,
+        120
+      ],
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -0.647,
+          -1.36,
+          0.0
+        ],
+        "max": [
+          1.182,
+          0.55,
+          3.2
+        ],
+        "size": [
+          1.828,
+          1.91,
+          3.2
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ]
+    },
+    {
+      "id": "impact_tool",
+      "source": "source/art/impact_tool.blend",
+      "source_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "outputs": [
+        {
+          "path": "game/assets/art/weapons/impact_tool.png",
+          "sha256": "0a566362f4436f1814203fa76ce21e43ca3db59f4f31ded676cd3a85f3c056f7",
+          "bytes": 25620,
+          "dimensions": [
+            960,
+            200
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "origin_px": [
+        160,
+        200
+      ],
+      "anchor": "bottom center of 320x200 overlay; aim is screen-center above muzzle",
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -0.752,
+          -1.73,
+          -0.002
+        ],
+        "max": [
+          0.751,
+          1.021,
+          0.814
+        ],
+        "size": [
+          1.503,
+          2.751,
+          0.816
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "fire",
+        "recover"
+      ]
+    },
+    {
+      "id": "rivet_pistol",
+      "source": "source/art/rivet_pistol.blend",
+      "source_sha256": "54e2b5d31822b88c0b1a0d366da311785f5b143ec7471714c4a83345fc435624",
+      "outputs": [
+        {
+          "path": "game/assets/art/weapons/rivet_pistol.png",
+          "sha256": "5e86828541b50788820c71d9abbbc5aa0a8b08358ee5d7deb112b89b4025f7ce",
+          "bytes": 25257,
+          "dimensions": [
+            960,
+            200
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "origin_px": [
+        160,
+        200
+      ],
+      "anchor": "bottom center of 320x200 overlay; aim is screen-center above muzzle",
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -0.49,
+          -1.73,
+          -0.03
+        ],
+        "max": [
+          0.751,
+          1.081,
+          0.954
+        ],
+        "size": [
+          1.241,
+          2.811,
+          0.984
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "fire",
+        "recover"
+      ]
+    },
+    {
+      "id": "skin_bell",
+      "source": "source/art/skin_bell.blend",
+      "source_sha256": "a3ad955330da4735aa8b5005291f694edb001ef6e2f2baa9d057c852e7656d9f",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/skin_bell.glb",
+          "sha256": "bcfbde72f7b1a40978d2dfa18acfdcfeafca7ce298f333969ba68c8df7dc2491",
+          "bytes": 1045580
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -2.94,
+          -2.94,
+          0.06
+        ],
+        "max": [
+          2.94,
+          2.94,
+          8.047
+        ],
+        "size": [
+          5.88,
+          5.88,
+          7.987
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 13072,
+      "runtime_mesh_nodes": 6,
+      "material_count": 6,
+      "loop_id": "intake_loop_bell"
+    },
+    {
+      "id": "siphon_heart",
+      "source": "source/art/siphon_heart.blend",
+      "source_sha256": "56d05d6cfbe5a742f4330e891c014ef2f7203992de6fe62f125fedfc8d18622f",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/siphon_heart.glb",
+          "sha256": "22bd9b1815eb9f53bdb0a01b6642af8c60cc841056c27fe0570b6c2a41cf7b3f",
+          "bytes": 784764
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -2.438,
+          -1.81,
+          0.0
+        ],
+        "max": [
+          2.438,
+          1.75,
+          3.911
+        ],
+        "size": [
+          4.877,
+          3.56,
+          3.911
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 9118,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": "intake_loop_siphon"
+    },
+    {
+      "id": "ribbed_wall",
+      "source": "source/art/ribbed_wall.blend",
+      "source_sha256": "8ecc87d4393ccbfa7d80c6ae73669d6ead3ca595b0c05af71467ce66fd92e68b",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/ribbed_wall.glb",
+          "sha256": "a635605e0a9c1e9df05589f87b4263664fa8ad060253d9155912cb72a64f40b1",
+          "bytes": 222464
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -2.0,
+          -0.4,
+          0.0
+        ],
+        "max": [
+          2.0,
+          0.31,
+          3.5
+        ],
+        "size": [
+          4.0,
+          0.71,
+          3.5
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 2796,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null
+    },
+    {
+      "id": "conduit",
+      "source": "source/art/conduit.blend",
+      "source_sha256": "fa74edb2a38f43a9a84ac85b69a88b2946b4da6dfa3e48e421b8850cba50b3cb",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/conduit.glb",
+          "sha256": "ae96ea8bc94a8b0fd17c066c9f0e5c253c49573ef9e7a1ec2ba803b00c24f349",
+          "bytes": 255760
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.49,
+          -2.006,
+          0.0
+        ],
+        "max": [
+          0.49,
+          2.022,
+          0.59
+        ],
+        "size": [
+          0.98,
+          4.028,
+          0.59
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 3660,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null
+    },
+    {
+      "id": "arch",
+      "source": "source/art/arch.blend",
+      "source_sha256": "a42925e1331b39c0cac551ffa5e6503da87142b8abe23c548681d3c60485718f",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/arch.glb",
+          "sha256": "a32c10e501ab9a4ebbf31676bbe7d89b20926adac0f330664b61705a3ed41dff",
+          "bytes": 130376
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -2.335,
+          -0.45,
+          0.0
+        ],
+        "max": [
+          2.335,
+          0.45,
+          5.072
+        ],
+        "size": [
+          4.67,
+          0.9,
+          5.072
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1524,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null
+    },
+    {
+      "id": "floor",
+      "source": "source/art/texture_library.blend",
+      "source_sha256": "2ed386bfd4dd282928eb9667bdd1a8361b9ad79c67dbc7d12ae18b15573157bc",
+      "outputs": [
+        {
+          "path": "game/assets/art/textures/floor.png",
+          "sha256": "2131e8803f74768a0ee3783ba1a08fae6bb5d58ec63e9f8cec0c49ea5f47f8a1",
+          "bytes": 3237,
+          "dimensions": [
+            64,
+            64
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "filter": "nearest",
+      "tile_size_m": [
+        2,
+        2
+      ],
+      "color_space": "sRGB",
+      "authored_pattern": "floor"
+    },
+    {
+      "id": "grate",
+      "source": "source/art/texture_library.blend",
+      "source_sha256": "2ed386bfd4dd282928eb9667bdd1a8361b9ad79c67dbc7d12ae18b15573157bc",
+      "outputs": [
+        {
+          "path": "game/assets/art/textures/grate.png",
+          "sha256": "f4696d6f9aa916849f028b4f08bfcf9a2fd1cc9caa16755b37e2aabea41e328c",
+          "bytes": 2678,
+          "dimensions": [
+            64,
+            64
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "filter": "nearest",
+      "tile_size_m": [
+        2,
+        2
+      ],
+      "color_space": "sRGB",
+      "authored_pattern": "grate"
+    },
+    {
+      "id": "wall",
+      "source": "source/art/texture_library.blend",
+      "source_sha256": "2ed386bfd4dd282928eb9667bdd1a8361b9ad79c67dbc7d12ae18b15573157bc",
+      "outputs": [
+        {
+          "path": "game/assets/art/textures/wall.png",
+          "sha256": "1da3d44e80befd4de0fba29cef47e6c73cc66443b6e86c41f016bafdbc00325c",
+          "bytes": 3182,
+          "dimensions": [
+            64,
+            64
+          ]
+        },
+        {
+          "path": "game/assets/art/textures/surface_atlas.png",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "dimensions": [
+            192,
+            64
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "filter": "nearest",
+      "tile_size_m": [
+        2,
+        2
+      ],
+      "color_space": "sRGB",
+      "authored_pattern": "wall",
+      "atlas_regions_px": {
+        "floor": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grate": [
+          64,
+          0,
+          64,
+          64
+        ],
+        "wall": [
+          128,
+          0,
+          64,
+          64
+        ]
+      }
+    }
+  ],
+  "build": {
+    "blender_version": "5.2.2 LTS",
+    "script_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776",
+    "render_engine": "Cycles CPU",
+    "threads": 4,
+    "samples": 16,
+    "native_pixel_render": true
+  }
+}
