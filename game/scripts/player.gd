@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 	else: camera.position.x = 0
 	if Input.is_action_pressed("fire"): fire()
 	if Input.is_action_just_pressed("interact"): game.interact()
+	if not game.playing: return # Exit interaction invalidates this map and its pending position write.
 	if Input.is_action_just_pressed("weapon_next"): cycle_weapon(1)
 	if Input.is_action_just_pressed("weapon_previous"): cycle_weapon(-1)
 	for index in range(6):

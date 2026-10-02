@@ -8,7 +8,10 @@ func run() -> void:
 	game.settings_path = "user://scenery_contract_preferences.json"
 	game.progress_path = "user://scenery_contract_progress.json"
 	root.add_child(game)
-	game.start_campaign(0)
+	game.state.new_campaign(0)
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--level="): game.state.level_index = int(arg.trim_prefix("--level="))
+	game.start_level()
 	game.pause_game()
 	if not expect(root.use_occlusion_culling,"Native static-wall occlusion must be enabled"): return
 	var occluders = 0
@@ -52,14 +55,20 @@ func run() -> void:
 			var roof = game.level.layout.height_at(cell)+game.level._roof_height(Vector2i(floori(cell.x),floori(cell.y)))
 			if not expect(node.position.y < roof-0.15,"Light is above the solid ceiling: "+str(node.position)): return
 		if node is WorldEnvironment: environment = node.environment
-	if not expect(occluders == 214,"Every existing boundary wall has native conservative occlusion; no invented blocking geometry"): return
+	var boundary_count = 0
+	for cell in game.level.layout.tiles:
+		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+			if not game.level.layout.is_walkable(cell+direction): boundary_count += 1
+	if not expect(occluders == boundary_count,"Every boundary wall has native conservative occlusion; no invented blocking geometry"): return
+	if game.state.level_index == 0 and not expect(occluders == 214,"Preserve exact Intake boundary count"): return
 	for marker in game.level.markers.values():
 		if not expect(marker.scene_file_path == "res://assets/art/world/containment_capsule.glb","Pickups/interaction markers must use Blender containment pods rather than conspicuous placeholder cubes"): return
 		if not expect(marker.scale == Vector3(0.25,0.17,0.25),"Collectible pods must remain small enough to preserve level routes"): return
 	if not expect(floors > 10 and ceilings == floors,"Local lit floor and ceiling coverage required"): return
 	for id in ["ribbed_wall","conduit","vault_span","lumen_sconce","witness_relief","suspended_cadaver","containment_capsule","drain_altar"]:
 		if not expect(art.get(id,0) >= 2,"Scenery missing from playable scene: "+id): return
-	if not expect(art.get("skin_bell",0) == 1 and art.get("siphon_heart",0) == 1,"Each loop retains its unique landmark"): return
+	for hero in game.level.layout.data.heroes:
+		if not expect(art.get(hero.id,0) == 1,"Each loop retains its unique landmark: "+hero.id): return
 	if not expect(shadows >= 2 and shadows <= 6,"Bounded shadowed landmark lighting required"): return
 	if not expect(environment != null and environment.fog_enabled and environment.fog_mode == Environment.FOG_MODE_DEPTH,"Native depth fog required"): return
 	if not expect(environment.fog_depth_begin >= 12 and environment.fog_depth_end > 40,"Fog must retain combat sight lines"): return
@@ -74,11 +83,12 @@ func run() -> void:
 		var query = PhysicsRayQueryParameters3D.create(p+Vector3.UP*1.2,p+Vector3.UP*0.05,1)
 		await physics_frame
 		if not expect(not game.level.get_world_3d().direct_space_state.intersect_ray(query).is_empty(),"Landmark base requires collision: "+hero.id): return
+	var level_id = game.level.layout.data.id
 	game.queue_free()
 	paused = false
 	await process_frame
 	await process_frame
-	print("PASS Intake scene contains Blender scenery, local lit floors/ceilings, bounded shadow lighting and combat-readable depth fog")
+	print("PASS ",level_id," scene contains Blender scenery, local lit floors/ceilings, bounded shadow lighting and combat-readable depth fog")
 	quit()
 
 func expect(condition: bool, detail: String) -> bool:

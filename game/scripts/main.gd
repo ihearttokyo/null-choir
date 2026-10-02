@@ -226,8 +226,13 @@ func interact() -> void:
 			if _save() != OK:
 				state.from_dict(prior)
 				return
+			var completed_title = level.layout.data.title+" RESTORED"
 			show_title()
-			_show_menu("INTAKE RESTORED",[["Return to title",show_title]])
+			var next_layout = Level.Layout.new()
+			var actions = [["Return to title",show_title]]
+			if next_layout.load_level(state.level_index):
+				actions.push_front(["Descend to "+next_layout.data.title.capitalize(),start_level])
+			_show_menu(completed_title,actions)
 
 func hurt_player(amount: int) -> void:
 	if state.health <= 0: return
@@ -432,11 +437,20 @@ func _verify_export() -> void:
 	checks["pause"] = get_tree().paused and not playing
 	restore_checkpoint()
 	checks["checkpoint"] = playing and state.ammo[1] == 90
+	var retained_bank = music.player.bank
+	state.complete_level()
+	start_level()
+	checks["foundry"] = playing and level.layout.data.id == "foundry" and state.position == level.layout.world_position(level.layout.data.spawn)
+	checks["foundry_midi"] = music.player.file == "res://audio/foundry.mid" and music.player.bank == retained_bank
+	var foundry_heroes = []
+	for node in level.get_children():
+		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
+	checks["foundry_art"] = foundry_heroes.size() == 2
 	show_title()
 	for check in checks:
 		if not checks[check]:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
-	print("PASS packaged title, start, fire, pause, checkpoint restoration, MIDI source and notices")
+	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry scene/art/live MIDI, MIDI source and notices")
 	get_tree().quit()

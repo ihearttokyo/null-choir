@@ -1,6 +1,6 @@
 extends RefCounted
 
-const FILES = ["01_intake"]
+const FILES = ["01_intake", "02_foundry"]
 var data: Dictionary = {}
 var tiles: Dictionary = {}
 
@@ -19,13 +19,19 @@ func load_level(index: int) -> bool:
 	return true
 
 func height_at(cell: Vector2) -> float:
-	if cell.x >= 17 and cell.y <= 10:
-		return clampf((cell.x - 17.0) / 3.0, 0.0, 2.0)
-	if cell.x >= 20 and cell.y >= 10 and cell.y <= 18:
-		return 2.0
-	if cell.x >= 22 and cell.y >= 18:
-		return clampf((24.0 - cell.y) / 3.0, 0.0, 2.0)
+	for region in data.elevations:
+		var r = region.rect
+		if cell.x < r[0] or cell.y < r[1] or cell.x > r[2] or cell.y > r[3]: continue
+		if region.has("axis"):
+			return clampf((cell[int(region.axis)]-region.start)/(region.end-region.start),0.0,1.0)*region.height
+		return region.height
 	return 0.0
+
+func roof_height(cell: Vector2i) -> float:
+	for region in data.ceilings:
+		var r = region.rect
+		if cell.x >= r[0] and cell.y >= r[1] and cell.x <= r[2] and cell.y <= r[3]: return region.height
+	return 6.0
 
 func is_walkable(cell: Vector2i) -> bool:
 	return tiles.has(cell)

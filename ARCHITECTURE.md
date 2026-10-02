@@ -21,3 +21,5 @@ Level JSON owns authored scenery transforms and light positions. `level.gd` inst
 Blender world fronts authored toward -Y export toward Godot +Z. Level JSON uses Godot-space yaw; wall art faces inward and its backing faces the boundary. Native scenery assertions cover front direction, wall mounting and light clearance below ceilings.
 
 Static boundary walls alone own inset native BoxOccluder3D instances. Project-level occlusion hides fully blocked geometry without changing authored assets, lighting or camera range. Floor/ceiling triangles use Godot clockwise front faces; native assertions cover both winding and conservative wall occluder bounds. [SCENERY.md](docs/SCENERY.md) owns visual and GPU comparison evidence.
+
+`level_data.gd` reads each authored map's elevation regions and ceiling heights. Floor corners, native capsule positions and landmark lighting share those values. Hero specifications own their low collision-base dimensions; each level keeps its unique machine geometry. Intake's original floor corners and roof heights remain covered by an exact native regression.

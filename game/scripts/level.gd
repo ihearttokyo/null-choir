@@ -16,12 +16,12 @@ func build(owner_game: Node, index: int) -> void:
 	_build_scenery()
 	for hero in layout.data.heroes:
 		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
-		var base = _box(Vector3(6.6,0.55,6.6) if hero.id == "skin_bell" else Vector3(5.5,0.55,4.5),layout.world_position(hero.cell)+Vector3.UP*0.275,_material(Color(0.12,0.16,0.17)),true)
+		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),_material(Color(0.12,0.16,0.17)),true)
 		base.get_child(0).hide()
-		if hero.id == "skin_bell":
+		if hero.get("round",false):
 			var cylinder = CylinderShape3D.new()
-			cylinder.radius = 3.3
-			cylinder.height = 0.55
+			cylinder.radius = hero.base[0]/2
+			cylinder.height = hero.base[1]
 			base.get_child(1).shape = cylinder
 		base.name = "LandmarkBase_"+hero.id
 		base.rotation.y = deg_to_rad(hero.yaw)
@@ -80,7 +80,7 @@ func _box(size: Vector3, location: Vector3, material: Material, solid: bool) -> 
 	return root
 
 func _roof_height(cell: Vector2i) -> float:
-	return 10.0 if cell.x < 10 and cell.y < 19 and cell.y > 11 else 6.0
+	return layout.roof_height(cell)
 
 func _build_geometry() -> void:
 	var floor_material = _material(Color.WHITE)

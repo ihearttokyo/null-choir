@@ -1,0 +1,1675 @@
+{
+  "id": "foundry",
+  "title": "THE FOUNDRY",
+  "subtitle": "02 / TEMPER THE RESTRAINT",
+  "cell_size": 4,
+  "spawn": [
+    14.5,
+    30.5
+  ],
+  "spawn_yaw": -35,
+  "rects": [
+    [
+      12,
+      28,
+      17,
+      32
+    ],
+    [
+      16,
+      24,
+      17,
+      28
+    ],
+    [
+      12,
+      24,
+      17,
+      25
+    ],
+    [
+      12,
+      19,
+      13,
+      25
+    ],
+    [
+      10,
+      17,
+      18,
+      22
+    ],
+    [
+      5,
+      19,
+      12,
+      20
+    ],
+    [
+      3,
+      10,
+      10,
+      18
+    ],
+    [
+      8,
+      7,
+      9,
+      10
+    ],
+    [
+      8,
+      6,
+      25,
+      7
+    ],
+    [
+      16,
+      7,
+      17,
+      17
+    ],
+    [
+      21,
+      8,
+      28,
+      14
+    ],
+    [
+      23,
+      7,
+      24,
+      8
+    ],
+    [
+      23,
+      15,
+      24,
+      23
+    ],
+    [
+      18,
+      22,
+      24,
+      23
+    ],
+    [
+      12,
+      3,
+      13,
+      6
+    ],
+    [
+      9,
+      0,
+      16,
+      3
+    ],
+    [
+      1,
+      13,
+      3,
+      14
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        18,
+        6,
+        30,
+        8
+      ],
+      "axis": 0,
+      "start": 18,
+      "end": 21,
+      "height": 2
+    },
+    {
+      "rect": [
+        21,
+        7,
+        30,
+        15
+      ],
+      "height": 2
+    },
+    {
+      "rect": [
+        23,
+        15,
+        25,
+        24
+      ],
+      "axis": 1,
+      "start": 22,
+      "end": 15,
+      "height": 2
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        3,
+        10,
+        10,
+        18
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        21,
+        8,
+        28,
+        14
+      ],
+      "height": 8
+    }
+  ],
+  "loops": [
+    {
+      "id": "foundry_loop_furnace",
+      "route": [
+        [
+          12,
+          20
+        ],
+        [
+          6,
+          20
+        ],
+        [
+          9,
+          17
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          16,
+          19
+        ],
+        [
+          12,
+          20
+        ]
+      ],
+      "hero": "vertebral_furnace"
+    },
+    {
+      "id": "foundry_loop_crucible",
+      "route": [
+        [
+          17,
+          20
+        ],
+        [
+          23,
+          22
+        ],
+        [
+          23,
+          18
+        ],
+        [
+          26,
+          14
+        ],
+        [
+          26,
+          9
+        ],
+        [
+          23,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          20
+        ]
+      ],
+      "hero": "marrow_crucible"
+    }
+  ],
+  "heroes": [
+    {
+      "id": "vertebral_furnace",
+      "cell": [
+        7.5,
+        14.5
+      ],
+      "yaw": 30,
+      "base": [
+        7.8,
+        0.55,
+        5.6
+      ]
+    },
+    {
+      "id": "marrow_crucible",
+      "cell": [
+        24.5,
+        12.5
+      ],
+      "yaw": 0,
+      "base": [
+        7.8,
+        0.55,
+        5.6
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "foundry_gate",
+      "cell": [
+        13,
+        4.7
+      ],
+      "size": [
+        8.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "foundry_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        4.5,
+        11.5
+      ],
+      "text": "FURNACE BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "foundry_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        27.5,
+        9.5
+      ],
+      "text": "CRUCIBLE IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "foundry_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        16.5,
+        8.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "foundry_story",
+      "kind": "story",
+      "cell": [
+        1.5,
+        13.5
+      ],
+      "text": "A casting ledger: the restraint was forged around something already alive. Every repair removes a tooth."
+    },
+    {
+      "id": "foundry_exit",
+      "kind": "exit",
+      "cell": [
+        12.5,
+        1.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "TEMPERING COMPLETE / DESCEND"
+    }
+  ],
+  "mission": "RECOVERY ORDER 02: temper both restraint seals. Ignore the heat beneath the vertebrae.",
+  "pickups": [
+    {
+      "id": "foundry_entry_ammo",
+      "kind": "ammo",
+      "cell": [
+        15,
+        29
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "foundry_junction_health",
+      "kind": "health",
+      "cell": [
+        10.5,
+        20.5
+      ],
+      "amount": 25
+    },
+    {
+      "id": "furnace_armor",
+      "kind": "armor",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "furnace_ammo",
+      "kind": "ammo",
+      "cell": [
+        4.5,
+        10.5
+      ],
+      "amount": 65,
+      "weapon": 1
+    },
+    {
+      "id": "furnace_health",
+      "kind": "health",
+      "cell": [
+        8.5,
+        18.5
+      ],
+      "amount": 25
+    },
+    {
+      "id": "north_ammo",
+      "kind": "ammo",
+      "cell": [
+        10.5,
+        7
+      ],
+      "amount": 50,
+      "weapon": 1
+    },
+    {
+      "id": "crucible_armor",
+      "kind": "armor",
+      "cell": [
+        27.5,
+        14.5
+      ],
+      "amount": 45
+    },
+    {
+      "id": "crucible_health",
+      "kind": "health",
+      "cell": [
+        22,
+        10
+      ],
+      "amount": 30
+    },
+    {
+      "id": "crucible_ammo",
+      "kind": "ammo",
+      "cell": [
+        27,
+        8.5
+      ],
+      "amount": 65,
+      "weapon": 1
+    },
+    {
+      "id": "foundry_gate_ammo",
+      "kind": "ammo",
+      "cell": [
+        10.5,
+        2.5
+      ],
+      "amount": 60,
+      "weapon": 1
+    },
+    {
+      "id": "foundry_gate_health",
+      "kind": "health",
+      "cell": [
+        15.5,
+        2.5
+      ],
+      "amount": 40
+    },
+    {
+      "id": "foundry_ramp_ammo",
+      "kind": "ammo",
+      "cell": [
+        23.5,
+        21.5
+      ],
+      "amount": 40,
+      "weapon": 1
+    }
+  ],
+  "enemies": [
+    {
+      "id": "foundry_enemy_00",
+      "kind": "worker",
+      "cell": [
+        10.5,
+        20.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "foundry_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        17,
+        18.5
+      ],
+      "yaw": 79
+    },
+    {
+      "id": "foundry_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        6,
+        19.5
+      ],
+      "yaw": 158
+    },
+    {
+      "id": "foundry_enemy_03",
+      "kind": "worker",
+      "cell": [
+        4.5,
+        18
+      ],
+      "yaw": 237
+    },
+    {
+      "id": "foundry_enemy_04",
+      "kind": "crawler",
+      "cell": [
+        4.5,
+        12
+      ],
+      "yaw": 316
+    },
+    {
+      "id": "foundry_enemy_05",
+      "kind": "worker",
+      "cell": [
+        10,
+        10.5
+      ],
+      "yaw": 35
+    },
+    {
+      "id": "foundry_enemy_06",
+      "kind": "crawler",
+      "cell": [
+        9,
+        8.5
+      ],
+      "yaw": 114
+    },
+    {
+      "id": "foundry_enemy_07",
+      "kind": "worker",
+      "cell": [
+        12,
+        7
+      ],
+      "yaw": 193
+    },
+    {
+      "id": "foundry_enemy_08",
+      "kind": "worker",
+      "cell": [
+        17,
+        11
+      ],
+      "yaw": 272
+    },
+    {
+      "id": "foundry_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        17,
+        15
+      ],
+      "yaw": 351
+    },
+    {
+      "id": "foundry_enemy_10",
+      "kind": "crawler",
+      "cell": [
+        23.5,
+        22
+      ],
+      "yaw": 70
+    },
+    {
+      "id": "foundry_enemy_11",
+      "kind": "worker",
+      "cell": [
+        27.5,
+        14.4
+      ],
+      "yaw": 149
+    },
+    {
+      "id": "foundry_enemy_12",
+      "kind": "crawler",
+      "cell": [
+        21.5,
+        13
+      ],
+      "yaw": 228
+    },
+    {
+      "id": "foundry_enemy_13",
+      "kind": "worker",
+      "cell": [
+        27.5,
+        9.5
+      ],
+      "yaw": 307
+    },
+    {
+      "id": "foundry_enemy_14",
+      "kind": "crawler",
+      "cell": [
+        25,
+        8.5
+      ],
+      "yaw": 26
+    },
+    {
+      "id": "foundry_enemy_15",
+      "kind": "worker",
+      "cell": [
+        24,
+        6.5
+      ],
+      "yaw": 105
+    },
+    {
+      "id": "foundry_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        20,
+        7
+      ],
+      "yaw": 184
+    },
+    {
+      "id": "foundry_enemy_17",
+      "kind": "worker",
+      "cell": [
+        10.5,
+        1.5
+      ],
+      "yaw": 263
+    },
+    {
+      "id": "foundry_enemy_18",
+      "kind": "worker",
+      "cell": [
+        15,
+        1.5
+      ],
+      "yaw": 342
+    },
+    {
+      "id": "foundry_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        11.5,
+        3
+      ],
+      "yaw": 61
+    },
+    {
+      "id": "foundry_enemy_20",
+      "kind": "crawler",
+      "cell": [
+        14.5,
+        3
+      ],
+      "yaw": 140
+    },
+    {
+      "id": "foundry_enemy_21",
+      "kind": "crawler",
+      "cell": [
+        10,
+        18
+      ],
+      "yaw": 219
+    },
+    {
+      "id": "foundry_enemy_22",
+      "kind": "worker",
+      "cell": [
+        22,
+        10
+      ],
+      "yaw": 298
+    }
+  ],
+  "scenery": [
+    {
+      "art": "vault_span",
+      "cell": [
+        15,
+        29
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        17,
+        26
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13,
+        23
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14,
+        19
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        7,
+        20
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        9,
+        9
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13,
+        7
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        17,
+        15
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        24,
+        20
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        24,
+        7
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13,
+        2.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        12.15,
+        30
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        17.85,
+        31
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.15,
+        22.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        18.85,
+        21
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        3.15,
+        12
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.85,
+        16
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        8.15,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        27.5,
+        14.85
+      ],
+      "yaw": 180,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        28.85,
+        12
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        21.15,
+        9.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        9.15,
+        1.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        16.85,
+        2.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        13,
+        31
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        16,
+        29.5
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        12.6,
+        22
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        17.5,
+        19
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        4,
+        16
+      ],
+      "height": 7
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        10,
+        12
+      ],
+      "height": 7
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        27.7,
+        11
+      ],
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        21.7,
+        14
+      ],
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        14,
+        2
+      ],
+      "height": 3
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12.7,
+        32.3
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17.3,
+        32.3
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        10.6,
+        17.7
+      ],
+      "yaw": 20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        18.3,
+        17.7
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3.7,
+        17.8
+      ],
+      "yaw": 35,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3.7,
+        10.6
+      ],
+      "yaw": 60,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        10.3,
+        17.9
+      ],
+      "yaw": -30,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        21.7,
+        14.8
+      ],
+      "yaw": 25,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        28.3,
+        14.8
+      ],
+      "yaw": -25,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        28.3,
+        8.7
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9.7,
+        2.7
+      ],
+      "yaw": 25,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        16.3,
+        2.7
+      ],
+      "yaw": -25,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        13,
+        28.7
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        18.4,
+        19.7
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        4,
+        14.7
+      ],
+      "yaw": 90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        10.6,
+        11.7
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        8.4,
+        17.8
+      ],
+      "yaw": 155,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        21.8,
+        11.7
+      ],
+      "yaw": 90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        27.9,
+        13.9
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        11,
+        1
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        12.15,
+        30.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        17.85,
+        29.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        17.85,
+        26.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        12.15,
+        24.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.15,
+        21.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.85,
+        18.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        6.5,
+        20.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        3.15,
+        15.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 90,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.85,
+        13.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        9.5,
+        6.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        14.5,
+        6.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        17.85,
+        10.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.15,
+        20.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.28,
+        0.72,
+        0.83
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.85,
+        14
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.28,
+        0.72,
+        0.83
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.15,
+        10.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.28,
+        0.72,
+        0.83
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25,
+        14.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.28,
+        0.72,
+        0.83
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25.85,
+        6.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.28,
+        0.72,
+        0.83
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        9.15,
+        2.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        16.85,
+        1.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        1,
+        0.48,
+        0.22
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        6,
+        12
+      ],
+      "target": [
+        7.5,
+        14.5
+      ],
+      "height": 8.5,
+      "color": [
+        1,
+        0.3,
+        0.09
+      ],
+      "energy": 5.5,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        9.5,
+        17.5
+      ],
+      "target": [
+        7.5,
+        14.5
+      ],
+      "height": 7.8,
+      "color": [
+        0.25,
+        0.42,
+        0.75
+      ],
+      "energy": 4,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        23,
+        10
+      ],
+      "target": [
+        24.5,
+        12.5
+      ],
+      "height": 6.8,
+      "color": [
+        1,
+        0.45,
+        0.12
+      ],
+      "energy": 5.5,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        27.5,
+        14.5
+      ],
+      "target": [
+        24.5,
+        12.5
+      ],
+      "height": 6.8,
+      "color": [
+        0.24,
+        0.7,
+        0.95
+      ],
+      "energy": 4.5,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        15,
+        31
+      ],
+      "height": 4.8,
+      "color": [
+        0.35,
+        0.45,
+        0.6
+      ],
+      "energy": 2,
+      "range": 18
+    },
+    {
+      "cell": [
+        14,
+        19.5
+      ],
+      "height": 5.4,
+      "color": [
+        0.45,
+        0.18,
+        0.1
+      ],
+      "energy": 2,
+      "range": 18
+    },
+    {
+      "cell": [
+        7,
+        15
+      ],
+      "height": 5.5,
+      "color": [
+        1,
+        0.15,
+        0.04
+      ],
+      "energy": 2,
+      "range": 18
+    },
+    {
+      "cell": [
+        24.5,
+        12.5
+      ],
+      "height": 4,
+      "color": [
+        0.55,
+        0.32,
+        0.08
+      ],
+      "energy": 2,
+      "range": 18
+    }
+  ]
+}

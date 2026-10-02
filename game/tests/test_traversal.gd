@@ -7,7 +7,10 @@ func run() -> void:
 	var game = load("res://scripts/main.gd").new()
 	game.progress_path = "user://traversal_contract.json"
 	root.add_child(game)
-	game.start_campaign(0)
+	game.state.new_campaign(0)
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--level="): game.state.level_index = int(arg.trim_prefix("--level="))
+	game.start_level()
 	game.set_process(false)
 	game.player.set_physics_process(false)
 	for actor in game.enemies:
@@ -33,7 +36,7 @@ func run() -> void:
 					if offset.length() < 0.22:
 						reached = true
 						break
-					var direction = offset.normalized()
+					var direction = game.player.basis.inverse()*offset.normalized()
 					for binding in [["move_right",maxf(0,direction.x)],["move_left",maxf(0,-direction.x)],["move_back",maxf(0,direction.z)],["move_forward",maxf(0,-direction.z)]]:
 						Input.action_press(binding[0],binding[1])
 					await physics_frame
@@ -46,7 +49,7 @@ func run() -> void:
 	game.queue_free()
 	paused = false
 	if FileAccess.file_exists(game.progress_path): DirAccess.remove_absolute(game.progress_path)
-	print("PASS native capsule traverses both authored Intake loops without jumping or falling")
+	print("PASS native capsule traverses both authored loops without jumping or falling")
 	quit()
 
 func cell_path(layout, start: Vector2i, finish: Vector2i) -> Array:

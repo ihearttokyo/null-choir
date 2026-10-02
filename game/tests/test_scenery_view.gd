@@ -23,7 +23,10 @@ func run() -> void:
 	game.progress_path = "user://scenery_view_progress.json"
 	root.add_child(game)
 	var start = Time.get_ticks_msec()
-	game.start_campaign(0)
+	game.state.new_campaign(0)
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--level="): game.state.level_index = int(arg.trim_prefix("--level="))
+	game.start_level()
 	print("LEVEL_BUILD_MS ",Time.get_ticks_msec()-start)
 	game.set_process(false)
 	game.player.set_physics_process(false)
@@ -34,7 +37,10 @@ func run() -> void:
 	game.message_time = 0
 	game.hud.queue_redraw()
 	var layout = game.level.layout
-	for view in [{"id":"entrance","cell":[14.5,28.5],"target":[14.5,20],"height":1.65},{"id":"bell","cell":[7.8,17.4],"target":[4.5,15.2],"height":3.6},{"id":"siphon","cell":[22.4,17.2],"target":[25.5,14.5],"height":2.3},{"id":"combat","cell":[14.5,28.5],"target":[14.5,20],"height":1.65}]:
+	var views = [{"id":"entrance","cell":[14.5,28.5],"target":[14.5,20],"height":1.65},{"id":"bell","cell":[7.8,17.4],"target":[4.5,15.2],"height":3.6},{"id":"siphon","cell":[22.4,17.2],"target":[25.5,14.5],"height":2.3},{"id":"combat","cell":[14.5,28.5],"target":[14.5,20],"height":1.65}]
+	if game.state.level_index == 1:
+		views = [{"id":"entrance","cell":[14.5,30.5],"target":[17,27],"height":1.65},{"id":"furnace","cell":[9.6,17.8],"target":[7.5,14.5],"height":4.4},{"id":"crucible","cell":[27.3,14.2],"target":[24.5,12.5],"height":2.8},{"id":"combat","cell":[14,20.5],"target":[11,20],"height":1.65}]
+	for view in views:
 		game.player.position = layout.world_position(view.cell)
 		game.player.camera.look_at(layout.world_position(view.target)+Vector3.UP*view.height)
 		if view.id == "combat":

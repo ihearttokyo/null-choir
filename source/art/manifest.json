@@ -866,6 +866,100 @@
       "runtime_mesh_nodes": 7,
       "material_count": 7,
       "loop_id": null
+    },
+    {
+      "id": "vertebral_furnace",
+      "source": "source/art/vertebral_furnace.blend",
+      "source_sha256": "9392cd55fa53a54653bb0e9dd8a352cb5eb9738b1a2c5e1cabc9a11e7a02a2bd",
+      "recipe_sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/vertebral_furnace.glb",
+          "sha256": "a7abbb9ed0e749c9a72b9eaba5fe43409362d96d0b11bbbe82396fdca928b882",
+          "bytes": 2126524
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_foundry_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -3.145,
+          -1.58,
+          0.0
+        ],
+        "max": [
+          3.322,
+          1.82,
+          8.873
+        ],
+        "size": [
+          6.467,
+          3.4,
+          8.873
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 24584,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": "foundry_loop_furnace",
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9"
+      },
+      "source_mesh_count": 296,
+      "facing": "front Blender -Y; exported Godot +Z"
+    },
+    {
+      "id": "marrow_crucible",
+      "source": "source/art/marrow_crucible.blend",
+      "source_sha256": "16e5a7241583efaa32c0aa542b84e8836d8599b00f771f3941e37116af9b3b8a",
+      "recipe_sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marrow_crucible.glb",
+          "sha256": "c4a83c960893a341ed856801202b34d345951f31c2880adc0c63234a7c237bff",
+          "bytes": 1966772
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_foundry_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -3.536,
+          -2.675,
+          0.0
+        ],
+        "max": [
+          3.536,
+          2.019,
+          4.282
+        ],
+        "size": [
+          7.072,
+          4.694,
+          4.282
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 23076,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": "foundry_loop_crucible",
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9"
+      },
+      "source_mesh_count": 194,
+      "facing": "front Blender -Y; exported Godot +Z"
     }
   ],
   "build": {

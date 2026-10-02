@@ -3,9 +3,10 @@ from pathlib import Path
 import plistlib
 import subprocess
 import tempfile
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-ZIP = ROOT / 'builds/macos/NULL CHOIR-arm64.zip'
+ZIP = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'builds/macos/NULL CHOIR-arm64.zip'
 
 with tempfile.TemporaryDirectory(prefix='null-choir-check-', dir='/private/tmp') as tmp:
     subprocess.run(['ditto','-x','-k',str(ZIP),tmp],check=True)
@@ -21,5 +22,6 @@ with tempfile.TemporaryDirectory(prefix='null-choir-check-', dir='/private/tmp')
     result = subprocess.run([str(binary),'--headless','--audio-driver','CoreAudio','--','--verify-export'],capture_output=True,text=True,timeout=30)
     output = result.stdout+result.stderr
     assert result.returncode == 0 and 'PASS packaged' in output and 'ERROR:' not in output, output
+    assert 'Foundry' in output, 'Packaged second-level load/MIDI/art acceptance missing'
     print(output.strip())
 print('PASS exported ARM64 ZIP, strict ad-hoc signature, system-only dependencies and offline native title startup')

@@ -1,4 +1,4 @@
-"""Direct, stdlib-only Intake art contract: python3 tests/test_art.py."""
+"""Direct, stdlib-only authored art contract: python3 tests/test_art.py."""
 import hashlib
 import json
 from pathlib import Path
@@ -9,11 +9,13 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {'crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
             'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall',
             'vault_span', 'lumen_sconce', 'witness_relief', 'suspended_cadaver',
-            'containment_capsule', 'drain_altar'}
+            'containment_capsule', 'drain_altar', 'vertebral_furnace', 'marrow_crucible'}
 SCENERY = {'vault_span': (8, 1.2, 6), 'lumen_sconce': (1, .6, 2),
            'witness_relief': (3.5, .8, 4.8), 'suspended_cadaver': (2, 2, 3),
            'containment_capsule': (2.2, 1.8, 5), 'drain_altar': (3, 2.2, 1.7),
-           'skin_bell': (7, 7, 9), 'siphon_heart': (6, 6, 5)}
+           'skin_bell': (7, 7, 9), 'siphon_heart': (6, 6, 5),
+           'vertebral_furnace': (8, 6, 9), 'marrow_crucible': (8, 6, 5)}
+FOUNDRY = {'vertebral_furnace', 'marrow_crucible'}
 
 
 def world_geometry(gltf, binary):
@@ -75,11 +77,11 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED, 'six authored scenery assets required (intended RED)'
+    assert {a['id'] for a in assets} == EXPECTED, 'both Foundry hero pieces required (intended RED)'
     assert len(assets) == len(EXPECTED)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
-    scenery_bytes = 0
+    scenery_bytes = foundry_bytes = 0
     for a in assets:
         assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
         source = ROOT / a['source']
@@ -135,8 +137,19 @@ def check():
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
                 if a['id'] in SCENERY:
-                    scenery_bytes += len(data)
-                    assert a['recipe_sha256'] == manifest['build']['script_sha256']
+                    if a['id'] in FOUNDRY:
+                        foundry_bytes += len(data)
+                        recipe = 'tools/build_foundry_art.py'
+                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
+                        assert a['provenance']['authoring_script'] == recipe
+                        assert a['recipe_dependencies'] == {'tools/build_art.py': manifest['build']['script_sha256']}
+                        assert a['triangles'] <= 30000 and a['source_mesh_count'] >= 100
+                        assert a['loop_id'] == ('foundry_loop_furnace' if a['id'] == 'vertebral_furnace' else 'foundry_loop_crucible')
+                        assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
+                    else:
+                        scenery_bytes += len(data)
+                        assert a['provenance']['authoring_script'] == 'tools/build_art.py'
+                        assert a['recipe_sha256'] == manifest['build']['script_sha256']
                     binary_size, binary_kind = struct.unpack_from('<I4s', data, 20 + n)
                     assert binary_kind == b'BIN\x00'
                     points, triangles = world_geometry(gltf, data[28 + n:28 + n + binary_size])
@@ -153,6 +166,10 @@ def check():
                     assert all(v <= cap + .003 for v, cap in zip(size, SCENERY[a['id']])), (a['id'], size)
                     assert -.002 <= lo[1] <= .002, 'scenery must have a true ground origin'
                     assert any(any(v > 0 for v in m.get('emissiveFactor', [])) for m in gltf['materials']), a['id']
+                    if a['id'] == 'vertebral_furnace':
+                        assert size[2] >= 7.5 and size[2] > size[0], 'furnace needs a vertical spinal silhouette'
+                    if a['id'] == 'marrow_crucible':
+                        assert size[0] >= 6 and size[0] > size[2] * 1.4, 'crucible needs a broad pelvic silhouette'
                     if a['id'] == 'vault_span':
                         assert size[0] >= 7.95 and size[2] >= 5.95
                         assert all(abs(p[0]) >= 3.7 - .002 or p[1] >= 3.6 for p in points), 'vault hangs into capsule route'
@@ -166,6 +183,7 @@ def check():
             assert a['frames'] == ['idle', 'fire', 'recover']
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
     assert actual == owned_outputs, 'manifest/output parity'
+    assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'
     assert scenery_bytes < 8 * 1024 * 1024, 'eight scenery GLBs exceed their runtime budget'
     assert hashlib.sha256((ROOT / 'tools/build_art.py').read_bytes()).hexdigest() == manifest['build']['script_sha256']
     print(f'PASS: {len(assets)} assets; {len(owned_outputs)} exports; PNG alpha/pose/dimensions, GLB structure, blend provenance and SHA-256 parity')

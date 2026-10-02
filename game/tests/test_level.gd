@@ -6,6 +6,16 @@ func _initialize() -> void:
 	if not expect(is_equal_approx(layout.height_at(Vector2(23,14)), 2.0)): return
 	if not expect(is_equal_approx(layout.height_at(Vector2(23,21)), 1.0)): return
 	if not expect(is_equal_approx(layout.height_at(Vector2(20,8)), 1.0)): return
+	# Preserve all Intake floor corners when moving authored elevations out of runtime code.
+	for tile in layout.tiles:
+		for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.DOWN,Vector2.ONE]:
+			var point = Vector2(tile)+offset
+			var expected = 0.0
+			if point.x >= 17 and point.y <= 10: expected = clampf((point.x-17)/3,0,2)
+			elif point.x >= 20 and point.y >= 10 and point.y <= 18: expected = 2.0
+			elif point.x >= 22 and point.y >= 18: expected = clampf((24-point.y)/3,0,2)
+			if not expect(is_equal_approx(layout.height_at(point),expected)): return
+		if not expect(is_equal_approx(layout.roof_height(tile),10.0 if tile.x < 10 and tile.y > 11 and tile.y < 19 else 6.0)): return
 	if not expect(layout.data.loops.size() >= 2): return
 	var art = {}
 	for loop in layout.data.loops:
@@ -21,7 +31,7 @@ func _initialize() -> void:
 	print("PASS Intake authored closed routes, distinct loop art, connected placements and ramp elevations")
 	quit()
 
-func reachable(layout, start: Vector2i, finish: Vector2i, blocked: Array = []) -> bool:
+static func reachable(layout, start: Vector2i, finish: Vector2i, blocked: Array = []) -> bool:
 	var queue = [start]
 	var seen = {start: true}
 	while not queue.is_empty():

@@ -1,6 +1,6 @@
 # Blender art pipeline
 
-The first Intake asset set is original geometry and authored pixel textures. No Doom, Alien, third-party character model or downloaded texture is included. `source/art/manifest.json` records editable sources, output hashes, origins, pose order, dimensions and loop identities. [DESIGN.md](../DESIGN.md) owns campaign-wide art acceptance; the present set covers Intake only.
+The first Intake asset set is original geometry and authored pixel textures. No Doom, Alien, third-party character model or downloaded texture is included. `source/art/manifest.json` records editable sources, output hashes, origins, pose order, dimensions and loop identities. [DESIGN.md](../DESIGN.md) owns campaign-wide art acceptance; the present set covers Intake and Foundry.
 
 Rebuild with the installed Blender:
 
@@ -39,3 +39,14 @@ blender -b -t 4 --python-exit-code 1 --python tests/test_art_pose.py
 ```
 
 The first verifies manifest/file parity, hashes, `.blend` provenance, self-contained GLB, PNG dimensions/alpha, distinct poses and foot baselines. For the eight scenery assets it also reads actual exported vertices, compares axis-converted bounds, checks material merging and vault clearance, and enforces triangle and combined file-size budgets. The second proves that later authored poses cannot mutate earlier geometry. Neither check establishes visual quality. Native Blender previews in ignored `builds/art/<identity>_preview.png` support inspection; in-game review and performance remain separate parent-owned acceptance gates.
+
+## Foundry heroes
+
+`tools/build_foundry_art.py` reuses the original Blender source/render/material-merging/export helpers. It adds independent `vertebral_furnace` and `marrow_crucible` recipes without regenerating Intake assets. Each new manifest entry records its recipe hash and the unchanged helper dependency. The furnace has 296 editable meshes and 24,584 triangles; the crucible has 194 and 23,076. Their distinct vertical spinal and broad pelvic silhouettes are covered by real exported geometry checks. [FOUNDRY.md](FOUNDRY.md) owns in-level views and native traversal evidence.
+
+```sh
+blender -b -t 4 --python-exit-code 1 --python tools/build_foundry_art.py
+python3 tests/test_art.py
+```
+
+A native build initially exceeded the unchanged combined four-MiB budget by 31,092 bytes. Reducing only small gauge-ring tessellation retained all named features and passed at 4,093,296 bytes. All 35 original source/output hashes and 18 prior manifest entries remain unchanged. Preview outputs are ignored under `builds/art/`; raw validation receipts remain outside Git.
