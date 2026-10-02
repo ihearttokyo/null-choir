@@ -3,7 +3,7 @@
 [DESIGN.md](DESIGN.md) owns requirements. This file owns implementation boundaries.
 
 - `game/`: Godot runtime project, imported sprites, world models, MIDI, and the pinned synthesizer dependency. No Blender invocation or host audio library is required during play.
-- `source/art/`: editable Blender scenes and art manifest. `tools/build_art.py` generates runtime assets before export.
+- `source/art/`: editable Blender scenes and art manifest. The recipes documented in [ART.md](docs/ART.md) generate runtime assets before export.
 - `source/music/`: editable composition data. `tools/compose_music.py` produces the eight runtime MIDI files.
 - `game/tests/` and `tests/`: direct Godot and Python assertions using the real gameplay, asset, and music paths.
 - `builds/`: ignored application exports. Raw validation receipts stay outside Git.
@@ -23,3 +23,5 @@ Blender world fronts authored toward -Y export toward Godot +Z. Level JSON uses 
 Static boundary walls alone own inset native BoxOccluder3D instances. Project-level occlusion hides fully blocked geometry without changing authored assets, lighting or camera range. Floor/ceiling triangles use Godot clockwise front faces; native assertions cover both winding and conservative wall occluder bounds. [SCENERY.md](docs/SCENERY.md) owns visual and GPU comparison evidence.
 
 `level_data.gd` reads each authored map's elevation regions and ceiling heights. Floor corners, native capsule positions and landmark lighting share those values. Hero specifications own their low collision-base dimensions; each level keeps its unique machine geometry. Intake's original floor corners and roof heights remain covered by an exact native regression.
+
+`projectile.gd` owns one finite swept-collision projectile attached to the current level. Native pause and scene ownership govern its lifetime; it checks stale-map/shooter references before applying existing difficulty and infighting damage. Weapon pickups normalize JSON indices in the existing collection path; the player/HUD/campaign implementations remain shared.

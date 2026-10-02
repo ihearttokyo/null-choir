@@ -1,6 +1,6 @@
 # Blender art pipeline
 
-The first Intake asset set is original geometry and authored pixel textures. No Doom, Alien, third-party character model or downloaded texture is included. `source/art/manifest.json` records editable sources, output hashes, origins, pose order, dimensions and loop identities. [DESIGN.md](../DESIGN.md) owns campaign-wide art acceptance; the present set covers Intake and Foundry.
+The first Intake asset set is original geometry and authored pixel textures. No Doom, Alien, third-party character model or downloaded texture is included. `source/art/manifest.json` records editable sources, output hashes, origins, pose order, dimensions and loop identities. [DESIGN.md](../DESIGN.md) owns campaign-wide art acceptance; the present set covers Intake, Foundry and Processional.
 
 Rebuild with the installed Blender:
 
@@ -50,3 +50,18 @@ python3 tests/test_art.py
 ```
 
 A native build initially exceeded the unchanged combined four-MiB budget by 31,092 bytes. Reducing only small gauge-ring tessellation retained all named features and passed at 4,093,296 bytes. All 35 original source/output hashes and 18 prior manifest entries remain unchanged. Preview outputs are ignored under `builds/art/`; raw validation receipts remain outside Git.
+
+
+## Processional assets
+
+`tools/build_processional_art.py` adds the walking bone organ, ossified palanquin, floating caster and scattergun. It reuses both unchanged authoring helpers and records their hashes. The organ has 370 editable meshes, six walking legs, fifteen hollow pipes and 22,384 triangles; the palanquin has 339 meshes, six carrying limbs, a split casket and 21,788 triangles. Both hero sources retain named editable assemblies. Runtime geometry merges into seven material groups per hero; their combined GLBs are 3,711,980 bytes, below the unchanged four-MiB budget.
+
+Caster sources retain five pose collections and 40 distinct directional cells, including a visibly collapsed death row. The scattergun retains three poses with two hollow barrels and visible biological hands. Native CPU builds/rendering pass; manifest parity now covers 24 assets and 25 exports. All 41 prior source/output/helper hashes and 20 prior manifest entries remain unchanged. [PROCESSIONAL.md](PROCESSIONAL.md) owns scene and combat evidence.
+
+```sh
+blender -b -t 4 --python-exit-code 1 --python tools/build_processional_art.py -- --asset walking_bone_organ
+blender -b -t 4 --python-exit-code 1 --python tools/build_processional_art.py -- --asset ossified_palanquin
+blender -b -t 4 --python-exit-code 1 --python tools/build_processional_art.py -- --asset caster
+blender -b -t 4 --python-exit-code 1 --python tools/build_processional_art.py -- --asset scattergun
+python3 tests/test_art.py
+```

@@ -38,4 +38,4 @@ godot --headless --audio-driver CoreAudio --fixed-fps 60 --path game --quit-afte
 godot --headless --audio-driver CoreAudio --path game --script tests/test_scenery.gd -- --level=1
 ```
 
-Six maps, remaining combat equipment/roles/bosses, sound effects, ending and full story/pacing/performance acceptance remain. Physical-controller validation, musical listening and notarization are separate open gates. [CHECKPOINT.md](../CHECKPOINT.md) records the latest application and private delivery evidence.
+[CHECKPOINT.md](../CHECKPOINT.md) owns current remaining campaign, validation and private-delivery gates.

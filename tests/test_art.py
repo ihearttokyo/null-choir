@@ -9,13 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {'crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
             'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall',
             'vault_span', 'lumen_sconce', 'witness_relief', 'suspended_cadaver',
-            'containment_capsule', 'drain_altar', 'vertebral_furnace', 'marrow_crucible'}
+            'containment_capsule', 'drain_altar', 'vertebral_furnace', 'marrow_crucible',
+            'walking_bone_organ', 'ossified_palanquin', 'caster', 'scattergun'}
 SCENERY = {'vault_span': (8, 1.2, 6), 'lumen_sconce': (1, .6, 2),
            'witness_relief': (3.5, .8, 4.8), 'suspended_cadaver': (2, 2, 3),
            'containment_capsule': (2.2, 1.8, 5), 'drain_altar': (3, 2.2, 1.7),
            'skin_bell': (7, 7, 9), 'siphon_heart': (6, 6, 5),
-           'vertebral_furnace': (8, 6, 9), 'marrow_crucible': (8, 6, 5)}
+           'vertebral_furnace': (8, 6, 9), 'marrow_crucible': (8, 6, 5),
+           'walking_bone_organ': (8, 6, 9), 'ossified_palanquin': (8, 6, 6)}
 FOUNDRY = {'vertebral_furnace', 'marrow_crucible'}
+PROCESSIONAL = {'walking_bone_organ', 'ossified_palanquin'}
+PROCESSIONAL_ASSETS = PROCESSIONAL | {'caster', 'scattergun'}
 
 
 def world_geometry(gltf, binary):
@@ -77,17 +81,23 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED, 'both Foundry hero pieces required (intended RED)'
+    assert {a['id'] for a in assets} == EXPECTED, 'four Processional assets required: walking_bone_organ, ossified_palanquin, caster, scattergun (intended RED)'
     assert len(assets) == len(EXPECTED)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
-    scenery_bytes = foundry_bytes = 0
+    scenery_bytes = foundry_bytes = processional_bytes = 0
     for a in assets:
         assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
         source = ROOT / a['source']
         assert source.is_relative_to(ROOT / 'source/art') and source.suffix == '.blend'
         assert source.is_file() and source.read_bytes()[:7] == b'BLENDER', a['id']
         assert hashlib.sha256(source.read_bytes()).hexdigest() == a['source_sha256'], a['id']
+        if a['id'] in PROCESSIONAL_ASSETS:
+            recipe = 'tools/build_processional_art.py'
+            assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
+            assert a['provenance']['authoring_script'] == recipe
+            assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
+                                                 for helper in ('tools/build_art.py', 'tools/build_foundry_art.py')}
         for output in a['outputs']:
             file = ROOT / output['path']
             assert file.is_relative_to(ROOT / 'game/assets/art')
@@ -98,11 +108,11 @@ def check():
             if file.suffix == '.png':
                 size, pixels = png(file)
                 assert list(size) == output['dimensions'], file
-                if a['id'] in ('crawler', 'worker', 'impact_tool', 'rivet_pistol'):
+                if a['id'] in ('crawler', 'worker', 'impact_tool', 'rivet_pistol', 'caster', 'scattergun'):
                     assert 0 in pixels[3::4] and 255 in pixels[3::4], file
                     assert set(pixels[3::4]) == {0, 255}, 'sprite edges must be pixel-crisp'
                     cw, ch = a['cell_size']
-                    enemy = a['id'] in ('crawler', 'worker')
+                    enemy = a['id'] in ('crawler', 'worker', 'caster')
                     rows = len(a['frames']) if enemy else 1
                     assert size == (a['columns'] * cw, rows * ch)
                     assert a['filter'] == 'nearest'
@@ -119,7 +129,14 @@ def check():
                     if enemy:
                         for column in range(a['columns']):
                             assert len(set(cells[column::a['columns']])) == rows, 'enemy poses cannot be duplicate cells'
+                        if a['id'] == 'caster':
+                            assert len(set(cells)) == 40, 'all caster directions and poses must be distinct'
+                            for cell in cells[-8:]:
+                                top = min(y for y in range(ch) if any(cell[(y * cw + x) * 4 + 3] for x in range(cw)))
+                                assert top >= 64, 'dead caster must visibly collapse'
                     else:
+                        if a['id'] == 'scattergun':
+                            assert not any(pixels[3:24 * size[0] * 4:4]), 'scattergun must stay below central aim'
                         assert len(set(cells)) == len(a['frames']), 'weapon poses cannot be duplicate cells'
             elif file.suffix == '.glb':
                 assert 'gltf/embedded_image_handling=3' in file.with_suffix('.glb.import').read_text(), 'Godot must keep authored images embedded'
@@ -146,6 +163,13 @@ def check():
                         assert a['triangles'] <= 30000 and a['source_mesh_count'] >= 100
                         assert a['loop_id'] == ('foundry_loop_furnace' if a['id'] == 'vertebral_furnace' else 'foundry_loop_crucible')
                         assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
+                    elif a['id'] in PROCESSIONAL:
+                        processional_bytes += len(data)
+                        assert a['triangles'] <= 30000 and a['source_mesh_count'] >= 100
+                        assert a['source_hierarchy_groups'] >= 4, 'editable hero assemblies required'
+                        assert a['loop_id'] == ('processional_loop_organ' if a['id'] == 'walking_bone_organ' else 'processional_loop_palanquin')
+                        assert a['facing'] == 'front Blender -Y; exported Godot +Z'
+                        assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
                     else:
                         scenery_bytes += len(data)
                         assert a['provenance']['authoring_script'] == 'tools/build_art.py'
@@ -170,20 +194,35 @@ def check():
                         assert size[2] >= 7.5 and size[2] > size[0], 'furnace needs a vertical spinal silhouette'
                     if a['id'] == 'marrow_crucible':
                         assert size[0] >= 6 and size[0] > size[2] * 1.4, 'crucible needs a broad pelvic silhouette'
+                    if a['id'] == 'walking_bone_organ':
+                        assert size[2] >= 7.2 and size[2] > size[0], 'organ needs tall staggered pipe silhouette'
+                        assert a['features']['hollow_pipes'] >= 12 and a['features']['walking_legs'] == 6
+                        assert a['features']['pedals'] >= 12 and a['features']['bellows_folds'] >= 12
+                    if a['id'] == 'ossified_palanquin':
+                        assert size[0] >= 6.6 and size[0] > size[2] * 1.25, 'palanquin needs broad conveyance silhouette'
+                        assert a['features']['canopy_ribs'] >= 8 and a['features']['carrying_limbs'] == 6
+                        assert a['features']['casket_leaves'] == 2 and a['features']['restraint_bands'] >= 6
                     if a['id'] == 'vault_span':
                         assert size[0] >= 7.95 and size[2] >= 5.95
                         assert all(abs(p[0]) >= 3.7 - .002 or p[1] >= 3.6 for p in points), 'vault hangs into capsule route'
                         assert all(abs(p[0]) >= 3.5 or p[1] >= 4 for p in points), 'vault must preserve the open 7m interior'
-        if a['id'] in ('crawler', 'worker'):
+        if a['id'] in ('crawler', 'worker', 'caster'):
             assert a['columns'] == 8 and a['cell_size'] == [128, 128]
             assert a['frames'] == ['idle', 'walk_a', 'walk_b', 'attack', 'dead']
             assert a['yaw_degrees'] == list(range(0, 360, 45))
-        if a['id'] in ('impact_tool', 'rivet_pistol'):
+        if a['id'] in ('caster', 'scattergun'):
+            assert a['pose_collections'] == a['frames']
+            assert set(a['pose_mesh_counts']) == set(a['frames'])
+            assert all(n >= (70 if a['id'] == 'caster' else 80) for n in a['pose_mesh_counts'].values())
+            if a['id'] == 'caster':
+                assert a['runtime_quad_height_m'] == 3.65
+        if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun'):
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'
+    assert processional_bytes < 4 * 1024 * 1024, 'two Processional GLBs exceed their runtime budget'
     assert scenery_bytes < 8 * 1024 * 1024, 'eight scenery GLBs exceed their runtime budget'
     assert hashlib.sha256((ROOT / 'tools/build_art.py').read_bytes()).hexdigest() == manifest['build']['script_sha256']
     print(f'PASS: {len(assets)} assets; {len(owned_outputs)} exports; PNG alpha/pose/dimensions, GLB structure, blend provenance and SHA-256 parity')

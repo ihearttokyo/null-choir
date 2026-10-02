@@ -1,6 +1,6 @@
 extends RefCounted
 
-const FILES = ["01_intake", "02_foundry"]
+const FILES = ["01_intake", "02_foundry", "03_processional"]
 var data: Dictionary = {}
 var tiles: Dictionary = {}
 

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const Projectile = preload("res://scripts/projectile.gd")
+
 var game: Node
 var id: String
 var kind: String
@@ -26,6 +28,10 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	collision_layer = 4
 	collision_mask = 1 | 2 | 4
 	floor_snap_length = 0.5
+	if kind == "caster":
+		position.y += 1.0
+		motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+		floor_snap_length = 0
 	var collider = CollisionShape3D.new()
 	var shape = CapsuleShape3D.new()
 	shape.radius = 0.42 if kind == "crawler" else 0.34
@@ -64,7 +70,12 @@ func _physics_process(delta: float) -> void:
 	var sight = get_world_3d().direct_space_state.intersect_ray(query)
 	var range_to_target = global_position.distance_to(target.global_position)
 	if range_to_target < 34 and sight.is_empty(): alerted = true
-	velocity.y -= delta*24
+	if kind == "caster":
+		var floor_query = PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*0.5,global_position-Vector3.UP*6,1)
+		var floor_hit = get_world_3d().direct_space_state.intersect_ray(floor_query)
+		velocity.y = clampf((floor_hit.position.y+1.0+sin(age*2)*0.16-global_position.y)*5,-3,3) if not floor_hit.is_empty() else -3.0
+	else:
+		velocity.y -= delta*24
 	if alerted:
 		var heading = target.global_position-global_position
 		heading.y = 0
@@ -76,7 +87,7 @@ func _physics_process(delta: float) -> void:
 			heading = waypoint-global_position
 			heading.y = 0
 		var move = heading.normalized()
-		var desired = 0.0 if kind == "worker" and range_to_target < 18 and sight.is_empty() else speed
+		var desired = 0.0 if kind in ["worker","caster"] and range_to_target < 18 and sight.is_empty() else speed
 		velocity.x = move.x*desired
 		velocity.z = move.z*desired
 		if heading.length() > 0.2: rotation.y = atan2(-heading.x,-heading.z)
@@ -90,6 +101,12 @@ func _physics_process(delta: float) -> void:
 				var hit = get_world_3d().direct_space_state.intersect_ray(shot)
 				if not hit.is_empty(): _attack(hit.collider,10)
 				attack_time = 1.7
+			elif kind == "caster" and range_to_target < 30:
+				var projectile = Projectile.new()
+				game.level.add_child(projectile)
+				projectile.configure(game,self,global_position+Vector3(0,1.4,0),aim)
+				pose_time = 0.4
+				attack_time = 2.2
 	else:
 		velocity.x = 0
 		velocity.z = 0

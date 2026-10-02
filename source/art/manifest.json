@@ -960,6 +960,277 @@
       },
       "source_mesh_count": 194,
       "facing": "front Blender -Y; exported Godot +Z"
+    },
+    {
+      "id": "walking_bone_organ",
+      "source": "source/art/walking_bone_organ.blend",
+      "source_sha256": "be7b967cb3145c1f8aded73530f2bd9d1f7eee19b40c2f87bb0159a035793abe",
+      "recipe_sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/walking_bone_organ.glb",
+          "sha256": "8cff7b055384aba6dab1aef7f431f99ef5d4aa7eaba5e5e43cd1491faf2b607c",
+          "bytes": 1804628
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_processional_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -3.53,
+          -2.235,
+          0.0
+        ],
+        "max": [
+          3.53,
+          1.885,
+          8.432
+        ],
+        "size": [
+          7.06,
+          4.12,
+          8.432
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 22384,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": "processional_loop_organ",
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+        "tools/build_foundry_art.py": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+      },
+      "source_mesh_count": 370,
+      "source_hierarchy_groups": 4,
+      "features": {
+        "hollow_pipes": 15,
+        "walking_legs": 6,
+        "pedals": 14,
+        "bellows_folds": 14
+      },
+      "facing": "front Blender -Y; exported Godot +Z"
+    },
+    {
+      "id": "ossified_palanquin",
+      "source": "source/art/ossified_palanquin.blend",
+      "source_sha256": "c2834d9d4a09d35548f06c8306a0ca52d7f2c75d3e92e6be9459a8ca3e631c5e",
+      "recipe_sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/ossified_palanquin.glb",
+          "sha256": "0dfedd465f6ca23b1ea7d4ea7cad6f625972dd5752a6a2adc182739dce6bdd59",
+          "bytes": 1907352
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_processional_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -3.64,
+          -2.585,
+          0.0
+        ],
+        "max": [
+          3.64,
+          2.585,
+          5.33
+        ],
+        "size": [
+          7.28,
+          5.17,
+          5.33
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 21788,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": "processional_loop_palanquin",
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+        "tools/build_foundry_art.py": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+      },
+      "source_mesh_count": 339,
+      "source_hierarchy_groups": 5,
+      "features": {
+        "canopy_ribs": 18,
+        "carrying_limbs": 6,
+        "casket_leaves": 2,
+        "restraint_bands": 7
+      },
+      "facing": "front Blender -Y; exported Godot +Z"
+    },
+    {
+      "id": "caster",
+      "source": "source/art/caster.blend",
+      "source_sha256": "82d1c3c919c5fe1ee426e65da667b09f2eb72edc047a9894bef74261d846dba1",
+      "recipe_sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a",
+      "outputs": [
+        {
+          "path": "game/assets/art/sprites/caster.png",
+          "sha256": "cc00a5a80e1d119073e3b28c37a0ca6036afcca7e309a64ced35a6564fb81527",
+          "bytes": 189567,
+          "dimensions": [
+            1024,
+            640
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_processional_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        128,
+        128
+      ],
+      "columns": 8,
+      "frames": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ],
+      "yaw_degrees": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "facing": "column0 sees front (-Y); camera orbits clockwise viewed from +Z, column2 sees right (+X)",
+      "origin_px": [
+        64,
+        120
+      ],
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -1.261,
+          -1.235,
+          0.011
+        ],
+        "max": [
+          1.286,
+          0.448,
+          3.159
+        ],
+        "size": [
+          2.547,
+          1.683,
+          3.148
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "walk_a",
+        "walk_b",
+        "attack",
+        "dead"
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+        "tools/build_foundry_art.py": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+      },
+      "source_mesh_count": 365,
+      "pose_mesh_counts": {
+        "idle": 72,
+        "walk_a": 72,
+        "walk_b": 72,
+        "attack": 75,
+        "dead": 74
+      },
+      "runtime_quad_height_m": 3.65
+    },
+    {
+      "id": "scattergun",
+      "source": "source/art/scattergun.blend",
+      "source_sha256": "5588ed27bcd12e95b732d6d1e598bfbb14704f8654cce60909283c41fd33c34b",
+      "recipe_sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a",
+      "outputs": [
+        {
+          "path": "game/assets/art/weapons/scattergun.png",
+          "sha256": "78177df17e91aca29057858fc7f73f54cd634c97361d7714b82993fdf24bb1b6",
+          "bytes": 43437,
+          "dimensions": [
+            960,
+            200
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_processional_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "origin_px": [
+        160,
+        200
+      ],
+      "anchor": "bottom center of 320x200 overlay; aim is screen-center above muzzle",
+      "filter": "nearest",
+      "physical_bounds_m": {
+        "min": [
+          -0.752,
+          -1.73,
+          -0.057
+        ],
+        "max": [
+          0.751,
+          1.601,
+          0.808
+        ],
+        "size": [
+          1.503,
+          3.331,
+          0.865
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "pose_collections": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+        "tools/build_foundry_art.py": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+      },
+      "source_mesh_count": 278,
+      "pose_mesh_counts": {
+        "idle": 92,
+        "fire": 94,
+        "recover": 92
+      }
     }
   ],
   "build": {

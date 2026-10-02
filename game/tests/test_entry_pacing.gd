@@ -29,7 +29,8 @@ func run() -> void:
 			if actor.alerted: alert_ids.append(actor.id)
 		print("ENTRY difficulty=",mode," simulated_seconds=10 health=",game.state.health," alerted=",alert_ids)
 		if not expect(game.state.health == 100,"Entry must allow reading the seven-second mission before combat"): return
-		game.player.position = game.level.layout.world_position([14.5,17.5] if level_index == 0 else [14,19])
+		var nave = [14.5,17.5] if level_index == 0 else [14,19] if level_index == 1 else [16.5,20.5]
+		game.player.position = game.level.layout.world_position(nave)
 		await physics_frame
 		await physics_frame
 		var engaged = false

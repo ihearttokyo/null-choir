@@ -165,6 +165,12 @@ func collect_pickup(id: String) -> void:
 	for spec in level.layout.data.pickups:
 		if spec.id != id: continue
 		match spec.kind:
+			"weapon":
+				var weapon = int(spec.weapon)
+				if not weapon in state.owned_weapons:
+					state.owned_weapons.append(weapon)
+					state.weapon = weapon
+				state.ammo[weapon] = mini(9999,state.ammo[weapon]+spec.amount)
 			"ammo": state.ammo[spec.weapon] = mini(9999,state.ammo[spec.weapon]+spec.amount)
 			"health":
 				if state.health >= 100: return
@@ -446,11 +452,44 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
 	checks["foundry_art"] = foundry_heroes.size() == 2
+	state.complete_level()
+	start_level()
+	checks["processional"] = playing and level.layout.data.id == "processional" and state.position == level.layout.world_position(level.layout.data.spawn)
+	checks["processional_midi"] = music.player.file == "res://audio/processional.mid" and music.player.bank == retained_bank
+	music.player._process(0.2)
+	checks["processional_live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+	var processional_heroes = []
+	for node in level.get_children():
+		if node.scene_file_path.get_file().get_basename() in ["walking_bone_organ","ossified_palanquin"]: processional_heroes.append(node.scene_file_path)
+	checks["processional_art"] = processional_heroes.size() == 2
+	player.set_physics_process(false)
+	var caster
+	var caster_count = 0
+	for actor in enemies:
+		actor.set_physics_process(false)
+		if actor.kind == "caster":
+			caster_count += 1
+			if actor.id == "processional_enemy_11": caster = actor
+	checks["caster_art"] = caster_count == 4
+	player.position = level.layout.world_position([20.5,25.5])
+	_process(0)
+	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/scattergun.png")
+	checks["scattergun_fire"] = player.fire() and state.ammo[2] == 15
+	player.position = level.layout.world_position([16.5,16.5])
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if caster != null:
+		caster._physics_process(0.05)
+		checks["caster_art"] = checks["caster_art"] and caster.sprite.texture != null and caster.motion_mode == CharacterBody3D.MOTION_MODE_FLOATING
+	var projectiles = 0
+	for node in level.get_children():
+		if node.get_script() == Enemy.Projectile: projectiles += 1
+	checks["caster_flight"] = projectiles == 1
 	show_title()
 	for check in checks:
 		if not checks[check]:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
-	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry scene/art/live MIDI, MIDI source and notices")
+	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices")
 	get_tree().quit()

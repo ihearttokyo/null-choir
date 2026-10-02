@@ -23,5 +23,7 @@ with tempfile.TemporaryDirectory(prefix='null-choir-check-', dir='/private/tmp')
     output = result.stdout+result.stderr
     assert result.returncode == 0 and 'PASS packaged' in output and 'ERROR:' not in output, output
     assert 'Foundry' in output, 'Packaged second-level load/MIDI/art acceptance missing'
+    assert 'Processional' in output, 'Packaged third-level/caster/scattergun acceptance missing (intended RED)'
+    assert info['CFBundleShortVersionString'] == '0.1.3', 'Current development app version required'
     print(output.strip())
 print('PASS exported ARM64 ZIP, strict ad-hoc signature, system-only dependencies and offline native title startup')
