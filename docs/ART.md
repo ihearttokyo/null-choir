@@ -96,16 +96,24 @@ Pose collections open with idle visible. Reveal a chosen collection and update B
 
 ## Image-derived overhead apparatus
 
-`tools/build_world_atmosphere_art.py` derives four editable modules from the retained
-`source/art/references/world-polish-late-01.png` construction direction: Nursery
-umbilical growth vessels, Ossuary suspended bone sorting, Inversion layered cosmic
-fractures and Heart arterial ribs. Native Blender sources retain four named
-assemblies and 92–134 independent meshes. Reopening, an actual vertex edit/revert,
-packed textures and unchanged disk hashes pass. Native exports contain 5,948–19,980
-triangles and four or five material meshes each; all four total 4,044,984 bytes.
-Their independent ceilings are 22,000 triangles, five meshes, two MiB per asset
-and six MiB combined. The strict inventory preserves all 88 prior records and
-source/output hashes; religious and original scenery budgets remain separate.
+`tools/build_world_atmosphere_art.py` derives four editable modules from retained
+GPT Image construction references. Nursery umbilical vessels, Ossuary bone sorting
+and Heart arterial ribs retain `world-polish-late-01.png`; Inversion now selects
+`inversion-cavity-02.png` for a recessed cosmic void, fractured violet incisions
+and suspended surgical ribs. Each asset validates its selected image hash before
+native imports or output writes. The original 128x64 cosmic texture is authored
+in Blender, not copied from the reference.
+
+Native sources retain four named assemblies and 118–171 independent meshes.
+Reopening, an actual vertex edit/revert, packed textures and unchanged disk hashes
+pass. Exports contain 13,498–19,980 triangles and four or five material meshes;
+all four total 4,646,440 bytes. Their independent ceilings remain 22,000 triangles,
+five meshes, two MiB per asset and six MiB combined. Inversion retains its original
+10.352x10.388x3.905m bounds. The other three rebuilt exports have identical oriented
+triangles, vertex attributes, materials and embedded textures; export index order
+varies, so actual new hashes are recorded. Strict inventory keeps the other 88
+records and their source/output hashes unchanged. Religious and scenery budgets
+remain separate.
 
 Godot imports retain embedded images with mode 3. Actual material-resource and
 vertex checks pass after correcting the initial default-mode extraction. Four

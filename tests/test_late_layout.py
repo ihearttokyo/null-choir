@@ -287,6 +287,10 @@ def check_layout(level, data):
         assert set(group["requires"]) <= set(keys)
     for hero in data["heroes"]:
         assert hero["seal"] in keys and set(hero["light_ids"]) <= set(lights)
+        if hero["id"] in {"nursery_gestation_engine", "heart_mouth_restraint"}:
+            core = lights[hero["light_ids"][1]]
+            assert math.dist(core["cell"], hero["cell"]) * data["cell_size"] < 8 and core["height"] <= 5.5, "examination light must reach modeled organism/mouth, not the distant vault"
+            assert core.get("target") == hero["cell"], "repositioned examination spot must aim at its original hero"
     assert {tuple(p["requires"]) for p in groups.values()} >= {(), ("blood",), ("ivory",), ("blood", "ivory")}
     assert all(groups[f"{level}_{branch}_commit"]["requires"] == [] and groups[f"{level}_{branch}_return"]["requires"] == [seal] for branch, seal in [("first", "blood"), ("second", "ivory")])
     pickups = {p["id"]: p for p in data["pickups"]}

@@ -261,8 +261,11 @@ def check():
                         assert a['source_hierarchy_groups'] >= 4 and len(set(a['assembly_names'])) == a['source_hierarchy_groups']
                         assert len(data) == output['bytes'] < 2 * 1024 * 1024
                         assert a['facing'] == 'front Blender -Y; exported Godot +Z' and a['collision'].startswith('none;')
-                        assert a['reference_images'] == [{'path': 'source/art/references/world-polish-late-01.png',
-                                                         'sha256': 'f779257d54a32b0d702193b79beceee63df0d96b54f2988a5899e457670dc9a7'}]
+                        expected_reference = ('source/art/references/inversion-cavity-02.png',
+                                              '8f3363b3643660733b13e4b76ee9029ccdfa088a97191a106c68248ce7da125e') if a['id'] == 'inversion_cosmic_membrane' else (
+                                              'source/art/references/world-polish-late-01.png',
+                                              'f779257d54a32b0d702193b79beceee63df0d96b54f2988a5899e457670dc9a7')
+                        assert a['reference_images'] == [{'path': expected_reference[0], 'sha256': expected_reference[1]}]
                         for reference in a['reference_images']:
                             assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
                         assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])

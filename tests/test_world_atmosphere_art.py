@@ -20,6 +20,11 @@ def check():
     assert recipe['CAPS'] == (12, 12, 4.2) and recipe['TRIANGLE_CAP'] == 22000 and recipe['MESH_CAP'] == 5
     assert recipe['ASSET_BYTE_CAP'] == 2 * 1024 * 1024 and recipe['GROUP_BYTE_CAP'] == 6 * 1024 * 1024
     assert all(callable(recipe[asset]) for asset in recipe['IDS'])
+    selected = {'source/art/references/inversion-cavity-02.png':
+                '8f3363b3643660733b13e4b76ee9029ccdfa088a97191a106c68248ce7da125e'}
+    expected_references = {asset: {recipe['REFERENCE']: recipe['REFERENCE_SHA']} for asset in recipe['IDS']}
+    expected_references['inversion_cosmic_membrane'] = selected
+    assert recipe.get('REFERENCES') == expected_references, 'Inversion must select its inspected cavity reference (intended RED)'
     assert callable(recipe.get('export_details')), 'Actual embedded-texture evidence reader is missing (intended RED)'
     try:
         recipe['export_details'](b'not a GLB')
@@ -44,7 +49,8 @@ def check():
         base = Path(temp).resolve()
         project, receipt = base / 'frozen', base / 'receipts'
         output = receipt / 'native'
-        for path in ('tools/build_world_atmosphere_art.py', *recipe['DEPENDENCIES'], recipe['REFERENCE'], 'source/art/manifest.json', 'game/assets/art/textures/surface_atlas.png'):
+        references = {path for refs in expected_references.values() for path in refs}
+        for path in ('tools/build_world_atmosphere_art.py', *recipe['DEPENDENCIES'], *references, 'source/art/manifest.json', 'game/assets/art/textures/surface_atlas.png'):
             target = project / path
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / path, target)
@@ -66,23 +72,36 @@ def check():
                 raise AssertionError('refuse every existing candidate target before writes')
             assert tail.read_bytes() == b'preserved candidate'
             tail.unlink()
-        ref = project / recipe['REFERENCE']
-        data = ref.read_bytes()
-        ref.write_bytes(b'bad reference')
-        try:
-            recipe['preflight'](asset, output, receipt, project)
-        except ValueError:
-            pass
-        else:
-            raise AssertionError('reject changed/missing selected image before native imports')
-        ref.unlink()
-        try:
-            recipe['preflight'](asset, output, receipt, project)
-        except ValueError:
-            pass
-        else:
-            raise AssertionError('reject missing selected image')
-        ref.write_bytes(data)
+        # Each asset rejects drift in its own image, without depending on another asset's image.
+        for name, refs in expected_references.items():
+            ref = project / next(iter(refs))
+            data = ref.read_bytes()
+            assert recipe['preflight'](name, output, receipt, project) == (output, receipt, project)
+            ref.write_bytes(b'changed selected image')
+            try:
+                recipe['preflight'](name, output, receipt, project)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError('reject per-asset image drift before writes/native imports')
+            ref.unlink()
+            try:
+                recipe['preflight'](name, output, receipt, project)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError('reject missing per-asset image')
+            unrelated = 'nursery_growth_vault' if name == 'inversion_cosmic_membrane' else 'inversion_cosmic_membrane'
+            assert recipe['preflight'](unrelated, output, receipt, project) == (output, receipt, project)
+            ref.symlink_to(ROOT / next(iter(refs)))
+            try:
+                recipe['preflight'](name, output, receipt, project)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError('reject symlinked per-asset image even with matching pixels')
+            ref.unlink()
+            ref.write_bytes(data)
         atlas = project / 'game/assets/art/textures/surface_atlas.png'
         atlas_data = atlas.read_bytes()
         atlas.write_bytes(b'changed shared atlas')
@@ -119,7 +138,8 @@ def check_candidates(receipt, project):
     geometry = runpy.run_path(str(project / 'tests/test_art.py'))['world_geometry']
     sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
     dependencies = {path: sha(project / path) for path in recipe['DEPENDENCIES']}
-    assert sha(project / recipe['REFERENCE']) == recipe['REFERENCE_SHA']
+    for references in recipe['REFERENCES'].values():
+        assert all(sha(project / path) == digest for path, digest in references.items())
     manifest_data = (project / 'source/art/manifest.json').read_bytes()
     assert dependencies['tools/build_art.py'] == json.loads(manifest_data)['build']['script_sha256']
     digests, total = set(), 0
@@ -139,7 +159,7 @@ def check_candidates(receipt, project):
         assert entry['id'] == asset and entry['level_id'] == asset.split('_', 1)[0] and entry['loop_id'] is None
         assert entry['recipe_sha256'] == sha(project / recipe['RECIPE'])
         assert entry['recipe_dependencies'] == dependencies
-        assert entry['reference_images'] == [{'path': recipe['REFERENCE'], 'sha256': recipe['REFERENCE_SHA']}]
+        assert entry['reference_images'] == [{'path': path, 'sha256': digest} for path, digest in recipe['REFERENCES'][asset].items()]
         assert entry['machine_purpose'] == recipe['PURPOSES'][asset]
         assert entry['facing'] == 'front Blender -Y; exported Godot +Z' and entry['collision'].startswith('none;')
         assert entry['provenance']['authoring_script'] == recipe['RECIPE'] and not entry['provenance']['imports']

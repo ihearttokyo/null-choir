@@ -133,6 +133,41 @@ are complete. Continue remaining played/heard and physical-control acceptance,
 and cold-start remediation after Xcode/Metal Toolchain installation.
 A milestone never completes or pauses the goal.
 
+## Inversion depth and landmark examination lights
+
+The latest bounded native visual review passes the corrected Inversion vaults.
+Fresh retained GPT Image references drove recessed nested geometry, narrow violet
+incisions and an original sparse star field. All four Blender atmosphere sources
+were rebuilt coherently, reopened and edited/restored in memory. Actual exports,
+embedded textures, vertex bounds and staging pass unchanged caps. Inversion has
+13,498 triangles and five material meshes inside its original physical bounds;
+the four modules total 4,646,440 bytes. The other three have identical actual
+oriented triangles, attributes, materials and textures, with export-order changes
+recorded rather than invented old hashes.
+
+Two existing examination spotlights now illuminate the Nursery organism and the
+Heart's teeth, tissue and narrowing throat. Positions and heights changed; Heart
+uses warm amber. Targets, energies, ranges, shadows and light counts remain
+unchanged. Both old placements fail the new proximity/aim guard; both corrected
+maps pass it and native scenery checks. Independent ordinary-eye-height views
+pass for Heart, Nursery and Foundry without enlarging their geometry. Diagnostic
+light probes initially omitted spot re-aiming; those captures were rejected and
+corrected using the existing production factory's exact targeting method.
+
+All 30 actual M4/Metal source-candidate combat stress samples pass at 105.81–120.77
+FPS, with warm scene construction at most 417.10 ms and all actors/music active.
+These are source diagnostics, not cold-start, physical-control, heard-music or
+full-playthrough certification. The prior private v0.2.0-dev is preserved. A fresh 0.2.1 Apple Silicon ZIP passes
+full-eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing,
+system-only dependencies and isolated user data: 88,374,685 bytes, SHA256
+`a942165ac91accb17265db275da70b5894689beed2e352ed94053875fd4ebfb2`. Actual standalone title, Continue, stock Escape pause, live Heart
+world, staged death, checkpoint restoration, save/title and normal Quit pass.
+Primary campaign/preferences remain unchanged. The stationary 100-health canary
+died during operator latency; it is retained as death/recovery evidence, not an
+alive-stress result. This candidate is ready for separate private publication.
+The full goal remains active; Xcode/Metal Toolchain, listening and physical/full
+playthrough gates remain open.
+
 ## Prior delivered piece (historical, superseded)
 
 [DESIGN.md](DESIGN.md) owns the approved eight-level scope; [ARCHITECTURE.md](ARCHITECTURE.md) owns module boundaries. Goal active. Implementation, validation and private project/app delivery remain approved without repeated confirmation. Previous turn: progress, with Foundry source and private 0.1.2 app delivered. This continuation implements Processional and its combat additions.
@@ -199,3 +234,28 @@ user data and older app processes remain unchanged. The initial pipe-based run
 is retained as inconclusive because stdout was buffered until exit; native PTY
 output repairs observation only. This bounded case is not a full packaged matrix,
 physical movement test or campaign playthrough.
+
+## Native shipped-data-pack performance
+
+The exact published 0.2.0 PCK passes thirty real M4/Metal stress samples through
+Godot's supported pack loader: eight spawn views and two Heart landmark views,
+each repeated three times. All authored cohorts are active; every player remains
+alive without health/armor refresh. Rates are 118.70–120.38 FPS with diagnostic
+uncapping; scene construction takes at most 427.26 ms. The actual PCK bytes match
+the published ZIP. CoreAudio, clean exit and unchanged primary user data pass.
+
+This uses the installed official Godot engine, not the release executable. That
+release template disables path overrides, so an external-script probe ran the
+normal title until its owned twenty-second timeout. The native help and official
+source establish the cause. No engine, security or path-override control changed;
+the supported pack-loader result is distinct from the release app's existing
+normal-vsync sixty-FPS canary. It does not certify full played routes, cold menu
+timing, physical controls or heard music. The frozen thirty-case release-binary
+matrix remains NOT RUN. The unsupported probe and all raw evidence are retained.
+
+An independent eleven-image review flagged Inversion depth and requested
+unobstructed Heart, Nursery and Foundry views. The focused reviews now pass those
+supplied views after the correction documented above. Four other maps retain their
+bounded supplied-view verdicts. These pixel reviews do not certify full played
+routes or artistic acceptance by Jared; imports and prop counts alone remain
+insufficient.

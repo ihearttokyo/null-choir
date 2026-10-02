@@ -6008,12 +6008,12 @@
     {
       "id": "nursery_growth_vault",
       "source": "source/art/nursery_growth_vault.blend",
-      "source_sha256": "e324519ee88f7465e4a354ae1971319d613b46a37a7fe0f3501290db7823b530",
-      "recipe_sha256": "a61a76b40490bb51ff7c54ce42f040190f2df8ecff2c6a5ed6862dd0f9c3ffbc",
+      "source_sha256": "168ee5fa0d68a55e532a97f2eed769eeeb9b13b96bcec95ec7d5076e0925c4c1",
+      "recipe_sha256": "de68b7d9aad169828c0417d941d18b43de7ea9dea3c3e338df22aba35ff46623",
       "outputs": [
         {
           "path": "game/assets/art/world/nursery_growth_vault.glb",
-          "sha256": "0a291e9113dd2ba0fc0c73ad03ec02d216aff05e6a93e31de0bd6166daa2eb92",
+          "sha256": "9c4c25c5519c7d8812d0296309ea6a61a015e03969d48085bdb757e011f4efd6",
           "bytes": 1187816
         }
       ],
@@ -6076,12 +6076,12 @@
     {
       "id": "ossuary_sorting_vault",
       "source": "source/art/ossuary_sorting_vault.blend",
-      "source_sha256": "203d25eb10966864d64a1a5046897f4eb915e333a3716f0f7f026a175d19381b",
-      "recipe_sha256": "a61a76b40490bb51ff7c54ce42f040190f2df8ecff2c6a5ed6862dd0f9c3ffbc",
+      "source_sha256": "be0b5ec7bc0f8843efcffb4e0b552d8c85ab7a0f3436270b41de935dc58cf5db",
+      "recipe_sha256": "de68b7d9aad169828c0417d941d18b43de7ea9dea3c3e338df22aba35ff46623",
       "outputs": [
         {
           "path": "game/assets/art/world/ossuary_sorting_vault.glb",
-          "sha256": "926ee0875cf0ec309462da8c692d8abb4d220761b08ec9626efa627cd59bfded",
+          "sha256": "218ad1258e26cf6a3da7def70330b0d2d2f19a09809d68c30e1731532468e82d",
           "bytes": 1431700
         }
       ],
@@ -6144,13 +6144,13 @@
     {
       "id": "inversion_cosmic_membrane",
       "source": "source/art/inversion_cosmic_membrane.blend",
-      "source_sha256": "2990d8477a2ee4b0372908fa1f7cb7ea8b638ea60a47d0ab1c5232cd6287a035",
-      "recipe_sha256": "a61a76b40490bb51ff7c54ce42f040190f2df8ecff2c6a5ed6862dd0f9c3ffbc",
+      "source_sha256": "64af434732893a918ee917b598dd2aae004a37536abe350eb541a9cbd09cc359",
+      "recipe_sha256": "de68b7d9aad169828c0417d941d18b43de7ea9dea3c3e338df22aba35ff46623",
       "outputs": [
         {
           "path": "game/assets/art/world/inversion_cosmic_membrane.glb",
-          "sha256": "89bfad082f7df42919cad0f631062277e5a81ddebcf9e8937f349a750b336231",
-          "bytes": 433312
+          "sha256": "a435b9f3fb62254d4e2118e5d55ee38200850d1a1fa100c11f393fae50c7f399",
+          "bytes": 1034768
         }
       ],
       "provenance": {
@@ -6178,11 +6178,11 @@
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 5948,
+      "triangles": 13498,
       "runtime_mesh_nodes": 5,
       "material_count": 5,
       "loop_id": null,
-      "source_mesh_count": 92,
+      "source_mesh_count": 171,
       "source_hierarchy_groups": 4,
       "assembly_names": [
         "Three separated faceted cosmic-depth layers with actual broken openings",
@@ -6197,12 +6197,12 @@
       },
       "reference_images": [
         {
-          "path": "source/art/references/world-polish-late-01.png",
-          "sha256": "f779257d54a32b0d702193b79beceee63df0d96b54f2988a5899e457670dc9a7"
+          "path": "source/art/references/inversion-cavity-02.png",
+          "sha256": "8f3363b3643660733b13e4b76ee9029ccdfa088a97191a106c68248ce7da125e"
         }
       ],
       "level_id": "inversion",
-      "machine_purpose": "Fractured translucent restraints and backward ribs separate layered cosmic-depth cavities beneath a solid roof",
+      "machine_purpose": "Nested inky cavity and violet incisions behind fractured translucent restraints and backward ribs beneath a solid roof",
       "texture_dependencies": {
         "game/assets/art/textures/surface_atlas.png": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39"
       },
@@ -6212,12 +6212,12 @@
     {
       "id": "heart_arterial_vault",
       "source": "source/art/heart_arterial_vault.blend",
-      "source_sha256": "c52a7918712ca5da595ef1d34e6ed577a2f28ae0594e03cdd1121a74e5ec2566",
-      "recipe_sha256": "a61a76b40490bb51ff7c54ce42f040190f2df8ecff2c6a5ed6862dd0f9c3ffbc",
+      "source_sha256": "90c5448c051fd81b5bddfcdc6db4545078dfb36d18cda026f981811343e6f2a7",
+      "recipe_sha256": "de68b7d9aad169828c0417d941d18b43de7ea9dea3c3e338df22aba35ff46623",
       "outputs": [
         {
           "path": "game/assets/art/world/heart_arterial_vault.glb",
-          "sha256": "7703b78b3a1417205bb42c6a8835c51a7e07a87ddbce449beefdc26992f490d8",
+          "sha256": "caf69b34361d3e90524b50c7a57afab76dd15c6481f3ebb030cfecf3f2c9d9b0",
           "bytes": 992156
         }
       ],

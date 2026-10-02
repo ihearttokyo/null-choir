@@ -18,13 +18,17 @@ REFERENCE = 'source/art/references/world-polish-late-01.png'
 ATLAS = 'game/assets/art/textures/surface_atlas.png'
 RECIPE = 'tools/build_world_atmosphere_art.py'
 REFERENCE_SHA = 'f779257d54a32b0d702193b79beceee63df0d96b54f2988a5899e457670dc9a7'
+REFERENCES = {asset: {REFERENCE: REFERENCE_SHA} for asset in IDS}
+REFERENCES['inversion_cosmic_membrane'] = {
+    'source/art/references/inversion-cavity-02.png': '8f3363b3643660733b13e4b76ee9029ccdfa088a97191a106c68248ce7da125e',
+}
 DEPENDENCIES = ('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_religious_art.py')
 CAPS, TRIANGLE_CAP, MESH_CAP = (12, 12, 4.2), 22000, 5
 ASSET_BYTE_CAP, GROUP_BYTE_CAP = 2 * 1024 * 1024, 6 * 1024 * 1024
 PURPOSES = dict(zip(IDS, (
     'Peripheral growth vessels hang from branching umbilical feeds around an unchanged gestation hero',
     'Suspended hollow bone bundles travel under sorting tracks outside the open rib-bridge passage',
-    'Fractured translucent restraints and backward ribs separate layered cosmic-depth cavities beneath a solid roof',
+    'Nested inky cavity and violet incisions behind fractured translucent restraints and backward ribs beneath a solid roof',
     'Grown capillary webs and layered bone rib connections frame the unchanged restrained mouth',
 )))
 STATS = {}
@@ -43,11 +47,11 @@ def preflight(asset, output_root, receipt_root, project_root):
     project = Path(project_root).resolve()
     output, receipt = intake.candidate_roots(output_root, receipt_root, project)
     intake.candidate_roots(output, receipt, SOURCE_ROOT)
-    inputs = [project / path for path in (REFERENCE, RECIPE, 'source/art/manifest.json', ATLAS, *DEPENDENCIES)]
+    inputs = [project / path for path in (*REFERENCES[asset], RECIPE, 'source/art/manifest.json', ATLAS, *DEPENDENCIES)]
     for path in inputs:
         if any(p.is_symlink() for p in (path, *path.parents) if p.is_relative_to(project)) or not path.is_file():
             raise ValueError('Required frozen project input is missing or symlinked: ' + str(path))
-    if sha(project / REFERENCE) != REFERENCE_SHA:
+    if any(sha(project / path) != digest for path, digest in REFERENCES[asset].items()):
         raise ValueError('Selected atmosphere reference changed')
     manifest = json.loads((project / 'source/art/manifest.json').read_bytes())
     if sha(project / DEPENDENCIES[0]) != manifest['build']['script_sha256']:
@@ -186,34 +190,56 @@ def ossuary_sorting_vault():
 
 def inversion_cosmic_membrane():
     with assembly('Three separated faceted cosmic-depth layers with actual broken openings'):
-        for row, (r, z) in enumerate([(5.22, 3.70), (4.11, 3.28), (2.96, 2.87)]):
+        depth = [shell('Cosmic restraint recessed inky cavity core', [(.04, 3.87), (.74, 3.84), (1.46, 3.74),
+                       (2.08, 3.61), (2.08, 3.65), (1.46, 3.78), (.74, 3.88), (.04, 3.91), (.04, 3.87)],
+                       'black', steps=32)]
+        # Rise inward beneath the unchanged roof; retain the original outer footprint.
+        for row, (r, z) in enumerate([(5.22, 2.37), (4.11, 2.99), (2.96, 3.39)]):
             for i in range(8):
-                if (row + i) % 5 == 0:
-                    continue
                 a = i * math.tau / 8
-                # Sectioned annular walls are bent, thick shards, not a planar sky screenshot.
-                shard = shell(f'Cosmic restraint thick depth shard {row} {i}', [(r, z), (r * .72, z - .34),
-                              (r * .62, z - .30), (r * .86, z + .09), (r, z)],
-                              'black', arc=(a + .10, a + .63), steps=8)
-                uv = shard.data.uv_layers.new(name='Original compact cosmic pixel field')
-                for loop in shard.data.loops:
-                    p = shard.data.vertices[loop.vertex_index].co
-                    uv.data[loop.index].uv = ((p.x + 5.5) / 11, (p.y + 5.5) / 11)
+                for part, arc in enumerate(((a + .10, a + .63), (a + .63, a + math.tau / 8 + .08))):
+                    # Stagger genuine fractures; recessed bridges replace the old wide roof gaps.
+                    if part and i == row * 2 + 1:
+                        continue
+                    radius = r - (.12 if part or (row + i) % 5 == 0 else 0)
+                    shard = shell(f'Cosmic restraint thick depth shard {row} {i} {part}',
+                                  [(radius, z), (radius * .82, z + .18), (radius * .66, z + .46),
+                                   (radius * .66, z + .50), (radius * .82, z + .22), (radius, z + .04), (radius, z)],
+                                  'black', arc=arc, steps=8)
+                    for j, vertex in enumerate(shard.data.vertices):
+                        if j // 9 in (1, 2, 3, 4):
+                            angle = math.atan2(vertex.co.y, vertex.co.x)
+                            cut = math.sin(angle * 19 + row * 2.3)
+                            vertex.co.x *= .98 + .02 * cut
+                            vertex.co.y *= .98 + .02 * cut
+                            vertex.co.z += .045 * cut
+                    shard.data.update()
+                    depth.append(shard)
+                    rim = [tuple(v.co) for v in shard.data.vertices[18:27]]
+                    art.tube(f'Cosmic restraint violet incised cavity lip {row} {i} {part}', rim, .035, 'amber', 5)
+                    if not part and i % 3 == row % 3:
+                        art.tube(f'Cosmic restraint short radial incision {row} {i}',
+                                 [tuple(shard.data.vertices[j].co) for j in (9, 18)], .024, 'amber', 5)
+        for shard in depth:
+            uv = shard.data.uv_layers.new(name='Original compact cosmic pixel field')
+            for loop in shard.data.loops:
+                p = shard.data.vertices[loop.vertex_index].co
+                uv.data[loop.index].uv = ((p.x + 5.5) / 11, (p.y + 5.5) / 11)
     with assembly('Fractured translucent restrained membranes and separate incision rims'):
         for i in range(7):
             a = i * math.tau / 7
             r = 4.67
             verts = [(r * math.cos(a), r * math.sin(a), 2.57),
                      (r * math.cos(a + .39), r * math.sin(a + .39), 2.84),
-                     (2.75 * math.cos(a + .28), 2.75 * math.sin(a + .28), 2.61),
-                     (2.89 * math.cos(a + .04), 2.89 * math.sin(a + .04), 2.25)]
+                     (3.75 * math.cos(a + .28), 3.75 * math.sin(a + .28), 2.61),
+                     (3.89 * math.cos(a + .04), 3.89 * math.sin(a + .04), 2.25)]
             # A closed thin folded slab retains independent broken edges and modeled thickness.
             slab = verts + [(x, y, z - .04) for x, y, z in verts]
             faces = [(0, 1, 2), (0, 2, 3), (6, 5, 4), (7, 6, 4)]
             faces += [(j, (j + 1) % 4, (j + 1) % 4 + 4, j + 4) for j in range(4)]
             art.mesh(f'Cosmic restraint translucent folded fracture {i}', slab, faces, 'skin')
             for edge in ((0, 1), (1, 2), (2, 3)):
-                art.tube(f'Cosmic restraint separate incision border {i} {edge}', [verts[edge[0]], verts[edge[1]]], .032, 'bone', 5)
+                art.tube(f'Cosmic restraint separate incision border {i} {edge}', [verts[edge[0]], verts[edge[1]]], .024, 'amber', 5)
     with assembly('Upside-down articulated surgical ribs and pointed peripheral hooks'):
         for side in (-1, 1):
             for i in range(5):
@@ -323,11 +349,11 @@ def setup():
         for y in range(64):
             for x in range(128):
                 vein = (x + round(12 * math.sin(y * .17))) % 47
-                shade = .025 + .024 * (1 + math.sin(x * .13 + y * .07))
+                shade = .003 + .005 * (1 + math.sin(x * .13 + y * .07))
                 color = (shade * .49, shade * .19, shade)
                 if vein < 2:
-                    color = (.078, .031, .15)
-                if (x * 43 + y * 71 + x * y * 7) % 431 == 0:
+                    color = (.018, .006, .035)
+                if (x * 43 + y * 71 + x * y * 7) % 97 == 0:
                     color = (.48, .39, .68)
                 pixels.extend((*color, 1))
         image.pixels.foreach_set(pixels)
@@ -337,14 +363,14 @@ def setup():
         tex = next(n for n in nodes.nodes if n.type == 'TEX_IMAGE')
         shader = nodes.nodes.get('Principled BSDF')
         nodes.links.new(tex.outputs['Color'], shader.inputs['Emission Color'])
-        shader.inputs['Emission Strength'].default_value = .35
+        shader.inputs['Emission Strength'].default_value = .5
         art.M['skin'] = art.material('Translucent fractured violet restraint', '#4a2c73', rough=.35)
         art.M['skin'].node_tree.nodes.get('Principled BSDF').inputs['Alpha'].default_value = .28
         art.M['skin'].surface_render_method = 'DITHERED'
         shader = art.M['amber'].node_tree.nodes.get('Principled BSDF')
-        shader.inputs['Base Color'].default_value = art.rgba('#8062ad')
-        shader.inputs['Emission Color'].default_value = art.rgba('#8062ad')
-        shader.inputs['Emission Strength'].default_value = .8
+        shader.inputs['Base Color'].default_value = art.rgba('#9c52e6')
+        shader.inputs['Emission Color'].default_value = art.rgba('#9c52e6')
+        shader.inputs['Emission Strength'].default_value = 1.1
     return scene
 
 
@@ -384,7 +410,7 @@ def build_scene(name):
                    'source_hierarchy_groups': len(groups), 'assembly_names': groups, 'source_meshes': counts}
     scene = bpy.context.scene
     scene['asset_id'], scene['authoring_recipe'], scene['recipe_sha256'] = name, RECIPE, sha(__file__)
-    scene['reference_images'] = json.dumps({REFERENCE: REFERENCE_SHA})
+    scene['reference_images'] = json.dumps(REFERENCES[name])
     scene['machine_purpose'] = PURPOSES[name]
     scene['source_root'], scene['project_root'] = str(SOURCE_ROOT), str(current_project)
     scene['recipe_dependencies'] = json.dumps({path: sha(current_project / path) for path in DEPENDENCIES}, sort_keys=True)
@@ -417,7 +443,7 @@ def main():
     entry = art.world_export(opts.asset)
     entry.update({key: STATS[opts.asset][key] for key in ('source_mesh_count', 'source_hierarchy_groups', 'assembly_names')})
     entry.update(recipe_sha256=sha(__file__), recipe_dependencies=dependencies,
-                 reference_images=[{'path': REFERENCE, 'sha256': REFERENCE_SHA}], level_id=opts.asset.split('_', 1)[0],
+                 reference_images=[{'path': path, 'sha256': digest} for path, digest in REFERENCES[opts.asset].items()], level_id=opts.asset.split('_', 1)[0],
                  machine_purpose=PURPOSES[opts.asset], texture_dependencies={ATLAS: atlas_digest},
                  facing='front Blender -Y; exported Godot +Z', collision='none; parent mounts under existing ceilings')
     entry['provenance']['authoring_script'] = RECIPE
