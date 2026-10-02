@@ -164,3 +164,11 @@ rebuilt standalone passes all packed checks and live current-app menu/settings, 
 zero damage on a direct marrow hit to a tall boss cap. Splash-only filtering now
 excludes direct colliders; six real cap impacts across all difficulties deal
 110 once. Original covered-splash, self-damage and lifetime assertions stay intact.
+
+Eight complete native MIDI-loop recordings, each including six seconds of the
+repeated intro, now pass real CoreAudio/nonzero/repeat/zero-discard/zero-clipping
+checks. They do not establish heard musical quality. The exact published app
+also passes one controlled live Heart stress case at production vsync: six whole
+one-second samples at 60 FPS, real active enemies, inspected images, stock Escape
+pause and a surviving isolated save. Cold startup, full campaign playthrough,
+held physical controls, gamepad and listening acceptance remain open.

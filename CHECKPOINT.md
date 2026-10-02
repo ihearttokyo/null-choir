@@ -119,20 +119,21 @@ parity at /Users/jared/.codex/control-surface-local/AGENTS.md and
 134 tests and six parity checks passed. Controlled goal/provider canaries are
 unrun. No perfect-pipeline or instruction-based twenty-minute timeout is claimed.
 
-Baseline remains main@c25d0bc with authorized dirty shared WIP; no current release
-is published. Reconcile live Git/default/private state before publication. Fresh
-isolated snapshots avoid intermittent cloud reads without global cache changes.
+Rollback remains main@c25d0bc. Current branch is codex/full8-overhaul; private
+v0.2.0-dev and PR #1 are delivered as recorded below. Reconcile
+live Git/default/private state before any further publication. Fresh isolated
+snapshots avoid intermittent cloud reads without global cache changes.
 Exact prior human approval for a dedicated foreground playtest window is retained;
 preserve unrelated windows and game processes. Parent heavy jobs remain serial.
 
 Live hashes, receipts, active handles and next steps are in
 /Users/jared/.codex/tasks/01a0f03f-e2f6-7be1-926a-af974a4ed8b7/overhaul-01/STATE.json.
-Finish the direct-hit regressions and exact Metal app rebuild, then full campaign
-playtests, heard music, physical controls, packaged startup/performance and private
-delivery.
+Direct-hit regressions, the exact Metal rebuild and private preview delivery
+are complete. Continue remaining played/heard and physical-control acceptance,
+and cold-start remediation after Xcode/Metal Toolchain installation.
 A milestone never completes or pauses the goal.
 
-## Prior delivered piece
+## Prior delivered piece (historical, superseded)
 
 [DESIGN.md](DESIGN.md) owns the approved eight-level scope; [ARCHITECTURE.md](ARCHITECTURE.md) owns module boundaries. Goal active. Implementation, validation and private project/app delivery remain approved without repeated confirmation. Previous turn: progress, with Foundry source and private 0.1.2 app delivered. This continuation implements Processional and its combat additions.
 
@@ -185,5 +186,16 @@ CI is configured. Main and v0.1.3-dev remain unchanged rollback points.
 This delivery is a preview, not full-goal completion. Initial cold first-frame,
 played campaign pacing, heard musical quality, held physical movement, connected
 gamepad and Developer ID/notarization remain open. The universal image-first
-source/installed instructions have verified parity. Full native MIDI-loop
-recordings are being prepared without replacing live runtime synthesis.
+source/installed instructions have verified parity. Eight native full-loop-plus-
+six-second MIDI recordings now pass repeat, nonzero PCM and zero clipped/discarded
+frame checks. All eight still require listening; runtime synthesis is unchanged.
+
+The exact published app also passes one live Heart mouth-vault stress canary at
+production vsync: six whole one-second samples each report 60 FPS while all
+authored cohorts are active. A validated simulated save supplies legal initial
+200 health and 200 armor once, without refresh. Two actual live images and stock Escape pause were
+inspected; the isolated save retains 15 health, and the app closes cleanly. Primary
+user data and older app processes remain unchanged. The initial pipe-based run
+is retained as inconclusive because stdout was buffered until exit; native PTY
+output repairs observation only. This bounded case is not a full packaged matrix,
+physical movement test or campaign playthrough.
