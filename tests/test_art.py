@@ -7,7 +7,38 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {'crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
-            'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall'}
+            'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall',
+            'vault_span', 'lumen_sconce', 'witness_relief', 'suspended_cadaver',
+            'containment_capsule', 'drain_altar'}
+SCENERY = {'vault_span': (8, 1.2, 6), 'lumen_sconce': (1, .6, 2),
+           'witness_relief': (3.5, .8, 4.8), 'suspended_cadaver': (2, 2, 3),
+           'containment_capsule': (2.2, 1.8, 5), 'drain_altar': (3, 2.2, 1.7),
+           'skin_bell': (7, 7, 9), 'siphon_heart': (6, 6, 5)}
+
+
+def world_geometry(gltf, binary):
+    """Read the real exported vertices, not just the manifest's claimed bounds."""
+    points, triangles, materials = [], 0, []
+    for node in gltf['nodes']:
+        if 'mesh' not in node:
+            continue
+        assert not node.get('children') and 'matrix' not in node
+        assert node.get('rotation', [0, 0, 0, 1]) == [0, 0, 0, 1]
+        scale, offset = node.get('scale', [1] * 3), node.get('translation', [0] * 3)
+        primitives = gltf['meshes'][node['mesh']]['primitives']
+        assert len(primitives) == 1, 'runtime mesh must be merged by material'
+        for primitive in primitives:
+            a = gltf['accessors'][primitive['attributes']['POSITION']]
+            view = gltf['bufferViews'][a['bufferView']]
+            assert a['componentType'] == 5126 and a['type'] == 'VEC3'
+            start = view.get('byteOffset', 0) + a.get('byteOffset', 0)
+            for i in range(a['count']):
+                p = struct.unpack_from('<3f', binary, start + i * view.get('byteStride', 12))
+                points.append(tuple(p[j] * scale[j] + offset[j] for j in range(3)))
+            triangles += gltf['accessors'][primitive['indices']]['count'] // 3
+            materials.append(primitive['material'])
+    assert len(materials) == len(set(materials)), 'one runtime mesh per material'
+    return points, triangles
 
 
 def png(path):
@@ -44,10 +75,11 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED
+    assert {a['id'] for a in assets} == EXPECTED, 'six authored scenery assets required (intended RED)'
     assert len(assets) == len(EXPECTED)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
+    scenery_bytes = 0
     for a in assets:
         assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
         source = ROOT / a['source']
@@ -102,6 +134,29 @@ def check():
                     for primitive in mesh['primitives']:
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
+                if a['id'] in SCENERY:
+                    scenery_bytes += len(data)
+                    assert a['recipe_sha256'] == manifest['build']['script_sha256']
+                    binary_size, binary_kind = struct.unpack_from('<I4s', data, 20 + n)
+                    assert binary_kind == b'BIN\x00'
+                    points, triangles = world_geometry(gltf, data[28 + n:28 + n + binary_size])
+                    assert triangles == a['triangles'] and triangles < 50000, a['id']
+                    assert len(gltf['meshes']) == a['runtime_mesh_nodes'] <= 7
+                    assert len(gltf['materials']) == a['material_count']
+                    lo = [min(p[i] for p in points) for i in range(3)]
+                    hi = [max(p[i] for p in points) for i in range(3)]
+                    # Convert Y-up GLB bounds back to Blender XYZ for manifest parity.
+                    actual_lo, actual_hi = [lo[0], -hi[2], lo[1]], [hi[0], -lo[2], hi[1]]
+                    for key, values in [('min', actual_lo), ('max', actual_hi)]:
+                        assert all(abs(v - w) <= .002 for v, w in zip(values, a['physical_bounds_m'][key])), (a['id'], key)
+                    size = [actual_hi[i] - actual_lo[i] for i in range(3)]
+                    assert all(v <= cap + .003 for v, cap in zip(size, SCENERY[a['id']])), (a['id'], size)
+                    assert -.002 <= lo[1] <= .002, 'scenery must have a true ground origin'
+                    assert any(any(v > 0 for v in m.get('emissiveFactor', [])) for m in gltf['materials']), a['id']
+                    if a['id'] == 'vault_span':
+                        assert size[0] >= 7.95 and size[2] >= 5.95
+                        assert all(abs(p[0]) >= 3.7 - .002 or p[1] >= 3.6 for p in points), 'vault hangs into capsule route'
+                        assert all(abs(p[0]) >= 3.5 or p[1] >= 4 for p in points), 'vault must preserve the open 7m interior'
         if a['id'] in ('crawler', 'worker'):
             assert a['columns'] == 8 and a['cell_size'] == [128, 128]
             assert a['frames'] == ['idle', 'walk_a', 'walk_b', 'attack', 'dead']
@@ -111,6 +166,8 @@ def check():
             assert a['frames'] == ['idle', 'fire', 'recover']
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
     assert actual == owned_outputs, 'manifest/output parity'
+    assert scenery_bytes < 8 * 1024 * 1024, 'eight scenery GLBs exceed their runtime budget'
+    assert hashlib.sha256((ROOT / 'tools/build_art.py').read_bytes()).hexdigest() == manifest['build']['script_sha256']
     print(f'PASS: {len(assets)} assets; {len(owned_outputs)} exports; PNG alpha/pose/dimensions, GLB structure, blend provenance and SHA-256 parity')
 
 

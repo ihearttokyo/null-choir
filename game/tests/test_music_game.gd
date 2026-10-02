@@ -12,6 +12,7 @@ func run() -> void:
 		quit(1)
 		return
 	var music = game.music
+	if not expect(music.level_tracks == PackedStringArray(["res://audio/intake.mid","res://audio/foundry.mid","res://audio/processional.mid","res://audio/reliquary.mid","res://audio/nursery.mid","res://audio/ossuary.mid","res://audio/inversion.mid","res://audio/heart.mid"]),"Campaign must select its eight authored MIDI files in level order"): return
 	var bank = music.player.bank
 	game.start_campaign(1)
 	game.set_process(false)

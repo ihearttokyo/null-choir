@@ -8,11 +8,11 @@
 - `set_paused(paused)`: freezes the MIDI clock, envelope timers and both sides of stereo PCM playback. The Node processes independently of SceneTree pause; the game must call this API when pausing.
 - `stop()`: silences primary and linked voices immediately and clears note bookkeeping. The next play resets channel state.
 
-The initial track list contains only the original gate fixture. It does not pretend to provide eight final tracks. Update `level_tracks` and the required SoundFont `PROGRAMS` palette when the final compositions exist. This fixture uses Distortion Guitar (30), Pick Bass (34), Pipe Organ (19), Saw Lead (81) and Standard 1 drums (bank 128/program 0), with zero-based GM program numbers.
+The track list contains the eight original campaign MIDI files in level order. [Campaign scores](MUSIC.md) owns their editable sources, arrangement and generation contract. The retained gate fixture isolates scheduler and synthesis regressions. The approved palette uses Distortion Guitar (30), Pick Bass (34), Pipe Organ (19), Saw Lead (81) and Standard 1 drums (bank 128/program 0), with zero-based GM program numbers.
 
 ## Timing and tails
 
-The patched player consumes elapsed seconds up to each MIDI event before applying the next tempo. Tick-zero and exact-boundary events are inclusive. It retains overshoot across multiple loops, resets controllers/tempo on seek or repeat, and uses the final end-of-track tick as the explicit loop boundary. `source/music/gate.json` owns the fixture data; `python3 tools/compose_music.py` generates `game/audio/gate.mid`.
+The patched player consumes elapsed seconds up to each MIDI event before applying the next tempo. Tick-zero and exact-boundary events are inclusive. It retains overshoot across multiple loops, resets controllers/tempo on seek or repeat, and uses the final end-of-track tick as the explicit loop boundary. `source/music/gate.json` owns the fixture data; `python3 tools/compose_music.py --gate` verifies its frozen MIDI without replacing it. The default composer command generates the eight campaign files.
 
 Natural note-offs use the SoundFont release envelope. Repeat, stop and level switch cut old release tails; they do not carry sustained voices into a new track. Author silence/release space before an end-of-track boundary, then audition the boundary. The scheduler dispatches on frames. Frame and audio-buffer latency affect event placement; exact logical tick duration alone cannot prove an inaudible seam.
 
@@ -27,7 +27,7 @@ GeneralUser GS permits music creation and software packaging, but its author exp
 
 Local patches are limited to `MidiPlayer.gd` (event-boundary clock, complete pause, fresh channel state and freed replaced voice nodes), `ADSR.gd` (apply sample attenuation and stop linked PCM at release completion), and `Bank.gd` (intersect preset/instrument key ranges and break skipped-preset reference cycles). Raw upstream diffs and RED/GREEN evidence belong to the task receipt, not Git.
 
-This add-on does not implement every SoundFont modulator/filter or GS feature. Approve the actual palette by audition; a correctly mapped program is not proof of equivalent full SoundFont synthesis. Do not add final compositions against an unapproved timbre.
+This add-on does not implement every SoundFont modulator/filter or GS feature. Approve the actual palette by audition; a correctly mapped program is not proof of equivalent full SoundFont synthesis. Jared approved the presented native palette on 2026-10-02. Final-song composition and synthesis checks may proceed without another palette confirmation; song quality and repeat/switch checks still need evidence.
 
 ## Validation and integration
 

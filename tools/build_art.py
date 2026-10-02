@@ -20,7 +20,9 @@ PALETTE = {'burgundy': '#713d48', 'ivory': '#d1ba8f', 'petrol': '#172e32',
            'amber': '#e9a347', 'scar': '#aa6763', 'iron': '#536265', 'black': '#12151b'}
 FRAMES = ['idle', 'walk_a', 'walk_b', 'attack', 'dead']
 IDS = ['crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
-       'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall']
+       'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall',
+       'vault_span', 'lumen_sconce', 'witness_relief', 'suspended_cadaver',
+       'containment_capsule', 'drain_altar']
 M = {}
 
 
@@ -290,6 +292,7 @@ def record(name, source, paths, **extra):
             entry['dimensions'] = dimensions
         outputs.append(entry)
     return {'id': name, 'source': str(source.relative_to(ROOT)), 'source_sha256': sha(source),
+            'recipe_sha256': sha(Path(__file__)),
             'outputs': outputs, 'provenance': {'method': 'original Blender geometry and authored pixel textures',
             'authoring_script': 'tools/build_art.py', 'imports': [], 'license': 'Original NULL CHOIR project art'}, **extra}
 
@@ -606,6 +609,34 @@ def bell():
         a = i * math.pi / 3
         tube(f'Rim hanging cartilage fringe {i}', [(1.95 * math.cos(a), 1.95 * math.sin(a), 2.2),
              (2.0 * math.cos(a), 2.0 * math.sin(a), 1.75), (1.83 * math.cos(a), 1.83 * math.sin(a), 1.53)], [.07, .05, .005], 'bone')
+    # The suspension terminates in a real restraint dais, not floating stick feet.
+    ring('Dais steel perimeter', (0, 0, .16), 3.08, .16, 'steel', segments=48)
+    ring('Inner draining channel', (0, 0, .27), 2.40, .065, 'black', segments=48)
+    box('Bell restraint foundation', (0, 0, .07), (4.6, 4.6, .14), 'iron', .06)
+    for i in range(8):
+        a = i * math.pi / 4
+        u = Vector((math.cos(a), math.sin(a), 0))
+        tube(f'Radial foundation shoe {i}', [u * 2.0 + Vector((0, 0, .18)), u * 3.08 + Vector((0, 0, .18))], .17, 'iron')
+        for r in (2.48, 2.85):
+            egg(f'Dais hold-down bolt {i} {r}', u * r + Vector((0, 0, .27)), (.10, .10, .055), 'bone', 8, 4)
+        # Paired side tendons and lattice collars make the tall crown legible.
+        for phase in (-1, 1):
+            pts = []
+            for j in range(17):
+                t = j / 16
+                theta = a + phase * .055 * math.sin(t * math.pi * 8)
+                radius = 2.65 - .60 * t
+                pts.append((radius * math.cos(theta), radius * math.sin(theta), .45 + t * 5.95))
+            tube(f'Braided restraint tendon {i} {phase}', pts, .032, 'scar', 6)
+        tube(f'Crown flying buttress {i}', [u * 2.12 + Vector((0, 0, 6.5)), u * 2.60 + Vector((0, 0, 7.12)),
+             u * 2.25 + Vector((0, 0, 7.7)), u * 1.50 + Vector((0, 0, 7.78))], [.10, .07, .05, .009], 'bone')
+        egg(f'Crown amber restraint seal {i}', u * 2.25 + Vector((0, 0, 6.5)), (.10, .10, .16), 'amber', 10, 6)
+    ring('Eight point overhead restraint', (0, 0, 8.1), .65, .10, 'steel', segments=24)
+    for i in range(24):
+        a = i * math.pi / 12
+        u = Vector((math.cos(a), math.sin(a), 0))
+        tube(f'Dais comb tooth {i}', [u * 2.88 + Vector((0, 0, .24)), u * 2.68 + Vector((0, 0, .55)),
+             u * 2.50 + Vector((0, 0, .62))], [.055, .04, .005], 'bone', 6)
 
 
 def siphon():
@@ -656,6 +687,213 @@ def siphon():
         box(f'Amber manometer column {side}', (side * 1.56, -1.23, 1.14), (.1, .03, .42), 'amber')
     for i in range(8):
         box(f'Foot machine rib {i}', (-1.96 + i * .56, -1.35, .33), (.2, .4, .14), 'steel', .015)
+    for side in (-1, 1):
+        box(f'Manifold bolted pedestal {side}', (side * 2.12, 0, .26), (.62, 3.4, .52), 'iron', .08)
+        for y in (-1.35, -.45, .45, 1.35):
+            ring(f'Pedestal clamp washer {side} {y}', (side * 2.12, y, .54), .10, .025, 'steel', segments=12)
+            box(f'Pedestal bolt {side} {y}', (side * 2.12, y, .56), (.09, .09, .07), 'bone', .015)
+        for i in range(9):
+            z = .9 + i * .28
+            x = side * (2.14 - max(0, z - 1.5) * .30)
+            tube(f'Cradle outward costal fin {side} {i}', [(x, .08, z), (x + side * .28, .1, z + .12),
+                 (x + side * .35, -.13, z + .28), (x + side * .19, -.24, z + .34)], [.08, .075, .045, .008], 'bone')
+        tube(f'Posterior arterial loop {side}', [(side * .25, .10, 2.98), (side * .55, .48, 3.75),
+             (side * 1.12, .78, 4.05), (side * 1.5, .94, 3.45), (side * 1.3, .98, .5)], [.13, .15, .12, .11, .08], 'scar', 12)
+        for i in range(5):
+            z = 1.1 + i * .48
+            ring(f'Arterial pressure cuff {side} {i}', (side * 1.3, .98, z), .15, .035, 'steel', segments=12)
+        ring(f'Front pressure gauge rim {side}', (side * 1.32, -1.53, .72), .22, .038, 'bone', 'XZ', 20)
+        egg(f'Front pressure gauge face {side}', (side * 1.32, -1.54, .72), (.19, .022, .19), 'black', 16, 6)
+        tube(f'Gauge needle {side}', [(side * 1.32, -1.58, .72), (side * 1.32 + .10, -1.58, .82)], .018, 'amber', 5)
+    for i in range(11):
+        z = .62 + i * .29
+        box(f'Rear ladder manifold vertebra {i}', (0, .9, z), (.36, .25, .14), 'steel', .035)
+        for side in (-1, 1):
+            tube(f'Rear capillary fan {side} {i}', [(0, .83, z), (side * (.4 + i * .03), .66, z + .13),
+                 (side * (.9 + i * .045), .55, z + .05)], [.045, .035, .012], 'skin', 6)
+
+
+def scenery(name):
+    if name == 'vault_span':
+        for side in (-1, 1):
+            box(f'Vault pier shoe {side}', (side * 3.85, 0, .16), (.30, 1.2, .32), 'steel', .04)
+            for depth in (-.40, .40):
+                tube(f'Vault fluted load rib {side} {depth}', [(side * 3.86, depth, .3), (side * 3.86, depth, 2.1),
+                     (side * 3.86, depth, 4.15), (side * 3.55, depth, 4.68), (side * 2.45, depth, 5.24),
+                     (side * 1.1, depth, 5.70), (0, depth, 5.89)], [.10, .10, .12, .13, .12, .11, .10], 'bone', 10)
+            for i in range(9):
+                z = .6 + i * .40
+                box(f'Pier vertebral collar {side} {i}', (side * 3.86, 0, z), (.27, .96, .12), 'iron', .03)
+                box(f'Pier visible worn tab {side} {i}', (side * 3.86, -.50, z), (.18, .06, .08), 'bone', .015)
+            for i in range(7):
+                t = i / 7
+                x, z = side * (3.60 * (1 - t)), 4.70 + 1.10 * t
+                tube(f'Vault transverse vertebra {side} {i}', [(x, -.53, z), (x, -.30, z + .13),
+                     (x, .30, z + .13), (x, .53, z)], [.065, .085, .085, .065], 'steel')
+            tube(f'Peripheral rising vessel {side}', [(side * 3.88, -.28, .4), (side * 3.9, -.28, 3.6),
+                 (side * 3.72, -.28, 4.3), (side * 2.5, -.28, 5.0), (0, -.28, 5.70)], .055, 'skin')
+        box('Vault keystone restraint', (0, 0, 5.81), (.40, 1.08, .38), 'iron', .06)
+        egg('Keystone amber marrow', (0, -.57, 5.8), (.10, .03, .13), 'amber', 12, 6)
+    elif name == 'lumen_sconce':
+        box('Wall fastening spine', (0, .15, 1), (.22, .08, 2), 'iron', .03)
+        for z in (.15, 1.85):
+            box(f'Sconce mount wing {z}', (0, .14, z), (1, .10, .17), 'steel', .03)
+            for x in (-.4, .4):
+                egg(f'Sconce ivory bolt {x} {z}', (x, .05, z), (.05, .035, .05), 'bone', 8, 4)
+        tube('Vertical living amber lumen', [(0, -.20, .28), (.025, -.23, .5), (-.025, -.24, 1.0),
+             (.02, -.23, 1.5), (0, -.20, 1.72)], [.06, .12, .13, .12, .055], 'amber', 16)
+        for side in (-1, 1):
+            tube(f'Ivory ogive cage {side}', [(0, -.18, .18), (side * .27, -.30, .45), (side * .40, -.26, 1),
+                 (side * .27, -.30, 1.55), (0, -.18, 1.82)], [.08, .06, .055, .06, .08], 'bone')
+            tube(f'Outer vascular brace {side}', [(side * .44, .08, .18), (side * .31, -.15, .65),
+                 (side * .30, -.17, 1.40), (side * .44, .08, 1.82)], .025, 'skin', 6)
+        for i in range(5):
+            z = .48 + i * .26
+            tube(f'Cage oblique suture {i}', [(-.27, -.25, z -.09), (0, -.385, z), (.27, -.25, z + .09)], .025, 'steel', 6)
+        tube('Lumen black incision', [(-.01, -.35, .42), (-.035, -.37, .9), (.035, -.37, 1.4), (0, -.33, 1.6)], .018, 'black', 5)
+    elif name == 'witness_relief':
+        # A flayed wing-shaped shell with a missing face; this is wall anatomy, not a standing enemy.
+        outline = [(-.6, 0), (-1.4, .45), (-1.75, 1.4), (-1.45, 2.9), (-.65, 4.15),
+                   (-.2, 4.8), (.55, 4.55), (1.25, 3.45), (1.65, 2), (1.35, .6), (.5, .12)]
+        mesh('Asymmetric iron witness backing', [(x, .2, z) for x, z in outline], [tuple(range(len(outline)))], 'iron')
+        for side in (-1, 1):
+            profile = [(.4, .3), (.9, .62), (1.5, 1.05), (2.2, 1.24), (2.85, 1.07), (3.35, .61), (3.65, .30)]
+            verts, faces = [], []
+            for i, (z, width) in enumerate(profile):
+                asym = .12 * math.sin(z * 2) if side == 1 else 0
+                for j in range(5):
+                    t = j / 4
+                    verts.append((side * (.10 + width * t) + asym, -.11 - .24 * math.sin(t * math.pi), z + side * .1 * t))
+                    if i and j:
+                        k = i * 5 + j
+                        faces.append((k - 6, k - 5, k, k - 1))
+            mesh(f'Stretched flayed thoracic wing {side}', verts, faces, 'skin')
+            for i in range(13):
+                z = .55 + i * .235
+                w = .28 + .98 * math.sin((i + 1) * math.pi / 15)
+                tube(f'Layered witness costal arch {side} {i}', [(side * .10, -.43, z), (side * .52, -.46, z + .17),
+                     (side * w, -.33, z + .30), (side * (w + .12), -.02, z + .24)], [.045, .055, .04, .012], 'bone', 6)
+                tube(f'Second laminar rib {side} {i}', [(side * .18, -.15, z + .06), (side * (w + .25), -.07, z + .15)], [.035, .013], 'scar', 6)
+        verts, faces = [], []
+        for layer, (rx, rz, y) in enumerate([(.42, .62, -.09), (.35, .54, -.43), (.20, .37, -.33)]):
+            for i in range(24):
+                a = i * math.pi / 12
+                verts.append((.10 + rx * math.cos(a), y, 3.89 + rz * math.sin(a)))
+                if layer:
+                    k, q = (layer - 1) * 24 + i, (layer - 1) * 24 + (i + 1) % 24
+                    faces.append((k, q, q + 24, k + 24))
+        mesh('Excised faceless witness shell', verts, faces, 'bone')
+        egg('Vacant face interior', (.10, -.05, 3.9), (.19, .07, .36), 'black', 16, 8)
+        for i in range(17):
+            z = .44 + i * .20
+            box(f'Witness bifurcated spine {i}', (.035 * math.sin(i), -.39, z), (.16, .16, .11), 'steel', .025)
+        for side in (-1, 1):
+            tube(f'Pinned scapular tendon {side}', [(side * 1.65, .13, 1.0), (side * 1.45, -.10, 2.4),
+                 (side * .65, -.13, 3.5), (.1, -.15, 4.55)], [.07, .05, .035, .008], 'scar')
+            for i in range(6):
+                egg(f'Witness amber restraint node {side} {i}', (side * (.38 + .10 * math.sin(i)), -.43, .85 + i * .40), (.045, .035, .075), 'amber', 8, 4)
+        stitches('Pinned abdominal incision', [(.2, -.46, .7 + i * .15) for i in range(14)], (.09, 0, .025))
+    elif name == 'suspended_cadaver':
+        ring('Steel suspension apparatus', (0, 0, 2.72), .90, .08, 'steel', segments=32)
+        ring('Ivory isolation liner', (0, 0, 2.70), .74, .045, 'bone', segments=32)
+        box('Decommissioned ankle restraint', (0, -.05, .08), (.38, .40, .16), 'iron', .04)
+        profile = [(.2, .16), (.5, .26), (.95, .35), (1.35, .46), (1.65, .47), (1.94, .32), (2.18, .10)]
+        for i in range(10):
+            a = i * math.pi / 5
+            verts, faces = [], []
+            for row, (z, r) in enumerate(profile):
+                for edge in (-1, 1):
+                    theta = a + edge * .22 + .13 * math.sin(z * 2)
+                    verts.append((r * math.cos(theta), r * .78 * math.sin(theta), z))
+                if row:
+                    k = row * 2
+                    faces.append((k - 2, k - 1, k + 1, k))
+            mesh(f'Longitudinal burial membrane {i}', verts, faces, 'skin' if i % 3 else 'scar')
+            tube(f'Cocoon longitudinal stitch rail {i}', [(r * math.cos(a), r * .78 * math.sin(a), z) for z, r in profile], .028, 'bone', 6)
+        for i in range(13):
+            z = .32 + i * .13
+            box(f'Exposed technician spinal lock {i}', (.045 * math.sin(i), -.32, z), (.16, .10, .085), 'bone', .018)
+            tube(f'Excised spinal root {i}', [(.02, -.33, z), ((-.22 if i % 2 else .22), -.35, z + .09)], [.028, .006], 'scar', 5)
+        for i in range(6):
+            a = i * math.pi / 3
+            for strand in (-1, 1):
+                pts = []
+                for j in range(17):
+                    t = j / 16
+                    r = .32 + .54 * t
+                    theta = a + strand * .06 * math.sin(t * math.pi * 6)
+                    pts.append((r * math.cos(theta), r * math.sin(theta), 1.88 + 1.07 * t))
+                tube(f'Braided ceiling tether {i} {strand}', pts, .032, 'steel' if strand == 1 else 'skin', 6)
+        for i in range(8):
+            z, r = .48 + i * .18, .29 + .15 * math.sin(i * .4)
+            # Loose crossing restraints leave cutaways exposing the inner lock spine.
+            tube(f'Diagonal mortuary binding {i}', [(-r, 0, z), (-r * .65, -.32, z + .09),
+                 (r * .65, -.32, z + .21), (r, 0, z + .25)], .035, 'iron', 6)
+        egg('Cadaver sealed lumen tag', (.12, -.39, 1.48), (.075, .025, .13), 'amber', 10, 6)
+        box('Ceiling mounting cleat', (0, .05, 2.94), (.40, .40, .12), 'iron', .035)
+    elif name == 'containment_capsule':
+        box('Surgical reliquary foundation', (0, 0, .12), (2.2, 1.8, .24), 'iron', .08)
+        box('Reliquary crown mounting cleat', (0, .36, 4.96), (.28, .36, .08), 'iron', .025)
+        box('Inset sump beneath specimen', (0, -.13, .28), (1.4, 1.3, .12), 'black', .03)
+        for side in (-1, 1):
+            tube(f'Reliquary structural ogive {side}', [(side * .96, .36, .24), (side * .96, .36, 3.8),
+                 (side * .77, .36, 4.45), (side * .4, .36, 4.82), (0, .36, 4.9)], [.12, .12, .10, .08, .06], 'steel', 10)
+            tube(f'Anterior ivory lancet {side}', [(side * .84, -.58, .3), (side * .87, -.60, 2.8),
+                 (side * .72, -.52, 4.0), (side * .32, -.37, 4.7), (0, -.30, 4.88)], [.08, .07, .09, .065, .015], 'bone')
+            for i in range(16):
+                z = .44 + i * .235
+                tube(f'Capsule ribbed sidewall {side} {i}', [(side * .85, -.60, z), (side * 1.03, -.13, z + .08),
+                     (side * 1.02, .47, z + .08), (side * .75, .75, z)], [.065, .06, .06, .045], 'iron')
+                box(f'Capsule sidewall plate {side} {i}', (side * 1.015, .20, z), (.14, .34, .14), 'steel', .025)
+            tube(f'Anterior amber index {side}', [(side * .72, -.66, .6), (side * .74, -.66, 3.6)], .025, 'amber', 6)
+            tube(f'Surgical arterial feed {side}', [(side * .82, .45, .3), (side * .62, .64, 1.5),
+                 (side * .23, .1, 2.5), (side * .18, -.02, 3.3)], [.09, .07, .05, .025], 'skin')
+        for i in range(18):
+            z = .63 + i * .175
+            x = .06 * math.sin(i * .3)
+            box(f'Preserved specimen vertebra {i}', (x, -.05, z), (.16, .19, .10), 'bone', .025)
+            width = .13 + .30 * math.sin((i + 1) * math.pi / 20)
+            for side in (-1, 1):
+                tube(f'Hollow specimen branch {side} {i}', [(x, -.12, z), (side * width, -.25, z + .14),
+                     (side * width * .9, -.04, z + .23)], [.028, .023, .008], 'scar' if i % 4 == 0 else 'bone', 6)
+        # An open ovoid shell, not a solid capsule concealing a scaled enemy.
+        for side in (-1, 1):
+            tube(f'Excavated specimen cranial lamina {side}', [(side * .06, -.1, 3.35), (side * .25, -.22, 3.6),
+                 (side * .20, -.10, 3.96), (0, -.06, 4.06)], [.065, .055, .05, .025], 'skin')
+        egg('Dark excised cranial cavity', (0, .04, 3.75), (.13, .055, .22), 'black', 12, 6)
+        tube('Specimen restraint throat', [(0, -.04, 4.03), (.1, .1, 4.43), (0, .26, 4.84)], .04, 'steel')
+        ring('Reliquary front pressure dial', (0, -.74, .5), .16, .027, 'bone', 'XZ', 16)
+        tube('Reliquary amber dial needle', [(0, -.79, .5), (-.08, -.79, .57)], .015, 'amber', 5)
+    elif name == 'drain_altar':
+        box('Drain bolted machine foundation', (0, 0, .12), (3, 2.2, .24), 'iron', .06)
+        # Annular funnel preserves an actual open central mouth above the recessed throat.
+        verts, faces = [], []
+        for row, (radius, z) in enumerate([(1.05, .82), (.86, .94), (.62, .75), (.45, .38)]):
+            for i in range(40):
+                a = i * math.pi / 20
+                verts.append((radius * math.cos(a), radius * .80 * math.sin(a), z))
+                if row:
+                    k, q = (row - 1) * 40 + i, (row - 1) * 40 + (i + 1) % 40
+                    faces.append((k, q, q + 40, k + 40))
+        mesh('Open mechanical swallowing funnel', verts, faces, 'skin')
+        ring('Steel drain mouth ring', (0, 0, .87), .97, .10, 'steel', segments=40)
+        egg('Recessed dark drain throat', (0, 0, .32), (.46, .38, .025), 'black', 24, 6)
+        for i in range(16):
+            a = i * math.pi / 8
+            u = Vector((math.cos(a), .80 * math.sin(a), 0))
+            tube(f'Radial surgical tooth {i}', [u * .94 + Vector((0, 0, .84)), u * .78 + Vector((0, 0, 1.20)),
+                 u * .54 + Vector((0, 0, 1.08))], [.065, .045, .005], 'bone', 6)
+            tube(f'External drain actuator {i}', [u * 1.02 + Vector((0, 0, .8)), u * 1.14 + Vector((0, 0, .43)),
+                 u * 1.20 + Vector((0, 0, .24))], [.06, .045, .025], 'iron', 6)
+        for side in (-1, 1):
+            tube(f'Organic sump cable {side}', [(side * 1.37, -.82, .2), (side * 1.32, -.42, .53),
+                 (side * 1.17, .22, .63), (side * .72, .64, .81)], [.07, .08, .065, .035], 'scar')
+            box(f'Raised drain gauge housing {side}', (side * 1.20, .56, 1.20), (.36, .45, 1.0), 'steel', .06)
+            ring(f'Drain gauge face {side}', (side * 1.20, .31, 1.36), .13, .025, 'bone', 'XZ', 16)
+            egg(f'Drain gauge dark dial {side}', (side * 1.20, .30, 1.36), (.11, .02, .11), 'black', 12, 4)
+            tube(f'Drain gauge needle {side}', [(side * 1.20, .27, 1.36), (side * 1.20 + .07, .27, 1.42)], .014, 'amber', 5)
+            for y in (-.9, .9):
+                box(f'Drain anchor bolt {side} {y}', (side * 1.3, y, .27), (.12, .12, .1), 'bone', .02)
 
 
 def kit(name):
@@ -695,7 +933,8 @@ def kit(name):
 
 def world_export(name):
     scene = setup()
-    (bell if name == 'skin_bell' else siphon if name == 'siphon_heart' else lambda: kit(name))()
+    (bell if name == 'skin_bell' else siphon if name == 'siphon_heart' else
+     lambda: kit(name) if name in ('arch', 'ribbed_wall', 'conduit') else scenery(name))()
     bpy.context.view_layer.update()
     objects = [o for o in scene.objects if o.type == 'MESH']
     extent = bounds(objects)
@@ -715,7 +954,9 @@ def world_export(name):
                 p = obj.data.vertices[loop.vertex_index].co
                 uv.data[loop.index].uv = (2 / 3 + (p.x * .5 % 1) / 3, p.z * .5)
     height = extent['size'][2]
-    camera(scene, (height * .95, -height * 1.4, height * .85), (0, 0, height * .43), height * 1.22, 384, 384)
+    scale = max(height, extent['size'][0]) * 1.22
+    preview_z = scale * .8 if name == 'drain_altar' else height * .78
+    camera(scene, (scale * .52, -scale * 1.4, preview_z), (0, 0, height * .46), scale, 384, 384)
     preview = pixels_render(scene, name + '_hero', 384, 384)
     bg = bytearray(preview)
     for i in range(0, len(bg), 4):
@@ -740,6 +981,7 @@ def world_export(name):
     meshes = [o for o in scene.objects if o.type == 'MESH']
     for obj in meshes:
         obj.select_set(True)
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
     path = target(OUT / 'world' / f'{name}.glb')
     bpy.ops.export_scene.gltf(filepath=str(path), export_format='GLB', use_selection=True,
                               export_apply=True, export_yup=True, export_animations=False, export_cameras=False,
@@ -780,6 +1022,8 @@ def main():
     opts = args.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
     path = ART / 'manifest.json'
     current = json.loads(path.read_text()) if path.exists() else {'schema_version': 1, 'palette': PALETTE, 'assets': []}
+    for entry in current['assets']:
+        entry.setdefault('recipe_sha256', current.get('build', {}).get('script_sha256'))
     selected = [opts.asset] if opts.asset else IDS
     current['build'] = {'blender_version': bpy.app.version_string, 'script_sha256': sha(Path(__file__)),
                         'render_engine': 'Cycles CPU', 'threads': 4, 'samples': 16, 'native_pixel_render': True}

@@ -11,6 +11,7 @@ func run():
 	for actor in game.enemies: actor.set_physics_process(false)
 	await physics_frame
 	var worker = game.enemies[0]
+	if not expect(worker.sprite.shaded): return
 	var crawler = game.enemies[1]
 	var before = crawler.hp
 	crawler.take_damage(13,worker)

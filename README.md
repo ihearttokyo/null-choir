@@ -4,7 +4,7 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 ## Development status
 
-This is an unfinished first-level build, not the completed campaign. Intake has two traversal loops with distinct Blender hero pieces, two enemy roles, two weapons, keys, one hidden story discovery, pickups, checkpoint restoration and persistent saves. Seven levels, remaining weapons/enemies/bosses, final music, full settings/rebinding, sound effects and visual/pacing polish remain. The current music is a short technical fixture. [DESIGN.md](DESIGN.md) owns the approved full scope; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
+This is an unfinished first-level build, not the completed campaign. Intake has two traversal loops with distinct Blender hero pieces, two enemy roles, two weapons, keys, one hidden story discovery, pickups, checkpoint restoration and persistent saves. Eight original MIDI scores and persisted keyboard/mouse/gamepad rebinding are implemented. Seven levels, remaining weapons/enemies/bosses, sound effects, musical listening acceptance and visual/pacing/performance acceptance remain. Intake now has Blender-built vaults, wall reliefs, suspended anatomy, containment machinery and shadowed warm/cold lighting. [Rendered scenery](docs/SCENERY.md) shows the correction and its native validation. [DESIGN.md](DESIGN.md) owns the approved full scope; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
 
 ## Run and build
 
@@ -14,7 +14,7 @@ Open `game/project.godot` in Godot 4.7.2, or run:
 godot --path game
 ```
 
-WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1/2 selects the initial weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Controls are not yet rebindable. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
+WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1/2 selects the initial weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
 With matching Godot Mac export templates and Apple command-line tools installed:
 
@@ -38,7 +38,8 @@ That checks packaged resources and the start/fire/pause/checkpoint path. It does
 [ARCHITECTURE.md](ARCHITECTURE.md) describes module ownership. [Blender pipeline](docs/ART.md) covers regeneration and editable scenes; [live MIDI](docs/AUDIO.md) records dependency pins, patches, licenses and runtime API.
 
 ```sh
-python3 tools/check_game.py tests/test_campaign.gd tests/test_level.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd
+python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd
+python3 tests/test_music.py
 python3 tests/test_art.py
 blender -b -t 4 --python-exit-code 1 --python tests/test_art_pose.py
 godot --headless --fixed-fps 60 --path game --quit-after 10000 --script tests/test_traversal.gd

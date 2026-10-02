@@ -35,8 +35,9 @@ func configure(owner_game: Node) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if game == null or not game.playing: return
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		look(event.relative * game.settings.sensitivity * 0.002)
+	if event is InputEventMouseMotion:
+		look(event.screen_relative * game.settings.sensitivity * 0.002)
+	if event.is_action_pressed("fire"): fire()
 
 func look(delta: Vector2) -> void:
 	rotation.y -= delta.x

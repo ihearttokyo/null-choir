@@ -83,7 +83,8 @@
         "walk_b",
         "attack",
         "dead"
-      ]
+      ],
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "worker",
@@ -158,7 +159,8 @@
         "walk_b",
         "attack",
         "dead"
-      ]
+      ],
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "impact_tool",
@@ -219,7 +221,8 @@
         "idle",
         "fire",
         "recover"
-      ]
+      ],
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "rivet_pistol",
@@ -280,17 +283,19 @@
         "idle",
         "fire",
         "recover"
-      ]
+      ],
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "skin_bell",
       "source": "source/art/skin_bell.blend",
-      "source_sha256": "a3ad955330da4735aa8b5005291f694edb001ef6e2f2baa9d057c852e7656d9f",
+      "source_sha256": "6d4ac74b0fcf71ea2b5d6c422acbac2c93dfaf3e5ae4dd2c88f7e1f8e84917cd",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
       "outputs": [
         {
           "path": "game/assets/art/world/skin_bell.glb",
-          "sha256": "bcfbde72f7b1a40978d2dfa18acfdcfeafca7ce298f333969ba68c8df7dc2491",
-          "bytes": 1045580
+          "sha256": "b505992aed2b99195f8e1a93d49254e3017d86fb6d1213261a27ab5284899a28",
+          "bytes": 1675504
         }
       ],
       "provenance": {
@@ -301,37 +306,38 @@
       },
       "physical_bounds_m": {
         "min": [
-          -2.94,
-          -2.94,
-          0.06
+          -3.24,
+          -3.24,
+          0.0
         ],
         "max": [
-          2.94,
-          2.94,
-          8.047
+          3.24,
+          3.24,
+          8.2
         ],
         "size": [
-          5.88,
-          5.88,
-          7.987
+          6.48,
+          6.48,
+          8.2
         ],
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 13072,
-      "runtime_mesh_nodes": 6,
-      "material_count": 6,
+      "triangles": 21312,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
       "loop_id": "intake_loop_bell"
     },
     {
       "id": "siphon_heart",
       "source": "source/art/siphon_heart.blend",
-      "source_sha256": "56d05d6cfbe5a742f4330e891c014ef2f7203992de6fe62f125fedfc8d18622f",
+      "source_sha256": "053061985f12ac6b3b4b7cb95fae53867bc685a337f82e43b38e116c5cb97b9f",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
       "outputs": [
         {
           "path": "game/assets/art/world/siphon_heart.glb",
-          "sha256": "22bd9b1815eb9f53bdb0a01b6642af8c60cc841056c27fe0570b6c2a41cf7b3f",
-          "bytes": 784764
+          "sha256": "de0670dca919af9fa390dce4356626420072461a8a052562b13e51a34beae7eb",
+          "bytes": 1440216
         }
       ],
       "provenance": {
@@ -342,24 +348,24 @@
       },
       "physical_bounds_m": {
         "min": [
-          -2.438,
+          -2.534,
           -1.81,
           0.0
         ],
         "max": [
-          2.438,
+          2.534,
           1.75,
-          3.911
+          4.165
         ],
         "size": [
-          4.877,
+          5.067,
           3.56,
-          3.911
+          4.165
         ],
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 9118,
+      "triangles": 16746,
       "runtime_mesh_nodes": 7,
       "material_count": 7,
       "loop_id": "intake_loop_siphon"
@@ -403,7 +409,8 @@
       "triangles": 2796,
       "runtime_mesh_nodes": 4,
       "material_count": 4,
-      "loop_id": null
+      "loop_id": null,
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "conduit",
@@ -444,7 +451,8 @@
       "triangles": 3660,
       "runtime_mesh_nodes": 4,
       "material_count": 4,
-      "loop_id": null
+      "loop_id": null,
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "arch",
@@ -485,7 +493,8 @@
       "triangles": 1524,
       "runtime_mesh_nodes": 4,
       "material_count": 4,
-      "loop_id": null
+      "loop_id": null,
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "floor",
@@ -514,7 +523,8 @@
         2
       ],
       "color_space": "sRGB",
-      "authored_pattern": "floor"
+      "authored_pattern": "floor",
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "grate",
@@ -543,7 +553,8 @@
         2
       ],
       "color_space": "sRGB",
-      "authored_pattern": "grate"
+      "authored_pattern": "grate",
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
     },
     {
       "id": "wall",
@@ -601,12 +612,265 @@
           64,
           64
         ]
-      }
+      },
+      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
+    },
+    {
+      "id": "vault_span",
+      "source": "source/art/vault_span.blend",
+      "source_sha256": "141df8e722212f1bd7edac4218446a5f6465662045b0eb2bd70322af6cbb9dca",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/vault_span.glb",
+          "sha256": "ce826cbc728cf70f49ab992151901a192413734d22ee0a930171899635ed4315",
+          "bytes": 283092
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -4.0,
+          -0.6,
+          0.0
+        ],
+        "max": [
+          4.0,
+          0.6,
+          6.0
+        ],
+        "size": [
+          8.0,
+          1.2,
+          6.0
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 3372,
+      "runtime_mesh_nodes": 5,
+      "material_count": 5,
+      "loop_id": null
+    },
+    {
+      "id": "lumen_sconce",
+      "source": "source/art/lumen_sconce.blend",
+      "source_sha256": "93c1dc829658aa20f4fc5c6d7d498d2f452f2fba84d446848413409be9bda18e",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/lumen_sconce.glb",
+          "sha256": "bb22a1fa72841cfb28a7fd37c3e12f1e8a6c7f838edb5a1cddf69e08bab79d98",
+          "bytes": 81244
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.5,
+          -0.41,
+          0.0
+        ],
+        "max": [
+          0.5,
+          0.19,
+          2.0
+        ],
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 916,
+      "runtime_mesh_nodes": 6,
+      "material_count": 6,
+      "loop_id": null
+    },
+    {
+      "id": "witness_relief",
+      "source": "source/art/witness_relief.blend",
+      "source_sha256": "d0d0596a03f8aa537443d6c352757d87750c467eea37db579bd64da47438b086",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/witness_relief.glb",
+          "sha256": "cef04173693dc6b905544c0aad6fcb511209f051caaf606f62cb22112a19d8e6",
+          "bytes": 293196
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -1.75,
+          -0.515,
+          0.0
+        ],
+        "max": [
+          1.719,
+          0.2,
+          4.8
+        ],
+        "size": [
+          3.469,
+          0.715,
+          4.8
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 3897,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": null
+    },
+    {
+      "id": "suspended_cadaver",
+      "source": "source/art/suspended_cadaver.blend",
+      "source_sha256": "ac38f72dea6df4765a73500d112238e23e9983eda99978eea0ea57e53b7a93d6",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/suspended_cadaver.glb",
+          "sha256": "7d2864c296cf8755aa3b7826d196c9ccc184b35def236e3c6b795104bbe442b4",
+          "bytes": 442012
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.98,
+          -0.98,
+          0.0
+        ],
+        "max": [
+          0.98,
+          0.98,
+          3.0
+        ],
+        "size": [
+          1.96,
+          1.96,
+          3.0
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 5688,
+      "runtime_mesh_nodes": 6,
+      "material_count": 6,
+      "loop_id": null
+    },
+    {
+      "id": "containment_capsule",
+      "source": "source/art/containment_capsule.blend",
+      "source_sha256": "ebb19d98113e3b88c7b62a7152a8499eaa252a7f4413aa579731fd390e43e922",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/containment_capsule.glb",
+          "sha256": "f661740f969e44094b63c6740e37f11581453b8a688627a102f6b47dcd1a53d7",
+          "bytes": 550936
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -1.1,
+          -0.9,
+          0.0
+        ],
+        "max": [
+          1.1,
+          0.9,
+          5.0
+        ],
+        "size": [
+          2.2,
+          1.8,
+          5.0
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 6476,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": null
+    },
+    {
+      "id": "drain_altar",
+      "source": "source/art/drain_altar.blend",
+      "source_sha256": "5798f2117bcb6dbfc4e3d1aad782ca189e8a677b33dbab2ac1689428c83e6ea6",
+      "recipe_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/drain_altar.glb",
+          "sha256": "3798faf19fb33fce29f2c5638a6cb4b24c18256502153820fb231b0db4a99008",
+          "bytes": 277620
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -1.5,
+          -1.1,
+          0.0
+        ],
+        "max": [
+          1.5,
+          1.1,
+          1.7
+        ],
+        "size": [
+          3.0,
+          2.2,
+          1.7
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 3296,
+      "runtime_mesh_nodes": 7,
+      "material_count": 7,
+      "loop_id": null
     }
   ],
   "build": {
     "blender_version": "5.2.2 LTS",
-    "script_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776",
+    "script_sha256": "d2c87da78983e818704f495b2f3e0283b685ae789a4087dc8b41a6c25362bee9",
     "render_engine": "Cycles CPU",
     "threads": 4,
     "samples": 16,

@@ -186,18 +186,18 @@
     {
       "id": "skin_bell",
       "cell": [
-        6,
-        16
+        4.5,
+        15.2
       ],
       "yaw": 0
     },
     {
       "id": "siphon_heart",
       "cell": [
-        23.5,
+        25.5,
         14.5
       ],
-      "yaw": 180
+      "yaw": 0
     }
   ],
   "doors": [
@@ -582,5 +582,1011 @@
     0.027,
     0.018,
     0.026
+  ],
+  "scenery": [
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        23
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        7,
+        23.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        10,
+        23.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        20.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        14
+      ],
+      "yaw": 0,
+      "scale": [
+        4,
+        1.6,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        17
+      ],
+      "yaw": 0,
+      "scale": [
+        4,
+        1.6,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        9,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        12,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        18,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        21,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        20
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        13
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        17
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14,
+        6
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        3
+      ],
+      "yaw": 0,
+      "scale": [
+        4.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        11.1,
+        28.5
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        17.9,
+        26.7
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        11.1,
+        16.5
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        17.9,
+        12.5
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.1,
+        14.0
+      ],
+      "yaw": 90,
+      "height": 3.0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        9.9,
+        17
+      ],
+      "yaw": 270,
+      "height": 3.0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        26.9,
+        13.2
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        20.1,
+        16.7
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.1,
+        2.5
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        18.9,
+        2.5
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        12.5,
+        29
+      ],
+      "yaw": 20,
+      "height": 2.8
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        16.5,
+        22
+      ],
+      "yaw": -20,
+      "height": 2.8
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        3.2,
+        14
+      ],
+      "yaw": 45,
+      "height": 6.5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        8.4,
+        17
+      ],
+      "yaw": -35,
+      "height": 6.5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        21.2,
+        12.7
+      ],
+      "yaw": 70,
+      "height": 2.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        26,
+        16.8
+      ],
+      "yaw": 180,
+      "height": 2.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        16.7,
+        2.5
+      ],
+      "yaw": -45,
+      "height": 2.8
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12,
+        30
+      ],
+      "yaw": 180,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17,
+        28
+      ],
+      "yaw": -90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12,
+        18
+      ],
+      "yaw": 90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9,
+        13
+      ],
+      "yaw": -90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3,
+        17.7
+      ],
+      "yaw": 120,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        20.7,
+        15.8
+      ],
+      "yaw": 90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        26,
+        12
+      ],
+      "yaw": -45,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17.7,
+        3.5
+      ],
+      "yaw": -120,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16.8,
+        29.5
+      ],
+      "yaw": -110,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16.8,
+        15
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        3.1,
+        12.8
+      ],
+      "yaw": 30,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        8.8,
+        17.8
+      ],
+      "yaw": -120,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        21,
+        17.8
+      ],
+      "yaw": 125,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        26,
+        17.6
+      ],
+      "yaw": 180,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        10.9,
+        1
+      ],
+      "yaw": 80,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        11.15,
+        22.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        11.15,
+        14.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        17.85,
+        11.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        7.5,
+        23.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        5.15,
+        21
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        5.15,
+        10.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        9,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        12.5,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        18.5,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        22.15,
+        20.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        26.85,
+        17.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        20.15,
+        12.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        18.85,
+        2.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        10.15,
+        1.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        2.15,
+        13.5
+      ],
+      "height": 4.3,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 4.4,
+      "range": 18,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        9.85,
+        17.5
+      ],
+      "height": 4.3,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 4.4,
+      "range": 18,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        4.5,
+        13.5
+      ],
+      "height": 8.8,
+      "color": [
+        1,
+        0.48,
+        0.24
+      ],
+      "energy": 5.0,
+      "range": 22,
+      "target": [
+        4.5,
+        15.2
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        7.5,
+        16.5
+      ],
+      "height": 8.0,
+      "color": [
+        0.25,
+        0.48,
+        0.72
+      ],
+      "energy": 3.8,
+      "range": 21,
+      "target": [
+        4.5,
+        15.2
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        24,
+        12
+      ],
+      "height": 5.0,
+      "color": [
+        0.35,
+        0.78,
+        0.88
+      ],
+      "energy": 4.5,
+      "range": 20,
+      "target": [
+        25.5,
+        14.5
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        26,
+        17.5
+      ],
+      "height": 5.0,
+      "color": [
+        1,
+        0.25,
+        0.18
+      ],
+      "energy": 3.7,
+      "range": 20,
+      "target": [
+        25.5,
+        14.5
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        14.5,
+        29
+      ],
+      "height": 4.8,
+      "color": [
+        0.28,
+        0.5,
+        0.6
+      ],
+      "energy": 2.5,
+      "range": 18
+    },
+    {
+      "cell": [
+        14.5,
+        16
+      ],
+      "height": 5.5,
+      "color": [
+        0.28,
+        0.45,
+        0.65
+      ],
+      "energy": 2.5,
+      "range": 18
+    },
+    {
+      "cell": [
+        14.5,
+        2
+      ],
+      "height": 5.5,
+      "color": [
+        0.5,
+        0.23,
+        0.18
+      ],
+      "energy": 2.5,
+      "range": 18
+    }
   ]
 }

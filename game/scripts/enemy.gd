@@ -38,6 +38,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.hframes = 8
 	sprite.vframes = 5
 	sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	sprite.shaded = true
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 	sprite.pixel_size = (3.8 if kind == "crawler" else 3.65)/128.0

@@ -37,6 +37,20 @@ func run():
 	game.state.health = 100
 	game.state.ammo[1] = 10
 	if not expect(not player.fire() and game.state.ammo[1] == 10): return
+	game.playing = true
+	preload("res://scripts/preferences.gd").new().apply_bindings()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var motion = InputEventMouseMotion.new()
+	motion.relative = Vector2(5,0)
+	motion.screen_relative = Vector2(10,0)
+	player._unhandled_input(motion)
+	if not expect(is_equal_approx(player.rotation.y,-0.02)): return
+	var tap = InputMap.action_get_events("fire")[0].duplicate()
+	tap.pressed = true
+	player._unhandled_input(tap)
+	tap.pressed = false
+	player._unhandled_input(tap)
+	if not expect(game.state.ammo[1] == 9 and game.shots == 3): return
 	print("PASS native player fire: ammo, cooldown, empty weapon, melee, inventory cycle and death gate")
 	game.queue_free()
 	quit()

@@ -6,15 +6,21 @@ const Player = preload("res://scripts/player.gd")
 const Enemy = preload("res://scripts/enemy.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Music = preload("res://audio/music.gd")
+const Preferences = preload("res://scripts/preferences.gd")
 var state = Campaign.new()
 var playing: bool = false
-var settings = {"sensitivity":1.0,"invert_y":false,"head_bob":true,"camera_shake":true,"auto_aim":false,"music_volume":0.65,"effects_volume":0.8}
+var preferences = Preferences.new()
+var settings: Dictionary = preferences.values
 var progress_path: String = Campaign.SAVE_PATH
+var settings_path: String = "user://preferences.json"
 var level: Node3D
 var player: CharacterBody3D
 var music: Node
 var enemies: Array = []
 var menu: VBoxContainer
+var menu_scroll: ScrollContainer
+var pending_action: String = ""
+var pending_button: Button
 var hud: Node2D
 var canvas: CanvasLayer
 var message: String = ""
@@ -26,10 +32,12 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().auto_accept_quit = false
 	if "--verify-export" in OS.get_cmdline_user_args(): AudioServer.set_bus_mute(0,true)
+	if FileAccess.file_exists(settings_path) and not preferences.load_file(settings_path): notify("INVALID SETTINGS: USING DEFAULTS",8)
+	settings = preferences.values
 	music = Music.new()
 	add_child(music)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),linear_to_db(settings.music_volume))
-	_bind_controls()
+	_apply_volumes()
+	preferences.apply_bindings()
 	canvas = CanvasLayer.new()
 	canvas.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(canvas)
@@ -37,39 +45,48 @@ func _ready() -> void:
 	hud.game = self
 	canvas.add_child(hud)
 	menu = VBoxContainer.new()
-	menu.position = Vector2(150,45)
-	menu.size = Vector2(340,275)
+	menu.custom_minimum_size.x = 340
+	menu_scroll = ScrollContainer.new()
+	menu_scroll.position = Vector2(150,45)
+	menu_scroll.size = Vector2(340,275)
+	menu_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	menu_scroll.follow_focus = true
 	menu.add_theme_constant_override("separation",9)
-	canvas.add_child(menu)
+	menu_scroll.add_child(menu)
+	canvas.add_child(menu_scroll)
 	show_title()
 	if "--verify-export" in OS.get_cmdline_user_args(): call_deferred("_verify_export")
 
-func _bind_controls() -> void:
-	var keys = {"move_forward":KEY_W,"move_back":KEY_S,"move_left":KEY_A,"move_right":KEY_D,"interact":KEY_E,"pause":KEY_ESCAPE,"weapon_previous":KEY_Q,"weapon_next":KEY_TAB}
-	for index in range(6): keys["weapon_"+str(index+1)] = KEY_1+index
-	for action in keys:
-		if not InputMap.has_action(action): InputMap.add_action(action)
-		var key = InputEventKey.new()
-		key.physical_keycode = keys[action]
-		InputMap.action_add_event(action,key)
-	if not InputMap.has_action("fire"): InputMap.add_action("fire")
-	var mouse = InputEventMouseButton.new()
-	mouse.button_index = MOUSE_BUTTON_LEFT
-	InputMap.action_add_event("fire",mouse)
-	for action in ["look_left","look_right","look_up","look_down"]:
-		if not InputMap.has_action(action): InputMap.add_action(action,0.2)
-	for bind in [["move_left",0,-1],["move_right",0,1],["move_forward",1,-1],["move_back",1,1],["look_left",2,-1],["look_right",2,1],["look_up",3,-1],["look_down",3,1],["fire",5,1]]:
-		var motion = InputEventJoypadMotion.new()
-		motion.axis = bind[1]
-		motion.axis_value = bind[2]
-		InputMap.action_add_event(bind[0],motion)
-	for bind in [["interact",JOY_BUTTON_A],["pause",JOY_BUTTON_START],["weapon_previous",JOY_BUTTON_LEFT_SHOULDER],["weapon_next",JOY_BUTTON_RIGHT_SHOULDER]]:
-		var button = InputEventJoypadButton.new()
-		button.button_index = bind[1]
-		InputMap.action_add_event(bind[0],button)
+func _apply_volumes() -> void:
+	for bus in ["Music","Effects"]:
+		if AudioServer.get_bus_index(bus) < 0:
+			AudioServer.add_bus()
+			AudioServer.set_bus_name(AudioServer.get_bus_count()-1,bus)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),linear_to_db(settings[bus.to_lower()+"_volume"]))
+
+func _save_settings() -> void:
+	var error = preferences.save(settings_path)
+	if error != OK: notify("SETTINGS SAVE FAILED: "+error_string(error),8)
+
+func _input(event: InputEvent) -> void:
+	if pending_action.is_empty(): return
+	if event is InputEventKey and (event.physical_keycode if event.physical_keycode else event.keycode) in [KEY_SHIFT,KEY_CTRL,KEY_ALT,KEY_META]:
+		if event.pressed:
+			get_viewport().set_input_as_handled()
+			return
+		event = event.duplicate()
+		event.pressed = true
+	if event is InputEventKey and event.pressed and (event.physical_keycode == KEY_ESCAPE or event.keycode == KEY_ESCAPE):
+		pending_button.text = _control_text(pending_action)
+		pending_action = ""
+	elif preferences.bind_event(pending_action,event):
+		pending_button.text = _control_text(pending_action)
+		pending_action = ""
+		_save_settings()
+	get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause") and level != null:
+	if Input.is_action_just_pressed_by_event("pause",event) and level != null:
 		if playing: pause_game()
 		elif state.health > 0: resume_game()
 		get_viewport().set_input_as_handled()
@@ -105,7 +122,7 @@ func start_level() -> void:
 		enemies.append(actor)
 	message = level.layout.data.mission
 	message_time = 7
-	menu.hide()
+	menu_scroll.hide()
 	playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if music != null:
@@ -238,7 +255,7 @@ func pause_game() -> void:
 func resume_game() -> void:
 	get_tree().paused = false
 	playing = true
-	menu.hide()
+	menu_scroll.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if music != null: music.set_paused(false)
 
@@ -283,11 +300,63 @@ func show_settings() -> void:
 		var button = CheckButton.new()
 		button.text = option[1]
 		button.button_pressed = settings[option[0]]
-		button.toggled.connect(func(value): settings[option[0]] = value)
+		button.toggled.connect(func(value):
+			settings[option[0]] = value
+			_save_settings())
 		menu.add_child(button)
+	for option in [["sensitivity","Look sensitivity",0.1,4.0,0.05],["music_volume","Music volume",0.0,1.0,0.01],["effects_volume","Effects volume",0.0,1.0,0.01]]:
+		var label = Label.new()
+		label.text = "%s: %.2f" % [option[1],settings[option[0]]]
+		menu.add_child(label)
+		var slider = HSlider.new()
+		slider.min_value = option[2]
+		slider.max_value = option[3]
+		slider.step = option[4]
+		slider.value = settings[option[0]]
+		slider.value_changed.connect(func(value):
+			settings[option[0]] = value
+			label.text = "%s: %.2f" % [option[1],value]
+			_apply_volumes()
+			_save_settings())
+		menu.add_child(slider)
+	_button("Controls",show_controls)
+	_button("Restore all defaults",func():
+		preferences.reset()
+		settings = preferences.values
+		_apply_volumes()
+		_save_settings()
+		show_settings())
 	_button("Back",func(): pause_game() if level != null else show_title())
+	menu.get_child(1).grab_focus()
+
+func _control_text(action: String) -> String:
+	return action.replace("_"," ").capitalize()+": "+preferences.binding_text(action)
+
+func show_controls() -> void:
+	_show_menu("CONTROLS",[])
+	var label = Label.new()
+	label.text = "Select a row, then press a key, mouse button,\nor pad input. Esc cancels. Other device stays bound."
+	label.add_theme_font_size_override("font_size",12)
+	menu.add_child(label)
+	for action in Preferences.ACTIONS:
+		var button = Button.new()
+		button.text = _control_text(action)
+		button.custom_minimum_size.y = 34
+		button.add_theme_font_size_override("font_size",14)
+		button.pressed.connect(func():
+			if not pending_action.is_empty(): pending_button.text = _control_text(pending_action)
+			pending_action = action
+			pending_button = button
+			button.text = action.replace("_"," ").capitalize()+": press input (Esc cancels)")
+		menu.add_child(button)
+	_button("Back",show_settings)
+	menu.get_child(2).grab_focus()
 
 func _show_menu(title: String, actions: Array) -> void:
+	pending_action = ""
+	pending_button = null
+	menu_scroll.scroll_vertical = 0
+	menu_scroll.show()
 	for child in menu.get_children():
 		menu.remove_child(child)
 		child.queue_free()
@@ -352,6 +421,8 @@ func _verify_export() -> void:
 		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
 	start_campaign(1)
 	checks["start"] = playing and enemies.size() == 23 and music.player.bank != null
+	checks["campaign_midis"] = music.level_tracks.size() == 8
+	for track in music.level_tracks: checks["campaign_midis"] = checks["campaign_midis"] and FileAccess.file_exists(track)
 	music.player._process(0.2)
 	checks["live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
 	player.set_physics_process(false)

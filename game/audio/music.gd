@@ -1,9 +1,8 @@
 extends Node
 
-# Gate fixture only; parent replaces this list with the eight authored level files.
-@export var level_tracks: PackedStringArray = ["res://audio/gate.mid"]
+@export var level_tracks: PackedStringArray = ["res://audio/intake.mid","res://audio/foundry.mid","res://audio/processional.mid","res://audio/reliquary.mid","res://audio/nursery.mid","res://audio/ossuary.mid","res://audio/inversion.mid","res://audio/heart.mid"]
 const BANK_PATH := "res://audio/GeneralUser-GS.sf2"
-# Load only the representative palette once. Add programs when final compositions use them.
+# Load the authored campaign palette once; bank survives level changes.
 const PROGRAMS := [0, 19, 30, 34, 81, 128 << 7]
 var player: MidiPlayer
 

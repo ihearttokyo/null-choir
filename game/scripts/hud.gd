@@ -51,7 +51,7 @@ func _draw() -> void:
 				draw_line(Vector2(320,180)+direction*9,Vector2(320,180)+direction*13,Color.WHITE,1)
 		if game.playing:
 			var interaction = game.nearest_interaction()
-			if not interaction.is_empty(): draw_string(font,Vector2(230,302),"[E / A] INTERACT",HORIZONTAL_ALIGNMENT_LEFT,-1,14,cream)
+			if not interaction.is_empty(): draw_string(font,Vector2(230,302),"["+game.preferences.binding_text("interact")+"] INTERACT",HORIZONTAL_ALIGNMENT_LEFT,-1,14,cream)
 		if game.damage_flash > 0: draw_rect(Rect2(0,0,640,322),Color(0.65,0.035,0.05,game.damage_flash*0.7))
 	if not game.playing and game.level != null:
 		draw_rect(Rect2(0,0,640,360),Color(0.025,0.012,0.02,0.76))
