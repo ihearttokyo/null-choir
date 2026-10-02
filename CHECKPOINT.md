@@ -281,3 +281,29 @@ committed, and canonical owned-path hashes matched. Generated test UID sidecars
 and import/build/receipt artifacts remain outside Git. Cold-start, heard music,
 held physical controls and full played campaign remain the unmet acceptance.
 The bounded correction is delivered; the full game goal remains active.
+
+## Published 0.2.1 startup measurement
+
+Three serial launches use the exact downloaded published ZIP and unchanged
+binary/PCK, separate fresh HOME/path pairs, native M4/Metal and CoreAudio, and
+Godot's supported `--write-movie first.png --quit-after 1` path. The first written
+640x360 title frame appears at 7.9827 seconds; process-to-clean-exit takes 8.0625
+seconds. The later written frames take 1.8539 and 1.9445 seconds, with process
+upper bounds of 1.8998 and 2.0003 seconds. All three title images are byte-identical
+and the actual pixels show the expected campaign, Continue, settings and Quit
+menu. All processes close cleanly and primary progress/preferences are unchanged.
+
+The controlled initial-start target still fails. Fresh HOME/path does not purge
+shared OS/GPU caches; fixed-frame movie writing is not normal input-ready timing,
+reboot-cold certification or a full campaign check. No source, export preset,
+cache, global developer setting or security control changes. `/Applications/Xcode.app`
+is still absent and `xcrun --find metal` exits 72. The prior partial-baking experiment
+remains unpromoted; its native warning and official implementation require the
+missing Metal compiler for full baking. Once Xcode and Metal Toolchain are
+installed through human authentication, verify the compiler and resume the
+existing one-variable paired bake experiment with per-job `DEVELOPER_DIR`,
+separate clean import and the original three-second target.
+
+Music listening, held physical controls, full played campaign/pacing and release
+notarization authentication remain open. The complete eight-level objective is
+unchanged; diagnostic warm frames do not establish completion.
