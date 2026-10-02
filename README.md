@@ -8,6 +8,8 @@ This is an unfinished first-level build, not the completed campaign. Intake has 
 
 ## Run and build
 
+[Private Mac development app: v0.1.1-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.1.1-dev) includes this scenery correction. The campaign remains unfinished; signing limitations are described below.
+
 Open `game/project.godot` in Godot 4.7.2, or run:
 
 ```sh
