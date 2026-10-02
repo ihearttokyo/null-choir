@@ -8,7 +8,7 @@ Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 The approved full eight-level goal remains active. All eight maps are registered,
 and native scenery, mounted lights, solid roofs and both capsule loops pass.
 A fresh 0.2.0 standalone Apple Silicon ZIP passes native packed-resource checks,
-but no final overhaul release is published. The prior 0.1.3 delivery below remains
+and the private v0.2.0-dev preview is now published; final overhaul acceptance remains open. The prior 0.1.3 delivery below remains
 rollback evidence. Authored role assignments, boss gates and overhead scenery are
 integrated; full played/heard acceptance, physical controls and final packaged
 performance remain before private project/app delivery.
@@ -165,3 +165,25 @@ CLI artist `01a0faf9-03df-7930-b24e-6380daab06e9` and combat worker `01a0faf9-0c
 Next, continue Reliquary and remaining campaign/combat assets in bounded pieces. Preserve full acceptance and real playtests; do not renew routine approvals or stop at status-only planning.
 
 Raw receipts and immutable candidate are outside Git under `/Users/jared/.codex/tasks/01a0f03f-e2f6-7be1-926a-af974a4ed8b7/processional/`. Actual app: `/private/tmp/null-choir-processional-0.1.3-xn20lqab/NULL CHOIR.app`. Reconcile source, runtime and external state before resuming.
+
+## Private eight-level development delivery
+
+On 2026-10-03 Tokyo time, branch `codex/full8-overhaul` at
+`88a5faa41728eb70df2c158daf2e5617729ee402` was pushed to the verified private
+`ihearttokyo/null-choir` repository. [PR #1](https://github.com/ihearttokyo/null-choir/pull/1)
+is open against main; no merge or automatic merge was requested.
+[Private v0.2.0-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.0-dev)
+targets that exact implementation SHA. GitHub names the uploaded attachment
+`NULL.CHOIR-arm64.zip`; its 88,025,807 bytes and SHA256
+`360bb71da7858995bf70aab86a31ebf94fcf5398c839cda784e86ce883d6a4b7`
+match the tested local ZIP. The actual published attachment was downloaded,
+hash-checked and passed native full-eight resources/live MIDI/weapons/actors,
+strict arm64 ad-hoc signature, system-only dependencies and isolated-userdata
+checks. Every one of 361 frozen game inputs matches canonical source. No remote
+CI is configured. Main and v0.1.3-dev remain unchanged rollback points.
+
+This delivery is a preview, not full-goal completion. Initial cold first-frame,
+played campaign pacing, heard musical quality, held physical movement, connected
+gamepad and Developer ID/notarization remain open. The universal image-first
+source/installed instructions have verified parity. Full native MIDI-loop
+recordings are being prepared without replacing live runtime synthesis.

@@ -153,7 +153,7 @@ strict development-signature checks. Isolated live menus/rebinding/mouse fire an
 checkpoint recovery pass without changing primary user data. Dense all-cohort
 M4 stress samples expose sub-60 FPS late views; warm transitions stay below 288 ms.
 The older private v0.1.3 app is rollback evidence and cannot stand in for current
-delivery. No final overhaul release is published.
+delivery. The private v0.2.0-dev eight-level preview is published at implementation commit 88a5faa; its downloaded ZIP passes native checks. Final overhaul acceptance remains open.
 
 The OpenGL stress failure prompted an installed native renderer comparison, not
 reduced scenery or shadows. Six serial C/T runs pass all thirty Metal samples at
