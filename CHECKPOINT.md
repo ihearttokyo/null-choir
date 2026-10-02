@@ -7,8 +7,8 @@ Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
 The approved full eight-level goal remains active. All eight maps are registered,
 and native scenery, mounted lights, solid roofs and both capsule loops pass.
-A fresh 0.2.0 standalone Apple Silicon ZIP passes native packed-resource checks,
-and the private v0.2.0-dev preview is now published; final overhaul acceptance remains open. The prior 0.1.3 delivery below remains
+A fresh 0.2.1 standalone Apple Silicon ZIP passes native packed-resource checks,
+and the private v0.2.1-dev preview is published; final overhaul acceptance remains open. The prior 0.1.3 delivery below remains
 rollback evidence. Authored role assignments, boss gates and overhead scenery are
 integrated; full played/heard acceptance, physical controls and final packaged
 performance remain before final release acceptance.
@@ -164,7 +164,8 @@ system-only dependencies and isolated user data: 88,374,685 bytes, SHA256
 world, staged death, checkpoint restoration, save/title and normal Quit pass.
 Primary campaign/preferences remain unchanged. The stationary 100-health canary
 died during operator latency; it is retained as death/recovery evidence, not an
-alive-stress result. This candidate is ready for separate private publication.
+alive-stress result. Private v0.2.1-dev is published and its exact attachment passes downloaded native
+full-eight, signing, dependency and isolated-userdata verification.
 The full goal remains active; Xcode/Metal Toolchain, listening and physical/full
 playthrough gates remain open.
 
@@ -259,3 +260,24 @@ supplied views after the correction documented above. Four other maps retain the
 bounded supplied-view verdicts. These pixel reviews do not certify full played
 routes or artistic acceptance by Jared; imports and prop counts alone remain
 insufficient.
+
+## Private 0.2.1 delivery confirmation
+
+[Private v0.2.1-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.1-dev) pins tested source
+`ac0fbdfa44753553c064ae332cc4afb5d63dfaae` on `codex/full8-overhaul`. Its uploaded
+`NULL.CHOIR-arm64.zip` is 88,374,685 bytes and SHA256
+`a942165ac91accb17265db275da70b5894689beed2e352ed94053875fd4ebfb2`. The downloaded attachment matches exactly and passes
+original native full-eight live-MIDI, weapon/actor, strict arm64 ad-hoc signature,
+system-only dependency and isolated-userdata checks. PR #1 remains open against
+main, without configured CI or reviews. Main@c25d0bc and v0.2.0-dev are preserved.
+The local versioned ZIP is `builds/macos/NULL CHOIR-0.2.1-arm64.zip`; the prior
+default 0.2.0 ZIP is retained. This documentation follows the tested source tag.
+
+Canonical whole-tree Git readers stalled in filesystem mmap; native sampling
+records that wait. A complete 559-file byte-frozen local project supports the
+build and per-command Git work-tree operations, without global Git/cache changes.
+Every staged blob matched the tested snapshot, only 23 explicit owned paths were
+committed, and canonical owned-path hashes matched. Generated test UID sidecars
+and import/build/receipt artifacts remain outside Git. Cold-start, heard music,
+held physical controls and full played campaign remain the unmet acceptance.
+The bounded correction is delivered; the full game goal remains active.
