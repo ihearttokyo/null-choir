@@ -1,6 +1,6 @@
 # Game project checkpoint
 
-Date: 2026-10-02
+Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
 ## Current priority: integrated overhaul and image-derived set pieces
@@ -11,7 +11,7 @@ A fresh 0.2.0 standalone Apple Silicon ZIP passes native packed-resource checks,
 and the private v0.2.0-dev preview is now published; final overhaul acceptance remains open. The prior 0.1.3 delivery below remains
 rollback evidence. Authored role assignments, boss gates and overhead scenery are
 integrated; full played/heard acceptance, physical controls and final packaged
-performance remain before private project/app delivery.
+performance remain before final release acceptance.
 
 All 56 religious-aesthetic pieces have actual editable Blender sources and
 compact GLBs. Each level contains Christian, Buddhist, Shinto, Islamic, Hindu,
