@@ -101,6 +101,8 @@ func from_dict(data: Dictionary) -> bool:
 
 func _normalized_resources(data: Dictionary) -> Dictionary:
 	var result = data.duplicate(true)
+	var point = Vector3(data.position[0],data.position[1],data.position[2])
+	result.position = [point.x,point.y,point.z]
 	for field in ["health", "armor", "weapon"]:
 		result[field] = int(result[field])
 	for field in ["ammo", "owned_weapons"]:

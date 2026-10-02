@@ -4,11 +4,13 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 ## Development status
 
-This is an unfinished three-level build, not the completed eight-level campaign. Intake, Foundry and Processional each have two traversal loops with distinct original Blender hero pieces, keys, one hidden story discovery and mid-level restoration. Three enemy roles and three weapons are implemented; eight original MIDI scores and persisted keyboard/mouse/gamepad rebinding are integrated. Five maps, remaining weapons/enemies/bosses, sound effects, ending, musical listening and full visual/pacing/performance acceptance remain. [Intake scenery](docs/SCENERY.md) and [Foundry scenery](docs/FOUNDRY.md) and [Processional scenery](docs/PROCESSIONAL.md) show native rendered evidence. [DESIGN.md](DESIGN.md) owns the approved scope; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
+The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. Eight original MIDI scores are synthesized live. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
+
+The overhaul remains unfinished. Twelve authored late-role assignments pass all 24 difficulty/seal-order cases. A wall-batching experiment reduced draw calls but failed its frame-rate gate and was rolled back. A fresh 0.2.0 Apple Silicon ZIP passes all eight packed scenes, live MIDI, weapon and actor imports. Live isolated-app checks pass menus, rebinding, mouse firing and checkpoint recovery. The original OpenGL stress run exposed sub-60 FPS late views. Six matched renderer comparisons then passed all 30 native Metal treatment samples at 141–181 FPS, with the same art, lights and active enemies. Sixty-four matched 640x360 images and 17 native safeguards pass; the project now selects Godot Mobile/native Metal. The rebuilt Metal ZIP passes native packed-resource checks and live isolated-app menus, settings, stock Escape pause, firing, death, checkpoint recovery and persisted Continue. Initial native first-frame timing is 5.94 seconds, above the three-second target; partial shader baking also misses it, and the full Metal compiler requires Xcode installation. No shader-baker change is promoted. Full campaign playthrough, musical listening, physical keyboard/controller checks and packaged cold-start/performance acceptance remain before final release acceptance. Native staging, old gameplay regressions, checkpoint/death/Continue/restart, late-level input and final ending gates have passed; these controlled tests do not establish overall pacing or artistic quality. [DESIGN.md](DESIGN.md) owns requirements; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
 
 ## Run and build
 
-[Private Mac development app: v0.1.3-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.1.3-dev) includes Intake, Foundry and Processional. The campaign remains unfinished; signing limitations are described below.
+[Private Mac development app: v0.1.3-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.1.3-dev) includes Intake, Foundry and Processional. That older release is rollback evidence and does not contain the current eight-map overhaul. Signing limitations are described below.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
@@ -16,7 +18,7 @@ Open `game/project.godot` in Godot 4.7.2, or run:
 godot --path game
 ```
 
-WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1/2/3 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
+WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
 With matching Godot Mac export templates and Apple command-line tools installed:
 
@@ -33,7 +35,7 @@ The exported binary supports a fixed headless development check:
 "NULL CHOIR.app/Contents/MacOS/NULL CHOIR" --headless --audio-driver CoreAudio -- --verify-export
 ```
 
-That checks packaged resources, start/fire/pause/checkpoint restoration Foundry and Processional scene/art/live MIDI, scattergun pickup/fire and caster projectile launch. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
+That checks all eight packed scenes, art, live MIDI and retained soundbank, plus late-weapon pickups/fire/ammo and actor/boss imports. It retains the original start/fire/pause/checkpoint, Foundry/Processional, scattergun and caster-flight assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
 
 ## Source and checks
 

@@ -12,11 +12,13 @@ The value hypothesis is that fast, readable combat, distinct level architecture,
 
 An industrial cathedral surrounds a buried organism. Lovecraftian cosmic horror and H. R. Giger-inspired body horror guide original designs. Extreme fictional body horror is encouraged; do not copy existing game characters, artwork, maps, or songs.
 
-The silent player is a recovery technician assigned to restart containment systems. Visible hands and equipment gradually become less human. The cathedral is a restraint mistaken for a shrine; the assigned repairs are releasing its occupant. One optional environmental story discovery per level contradicts the mission. Finding all eight changes the final revelation and identifies who supplied the orders without fully explaining the entity. Keep exposition minimal.
+The silent player is a recovery technician assigned to restart containment systems. Visible hands and equipment gradually become less human. The cathedral is a restraint mistaken for a shrine; the assigned repairs are releasing its occupant. An inhuman force has redirected human religious architecture and rituals into control machinery. Its manipulation, rather than any real religious community, is the antagonist. One optional environmental story discovery per level contradicts the mission. Finding all eight changes the final revelation and identifies who supplied the orders without fully explaining the entity. Keep exposition minimal.
 
 ## Campaign and unique set design
 
 Eight hand-authored exploratory maps contain keys, elevation changes, ambushes, secrets, and routes returning to recognizable junctions. Each map has at least two deliberately authored traversal loops. Every authored loop contains a bespoke Blender-authored hero set piece, unique across the campaign. A recolored texture, sign, or reused prop does not satisfy this requirement. There must be at least sixteen distinct pieces; additional authored loops require additional pieces.
+
+Jared's 2026-10-02 expansion requires at least seven distinct religious-aesthetic set pieces in every level: Christian, Buddhist and Shinto, plus four additional traditions. The selected additional directions are Islamic, Hindu, Jewish and ancient Egyptian. Each needs recognizable modeled structure, level-specific purpose and intentional staging; labels and recolors do not qualify. Existing unique loop heroes remain required and may fulfill a category when their actual design supports it. Generate and inspect actual GPT Image references before deriving editable Blender sources and compact game assets. The first [Intake construction sheet](source/art/references/religion-intake-01.png) is a production input, not rendered-game acceptance.
 
 | Level | Location | Signature piece for one loop |
 |---|---|---|
@@ -62,7 +64,7 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 
 ## Authority, ownership, and rollback
 
-Jared permits necessary tools, unlimited spending, incremental autonomous work after confirmation, and useful named CLI child tasks. All testing and child work must use `gpt-6.1-sol`, `xhigh`, Fast off, and explicitly pinned `service_tier="default"`. Inspect available runtime evidence; missing telemetry is a reporting limitation, not a blocker. Follow the successful bundled-CLI runtime receipt in [RESEARCH.md](RESEARCH.md). Bound concurrency and preserve other work; serialize heavy jobs until observed headroom supports more.
+Jared permits necessary tools, unlimited spending, incremental autonomous work after confirmation, and useful named CLI child tasks. Testing and child work use `gpt-6.1-sol`, `xhigh`, Fast off, and explicitly pinned `service_tier="default"`, except the religious-set-piece child for which Jared expressly requested Fast on 2026-10-02. That child requests `service_tier="fast"` and `features.fast_mode=true`; the exception changes no other worker or global default. Inspect available runtime evidence; missing telemetry is a reporting limitation, not a blocker. Follow the successful bundled-CLI runtime receipt in [RESEARCH.md](RESEARCH.md). Bound concurrency and preserve other work; serialize heavy jobs until observed headroom supports more.
 
 The parent owns integration. Give children bounded missions and nonoverlapping files, verify task identity/tool state, preserve receipts, and archive unneeded finished children. Exact encounter layouts, animation details, palettes, composition structure, clue wording, and balancing may be authored within this agreed brief; material scope or authority changes require Jared.
 

@@ -1,18 +1,27 @@
 extends CharacterBody3D
 
+const Projectile = preload("res://scripts/projectile.gd")
 const WEAPONS = [
-	{"name":"IMPACT TOOL","asset":"impact_tool","damage":28,"interval":0.36,"range":2.7,"pellets":1},
-	{"name":"RIVET PISTOL","asset":"rivet_pistol","damage":22,"interval":0.21,"range":140.0,"pellets":1},
-	{"name":"SCATTERGUN","asset":"scattergun","damage":15,"interval":0.7,"range":90.0,"pellets":7},
-	{"name":"SAWTOOTH REPEATER","asset":"sawtooth_repeater","damage":15,"interval":0.085,"range":140.0,"pellets":1},
-	{"name":"MARROW LAUNCHER","asset":"marrow_launcher","damage":110,"interval":0.8,"range":140.0,"pellets":1},
-	{"name":"CHOIR DISRUPTOR","asset":"choir_disruptor","damage":40,"interval":0.16,"range":140.0,"pellets":3}]
+	{"name":"IMPACT TOOL","asset":"impact_tool","damage":28,"interval":0.36,"range":2.7,"pellets":1,"max_ammo":0,"low_ammo":0,"useful_range":2.7},
+	{"name":"RIVET PISTOL","asset":"rivet_pistol","damage":22,"interval":0.21,"range":140.0,"pellets":1,"max_ammo":180,"low_ammo":20,"useful_range":140.0},
+	{"name":"SCATTERGUN","asset":"scattergun","damage":15,"interval":0.7,"range":32.0,"pellets":7,"max_ammo":32,"low_ammo":4,"useful_range":8.0},
+	{"name":"SAWTOOTH REPEATER","asset":"sawtooth_repeater","damage":15,"interval":0.085,"range":140.0,"pellets":1,"max_ammo":240,"low_ammo":30,"useful_range":24.0},
+	{"name":"MARROW LAUNCHER","asset":"marrow_launcher","damage":110,"interval":0.8,"range":96.0,"pellets":1,"max_ammo":24,"low_ammo":3,"useful_range":48.0},
+	{"name":"CHOIR DISRUPTOR","asset":"choir_disruptor","damage":40,"interval":0.16,"range":24.0,"pellets":3,"max_ammo":120,"low_ammo":12,"useful_range":16.0}]
+const SPREAD = [Vector2.ZERO,Vector2(-0.065,0),Vector2(0.065,0),Vector2(-0.0325,-0.039),Vector2(0.0325,-0.039),Vector2(-0.0325,0.039),Vector2(0.0325,0.039)]
 var game: Node
 var camera: Camera3D
-var cooldown: float = 0.0
+var weapon_cooldowns: Array[float] = [0.0,0.0,0.0,0.0,0.0,0.0]
+var cooldown: float:
+	get:
+		return weapon_cooldowns[game.state.weapon] if game != null else 0.0
+	set(value):
+		if game != null: weapon_cooldowns[game.state.weapon] = maxf(0,value)
+var dry_fire_time: float = 0.0
 var shot_flash: float = 0.0
 var stride: float = 0.0
 var recoil: float = 0.0
+var _repeater_spread: float = 0.0
 
 func configure(owner_game: Node) -> void:
 	game = owner_game
@@ -45,7 +54,11 @@ func look(delta: Vector2) -> void:
 
 func _physics_process(delta: float) -> void:
 	if game == null or not game.playing or game.state.health <= 0: return
-	cooldown = maxf(0,cooldown-delta)
+	for index in range(weapon_cooldowns.size()):
+		weapon_cooldowns[index] = maxf(0,weapon_cooldowns[index]-delta)
+	if game.state.weapon != 3 or not Input.is_action_pressed("fire"):
+		_repeater_spread = move_toward(_repeater_spread,0,delta*0.06)
+	dry_fire_time = maxf(0,dry_fire_time-delta)
 	shot_flash = maxf(0,shot_flash-delta)
 	recoil = move_toward(recoil,0,delta*7)
 	var axes = Input.get_vector("move_left","move_right","move_forward","move_back")
@@ -61,7 +74,6 @@ func _physics_process(delta: float) -> void:
 	camera.position.y = 1.55 + (sin(stride*1.8)*0.035 if game.settings.head_bob else 0.0)
 	if game.settings.camera_shake: camera.position.x = sin(shot_flash*200)*shot_flash*0.1
 	else: camera.position.x = 0
-	if Input.is_action_pressed("fire"): fire()
 	if Input.is_action_just_pressed("interact"): game.interact()
 	if not game.playing: return # Exit interaction invalidates this map and its pending position write.
 	if Input.is_action_just_pressed("weapon_next"): cycle_weapon(1)
@@ -69,6 +81,7 @@ func _physics_process(delta: float) -> void:
 	for index in range(6):
 		if Input.is_action_just_pressed("weapon_"+str(index+1)) and index in game.state.owned_weapons:
 			game.state.weapon = index
+	if Input.is_action_pressed("fire"): fire()
 	game.state.position = position
 	if position.y < -12: game.hurt_player(200)
 
@@ -78,30 +91,85 @@ func cycle_weapon(direction: int) -> void:
 	game.state.weapon = inventory[posmod(index+direction,inventory.size())]
 
 func fire() -> bool:
-	if not game.playing or cooldown > 0 or game.state.health <= 0: return false
+	if game == null or not game.playing or game.state.health <= 0: return false
 	var index = game.state.weapon
-	if index > 0 and game.state.ammo[index] <= 0: return false
+	if index >= 3 and not _current_map(): return false
+	if index > 0 and game.state.ammo[index] <= 0:
+		if dry_fire_time <= 0:
+			dry_fire_time = 0.35
+			if game.has_method("dry_fire"): game.dry_fire(index)
+		var inventory = game.state.owned_weapons
+		var selected = inventory.find(index)
+		game.state.weapon = 0
+		for offset in range(1,inventory.size()+1):
+			var candidate = inventory[posmod(selected+offset,inventory.size())]
+			if candidate > 0 and game.state.ammo[candidate] > 0:
+				game.state.weapon = candidate
+				break
+		return false
+	if cooldown > 0: return false
 	if index > 0: game.state.ammo[index] -= 1
 	var weapon = WEAPONS[index]
 	cooldown = weapon.interval
 	shot_flash = 0.12
 	recoil = 1
 	game.shot(index)
-	for pellet in range(weapon.pellets):
-		var direction = -camera.global_basis.z
-		if weapon.pellets > 1:
-			direction = (direction + camera.global_basis.x*randf_range(-0.065,0.065) + camera.global_basis.y*randf_range(-0.045,0.045)).normalized()
-		var query = PhysicsRayQueryParameters3D.create(camera.global_position,camera.global_position+direction*weapon.range,1|4)
-		query.exclude = [get_rid()]
-		var hit = get_world_3d().direct_space_state.intersect_ray(query)
-		if game.settings.auto_aim and (hit.is_empty() or not hit.collider.has_method("take_damage")):
-			var target = game.autoaim_target(camera.global_position,direction,weapon.range)
+	if index >= 3 and (not _current_map() or not game.playing): return true
+	var origin = camera.global_position
+	var direction = -camera.global_basis.z
+	var query = PhysicsRayQueryParameters3D.create(origin,origin+direction*weapon.range,1|4)
+	query.exclude = [get_rid()]
+	var space = get_world_3d().direct_space_state
+	if game.settings.auto_aim and game.has_method("autoaim_target"):
+		var center = space.intersect_ray(query)
+		if center.is_empty() or not center.collider.has_method("take_damage"):
+			var target = game.autoaim_target(origin,direction,weapon.range)
 			if target != null:
-				query.to = target.global_position + Vector3(0,0.85,0)
-				hit = get_world_3d().direct_space_state.intersect_ray(query)
+				direction = (target.global_position+Vector3(0,0.85,0)-origin).normalized()
+	if index == 4:
+		var projectile = Projectile.new()
+		game.level.add_child(projectile)
+		projectile.configure(game,self,origin,origin+direction*weapon.range,weapon.damage)
+		return true
+	if index == 5:
+		query.to = origin+direction*weapon.range
+		query.hit_from_inside = true
+		for actor_hit in range(weapon.pellets):
+			if not _current_map() or not game.playing: break
+			var hit = space.intersect_ray(query)
+			if hit.is_empty(): break
+			if (hit.collider.collision_layer & 1) != 0 or not hit.collider.has_method("take_damage"):
+				if game.has_method("impact"): game.impact(hit.position)
+				break
+			# Keep the same finite ray, excluding each real capsule once; walls remain queryable.
+			query.exclude = query.exclude+[hit.collider.get_rid()]
+			hit.collider.take_damage(weapon.damage,self)
+			if not _current_map() or not game.playing: break
+			if game.has_method("hit_feedback"): game.hit_feedback()
+			if _current_map() and game.playing and game.has_method("impact"): game.impact(hit.position)
+		return true
+	var right = direction.cross(camera.global_basis.y).normalized()
+	var up = right.cross(direction).normalized()
+	for pellet in range(weapon.pellets):
+		var spread = SPREAD[pellet] if weapon.pellets > 1 else Vector2.ZERO
+		if index == 3:
+			spread = Vector2.from_angle(randf()*TAU)*_repeater_spread*sqrt(randf())
+			_repeater_spread = minf(0.07,_repeater_spread+0.004)
+		var ray_direction = (direction+right*spread.x+up*spread.y).normalized()
+		query.to = origin+ray_direction*weapon.range
+		var hit = space.intersect_ray(query)
 		if not hit.is_empty():
 			if hit.collider.has_method("take_damage"):
-				hit.collider.take_damage(weapon.damage,self)
-				game.hit_feedback()
-			game.impact(hit.position)
+				var damage: int = weapon.damage
+				if index == 2:
+					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
+					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
+				hit.collider.take_damage(damage,self)
+				if index == 3 and (not _current_map() or not game.playing): break
+				if game.has_method("hit_feedback"): game.hit_feedback()
+			if index == 3 and (not _current_map() or not game.playing): break
+			if game.has_method("impact"): game.impact(hit.position)
 	return true
+
+func _current_map() -> bool:
+	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and game.player == self and not is_queued_for_deletion()

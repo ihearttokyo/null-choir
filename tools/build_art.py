@@ -1038,10 +1038,10 @@ def main():
         print(f'ART_START {name}', flush=True)
         entry = build_enemy(name) if name in ('crawler', 'worker') else build_weapon(name) if name in ('impact_tool', 'rivet_pistol') else world_export(name)
         current['assets'] = [a for a in current['assets'] if a['id'] != name] + [entry]
-        current['assets'].sort(key=lambda a: IDS.index(a['id']))
+        current['assets'].sort(key=lambda a: IDS.index(a['id']) if a['id'] in IDS else len(IDS))
         target(path).write_text(json.dumps(current, indent=2) + '\n')
         print(f'ART_DONE {name} {entry["outputs"][0]["sha256"]}', flush=True)
-    current['assets'].sort(key=lambda a: IDS.index(a['id']))
+    current['assets'].sort(key=lambda a: IDS.index(a['id']) if a['id'] in IDS else len(IDS))
     target(path).write_text(json.dumps(current, indent=2) + '\n')
 
 

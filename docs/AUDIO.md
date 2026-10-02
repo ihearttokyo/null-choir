@@ -6,7 +6,10 @@
 
 - `play_level(index)`: zero-based index into `level_tracks`; replaces MIDI event data and resets notes, tempo and channel controllers. Invalid/missing tracks leave current playback unchanged and report an error.
 - `set_paused(paused)`: freezes the MIDI clock, envelope timers and both sides of stereo PCM playback. The Node processes independently of SceneTree pause; the game must call this API when pausing.
+- `set_pressure(value: float)`: requests an accompaniment mix without seeking or restarting playback. Finite values clamp to `[0, 1]`; non-finite values request zero. Linear smoothing traverses the full range in 0.25 seconds on attack and one second on release, and freezes while paused. Repeat and level switch reapply the current mix after the player's controller reset.
 - `stop()`: silences primary and linked voices immediately and clears note bookkeeping. The next play resets channel state.
+
+Pressure defaults to zero. At zero, expression is 0.35 for guitar, 0.8 for bass, 0.6 for saw and 0.55 for drums; at one, each reaches one. Organ expression remains untouched at one. These factors only attenuate authored channel volumes through the existing `update_channel_status` API. The same player, bank and voice pool remain in use. Pressure never writes the user Music bus gain/mute or the synth-master gain. The parent derives pressure from active threats and damage; the music node owns only its smoothing and expression application.
 
 The track list contains the eight original campaign MIDI files in level order. [Campaign scores](MUSIC.md) owns their editable sources, arrangement and generation contract. The retained gate fixture isolates scheduler and synthesis regressions. The approved palette uses Distortion Guitar (30), Pick Bass (34), Pipe Organ (19), Saw Lead (81) and Standard 1 drums (bank 128/program 0), with zero-based GM program numbers.
 
@@ -37,7 +40,10 @@ Run direct assertions with Godot 4.7.2 after importing the project:
 godot --headless --path game --script res://tests/test_midi_timing.gd
 godot --headless --path game --script res://tests/test_midi_audio.gd
 godot --headless --path game --script res://tests/test_midi_bank.gd
+godot --headless --audio-driver Dummy --path game --script res://tests/test_music_pressure.gd
 ```
+
+The pressure assertion manually advances the real scheduler and checks finite clamping, attack/release, pause, channel-bus gains, unchanged transport/bank/voice pool, repeat/switch and independent user settings. Dummy is scheduler/state evidence only; it cannot establish PCM, CoreAudio behavior, perceived mix or musical quality. Revised scores and pressure still require parent-owned native validation and actual mixed gameplay listening.
 
 The isolated gate, export preset and Mac application are under ignored `builds/midi_gate/`. The receipt at `/Users/jared/.codex/tasks/01a0f03f-e2f6-7be1-926a-af974a4ed8b7/midi-runtime/` owns current results, raw logs, captured output and remaining gates. Parent integration must include `*.mid` and `*.sf2` in export filters, retain the packaged licenses, and use an arm64 Mac export. The installed official Mac template contains universal binaries; the gate derives arm64 template binaries locally with Apple `lipo`, without changing global templates.
 

@@ -5,6 +5,7 @@ var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
+var machine_lights: Dictionary = {}
 
 func build(owner_game: Node, index: int) -> void:
 	game = owner_game
@@ -16,6 +17,7 @@ func build(owner_game: Node, index: int) -> void:
 	_build_scenery()
 	for hero in layout.data.heroes:
 		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
+		if not hero.has("base"): continue
 		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),_material(Color(0.12,0.16,0.17)),true)
 		base.get_child(0).hide()
 		if hero.get("round",false):
@@ -48,6 +50,7 @@ func build(owner_game: Node, index: int) -> void:
 		core.position.y = 2.2
 		marker.add_child(core)
 		markers[spec.id] = marker
+	refresh_machine_lights()
 
 func _material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 	var material = StandardMaterial3D.new()
@@ -189,6 +192,7 @@ func _build_environment() -> void:
 		light.light_energy = spec.energy
 		light.shadow_enabled = spec.get("shadow",false)
 		add_child(light)
+		if spec.has("id"): machine_lights[spec.id] = light
 		if light is SpotLight3D:
 			light.spot_range = spec.range
 			light.spot_angle = 48
@@ -197,6 +201,19 @@ func _build_environment() -> void:
 			light.omni_range = spec.range
 		if spec.has("fixture_yaw"):
 			_place_model("lumen_sconce",layout.world_position(spec.cell)+Vector3.UP*(spec.height-1.0),spec.fixture_yaw)
+
+func apply_encounter_cue(spec: Dictionary, _restoring: bool) -> void:
+	# Steady feed light: no flicker, motion, audio or text to replay on restoration.
+	for id in spec.cue.light_ids:
+		if machine_lights.has(id): machine_lights[id].light_color = Color(1.0,0.28,0.1)
+	refresh_machine_lights()
+
+func refresh_machine_lights() -> void:
+	# Earned seals override a live feed, including version-1 saves without encounter flags.
+	for hero in layout.data.heroes:
+		if not hero.get("seal","") in game.state.keys: continue
+		for id in hero.get("light_ids",[]):
+			if machine_lights.has(id): machine_lights[id].light_color = Color(1.0,0.76,0.44)
 
 func remove_marker(id: String) -> void:
 	if markers.has(id):

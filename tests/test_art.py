@@ -20,6 +20,49 @@ SCENERY = {'vault_span': (8, 1.2, 6), 'lumen_sconce': (1, .6, 2),
 FOUNDRY = {'vertebral_furnace', 'marrow_crucible'}
 PROCESSIONAL = {'walking_bone_organ', 'ossified_palanquin'}
 PROCESSIONAL_ASSETS = PROCESSIONAL | {'caster', 'scattergun'}
+RELIGIOUS_INTAKE = dict(zip(
+    ('intake_throat_frame', 'intake_wheel_reservoir', 'intake_bound_gate',
+     'intake_pressure_screen', 'intake_ascending_engine', 'intake_seven_lamps', 'intake_solar_seal'),
+    ('Christian', 'Buddhist', 'Shinto', 'Islamic', 'Hindu', 'Jewish', 'ancient Egyptian')))
+EXPECTED.update(RELIGIOUS_INTAKE)
+SCENERY.update(dict.fromkeys(RELIGIOUS_INTAKE, (8, 6, 9)))
+RELIGIOUS_FOUNDRY = dict(zip(
+    ('foundry_cross_spine', 'foundry_slag_wheel', 'foundry_bound_furnace',
+     'foundry_pressure_canopy', 'foundry_tower_cluster', 'foundry_lamp_manifold', 'foundry_solar_crucible'),
+    ('Christian', 'Buddhist', 'Shinto', 'Islamic', 'Hindu', 'Jewish', 'ancient Egyptian')))
+EXPECTED.update(RELIGIOUS_FOUNDRY)
+SCENERY.update(dict.fromkeys(RELIGIOUS_FOUNDRY, (8, 6, 9)))
+RELIGIOUS_PROCESSIONAL = dict(zip(
+    ('processional_pipe_choir', 'processional_gong_carousel', 'processional_bound_drums',
+     'processional_acoustic_canopy', 'processional_reed_chariot', 'processional_seven_reeds', 'processional_winged_sarcophagus'),
+    ('Christian', 'Buddhist', 'Shinto', 'Islamic', 'Hindu', 'Jewish', 'ancient Egyptian')))
+EXPECTED.update(RELIGIOUS_PROCESSIONAL)
+SCENERY.update(dict.fromkeys(RELIGIOUS_PROCESSIONAL, (8, 6, 9)))
+RELIGIOUS_RELIQUARY = dict(zip(
+    ('reliquary_face_halo', 'reliquary_memory_wheel', 'reliquary_bound_gate', 'reliquary_cell_vault',
+     'reliquary_tower_cluster', 'reliquary_seven_vessels', 'reliquary_winged_seal'),
+    ('Christian', 'Buddhist', 'Shinto', 'Islamic', 'Hindu', 'Jewish', 'ancient Egyptian')))
+EXPECTED.update(RELIGIOUS_RELIQUARY)
+SCENERY.update(dict.fromkeys(RELIGIOUS_RELIQUARY, (8, 6, 9)))
+RELIGIOUS_SETS = {'intake': RELIGIOUS_INTAKE, 'foundry': RELIGIOUS_FOUNDRY,
+                  'processional': RELIGIOUS_PROCESSIONAL, 'reliquary': RELIGIOUS_RELIQUARY}
+for level, suffixes in {
+    'nursery': ('gestation_engine', 'seed_orrery', 'bound_gate', 'cell_canopy', 'tower_cluster', 'seven_vessels', 'winged_cradle'),
+    'ossuary': ('rib_bridge', 'bone_mandala', 'bound_gate', 'cell_archive', 'tower_cluster', 'seven_reservoirs', 'winged_sarcophagus'),
+    'inversion': ('surgical_cradle', 'tilted_gyroscope', 'bound_gate', 'cell_prism', 'tower_cluster', 'seven_vessels', 'winged_cradle'),
+    'heart': ('mouth_restraint', 'pulse_mandala', 'bound_gate', 'cell_crown', 'tower_cluster', 'seven_reservoirs', 'winged_seal'),
+}.items():
+    RELIGIOUS_SETS[level] = dict(zip((level+'_'+s for s in suffixes), RELIGIOUS_INTAKE.values()))
+    EXPECTED.update(RELIGIOUS_SETS[level])
+    SCENERY.update(dict.fromkeys(RELIGIOUS_SETS[level], (8, 6, 9)))
+LATE_WEAPONS = {'sawtooth_repeater', 'marrow_launcher', 'choir_disruptor'}
+LATE_ROLES = {'brute', 'guardian', 'summoner'}
+LATE_BOSSES = {'nursery_warden', 'choir_avatar'}
+LATE_COMBAT = LATE_WEAPONS | LATE_ROLES | LATE_BOSSES
+EXPECTED.update(LATE_COMBAT)
+ATMOSPHERE = {'nursery_growth_vault', 'ossuary_sorting_vault', 'inversion_cosmic_membrane', 'heart_arterial_vault'}
+EXPECTED.update(ATMOSPHERE)
+SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
 
 
 def world_geometry(gltf, binary):
@@ -81,17 +124,33 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED, 'four Processional assets required: walking_bone_organ, ossified_palanquin, caster, scattergun (intended RED)'
+    assert {a['id'] for a in assets} == EXPECTED, 'original assets, all56 religious pieces, eight native late combat identities and four atmosphere modules required (intended RED)'
     assert len(assets) == len(EXPECTED)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
-    scenery_bytes = foundry_bytes = processional_bytes = 0
+    scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
+    religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
         assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
         source = ROOT / a['source']
         assert source.is_relative_to(ROOT / 'source/art') and source.suffix == '.blend'
         assert source.is_file() and source.read_bytes()[:7] == b'BLENDER', a['id']
         assert hashlib.sha256(source.read_bytes()).hexdigest() == a['source_sha256'], a['id']
+        if a['id'] in LATE_COMBAT:
+            recipe = 'tools/build_late_combat_art.py'
+            assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
+            assert a['provenance']['authoring_script'] == recipe
+            assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
+                                                for helper in ('tools/build_art.py', 'tools/build_foundry_art.py',
+                                                               'tools/build_processional_art.py', 'tools/build_religious_art.py')}
+            assert len(a['reference_images']) == 1
+            reference = a['reference_images'][0]
+            assert (ROOT / reference['path']).resolve().is_relative_to((ROOT / 'source/art/references').resolve())
+            assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
+            assert a['pose_collections'] == a['frames'] and set(a['pose_mesh_counts']) == set(a['frames'])
+            assert all(count >= 50 for count in a['pose_mesh_counts'].values())
+            cap = 18000 if a['id'] in LATE_WEAPONS else 24000 if a['id'] in LATE_BOSSES else 16000
+            assert set(a['pose_triangles']) == set(a['frames']) and all(0 < count <= cap for count in a['pose_triangles'].values())
         if a['id'] in PROCESSIONAL_ASSETS:
             recipe = 'tools/build_processional_art.py'
             assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
@@ -108,11 +167,11 @@ def check():
             if file.suffix == '.png':
                 size, pixels = png(file)
                 assert list(size) == output['dimensions'], file
-                if a['id'] in ('crawler', 'worker', 'impact_tool', 'rivet_pistol', 'caster', 'scattergun'):
+                if a['id'] in ('crawler', 'worker', 'impact_tool', 'rivet_pistol', 'caster', 'scattergun') or a['id'] in LATE_COMBAT:
                     assert 0 in pixels[3::4] and 255 in pixels[3::4], file
                     assert set(pixels[3::4]) == {0, 255}, 'sprite edges must be pixel-crisp'
                     cw, ch = a['cell_size']
-                    enemy = a['id'] in ('crawler', 'worker', 'caster')
+                    enemy = a['id'] in ('crawler', 'worker', 'caster') or a['id'] in LATE_ROLES | LATE_BOSSES
                     rows = len(a['frames']) if enemy else 1
                     assert size == (a['columns'] * cw, rows * ch)
                     assert a['filter'] == 'nearest'
@@ -124,20 +183,23 @@ def check():
                             assert sum(v != 0 for v in cell[3::4]) >= 80, (a['id'], column, frame)
                             if enemy:
                                 bottom = max(y for y in range(ch) if any(cell[(y * cw + x) * 4 + 3] for x in range(cw)))
-                                assert bottom == 119, 'every enemy pose must meet its documented baseline'
+                                assert bottom == (247 if a['id'] in LATE_BOSSES else 119), 'every enemy pose must meet its documented baseline'
                             cells.append(cell)
                     if enemy:
                         for column in range(a['columns']):
                             assert len(set(cells[column::a['columns']])) == rows, 'enemy poses cannot be duplicate cells'
-                        if a['id'] == 'caster':
+                        if a['id'] == 'caster' or a['id'] in LATE_ROLES | LATE_BOSSES:
                             assert len(set(cells)) == 40, 'all caster directions and poses must be distinct'
                             for cell in cells[-8:]:
                                 top = min(y for y in range(ch) if any(cell[(y * cw + x) * 4 + 3] for x in range(cw)))
-                                assert top >= 64, 'dead caster must visibly collapse'
+                                assert top >= ch // 2, 'dead character must visibly collapse'
                     else:
-                        if a['id'] == 'scattergun':
+                        if a['id'] == 'scattergun' or a['id'] in LATE_WEAPONS:
                             assert not any(pixels[3:24 * size[0] * 4:4]), 'scattergun must stay below central aim'
                         assert len(set(cells)) == len(a['frames']), 'weapon poses cannot be duplicate cells'
+                    if a['id'] in LATE_COMBAT:
+                        byte_cap = 256*1024 if a['id'] in LATE_WEAPONS else 2*1024*1024 if a['id'] in LATE_BOSSES else 512*1024
+                        assert file.stat().st_size == output['bytes'] <= byte_cap
             elif file.suffix == '.glb':
                 assert 'gltf/embedded_image_handling=3' in file.with_suffix('.glb.import').read_text(), 'Godot must keep authored images embedded'
                 data = file.read_bytes()
@@ -154,7 +216,60 @@ def check():
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
                 if a['id'] in SCENERY:
-                    if a['id'] in FOUNDRY:
+                    if any(a['id'] in pieces for pieces in RELIGIOUS_SETS.values()):
+                        level = a['level_id']
+                        assert level in RELIGIOUS_SETS and a['id'] in RELIGIOUS_SETS[level]
+                        traditions = RELIGIOUS_SETS[level]
+                        religious_bytes[level] += len(data)
+                        recipe = {'intake': 'tools/build_religious_art.py', 'foundry': 'tools/build_religious_foundry_art.py',
+                                  'processional': 'tools/build_religious_processional_art.py',
+                                  **dict.fromkeys(('reliquary', 'nursery', 'ossuary', 'inversion', 'heart'), 'tools/build_religious_late_art.py')}[level]
+                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
+                        assert a['provenance']['authoring_script'] == recipe
+                        helpers = ['tools/build_art.py', 'tools/build_foundry_art.py']
+                        if level != 'intake':
+                            helpers.append('tools/build_religious_art.py')
+                        if level not in ('intake', 'foundry'):
+                            helpers.extend(['tools/build_processional_art.py', 'tools/build_religious_foundry_art.py'])
+                        assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
+                                                            for helper in helpers}
+                        assert a['tradition_aesthetic'] == traditions[a['id']] and a['level_id'] == level
+                        assert a['loop_id'] == {'reliquary_face_halo': 'reliquary_loop_halo',
+                                                'reliquary_memory_wheel': 'reliquary_loop_wheel',
+                                                'nursery_gestation_engine': 'nursery_loop_gestation', 'nursery_seed_orrery': 'nursery_loop_seeds',
+                                                'ossuary_rib_bridge': 'ossuary_loop_transport', 'ossuary_bone_mandala': 'ossuary_loop_mandala',
+                                                'inversion_surgical_cradle': 'inversion_loop_clamps', 'inversion_tilted_gyroscope': 'inversion_loop_gyroscope',
+                                                'heart_mouth_restraint': 'heart_loop_restraint', 'heart_pulse_mandala': 'heart_loop_pulse'}.get(a['id'])
+                        assert a['triangles'] <= 30000 and a['source_hierarchy_groups'] >= 4
+                        assert len(set(a['assembly_names'])) == a['source_hierarchy_groups']
+                        assert a['facing'] == 'front Blender -Y; exported Godot +Z'
+                        assert a['reference_images']
+                        for reference in a['reference_images']:
+                            path = ROOT / reference['path']
+                            assert path.resolve().is_relative_to((ROOT / 'source/art/references').resolve())
+                            assert hashlib.sha256(path.read_bytes()).hexdigest() == reference['sha256']
+                        assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
+                    elif a['id'] in ATMOSPHERE:
+                        atmosphere_bytes += len(data)
+                        recipe = 'tools/build_world_atmosphere_art.py'
+                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
+                        assert a['provenance']['authoring_script'] == recipe
+                        assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
+                                                            for helper in ('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_religious_art.py')}
+                        assert a['level_id'] == a['id'].split('_', 1)[0] and a['loop_id'] is None
+                        assert a['triangles'] <= 22000 and a['runtime_mesh_nodes'] <= 5 and a['material_count'] <= 5
+                        assert a['source_hierarchy_groups'] >= 4 and len(set(a['assembly_names'])) == a['source_hierarchy_groups']
+                        assert len(data) == output['bytes'] < 2 * 1024 * 1024
+                        assert a['facing'] == 'front Blender -Y; exported Godot +Z' and a['collision'].startswith('none;')
+                        assert a['reference_images'] == [{'path': 'source/art/references/world-polish-late-01.png',
+                                                         'sha256': 'f779257d54a32b0d702193b79beceee63df0d96b54f2988a5899e457670dc9a7'}]
+                        for reference in a['reference_images']:
+                            assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
+                        assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
+                        assert not gltf.get('cameras') and not gltf.get('animations') and not gltf.get('skins')
+                        assert 'KHR_lights_punctual' not in gltf.get('extensionsUsed', [])
+                        assert all(s.get('magFilter') == 9728 and s.get('minFilter') in (9728, 9984) for s in gltf['samplers'])
+                    elif a['id'] in FOUNDRY:
                         foundry_bytes += len(data)
                         recipe = 'tools/build_foundry_art.py'
                         assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
@@ -206,8 +321,9 @@ def check():
                         assert size[0] >= 7.95 and size[2] >= 5.95
                         assert all(abs(p[0]) >= 3.7 - .002 or p[1] >= 3.6 for p in points), 'vault hangs into capsule route'
                         assert all(abs(p[0]) >= 3.5 or p[1] >= 4 for p in points), 'vault must preserve the open 7m interior'
-        if a['id'] in ('crawler', 'worker', 'caster'):
-            assert a['columns'] == 8 and a['cell_size'] == [128, 128]
+        if a['id'] in ('crawler', 'worker', 'caster') or a['id'] in LATE_ROLES | LATE_BOSSES:
+            cell = 256 if a['id'] in LATE_BOSSES else 128
+            assert a['columns'] == 8 and a['cell_size'] == [cell, cell]
             assert a['frames'] == ['idle', 'walk_a', 'walk_b', 'attack', 'dead']
             assert a['yaw_degrees'] == list(range(0, 360, 45))
         if a['id'] in ('caster', 'scattergun'):
@@ -216,13 +332,15 @@ def check():
             assert all(n >= (70 if a['id'] == 'caster' else 80) for n in a['pose_mesh_counts'].values())
             if a['id'] == 'caster':
                 assert a['runtime_quad_height_m'] == 3.65
-        if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun'):
+        if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun') or a['id'] in LATE_WEAPONS:
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'
     assert processional_bytes < 4 * 1024 * 1024, 'two Processional GLBs exceed their runtime budget'
+    assert all(total < 8 * 1024 * 1024 for total in religious_bytes.values()), 'seven religious-aesthetic GLBs in a level exceed their runtime budget'
+    assert atmosphere_bytes < 6 * 1024 * 1024, 'four atmosphere GLBs exceed their independent runtime budget'
     assert scenery_bytes < 8 * 1024 * 1024, 'eight scenery GLBs exceed their runtime budget'
     assert hashlib.sha256((ROOT / 'tools/build_art.py').read_bytes()).hexdigest() == manifest['build']['script_sha256']
     print(f'PASS: {len(assets)} assets; {len(owned_outputs)} exports; PNG alpha/pose/dimensions, GLB structure, blend provenance and SHA-256 parity')

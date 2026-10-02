@@ -4,7 +4,11 @@ extends Node
 const BANK_PATH := "res://audio/GeneralUser-GS.sf2"
 # Load the authored campaign palette once; bank survives level changes.
 const PROGRAMS := [0, 19, 30, 34, 81, 128 << 7]
+# Expression attenuates the authored mix; the organ remains the constant anchor.
+const QUIET_EXPRESSION := {0: 0.35, 1: 0.8, 3: 0.6, 9: 0.55}
 var player: MidiPlayer
+var pressure := 0.0
+var pressure_target := 0.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -15,6 +19,7 @@ func _ready() -> void:
 	player.bus = &"Music"
 	player.loop = true
 	add_child(player)
+	player.looped.connect(_apply_pressure)
 	if not FileAccess.file_exists(BANK_PATH):
 		push_error("Packaged soundbank is missing")
 		return
@@ -31,6 +36,23 @@ func play_level(index: int) -> void:
 		return
 	player.file = level_tracks[index]
 	player.play()
+	_apply_pressure()
+
+func set_pressure(value: float) -> void:
+	pressure_target = clampf(value, 0.0, 1.0) if is_finite(value) else 0.0
+
+func _process(delta: float) -> void:
+	if player == null or player.playback_paused or pressure == pressure_target:
+		return
+	var rate := 4.0 if pressure_target > pressure else 1.0
+	pressure = move_toward(pressure, pressure_target, maxf(0.0, delta) * rate)
+	_apply_pressure()
+
+func _apply_pressure() -> void:
+	for number in QUIET_EXPRESSION:
+		var channel := player.channel_status[number]
+		channel.expression = lerpf(QUIET_EXPRESSION[number], 1.0, pressure)
+		player.update_channel_status(channel)
 
 func set_paused(paused: bool) -> void:
 	player.set_paused(paused)

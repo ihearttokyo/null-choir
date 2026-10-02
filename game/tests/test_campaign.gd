@@ -40,6 +40,9 @@ func run() -> void:
 	state.damage(30)
 	if not expect(state.health == 80 and state.armor == 40): return
 	if not expect(not state.from_dict({"version": 1, "level_index": -1})): return
+	# Checkpoint and entry keep exact native float32 floor positions across JSON.
+	state.mark_checkpoint("entry",Vector3(18,0.04,134))
+	state.mark_checkpoint("fractional_floor",Vector3(102,0.04,78))
 	var path = "user://campaign_contract.json"
 	if not expect(state.save_progress(path) == OK): return
 	if not expect(restored.load_progress(path)): return

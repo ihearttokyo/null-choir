@@ -82,6 +82,13 @@ func run() -> void:
 		var p = game.level.layout.world_position(hero.cell)
 		var query = PhysicsRayQueryParameters3D.create(p+Vector3.UP*1.2,p+Vector3.UP*0.05,1)
 		await physics_frame
+		if hero.id == "ossuary_rib_bridge":
+			if not expect(not hero.has("base") and game.level.get_world_3d().direct_space_state.intersect_ray(query).is_empty(),"Open bridge central passage must have no landmark-base collision"): return
+			query.from = p+Vector3.UP*.05
+			query.to = p-Vector3.UP*.25
+			var floor_hit = game.level.get_world_3d().direct_space_state.intersect_ray(query)
+			if not expect(not floor_hit.is_empty() and absf(floor_hit.position.y-p.y) < .003,"Open bridge retains the actual raised floor"): return
+			continue
 		if not expect(not game.level.get_world_3d().direct_space_state.intersect_ray(query).is_empty(),"Landmark base requires collision: "+hero.id): return
 	var level_id = game.level.layout.data.id
 	game.queue_free()

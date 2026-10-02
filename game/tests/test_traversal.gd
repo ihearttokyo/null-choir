@@ -45,10 +45,14 @@ func run() -> void:
 				if not expect(absf(game.player.position.y-target.y) < 0.3,"Floor/ramp height mismatch at "+str(cell)): return
 		print("TRAVERSED "+loop.id+" / "+loop.hero)
 	for action in ["move_right","move_left","move_back","move_forward"]: Input.action_release(action)
-	game.pause_game()
-	game.queue_free()
+	var progress_path = game.progress_path
+	game.show_title()
 	paused = false
-	if FileAccess.file_exists(game.progress_path): DirAccess.remove_absolute(game.progress_path)
+	await create_timer(.1).timeout
+	game.free()
+	await process_frame
+	await process_frame
+	if FileAccess.file_exists(progress_path): DirAccess.remove_absolute(progress_path)
 	print("PASS native capsule traverses both authored loops without jumping or falling")
 	quit()
 
