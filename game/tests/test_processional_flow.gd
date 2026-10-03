@@ -58,12 +58,12 @@ func run() -> void:
 	game.player.cooldown = 0
 	if not expect(game.player.fire() and game.state.ammo[2] == 15,"Real scattergun firing consumes one shell"): return
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 16 and game.state.weapon == 2,"Death restores third-map checkpoint weapon/resources"): return
 	game.save_and_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	if not expect(game.playing and game.state.discoveries == [1,2] and game.state.owned_weapons == [0,1,2],"Save Continue retains Processional and earned inventory"): return
-	game.restart_level()
+	await game.restart_level()
 	if not expect(game.state.checkpoint_id == "entry" and game.state.owned_weapons == [0,1] and game.state.ammo[1] == 111,"Restart restores third-map entry resources before scattergun acquisition"): return
 	var progress = game.progress_path
 	game.show_title()

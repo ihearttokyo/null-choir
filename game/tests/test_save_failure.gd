@@ -52,7 +52,7 @@ func run() -> void:
 			quit(1)
 			return
 		game.show_title()
-		game.continue_campaign()
+		await game.continue_campaign()
 		if dead_startups[0] != 0:
 			push_error("Dead Continue must never activate or capture gameplay during synchronous music initialization")
 			quit(1)
@@ -73,6 +73,9 @@ func run() -> void:
 				if node is Button and node.text == "Restore checkpoint":
 					node.pressed.emit()
 					break
+			await physics_frame
+			await physics_frame
+			await physics_frame
 			if not game.playing or game.state.health != 100:
 				push_error("Real recovery menu callback restores a healthy playable checkpoint")
 				quit(1)
@@ -93,6 +96,9 @@ func run() -> void:
 				if node is Button and node.text == "Restart level":
 					node.pressed.emit()
 					break
+			await physics_frame
+			await physics_frame
+			await physics_frame
 			if not game.playing or game.state.health != 100 or game.state.checkpoint_id != "entry":
 				push_error("Real recovery Restart-level button restores healthy entry resources")
 				quit(1)

@@ -29,9 +29,9 @@ func run():
 	game.state.mark_checkpoint("scene_contract", game.player.position)
 	game.hurt_player(300)
 	if not expect(not game.playing and game.state.health == 0): return
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	if not expect(game.playing and game.state.health > 0 and game.state.ammo[1] == ammo_before+35): return
-	game.restart_level()
+	await game.restart_level()
 	if not expect(game.state.ammo[1] == ammo_before and game.state.keys.is_empty()): return
 	game.pause_game()
 	if not expect(not game.playing and paused): return
@@ -40,8 +40,8 @@ func run():
 	game.state.save_progress(game.progress_path)
 	game.show_title()
 	if not expect(game.level == null and not game.playing): return
-	game.continue_campaign()
-	game.restart_level()
+	await game.continue_campaign()
+	await game.restart_level()
 	if not expect(game.state.ammo[1] == ammo_before): return
 	game.pause_game()
 	if FileAccess.file_exists(game.progress_path): DirAccess.remove_absolute(game.progress_path)

@@ -10,6 +10,8 @@ const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 var state = Campaign.new()
 var playing: bool = false
+var loaded_positions: bool = false
+var placement_pending: bool = false
 var preferences = Preferences.new()
 var settings: Dictionary = preferences.values
 var progress_path: String = Campaign.SAVE_PATH
@@ -122,15 +124,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.survey.toggle()
 		get_viewport().set_input_as_handled()
 	if Input.is_action_just_pressed_by_event("pause",event) and level != null:
-		if playing: pause_game()
+		if playing or placement_pending: pause_game()
 		elif state.health > 0: resume_game()
 		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and playing: pause_game()
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and (playing or placement_pending): pause_game()
 
 func start_campaign(mode: int) -> void:
+	loaded_positions = false
 	state.new_campaign(mode)
 	start_level()
 
@@ -138,6 +141,8 @@ func start_level() -> void:
 	if hud != null: hud.survey.hide()
 	get_tree().paused = false
 	playing = false
+	placement_pending = false
+	if loaded_positions and music != null: music.set_paused(true)
 	if effects != null:
 		effects.stop()
 		effects.set_paused(false)
@@ -150,7 +155,7 @@ func start_level() -> void:
 	player = Player.new()
 	level.add_child(player)
 	player.configure(self)
-	if state.position == Vector3.ZERO:
+	if state.position == Vector3.ZERO and not loaded_positions:
 		state.mark_checkpoint("entry",level.layout.world_position(level.layout.data.spawn))
 	player.position = state.position + Vector3(0,0.04,0)
 	player.rotation.y = deg_to_rad(level.layout.data.spawn_yaw)
@@ -174,6 +179,22 @@ func start_level() -> void:
 	if state.health <= 0:
 		show_recovery()
 		return
+	if loaded_positions:
+		placement_pending = true
+		var pending_level = level
+		var pending_player = player
+		# New native bodies are not queryable reliably in their construction frame.
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		if level != pending_level or player != pending_player or not is_instance_valid(pending_level) or pending_level.is_queued_for_deletion(): return
+		placement_pending = false
+		if state.health <= 0:
+			show_recovery()
+			return
+		if not _repair_loaded_position():
+			show_title()
+			notify("NO SAFE RECOVERY POSITION",8)
+			return
 	menu_scroll.hide()
 	playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -181,6 +202,41 @@ func start_level() -> void:
 		music.set_paused(false)
 		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _valid_saved_position(point: Vector3) -> bool:
+	var size: float = level.layout.data.cell_size
+	if not level.layout.is_walkable(Vector2i(floor(point.x/size),floor(point.z/size))): return false
+	var space = level.get_world_3d().direct_space_state
+	var support = PhysicsRayQueryParameters3D.create(point+Vector3.UP*0.2,point-Vector3.UP*0.6,1)
+	var floor_hit = space.intersect_ray(support)
+	if floor_hit.is_empty() or floor_hit.normal.y < 0.5: return false
+	var collider: CollisionShape3D = player.get_child(0)
+	var query = PhysicsShapeQueryParameters3D.new()
+	query.shape = collider.shape
+	var pose = player.global_transform
+	pose.origin = point+Vector3.UP*0.04
+	query.transform = pose*collider.transform
+	query.collision_mask = 1|4
+	query.exclude = [player.get_rid()]
+	return space.intersect_shape(query,1).is_empty()
+
+func _repair_loaded_position() -> bool:
+	if _valid_saved_position(state.position): return true
+	for snapshot in [state.checkpoint,state.level_start]:
+		if snapshot.get("health",0) <= 0: continue
+		var values = snapshot.position
+		var point = Vector3(values[0],values[1],values[2])
+		if not _valid_saved_position(point): continue
+		state.position = point
+		player.position = point+Vector3.UP*0.04
+		notify("RECOVERY POSITION REPAIRED: HEALTHY SNAPSHOT",8)
+		return true
+	var entry: Vector3 = level.layout.world_position(level.layout.data.spawn)
+	if not _valid_saved_position(entry): return false
+	state.position = entry
+	player.position = entry+Vector3.UP*0.04
+	notify("RECOVERY POSITION REPAIRED: LEVEL ENTRY",8)
+	return true
 
 func _process(delta: float) -> void:
 	message_time = maxf(0,message_time-delta)
@@ -336,6 +392,7 @@ func interact() -> void:
 			if _save() != OK:
 				state.from_dict(prior)
 				return
+			loaded_positions = false
 			var completed_title = level.layout.data.title+" RESTORED"
 			if state.level_index == 8:
 				show_ending()
@@ -365,13 +422,17 @@ func show_recovery() -> void:
 
 func restore_checkpoint() -> void:
 	state.restore_checkpoint()
-	start_level()
+	await start_level()
 
 func restart_level() -> void:
 	state.restore_level_start()
-	start_level()
+	await start_level()
 
 func pause_game() -> void:
+	if placement_pending:
+		show_title()
+		notify("RECOVERY HELD: SELECT CONTINUE WHEN READY",5)
+		return
 	hud.survey.hide()
 	playing = false
 	get_tree().paused = true
@@ -381,7 +442,7 @@ func pause_game() -> void:
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 
 func resume_game() -> void:
-	if state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
+	if placement_pending or state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
 	playing = true
 	menu_scroll.hide()
@@ -403,6 +464,7 @@ func save_and_title() -> void:
 func show_title() -> void:
 	if hud != null: hud.survey.hide()
 	playing = false
+	placement_pending = false
 	if level != null:
 		level.queue_free()
 		level = null
@@ -423,7 +485,8 @@ func continue_campaign() -> void:
 	if state.level_index == 8:
 		show_ending()
 		return
-	start_level()
+	loaded_positions = true
+	await start_level()
 
 func show_ending() -> void:
 	show_title()

@@ -51,12 +51,12 @@ func run() -> void:
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "foundry_checkpoint","Authored automatic checkpoint must trigger"): return
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	if not expect(game.playing and game.state.health == 100 and game.level.layout.data.id == "foundry","Death restores current map checkpoint"): return
 	game.save_and_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	if not expect(game.playing and game.level.layout.data.id == "foundry" and game.state.discoveries == [0,1],"Saved Continue must retain Foundry"): return
-	game.restart_level()
+	await game.restart_level()
 	if not expect(game.state.checkpoint_id == "entry" and game.state.ammo[1] == 123,"Restart keeps Foundry entry resources"): return
 	var test_path = game.progress_path
 	game.show_title()

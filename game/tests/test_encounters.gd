@@ -250,7 +250,7 @@ func check_persistence() -> bool:
 	actor_with_id(dead_id).take_damage(1000,game.player)
 	if not expect(flag in game.state.removed and dead_id in game.state.removed,"Lethal first hit records group activation and original enemy removal"): return false
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze()
 	await settle()
 	if not expect(not flag in game.state.removed and not dead_id in game.state.removed and actor_with_id(dead_id) != null and not actor_with_id(dead_id).active,"Pre-encounter checkpoint rewinds activation and restores killed members dormant"): return false
@@ -265,18 +265,18 @@ func check_persistence() -> bool:
 	await create_timer(1.0).timeout
 	var lights = light_state(group.cue.light_ids)
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze()
 	await settle()
 	if not expect(restored_group(group,dead_id) and game.state.health == health and game.state.ammo == ammo,"Active checkpoint restores exact resources, survivor activity and permanent member removal"): return false
 	if not expect(game._save() == OK,"SETUP: unique fixture progress must save through the real game path"): return false
 	game.show_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	freeze()
 	await settle()
 	if not expect(restored_group(group,dead_id) and game.state.health == health and game.state.ammo == ammo and game.state.to_dict().version == 1,"Continue preserves activated survivors, dead IDs and valid older over-cap ammo without a save migration"): return false
 	if not expect(game.message == game.level.layout.data.mission and light_state(group.cue.light_ids) == lights,"Continue restores lighting silently rather than replaying the encounter cue"): return false
-	game.restart_level()
+	await game.restart_level()
 	freeze()
 	await settle()
 	return expect(not flag in game.state.removed and actor_with_id(dead_id) != null and not actor_with_id(dead_id).active and game.state.health == 100 and game.state.ammo[1] == 90 and game.state.checkpoint_id == "entry","Restart restores original entry resources and all encounter members dormant")
@@ -313,7 +313,7 @@ func check_machine_seals() -> bool:
 	if not expect(game.unlock_door(gate.id),"Both original seals still unlock the actual exit gate"): return false
 	if not expect(game._save() == OK,"SETUP: earned seal fixture must save"): return false
 	game.show_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	freeze()
 	await settle()
 	for i in range(2):

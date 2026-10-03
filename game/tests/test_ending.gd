@@ -16,7 +16,7 @@ func run() -> void:
 		for index in range(8): game.state.complete_level()
 		game.state.discoveries = clues.duplicate()
 		if not expect(game._save() == OK,"Actual completed campaign must save before Continue"): return
-		game.continue_campaign()
+		await game.continue_campaign()
 		var expected = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if clues.size() == 8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
 		if not expect(game.menu.get_child(0).text == expected,"INTENDED RED: completed saved Continue presents the actual clue-dependent ending"): return
 		if not expect(not game.playing and game.level == null and game.state.level_index == 8 and game.state.discoveries == clues,"Ending never starts a ninth map or changes earned discoveries"): return
@@ -28,7 +28,7 @@ func run() -> void:
 		if not expect(buttons.size() == 2 and buttons[0].text == "New campaign" and buttons[1].text == "Return to title" and buttons[0].has_focus(),"Ending retains native keyboard focus and restart/title actions"): return
 		buttons[1].pressed.emit()
 		if not expect(game.menu.get_child(0).text == "NULL CHOIR" and game.state.level_index == 8,"Return to title preserves the completed save"): return
-		game.continue_campaign()
+		await game.continue_campaign()
 		game.menu.get_child(1).pressed.emit()
 		if not expect(game.menu.get_child(0).text == "RECOVERY PROTOCOL" and game.state.level_index == 8,"New campaign asks for existing difficulty before changing progress"): return
 	await finish(0)

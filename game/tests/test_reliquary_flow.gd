@@ -67,14 +67,14 @@ func run() -> void:
 	game.player.cooldown = 0
 	if not expect(game.player.fire() and game.state.ammo[2] == 18,"Actual fourth-map firing consumes one shell"): return
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze()
 	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 19 and game.state.weapon == 2 and not "encounter:reliquary_catalogue" in game.state.removed,"Death restores exact pre-catalogue resources and rewinds encounter activation"): return
 	game.save_and_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	freeze()
 	if not expect(game.playing and game.level.layout.data.id == "reliquary" and game.state.discoveries == [2,3] and game.state.ammo[2] == 19,"Saved Continue restores the actual fourth map and earned inventory/discoveries"): return
-	game.restart_level()
+	await game.restart_level()
 	freeze()
 	if not expect(game.state.checkpoint_id == "entry" and game.state.ammo[1] == 111 and game.state.ammo[2] == 3 and game.state.weapon == 1 and game.state.discoveries == [2,3],"Restart restores fourth entry inventory and retains permanent discoveries"): return
 	cleanup()

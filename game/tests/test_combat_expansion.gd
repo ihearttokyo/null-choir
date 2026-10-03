@@ -63,12 +63,12 @@ func check_pickups() -> bool:
 	game.player.cycle_weapon(-1)
 	if not expect(game.state.weapon == 2,"Inventory cycle returns to the earned scattergun"): return false
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze_actors()
 	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 16 and game.state.weapon == 2 and "combat_scattergun" in game.state.removed,"Death restores checkpoint weapon, ammo and pickup removal"): return false
 	if not expect(game._save() == OK,"Save earned scattergun through the real game path"): return false
 	game.show_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	freeze_actors()
 	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 16 and "combat_scattergun" in game.state.removed,"Save Continue restores earned inventory and one-shot removal"): return false
 	var refill = spec.duplicate()
@@ -79,10 +79,10 @@ func check_pickups() -> bool:
 	game.collect_pickup(refill.id)
 	game.collect_pickup(refill.id)
 	if not expect(game.state.weapon == 1 and game.state.ammo[2] == 32 and game.state.owned_weapons == [0,1,2],"Owned weapon refill caps ammo, preserves selection and remains one-shot"): return false
-	game.restart_level()
+	await game.restart_level()
 	freeze_actors()
 	if not expect(game.state.owned_weapons == [0,1] and game.state.ammo[2] == 0 and game.state.weapon == 1 and not "combat_scattergun" in game.state.removed,"Level restart restores pre-pickup entry resources"): return false
-	game.continue_campaign()
+	await game.continue_campaign()
 	game.state.complete_level()
 	game.start_level()
 	freeze_actors()
