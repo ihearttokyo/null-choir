@@ -74,7 +74,6 @@ class CapturePilotTests(unittest.TestCase):
 
     def run_one(self):
         with patch.object(supervisor.transport,'LIVE_TEST_ENABLED',True), \
-             patch.object(supervisor.time,'monotonic',self.clock), \
              patch.object(supervisor,'_run_owned_worker',side_effect=self.worker):
             return self.pilot.run_one(credential='synthetic-not-real')
 
@@ -139,6 +138,62 @@ class CapturePilotTests(unittest.TestCase):
         self.assertEqual(len(self.peer.commands),1)
         self.assertEqual(self.controller.attempts,1)
 
+    def test_same_frame_capture_requires_consistent_observations(self):
+        state=observation()
+        self.pilot.capture.last_state=observation()
+        self.assertIs(self.pilot._newest_state(state),state)
+        for change in ({'level_id':12}, {'player_id':23}, {'action_sequence':1},
+                       {'phase':'menu'}, {'health':0}, {'health':72},
+                       {'ammo':[0,36,0,0,0,0]}, {'pose':[2,0,2]}, {'sensitivity':2}):
+            with self.subTest(change=change):
+                self.pilot.capture.last_state=observation(**change)
+                with self.assertRaises(ValueError): self.pilot._newest_state(state)
+        self.pilot.capture.last_state=observation(frame=state['frame']-1,player_id=23)
+        self.assertIs(self.pilot._newest_state(state),state)
+
+    def test_same_frame_menu_conflict_stops_before_provider_or_command(self):
+        # The first simulated RPC uses frame 2; a queued draw disagrees at that frame.
+        self.pilot.capture.last_state=observation(frame=2,phase='menu')
+        with patch.object(supervisor,'_run_owned_worker',side_effect=self.worker) as worker:
+            with self.assertRaises(pilot.PilotError): self.run_one()
+        worker.assert_not_called()
+        self.assertEqual(self.controller.attempts,0)
+        self.assertEqual(self.peer.commands,[])
+        self.assertTrue(self.journal.closed)
+
+    def test_same_frame_capture_cannot_finish_action_or_allow_next_decision(self):
+        barrier=self.pilot._frame_barrier
+        def same_frame(*args):
+            self.peer.suppress=True
+            self.pilot.capture.last_state=observation(
+                frame=self.peer.commands[0]['frame'],action_sequence=1)
+            with patch.object(self.pilot,'_drain_capture'):
+                return barrier(*args)
+        with patch.object(self.pilot,'_frame_barrier',side_effect=same_frame):
+            with self.assertRaises(pilot.PilotError): self.run_one()
+        self.assertTrue(self.pilot.stopped)
+        self.assertEqual(self.controller.attempts,1)
+        self.assertEqual(len(self.peer.commands),1)
+        with self.assertRaises(pilot.PilotError): self.run_one()
+        self.assertEqual(self.controller.attempts,1)
+        self.assertEqual(len(self.peer.commands),1)
+
+    def test_frame_barrier_waits_for_strictly_newer_issued_frame(self):
+        state=observation()
+        ticket,_=self.controller.begin(state,0)
+        def advance(seconds): self.clock.now+=seconds
+        with patch.object(self.pilot,'_drain_capture'), \
+             patch.object(self.pilot,'sleep',side_effect=advance):
+            for frame in (state['frame']-1,state['frame']):
+                with self.subTest(frame=frame):
+                    self.clock.now=0
+                    self.pilot.capture.last_state=observation(frame=frame,action_sequence=1)
+                    with self.assertRaisesRegex(ValueError,'Missing completed frame'):
+                        self.pilot._frame_barrier(ticket,1,state['frame'])
+            self.clock.now=0
+            self.pilot.capture.last_state=observation(frame=state['frame']+1,action_sequence=1)
+            self.pilot._frame_barrier(ticket,1,state['frame'])
+            self.assertEqual(self.clock.now,0)
     def test_completed_ack_cannot_be_accepted_after_deadline(self):
         state=observation()
         ticket,_=self.controller.begin(state,0)
@@ -155,11 +210,11 @@ class CapturePilotTests(unittest.TestCase):
             result=poll(now)
             if result is not None: self.clock.now+=1.1
             return result
-        def delayed_frame(ticket,sequence):
+        def delayed_frame(ticket,sequence,issued_frame):
             self.peer.suppress=False
             self.peer.step()
             with patch.object(self.pilot.capture,'poll',side_effect=slow_poll):
-                return barrier(ticket,sequence)
+                return barrier(ticket,sequence,issued_frame)
         with patch.object(self.pilot,'_frame_barrier',side_effect=delayed_frame):
             with self.assertRaises(pilot.PilotError): self.run_one()
         self.assertTrue(self.pilot.stopped)

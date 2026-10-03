@@ -94,17 +94,17 @@ class PilotTests(unittest.TestCase):
 
     def worker(self, worker, args, timeout):
         self.assertGreater(timeout, 0)
-        controller, payload, ticket, credential = args
+        controller, payload, ticket, credential, epoch_offset = args
         self.assertEqual(controller.pending, ticket)
         self.assertEqual(payload['model'], p.MODEL)
         self.assertEqual(credential, 'synthetic-not-real')
+        self.assertIsInstance(epoch_offset,(int,float))
         self.clock.now += 0.02
         return reply('move_forward', private='synthetic provider details')
 
     def run_one(self):
         # No HTTP path: only a synthetic reply boundary and local simulated peer.
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker', side_effect=self.worker):
             return self.pilot.run_one(credential='synthetic-not-real')
 
@@ -118,6 +118,14 @@ class PilotTests(unittest.TestCase):
         self.assertFalse((self.root/'request.json').exists())
         self.assertEqual(self.controller.attempts, 0)
         self.assertTrue(self.pilot.stopped)
+
+    def test_explicit_pilot_clock_works_without_replacing_real_monotonic(self):
+        with patch.object(supervisor.transport,'LIVE_TEST_ENABLED',True), \
+             patch.object(supervisor,'_run_owned_worker',side_effect=self.worker):
+            result=self.pilot.run_one(credential='synthetic-not-real')
+        self.assertEqual(result['acknowledged_sequence'],1)
+        self.assertEqual(self.controller.attempts,1)
+        self.assertFalse(self.pilot.stopped)
 
     def test_two_decisions_bind_original_frame_and_defer_early_native_ack(self):
         first = self.run_one()
@@ -147,7 +155,6 @@ class PilotTests(unittest.TestCase):
             self.peer.change = {'phase': 'menu', 'player_id': 0, 'level_id': 0}
             return result
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker', side_effect=menu), self.assertRaises(pilot.PilotError):
             self.pilot.run_one(credential='synthetic-not-real')
         self.assertEqual(self.peer.commands, [])
@@ -199,7 +206,6 @@ class PilotTests(unittest.TestCase):
             self.assertFalse(self.pilot.stopped)
             return original(*args)
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker', side_effect=reentrant):
             self.assertEqual(self.pilot.run_one(credential='synthetic-not-real')['acknowledged_sequence'], 1)
         self.assertEqual(self.controller.attempts, 1)
@@ -230,7 +236,6 @@ class PilotTests(unittest.TestCase):
 
     def test_provider_interrupt_keeps_reservation_closes_journal_and_drops_secrets(self):
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker', side_effect=KeyboardInterrupt('private details')), \
              self.assertRaises(KeyboardInterrupt):
             self.pilot.run_one(credential='synthetic-not-real')
@@ -246,7 +251,6 @@ class PilotTests(unittest.TestCase):
             self.clock.now += p.LEASE_SECONDS
             return result
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker', side_effect=late), self.assertRaises(pilot.PilotError):
             self.pilot.run_one(credential='synthetic-not-real')
         self.assertEqual(self.peer.commands, [])
@@ -263,7 +267,6 @@ class PilotTests(unittest.TestCase):
     def test_dead_initial_observation_never_launches_provider(self):
         self.peer.change = {'phase': 'dead', 'health': 0}
         with patch.object(supervisor.transport, 'LIVE_TEST_ENABLED', True), \
-             patch.object(supervisor.time, 'monotonic', self.clock), \
              patch.object(supervisor, '_run_owned_worker') as worker, self.assertRaises(pilot.PilotError):
             self.pilot.run_one(credential='synthetic-not-real')
         worker.assert_not_called()

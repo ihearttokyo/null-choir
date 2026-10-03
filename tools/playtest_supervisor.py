@@ -95,18 +95,23 @@ def _run_owned_worker(worker, args, timeout):
         sender.close()
 
 
-def _http_worker(controller, payload, ticket, credential):
-    return transport._exchange(controller, payload, ticket, credential, time.monotonic)
+def _http_worker(controller, payload, ticket, credential, epoch_offset):
+    # Translate real elapsed time, not a mutable/unpicklable parent clock callable.
+    return transport._exchange(controller, payload, ticket, credential,
+                               lambda: time.monotonic()+epoch_offset)
 
 
-def decide(controller, state, *, credential, observe):
+def decide(controller, state, *, credential, observe, clock=time.monotonic):
     """Supervised HTTP reply, then original parent ticket and fresh scene validation."""
     try:
         transport._validate_activation(controller, credential)
-        ticket, payload = controller.begin(state, time.monotonic())
-        reply = _run_owned_worker(_http_worker, (controller, payload, ticket, credential),
-                                  ticket.expires_at - time.monotonic())
-        plan = controller.accept(ticket, reply, observe(), time.monotonic())
+        ticket, payload = controller.begin(state, clock())
+        now = clock()
+        controller._clock(now)
+        epoch_offset = now-time.monotonic()
+        reply = _run_owned_worker(_http_worker, (controller, payload, ticket, credential, epoch_offset),
+                                  ticket.expires_at - now)
+        plan = controller.accept(ticket, reply, observe(), clock())
         return {'plan': plan, 'model': reply['model'],
                 'usage': {key: reply['usage'][key] for key in ('input_tokens', 'output_tokens')}}
     except Exception:

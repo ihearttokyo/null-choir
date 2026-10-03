@@ -41,7 +41,11 @@ class Pilot:
 
     def _newest_state(self, state):
         captured = self.capture.last_state if self.capture is not None else None
-        if captured is None or captured['frame'] <= state['frame']:
+        if captured is None or captured['frame'] < state['frame']:
+            return state
+        if captured['frame'] == state['frame']:
+            if captured != state:
+                raise ValueError('Same-frame capture/RPC disagreement')
             return state
         if (p.identity(captured)[:4] != p.identity(state)[:4]
                 or captured['action_sequence'] < state['action_sequence']):
@@ -114,7 +118,7 @@ class Pilot:
             if not self.journal.closed:
                 self._request('snapshot', deadline=deadline)
 
-    def _frame_barrier(self, ticket, sequence):
+    def _frame_barrier(self, ticket, sequence, issued_frame):
         if self.capture is None:
             return
         deadline = min(self.clock()+1.0, self.journal.started_at+p.MAX_SECONDS)
@@ -129,7 +133,7 @@ class Pilot:
                 if (key[:4] != ticket.identity[:4] or clean['phase'] != 'alive'
                         or clean['health'] <= 0 or key[4] > sequence):
                     raise ValueError('Stale completed frame')
-                if key[4] == sequence:
+                if key[4] == sequence and state['frame'] > issued_frame:
                     if self.capture.stopped:
                         self.stop()  # Retain the successful final action/frame.
                     return
@@ -152,7 +156,8 @@ class Pilot:
             if issued['phase'] != 'alive' or issued['health'] <= 0:
                 raise ValueError('Alive observation required')
             result = supervisor.decide(self.controller, issued, credential=credential,
-                                       observe=lambda: self._request('snapshot', deadline=self.controller.pending.expires_at))
+                                       observe=lambda: self._request('snapshot', deadline=self.controller.pending.expires_at),
+                                       clock=self.clock)
             ticket = self.controller.active_ticket
             now = self.clock()
             # A fresh snapshot verifies the scene, but must not replace the native
@@ -165,7 +170,7 @@ class Pilot:
             self.journal._append(row)  # An attempted commit, not rendered input proof.
             self._request('command', command, deadline=ticket.expires_at)
             sequence = self._acknowledge(ticket)
-            self._frame_barrier(ticket,sequence)
+            self._frame_barrier(ticket,sequence,issued['frame'])
             return {'action': result['plan']['action'], 'model': result['model'],
                     'usage': result['usage'], 'acknowledged_sequence': sequence}
         except Exception:

@@ -50,7 +50,7 @@ Use Python 3.11 or newer from this checkout:
 python3 -m unittest tests.test_playtest_protocol tests.test_playtest_transport tests.test_playtest_supervisor tests.test_playtest_recorder tests.test_playtest_bridge tests.test_playtest_mailbox tests.test_playtest_pilot tests.test_playtest_capture tests.test_playtest_capture_pilot tests.test_playtest_report -v
 ```
 
-The 155 checks use real private temporary files and real isolated Python process
+The 163 checks use real private temporary files and real isolated Python process
 cleanup where required. Provider replies, telemetry, clocks and PNG pixels are
 controlled fixtures. They do not contact the provider, inject native game input,
 launch an engine, capture the user's screen or certify graphics/audio quality.
