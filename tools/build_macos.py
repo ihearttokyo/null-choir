@@ -48,13 +48,13 @@ def run(*args):
 
 
 def main():
-    print(run('godot', '--headless', '--path', str(ROOT / 'game'), '--script', str(ROOT / 'tools/export_engine_licenses.gd')))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='null-choir-build-', dir='/private/tmp') as tmp:
         tmp = Path(tmp)
         export = tmp / 'export.zip'
         game = tmp / 'game'
         shutil.copytree(ROOT / 'game', game, ignore=shutil.ignore_patterns('.godot'))
+        print(run('godot', '--headless', '--path', str(game), '--script', str(ROOT / 'tools/export_engine_licenses.gd')))
         print(run('godot', '--headless', '--editor', '--path', str(game), '--import'))
         print(run('godot', '--path', str(game), '--export-release', 'macOS', str(export)))
         run('ditto', '-x', '-k', str(export), str(tmp))
