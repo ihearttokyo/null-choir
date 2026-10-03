@@ -18,13 +18,12 @@ func build(owner_game: Node, index: int) -> void:
 	for hero in layout.data.heroes:
 		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
 		if not hero.has("base"): continue
-		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),_material(Color(0.12,0.16,0.17)),true)
-		base.get_child(0).hide()
+		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),null,true)
 		if hero.get("round",false):
 			var cylinder = CylinderShape3D.new()
 			cylinder.radius = hero.base[0]/2
 			cylinder.height = hero.base[1]
-			base.get_child(1).shape = cylinder
+			base.get_child(0).shape = cylinder
 		base.name = "LandmarkBase_"+hero.id
 		base.rotation.y = deg_to_rad(hero.yaw)
 	for spec in layout.data.doors:
@@ -67,12 +66,13 @@ func _box(size: Vector3, location: Vector3, material: Material, solid: bool) -> 
 	var root = StaticBody3D.new() if solid else Node3D.new()
 	add_child(root)
 	root.position = location
-	var mesh = MeshInstance3D.new()
-	var shape = BoxMesh.new()
-	shape.size = size
-	mesh.mesh = shape
-	mesh.material_override = material
-	root.add_child(mesh)
+	if material != null:
+		var mesh = MeshInstance3D.new()
+		var shape = BoxMesh.new()
+		shape.size = size
+		mesh.mesh = shape
+		mesh.material_override = material
+		root.add_child(mesh)
 	if solid:
 		root.collision_layer = 1
 		var collider = CollisionShape3D.new()
@@ -161,9 +161,8 @@ func _build_scenery() -> void:
 		_place_model(spec.art,position_world,spec.get("yaw",0),spec.get("scale",[1,1,1]))
 		if spec.has("solid"):
 			var dimensions = Vector3(spec.solid[0],spec.solid[1],spec.solid[2])
-			var base = _box(dimensions,position_world+Vector3.UP*dimensions.y/2,_material(Color(0.12,0.16,0.17)),true)
+			var base = _box(dimensions,position_world+Vector3.UP*dimensions.y/2,null,true)
 			# Invisible envelope prevents walking through peripheral machinery.
-			base.get_child(0).hide()
 			base.rotation.y = deg_to_rad(spec.get("yaw",0))
 
 func _build_environment() -> void:
@@ -226,4 +225,5 @@ func open_door(id: String) -> void:
 	door.collision_layer = 0
 	var tween = create_tween()
 	tween.tween_property(door,"position:y",door.position.y+6.0,0.65)
+	tween.finished.connect(door.queue_free)
 	doors.erase(id)

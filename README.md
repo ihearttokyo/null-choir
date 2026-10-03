@@ -47,12 +47,13 @@ That checks all eight packed scenes, art, live MIDI and retained soundbank, plus
 
 ```sh
 python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_foundry.gd tests/test_processional.gd tests/test_processional_flow.gd tests/test_combat_expansion.gd tests/test_level_transition.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd
+python3 tools/check_game.py --timeout 360 tests/test_late_roles.gd
 python3 tests/test_music.py
 python3 tests/test_art.py
 blender -b -t 4 --python-exit-code 1 --python tests/test_art_pose.py
 godot --headless --audio-driver CoreAudio --fixed-fps 60 --path game --quit-after 20000 --script tests/test_traversal.gd -- --level=1
 ```
 
-These use actual native gameplay/assets; headless input is simulated. A PASS marker and clean exit are required. MIDI assertions and native CoreAudio capture are separate from listening and GUI review.
+These use actual native gameplay/assets; headless input is simulated. A PASS marker and clean exit are required. The runner enforces a finite wall-clock deadline. The full late-role fixture needs about three minutes on the measured M4 host. MIDI assertions and native CoreAudio capture are separate from listening and GUI review.
 
 Original code, compositions and art remain project-owned. Third-party notices are retained in `licenses/audio/`, packaged audio/add-on notices and `game/licenses/Godot-Third-Party.txt`. GeneralUser GS permits software redistribution but qualifies historical sample origins; that qualification is retained for this private development build. No copied Doom maps, sprites or songs are included.

@@ -94,6 +94,17 @@ func run() -> void:
 		actor.take_damage(1,game.player)
 		if not expect(game.effects.players.stagger.playing,"Eligible real windup counter routes native stagger feedback"): return
 		actor._counter_time = 0
+	var late_tells = {"brute":"crawler_charge","guardian":"worker_charge","summoner":"caster_charge","nursery_warden":"crawler_charge","choir_avatar":"caster_charge"}
+	for kind in late_tells:
+		var threat = game.Enemy.new()
+		game.level.add_child(threat)
+		threat.configure(game,{"id":"tell_"+kind,"kind":kind,"cell":game.level.layout.data.spawn,"yaw":0})
+		threat.set_physics_process(false)
+		threat.target = game.player
+		game.enemies.append(threat)
+		game.effects.stop()
+		threat._begin_attack(game.player.global_position+Vector3.UP)
+		if not expect(threat.telegraph_time > 0 and game.effects.players[late_tells[kind]].playing,"Configured "+kind+" windup must play its intentional existing charge-family tell"): return
 	game.effects.stop()
 	actor.take_damage(1000,game.player)
 	if not expect(game.effects.players.death.playing,"One real death routes native feedback"): return

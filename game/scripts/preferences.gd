@@ -2,7 +2,7 @@ extends RefCounted
 
 const SAVE_PATH = "user://preferences.json"
 const DEFAULTS = {"sensitivity":1.0,"invert_y":false,"head_bob":true,"camera_shake":true,"auto_aim":false,"music_volume":0.65,"effects_volume":0.8}
-const ACTIONS = ["move_forward","move_back","move_left","move_right","interact","pause","fire","weapon_previous","weapon_next","look_left","look_right","look_up","look_down","weapon_1","weapon_2","weapon_3","weapon_4","weapon_5","weapon_6"]
+const ACTIONS = ["move_forward","move_back","move_left","move_right","interact","pause","fire","weapon_previous","weapon_next","look_left","look_right","look_up","look_down","weapon_1","weapon_2","weapon_3","weapon_4","weapon_5","weapon_6","survey"]
 var values: Dictionary = DEFAULTS.duplicate()
 var bindings: Dictionary = default_bindings()
 
@@ -13,11 +13,12 @@ static func default_bindings() -> Dictionary:
 	for i in keys.size(): result[ACTIONS[i]].append(_key(keys[i]))
 	result.weapon_previous.append(_key(KEY_Q))
 	result.weapon_next.append(_key(KEY_TAB))
+	result.survey.append(_key(KEY_M))
 	for i in 6: result["weapon_"+str(i+1)].append(_key(KEY_1+i))
 	result.fire.append({"kind":"mouse","code":MOUSE_BUTTON_LEFT})
 	for bind in [["move_left",0,-1],["move_right",0,1],["move_forward",1,-1],["move_back",1,1],["look_left",2,-1],["look_right",2,1],["look_up",3,-1],["look_down",3,1],["fire",5,1]]:
 		result[bind[0]].append({"kind":"axis","code":bind[1],"sign":bind[2]})
-	for bind in [["interact",JOY_BUTTON_A],["pause",JOY_BUTTON_START],["weapon_previous",JOY_BUTTON_LEFT_SHOULDER],["weapon_next",JOY_BUTTON_RIGHT_SHOULDER]]:
+	for bind in [["interact",JOY_BUTTON_A],["pause",JOY_BUTTON_START],["weapon_previous",JOY_BUTTON_LEFT_SHOULDER],["weapon_next",JOY_BUTTON_RIGHT_SHOULDER],["survey",JOY_BUTTON_BACK]]:
 		result[bind[0]].append({"kind":"joy","code":bind[1]})
 	return result
 
@@ -92,6 +93,10 @@ func from_dict(data: Dictionary) -> bool:
 	if data.size() != 3 or not _integer(data.get("version"),1,1): return false
 	var options = data.get("values")
 	var controls = data.get("bindings")
+	# One additive action; retain all existing v1 user bindings.
+	if controls is Dictionary and controls.size() == ACTIONS.size()-1 and not controls.has("survey"):
+		controls = controls.duplicate(true)
+		controls.survey = default_bindings().survey
 	if not options is Dictionary or options.size() != DEFAULTS.size(): return false
 	for key in DEFAULTS:
 		var value = options.get(key)

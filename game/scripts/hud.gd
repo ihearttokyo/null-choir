@@ -1,5 +1,7 @@
 extends Node2D
 
+const Survey = preload("res://scripts/survey.gd")
+
 # Native translation of the selected source/art/references/overhaul-01.png instrument.
 const IVORY = Color(0.9,0.85,0.72)
 const COPPER = Color(0.5,0.31,0.17)
@@ -13,6 +15,7 @@ var weapon_texture: Texture2D
 var weapon_asset: String = ""
 var labels: Dictionary = {}
 var view: Dictionary = {}
+var survey: Node2D
 
 func _ready() -> void:
 	_label("LevelTitle",Rect2(12,8,306,22),14)
@@ -36,6 +39,9 @@ func _ready() -> void:
 	_label("InteractionPrompt",Rect2(128,250,384,32),12,HORIZONTAL_ALIGNMENT_CENTER)
 	_label("InteractionBinding",Rect2(96,286,448,30),11,HORIZONTAL_ALIGNMENT_CENTER)
 	message_label = _label("Transmission",Rect2(16,64,608,68),12)
+	survey = Survey.new()
+	survey.game = game
+	add_child(survey)
 	_process(0)
 
 func _label(id: String, rect: Rect2, font_size: int, alignment: int = HORIZONTAL_ALIGNMENT_LEFT) -> Label:
