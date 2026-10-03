@@ -9,7 +9,7 @@
 - `set_pressure(value: float)`: requests an accompaniment mix without seeking or restarting playback. Finite values clamp to `[0, 1]`; non-finite values request zero. Linear smoothing traverses the full range in 0.25 seconds on attack and one second on release, and freezes while paused. Repeat and level switch reapply the current mix after the player's controller reset.
 - `stop()`: silences primary and linked voices immediately and clears note bookkeeping. The next play resets channel state.
 
-Pressure defaults to zero. At zero, expression is 0.35 for guitar, 0.8 for bass, 0.6 for saw and 0.55 for drums; at one, each reaches one. Organ expression remains untouched at one. These factors only attenuate authored channel volumes through the existing `update_channel_status` API. The same player, bank and voice pool remain in use. Pressure never writes the user Music bus gain/mute or the synth-master gain. The parent derives pressure from active threats and damage; the music node owns only its smoothing and expression application.
+Pressure defaults to zero. At zero, expression is 0.35 for guitar, 0.8 for bass, 0.6 for saw and 0.55 for drums; at one, each reaches one. Organ expression remains untouched at one. These factors only attenuate authored channel volumes through the existing volume-only `_apply_channel_volume` API. The same player, bank and voice pool remain in use. Pressure never writes the user Music bus gain/mute or the synth-master gain. The parent derives pressure from active threats and damage; the music node owns only its smoothing and expression application.
 
 The track list contains the eight original campaign MIDI files in level order. [Campaign scores](MUSIC.md) owns their editable sources, arrangement and generation contract. The retained gate fixture isolates scheduler and synthesis regressions. The approved palette uses Distortion Guitar (30), Pick Bass (34), Pipe Organ (19), Saw Lead (81) and Standard 1 drums (bank 128/program 0), with zero-based GM program numbers.
 
@@ -28,7 +28,14 @@ The synth is pure GDScript, using native Godot audio streams and effects. No Flu
 
 GeneralUser GS permits music creation and software packaging, but its author explicitly cannot establish every historical sample origin. This bank is provisional for private project playback. These permissions are not a claim of independently verified sample clearance or authorization to publish the game externally.
 
-Local patches are limited to `MidiPlayer.gd` (event-boundary clock, complete pause, fresh channel state and freed replaced voice nodes), `ADSR.gd` (apply sample attenuation and stop linked PCM at release completion), and `Bank.gd` (intersect preset/instrument key ranges and break skipped-preset reference cycles). Raw upstream diffs and RED/GREEN evidence belong to the task receipt, not Git.
+Local patches are owned by these files:
+
+- `MidiPlayer.gd`: event-boundary clock, complete pause, fresh channel state, replaced voice cleanup, quietest released-voice selection and guards for empty tracks/banks, unsupported timebases and invalid tempo.
+- `ADSR.gd`: sample attenuation and linked PCM cleanup at release completion.
+- `Bank.gd`: intersected key ranges, exact encoded bank/program selection, complete even-length PCM slices, packed silence and immediate removal of unused parsing metadata/backreferences.
+- `SMF.gd` and `SoundFont.gd`: failed-file-open guards; SMF additionally rejects either malformed header field and unsupported timebases.
+
+Raw upstream diffs and RED/GREEN evidence belong to the task receipt, not Git. No selected sample data is compressed or resampled by these patches.
 
 This add-on does not implement every SoundFont modulator/filter or GS feature. Approve the actual palette by audition; a correctly mapped program is not proof of equivalent full SoundFont synthesis. Jared approved the presented native palette on 2026-10-02. Final-song composition and synthesis checks may proceed without another palette confirmation; song quality and repeat/switch checks still need evidence.
 
@@ -37,13 +44,10 @@ This add-on does not implement every SoundFont modulator/filter or GS feature. A
 Run direct assertions with Godot 4.7.2 after importing the project:
 
 ```sh
-godot --headless --path game --script res://tests/test_midi_timing.gd
-godot --headless --path game --script res://tests/test_midi_audio.gd
-godot --headless --path game --script res://tests/test_midi_bank.gd
-godot --headless --audio-driver Dummy --path game --script res://tests/test_music_pressure.gd
+python3 tools/check_game.py --timeout 150 tests/test_midi_reliability.gd tests/test_midi_timing.gd tests/test_midi_audio.gd tests/test_midi_bank.gd tests/test_music_pressure.gd tests/test_campaign_music.gd
 ```
 
-The pressure assertion manually advances the real scheduler and checks finite clamping, attack/release, pause, channel-bus gains, unchanged transport/bank/voice pool, repeat/switch and independent user settings. Dummy is scheduler/state evidence only; it cannot establish PCM, CoreAudio behavior, perceived mix or musical quality. Revised scores and pressure still require parent-owned native validation and actual mixed gameplay listening.
+The pressure assertion manually advances the real scheduler and checks finite clamping, attack/release, pause, channel-bus gains, unchanged transport/bank/voice pool, repeat/switch and independent user settings. The runner uses native CoreAudio and rejects runtime errors and leaked resources. Reliability checks include exact mono/linked-stereo bytes, voice saturation, empty tracks/banks, malformed headers, invalid timebases and an encoded zero-tempo event. Audio teardown yields native frames for at least 150 milliseconds of monotonic wall time; simulated SceneTree timers are not audio-thread timing evidence. Headless native checks establish PCM/state behavior, not perceived mix or musical quality. Actual mixed gameplay listening remains required.
 
 The isolated gate, export preset and Mac application are under ignored `builds/midi_gate/`. The receipt at `/Users/jared/.codex/tasks/01a0f03f-e2f6-7be1-926a-af974a4ed8b7/midi-runtime/` owns current results, raw logs, captured output and remaining gates. Parent integration must include `*.mid` and `*.sf2` in export filters, retain the packaged licenses, and use an arm64 Mac export. The installed official Mac template contains universal binaries; the gate derives arm64 template binaries locally with Apple `lipo`, without changing global templates.
 

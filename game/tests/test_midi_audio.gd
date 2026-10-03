@@ -79,7 +79,11 @@ func run() -> void:
 	music.free()
 	bank = null
 	instrument = null
-	await create_timer(0.15).timeout # Let the audio thread release stopped playback resources.
+	pcm = null
+	# Native mixer cleanup needs wall time, not accelerated headless scene time.
+	var drain_start = Time.get_ticks_usec()
+	while Time.get_ticks_usec()-drain_start < 150000:
+		await process_frame
 	assert(Performance.get_monitor(Performance.OBJECT_COUNT) < objects_before + 500, "bank teardown must not retain thousands of skipped preset cycles")
-	print("MIDI_AUDIO_GREEN: real bank/fixture, pause, restart, bus, attenuation, stereo release")
+	print("PASS MIDI_AUDIO_GREEN: real bank/fixture, pause, restart, bus, attenuation, stereo release")
 	quit()

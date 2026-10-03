@@ -52,7 +52,7 @@ func _apply_pressure() -> void:
 	for number in QUIET_EXPRESSION:
 		var channel := player.channel_status[number]
 		channel.expression = lerpf(QUIET_EXPRESSION[number], 1.0, pressure)
-		player.update_channel_status(channel)
+		player._apply_channel_volume(channel)
 
 func set_paused(paused: bool) -> void:
 	player.set_paused(paused)

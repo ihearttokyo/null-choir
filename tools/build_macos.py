@@ -2,6 +2,7 @@
 """Export offline Mac app; temporary files stay outside cloud-backed folders."""
 from pathlib import Path
 import hashlib
+import os
 import plistlib
 import subprocess
 import tempfile
@@ -9,6 +10,34 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'builds/macos/NULL CHOIR-arm64.zip'
+
+
+def file_sha256(path):
+    with Path(path).open('rb') as source:
+        return hashlib.file_digest(source, 'sha256').hexdigest()
+
+
+def archive_app(app, output):
+    files = sorted(file for file in app.rglob('*') if file.is_file())
+    if app.suffix != '.app' or not files:
+        raise ValueError(f'Missing or empty application bundle: {app}')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    mask = os.umask(0)
+    os.umask(mask)
+    mode = output.stat().st_mode & 0o777 if output.is_file() else 0o666 & ~mask
+    with tempfile.NamedTemporaryFile(dir=output.parent, prefix=output.name + '.', suffix='.tmp', delete=False) as partial:
+        path = Path(partial.name)
+    try:
+        with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as archive:
+            for file in files:
+                archive.write(file, file.relative_to(app.parent))
+        with zipfile.ZipFile(path) as archive:
+            if archive.testzip() is not None:
+                raise ValueError('Application ZIP failed its CRC check')
+        path.chmod(mode)
+        path.replace(output)
+    finally:
+        path.unlink(missing_ok=True)
 
 
 def run(*args):
@@ -33,10 +62,8 @@ def main():
         thin.replace(binary)
         print(run('codesign', '--force', '--deep', '--sign', '-', str(app)))
         print(run('codesign', '--verify', '--deep', '--strict', '--verbose=2', str(app)))
-        with zipfile.ZipFile(OUTPUT, 'w', zipfile.ZIP_DEFLATED) as archive:
-            for file in sorted(app.rglob('*')):
-                if file.is_file(): archive.write(file, file.relative_to(tmp))
-    print(f'BUILT {OUTPUT} SHA256 {hashlib.sha256(OUTPUT.read_bytes()).hexdigest()}')
+        archive_app(app, OUTPUT)
+    print(f'BUILT {OUTPUT} SHA256 {file_sha256(OUTPUT)}')
 
 
 if __name__ == '__main__':
