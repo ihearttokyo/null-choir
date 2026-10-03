@@ -53,7 +53,7 @@ func look(delta: Vector2) -> void:
 	camera.rotation.x = clampf(camera.rotation.x - delta.y * (-1 if game.settings.invert_y else 1), -1.35, 1.35)
 
 func _physics_process(delta: float) -> void:
-	if game == null or not game.playing or game.state.health <= 0: return
+	if not _current_map() or not game.playing or game.state.health <= 0: return
 	for index in range(weapon_cooldowns.size()):
 		weapon_cooldowns[index] = maxf(0,weapon_cooldowns[index]-delta)
 	if game.state.weapon != 3 or not Input.is_action_pressed("fire"):
@@ -82,6 +82,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("weapon_"+str(index+1)) and index in game.state.owned_weapons:
 			game.state.weapon = index
 	if Input.is_action_pressed("fire"): fire()
+	if not _current_map() or not game.playing: return
 	game.state.position = position
 	if position.y < -12: game.hurt_player(200)
 
@@ -91,13 +92,13 @@ func cycle_weapon(direction: int) -> void:
 	game.state.weapon = inventory[posmod(index+direction,inventory.size())]
 
 func fire() -> bool:
-	if game == null or not game.playing or game.state.health <= 0: return false
+	if not _current_map() or not game.playing or game.state.health <= 0: return false
 	var index = game.state.weapon
-	if index >= 3 and not _current_map(): return false
 	if index > 0 and game.state.ammo[index] <= 0:
 		if dry_fire_time <= 0:
 			dry_fire_time = 0.35
 			if game.has_method("dry_fire"): game.dry_fire(index)
+			if not _current_map() or not game.playing: return false
 		var inventory = game.state.owned_weapons
 		var selected = inventory.find(index)
 		game.state.weapon = 0
@@ -114,7 +115,7 @@ func fire() -> bool:
 	shot_flash = 0.12
 	recoil = 1
 	game.shot(index)
-	if index >= 3 and (not _current_map() or not game.playing): return true
+	if not _current_map() or not game.playing: return true
 	var origin = camera.global_position
 	var direction = -camera.global_basis.z
 	var query = PhysicsRayQueryParameters3D.create(origin,origin+direction*weapon.range,1|4)
@@ -151,6 +152,7 @@ func fire() -> bool:
 	var right = direction.cross(camera.global_basis.y).normalized()
 	var up = right.cross(direction).normalized()
 	for pellet in range(weapon.pellets):
+		if not _current_map() or not game.playing: break
 		var spread = SPREAD[pellet] if weapon.pellets > 1 else Vector2.ZERO
 		if index == 3:
 			spread = Vector2.from_angle(randf()*TAU)*_repeater_spread*sqrt(randf())
@@ -165,9 +167,9 @@ func fire() -> bool:
 					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
 					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
 				hit.collider.take_damage(damage,self)
-				if index == 3 and (not _current_map() or not game.playing): break
+				if not _current_map() or not game.playing: break
 				if game.has_method("hit_feedback"): game.hit_feedback()
-			if index == 3 and (not _current_map() or not game.playing): break
+			if not _current_map() or not game.playing: break
 			if game.has_method("impact"): game.impact(hit.position)
 	return true
 

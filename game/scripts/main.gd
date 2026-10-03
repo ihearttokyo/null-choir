@@ -118,6 +118,9 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if playing and Input.is_action_just_pressed_by_event("survey",event):
+		hud.survey.toggle()
+		get_viewport().set_input_as_handled()
 	if Input.is_action_just_pressed_by_event("pause",event) and level != null:
 		if playing: pause_game()
 		elif state.health > 0: resume_game()
@@ -125,12 +128,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and playing: pause_game()
 
 func start_campaign(mode: int) -> void:
 	state.new_campaign(mode)
 	start_level()
 
 func start_level() -> void:
+	if hud != null: hud.survey.hide()
 	get_tree().paused = false
 	playing = false
 	if effects != null:
@@ -166,6 +171,9 @@ func start_level() -> void:
 	hit_flash = 0
 	message = level.layout.data.mission
 	message_time = 7
+	if state.health <= 0:
+		show_recovery()
+		return
 	menu_scroll.hide()
 	playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -192,8 +200,8 @@ func _process(delta: float) -> void:
 			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
 				state.removed.append(spec.id)
 				state.mark_checkpoint(spec.id,player.position)
-				_save()
-				notify(spec.text)
+				if _save() == OK: notify(spec.text)
+				else: notify("RECOVERY MEMORY ONLY: "+message,8)
 		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
 
@@ -223,7 +231,9 @@ func enemy_event(actor, event: String) -> void:
 	if not playing or not is_instance_valid(actor) or not actor._current_map() or not actor.active: return
 	var cue = ""
 	match event:
-		"windup": cue = actor.kind+"_charge"
+		"windup":
+			var family = {"brute":"crawler","guardian":"worker","summoner":"caster","nursery_warden":"crawler","choir_avatar":"caster"}.get(actor.kind,actor.kind)
+			cue = family+"_charge"
 		"attack": cue = "tool" if actor.kind == "crawler" else "rivet" if actor.kind == "worker" else "impact"
 		"stagger": cue = "stagger"
 		"death": cue = "death"
@@ -343,8 +353,15 @@ func hurt_player(amount: int) -> void:
 	damage_flash = 0.35
 	if effects != null: effects.play("impact",-6)
 	if state.health == 0:
-		pause_game()
-		_show_menu("RECOVERY FAILED",[["Restore checkpoint",restore_checkpoint],["Restart level",restart_level],["Return to title",show_title]])
+		show_recovery()
+
+func show_recovery() -> void:
+	pause_game()
+	var choices: Array = []
+	if state.checkpoint.get("health",0) > 0: choices.append(["Restore checkpoint",restore_checkpoint])
+	if state.level_start.get("health",0) > 0: choices.append(["Restart level",restart_level])
+	choices.append(["Return to title",show_title])
+	_show_menu("RECOVERY FAILED",choices)
 
 func restore_checkpoint() -> void:
 	state.restore_checkpoint()
@@ -355,6 +372,7 @@ func restart_level() -> void:
 	start_level()
 
 func pause_game() -> void:
+	hud.survey.hide()
 	playing = false
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -363,6 +381,7 @@ func pause_game() -> void:
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 
 func resume_game() -> void:
+	if state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
 	playing = true
 	menu_scroll.hide()
@@ -382,6 +401,7 @@ func save_and_title() -> void:
 	show_title()
 
 func show_title() -> void:
+	if hud != null: hud.survey.hide()
 	playing = false
 	if level != null:
 		level.queue_free()
