@@ -2,6 +2,7 @@
 """Export offline Mac app; temporary files stay outside cloud-backed folders."""
 from pathlib import Path
 import hashlib
+import os
 import plistlib
 import subprocess
 import tempfile
@@ -21,6 +22,9 @@ def archive_app(app, output):
     if app.suffix != '.app' or not files:
         raise ValueError(f'Missing or empty application bundle: {app}')
     output.parent.mkdir(parents=True, exist_ok=True)
+    mask = os.umask(0)
+    os.umask(mask)
+    mode = output.stat().st_mode & 0o777 if output.is_file() else 0o666 & ~mask
     with tempfile.NamedTemporaryFile(dir=output.parent, prefix=output.name + '.', suffix='.tmp', delete=False) as partial:
         path = Path(partial.name)
     try:
@@ -30,6 +34,7 @@ def archive_app(app, output):
         with zipfile.ZipFile(path) as archive:
             if archive.testzip() is not None:
                 raise ValueError('Application ZIP failed its CRC check')
+        path.chmod(mode)
         path.replace(output)
     finally:
         path.unlink(missing_ok=True)
