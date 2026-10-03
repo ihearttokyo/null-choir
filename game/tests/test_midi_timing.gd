@@ -41,5 +41,5 @@ func run() -> void:
 	assert(repeats == before_fixture + 2 and is_equal_approx(player.position, 60.0), "actual fixture repeat must retain 50 ms overshoot")
 	player.stop()
 	player.queue_free()
-	print("MIDI_TIMING_GREEN: exact start, tempo, duration, multi-loop overshoot, controller reset, actual 7.2s fixture")
+	print("PASS MIDI_TIMING_GREEN: exact start, tempo, duration, multi-loop overshoot, controller reset, actual 7.2s fixture")
 	quit()

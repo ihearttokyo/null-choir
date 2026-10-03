@@ -216,8 +216,8 @@ func read_file( path:String ) -> SoundFontParseResult:
 	var result: = SoundFontParseResult.new( )
 
 	var f: = FileAccess.open( path, FileAccess.READ )
-	if f.get_error( ) != OK:
-		result.error = f.get_error( )
+	if f == null:
+		result.error = FileAccess.get_open_error( )
 		return result
 	var stream:StreamPeerBuffer = StreamPeerBuffer.new( )
 	stream.set_data_array( f.get_buffer( f.get_length( ) ) )

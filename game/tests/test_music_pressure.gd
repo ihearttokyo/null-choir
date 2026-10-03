@@ -86,11 +86,21 @@ func run() -> void:
 	music.call("stop")
 	settle(music, 1.0)
 	if not expect(not player.playing and player.get_now_playing_polyphony() == 0, "Pressure while stopped must not start music or leave voices"): return
+	var batches: Array[int] = []
+	for batch in 7:
+		var start = Time.get_ticks_usec()
+		for step in 1000:
+			music.pressure = float(step%101)/100.0
+			music._apply_pressure()
+		batches.append(Time.get_ticks_usec()-start)
+	print("PRESSURE_1000_UPDATES_US: ",JSON.stringify(batches))
 	music.free()
 	bank = null
 	voices.clear()
-	await create_timer(0.15).timeout
-	print("MUSIC_PRESSURE_GREEN: finite clamp, asymmetric smoothing, pause, one transport/bank/voice pool, native gain, repeat/switch and independent user settings")
+	var drain_start = Time.get_ticks_usec()
+	while Time.get_ticks_usec()-drain_start < 150000:
+		await process_frame
+	print("PASS MUSIC_PRESSURE_GREEN: finite clamp, asymmetric smoothing, pause, one transport/bank/voice pool, native gain, repeat/switch and independent user settings")
 	quit()
 
 func gains(player: MidiPlayer) -> Array[float]:
