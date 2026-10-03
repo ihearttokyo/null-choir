@@ -47,6 +47,7 @@ That checks all eight packed scenes, art, live MIDI and retained soundbank, plus
 
 ```sh
 python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_foundry.gd tests/test_processional.gd tests/test_processional_flow.gd tests/test_combat_expansion.gd tests/test_level_transition.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd
+python3 tools/check_game.py --timeout 180 tests/test_save_placement.gd
 python3 tools/check_game.py --timeout 360 tests/test_late_roles.gd
 python3 tests/test_music.py
 python3 tests/test_art.py

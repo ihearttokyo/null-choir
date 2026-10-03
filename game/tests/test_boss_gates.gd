@@ -45,7 +45,7 @@ func run() -> void:
 			boss.take_damage(100000,game.player)
 			if not expect(boss.hp == 0 and game.state.removed.count(boss_id) == 1,"Actual manifested death persists once through the shared actor path"): return
 			game.save_and_title()
-			game.continue_campaign()
+			await game.continue_campaign()
 			freeze()
 			if not expect(game.playing and game.enemies.all(func(actor): return actor.id != boss_id),"Saved Continue retains defeat and cannot resurrect the boss"): return
 			game.player.position = game.level.layout.world_position(exit.cell)+Vector3(0,.04,1.3)
@@ -57,7 +57,7 @@ func run() -> void:
 			if index == 7:
 				var title = game.menu.get_child(0).text
 				if not expect(title == ("YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if all_clues else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"),"All eight optional discoveries change the actual final revelation"): return
-				game.continue_campaign()
+				await game.continue_campaign()
 				if not expect(game.menu.get_child(0).text == title and game.level == null,"Completed saved Continue returns to its real ending rather than development placeholder"): return
 	await finish(0)
 	print("PASS actual manifested boss gates, persisted defeat, two final revelations and completed Continue")
