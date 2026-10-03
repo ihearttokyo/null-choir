@@ -275,6 +275,8 @@ def report_run(root, *, run_id, build_sha256):
             with _file(directory, 'index.jsonl', min(MAX_INDEX_BYTES, p.MAX_BYTES), verified) as (fd, index_size):
                 total = index_size
                 for data in _lines(fd):
+                    if result['journal_has_stop']:
+                        raise ValueError('Journal stop must be terminal')
                     if count >= MAX_ROWS:
                         raise ValueError('Row count cap')
                     row = _row(data, count, run_id, build_sha256, last_time, started, last_frame, last_action)

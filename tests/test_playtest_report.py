@@ -157,6 +157,25 @@ class ReportTests(unittest.TestCase):
         self.assertFalse(result['journal_has_stop'])
         self.assertIn('no_local_stop_record',result['diagnostics'])
 
+    def test_stop_is_terminal_before_any_later_activity_or_capture_read(self):
+        original=self.rows()
+        tail=self.root/'tail.png';tail.write_bytes(VALID_PNG);tail.chmod(0o600)
+        templates={'state':original[1], 'action':original[1], 'release':original[1],
+                   'command_attempt':original[2], 'frame':original[3], 'stop':original[-1]}
+        for kind,template in templates.items():
+            row=json.loads(json.dumps(template))
+            row.update(kind=kind,sequence=len(original),monotonic=0.4,frame=3,action_sequence=2)
+            if kind=='command_attempt':
+                row.update(issued_frame=3,expires_monotonic=0.6)
+            elif kind=='frame':
+                row['capture']='tail.png'
+            self.rewrite(original+[row])
+            before={path.name:path.read_bytes() for path in self.root.iterdir()}
+            with self.subTest(kind=kind),patch.object(report.os,'open',wraps=os.open) as opened:
+                with self.assertRaises(report.ReportError): self.run_report()
+                self.assertFalse(any(call.args[0]=='tail.png' for call in opened.call_args_list))
+                self.assertEqual(before,{path.name:path.read_bytes() for path in self.root.iterdir()})
+
 
     def test_total_budget_preflights_index_even_without_captures(self):
         self.rewrite(self.rows()[:1])

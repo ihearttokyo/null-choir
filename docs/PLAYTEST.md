@@ -50,7 +50,7 @@ Use Python 3.11 or newer from this checkout:
 python3 -m unittest tests.test_playtest_protocol tests.test_playtest_transport tests.test_playtest_supervisor tests.test_playtest_recorder tests.test_playtest_bridge tests.test_playtest_mailbox tests.test_playtest_pilot tests.test_playtest_capture tests.test_playtest_capture_pilot tests.test_playtest_report -v
 ```
 
-The 163 checks use real private temporary files and real isolated Python process
+The 164 checks use real private temporary files and real isolated Python process
 cleanup where required. Provider replies, telemetry, clocks and PNG pixels are
 controlled fixtures. They do not contact the provider, inject native game input,
 launch an engine, capture the user's screen or certify graphics/audio quality.
@@ -76,6 +76,8 @@ decreases, and missing post-action frames. Scene/player changes reset movement
 and resource comparisons. A matching post-action capture needs the same scene,
 the exact next action sequence and a frame newer than the issued observation.
 Missing stop and frame records produce explicit diagnostics.
+A stop record must be terminal; any later row rejects the report before a later
+capture is read. Open or interrupted journals still report the missing stop.
 
 These are sample-only observations. No map denominator, coverage percentage,
 campaign-completion verdict, native input/render-origin proof or actual API cost
