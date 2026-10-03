@@ -12,6 +12,16 @@ Native GREEN below means the stated regression passed. Publication is identified
 - Checkpoint disk failures retain their cause in a memory-only warning. Dead Continue opens healthy recovery choices instead of recapturing gameplay; focus loss pauses and focus return requires explicit resume. Native checks and actual Mac pause/resume controls pass. OS focus notifications were simulated; physical focus and controls remain unverified.
 - Exact SoundFont selection reduces prepared presets from 18 to six and unique sample buffers from 507 to 166. In native measurements after repairing the common sample endpoint, selected PCM bytes fall from 28,339,054 to 10,021,256 (64.6%). This is selected PCM allocation, not whole-process RSS or a cold-start benchmark.
 
+## Native Metal export candidate
+
+The installed compiler enables complete native library baking. The current 0.2.2
+source requires native-GPU export and macOS 14+ on Apple Silicon, with packed-cache
+and target-metadata regressions. The larger fixed launch comparison passes its
+unchanged noise and three-second guards; the earlier smaller trial failed and is
+retained. [CHECKPOINT.md](../CHECKPOINT.md) owns exact measurements, compiler
+warnings, cache proof, rollout state and cold/input-ready limitations. This
+candidate leaves art, music, gameplay and global caches unchanged.
+
 ## Runtime findings
 
 | ID / priority | Source and evidence | Impact; smallest fix; acceptance | Current disposition |

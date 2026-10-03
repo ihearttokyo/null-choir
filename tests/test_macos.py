@@ -14,6 +14,7 @@ with tempfile.TemporaryDirectory(prefix='null-choir-check-', dir='/private/tmp')
     app, = Path(tmp).glob('*.app')
     info = plistlib.loads((app/'Contents/Info.plist').read_bytes())
     assert info['CFBundleIdentifier'] == 'com.ihearttokyo.nullchoir'
+    assert info.get('LSMinimumSystemVersionByArchitecture', {}).get('arm64') == '14.00', 'Native Metal baking requires the macOS14 arm64 target'
     binary = app/'Contents/MacOS'/info['CFBundleExecutable']
     architecture = subprocess.check_output(['lipo','-archs',str(binary)],text=True).strip()
     assert architecture == 'arm64', f'Apple Silicon-only required, got {architecture}'
@@ -32,8 +33,9 @@ with tempfile.TemporaryDirectory(prefix='null-choir-check-', dir='/private/tmp')
     assert 'PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices' in output, 'Legacy packed workflow acceptance missing'
     assert 'PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart' in output, 'Full-eight packed scenes/art/live MIDI acceptance missing (intended RED)'
     assert 'PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar' in output, 'Actual packed late weapon/actor/boss acceptance missing'
+    assert 'PASS packaged native Metal shader caches' in output, 'Actual packed native Metal cache acceptance missing'
     assert 'PASS packaged isolated userdata' in output, 'Validation must not use real campaign/preferences userdata'
     assert not any(message in output.lower() for message in ['error:', 'leaked', 'resources still in use', 'orphan']), output
-    assert info['CFBundleShortVersionString'] == '0.2.1' and info['CFBundleVersion'] == '0.2.1', 'Current development app version required'
+    assert info['CFBundleShortVersionString'] == '0.2.2' and info['CFBundleVersion'] == '0.2.2', 'Current development app version required'
     print(output.strip())
 print('PASS exported ARM64 ZIP, strict ad-hoc signature, system-only dependencies and offline native title startup')

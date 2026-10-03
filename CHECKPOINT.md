@@ -3,6 +3,66 @@
 Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
+## Current tools and native-baked development candidate
+
+Xcode 27.0/27A266a and the official Metal Toolchain are installed. An actual
+Metal kernel compiled to AIR and linked into a metallib; installation no longer
+requires user action. Older installation failures below remain historical evidence.
+
+Focused save-placement PR5 was merged before a late menu-race review was cleared
+because the shell continued after a failed assertion. Promotion was held.
+Corrective [PR6](https://github.com/ihearttokyo/null-choir/pull/6) merged at
+`c0f14c51d89cb967cc3e7f92b3b3934fe7253f58` after a fail-closed exact-head gate.
+The review thread is resolved. Eleven native fixtures and actual packed Settings
+cancellation, Continue/position repair, Pause/Resume/Quit pass. The editable source
+is backported with per-file hashes; whole cloud-backed Git status is not certified.
+The extracted Documents bundle repeatedly acquired FinderInfo that invalidated
+strict signing. A nonsynced local app verifies correctly; the validated ZIP stays
+in the project, and the unverified cloud copy is retained under a non-app name.
+No quarantine or security protection was changed.
+
+The experimental export contains 48 cache files with 546/546 decoded native Metal stage
+libraries, totaling 14,900,664 library bytes. Exact cache bytes are present in the
+actual PCK. Independent correctness/Ponytail review accepts this pinned-data proof;
+it does not prove every runtime pipeline selects those libraries. Both native M4
+GPU exports pass the original packed all-eight art/MIDI/weapon/recovery checks.
+Compiler warnings about upstream generated shader return paths are retained;
+exports and native runs have no errors, and runtime logs have no warnings/leaks.
+
+The first three-pair experiment improved median first-written title-frame time by
+17.37%, but failed its 21.02% noise threshold. It remains a failed promotion trial.
+A separate, pre-registered eight-pair balanced confirmatory cohort keeps the same
+three-second and max(10%, twice control MAD) guards: control median 1.8500 seconds,
+MAD 0.0446 seconds; baked median 1.4153 seconds, a 23.50% improvement. All eight
+baked samples remain below three seconds, and all title PNGs are byte-identical.
+The first baked frame in the earlier cohort was 1.6686 seconds, compared with the
+initial control's 6.4841 seconds. No failed observation is removed or pooled away.
+These are fresh HOME/path, fixed-60 movie first-written-frame measurements with
+potentially warm shared OS/GPU caches. They are not reboot-cold, normal input-ready,
+whole-process RSS, combat FPS or full campaign certification.
+
+Current source builds a native-baked 0.2.2 development candidate. Apple Silicon's
+minimum is macOS 14 because the pinned Godot 4.7.2 baker has an
+[open below-14 startup issue](https://github.com/godotengine/godot/issues/123266).
+Both experiment arms use the same minimum. Native-GPU export is required by
+[Godot's shader baker](https://docs.godotengine.org/en/4.7/tutorials/performance/pipeline_compilations.html).
+Actual prior normal and baked ZIPs prove intended REDs for target metadata and
+cache acceptance. The cache guard also covers absent/empty/non-Metal directories
+and nested Metal filenames; fixture placeholders certify filenames only, while
+the separate decoded actual PCK proof certifies compiled-library presence.
+A real source-preservation RED caught native editor normalization of project.godot.
+The builder now imports and exports a scratch copy; its regression requires unchanged
+project, preset and main bytes. The original game-content assertions and old
+published preview remain protected.
+Independent review caught a parent-only validation timeout that could orphan Godot.
+A real POSIX descendant fixture reproduced the defect. Isolated process-group
+termination and reaping now pass normal/error/deadline cases, and focused
+correctness/Ponytail review clears the fix without weakening the 300-second deadline.
+
+Physical keyboard/gamepad, listening, full played pacing, normal input-ready/cold
+launch and notarization authentication remain unfinished. The eight-level goal is
+active; the 64-item audit is not a claim that all findings are implemented.
+
 ## Current priority: integrated overhaul and image-derived set pieces
 
 The approved full eight-level goal remains active. All eight maps are registered,

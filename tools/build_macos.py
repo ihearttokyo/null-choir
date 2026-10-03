@@ -4,6 +4,7 @@ from pathlib import Path
 import hashlib
 import os
 import plistlib
+import shutil
 import subprocess
 import tempfile
 import zipfile
@@ -52,7 +53,10 @@ def main():
     with tempfile.TemporaryDirectory(prefix='null-choir-build-', dir='/private/tmp') as tmp:
         tmp = Path(tmp)
         export = tmp / 'export.zip'
-        print(run('godot', '--headless', '--path', str(ROOT / 'game'), '--export-release', 'macOS', str(export)))
+        game = tmp / 'game'
+        shutil.copytree(ROOT / 'game', game, ignore=shutil.ignore_patterns('.godot'))
+        print(run('godot', '--headless', '--editor', '--path', str(game), '--import'))
+        print(run('godot', '--path', str(game), '--export-release', 'macOS', str(export)))
         run('ditto', '-x', '-k', str(export), str(tmp))
         app, = tmp.glob('*.app')
         info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())

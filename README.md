@@ -10,11 +10,11 @@ The private 0.2.1 development preview is delivered; final campaign acceptance re
 
 The exact uploaded Apple Silicon ZIP was downloaded and passed all eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing, system-only dependencies and isolated user data. Actual standalone title/Continue, stock Escape pause, live Heart world, staged death/checkpoint restoration, save/title and normal Quit pass. Thirty M4/Metal source-candidate stress samples measure 105.81–120.77 FPS with warm scene construction at most 417.10 ms. These are source diagnostics, not a release-binary matrix or full playthrough.
 
-Controlled first-frame checks of the exact published 0.2.1 app still miss the three-second target: the initial written native title frame takes 7.98 seconds, while later fresh-home/path launches take 1.85 and 1.94 seconds. Godot's fixed-frame movie writer provides actual native title pixels; shared OS/GPU caches may be warm, so these are not uninstrumented or reboot-cold certification. Warm results do not erase the initial failure. The prior 0.2.0 initial measurement and partial shader baking also missed the target. The full Metal compiler still requires Xcode installation, and no shader-baker change is promoted. Held physical keyboard/controller checks, heard musical quality and full campaign pacing remain open. Eight native whole MIDI loops and three actual mixed clips are available for listening; capture metrics cannot certify their musical quality. [DESIGN.md](DESIGN.md) owns requirements; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
+The published 0.2.1 app missed the initial three-second title-frame target. Current source builds bake native Metal libraries into the development app; controlled launch comparisons show an improvement, with measurement limits recorded in [CHECKPOINT.md](CHECKPOINT.md). This does not certify reboot-cold or normal input-ready launch. Held physical controls, heard musical quality and full played pacing remain open. [DESIGN.md](DESIGN.md) owns requirements.
 
 ## Run and build
 
-[Private Mac development app: v0.2.1-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.1-dev) includes all eight levels and the editable project at its source tag. [Source integration PR](https://github.com/ihearttokyo/null-choir/pull/1) remains open; no merge was requested. The exact published ZIP was downloaded and passed native full-eight, signing and dependency checks. This is a development preview, with the validation limits above and signing limitations below. The older v0.2.0-dev and v0.1.3-dev remain rollback evidence.
+[Private Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration PR](https://github.com/ihearttokyo/null-choir/pull/1) remains open pending final acceptance; focused ready improvements are merged separately.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
@@ -24,22 +24,19 @@ godot --path game
 
 WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
-With Python 3.11 or newer, matching Godot Mac export templates and Apple command-line tools installed:
+With Python 3.11 or newer, matching Godot 4.7.2 Mac export templates, Xcode and Apple's Metal Toolchain installed:
 
 ```sh
-python3 tools/build_macos.py
+python3 tests/test_build_deadline.py
+python3 tests/test_build_source.py
 python3 tests/test_macos.py
 ```
 
-The builder exports to a temporary local folder, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
+Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
 
-The exported binary supports a fixed headless development check:
+Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 
-```sh
-"NULL CHOIR.app/Contents/MacOS/NULL CHOIR" --headless --audio-driver CoreAudio -- --verify-export
-```
-
-That checks all eight packed scenes, art, live MIDI and retained soundbank, plus late-weapon pickups/fire/ammo and actor/boss imports. It retains the original start/fire/pause/checkpoint, Foundry/Processional, scattergun and caster-flight assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
+`tests/test_macos.py` runs the exported binary's `--verify-export` path with a temporary isolated HOME. It checks all eight packed scenes, art, live MIDI and retained soundbank, late weapons/actors/bosses, native Metal cache files, macOS 14 target metadata and the original start/fire/pause/checkpoint assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
 
 ## Source and checks
 
@@ -47,6 +44,7 @@ That checks all eight packed scenes, art, live MIDI and retained soundbank, plus
 
 ```sh
 python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_foundry.gd tests/test_processional.gd tests/test_processional_flow.gd tests/test_combat_expansion.gd tests/test_level_transition.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd
+python3 tools/check_game.py tests/test_metal_cache.gd
 python3 tools/check_game.py --timeout 180 tests/test_save_placement.gd
 python3 tools/check_game.py --timeout 360 tests/test_late_roles.gd
 python3 tests/test_music.py
