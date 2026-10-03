@@ -558,6 +558,7 @@ func show_controls() -> void:
 	menu.get_child(2).grab_focus()
 
 func _show_menu(title: String, actions: Array) -> void:
+	if placement_pending: show_title()
 	pending_action = ""
 	pending_button = null
 	menu_scroll.scroll_vertical = 0
