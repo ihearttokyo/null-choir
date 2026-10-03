@@ -28,7 +28,7 @@ python3 -B tests/test_music.py
 godot --headless --audio-driver Dummy --path game --script res://tests/test_campaign_music.gd
 ```
 
-The default command regenerates only the eight campaign files. `--gate` verifies, but never overwrites, the frozen gate fixture. The encoder rejects section tiling errors, same-key overlaps, notes extending beyond a phrase, unsorted/unresolved bends and palette changes.
+The default command validates and encodes all eight scores before writing any campaign file. A missing, malformed or invalid score therefore leaves the existing MIDI files unchanged. This does not make the write phase a filesystem transaction: an I/O failure during writing can still leave partial output. `--gate` verifies, but never overwrites, the frozen gate fixture. The encoder rejects section tiling errors, same-key overlaps, notes extending beyond a phrase, unsorted/unresolved bends and palette changes.
 
 ## Palette and loop contract
 

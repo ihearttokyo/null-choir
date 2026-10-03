@@ -174,8 +174,11 @@ if __name__ == '__main__':
         assert data == (ROOT / 'game/audio/gate.mid').read_bytes()
         print('GATE_GREEN: byte-identical; six tracks; 7680 ticks; 7.2 seconds')
     else:
+        scores = []
         for level in LEVELS:
             spec = json.loads((ROOT / f'source/music/{level}.json').read_text())
             data = compose(spec)
+            scores.append((level, spec['beats'], data))
+        for level, beats, data in scores:
             (ROOT / f'game/audio/{level}.mid').write_bytes(data)
-            print(f'COMPOSE_GREEN: {level}: {len(data)} bytes; {spec["beats"]} beats')
+            print(f'COMPOSE_GREEN: {level}: {len(data)} bytes; {beats} beats')
