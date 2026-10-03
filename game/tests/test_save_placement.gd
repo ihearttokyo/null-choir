@@ -170,7 +170,7 @@ func run():
 	invalid.position = bad.duplicate()
 	game.state.from_dict(invalid)
 	game._save()
-	for cancel in ["title","new_campaign","focus","pause"]:
+	for cancel in ["title","new_campaign","focus","pause","settings","controls","difficulty"]:
 		game.show_title()
 		game.continue_campaign()
 		if game.playing or not game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
@@ -189,6 +189,9 @@ func run():
 				freeze()
 			"focus": game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
 			"pause": game.pause_game()
+			"settings": game.show_settings()
+			"controls": game.show_controls()
+			"difficulty": game.show_difficulty()
 		await physics_frame
 		await physics_frame
 		await physics_frame
@@ -198,9 +201,15 @@ func run():
 				await finish(1)
 				return
 		elif game.playing or game.level != null or game.placement_pending:
-			push_error("Title/focus cancellation must never reactivate old pending startup")
+			push_error("INTENDED RED: pending startup must not reactivate after menu/cancellation: "+cancel)
 			await finish(1)
 			return
+		if cancel in ["settings","controls","difficulty"]:
+			var selected_menu = {"settings":"SETTINGS","controls":"CONTROLS","difficulty":"RECOVERY PROTOCOL"}[cancel]
+			if not game.menu_scroll.visible or game.menu.get_child(0).text != selected_menu:
+				push_error("Pending startup must retain the menu the player actually selected: "+cancel)
+				await finish(1)
+				return
 	# Revalidate existing alive-state invariants across the new native-frame yield.
 	game.show_title()
 	game.continue_campaign()
