@@ -18,7 +18,7 @@ godot --path game
 
 WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1/2/3 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
-With matching Godot Mac export templates and Apple command-line tools installed:
+With Python 3.11 or newer, matching Godot Mac export templates and Apple command-line tools installed:
 
 ```sh
 python3 tools/build_macos.py
