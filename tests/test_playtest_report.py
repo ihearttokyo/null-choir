@@ -282,6 +282,49 @@ class ReportTests(unittest.TestCase):
             result=self.run_report()
             self.assertEqual([row['action'] for row in result['missing_post_action_frames']],['fire','wait'])
 
+    def test_non_alive_or_zero_health_capture_does_not_complete_action(self):
+        original = self.rows()
+        for phase, health in (("title", 68), ("loading", 68), ("menu", 68),
+                              ("dead", 0), ("stopped", 68), ("alive", 0)):
+            rows = json.loads(json.dumps(original[:4] + original[5:]))
+            rows[-1]["sequence"] = 4
+            rows[3]["state"].update(phase=phase, health=health)
+            self.rewrite(rows)
+            with self.subTest(phase=phase, health=health):
+                result = self.run_report()
+                self.assertEqual(result["capture_count"], 1)
+                self.assertEqual([item["action"] for item in result["missing_post_action_frames"]],
+                                 ["fire"])
+                self.assertIn("missing_post_action_frames", result["diagnostics"])
+
+    def test_positive_health_capture_still_completes_action(self):
+        original = self.rows()
+        for health in (1, 200):
+            rows = json.loads(json.dumps(original))
+            rows[3]["state"].update(phase="alive", health=health)
+            self.rewrite(rows)
+            with self.subTest(health=health):
+                result = self.run_report()
+                self.assertEqual([item["action"] for item in result["missing_post_action_frames"]],
+                                 ["wait"])
+                self.assertEqual(result["capture_count"], 1)
+
+    def test_later_fatal_capture_does_not_reopen_completed_action(self):
+        rows = self.rows()
+        death = json.loads(json.dumps(rows[3]))
+        death.update(sequence=4, monotonic=0.2, frame=3, capture="fatal.png")
+        death["state"].update(phase="dead", health=0)
+        (self.root / "fatal.png").write_bytes(VALID_PNG)
+        (self.root / "fatal.png").chmod(0o600)
+        stop = rows[-1]
+        stop.update(sequence=5, frame=3)
+        stop["state"].update(phase="dead", health=0)
+        self.rewrite(rows[:4] + [death, stop])
+        result = self.run_report()
+        self.assertEqual(result["capture_count"], 2)
+        self.assertEqual(result["missing_post_action_frames"], [])
+        self.assertNotIn("missing_post_action_frames", result["diagnostics"])
+
     def test_empty_truncated_header_schema_and_time_cap(self):
         original=(self.root/'index.jsonl').read_bytes()
         for data in (b'',original[:-1],original.replace(b'"version":1',b'"version":true',1)):

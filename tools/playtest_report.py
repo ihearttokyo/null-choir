@@ -318,6 +318,7 @@ def report_run(root, *, run_id, build_sha256):
                         pending = [item for item in pending if not (
                             (item['level_id'], item['player_id']) == scene
                             and item['expected_sequence'] == last_action
+                            and state['phase'] == 'alive' and state['health'] > 0
                             and row['frame'] > item['issued_frame'])]
                     elif row['kind'] == 'stop':
                         result['journal_has_stop'] = True
