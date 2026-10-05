@@ -31,6 +31,7 @@ var message: String = ""
 var message_time: float = 0
 var damage_flash: float = 0
 var hit_flash: float = 0
+var quitting: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -619,12 +620,22 @@ func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> No
 	return best
 
 func quit_game() -> bool:
+	if quitting: return true
 	if level != null and state.health > 0 and _save() != OK:
 		pause_game()
-		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",func(): get_tree().quit()],["Resume",resume_game]])
+		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",_finish_quit],["Resume",resume_game]])
 		return false
-	get_tree().quit()
+	_finish_quit()
 	return true
+
+func _finish_quit() -> void:
+	if quitting: return
+	quitting = true
+	show_title()
+	menu_scroll.hide()
+	# Native audio playback references release on the next mixer pass.
+	await get_tree().create_timer(0.1).timeout
+	get_tree().quit()
 
 func _has_metal_shader_cache(root: String) -> bool:
 	if not DirAccess.dir_exists_absolute(root): return false
