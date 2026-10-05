@@ -1,0 +1,2360 @@
+{
+  "id": "heart",
+  "title": "THE HEART",
+  "subtitle": "08 / COMPLETE THE FINAL RESTRAINT REPAIR",
+  "cell_size": 4,
+  "spawn": [
+    4.5,
+    5.5
+  ],
+  "spawn_yaw": 270,
+  "rects": [
+    [
+      2,
+      3,
+      7,
+      7
+    ],
+    [
+      7,
+      4,
+      16,
+      6
+    ],
+    [
+      14,
+      7,
+      16,
+      19
+    ],
+    [
+      14,
+      19,
+      24,
+      21
+    ],
+    [
+      17,
+      18,
+      24,
+      22
+    ],
+    [
+      12,
+      15,
+      14,
+      17
+    ],
+    [
+      2,
+      12,
+      11,
+      22
+    ],
+    [
+      5,
+      8,
+      7,
+      11
+    ],
+    [
+      6,
+      8,
+      14,
+      10
+    ],
+    [
+      4,
+      23,
+      7,
+      26
+    ],
+    [
+      22,
+      23,
+      24,
+      26
+    ],
+    [
+      15,
+      27,
+      25,
+      38
+    ],
+    [
+      8,
+      31,
+      14,
+      33
+    ],
+    [
+      12,
+      23,
+      14,
+      30
+    ],
+    [
+      13,
+      21,
+      17,
+      23
+    ],
+    [
+      25,
+      18,
+      34,
+      20
+    ],
+    [
+      30,
+      17,
+      32,
+      18
+    ],
+    [
+      26,
+      3,
+      41,
+      16
+    ],
+    [
+      20,
+      8,
+      23,
+      11
+    ],
+    [
+      21,
+      12,
+      23,
+      17
+    ],
+    [
+      42,
+      7,
+      45,
+      10
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        11,
+        15,
+        15,
+        18
+      ],
+      "axis": 0,
+      "start": 15,
+      "end": 11,
+      "height": -2
+    },
+    {
+      "rect": [
+        5,
+        8,
+        8,
+        12
+      ],
+      "axis": 1,
+      "start": 8,
+      "end": 12,
+      "height": -2
+    },
+    {
+      "rect": [
+        22,
+        23,
+        25,
+        27
+      ],
+      "axis": 1,
+      "start": 23,
+      "end": 27,
+      "height": 2
+    },
+    {
+      "rect": [
+        12,
+        23,
+        15,
+        27
+      ],
+      "axis": 1,
+      "start": 23,
+      "end": 27,
+      "height": 1
+    },
+    {
+      "rect": [
+        12,
+        31,
+        15,
+        34
+      ],
+      "axis": 0,
+      "start": 12,
+      "end": 15,
+      "height": 2
+    },
+    {
+      "rect": [
+        12,
+        27,
+        15,
+        31
+      ],
+      "height": 1
+    },
+    {
+      "rect": [
+        2,
+        12,
+        12,
+        27
+      ],
+      "height": -2
+    },
+    {
+      "rect": [
+        15,
+        27,
+        26,
+        39
+      ],
+      "height": 2
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        2,
+        12,
+        12,
+        23
+      ],
+      "height": 16
+    },
+    {
+      "rect": [
+        4,
+        23,
+        8,
+        27
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        15,
+        27,
+        26,
+        39
+      ],
+      "height": 16
+    },
+    {
+      "rect": [
+        8,
+        31,
+        12,
+        34
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        26,
+        3,
+        46,
+        17
+      ],
+      "height": 16
+    },
+    {
+      "rect": [
+        20,
+        8,
+        24,
+        12
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        2,
+        3,
+        8,
+        8
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        0,
+        0,
+        48,
+        42
+      ],
+      "height": 9
+    }
+  ],
+  "loops": [
+    {
+      "id": "heart_loop_restraint",
+      "hero": "heart_mouth_restraint",
+      "route": [
+        [
+          20,
+          20
+        ],
+        [
+          14,
+          20
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          10,
+          16
+        ],
+        [
+          10,
+          21
+        ],
+        [
+          3,
+          21
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          20
+        ],
+        [
+          20,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "heart_loop_pulse",
+      "hero": "heart_pulse_mandala",
+      "route": [
+        [
+          20,
+          20
+        ],
+        [
+          23,
+          20
+        ],
+        [
+          23,
+          27
+        ],
+        [
+          24,
+          27
+        ],
+        [
+          24,
+          37
+        ],
+        [
+          16,
+          37
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          13,
+          32
+        ],
+        [
+          13,
+          22
+        ],
+        [
+          20,
+          22
+        ],
+        [
+          20,
+          20
+        ]
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "heart_mouth_restraint",
+      "cell": [
+        7.5,
+        17.5
+      ],
+      "yaw": 270,
+      "base": [
+        7.35,
+        0.55,
+        4.8
+      ],
+      "tradition_aesthetic": "Christian",
+      "seal": "blood",
+      "light_ids": [
+        "heart_restraint_feed",
+        "heart_restraint_core"
+      ]
+    },
+    {
+      "id": "heart_pulse_mandala",
+      "cell": [
+        20.5,
+        32.5
+      ],
+      "yaw": 0,
+      "base": [
+        6.4,
+        0.55,
+        5.2
+      ],
+      "tradition_aesthetic": "Buddhist",
+      "seal": "ivory",
+      "light_ids": [
+        "heart_pulse_feed",
+        "heart_pulse_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "heart_final_gate",
+      "cell": [
+        31.5,
+        17.7
+      ],
+      "yaw": 0,
+      "size": [
+        12.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "id": "heart_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        3.5,
+        14.5
+      ],
+      "text": "RESTRAINT BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "heart_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        24.5,
+        35.5
+      ],
+      "text": "PULSE ENGINE IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "heart_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        31.5,
+        19.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "CENTRAL RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "heart_story",
+      "kind": "story",
+      "cell": [
+        7.5,
+        25.5
+      ],
+      "text": "The final restraint log identifies the repair channel as the organism's own speech. The release acknowledgements match your mission voice."
+    },
+    {
+      "id": "heart_descent",
+      "kind": "exit",
+      "cell": [
+        39.5,
+        5.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "requires_defeated": [
+        "heart_choir_avatar"
+      ]
+    }
+  ],
+  "pickups": [
+    {
+      "id": "heart_entry_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 80,
+      "cell": [
+        5.5,
+        5.5
+      ]
+    },
+    {
+      "id": "heart_entry_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 16,
+      "cell": [
+        6.5,
+        5.5
+      ]
+    },
+    {
+      "id": "heart_entry_health",
+      "kind": "health",
+      "amount": 35,
+      "cell": [
+        5.5,
+        6.5
+      ]
+    },
+    {
+      "id": "heart_entry_armor",
+      "kind": "armor",
+      "amount": 40,
+      "cell": [
+        6.5,
+        6.5
+      ]
+    },
+    {
+      "id": "heart_scattergun",
+      "kind": "weapon",
+      "weapon": 2,
+      "amount": 0,
+      "cell": [
+        6.5,
+        4.5
+      ]
+    },
+    {
+      "id": "heart_first_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 60,
+      "cell": [
+        14.5,
+        18.5
+      ]
+    },
+    {
+      "id": "heart_first_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        15.5,
+        18.5
+      ]
+    },
+    {
+      "id": "heart_first_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 50,
+      "cell": [
+        14.5,
+        10.5
+      ]
+    },
+    {
+      "id": "heart_first_return_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        13.5,
+        9.5
+      ]
+    },
+    {
+      "id": "heart_second_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 60,
+      "cell": [
+        23.5,
+        24.5
+      ]
+    },
+    {
+      "id": "heart_second_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        24.5,
+        24.5
+      ]
+    },
+    {
+      "id": "heart_second_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 50,
+      "cell": [
+        14.5,
+        32.5
+      ]
+    },
+    {
+      "id": "heart_second_return_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        13.5,
+        31.5
+      ]
+    },
+    {
+      "id": "heart_repeater_ammo",
+      "kind": "ammo",
+      "weapon": 3,
+      "amount": 90,
+      "cell": [
+        22.5,
+        13.5
+      ]
+    },
+    {
+      "id": "heart_launcher_ammo",
+      "kind": "ammo",
+      "weapon": 4,
+      "amount": 10,
+      "cell": [
+        22.5,
+        14.5
+      ]
+    },
+    {
+      "id": "heart_disruptor_ammo",
+      "kind": "ammo",
+      "weapon": 5,
+      "amount": 45,
+      "cell": [
+        22.5,
+        15.5
+      ]
+    },
+    {
+      "id": "heart_finale_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 80,
+      "cell": [
+        28.5,
+        19.5
+      ]
+    },
+    {
+      "id": "heart_finale_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 16,
+      "cell": [
+        29.5,
+        19.5
+      ]
+    },
+    {
+      "id": "heart_finale_health",
+      "kind": "health",
+      "amount": 40,
+      "cell": [
+        28.5,
+        18.5
+      ]
+    },
+    {
+      "id": "heart_finale_armor",
+      "kind": "armor",
+      "amount": 40,
+      "cell": [
+        29.5,
+        18.5
+      ]
+    },
+    {
+      "id": "heart_finale_launcher",
+      "kind": "weapon",
+      "weapon": 4,
+      "amount": 8,
+      "cell": [
+        30.5,
+        18.5
+      ]
+    },
+    {
+      "id": "heart_finale_disruptor",
+      "kind": "ammo",
+      "weapon": 5,
+      "amount": 30,
+      "cell": [
+        30.5,
+        19.5
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "heart_enemy_00",
+      "kind": "brute",
+      "cell": [
+        10.5,
+        18.5
+      ],
+      "yaw": 315
+    },
+    {
+      "id": "heart_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        9.5,
+        21.5
+      ],
+      "yaw": 346
+    },
+    {
+      "id": "heart_enemy_02",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        20.5
+      ],
+      "yaw": 284
+    },
+    {
+      "id": "heart_enemy_03",
+      "kind": "crawler",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "heart_enemy_04",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        12.5
+      ],
+      "yaw": 236
+    },
+    {
+      "id": "heart_enemy_05",
+      "kind": "caster",
+      "cell": [
+        10.5,
+        13.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "heart_enemy_06",
+      "kind": "crawler",
+      "cell": [
+        6.5,
+        11.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "heart_enemy_07",
+      "kind": "worker",
+      "cell": [
+        8.5,
+        14.5
+      ],
+      "yaw": 225
+    },
+    {
+      "id": "heart_enemy_08",
+      "kind": "worker",
+      "cell": [
+        11.5,
+        16.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "heart_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        22.5
+      ],
+      "yaw": 326
+    },
+    {
+      "id": "heart_enemy_10",
+      "kind": "guardian",
+      "cell": [
+        24.5,
+        28.5
+      ],
+      "yaw": 27
+    },
+    {
+      "id": "heart_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        24.5,
+        33.5
+      ],
+      "yaw": 14
+    },
+    {
+      "id": "heart_enemy_12",
+      "kind": "worker",
+      "cell": [
+        22.5,
+        37.5
+      ],
+      "yaw": 34
+    },
+    {
+      "id": "heart_enemy_13",
+      "kind": "crawler",
+      "cell": [
+        17.5,
+        36.5
+      ],
+      "yaw": 315
+    },
+    {
+      "id": "heart_enemy_14",
+      "kind": "worker",
+      "cell": [
+        15.5,
+        29.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "heart_enemy_15",
+      "kind": "caster",
+      "cell": [
+        18.5,
+        27.5
+      ],
+      "yaw": 259
+    },
+    {
+      "id": "heart_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        23.5,
+        30.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "heart_enemy_17",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        35.5
+      ],
+      "yaw": 315
+    },
+    {
+      "id": "heart_enemy_18",
+      "kind": "worker",
+      "cell": [
+        25.5,
+        36.5
+      ],
+      "yaw": 27
+    },
+    {
+      "id": "heart_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        34.5
+      ],
+      "yaw": 315
+    },
+    {
+      "id": "heart_enemy_20",
+      "kind": "summoner",
+      "cell": [
+        15.5,
+        12.5
+      ],
+      "yaw": 27
+    },
+    {
+      "id": "heart_enemy_21",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        15.5
+      ],
+      "yaw": 34
+    },
+    {
+      "id": "heart_enemy_22",
+      "kind": "worker",
+      "cell": [
+        16.5,
+        19.5
+      ],
+      "yaw": 34
+    },
+    {
+      "id": "heart_enemy_23",
+      "kind": "worker",
+      "cell": [
+        14.5,
+        26.5
+      ],
+      "yaw": 162
+    },
+    {
+      "id": "heart_enemy_24",
+      "kind": "crawler",
+      "cell": [
+        12.5,
+        28.5
+      ],
+      "yaw": 198
+    },
+    {
+      "id": "heart_enemy_25",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        23.5
+      ],
+      "yaw": 135
+    },
+    {
+      "id": "heart_enemy_26",
+      "kind": "worker",
+      "cell": [
+        29.5,
+        14.5
+      ],
+      "yaw": 214
+    },
+    {
+      "id": "heart_enemy_27",
+      "kind": "crawler",
+      "cell": [
+        37.5,
+        14.5
+      ],
+      "yaw": 117
+    },
+    {
+      "id": "heart_enemy_28",
+      "kind": "caster",
+      "cell": [
+        40.5,
+        6.5
+      ],
+      "yaw": 135
+    },
+    {
+      "id": "heart_enemy_29",
+      "kind": "crawler",
+      "cell": [
+        28.5,
+        5.5
+      ],
+      "yaw": 203
+    },
+    {
+      "id": "heart_enemy_30",
+      "kind": "worker",
+      "cell": [
+        37.5,
+        9.5
+      ],
+      "yaw": 135
+    },
+    {
+      "id": "heart_enemy_31",
+      "kind": "crawler",
+      "cell": [
+        33.5,
+        7.5
+      ],
+      "yaw": 158
+    },
+    {
+      "id": "heart_choir_avatar",
+      "kind": "choir_avatar",
+      "cell": [
+        34.0,
+        10.0
+      ],
+      "yaw": 180
+    }
+  ],
+  "encounters": [
+    {
+      "id": "heart_first_commit",
+      "region": [
+        2,
+        12,
+        11.9,
+        22.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "heart_enemy_00",
+        "heart_enemy_01",
+        "heart_enemy_02",
+        "heart_enemy_03",
+        "heart_enemy_04",
+        "heart_enemy_05",
+        "heart_enemy_06",
+        "heart_enemy_07",
+        "heart_enemy_08",
+        "heart_enemy_09"
+      ],
+      "cue": {
+        "text": "THE MOUTH RESTRAINT DRAWS POWER FROM YOUR REPAIR",
+        "light_ids": [
+          "heart_restraint_feed",
+          "heart_restraint_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "heart_second_commit",
+      "region": [
+        15,
+        27,
+        25.9,
+        38.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "heart_enemy_10",
+        "heart_enemy_11",
+        "heart_enemy_12",
+        "heart_enemy_13",
+        "heart_enemy_14",
+        "heart_enemy_15",
+        "heart_enemy_16",
+        "heart_enemy_17",
+        "heart_enemy_18",
+        "heart_enemy_19"
+      ],
+      "cue": {
+        "text": "THE EXPOSED PULSE ACCEPTS THE REPAIR CHANNEL",
+        "light_ids": [
+          "heart_pulse_feed",
+          "heart_pulse_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "heart_first_return",
+      "region": [
+        14,
+        11,
+        16.9,
+        13
+      ],
+      "requires": [
+        "blood"
+      ],
+      "enemy_ids": [
+        "heart_enemy_20",
+        "heart_enemy_21",
+        "heart_enemy_22"
+      ],
+      "cue": {
+        "text": "THE OUTER THROAT RESTRAINT LOSES PRESSURE",
+        "light_ids": [
+          "heart_first_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "heart_second_return",
+      "region": [
+        12,
+        25,
+        14.9,
+        27
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "enemy_ids": [
+        "heart_enemy_23",
+        "heart_enemy_24",
+        "heart_enemy_25"
+      ],
+      "cue": {
+        "text": "THE RETURN ARTERY NOW ANSWERS THE MISSION VOICE",
+        "light_ids": [
+          "heart_second_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "heart_finale",
+      "region": [
+        26,
+        3,
+        45.9,
+        16.9
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "enemy_ids": [
+        "heart_enemy_26",
+        "heart_enemy_27",
+        "heart_enemy_28",
+        "heart_enemy_29",
+        "heart_enemy_30",
+        "heart_enemy_31",
+        "heart_choir_avatar"
+      ],
+      "cue": {
+        "text": "THE FINAL REPAIR CHANNEL IS OPEN",
+        "light_ids": [
+          "heart_final_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "scenery": [
+    {
+      "art": "heart_bound_gate",
+      "cell": [
+        3.5,
+        4.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "solid": [
+        3.2235,
+        0.5,
+        0.93
+      ],
+      "tradition_aesthetic": "Shinto"
+    },
+    {
+      "art": "heart_cell_crown",
+      "cell": [
+        5.5,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.39,
+        0.5,
+        2.61
+      ],
+      "tradition_aesthetic": "Islamic"
+    },
+    {
+      "art": "heart_tower_cluster",
+      "cell": [
+        9.5,
+        31.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.81,
+        0.5,
+        2.91
+      ],
+      "tradition_aesthetic": "Hindu"
+    },
+    {
+      "art": "heart_seven_reservoirs",
+      "cell": [
+        22,
+        9.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.1925,
+        0.5,
+        2.08
+      ],
+      "tradition_aesthetic": "Jewish"
+    },
+    {
+      "art": "heart_winged_seal",
+      "cell": [
+        43.5,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.7775,
+        0.5,
+        2.275
+      ],
+      "tradition_aesthetic": "ancient Egyptian"
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6.5,
+        5.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        11.5,
+        5.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        15.5,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        15.5,
+        17.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13.5,
+        16.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6.5,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        11.5,
+        9.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        24.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13.5,
+        32.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13.5,
+        26.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        22.5,
+        14.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        27.5,
+        19.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        31.5,
+        17.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.15,
+        16.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        11.85,
+        20.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        15.15,
+        34.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        25.85,
+        29.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        26.15,
+        10.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        41.85,
+        12.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        36.5,
+        3.15
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        9.5,
+        18.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        22.5,
+        34.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        30.5,
+        6.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        38.5,
+        13.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        4.5,
+        15.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9.5,
+        20
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9.5,
+        14
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        4.5,
+        19
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        7.5,
+        20.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17.5,
+        30.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        23,
+        32.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        23,
+        36.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        17.5,
+        35
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        21.5,
+        28.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        16.5,
+        17.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12.5,
+        24.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        29,
+        7
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        38,
+        12
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        28.5,
+        10.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        39,
+        8
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        30,
+        13
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        37,
+        6
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        6,
+        16
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        6,
+        19
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        9,
+        16
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        9,
+        19
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        19,
+        31
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        19,
+        34
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        22,
+        31
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "heart_arterial_vault",
+      "cell": [
+        22,
+        34
+      ],
+      "height": 9.2,
+      "yaw": 180
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        2.15,
+        5.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        7.85,
+        7.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        11.5,
+        4.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        16.85,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "heart_first_return_feed",
+      "cell": [
+        14.15,
+        12.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        14.15,
+        18.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        2.15,
+        14.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        11.85,
+        20.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        8.5,
+        22.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        5.15,
+        10.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.5,
+        8.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        7.85,
+        25.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        19.5,
+        18.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        24.85,
+        21.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        24.85,
+        24.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        12.15,
+        29.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25.85,
+        35.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.5,
+        38.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        8.15,
+        31.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "heart_second_return_feed",
+      "cell": [
+        14.85,
+        26.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.15,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.85,
+        14.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.5,
+        20.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        32.85,
+        17.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "heart_final_feed",
+      "cell": [
+        26.15,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        41.85,
+        13.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        33.5,
+        3.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        38.5,
+        16.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        45.85,
+        8.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "heart_restraint_feed",
+      "cell": [
+        3.5,
+        21.5
+      ],
+      "height": 10,
+      "target": [
+        7.5,
+        17.5
+      ],
+      "color": [
+        0.86,
+        0.3,
+        0.12
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "heart_restraint_core",
+      "cell": [
+        5.95,
+        16.9
+      ],
+      "height": 4.8,
+      "target": [
+        7.5,
+        17.5
+      ],
+      "color": [
+        1.0,
+        0.48,
+        0.22
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "heart_pulse_feed",
+      "cell": [
+        16.5,
+        37.5
+      ],
+      "height": 10,
+      "target": [
+        20.5,
+        32.5
+      ],
+      "color": [
+        0.86,
+        0.3,
+        0.12
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "heart_pulse_core",
+      "cell": [
+        24.5,
+        28.5
+      ],
+      "height": 10,
+      "target": [
+        20.5,
+        32.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "atmosphere_0_0",
+      "cell": [
+        4,
+        17.5
+      ],
+      "height": 8,
+      "color": [
+        0.82,
+        0.22,
+        0.16
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_0_1",
+      "cell": [
+        10.5,
+        17.5
+      ],
+      "height": 8,
+      "color": [
+        0.82,
+        0.22,
+        0.16
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_0",
+      "cell": [
+        17,
+        33.0
+      ],
+      "height": 8,
+      "color": [
+        0.82,
+        0.22,
+        0.16
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_1",
+      "cell": [
+        24,
+        33.0
+      ],
+      "height": 8,
+      "color": [
+        0.82,
+        0.22,
+        0.16
+      ],
+      "energy": 1.2,
+      "range": 22
+    }
+  ],
+  "mission": "RECOVER BOTH PULSE SEALS / ENTER THE CENTRAL RESTRAINT"
+}

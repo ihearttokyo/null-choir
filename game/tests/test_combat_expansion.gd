@@ -51,7 +51,7 @@ func check_pickups() -> bool:
 	if not expect(not is_instance_valid(marker),"Collected marker must actually leave the scene"): return false
 	game.state.mark_checkpoint("combat_checkpoint",game.player.position)
 	var profile = game.player.WEAPONS[2]
-	if not expect(profile.pellets == 7 and profile.damage == 15 and profile.interval == 0.7 and profile.range == 90.0,"Reuse the planned scattergun profile"): return false
+	if not expect(profile.pellets == 7 and profile.damage == 15 and profile.interval == 0.7 and profile.range == 32.0 and profile.max_ammo == 32,"Scattergun retains its close-range profile and bounded reserve"): return false
 	if not expect(game.player.fire() and game.state.ammo[2] == 15 and is_equal_approx(game.player.cooldown,0.7),"Real scattergun fire consumes one shell and sets cooldown"): return false
 	if not expect(not game.player.fire() and game.state.ammo[2] == 15,"Cooldown blocks repeat fire without consuming ammo"): return false
 	game.player._physics_process(0.35)
@@ -63,26 +63,26 @@ func check_pickups() -> bool:
 	game.player.cycle_weapon(-1)
 	if not expect(game.state.weapon == 2,"Inventory cycle returns to the earned scattergun"): return false
 	game.hurt_player(300)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze_actors()
 	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 16 and game.state.weapon == 2 and "combat_scattergun" in game.state.removed,"Death restores checkpoint weapon, ammo and pickup removal"): return false
 	if not expect(game._save() == OK,"Save earned scattergun through the real game path"): return false
 	game.show_title()
-	game.continue_campaign()
+	await game.continue_campaign()
 	freeze_actors()
 	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 16 and "combat_scattergun" in game.state.removed,"Save Continue restores earned inventory and one-shot removal"): return false
 	var refill = spec.duplicate()
 	refill.id = "combat_scattergun_refill"
 	game.level.layout.data.pickups.append(refill)
 	game.state.weapon = 1
-	game.state.ammo[2] = 9995
+	game.state.ammo[2] = 31
 	game.collect_pickup(refill.id)
 	game.collect_pickup(refill.id)
-	if not expect(game.state.weapon == 1 and game.state.ammo[2] == 9999 and game.state.owned_weapons == [0,1,2],"Owned weapon refill caps ammo, preserves selection and remains one-shot"): return false
-	game.restart_level()
+	if not expect(game.state.weapon == 1 and game.state.ammo[2] == 32 and game.state.owned_weapons == [0,1,2],"Owned weapon refill caps ammo, preserves selection and remains one-shot"): return false
+	await game.restart_level()
 	freeze_actors()
 	if not expect(game.state.owned_weapons == [0,1] and game.state.ammo[2] == 0 and game.state.weapon == 1 and not "combat_scattergun" in game.state.removed,"Level restart restores pre-pickup entry resources"): return false
-	game.continue_campaign()
+	await game.continue_campaign()
 	game.state.complete_level()
 	game.start_level()
 	freeze_actors()
@@ -127,6 +127,9 @@ func check_projectiles() -> bool:
 	if not expect(caster.sprite.texture != null and caster.sprite.hframes == 8 and caster.sprite.vframes == 5 and is_equal_approx(caster.sprite.pixel_size*128,3.65),"Caster uses its real directional atlas at worker-scale height"): return false
 	if not expect(caster.motion_mode == CharacterBody3D.MOTION_MODE_FLOATING and caster.floor_snap_length == 0,"Caster must float rather than snap to the floor"): return false
 	caster._physics_process(0.05)
+	if not expect(is_equal_approx(caster.telegraph_time,0.70) and game.state.health == 100,"Caster must present its full tell before release"): return false
+	if not expect(not game.level.get_children().any(func(node): return node.get_script() == Projectile),"Caster cannot launch immediately during windup"): return false
+	caster._physics_process(0.70)
 	var projectile
 	for node in game.level.get_children():
 		if node.get_script() == Projectile: projectile = node
@@ -176,9 +179,13 @@ func check_projectiles() -> bool:
 	projectile._physics_process(1.2)
 	if not expect(worker.hp == 76 and worker.target == caster and game.state.health == 72,"Intervening enemy takes projectile damage and starts infighting"): return false
 	worker._physics_process(0)
+	if not expect(is_equal_approx(worker.telegraph_time,0.45) and caster.hp == 90,"Infighting worker still gives its full tell before hitscan retaliation"): return false
+	worker._physics_process(0.45)
 	if not expect(caster.hp == 80 and caster.target == worker,"Existing worker hitscan retaliates and caster retargets"): return false
 	caster.attack_time = 0
-	caster._physics_process(0)
+	caster._physics_process(caster.recovery_time)
+	if not expect(is_equal_approx(caster.telegraph_time,0.70),"Infighting caster finishes recovery and gives a new full tell"): return false
+	caster._physics_process(0.70)
 	for node in game.level.get_children():
 		if node.get_script() == Projectile and not node.is_queued_for_deletion(): projectile = node
 	projectile.set_physics_process(false)
@@ -216,7 +223,9 @@ func check_projectiles() -> bool:
 	projectile.queue_free()
 	caster.target = game.player
 	caster.attack_time = 0
-	caster._physics_process(0)
+	caster._physics_process(caster.recovery_time)
+	if not expect(is_equal_approx(caster.telegraph_time,0.70),"Destroyed-shooter case must first launch through a complete caster tell"): return false
+	caster._physics_process(0.70)
 	for node in game.level.get_children():
 		if node.get_script() == Projectile and not node.is_queued_for_deletion(): projectile = node
 	projectile.set_physics_process(false)
@@ -250,8 +259,12 @@ func check_projectiles() -> bool:
 	await physics_frame
 	await physics_frame
 	seeker._physics_process(0)
+	if not expect(is_equal_approx(seeker.telegraph_time,0.70),"Targeted caster commits a complete tell before release"): return false
+	seeker._physics_process(0.70)
+	projectile = null
 	for node in game.level.get_children():
 		if node.get_script() == Projectile and not node.is_queued_for_deletion(): projectile = node
+	if not expect(is_instance_valid(projectile),"Targeted caster releases a new projectile after its tell"): return false
 	projectile.set_physics_process(false)
 	start = projectile.global_position
 	victim.free()

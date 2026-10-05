@@ -5,6 +5,7 @@ var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
+var machine_lights: Dictionary = {}
 
 func build(owner_game: Node, index: int) -> void:
 	game = owner_game
@@ -16,13 +17,13 @@ func build(owner_game: Node, index: int) -> void:
 	_build_scenery()
 	for hero in layout.data.heroes:
 		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
-		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),_material(Color(0.12,0.16,0.17)),true)
-		base.get_child(0).hide()
+		if not hero.has("base"): continue
+		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),null,true)
 		if hero.get("round",false):
 			var cylinder = CylinderShape3D.new()
 			cylinder.radius = hero.base[0]/2
 			cylinder.height = hero.base[1]
-			base.get_child(1).shape = cylinder
+			base.get_child(0).shape = cylinder
 		base.name = "LandmarkBase_"+hero.id
 		base.rotation.y = deg_to_rad(hero.yaw)
 	for spec in layout.data.doors:
@@ -48,6 +49,7 @@ func build(owner_game: Node, index: int) -> void:
 		core.position.y = 2.2
 		marker.add_child(core)
 		markers[spec.id] = marker
+	refresh_machine_lights()
 
 func _material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 	var material = StandardMaterial3D.new()
@@ -64,12 +66,13 @@ func _box(size: Vector3, location: Vector3, material: Material, solid: bool) -> 
 	var root = StaticBody3D.new() if solid else Node3D.new()
 	add_child(root)
 	root.position = location
-	var mesh = MeshInstance3D.new()
-	var shape = BoxMesh.new()
-	shape.size = size
-	mesh.mesh = shape
-	mesh.material_override = material
-	root.add_child(mesh)
+	if material != null:
+		var mesh = MeshInstance3D.new()
+		var shape = BoxMesh.new()
+		shape.size = size
+		mesh.mesh = shape
+		mesh.material_override = material
+		root.add_child(mesh)
 	if solid:
 		root.collision_layer = 1
 		var collider = CollisionShape3D.new()
@@ -158,9 +161,8 @@ func _build_scenery() -> void:
 		_place_model(spec.art,position_world,spec.get("yaw",0),spec.get("scale",[1,1,1]))
 		if spec.has("solid"):
 			var dimensions = Vector3(spec.solid[0],spec.solid[1],spec.solid[2])
-			var base = _box(dimensions,position_world+Vector3.UP*dimensions.y/2,_material(Color(0.12,0.16,0.17)),true)
+			var base = _box(dimensions,position_world+Vector3.UP*dimensions.y/2,null,true)
 			# Invisible envelope prevents walking through peripheral machinery.
-			base.get_child(0).hide()
 			base.rotation.y = deg_to_rad(spec.get("yaw",0))
 
 func _build_environment() -> void:
@@ -189,6 +191,7 @@ func _build_environment() -> void:
 		light.light_energy = spec.energy
 		light.shadow_enabled = spec.get("shadow",false)
 		add_child(light)
+		if spec.has("id"): machine_lights[spec.id] = light
 		if light is SpotLight3D:
 			light.spot_range = spec.range
 			light.spot_angle = 48
@@ -197,6 +200,19 @@ func _build_environment() -> void:
 			light.omni_range = spec.range
 		if spec.has("fixture_yaw"):
 			_place_model("lumen_sconce",layout.world_position(spec.cell)+Vector3.UP*(spec.height-1.0),spec.fixture_yaw)
+
+func apply_encounter_cue(spec: Dictionary, _restoring: bool) -> void:
+	# Steady feed light: no flicker, motion, audio or text to replay on restoration.
+	for id in spec.cue.light_ids:
+		if machine_lights.has(id): machine_lights[id].light_color = Color(1.0,0.28,0.1)
+	refresh_machine_lights()
+
+func refresh_machine_lights() -> void:
+	# Earned seals override a live feed, including version-1 saves without encounter flags.
+	for hero in layout.data.heroes:
+		if not hero.get("seal","") in game.state.keys: continue
+		for id in hero.get("light_ids",[]):
+			if machine_lights.has(id): machine_lights[id].light_color = Color(1.0,0.76,0.44)
 
 func remove_marker(id: String) -> void:
 	if markers.has(id):
@@ -209,4 +225,5 @@ func open_door(id: String) -> void:
 	door.collision_layer = 0
 	var tween = create_tween()
 	tween.tween_property(door,"position:y",door.position.y+6.0,0.65)
+	tween.finished.connect(door.queue_free)
 	doors.erase(id)

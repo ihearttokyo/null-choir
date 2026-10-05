@@ -195,7 +195,12 @@
         0.55,
         6.6
       ],
-      "round": true
+      "round": true,
+      "seal": "blood",
+      "light_ids": [
+        "bell_feed",
+        "bell_seal"
+      ]
     },
     {
       "id": "siphon_heart",
@@ -208,6 +213,11 @@
         5.5,
         0.55,
         4.5
+      ],
+      "seal": "ivory",
+      "light_ids": [
+        "siphon_feed",
+        "siphon_seal"
       ]
     }
   ],
@@ -322,8 +332,8 @@
       "amount": 45,
       "weapon": 1,
       "cell": [
-        5,
-        8
+        5.5,
+        20.5
       ]
     },
     {
@@ -341,8 +351,8 @@
       "amount": 40,
       "weapon": 1,
       "cell": [
-        25,
-        17
+        23,
+        20.5
       ]
     },
     {
@@ -360,8 +370,8 @@
       "amount": 50,
       "weapon": 1,
       "cell": [
-        12,
-        3
+        12.5,
+        10.5
       ]
     },
     {
@@ -406,8 +416,8 @@
       "id": "intake_enemy_03",
       "kind": "worker",
       "cell": [
-        6,
-        17
+        6.5,
+        13.75
       ],
       "yaw": 219
     },
@@ -416,7 +426,7 @@
       "kind": "crawler",
       "cell": [
         3.5,
-        15
+        16.5
       ],
       "yaw": 292
     },
@@ -424,8 +434,8 @@
       "id": "intake_enemy_05",
       "kind": "crawler",
       "cell": [
-        8,
-        14
+        8.75,
+        17.75
       ],
       "yaw": 5
     },
@@ -433,8 +443,8 @@
       "id": "intake_enemy_06",
       "kind": "worker",
       "cell": [
-        8,
-        18
+        8.25,
+        14.75
       ],
       "yaw": 78
     },
@@ -460,8 +470,8 @@
       "id": "intake_enemy_09",
       "kind": "crawler",
       "cell": [
-        12,
-        12
+        12.5,
+        11.75
       ],
       "yaw": 297
     },
@@ -478,8 +488,8 @@
       "id": "intake_enemy_11",
       "kind": "crawler",
       "cell": [
-        15,
-        18
+        15.5,
+        13.75
       ],
       "yaw": 83
     },
@@ -496,8 +506,8 @@
       "id": "intake_enemy_13",
       "kind": "worker",
       "cell": [
-        21,
-        17
+        21.75,
+        15
       ],
       "yaw": 229
     },
@@ -505,8 +515,8 @@
       "id": "intake_enemy_14",
       "kind": "crawler",
       "cell": [
-        25,
-        16
+        24.25,
+        17
       ],
       "yaw": 302
     },
@@ -515,7 +525,7 @@
       "kind": "worker",
       "cell": [
         25,
-        12
+        11.75
       ],
       "yaw": 15
     },
@@ -523,8 +533,8 @@
       "id": "intake_enemy_16",
       "kind": "crawler",
       "cell": [
-        21,
-        12
+        21.5,
+        12.25
       ],
       "yaw": 88
     },
@@ -1145,10 +1155,10 @@
     {
       "art": "drain_altar",
       "cell": [
-        8.8,
-        17.8
+        8.25,
+        16
       ],
-      "yaw": -120,
+      "yaw": 0,
       "solid": [
         3,
         1.6,
@@ -1192,6 +1202,139 @@
         3,
         1.6,
         2.2
+      ]
+    },
+    {
+      "art": "intake_throat_frame",
+      "tradition": "Christian",
+      "cell": [
+        8.1,
+        14.3
+      ],
+      "yaw": 0,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "solid": [
+        5.4,
+        0.55,
+        3.48
+      ]
+    },
+    {
+      "art": "intake_wheel_reservoir",
+      "tradition": "Buddhist",
+      "cell": [
+        21.15,
+        13.4
+      ],
+      "yaw": 0,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        3.872,
+        0.55,
+        3.244
+      ]
+    },
+    {
+      "art": "intake_bound_gate",
+      "tradition": "Shinto",
+      "cell": [
+        16.0,
+        21.2
+      ],
+      "yaw": 0,
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ],
+      "solid": [
+        4.896,
+        0.55,
+        1.223
+      ]
+    },
+    {
+      "art": "intake_pressure_screen",
+      "tradition": "Islamic",
+      "cell": [
+        16.85,
+        16.3
+      ],
+      "yaw": 270,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        3.15,
+        0.55,
+        1.267
+      ]
+    },
+    {
+      "art": "intake_ascending_engine",
+      "tradition": "Hindu",
+      "cell": [
+        12.0,
+        16.8
+      ],
+      "yaw": 90,
+      "scale": [
+        0.62,
+        0.62,
+        0.62
+      ],
+      "solid": [
+        2.874,
+        0.55,
+        2.799
+      ]
+    },
+    {
+      "art": "intake_seven_lamps",
+      "tradition": "Jewish",
+      "cell": [
+        12.5,
+        27.0
+      ],
+      "yaw": 0,
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ],
+      "solid": [
+        4.46,
+        0.55,
+        1.904
+      ]
+    },
+    {
+      "art": "intake_solar_seal",
+      "tradition": "ancient Egyptian",
+      "cell": [
+        17.3,
+        1.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        4.69,
+        0.55,
+        2.065
       ]
     }
   ],
@@ -1269,7 +1412,8 @@
       ],
       "energy": 3.4,
       "range": 14,
-      "fixture_yaw": 90
+      "fixture_yaw": 90,
+      "id": "intake_nave_return"
     },
     {
       "cell": [
@@ -1344,7 +1488,8 @@
       ],
       "energy": 3.4,
       "range": 14,
-      "fixture_yaw": 0
+      "fixture_yaw": 0,
+      "id": "bell_return"
     },
     {
       "cell": [
@@ -1374,7 +1519,8 @@
       ],
       "energy": 3.4,
       "range": 14,
-      "fixture_yaw": 0
+      "fixture_yaw": 0,
+      "id": "siphon_return"
     },
     {
       "cell": [
@@ -1404,7 +1550,8 @@
       ],
       "energy": 3.4,
       "range": 14,
-      "fixture_yaw": 270
+      "fixture_yaw": 270,
+      "id": "siphon_seal"
     },
     {
       "cell": [
@@ -1464,7 +1611,8 @@
       ],
       "energy": 4.4,
       "range": 18,
-      "fixture_yaw": 90
+      "fixture_yaw": 90,
+      "id": "bell_seal"
     },
     {
       "cell": [
@@ -1498,7 +1646,8 @@
         4.5,
         15.2
       ],
-      "shadow": true
+      "shadow": true,
+      "id": "bell_feed"
     },
     {
       "cell": [
@@ -1555,7 +1704,8 @@
         25.5,
         14.5
       ],
-      "shadow": true
+      "shadow": true,
+      "id": "siphon_feed"
     },
     {
       "cell": [
@@ -1597,7 +1747,27 @@
         0.18
       ],
       "energy": 2.5,
-      "range": 18
+      "range": 18,
+      "id": "intake_gate_feed"
+    },
+    {
+      "cell": [
+        16.0,
+        22.0
+      ],
+      "height": 4.4,
+      "color": [
+        0.22,
+        0.46,
+        0.67
+      ],
+      "energy": 1.8,
+      "range": 10,
+      "target": [
+        16.0,
+        21.2
+      ],
+      "id": "intake_bound_threshold_rim"
     }
   ],
   "elevations": [
@@ -1644,6 +1814,150 @@
         18
       ],
       "height": 10
+    }
+  ],
+  "encounters": [
+    {
+      "id": "intake_bell_release",
+      "region": [
+        2,
+        12,
+        9.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_03",
+        "intake_enemy_04",
+        "intake_enemy_05",
+        "intake_enemy_06"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE MEMBRANE HAS LOST PRESSURE",
+        "light_ids": [
+          "bell_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_siphon_draw",
+      "region": [
+        20,
+        11,
+        26.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_13",
+        "intake_enemy_14",
+        "intake_enemy_15",
+        "intake_enemy_16"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE SIPHON DRAWS FROM THE UPPER GALLERY",
+        "light_ids": [
+          "siphon_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_nave_response",
+      "region": [
+        11,
+        9.9,
+        17.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_09",
+        "intake_enemy_11"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "BOTH FEEDS ANSWER THROUGH THE NAVE",
+        "light_ids": [
+          "intake_nave_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_bell_return",
+      "region": [
+        4,
+        7,
+        12.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_07",
+        "intake_enemy_08"
+      ],
+      "requires": [
+        "blood"
+      ],
+      "cue": {
+        "text": "THE BELL RETURNS YOUR PULSE",
+        "light_ids": [
+          "bell_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_siphon_return",
+      "region": [
+        17,
+        7,
+        24.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_17",
+        "intake_enemy_18"
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "cue": {
+        "text": "IVORY PRESSURE REACHES THE NORTH FEED",
+        "light_ids": [
+          "siphon_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_gate_release",
+      "region": [
+        13,
+        5,
+        14.75,
+        7.25
+      ],
+      "enemy_ids": [
+        "intake_enemy_19",
+        "intake_enemy_20",
+        "intake_enemy_21",
+        "intake_enemy_22"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE CONTAINMENT TEETH ARE UNLATCHED",
+        "light_ids": [
+          "intake_gate_feed"
+        ],
+        "sound": "seal_release"
+      }
     }
   ]
 }

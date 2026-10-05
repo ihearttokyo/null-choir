@@ -1,6 +1,6 @@
 extends RefCounted
 
-const FILES = ["01_intake", "02_foundry", "03_processional"]
+const FILES = ["01_intake", "02_foundry", "03_processional", "04_reliquary", "05_nursery", "06_ossuary", "07_inversion", "08_heart"]
 var data: Dictionary = {}
 var tiles: Dictionary = {}
 
@@ -37,4 +37,13 @@ func is_walkable(cell: Vector2i) -> bool:
 	return tiles.has(cell)
 
 func world_position(cell: Array) -> Vector3:
-	return Vector3(cell[0] * data.cell_size, height_at(Vector2(cell[0], cell[1])), cell[1] * data.cell_size)
+	var point = Vector2(cell[0],cell[1])
+	var tile = point.floor()
+	var uv = point-tile
+	var a = height_at(tile)
+	var b = height_at(tile+Vector2.RIGHT)
+	var c = height_at(tile+Vector2.ONE)
+	var d = height_at(tile+Vector2.DOWN)
+	# Match the two actual floor triangles, including elevation-boundary cells.
+	var height = a+(b-a)*uv.x+(c-b)*uv.y if uv.y <= uv.x else a+(c-d)*uv.x+(d-a)*uv.y
+	return Vector3(point.x*data.cell_size,height,point.y*data.cell_size)

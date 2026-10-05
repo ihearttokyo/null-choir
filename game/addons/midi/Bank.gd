@@ -24,8 +24,6 @@ class Instrument:
 	var vel_range_min:int = 0
 	## ベロシティ範囲(最高)
 	var vel_range_max:int = 127
-	## プリセットデータ
-	var preset:Preset
 	## ステレオL/Rのペアサンプルになっているか
 	var is_stereo_sample:bool = false
 
@@ -63,7 +61,6 @@ class Preset:
 
 ## SoundFont解析用
 class TempSoundFontBag:
-	var preset:Preset
 	var coarse_tune:int
 	var fine_tune:int
 	var key_range:TempSoundFontRange = TempSoundFontRange.new( 0, 127 )
@@ -169,7 +166,6 @@ func set_preset_sample( program_number:int, base_sample:AudioStreamWAV, base_key
 		var inst:Instrument = Instrument.new( )
 		inst.array_base_pitch = [ float( i - base_key ) / 12.0 ]
 		inst.array_stream = [ base_sample ]
-		inst.preset = preset
 		preset.instruments[i] = inst
 
 	self.set_preset( program_number, preset )
@@ -196,7 +192,7 @@ func get_preset( program_number:int, bank:int = 0 ) -> Preset:
 			pc = program_number
 		# それでも存在しない場合
 		if not self.presets.has( pc ):
-			if self.presets.is_empty( ): push_error( "Bank is empty." )
+			if self.presets.is_empty( ): return null
 			# 一番最初のデフォルト音源を読む
 			pc = self.presets.keys( )[0]
 
@@ -209,10 +205,8 @@ func read_soundfont( sf:SoundFont.SoundFontData, need_program_numbers:Array = []
 	var sf_insts:Array = self._read_soundfont_pdta_inst( sf )
 
 	if self.head_silent.size( ) == 0:
-		var temp:Array = []
-		for i in self.head_silent_samples * 2:
-			temp.append( 0 )
-		self.head_silent = PackedByteArray( temp )
+		self.head_silent.resize( self.head_silent_samples * 2 )
+		self.head_silent.fill( 0 )
 
 	#var times:Array = []
 	#times.append( Time.get_ticks_msec( ) )
@@ -233,7 +227,6 @@ func read_soundfont( sf:SoundFont.SoundFontData, need_program_numbers:Array = []
 		for bag_count in Vector2i( bag_index, bag_next ):
 			var gen_next:int = sf.pdta.pbag[bag_count+1].gen_ndx
 			var bag:TempSoundFontBag = TempSoundFontBag.new( )
-			bag.preset = preset
 			for gen_count in Vector2i( gen_index, gen_next ):
 				var gen:SoundFont.SoundFontGenerator = sf.pdta.pgen[gen_count]
 				match gen.gen_oper:
@@ -256,11 +249,11 @@ func read_soundfont( sf:SoundFont.SoundFontData, need_program_numbers:Array = []
 
 		# 追加するか？
 		if 0 < len( need_program_numbers ):
-			if not( program_number in need_program_numbers ) and not( phdr.preset in need_program_numbers ):
-				preset.bags.clear( ) # Break skipped bag -> preset cycles too.
+			if not( program_number in need_program_numbers ):
 				continue
 		# 追加
 		self._read_soundfont_preset_compose_sample( sf, preset )
+		preset.bags.clear( )
 		self.presets[program_number] = preset
 
 		#times.append( Time.get_ticks_msec( ) )
@@ -428,7 +421,7 @@ func _read_soundfont_preset_compose_sample( sf:SoundFont.SoundFontData, preset:P
 						array_stream.append( loaded_sample_data[loaded_key] )
 					else:
 						var asw: = AudioStreamWAV.new( )
-						asw.data = append_head_silent + sample_base.slice( start * 2, end * 2 - 1 )
+						asw.data = append_head_silent + sample_base.slice( start * 2, end * 2 )
 						asw.format = AudioStreamWAV.FORMAT_16_BITS
 						asw.mix_rate = 44100
 						asw.stereo = false
@@ -458,7 +451,7 @@ func _read_soundfont_preset_compose_sample( sf:SoundFont.SoundFontData, preset:P
 				else:
 					var asw: = AudioStreamWAV.new( )
 
-					asw.data = append_head_silent + sample_base.slice( start * 2, end * 2 - 1 )
+					asw.data = append_head_silent + sample_base.slice( start * 2, end * 2 )
 					asw.format = AudioStreamWAV.FORMAT_16_BITS
 					asw.mix_rate = 44100
 					asw.stereo = false
@@ -510,7 +503,6 @@ func _read_soundfont_preset_compose_sample( sf:SoundFont.SoundFontData, preset:P
 					preset.instruments[key_number] = [ instrument ]
 				else:
 					preset.instruments[key_number].append( instrument )
-				instrument.preset = preset
 				instrument.array_base_pitch = array_base_pitch.duplicate( )
 				if ibag.original_key != 255:
 					var shift_pitch:float = float( key_number - ibag.original_key ) / 12.0
@@ -524,12 +516,3 @@ func _read_soundfont_preset_compose_sample( sf:SoundFont.SoundFontData, preset:P
 				instrument.release_state = release_state
 				instrument.vel_range_min = vel_range_min
 				instrument.vel_range_max = vel_range_max
-
-## 通知ハンドラ（メモリ破棄用）
-## @param	what	通知要因
-func _notification( what:int ):
-	if what == NOTIFICATION_PREDELETE:
-		for i in self.presets.keys( ):
-			var preset:Preset = self.presets[i]
-			preset.instruments = []
-			preset.bags = []

@@ -13,6 +13,7 @@ var weapon: int = 1
 var keys: Array = []
 var discoveries: Array = []
 var removed: Array = []
+var explored: Array = []
 var checkpoint_id: String = "entry"
 var position: Vector3 = Vector3.ZERO
 var checkpoint: Dictionary = {}
@@ -29,6 +30,7 @@ func new_campaign(mode: int) -> void:
 	keys = []
 	discoveries = []
 	removed = []
+	explored = []
 	mark_checkpoint("entry", Vector3.ZERO)
 
 func damage(amount: int) -> void:
@@ -61,6 +63,7 @@ func complete_level() -> void:
 	level_index = mini(8, level_index + 1)
 	keys = []
 	removed = []
+	explored = []
 	mark_checkpoint("entry", Vector3.ZERO)
 
 func _resources() -> Dictionary:
@@ -72,7 +75,7 @@ func _resources() -> Dictionary:
 func to_dict() -> Dictionary:
 	var data = _resources()
 	data.merge({"version": VERSION, "difficulty": difficulty, "level_index": level_index,
-		"discoveries": discoveries.duplicate(), "checkpoint": checkpoint.duplicate(true),
+		"discoveries": discoveries.duplicate(), "explored": explored.duplicate(true), "checkpoint": checkpoint.duplicate(true),
 		"level_start": level_start.duplicate(true)})
 	return data
 
@@ -82,6 +85,14 @@ func from_dict(data: Dictionary) -> bool:
 		return false
 	if not _integer(data.get("level_index"), 0, 8) or not _valid_resources(data):
 		return false
+	var cells = data.get("explored",[])
+	if not cells is Array or cells.size() > 4096: return false
+	var normalized: Array = []
+	for cell in cells:
+		if not cell is Array or cell.size() != 2 or not _integers(cell,0,255,2): return false
+		var point = [int(cell[0]),int(cell[1])]
+		if point in normalized: return false
+		normalized.append(point)
 	var clues = data.get("discoveries")
 	if not _integers(clues, 0, 7, 8) or not _unique(clues.map(func(value): return int(value))):
 		return false
@@ -94,6 +105,7 @@ func from_dict(data: Dictionary) -> bool:
 	difficulty = int(data.difficulty)
 	level_index = int(data.level_index)
 	discoveries = clues.map(func(value): return int(value))
+	explored = normalized
 	checkpoint = _normalized_resources(saved_checkpoint)
 	level_start = _normalized_resources(saved_start)
 	_apply_resources(data)
@@ -101,6 +113,8 @@ func from_dict(data: Dictionary) -> bool:
 
 func _normalized_resources(data: Dictionary) -> Dictionary:
 	var result = data.duplicate(true)
+	var point = Vector3(data.position[0],data.position[1],data.position[2])
+	result.position = [point.x,point.y,point.z]
 	for field in ["health", "armor", "weapon"]:
 		result[field] = int(result[field])
 	for field in ["ammo", "owned_weapons"]:

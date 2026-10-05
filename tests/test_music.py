@@ -17,6 +17,7 @@ def test_encoder():
     assert hashlib.sha256(gate).hexdigest() == 'e0b5300b4fef2cc08e0f9065c9ef55514d90f9c99ddc632db39fc019ca147cf4'
     spec = json.loads(gate)
     assert hashlib.sha256(compose(spec)).hexdigest() == '6dd153f678b00f3302fe18faf28a93896e33dfd597b024e0e397ee74a1f9dc99'
+    assert compose(spec) == (ROOT / 'game/audio/gate.mid').read_bytes()
     spec.update(sections=[{'name': 'Authored phrase', 'beats': 12,
                           'parts': {'guitar': ['a']}},
                          {'name': 'Release', 'beats': 4, 'parts': {}}],
@@ -95,8 +96,33 @@ def test_campaign():
     assert len(riffs) == len(drum_rhythms) == len(hashes) == 8, 'Songs need distinct relative-pitch riffs and drum rhythms, not transpositions'
 
 
+def test_developed_processional():
+    spec = json.loads((ROOT / 'source/music/processional.json').read_text())
+    sections = {section['name']: section for section in spec['sections']}
+
+    def material(section, voice):
+        phrases = [spec['phrases'][voice][name] for name in section['parts'][voice]]
+        cycle = sum(phrase['beats'] for phrase in phrases)
+        assert cycle > 0 and section['beats'] % cycle == 0
+        notes, offset = [], 0
+        for _ in range(int(section['beats'] // cycle)):
+            for phrase in phrases:
+                notes.extend((round((offset + beat) * spec['ppq']), tuple(sorted(pitches)))
+                             for beat, _, pitches, _ in phrase['notes'])
+                offset += phrase['beats']
+        return sorted(notes)
+
+    theme, reprise = sections['Ten feet'], sections['Feet behind you']
+    guitar, developed = material(theme, 'guitar'), material(reprise, 'guitar')
+    assert guitar[:2] == developed[:2], 'Processional reprise must retain its opening guitar hook'
+    assert guitar != developed, 'Processional reprise must develop guitar pitches/onsets, not repeat the unchanged theme'
+    assert material(theme, 'bass') != material(reprise, 'bass'), 'Processional reprise needs a changed bass route, not velocity-only edits'
+
+
 if __name__ == '__main__':
     test_encoder()
     print('MUSIC_ENCODER_GREEN: VLQ, frozen gate, authored phrase changes output')
     test_campaign()
     print('PASS campaign scores: deterministic parity, duration, release, eight distinct motifs/arrangements')
+    test_developed_processional()
+    print('PASS developed Processional: retained opening hook, changed guitar material and bass route')

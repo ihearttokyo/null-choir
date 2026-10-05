@@ -4,11 +4,19 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 ## Development status
 
-This is an unfinished three-level build, not the completed eight-level campaign. Intake, Foundry and Processional each have two traversal loops with distinct original Blender hero pieces, keys, one hidden story discovery and mid-level restoration. Three enemy roles and three weapons are implemented; eight original MIDI scores and persisted keyboard/mouse/gamepad rebinding are integrated. Five maps, remaining weapons/enemies/bosses, sound effects, ending, musical listening and full visual/pacing/performance acceptance remain. [Intake scenery](docs/SCENERY.md) and [Foundry scenery](docs/FOUNDRY.md) and [Processional scenery](docs/PROCESSIONAL.md) show native rendered evidence. [DESIGN.md](DESIGN.md) owns the approved scope; [CHECKPOINT.md](CHECKPOINT.md) records current evidence and open gates.
+The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. Eight original MIDI scores are synthesized live. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
+
+The private 0.2.1 development preview is delivered; final campaign acceptance remains unfinished. Inversion now has recessed cosmic cavities, fractured violet incisions and visible sparse stars. Two existing examination spotlights reveal the Nursery organism and the Heart's tooth-lined throat. Independent focused pixel reviews and correctness/Ponytail reviews pass. Strict inventory covers 92 editable art assets and 93 exports. Both changed maps pass source and boundary checks; all 24 native late-map difficulty/seal-order cases pass.
+
+The exact uploaded Apple Silicon ZIP was downloaded and passed all eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing, system-only dependencies and isolated user data. Actual standalone title/Continue, stock Escape pause, live Heart world, staged death/checkpoint restoration, save/title and normal Quit pass. Thirty M4/Metal source-candidate stress samples measure 105.81–120.77 FPS with warm scene construction at most 417.10 ms. These are source diagnostics, not a release-binary matrix or full playthrough.
+
+The published 0.2.1 app missed the initial three-second title-frame target. Current source builds bake native Metal libraries into the development app; controlled launch comparisons show an improvement, with measurement limits recorded in [CHECKPOINT.md](CHECKPOINT.md). This does not certify reboot-cold or normal input-ready launch. Held physical controls, heard musical quality and full played pacing remain open. [DESIGN.md](DESIGN.md) owns requirements.
+
+Live-enemy save recovery remains a known development defect: surviving actors are rebuilt rather than retaining their damage and summoned companions. Corrected packed-app validation, full-campaign combat, listening and physical controls remain unfinished.
 
 ## Run and build
 
-[Private Mac development app: v0.1.3-dev](https://github.com/ihearttokyo/null-choir/releases/tag/v0.1.3-dev) includes Intake, Foundry and Processional. The campaign remains unfinished; signing limitations are described below.
+[Private Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
@@ -16,24 +24,21 @@ Open `game/project.godot` in Godot 4.7.2, or run:
 godot --path game
 ```
 
-WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1/2/3 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
+WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
-With Python 3.11 or newer, matching Godot Mac export templates and Apple command-line tools installed:
+With Python 3.11 or newer, matching Godot 4.7.2 Mac export templates, Xcode and Apple's Metal Toolchain installed:
 
 ```sh
-python3 tools/build_macos.py
+python3 tests/test_build_deadline.py
+python3 tests/test_build_source.py
 python3 tests/test_macos.py
 ```
 
-The builder exports to a temporary local folder, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
+Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
 
-The exported binary supports a fixed headless development check:
+Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 
-```sh
-"NULL CHOIR.app/Contents/MacOS/NULL CHOIR" --headless --audio-driver CoreAudio -- --verify-export
-```
-
-That checks packaged resources, start/fire/pause/checkpoint restoration Foundry and Processional scene/art/live MIDI, scattergun pickup/fire and caster projectile launch. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
+`tests/test_macos.py` runs the exported binary's `--verify-export` path with a temporary isolated HOME. It checks all eight packed scenes, art, live MIDI and retained soundbank, late weapons/actors/bosses, native Metal cache files, macOS 14 target metadata and the original start/fire/pause/checkpoint assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
 
 ## Source and checks
 
@@ -41,12 +46,15 @@ That checks packaged resources, start/fire/pause/checkpoint restoration Foundry 
 
 ```sh
 python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_foundry.gd tests/test_processional.gd tests/test_processional_flow.gd tests/test_combat_expansion.gd tests/test_level_transition.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd
+python3 tools/check_game.py tests/test_metal_cache.gd
+python3 tools/check_game.py --timeout 180 tests/test_save_placement.gd
+python3 tools/check_game.py --timeout 360 tests/test_late_roles.gd
 python3 tests/test_music.py
 python3 tests/test_art.py
 blender -b -t 4 --python-exit-code 1 --python tests/test_art_pose.py
 godot --headless --audio-driver CoreAudio --fixed-fps 60 --path game --quit-after 20000 --script tests/test_traversal.gd -- --level=1
 ```
 
-These use actual native gameplay/assets; headless input is simulated. A PASS marker and clean exit are required. MIDI assertions and native CoreAudio capture are separate from listening and GUI review.
+These use actual native gameplay/assets; headless input is simulated. A PASS marker and clean exit are required. The runner enforces a finite wall-clock deadline. The full late-role fixture needs about three minutes on the measured M4 host. MIDI assertions and native CoreAudio capture are separate from listening and GUI review.
 
 Original code, compositions and art remain project-owned. Third-party notices are retained in `licenses/audio/`, packaged audio/add-on notices and `game/licenses/Godot-Third-Party.txt`. GeneralUser GS permits software redistribution but qualifies historical sample origins; that qualification is retained for this private development build. No copied Doom maps, sprites or songs are included.

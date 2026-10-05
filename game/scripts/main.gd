@@ -6,9 +6,12 @@ const Player = preload("res://scripts/player.gd")
 const Enemy = preload("res://scripts/enemy.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Music = preload("res://audio/music.gd")
+const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 var state = Campaign.new()
 var playing: bool = false
+var loaded_positions: bool = false
+var placement_pending: bool = false
 var preferences = Preferences.new()
 var settings: Dictionary = preferences.values
 var progress_path: String = Campaign.SAVE_PATH
@@ -16,6 +19,7 @@ var settings_path: String = "user://preferences.json"
 var level: Node3D
 var player: CharacterBody3D
 var music: Node
+var effects: Node
 var enemies: Array = []
 var menu: VBoxContainer
 var menu_scroll: ScrollContainer
@@ -27,6 +31,7 @@ var message: String = ""
 var message_time: float = 0
 var damage_flash: float = 0
 var hit_flash: float = 0
+var quitting: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -36,6 +41,9 @@ func _ready() -> void:
 	settings = preferences.values
 	music = Music.new()
 	add_child(music)
+	effects = Effects.new()
+	effects.name = "Effects"
+	add_child(effects)
 	_apply_volumes()
 	preferences.apply_bindings()
 	canvas = CanvasLayer.new()
@@ -45,8 +53,9 @@ func _ready() -> void:
 	hud.game = self
 	canvas.add_child(hud)
 	menu = VBoxContainer.new()
-	menu.custom_minimum_size.x = 340
+	menu.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	menu_scroll = ScrollContainer.new()
+	menu_scroll.theme = _menu_theme()
 	menu_scroll.position = Vector2(150,45)
 	menu_scroll.size = Vector2(340,275)
 	menu_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -56,6 +65,31 @@ func _ready() -> void:
 	canvas.add_child(menu_scroll)
 	show_title()
 	if "--verify-export" in OS.get_cmdline_user_args(): call_deferred("_verify_export")
+
+func _menu_theme() -> Theme:
+	var theme = Theme.new()
+	theme.default_font_size = 14
+	var ivory = Color(0.87,0.79,0.65)
+	var copper = Color(0.45,0.26,0.19)
+	for type in ["Button","CheckButton","Label"]:
+		theme.set_color("font_color",type,ivory)
+		theme.set_color("font_focus_color",type,Color(1.0,0.9,0.72))
+		theme.set_color("font_hover_color",type,Color(1.0,0.9,0.72))
+		theme.set_color("font_pressed_color",type,ivory)
+		theme.set_color("font_disabled_color",type,Color(0.45,0.4,0.34))
+	for state_name in ["normal","hover","pressed","disabled","focus"]:
+		var box = StyleBoxFlat.new()
+		box.bg_color = Color(0.055,0.035,0.045) if state_name == "normal" else Color(0.13,0.065,0.075)
+		box.border_color = ivory if state_name == "focus" else copper
+		box.set_border_width_all(2 if state_name == "focus" else 1)
+		box.content_margin_left = 12
+		box.content_margin_right = 12
+		box.content_margin_top = 6
+		box.content_margin_bottom = 6
+		if state_name == "focus": box.draw_center = false
+		if state_name == "disabled": box.bg_color = Color(0.035,0.025,0.03)
+		theme.set_stylebox(state_name,"Button",box)
+	return theme
 
 func _apply_volumes() -> void:
 	for bus in ["Music","Effects"]:
@@ -83,24 +117,36 @@ func _input(event: InputEvent) -> void:
 		pending_button.text = _control_text(pending_action)
 		pending_action = ""
 		_save_settings()
+	if pending_button != null: pending_button.tooltip_text = pending_button.text
 	get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if playing and Input.is_action_just_pressed_by_event("survey",event):
+		hud.survey.toggle()
+		get_viewport().set_input_as_handled()
 	if Input.is_action_just_pressed_by_event("pause",event) and level != null:
-		if playing: pause_game()
+		if playing or placement_pending: pause_game()
 		elif state.health > 0: resume_game()
 		get_viewport().set_input_as_handled()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST: quit_game()
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and (playing or placement_pending): pause_game()
 
 func start_campaign(mode: int) -> void:
+	loaded_positions = false
 	state.new_campaign(mode)
 	start_level()
 
 func start_level() -> void:
+	if hud != null: hud.survey.hide()
 	get_tree().paused = false
 	playing = false
+	placement_pending = false
+	if loaded_positions and music != null: music.set_paused(true)
+	if effects != null:
+		effects.stop()
+		effects.set_paused(false)
 	if level != null: level.queue_free()
 	enemies.clear()
 	level = Level.new()
@@ -110,30 +156,100 @@ func start_level() -> void:
 	player = Player.new()
 	level.add_child(player)
 	player.configure(self)
-	if state.position == Vector3.ZERO:
+	if state.position == Vector3.ZERO and not loaded_positions:
 		state.mark_checkpoint("entry",level.layout.world_position(level.layout.data.spawn))
 	player.position = state.position + Vector3(0,0.04,0)
 	player.rotation.y = deg_to_rad(level.layout.data.spawn_yaw)
-	for spec in level.layout.data.enemies:
+	for authored in level.layout.data.enemies:
+		var spec = authored.duplicate()
 		if spec.id in state.removed: continue
+		for group in level.layout.data.get("encounters",[]):
+			if spec.id in group.enemy_ids:
+				spec["encounter"] = group.id
+				break
 		var actor = Enemy.new()
 		level.add_child(actor)
 		actor.configure(self,spec)
 		enemies.append(actor)
+	for group in level.layout.data.get("encounters",[]):
+		if "encounter:"+group.id in state.removed: level.apply_encounter_cue(group,true)
+	damage_flash = 0
+	hit_flash = 0
 	message = level.layout.data.mission
 	message_time = 7
+	if state.health <= 0:
+		show_recovery()
+		return
+	if loaded_positions:
+		placement_pending = true
+		var pending_level = level
+		var pending_player = player
+		# New native bodies are not queryable reliably in their construction frame.
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		if level != pending_level or player != pending_player or not is_instance_valid(pending_level) or pending_level.is_queued_for_deletion(): return
+		placement_pending = false
+		if state.health <= 0:
+			show_recovery()
+			return
+		if not _repair_loaded_position():
+			show_title()
+			notify("NO SAFE RECOVERY POSITION",8)
+			return
 	menu_scroll.hide()
 	playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if music != null:
 		music.set_paused(false)
+		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _valid_saved_position(point: Vector3) -> bool:
+	var size: float = level.layout.data.cell_size
+	if not level.layout.is_walkable(Vector2i(floor(point.x/size),floor(point.z/size))): return false
+	var space = level.get_world_3d().direct_space_state
+	var support = PhysicsRayQueryParameters3D.create(point+Vector3.UP*0.2,point-Vector3.UP*0.6,1)
+	var floor_hit = space.intersect_ray(support)
+	if floor_hit.is_empty() or floor_hit.normal.y < 0.5: return false
+	var collider: CollisionShape3D = player.get_child(0)
+	var query = PhysicsShapeQueryParameters3D.new()
+	query.shape = collider.shape
+	var pose = player.global_transform
+	pose.origin = point+Vector3.UP*0.04
+	query.transform = pose*collider.transform
+	query.collision_mask = 1|4
+	query.exclude = [player.get_rid()]
+	return space.intersect_shape(query,1).is_empty()
+
+func _repair_loaded_position() -> bool:
+	if _valid_saved_position(state.position): return true
+	for snapshot in [state.checkpoint,state.level_start]:
+		if snapshot.get("health",0) <= 0: continue
+		var values = snapshot.position
+		var point = Vector3(values[0],values[1],values[2])
+		if not _valid_saved_position(point): continue
+		state.position = point
+		player.position = point+Vector3.UP*0.04
+		notify("RECOVERY POSITION REPAIRED: HEALTHY SNAPSHOT",8)
+		return true
+	var entry: Vector3 = level.layout.world_position(level.layout.data.spawn)
+	if not _valid_saved_position(entry): return false
+	state.position = entry
+	player.position = entry+Vector3.UP*0.04
+	notify("RECOVERY POSITION REPAIRED: LEVEL ENTRY",8)
+	return true
 
 func _process(delta: float) -> void:
 	message_time = maxf(0,message_time-delta)
 	damage_flash = maxf(0,damage_flash-delta)
 	hit_flash = maxf(0,hit_flash-delta)
 	if playing and player != null:
+		var cell = Vector2(player.position.x,player.position.z)/float(level.layout.data.cell_size)
+		for group in level.layout.data.get("encounters",[]):
+			var r = group.region
+			# World positions are float32; preserve inclusive authored edges after cell conversion.
+			if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
+				activate_encounter(group.id)
 		for spec in level.layout.data.pickups:
 			if not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4:
 				collect_pickup(spec.id)
@@ -141,9 +257,45 @@ func _process(delta: float) -> void:
 			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
 				state.removed.append(spec.id)
 				state.mark_checkpoint(spec.id,player.position)
-				_save()
-				notify(spec.text)
+				if _save() == OK: notify(spec.text)
+				else: notify("RECOVERY MEMORY ONLY: "+message,8)
+		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
+
+func _combat_pressure() -> float:
+	var threats = 0
+	for actor in enemies:
+		if not is_instance_valid(actor) or not actor._current_map(): continue
+		if actor.hp > 0 and actor.active and actor.alerted and (actor.target == null or actor.target == player) and actor.position.distance_to(player.position) < 30:
+			threats += 1
+	return maxf(minf(1.0,threats*0.25),clampf(damage_flash/0.35,0,1)*0.75)
+
+func activate_encounter(id: String) -> void:
+	if not playing or not is_instance_valid(level) or level.is_queued_for_deletion() or "encounter:"+id in state.removed: return
+	for group in level.layout.data.get("encounters",[]):
+		if group.id != id: continue
+		state.removed.append("encounter:"+id)
+		for actor in enemies:
+			if is_instance_valid(actor) and actor._current_map() and actor.hp > 0 and actor.encounter_id == id:
+				actor.active = true
+				actor.alerted = true
+		level.apply_encounter_cue(group,false)
+		notify(group.cue.text,5)
+		if effects != null: effects.play(group.cue.sound,-6)
+		return
+
+func enemy_event(actor, event: String) -> void:
+	if not playing or not is_instance_valid(actor) or not actor._current_map() or not actor.active: return
+	var cue = ""
+	match event:
+		"windup":
+			var family = {"brute":"crawler","guardian":"worker","summoner":"caster","nursery_warden":"crawler","choir_avatar":"caster"}.get(actor.kind,actor.kind)
+			cue = family+"_charge"
+		"attack": cue = "tool" if actor.kind == "crawler" else "rivet" if actor.kind == "worker" else "impact"
+		"stagger": cue = "stagger"
+		"death": cue = "death"
+	if not cue.is_empty() and effects != null:
+		effects.play(cue,-6-clampf(actor.position.distance_to(player.position)/2,0,18))
 
 func _has_keys(required: Array) -> bool:
 	for key in required:
@@ -157,6 +309,8 @@ func collect_key(id: String) -> void:
 			if not spec.key in state.keys: state.keys.append(spec.key)
 			state.removed.append(id)
 			level.remove_marker(id)
+			level.refresh_machine_lights()
+			if effects != null: effects.play("seal_release",-6)
 			notify(spec.text)
 			return
 
@@ -165,13 +319,16 @@ func collect_pickup(id: String) -> void:
 	for spec in level.layout.data.pickups:
 		if spec.id != id: continue
 		match spec.kind:
-			"weapon":
+			"weapon", "ammo":
 				var weapon = int(spec.weapon)
-				if not weapon in state.owned_weapons:
+				var capacity = Player.WEAPONS[weapon].max_ammo
+				var acquired = spec.kind == "weapon" and not weapon in state.owned_weapons
+				if not acquired and state.ammo[weapon] >= capacity: return
+				if acquired:
 					state.owned_weapons.append(weapon)
 					state.weapon = weapon
-				state.ammo[weapon] = mini(9999,state.ammo[weapon]+spec.amount)
-			"ammo": state.ammo[spec.weapon] = mini(9999,state.ammo[spec.weapon]+spec.amount)
+				if state.ammo[weapon] < capacity:
+					state.ammo[weapon] = mini(capacity,state.ammo[weapon]+spec.amount)
 			"health":
 				if state.health >= 100: return
 				state.health = mini(100,state.health+spec.amount)
@@ -227,12 +384,20 @@ func interact() -> void:
 			notify(spec.text,12)
 		"exit":
 			if not _has_keys(spec.get("requires",[])): return
+			for id in spec.get("requires_defeated",[]):
+				if not id in state.removed:
+					notify("THE MANIFESTATION HOLDS THE RESTRAINT")
+					return
 			var prior = state.to_dict()
 			state.complete_level()
 			if _save() != OK:
 				state.from_dict(prior)
 				return
+			loaded_positions = false
 			var completed_title = level.layout.data.title+" RESTORED"
+			if state.level_index == 8:
+				show_ending()
+				return
 			show_title()
 			var next_layout = Level.Layout.new()
 			var actions = [["Return to title",show_title]]
@@ -241,34 +406,50 @@ func interact() -> void:
 			_show_menu(completed_title,actions)
 
 func hurt_player(amount: int) -> void:
-	if state.health <= 0: return
+	if state.health <= 0 or amount <= 0: return
 	state.damage(amount)
 	damage_flash = 0.35
+	if effects != null: effects.play("impact",-6)
 	if state.health == 0:
-		pause_game()
-		_show_menu("RECOVERY FAILED",[["Restore checkpoint",restore_checkpoint],["Restart level",restart_level],["Return to title",show_title]])
+		show_recovery()
+
+func show_recovery() -> void:
+	pause_game()
+	var choices: Array = []
+	if state.checkpoint.get("health",0) > 0: choices.append(["Restore checkpoint",restore_checkpoint])
+	if state.level_start.get("health",0) > 0: choices.append(["Restart level",restart_level])
+	choices.append(["Return to title",show_title])
+	_show_menu("RECOVERY FAILED",choices)
 
 func restore_checkpoint() -> void:
 	state.restore_checkpoint()
-	start_level()
+	await start_level()
 
 func restart_level() -> void:
 	state.restore_level_start()
-	start_level()
+	await start_level()
 
 func pause_game() -> void:
+	if placement_pending:
+		show_title()
+		notify("RECOVERY HELD: SELECT CONTINUE WHEN READY",5)
+		return
+	hud.survey.hide()
 	playing = false
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if music != null: music.set_paused(true)
+	if effects != null: effects.set_paused(true)
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 
 func resume_game() -> void:
+	if placement_pending or state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
 	playing = true
 	menu_scroll.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if music != null: music.set_paused(false)
+	if effects != null: effects.set_paused(false)
 
 func _save() -> Error:
 	var result = state.save_progress(progress_path)
@@ -282,7 +463,9 @@ func save_and_title() -> void:
 	show_title()
 
 func show_title() -> void:
+	if hud != null: hud.survey.hide()
 	playing = false
+	placement_pending = false
 	if level != null:
 		level.queue_free()
 		level = null
@@ -290,17 +473,26 @@ func show_title() -> void:
 		enemies.clear()
 	get_tree().paused = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if music != null: music.stop()
+	if music != null:
+		music.set_pressure(0)
+		music.stop()
+	if effects != null: effects.stop()
 	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Quit",quit_game]])
 
 func continue_campaign() -> void:
 	if not state.load_progress(progress_path):
 		notify("NO VALID RECOVERY IMAGE",5)
 		return
-	if state.level_index >= Level.Layout.FILES.size():
-		notify("CAMPAIGN DEVELOPMENT IN PROGRESS",5)
+	if state.level_index == 8:
+		show_ending()
 		return
-	start_level()
+	loaded_positions = true
+	await start_level()
+
+func show_ending() -> void:
+	show_title()
+	var revelation = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if state.discoveries.size() == 8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
+	_show_menu(revelation,[["New campaign",show_difficulty],["Return to title",show_title]])
 
 func show_difficulty() -> void:
 	_show_menu("RECOVERY PROTOCOL",[["Merciful",func(): start_campaign(0)],["Relentless",func(): start_campaign(1)],["Terminal",func(): start_campaign(2)],["Back",show_title]])
@@ -347,11 +539,14 @@ func show_controls() -> void:
 	_show_menu("CONTROLS",[])
 	var label = Label.new()
 	label.text = "Select a row, then press a key, mouse button,\nor pad input. Esc cancels. Other device stays bound."
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_font_size_override("font_size",12)
 	menu.add_child(label)
 	for action in Preferences.ACTIONS:
 		var button = Button.new()
 		button.text = _control_text(action)
+		button.clip_text = true
+		button.tooltip_text = button.text
 		button.custom_minimum_size.y = 34
 		button.add_theme_font_size_override("font_size",14)
 		button.pressed.connect(func():
@@ -364,6 +559,7 @@ func show_controls() -> void:
 	menu.get_child(2).grab_focus()
 
 func _show_menu(title: String, actions: Array) -> void:
+	if placement_pending: show_title()
 	pending_action = ""
 	pending_button = null
 	menu_scroll.scroll_vertical = 0
@@ -374,6 +570,7 @@ func _show_menu(title: String, actions: Array) -> void:
 	menu.show()
 	var label = Label.new()
 	label.text = title
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size",32)
 	menu.add_child(label)
@@ -382,6 +579,7 @@ func _show_menu(title: String, actions: Array) -> void:
 func _button(text: String, action: Callable) -> void:
 	var button = Button.new()
 	button.text = text
+	button.clip_text = true
 	button.custom_minimum_size.y = 34
 	button.pressed.connect(action)
 	menu.add_child(button)
@@ -391,22 +589,27 @@ func notify(text: String, duration: float = 3) -> void:
 	message = text
 	message_time = duration
 
-func shot(_weapon: int) -> void:
+func shot(weapon: int) -> void:
+	if effects != null: effects.play(["tool","rivet","scatter","rivet","scatter","caster_charge"][clampi(weapon,0,5)])
 	for actor in enemies:
-		if is_instance_valid(actor) and actor.hp > 0 and actor.position.distance_to(player.position) < 34:
+		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0 and actor.active and actor.position.distance_to(player.position) < 34:
 			actor.alerted = true
 
 func hit_feedback() -> void:
+	if effects != null and hit_flash <= 0: effects.play("flesh")
 	hit_flash = 0.12
 
 func impact(_point: Vector3) -> void:
-	pass
+	if effects != null: effects.play("impact",-12)
+
+func dry_fire(_weapon: int) -> void:
+	if effects != null: effects.play("dry")
 
 func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
 	var best: Node3D
 	var distance = max_range
 	for actor in enemies:
-		if not is_instance_valid(actor) or actor.hp <= 0: continue
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0: continue
 		var offset = actor.global_position+Vector3(0,0.85,0)-origin
 		var range_to_target = offset.length()
 		if range_to_target < distance and direction.dot(offset.normalized()) > 0.975:
@@ -417,17 +620,43 @@ func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> No
 	return best
 
 func quit_game() -> bool:
+	if quitting: return true
 	if level != null and state.health > 0 and _save() != OK:
 		pause_game()
-		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",func(): get_tree().quit()],["Resume",resume_game]])
+		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",_finish_quit],["Resume",resume_game]])
 		return false
-	get_tree().quit()
+	_finish_quit()
 	return true
 
+func _finish_quit() -> void:
+	if quitting: return
+	quitting = true
+	show_title()
+	menu_scroll.hide()
+	# Native audio playback references release on the next mixer pass.
+	await get_tree().create_timer(0.1).timeout
+	get_tree().quit()
+
+func _has_metal_shader_cache(root: String) -> bool:
+	if not DirAccess.dir_exists_absolute(root): return false
+	var directories = [root]
+	while not directories.is_empty():
+		var path = directories.pop_back()
+		if Array(DirAccess.get_files_at(path)).any(func(file): return file.ends_with(".metal.cache")): return true
+		for child in DirAccess.get_directories_at(path): directories.append(path.path_join(child))
+	return false
+
 # Fixed headless workflow for the release binary, which cannot execute external scripts.
+# Controlled packed-resource workflow; not played difficulty, art/audio quality or FPS acceptance.
 func _verify_export() -> void:
+	var validation_home = OS.get_environment("HOME")
+	if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):
+		push_error("Export validation requires isolated HOME/userdata")
+		get_tree().quit(1)
+		return
 	progress_path = "user://export_validation.json"
 	var checks = {
+		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
 		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
 	start_campaign(1)
@@ -444,6 +673,35 @@ func _verify_export() -> void:
 	restore_checkpoint()
 	checks["checkpoint"] = playing and state.ammo[1] == 90
 	var retained_bank = music.player.bank
+	var map_ids = ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"]
+	var verified_maps = []
+	var loaded_roles = []
+	var acquired_late_weapons = []
+	var verify_level = func() -> void:
+		var id: String = map_ids[state.level_index]
+		checks[id+"_scene"] = playing and level.layout.data.id == id and state.position == level.layout.world_position(level.layout.data.spawn) and enemies.size() == level.layout.data.enemies.size()
+		verified_maps.append(level.layout.data.id)
+		checks[id+"_track"] = music.player.file == "res://audio/"+id+".mid" and retained_bank != null and music.player.bank == retained_bank
+		music.player._process(0.2)
+		checks[id+"_synthesis"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+		var models = {}
+		for node in level.get_children():
+			if node.scene_file_path.get_extension() != "glb": continue
+			var art = node.scene_file_path.get_file().get_basename()
+			var meshes = [node]+node.find_children("*","MeshInstance3D",true,false)
+			if meshes.any(func(part): return part is MeshInstance3D and part.mesh != null and part.mesh.get_surface_count() > 0):
+				models[art] = models.get(art,0)+1
+		var expected_art = {"ribbed_wall":1,"conduit":1,"containment_capsule":1}
+		for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
+		for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
+		for art in expected_art: checks[id+"_art_"+art] = models.get(art,0) >= expected_art[art]
+		player.set_physics_process(false)
+		for actor in enemies:
+			actor.set_physics_process(false)
+			var cell = 256 if actor.kind in ["nursery_warden","choir_avatar"] else 128
+			checks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5
+			if not actor.kind in loaded_roles: loaded_roles.append(actor.kind)
+	verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["foundry"] = playing and level.layout.data.id == "foundry" and state.position == level.layout.world_position(level.layout.data.spawn)
@@ -452,6 +710,7 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
 	checks["foundry_art"] = foundry_heroes.size() == 2
+	verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["processional"] = playing and level.layout.data.id == "processional" and state.position == level.layout.world_position(level.layout.data.spawn)
@@ -462,6 +721,7 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["walking_bone_organ","ossified_palanquin"]: processional_heroes.append(node.scene_file_path)
 	checks["processional_art"] = processional_heroes.size() == 2
+	verify_level.call()
 	player.set_physics_process(false)
 	var caster
 	var caster_count = 0
@@ -479,17 +739,61 @@ func _verify_export() -> void:
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	if caster != null:
+		activate_encounter(caster.encounter_id)
+		checks["caster_encounter"] = caster.active and "encounter:"+caster.encounter_id in state.removed
 		caster._physics_process(0.05)
+		caster._physics_process(0.70)
 		checks["caster_art"] = checks["caster_art"] and caster.sprite.texture != null and caster.motion_mode == CharacterBody3D.MOTION_MODE_FLOATING
 	var projectiles = 0
 	for node in level.get_children():
 		if node.get_script() == Enemy.Projectile: projectiles += 1
 	checks["caster_flight"] = projectiles == 1
+	# Continue the actual campaign inventory; acquire late weapons at their authored pickup cells.
+	set_process(false)
+	for _index in range(3,8):
+		state.complete_level()
+		start_level()
+		verify_level.call()
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		for spec in level.layout.data.pickups:
+			if spec.kind != "weapon" or int(spec.weapon) < 3 or int(spec.weapon) in state.owned_weapons: continue
+			var weapon = int(spec.weapon)
+			var profile = Player.WEAPONS[weapon]
+			var before = state.ammo[weapon]
+			player.position = level.layout.world_position(spec.cell)
+			_process(0)
+			checks[profile.asset+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
+			before = state.ammo[weapon]
+			player.camera.rotation.x = 0.6
+			checks[profile.asset+"_fire"] = player.fire() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
+			if weapon == 4:
+				checks["marrow_launcher_projectile"] = level.get_children().filter(func(node): return node.get_script() == Player.Projectile).size() == 1
+			acquired_late_weapons.append(weapon)
+	checks["full8"] = verified_maps == map_ids
+	checks["late_weapons"] = acquired_late_weapons == [3,4,5] and state.owned_weapons == [0,1,2,3,4,5]
+	for kind in ["crawler","worker","caster","brute","guardian","summoner","nursery_warden","choir_avatar"]:
+		checks["role_"+kind] = kind in loaded_roles
+	for art in ["floor","wall","grate"]:
+		var texture = load("res://assets/art/textures/"+art+".png")
+		checks["texture_"+art] = texture is Texture2D and texture.get_width() > 0 and texture.get_height() > 0
+	for weapon in Player.WEAPONS:
+		var texture = load("res://assets/art/weapons/"+weapon.asset+".png")
+		checks["weapon_art_"+weapon.asset] = texture is Texture2D and texture.get_width() == 960 and texture.get_height() == 200
 	show_title()
+	get_tree().paused = false
+	# Existing native fixture grace: stopped effects release on the next audio mix.
+	await get_tree().create_timer(0.1).timeout
+	await get_tree().process_frame
+	await get_tree().process_frame
 	for check in checks:
 		if not checks[check]:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
 	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices")
+	print("PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
+	print("PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar")
+	print("PASS packaged native Metal shader caches")
+	print("PASS packaged isolated userdata")
 	get_tree().quit()

@@ -4,14 +4,16 @@
 
 | Level / file | Song | Tempo, BPM | Meter | Loop, seconds | Authored material |
 |---|---|---|---|---:|---|
-| Intake / `intake` | Skin Bell | 144 | 4/4 | 66.667 | Clipped E pedal with 3+3+2 sixteenth accents; rising alarm, organ answers and an empty-pipe break. |
-| Foundry / `foundry` | Trip Hammer | 168 / 112 / 168 | 4/4 | 77.143 | D triplet hammer bursts, chromatic hydraulic press, cooling chords and a bent saw arc. |
-| Processional / `processional` | Ten Feet | 112 / 96 / 112 | 5/4 | 84.821 | Ten-beat F-sharp procession, walking bass, independent organ counterpoint and fractured joints. |
-| Reliquary / `reliquary` | Faces in the Halo | 88 / 76 / 88 | 4/4 | 102.632 | C doom chords interrupted by D-flat/F-sharp halo stabs, exposed prayer and triplet splinters. |
-| Nursery / `nursery` | Glass Cradle | 126 / 108 / 126 | 6/8 | 87.619 | Compound A-minor cradle, dotted bass and glass melody collide with chromatic machine teeth. |
-| Ossuary / `ossuary` | Rib Spiral | 156 / 128 / 156 | 7/8 | 77.740 | B bridge riff with 3+2+2 accents, moving bass, slow tomb and a seven-beat climbing saw. |
-| Inversion / `inversion` | Under the Sky | 152 / 114 / 152 | 4/4 and 7/8 | 68.421 | B-flat metric cuts, inverted pitch contour, quartal organ and a suspended saw bend. |
-| Heart / `heart` | Mouth | 160 / 176 / 88 / 176 | 4/4 | 88.909 | E-flat gallop, alternating blast, slow exposed organ core and a new escape answer. |
+| Intake / `intake` | Skin Bell | 144 | 4/4 | 66.667 | E-F-B-flat-G-E command, clipped valve call, displaced breach answer and descending return bass. |
+| Foundry / `foundry` | Trip Hammer | 168 / 112 / 168 | 4/4 | 77.143 | Triplet hammer answered by stop-time snare/bass pickups; D-F-E-A-flat-G-F-E-D molten melody and cooling organ anticipation. |
+| Processional / `processional` | Ten Feet | 112 / 96 / 112 | 5/4 | 84.821 | Retained two-foot F-sharp guitar hook; developed reprise, changed bass route and answering organ canon. |
+| Reliquary / `reliquary` | Faces in the Halo | 88 / 76 / 88 | 4/4 | 102.632 | C-B-flat-A-flat-G descending prayer; independent lament bass and separated inward guitar/organ replies. |
+| Nursery / `nursery` | Glass Cradle | 126 / 108 / 126 | 6/8 | 87.619 | A-C-B-E-D-A lull becomes chromatic; duple fault against compound pulse, damaged bass return. |
+| Ossuary / `ossuary` | Rib Spiral | 156 / 128 / 156 | 7/8 | 77.740 | Six-span 3+2+2 bridge develops an answer/ascent/descent arch; anticipatory bass and organ in the gaps. |
+| Inversion / `inversion` | Under the Sky | 152 / 114 / 152 | 4/4 and 7/8 | 68.421 | B-flat command and its true contour inversion; exposed bass/quartal organ, suspended rests and scar answer. |
+| Heart / `heart` | Mouth | 160 / 176 / 88 / 176 | 4/4 | 88.909 | A-B-A-C-A gallop development, command reharmonized at the exposed organ core, delayed guitar/saw escape answer. |
+
+The five-note command cell has relative pitches `0, +1, +6, +3, 0`. Intake states it in the saw; Inversion reflects it about the first pitch; Heart reharmonizes it over the slow core. The other songs retain their own melodic identities rather than quoting the cell everywhere. Explicit notes and phrase order in each JSON file own the material; the table describes intended musical relationships, not a listening verdict.
 
 ## Edit and regenerate
 
@@ -30,7 +32,7 @@ The default command regenerates only the eight campaign files. `--gate` verifies
 
 ## Palette and loop contract
 
-Zero-based GM programs remain Distortion Guitar 30 on channel 0, Pick Bass 34 on 1, Pipe Organ 19 on 2, and Saw Lead 81 on 3. Channel 9 uses Standard 1, bank 128/program 0, through the existing player's percussion-channel mapping. These scores use kick 36, snare 38 and closed hat 42. Other inspected kit zones had long looping tails in the shipped synth, so fills use rhythmic/velocity variation within these proven short hits. No additional programs, effects sends or sustain pedal are used. Volume/pan defaults are defined once in the encoder; a score may override them with `mix: {voice: [volume, pan]}`.
+Zero-based GM programs remain Distortion Guitar 30 on channel 0, Pick Bass 34 on 1, Pipe Organ 19 on 2, and Saw Lead 81 on 3. Channel 9 uses Standard 1, bank 128/program 0, through the existing player's percussion-channel mapping. These scores use kick 36, snare 38 and closed hat 42. Other inspected kit zones had long looping tails in the shipped synth, so fills use rhythmic/velocity variation within these proven short hits. No additional programs, effects sends or sustain pedal are used. Volume/pan defaults are defined once in the encoder; each revised score authors its own `mix: {voice: [volume, pan]}`, with centered bass/drums and modest guitar/organ/saw separation. Channel volumes stay at or below the previous defaults; the synth master remains unchanged. [AUDIO.md](AUDIO.md#api) owns the independent combat-pressure contract.
 
 Each score ends with a deliberately empty release section lasting at least two seconds; note-offs occur before that section. Pitch bends return to center, sustain stays off, and same-tick note-offs precede retriggers. The runtime can therefore reset a loop without outstanding MIDI notes or controller state. This does not prove the SoundFont release envelope is inaudible at the boundary. Audition the actual loop.
 
@@ -38,4 +40,4 @@ Each score ends with a deliberately empty release section lasting at least two s
 
 Python assertions check deterministic source/output parity, the frozen gate hash, encoder guards, 60–120 second duration, release sections, phrase use and arrangement variation. Normalized main riffs and drum patterns differ across all eight scores; this is a structural check, not a claim of heard quality. Godot assertions use the shipped SMF reader to check actual track events, note balance, programs/channels/controllers, tempo/meter/section parity, end-of-track and release duration. They also load the actual bank and require every authored pitch/velocity to have a matching zone. Bank release envelopes and percussion auto-release/finite-PCM bounds must finish before the loop, including a 100 ms dispatch/buffer allowance. This deterministic bound does not replace listening or cover arbitrary frame stalls.
 
-`game/audio/music.gd` selects these files in table order and reuses the packaged bank. A full native CoreAudio run completed one repeat of every score, pause/resume and stop/switch checks, with non-silent output, zero clipped frames and zero dropped capture frames. The two-second capture buffer preserves PCM across the observed 1.259-second source-file preparation stall; the zero-drop assertion remains unchanged. Settings tests verify the independent Music gain. Listening quality, perceived loop seams and the complete campaign remain acceptance gates; no static or mixer-capture test approves unheard music.
+`game/audio/music.gd` selects these files in table order and reuses the packaged bank. Before this overhaul, a full native CoreAudio run completed one repeat of every baseline score, pause/resume and stop/switch checks, with non-silent output, zero clipped frames and zero dropped capture frames. That evidence does not validate the revised songs or pressure mix. The two-second capture buffer preserves PCM across the previously observed 1.259-second source-file preparation stall; the zero-drop assertion remains unchanged. Re-run native bank/tail assertions and CoreAudio capture, then listen to complete revised arcs, repeats and representative gameplay at quiet/intermediate/full pressure. Listening quality, attack-cue audibility, perceived loop seams and the complete campaign remain acceptance gates; no static or mixer-capture test approves unheard music.

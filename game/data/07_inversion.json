@@ -1,0 +1,2240 @@
+{
+  "id": "inversion",
+  "title": "THE INVERSION",
+  "subtitle": "07 / REALIGN THE SURGICAL CLAMPS",
+  "cell_size": 4,
+  "spawn": [
+    18.5,
+    36.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      16,
+      33,
+      20,
+      38
+    ],
+    [
+      17,
+      28,
+      19,
+      33
+    ],
+    [
+      16,
+      24,
+      22,
+      28
+    ],
+    [
+      4,
+      25,
+      16,
+      27
+    ],
+    [
+      4,
+      23,
+      6,
+      26
+    ],
+    [
+      2,
+      14,
+      11,
+      23
+    ],
+    [
+      5,
+      10,
+      7,
+      13
+    ],
+    [
+      6,
+      8,
+      14,
+      10
+    ],
+    [
+      13,
+      11,
+      15,
+      25
+    ],
+    [
+      13,
+      24,
+      16,
+      26
+    ],
+    [
+      26,
+      21,
+      28,
+      27
+    ],
+    [
+      25,
+      10,
+      35,
+      20
+    ],
+    [
+      31,
+      8,
+      33,
+      9
+    ],
+    [
+      19,
+      5,
+      32,
+      7
+    ],
+    [
+      18,
+      8,
+      20,
+      24
+    ],
+    [
+      16,
+      1,
+      20,
+      4
+    ],
+    [
+      18,
+      4,
+      20,
+      5
+    ],
+    [
+      21,
+      26,
+      40,
+      28
+    ],
+    [
+      37,
+      21,
+      41,
+      35
+    ],
+    [
+      38,
+      17,
+      41,
+      20
+    ],
+    [
+      0,
+      18,
+      1,
+      21
+    ],
+    [
+      29,
+      30,
+      32,
+      33
+    ],
+    [
+      30,
+      29,
+      31,
+      30
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        4,
+        23,
+        7,
+        27
+      ],
+      "axis": 1,
+      "start": 27,
+      "end": 23,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        10,
+        8,
+        15,
+        11
+      ],
+      "axis": 0,
+      "start": 15,
+      "end": 10,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        26,
+        21,
+        29,
+        27
+      ],
+      "axis": 1,
+      "start": 27,
+      "end": 21,
+      "height": -2
+    },
+    {
+      "rect": [
+        20,
+        5,
+        25,
+        8
+      ],
+      "axis": 0,
+      "start": 20,
+      "end": 25,
+      "height": -2
+    },
+    {
+      "rect": [
+        0,
+        8,
+        12,
+        24
+      ],
+      "height": 2.5
+    },
+    {
+      "rect": [
+        25,
+        5,
+        36,
+        21
+      ],
+      "height": -2
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        0,
+        8,
+        12,
+        24
+      ],
+      "height": 16
+    },
+    {
+      "rect": [
+        25,
+        5,
+        36,
+        21
+      ],
+      "height": 16
+    },
+    {
+      "rect": [
+        16,
+        1,
+        21,
+        8
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        16,
+        33,
+        21,
+        39
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        29,
+        29,
+        33,
+        34
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        37,
+        17,
+        42,
+        36
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        0,
+        0,
+        45,
+        42
+      ],
+      "height": 9
+    }
+  ],
+  "loops": [
+    {
+      "id": "inversion_loop_clamps",
+      "hero": "inversion_surgical_cradle",
+      "route": [
+        [
+          19,
+          26
+        ],
+        [
+          5,
+          26
+        ],
+        [
+          5,
+          22
+        ],
+        [
+          3,
+          22
+        ],
+        [
+          3,
+          15
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          26
+        ],
+        [
+          19,
+          26
+        ]
+      ]
+    },
+    {
+      "id": "inversion_loop_gyroscope",
+      "hero": "inversion_tilted_gyroscope",
+      "route": [
+        [
+          19,
+          26
+        ],
+        [
+          27,
+          26
+        ],
+        [
+          27,
+          20
+        ],
+        [
+          34,
+          20
+        ],
+        [
+          34,
+          11
+        ],
+        [
+          32,
+          11
+        ],
+        [
+          32,
+          6
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          19,
+          26
+        ]
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "inversion_surgical_cradle",
+      "cell": [
+        7.5,
+        18.5
+      ],
+      "yaw": 90,
+      "base": [
+        4.95,
+        0.55,
+        3.15
+      ],
+      "tradition_aesthetic": "Christian",
+      "seal": "blood",
+      "light_ids": [
+        "inversion_clamp_feed",
+        "inversion_clamp_core"
+      ]
+    },
+    {
+      "id": "inversion_tilted_gyroscope",
+      "cell": [
+        30.5,
+        15.5
+      ],
+      "yaw": 0,
+      "base": [
+        5.95,
+        0.55,
+        5.2
+      ],
+      "tradition_aesthetic": "Buddhist",
+      "seal": "ivory",
+      "light_ids": [
+        "inversion_gyro_feed",
+        "inversion_gyro_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "inversion_alignment_gate",
+      "cell": [
+        36.7,
+        27.5
+      ],
+      "yaw": 90,
+      "size": [
+        12.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "id": "inversion_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        10.5,
+        21.5
+      ],
+      "text": "SURGICAL CLAMP BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "inversion_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        34.5,
+        14.5
+      ],
+      "text": "GYROSCOPE IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "inversion_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        34.5,
+        27.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "ALIGNMENT RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "inversion_story",
+      "kind": "story",
+      "cell": [
+        0.5,
+        18.5
+      ],
+      "text": "Your coordinates are indexed as restraints. The voice marks each opened surgical clamp as stabilization."
+    },
+    {
+      "id": "inversion_descent",
+      "kind": "exit",
+      "cell": [
+        39.5,
+        33.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    }
+  ],
+  "pickups": [
+    {
+      "id": "inversion_entry_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 80,
+      "cell": [
+        18.5,
+        35.5
+      ]
+    },
+    {
+      "id": "inversion_entry_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 16,
+      "cell": [
+        19.5,
+        35.5
+      ]
+    },
+    {
+      "id": "inversion_entry_health",
+      "kind": "health",
+      "amount": 30,
+      "cell": [
+        19.5,
+        36.5
+      ]
+    },
+    {
+      "id": "inversion_entry_armor",
+      "kind": "armor",
+      "amount": 35,
+      "cell": [
+        19.5,
+        37.5
+      ]
+    },
+    {
+      "id": "inversion_scattergun",
+      "kind": "weapon",
+      "weapon": 2,
+      "amount": 0,
+      "cell": [
+        18.5,
+        34.5
+      ]
+    },
+    {
+      "id": "inversion_first_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 55,
+      "cell": [
+        5.5,
+        25.5
+      ]
+    },
+    {
+      "id": "inversion_first_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        6.5,
+        25.5
+      ]
+    },
+    {
+      "id": "inversion_first_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 50,
+      "cell": [
+        12.5,
+        9.5
+      ]
+    },
+    {
+      "id": "inversion_first_return_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        11.5,
+        9.5
+      ]
+    },
+    {
+      "id": "inversion_second_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 55,
+      "cell": [
+        27.5,
+        23.5
+      ]
+    },
+    {
+      "id": "inversion_second_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        28.5,
+        23.5
+      ]
+    },
+    {
+      "id": "inversion_second_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 50,
+      "cell": [
+        21.5,
+        6.5
+      ]
+    },
+    {
+      "id": "inversion_second_return_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        22.5,
+        6.5
+      ]
+    },
+    {
+      "id": "inversion_disruptor",
+      "kind": "weapon",
+      "weapon": 5,
+      "amount": 30,
+      "cell": [
+        20.5,
+        26.5
+      ]
+    },
+    {
+      "id": "inversion_repeater_ammo",
+      "kind": "ammo",
+      "weapon": 3,
+      "amount": 75,
+      "cell": [
+        30.5,
+        29.5
+      ]
+    },
+    {
+      "id": "inversion_launcher_ammo",
+      "kind": "ammo",
+      "weapon": 4,
+      "amount": 8,
+      "cell": [
+        31.5,
+        29.5
+      ]
+    },
+    {
+      "id": "inversion_finale_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 75,
+      "cell": [
+        32.5,
+        27.5
+      ]
+    },
+    {
+      "id": "inversion_finale_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 12,
+      "cell": [
+        31.5,
+        27.5
+      ]
+    },
+    {
+      "id": "inversion_finale_health",
+      "kind": "health",
+      "amount": 35,
+      "cell": [
+        32.5,
+        26.5
+      ]
+    },
+    {
+      "id": "inversion_finale_armor",
+      "kind": "armor",
+      "amount": 35,
+      "cell": [
+        33.5,
+        26.5
+      ]
+    },
+    {
+      "id": "inversion_disruptor_ammo",
+      "kind": "ammo",
+      "weapon": 5,
+      "amount": 30,
+      "cell": [
+        33.5,
+        27.5
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "inversion_enemy_00",
+      "kind": "brute",
+      "cell": [
+        4.5,
+        21.5
+      ],
+      "yaw": 198
+    },
+    {
+      "id": "inversion_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        9.5,
+        22.5
+      ],
+      "yaw": 117
+    },
+    {
+      "id": "inversion_enemy_02",
+      "kind": "worker",
+      "cell": [
+        10.5,
+        19.5
+      ],
+      "yaw": 124
+    },
+    {
+      "id": "inversion_enemy_03",
+      "kind": "crawler",
+      "cell": [
+        4.5,
+        18.5
+      ],
+      "yaw": 194
+    },
+    {
+      "id": "inversion_enemy_04",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        14.5
+      ],
+      "yaw": 217
+    },
+    {
+      "id": "inversion_enemy_05",
+      "kind": "caster",
+      "cell": [
+        9.5,
+        14.5
+      ],
+      "yaw": 149
+    },
+    {
+      "id": "inversion_enemy_06",
+      "kind": "crawler",
+      "cell": [
+        6.5,
+        12.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "inversion_enemy_07",
+      "kind": "worker",
+      "cell": [
+        10.5,
+        16.5
+      ],
+      "yaw": 124
+    },
+    {
+      "id": "inversion_enemy_08",
+      "kind": "worker",
+      "cell": [
+        2.5,
+        20.5
+      ],
+      "yaw": 236
+    },
+    {
+      "id": "inversion_enemy_09",
+      "kind": "guardian",
+      "cell": [
+        27.5,
+        19.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "inversion_enemy_10",
+      "kind": "crawler",
+      "cell": [
+        33.5,
+        19.5
+      ],
+      "yaw": 104
+    },
+    {
+      "id": "inversion_enemy_11",
+      "kind": "worker",
+      "cell": [
+        34.5,
+        16.5
+      ],
+      "yaw": 127
+    },
+    {
+      "id": "inversion_enemy_12",
+      "kind": "crawler",
+      "cell": [
+        26.5,
+        14.5
+      ],
+      "yaw": 194
+    },
+    {
+      "id": "inversion_enemy_13",
+      "kind": "worker",
+      "cell": [
+        34.5,
+        12.5
+      ],
+      "yaw": 149
+    },
+    {
+      "id": "inversion_enemy_14",
+      "kind": "caster",
+      "cell": [
+        29.5,
+        10.5
+      ],
+      "yaw": 187
+    },
+    {
+      "id": "inversion_enemy_15",
+      "kind": "crawler",
+      "cell": [
+        27.5,
+        11.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "inversion_enemy_16",
+      "kind": "worker",
+      "cell": [
+        32.5,
+        8.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "inversion_enemy_17",
+      "kind": "worker",
+      "cell": [
+        35.5,
+        14.5
+      ],
+      "yaw": 117
+    },
+    {
+      "id": "inversion_enemy_18",
+      "kind": "summoner",
+      "cell": [
+        14.5,
+        13.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "inversion_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        13.5,
+        18.5
+      ],
+      "yaw": 346
+    },
+    {
+      "id": "inversion_enemy_20",
+      "kind": "worker",
+      "cell": [
+        15.5,
+        22.5
+      ],
+      "yaw": 14
+    },
+    {
+      "id": "inversion_enemy_21",
+      "kind": "worker",
+      "cell": [
+        19.5,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "inversion_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        18.5,
+        15.5
+      ],
+      "yaw": 346
+    },
+    {
+      "id": "inversion_enemy_23",
+      "kind": "crawler",
+      "cell": [
+        20.5,
+        20.5
+      ],
+      "yaw": 14
+    },
+    {
+      "id": "inversion_enemy_24",
+      "kind": "worker",
+      "cell": [
+        38.5,
+        23.5
+      ],
+      "yaw": 166
+    },
+    {
+      "id": "inversion_enemy_25",
+      "kind": "crawler",
+      "cell": [
+        40.5,
+        26.5
+      ],
+      "yaw": 108
+    },
+    {
+      "id": "inversion_enemy_26",
+      "kind": "caster",
+      "cell": [
+        38.5,
+        31.5
+      ],
+      "yaw": 342
+    },
+    {
+      "id": "inversion_enemy_27",
+      "kind": "crawler",
+      "cell": [
+        39.5,
+        34.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "inversion_enemy_28",
+      "kind": "worker",
+      "cell": [
+        40.5,
+        30.5
+      ],
+      "yaw": 45
+    },
+    {
+      "id": "inversion_enemy_29",
+      "kind": "crawler",
+      "cell": [
+        37.5,
+        33.5
+      ],
+      "yaw": 333
+    }
+  ],
+  "encounters": [
+    {
+      "id": "inversion_first_commit",
+      "region": [
+        2,
+        14,
+        11.9,
+        23.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "inversion_enemy_00",
+        "inversion_enemy_01",
+        "inversion_enemy_02",
+        "inversion_enemy_03",
+        "inversion_enemy_04",
+        "inversion_enemy_05",
+        "inversion_enemy_06",
+        "inversion_enemy_07",
+        "inversion_enemy_08"
+      ],
+      "cue": {
+        "text": "THE SURGICAL CLAMPS RECEIVE THE ALIGNMENT ORDER",
+        "light_ids": [
+          "inversion_clamp_feed",
+          "inversion_clamp_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "inversion_second_commit",
+      "region": [
+        25,
+        10,
+        35.9,
+        20.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "inversion_enemy_09",
+        "inversion_enemy_10",
+        "inversion_enemy_11",
+        "inversion_enemy_12",
+        "inversion_enemy_13",
+        "inversion_enemy_14",
+        "inversion_enemy_15",
+        "inversion_enemy_16",
+        "inversion_enemy_17"
+      ],
+      "cue": {
+        "text": "THE GYROSCOPE TURNS ITS INDEX TOWARD THE SURFACE",
+        "light_ids": [
+          "inversion_gyro_feed",
+          "inversion_gyro_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "inversion_first_return",
+      "region": [
+        13,
+        12,
+        15.9,
+        14
+      ],
+      "requires": [
+        "blood"
+      ],
+      "enemy_ids": [
+        "inversion_enemy_18",
+        "inversion_enemy_19",
+        "inversion_enemy_20"
+      ],
+      "cue": {
+        "text": "THE UPPER RESTRAINT COLUMN LOSES PRESSURE",
+        "light_ids": [
+          "inversion_first_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "inversion_second_return",
+      "region": [
+        18,
+        9,
+        20.9,
+        11
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "enemy_ids": [
+        "inversion_enemy_21",
+        "inversion_enemy_22",
+        "inversion_enemy_23"
+      ],
+      "cue": {
+        "text": "THE LOWER ARRAY UNLOCKS THE CENTRAL GALLERY",
+        "light_ids": [
+          "inversion_second_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "inversion_finale",
+      "region": [
+        37,
+        21,
+        44.9,
+        35.9
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "enemy_ids": [
+        "inversion_enemy_24",
+        "inversion_enemy_25",
+        "inversion_enemy_26",
+        "inversion_enemy_27",
+        "inversion_enemy_28",
+        "inversion_enemy_29"
+      ],
+      "cue": {
+        "text": "THE ARCHIVE NOW LISTS EVERY RESTRAINT AS OPEN",
+        "light_ids": [
+          "inversion_alignment_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "scenery": [
+    {
+      "art": "inversion_bound_gate",
+      "cell": [
+        17.5,
+        35
+      ],
+      "yaw": 0,
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "solid": [
+        3.2385,
+        0.5,
+        0.91
+      ],
+      "tradition_aesthetic": "Shinto"
+    },
+    {
+      "art": "inversion_cell_prism",
+      "cell": [
+        1,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        2.34,
+        0.5,
+        2.04
+      ],
+      "tradition_aesthetic": "Islamic"
+    },
+    {
+      "art": "inversion_tower_cluster",
+      "cell": [
+        18.5,
+        2.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.78,
+        0.5,
+        2.73
+      ],
+      "tradition_aesthetic": "Hindu"
+    },
+    {
+      "art": "inversion_seven_vessels",
+      "cell": [
+        30.5,
+        31.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.48,
+        0.5,
+        1.86
+      ],
+      "tradition_aesthetic": "Jewish"
+    },
+    {
+      "art": "inversion_winged_cradle",
+      "cell": [
+        39.5,
+        18.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.1925,
+        0.5,
+        1.95
+      ],
+      "tradition_aesthetic": "ancient Egyptian"
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        18.5,
+        37.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        18.5,
+        30.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        11.5,
+        26.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        5.5,
+        24.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6.5,
+        12.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        12.5,
+        9.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        16.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        27.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        32.5,
+        8.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        6.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        14.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        30.5,
+        27.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        39.5,
+        29.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.15,
+        17.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        11.85,
+        21.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        25.15,
+        13.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        35.85,
+        18.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        37.15,
+        30.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        41.85,
+        24.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        9.5,
+        20.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        28.5,
+        16.5
+      ],
+      "yaw": 0,
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        40.5,
+        33.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        4.5,
+        16.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        10,
+        18
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9,
+        22
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        4.5,
+        20
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        9.5,
+        15.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        27,
+        17.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        33,
+        13.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        32.5,
+        18.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        28.5,
+        12.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        13.5,
+        20.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        18.5,
+        18.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        38.5,
+        25
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        40,
+        28.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        38.5,
+        32.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        40,
+        23
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        40,
+        31.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        6,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        6,
+        20
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        9,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        9,
+        20
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        29,
+        14
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        29,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        32,
+        14
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "inversion_cosmic_membrane",
+      "cell": [
+        32,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 180
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        20.85,
+        36.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        16.15,
+        37.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        17.15,
+        30.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.5,
+        24.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.42,
+        0.34,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        11.5,
+        27.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        4.15,
+        24.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        2.15,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        11.85,
+        20.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        9.5,
+        14.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        0.15,
+        20.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        5.15,
+        11.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.5,
+        8.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.42,
+        0.34,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "inversion_first_return_feed",
+      "cell": [
+        15.85,
+        13.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        13.15,
+        22.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.85,
+        23.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25.15,
+        17.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        35.85,
+        14.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.5,
+        10.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        33.85,
+        8.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        24.5,
+        5.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.42,
+        0.34,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        16.15,
+        2.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "inversion_second_return_feed",
+      "cell": [
+        18.15,
+        10.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.85,
+        19.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        32.85,
+        31.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        32.5,
+        28.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "inversion_alignment_feed",
+      "cell": [
+        37.15,
+        25.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        41.85,
+        30.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        39.5,
+        35.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        41.85,
+        18.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "inversion_clamp_feed",
+      "cell": [
+        3.5,
+        22.5
+      ],
+      "height": 10,
+      "target": [
+        7.5,
+        18.5
+      ],
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "inversion_clamp_core",
+      "cell": [
+        10.5,
+        15.5
+      ],
+      "height": 10,
+      "target": [
+        7.5,
+        18.5
+      ],
+      "color": [
+        0.4,
+        0.32,
+        0.86
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "inversion_gyro_feed",
+      "cell": [
+        26.5,
+        19.5
+      ],
+      "height": 10,
+      "target": [
+        30.5,
+        15.5
+      ],
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "inversion_gyro_core",
+      "cell": [
+        34.5,
+        11.5
+      ],
+      "height": 10,
+      "target": [
+        30.5,
+        15.5
+      ],
+      "color": [
+        0.4,
+        0.32,
+        0.86
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "atmosphere_0_0",
+      "cell": [
+        3.5,
+        18.8
+      ],
+      "height": 8,
+      "color": [
+        0.55,
+        0.22,
+        0.83
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_0_1",
+      "cell": [
+        10.3,
+        18.8
+      ],
+      "height": 8,
+      "color": [
+        0.55,
+        0.22,
+        0.83
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_0",
+      "cell": [
+        27.5,
+        15.5
+      ],
+      "height": 8,
+      "color": [
+        0.55,
+        0.22,
+        0.83
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_1",
+      "cell": [
+        34,
+        15.5
+      ],
+      "height": 8,
+      "color": [
+        0.55,
+        0.22,
+        0.83
+      ],
+      "energy": 1.2,
+      "range": 22
+    }
+  ],
+  "mission": "RELEASE BOTH CLAMPS / RETURN TO THE UPPER RECOVERY BAY"
+}

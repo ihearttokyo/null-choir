@@ -13,5 +13,5 @@ func run() -> void:
 	print("BANK_ZONE_LAYERS: actual=", actual, " declared=2")
 	assert(actual == 2, "preset and instrument key ranges must intersect")
 	bank = null
-	print("MIDI_BANK_GREEN: preset-zone intersection")
+	print("PASS MIDI_BANK_GREEN: preset-zone intersection")
 	quit()

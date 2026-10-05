@@ -350,8 +350,8 @@ func read_file( path:String ) -> SMFParseResult:
 	var result: = SMFParseResult.new( )
 
 	var f: = FileAccess.open( path, FileAccess.READ )
-	if f.get_error( ) != OK:
-		result.error = f.get_error( )
+	if f == null:
+		result.error = FileAccess.get_open_error( )
 		return result
 	var stream:StreamPeerBuffer = StreamPeerBuffer.new( )
 	stream.set_data_array( f.get_buffer( f.get_length( ) ) )
@@ -381,7 +381,7 @@ func read_data( data:PackedByteArray ) -> SMFParseResult:
 ## @return	smf
 func _read( input:StreamPeerBuffer ) -> SMFData:
 	var header:MIDIChunkData = self._read_chunk_data( input )
-	if header.id != "MThd" and header.size != 6:
+	if header.id != "MThd" or header.size != 6:
 		print( "expected MThd header" )
 		return null
 
@@ -390,6 +390,7 @@ func _read( input:StreamPeerBuffer ) -> SMFData:
 	smf.format_type = header.stream.get_u16( )
 	smf.track_count = header.stream.get_u16( )
 	smf.timebase = header.stream.get_u16( )
+	if smf.timebase <= 0 or smf.timebase > 32767: return null
 
 	for i in smf.track_count:
 		var track = self._read_track( input, i )

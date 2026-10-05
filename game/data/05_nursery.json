@@ -1,0 +1,2153 @@
+{
+  "id": "nursery",
+  "title": "THE NURSERY",
+  "subtitle": "05 / STABILIZE THE GROWTH FEEDS",
+  "cell_size": 4,
+  "spawn": [
+    4.5,
+    33.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      2,
+      30,
+      6,
+      34
+    ],
+    [
+      3,
+      24,
+      5,
+      30
+    ],
+    [
+      4,
+      20,
+      12,
+      24
+    ],
+    [
+      10,
+      20,
+      15,
+      22
+    ],
+    [
+      3,
+      15,
+      5,
+      19
+    ],
+    [
+      1,
+      6,
+      10,
+      14
+    ],
+    [
+      0,
+      2,
+      2,
+      5
+    ],
+    [
+      11,
+      8,
+      15,
+      10
+    ],
+    [
+      13,
+      11,
+      15,
+      20
+    ],
+    [
+      16,
+      22,
+      18,
+      24
+    ],
+    [
+      15,
+      25,
+      23,
+      34
+    ],
+    [
+      11,
+      30,
+      14,
+      32
+    ],
+    [
+      11,
+      23,
+      13,
+      29
+    ],
+    [
+      20,
+      21,
+      23,
+      24
+    ],
+    [
+      15,
+      20,
+      25,
+      22
+    ],
+    [
+      24,
+      15,
+      26,
+      20
+    ],
+    [
+      20,
+      18,
+      23,
+      20
+    ],
+    [
+      24,
+      4,
+      36,
+      14
+    ],
+    [
+      37,
+      8,
+      40,
+      11
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        3,
+        15,
+        6,
+        20
+      ],
+      "axis": 1,
+      "start": 20,
+      "end": 15,
+      "height": 2
+    },
+    {
+      "rect": [
+        11,
+        8,
+        15,
+        11
+      ],
+      "axis": 0,
+      "start": 15,
+      "end": 11,
+      "height": 2
+    },
+    {
+      "rect": [
+        16,
+        22,
+        19,
+        25
+      ],
+      "axis": 1,
+      "start": 22,
+      "end": 25,
+      "height": -1.5
+    },
+    {
+      "rect": [
+        11,
+        30,
+        15,
+        33
+      ],
+      "axis": 0,
+      "start": 11,
+      "end": 15,
+      "height": -1.5
+    },
+    {
+      "rect": [
+        0,
+        2,
+        11,
+        15
+      ],
+      "height": 2
+    },
+    {
+      "rect": [
+        15,
+        25,
+        24,
+        35
+      ],
+      "height": -1.5
+    },
+    {
+      "rect": [
+        20,
+        23,
+        24,
+        25
+      ],
+      "height": -1.5
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        0,
+        2,
+        11,
+        15
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        15,
+        25,
+        24,
+        35
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        20,
+        21,
+        24,
+        25
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        24,
+        4,
+        41,
+        15
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        2,
+        30,
+        7,
+        35
+      ],
+      "height": 9
+    },
+    {
+      "rect": [
+        20,
+        18,
+        24,
+        21
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        0,
+        0,
+        45,
+        40
+      ],
+      "height": 8
+    }
+  ],
+  "loops": [
+    {
+      "id": "nursery_loop_gestation",
+      "hero": "nursery_gestation_engine",
+      "route": [
+        [
+          14,
+          21
+        ],
+        [
+          4,
+          21
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          21
+        ]
+      ]
+    },
+    {
+      "id": "nursery_loop_seeds",
+      "hero": "nursery_seed_orrery",
+      "route": [
+        [
+          14,
+          21
+        ],
+        [
+          17,
+          21
+        ],
+        [
+          17,
+          25
+        ],
+        [
+          22,
+          25
+        ],
+        [
+          22,
+          33
+        ],
+        [
+          16,
+          33
+        ],
+        [
+          16,
+          31
+        ],
+        [
+          12,
+          31
+        ],
+        [
+          12,
+          21
+        ],
+        [
+          14,
+          21
+        ]
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "nursery_gestation_engine",
+      "cell": [
+        5.5,
+        10.5
+      ],
+      "yaw": 0,
+      "base": [
+        3.85,
+        0.55,
+        3.15
+      ],
+      "tradition_aesthetic": "Christian",
+      "seal": "blood",
+      "light_ids": [
+        "nursery_gestation_feed",
+        "nursery_gestation_core"
+      ]
+    },
+    {
+      "id": "nursery_seed_orrery",
+      "cell": [
+        19.5,
+        29.5
+      ],
+      "yaw": 0,
+      "base": [
+        5.75,
+        0.55,
+        4.85
+      ],
+      "tradition_aesthetic": "Buddhist",
+      "seal": "ivory",
+      "light_ids": [
+        "nursery_seed_feed",
+        "nursery_seed_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "nursery_growth_gate",
+      "cell": [
+        25.5,
+        16.7
+      ],
+      "size": [
+        12.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "nursery_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        9.5,
+        12.5
+      ],
+      "text": "GESTATION BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "nursery_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        22.5,
+        30.5
+      ],
+      "text": "SEED RECEIVER IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "nursery_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        25.5,
+        19.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "nursery_story",
+      "kind": "story",
+      "cell": [
+        23.25,
+        23.75
+      ],
+      "text": "The growth chart labels your repairs as release trials. Every successful recovery has widened the restraints."
+    },
+    {
+      "id": "nursery_descent",
+      "kind": "exit",
+      "cell": [
+        35.5,
+        5.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "GROWTH FEEDS STABLE / DESCEND",
+      "requires_defeated": [
+        "nursery_warden"
+      ]
+    }
+  ],
+  "mission": "STABILIZE BOTH GARDENS / RETURN TO THE DELIVERY GALLERY",
+  "pickups": [
+    {
+      "id": "nursery_entry_rivets",
+      "kind": "ammo",
+      "cell": [
+        3.5,
+        33.5
+      ],
+      "amount": 60,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_entry_scattergun",
+      "kind": "weapon",
+      "cell": [
+        4.5,
+        26.5
+      ],
+      "amount": 16,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_entry_health",
+      "kind": "health",
+      "cell": [
+        3.5,
+        32.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "nursery_entry_armor",
+      "kind": "armor",
+      "cell": [
+        5.5,
+        32.5
+      ],
+      "amount": 40
+    },
+    {
+      "id": "nursery_repeater",
+      "kind": "weapon",
+      "cell": [
+        14.5,
+        21.5
+      ],
+      "amount": 60,
+      "weapon": 3
+    },
+    {
+      "id": "nursery_first_approach_rivets",
+      "kind": "ammo",
+      "cell": [
+        4.5,
+        18.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_first_approach_shells",
+      "kind": "ammo",
+      "cell": [
+        5.5,
+        18.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_first_approach_health",
+      "kind": "health",
+      "cell": [
+        3.5,
+        18.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "nursery_first_return_rivets",
+      "kind": "ammo",
+      "cell": [
+        14.5,
+        10.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_first_return_shells",
+      "kind": "ammo",
+      "cell": [
+        13.5,
+        10.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_first_armor",
+      "kind": "armor",
+      "cell": [
+        9.5,
+        13.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "nursery_second_approach_rivets",
+      "kind": "ammo",
+      "cell": [
+        17.5,
+        23.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_second_approach_shells",
+      "kind": "ammo",
+      "cell": [
+        18.5,
+        23.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_second_approach_health",
+      "kind": "health",
+      "cell": [
+        16.5,
+        23.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "nursery_second_return_rivets",
+      "kind": "ammo",
+      "cell": [
+        12.5,
+        29.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_second_return_shells",
+      "kind": "ammo",
+      "cell": [
+        13.5,
+        29.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_second_armor",
+      "kind": "armor",
+      "cell": [
+        22.5,
+        32.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "nursery_finale_rivets",
+      "kind": "ammo",
+      "cell": [
+        25.5,
+        20.5
+      ],
+      "amount": 60,
+      "weapon": 1
+    },
+    {
+      "id": "nursery_finale_shells",
+      "kind": "ammo",
+      "cell": [
+        26.5,
+        19.5
+      ],
+      "amount": 12,
+      "weapon": 2
+    },
+    {
+      "id": "nursery_finale_health",
+      "kind": "health",
+      "cell": [
+        24.5,
+        19.5
+      ],
+      "amount": 40
+    },
+    {
+      "id": "nursery_finale_armor",
+      "kind": "armor",
+      "cell": [
+        25.5,
+        21.5
+      ],
+      "amount": 60
+    },
+    {
+      "id": "nursery_repeater_supply",
+      "kind": "ammo",
+      "cell": [
+        24.5,
+        20.5
+      ],
+      "amount": 60,
+      "weapon": 3
+    }
+  ],
+  "enemies": [
+    {
+      "id": "nursery_enemy_00",
+      "kind": "crawler",
+      "cell": [
+        2.5,
+        12.5
+      ],
+      "yaw": -161.5651
+    },
+    {
+      "id": "nursery_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        8.5,
+        13.5
+      ],
+      "yaw": 141.3402
+    },
+    {
+      "id": "nursery_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        2.5,
+        8.5
+      ],
+      "yaw": -168.6901
+    },
+    {
+      "id": "nursery_enemy_03",
+      "kind": "crawler",
+      "cell": [
+        8.5,
+        8.5
+      ],
+      "yaw": 158.1986
+    },
+    {
+      "id": "nursery_enemy_04",
+      "kind": "brute",
+      "cell": [
+        9.5,
+        11.5
+      ],
+      "yaw": 144.4623
+    },
+    {
+      "id": "nursery_enemy_05",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        7.5
+      ],
+      "yaw": -174.8056
+    },
+    {
+      "id": "nursery_enemy_06",
+      "kind": "worker",
+      "cell": [
+        1.5,
+        11.5
+      ],
+      "yaw": -156.8014
+    },
+    {
+      "id": "nursery_enemy_07",
+      "kind": "caster",
+      "cell": [
+        6.5,
+        7.5
+      ],
+      "yaw": 169.6952
+    },
+    {
+      "id": "nursery_enemy_08",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        27.5
+      ],
+      "yaw": -14.0362
+    },
+    {
+      "id": "nursery_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        22.5,
+        28.5
+      ],
+      "yaw": 45.0
+    },
+    {
+      "id": "nursery_enemy_10",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        32.5
+      ],
+      "yaw": -6.3402
+    },
+    {
+      "id": "nursery_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        21.5,
+        33.5
+      ],
+      "yaw": 21.8014
+    },
+    {
+      "id": "nursery_enemy_12",
+      "kind": "guardian",
+      "cell": [
+        22.5,
+        26.5
+      ],
+      "yaw": 59.0362
+    },
+    {
+      "id": "nursery_enemy_13",
+      "kind": "worker",
+      "cell": [
+        17.5,
+        25.5
+      ],
+      "yaw": -0.0
+    },
+    {
+      "id": "nursery_enemy_14",
+      "kind": "worker",
+      "cell": [
+        20.5,
+        33.5
+      ],
+      "yaw": 16.6992
+    },
+    {
+      "id": "nursery_enemy_15",
+      "kind": "caster",
+      "cell": [
+        20.5,
+        26.5
+      ],
+      "yaw": 45.0
+    },
+    {
+      "id": "nursery_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        14.5,
+        13.5
+      ],
+      "yaw": -0.0
+    },
+    {
+      "id": "nursery_enemy_17",
+      "kind": "summoner",
+      "cell": [
+        13.5,
+        15.5
+      ],
+      "yaw": -11.3099
+    },
+    {
+      "id": "nursery_enemy_18",
+      "kind": "worker",
+      "cell": [
+        15.5,
+        17.5
+      ],
+      "yaw": 8.1301
+    },
+    {
+      "id": "nursery_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        12.5,
+        27.5
+      ],
+      "yaw": -180.0
+    },
+    {
+      "id": "nursery_enemy_20",
+      "kind": "worker",
+      "cell": [
+        11.5,
+        25.5
+      ],
+      "yaw": -165.9638
+    },
+    {
+      "id": "nursery_enemy_21",
+      "kind": "worker",
+      "cell": [
+        13.5,
+        24.5
+      ],
+      "yaw": 168.6901
+    },
+    {
+      "id": "nursery_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        26.5,
+        8.5
+      ],
+      "yaw": 172.4054
+    },
+    {
+      "id": "nursery_enemy_23",
+      "kind": "crawler",
+      "cell": [
+        34.5,
+        9.5
+      ],
+      "yaw": 125.8377
+    },
+    {
+      "id": "nursery_enemy_24",
+      "kind": "worker",
+      "cell": [
+        26.5,
+        6.5
+      ],
+      "yaw": 173.991
+    },
+    {
+      "id": "nursery_enemy_25",
+      "kind": "worker",
+      "cell": [
+        34.5,
+        13.5
+      ],
+      "yaw": 105.5241
+    },
+    {
+      "id": "nursery_enemy_26",
+      "kind": "worker",
+      "cell": [
+        31.5,
+        5.5
+      ],
+      "yaw": 150.2551
+    },
+    {
+      "id": "nursery_enemy_27",
+      "kind": "caster",
+      "cell": [
+        30.5,
+        12.5
+      ],
+      "yaw": 124.992
+    },
+    {
+      "id": "nursery_warden",
+      "kind": "nursery_warden",
+      "cell": [
+        30.5,
+        9.5
+      ],
+      "yaw": 180
+    }
+  ],
+  "encounters": [
+    {
+      "id": "nursery_first_commit",
+      "region": [
+        1,
+        6,
+        10.9,
+        14.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "nursery_enemy_00",
+        "nursery_enemy_01",
+        "nursery_enemy_02",
+        "nursery_enemy_03",
+        "nursery_enemy_04",
+        "nursery_enemy_05",
+        "nursery_enemy_06",
+        "nursery_enemy_07"
+      ],
+      "cue": {
+        "text": "THE GLASS ROOTS BEGIN TO FEED",
+        "light_ids": [
+          "nursery_gestation_feed",
+          "nursery_gestation_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "nursery_second_commit",
+      "region": [
+        15,
+        25,
+        23.9,
+        34.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "nursery_enemy_08",
+        "nursery_enemy_09",
+        "nursery_enemy_10",
+        "nursery_enemy_11",
+        "nursery_enemy_12",
+        "nursery_enemy_13",
+        "nursery_enemy_14",
+        "nursery_enemy_15"
+      ],
+      "cue": {
+        "text": "THE SEED RECEIVER CHOOSES A BODY",
+        "light_ids": [
+          "nursery_seed_feed",
+          "nursery_seed_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "nursery_first_return",
+      "region": [
+        13,
+        11,
+        15.9,
+        13
+      ],
+      "requires": [
+        "blood"
+      ],
+      "enemy_ids": [
+        "nursery_enemy_16",
+        "nursery_enemy_17",
+        "nursery_enemy_18"
+      ],
+      "cue": {
+        "text": "THE GROWTH FEED FOLLOWS YOU DOWN",
+        "light_ids": [
+          "nursery_first_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "nursery_second_return",
+      "region": [
+        11,
+        26,
+        13.9,
+        28
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "enemy_ids": [
+        "nursery_enemy_19",
+        "nursery_enemy_20",
+        "nursery_enemy_21"
+      ],
+      "cue": {
+        "text": "THE RECEIVER SENDS ITS CONTENTS AHEAD",
+        "light_ids": [
+          "nursery_second_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "nursery_finale",
+      "region": [
+        24,
+        4,
+        40.9,
+        16.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "enemy_ids": [
+        "nursery_enemy_22",
+        "nursery_enemy_23",
+        "nursery_enemy_24",
+        "nursery_enemy_25",
+        "nursery_enemy_26",
+        "nursery_enemy_27",
+        "nursery_warden"
+      ],
+      "cue": {
+        "text": "THE DELIVERY CHAMBER ACCEPTS YOUR REPAIR",
+        "light_ids": [
+          "nursery_delivery_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "scenery": [
+    {
+      "art": "nursery_bound_gate",
+      "cell": [
+        6,
+        31.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "solid": [
+        3.2295,
+        0.5,
+        0.8735
+      ],
+      "tradition_aesthetic": "Shinto"
+    },
+    {
+      "art": "nursery_cell_canopy",
+      "cell": [
+        21.5,
+        23.75
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.42,
+        0.5,
+        2.73
+      ],
+      "tradition_aesthetic": "Islamic"
+    },
+    {
+      "art": "nursery_tower_cluster",
+      "cell": [
+        1.5,
+        3.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.3299999999999996,
+        0.5,
+        2.22
+      ],
+      "tradition_aesthetic": "Hindu"
+    },
+    {
+      "art": "nursery_seven_vessels",
+      "cell": [
+        21.5,
+        19.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.51,
+        0.5,
+        1.89
+      ],
+      "tradition_aesthetic": "Jewish"
+    },
+    {
+      "art": "nursery_winged_cradle",
+      "cell": [
+        39,
+        9.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.5825000000000005,
+        0.5,
+        2.795
+      ],
+      "tradition_aesthetic": "ancient Egyptian"
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        4.5,
+        33.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        4.5,
+        27.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        8.5,
+        21.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        17.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        12.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        12.5,
+        26.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        17.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        21.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        25.5,
+        19.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        1.2,
+        9.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.8,
+        12.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        15.2,
+        28.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        23.8,
+        31.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        24.2,
+        7.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        36.8,
+        12.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        3.5,
+        11.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        21.5,
+        31.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        8,
+        8
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        2,
+        10
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        8,
+        12
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        6.5,
+        13.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17.5,
+        28.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        21.5,
+        32
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        22,
+        28
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        17.5,
+        32
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        13.5,
+        18
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        11.5,
+        23.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        27.5,
+        8
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        33,
+        11
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        26.5,
+        12
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        34,
+        6.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        27.5,
+        12
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        33.5,
+        7.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        4,
+        9
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        4,
+        12
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        7,
+        9
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        7,
+        12
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        18,
+        28
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        18,
+        31
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        21,
+        28
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "nursery_growth_vault",
+      "cell": [
+        21,
+        31
+      ],
+      "height": 9.2,
+      "yaw": 180
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        2.15,
+        33.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        6.85,
+        32.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.8,
+        0.44,
+        0.18
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        3.15,
+        27.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        5.85,
+        25.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        7.5,
+        24.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        3.15,
+        17.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        1.15,
+        8.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.85,
+        12.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        7.5,
+        6.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        0.15,
+        3.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "nursery_first_return_feed",
+      "cell": [
+        15.85,
+        12.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        13.15,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.85,
+        23.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        15.15,
+        27.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.85,
+        31.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        19.5,
+        34.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "nursery_second_return_feed",
+      "cell": [
+        11.15,
+        26.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.15,
+        23.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        19.5,
+        20.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.5,
+        18.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        26.85,
+        18.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "nursery_delivery_feed",
+      "cell": [
+        24.15,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        36.85,
+        6.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        30.5,
+        4.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        31.5,
+        14.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        40.85,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "nursery_gestation_feed",
+      "cell": [
+        2.5,
+        7.5
+      ],
+      "height": 9,
+      "target": [
+        5.5,
+        10.5
+      ],
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "nursery_gestation_core",
+      "cell": [
+        4.8,
+        11.35
+      ],
+      "height": 3.9,
+      "target": [
+        5.5,
+        10.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "nursery_seed_feed",
+      "cell": [
+        16.5,
+        25.5
+      ],
+      "height": 9,
+      "target": [
+        19.5,
+        29.5
+      ],
+      "color": [
+        0.86,
+        0.44,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "nursery_seed_core",
+      "cell": [
+        22.5,
+        33.5
+      ],
+      "height": 9,
+      "target": [
+        19.5,
+        29.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "atmosphere_0_0",
+      "cell": [
+        2.5,
+        10.5
+      ],
+      "height": 8,
+      "color": [
+        0.25,
+        0.62,
+        0.72
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_0_1",
+      "cell": [
+        9.2,
+        10.5
+      ],
+      "height": 8,
+      "color": [
+        0.25,
+        0.62,
+        0.72
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_0",
+      "cell": [
+        17.1,
+        30.25
+      ],
+      "height": 8,
+      "color": [
+        0.25,
+        0.62,
+        0.72
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_1",
+      "cell": [
+        21.9,
+        30.25
+      ],
+      "height": 8,
+      "color": [
+        0.25,
+        0.62,
+        0.72
+      ],
+      "energy": 1.2,
+      "range": 22
+    }
+  ]
+}

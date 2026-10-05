@@ -1,0 +1,2179 @@
+{
+  "id": "reliquary",
+  "title": "THE RELIQUARY",
+  "subtitle": "04 / RESTORE THE MEMORY INDEX",
+  "cell_size": 4,
+  "spawn": [
+    19.5,
+    38.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      17,
+      35,
+      22,
+      39
+    ],
+    [
+      18,
+      31,
+      20,
+      35
+    ],
+    [
+      15,
+      26,
+      24,
+      30
+    ],
+    [
+      17,
+      9,
+      21,
+      26
+    ],
+    [
+      18,
+      2,
+      20,
+      9
+    ],
+    [
+      6,
+      26,
+      17,
+      28
+    ],
+    [
+      8,
+      22,
+      10,
+      25
+    ],
+    [
+      2,
+      12,
+      12,
+      21
+    ],
+    [
+      4,
+      10,
+      12,
+      11
+    ],
+    [
+      0,
+      14,
+      1,
+      17
+    ],
+    [
+      13,
+      10,
+      16,
+      12
+    ],
+    [
+      14,
+      6,
+      16,
+      9
+    ],
+    [
+      22,
+      27,
+      31,
+      29
+    ],
+    [
+      28,
+      21,
+      30,
+      26
+    ],
+    [
+      26,
+      10,
+      36,
+      20
+    ],
+    [
+      28,
+      8,
+      34,
+      9
+    ],
+    [
+      34,
+      5,
+      37,
+      8
+    ],
+    [
+      22,
+      11,
+      25,
+      13
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        8,
+        22,
+        11,
+        26
+      ],
+      "axis": 1,
+      "start": 26,
+      "end": 22,
+      "height": -2
+    },
+    {
+      "rect": [
+        13,
+        10,
+        17,
+        13
+      ],
+      "axis": 0,
+      "start": 17,
+      "end": 13,
+      "height": -2
+    },
+    {
+      "rect": [
+        28,
+        21,
+        31,
+        27
+      ],
+      "axis": 1,
+      "start": 27,
+      "end": 21,
+      "height": 2
+    },
+    {
+      "rect": [
+        22,
+        11,
+        26,
+        14
+      ],
+      "axis": 0,
+      "start": 22,
+      "end": 26,
+      "height": 2
+    },
+    {
+      "rect": [
+        0,
+        10,
+        13,
+        22
+      ],
+      "height": -2
+    },
+    {
+      "rect": [
+        26,
+        5,
+        38,
+        21
+      ],
+      "height": 2
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        0,
+        10,
+        13,
+        22
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        26,
+        5,
+        38,
+        21
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        14,
+        6,
+        16,
+        9
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        15,
+        26,
+        24,
+        30
+      ],
+      "height": 12
+    },
+    {
+      "rect": [
+        17,
+        35,
+        22,
+        39
+      ],
+      "height": 9
+    },
+    {
+      "rect": [
+        0,
+        0,
+        40,
+        40
+      ],
+      "height": 8
+    }
+  ],
+  "loops": [
+    {
+      "id": "reliquary_loop_halo",
+      "hero": "reliquary_face_halo",
+      "route": [
+        [
+          19,
+          11
+        ],
+        [
+          19,
+          28
+        ],
+        [
+          9,
+          28
+        ],
+        [
+          9,
+          20
+        ],
+        [
+          4,
+          20
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          19,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "reliquary_loop_wheel",
+      "hero": "reliquary_memory_wheel",
+      "route": [
+        [
+          19,
+          11
+        ],
+        [
+          19,
+          28
+        ],
+        [
+          29,
+          28
+        ],
+        [
+          29,
+          20
+        ],
+        [
+          35,
+          20
+        ],
+        [
+          35,
+          11
+        ],
+        [
+          28,
+          11
+        ],
+        [
+          19,
+          11
+        ]
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "reliquary_face_halo",
+      "cell": [
+        7.5,
+        16.5
+      ],
+      "yaw": 0,
+      "base": [
+        4.86,
+        0.55,
+        2.85
+      ],
+      "tradition_aesthetic": "Christian",
+      "seal": "blood",
+      "light_ids": [
+        "reliquary_halo_feed",
+        "reliquary_halo_core"
+      ]
+    },
+    {
+      "id": "reliquary_memory_wheel",
+      "cell": [
+        31.5,
+        15.5
+      ],
+      "yaw": 0,
+      "base": [
+        5.85,
+        0.55,
+        4.75
+      ],
+      "tradition_aesthetic": "Buddhist",
+      "seal": "ivory",
+      "light_ids": [
+        "reliquary_wheel_feed",
+        "reliquary_wheel_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "reliquary_index_gate",
+      "cell": [
+        19.5,
+        7.7
+      ],
+      "size": [
+        12.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "reliquary_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        11.5,
+        17.5
+      ],
+      "text": "FACE REGISTER BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "reliquary_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        35.5,
+        17.5
+      ],
+      "text": "MEMORY DRUM IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "reliquary_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        19.5,
+        10.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "reliquary_story",
+      "kind": "story",
+      "cell": [
+        0.75,
+        16.5
+      ],
+      "text": "The mission voice is indexed here as a command channel, not a recording. Your replies open the drawers."
+    },
+    {
+      "id": "reliquary_descent",
+      "kind": "exit",
+      "cell": [
+        19.5,
+        3.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "MEMORY INDEX RESTORED / DESCEND"
+    }
+  ],
+  "mission": "RECOVER BOTH REGISTERS / RETURN TO THE CATALOGUE",
+  "pickups": [
+    {
+      "id": "reliquary_entry_rivets",
+      "kind": "ammo",
+      "cell": [
+        18.5,
+        38.5
+      ],
+      "amount": 60,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_entry_scattergun",
+      "kind": "weapon",
+      "cell": [
+        19.5,
+        32.5
+      ],
+      "amount": 16,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_entry_health",
+      "kind": "health",
+      "cell": [
+        18.5,
+        37.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "reliquary_entry_armor",
+      "kind": "armor",
+      "cell": [
+        20.5,
+        37.5
+      ],
+      "amount": 40
+    },
+    {
+      "id": "reliquary_halo_approach_rivets",
+      "kind": "ammo",
+      "cell": [
+        9.5,
+        25.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_halo_approach_shells",
+      "kind": "ammo",
+      "cell": [
+        10.5,
+        25.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_halo_approach_health",
+      "kind": "health",
+      "cell": [
+        8.5,
+        25.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "reliquary_halo_approach_armor",
+      "kind": "armor",
+      "cell": [
+        9.5,
+        27.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "reliquary_halo_return_rivets",
+      "kind": "ammo",
+      "cell": [
+        15.5,
+        11.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_halo_return_shells",
+      "kind": "ammo",
+      "cell": [
+        14.5,
+        11.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_halo_recess_health",
+      "kind": "health",
+      "cell": [
+        2.75,
+        18.5
+      ],
+      "amount": 25
+    },
+    {
+      "id": "reliquary_wheel_approach_rivets",
+      "kind": "ammo",
+      "cell": [
+        29.5,
+        25.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_wheel_approach_shells",
+      "kind": "ammo",
+      "cell": [
+        30.5,
+        25.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_wheel_approach_health",
+      "kind": "health",
+      "cell": [
+        28.5,
+        25.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "reliquary_wheel_approach_armor",
+      "kind": "armor",
+      "cell": [
+        30.5,
+        28.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "reliquary_wheel_return_rivets",
+      "kind": "ammo",
+      "cell": [
+        23.5,
+        12.5
+      ],
+      "amount": 45,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_wheel_return_shells",
+      "kind": "ammo",
+      "cell": [
+        24.5,
+        13.5
+      ],
+      "amount": 8,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_wheel_recess_health",
+      "kind": "health",
+      "cell": [
+        36.5,
+        19.5
+      ],
+      "amount": 25
+    },
+    {
+      "id": "reliquary_catalogue_rivets",
+      "kind": "ammo",
+      "cell": [
+        20.5,
+        11.5
+      ],
+      "amount": 60,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_catalogue_shells",
+      "kind": "ammo",
+      "cell": [
+        19.5,
+        11.5
+      ],
+      "amount": 10,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_catalogue_health",
+      "kind": "health",
+      "cell": [
+        19.5,
+        12.5
+      ],
+      "amount": 40
+    },
+    {
+      "id": "reliquary_catalogue_armor",
+      "kind": "armor",
+      "cell": [
+        18.5,
+        12.5
+      ],
+      "amount": 50
+    },
+    {
+      "id": "reliquary_exit_rivets",
+      "kind": "ammo",
+      "cell": [
+        19.5,
+        10.5
+      ],
+      "amount": 40,
+      "weapon": 1
+    },
+    {
+      "id": "reliquary_exit_shells",
+      "kind": "ammo",
+      "cell": [
+        20.5,
+        10.5
+      ],
+      "amount": 10,
+      "weapon": 2
+    },
+    {
+      "id": "reliquary_exit_health",
+      "kind": "health",
+      "cell": [
+        18.5,
+        11.5
+      ],
+      "amount": 30
+    }
+  ],
+  "enemies": [
+    {
+      "id": "reliquary_enemy_00",
+      "kind": "crawler",
+      "cell": [
+        4.5,
+        19.5
+      ],
+      "yaw": -128.66
+    },
+    {
+      "id": "reliquary_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        10.5,
+        20.5
+      ],
+      "yaw": 161.565
+    },
+    {
+      "id": "reliquary_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        3.5,
+        17.5
+      ],
+      "yaw": -135.0
+    },
+    {
+      "id": "reliquary_enemy_03",
+      "kind": "crawler",
+      "cell": [
+        9.5,
+        13.5
+      ],
+      "yaw": -180.0
+    },
+    {
+      "id": "reliquary_enemy_04",
+      "kind": "worker",
+      "cell": [
+        11.5,
+        14.5
+      ],
+      "yaw": 167.471
+    },
+    {
+      "id": "reliquary_enemy_05",
+      "kind": "worker",
+      "cell": [
+        4.5,
+        12.5
+      ],
+      "yaw": -155.556
+    },
+    {
+      "id": "reliquary_enemy_06",
+      "kind": "worker",
+      "cell": [
+        12,
+        20
+      ],
+      "yaw": 144.462
+    },
+    {
+      "id": "reliquary_enemy_07",
+      "kind": "caster",
+      "cell": [
+        7.5,
+        11.5
+      ],
+      "yaw": -170.538
+    },
+    {
+      "id": "reliquary_enemy_08",
+      "kind": "crawler",
+      "cell": [
+        28.5,
+        19.5
+      ],
+      "yaw": -165.964
+    },
+    {
+      "id": "reliquary_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        35.5,
+        19.5
+      ],
+      "yaw": 123.69
+    },
+    {
+      "id": "reliquary_enemy_10",
+      "kind": "crawler",
+      "cell": [
+        27.5,
+        12.5
+      ],
+      "yaw": -169.695
+    },
+    {
+      "id": "reliquary_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        34.5,
+        11.5
+      ],
+      "yaw": 157.38
+    },
+    {
+      "id": "reliquary_enemy_12",
+      "kind": "worker",
+      "cell": [
+        35.5,
+        16.5
+      ],
+      "yaw": 139.399
+    },
+    {
+      "id": "reliquary_enemy_13",
+      "kind": "worker",
+      "cell": [
+        28.5,
+        15
+      ],
+      "yaw": -173.29
+    },
+    {
+      "id": "reliquary_enemy_14",
+      "kind": "worker",
+      "cell": [
+        33.5,
+        9.5
+      ],
+      "yaw": 164.055
+    },
+    {
+      "id": "reliquary_enemy_15",
+      "kind": "caster",
+      "cell": [
+        31.5,
+        9.5
+      ],
+      "yaw": 171.87
+    },
+    {
+      "id": "reliquary_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        15.5,
+        12.5
+      ],
+      "yaw": -75.964
+    },
+    {
+      "id": "reliquary_enemy_17",
+      "kind": "worker",
+      "cell": [
+        16,
+        10.5
+      ],
+      "yaw": -105.945
+    },
+    {
+      "id": "reliquary_enemy_18",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        10.5
+      ],
+      "yaw": -135.0
+    },
+    {
+      "id": "reliquary_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        24.5,
+        12.5
+      ],
+      "yaw": 78.69
+    },
+    {
+      "id": "reliquary_enemy_20",
+      "kind": "worker",
+      "cell": [
+        22.5,
+        13.5
+      ],
+      "yaw": 56.31
+    },
+    {
+      "id": "reliquary_enemy_21",
+      "kind": "worker",
+      "cell": [
+        23.5,
+        11.5
+      ],
+      "yaw": 90.0
+    },
+    {
+      "id": "reliquary_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        18.5,
+        13.5
+      ],
+      "yaw": -18.435
+    },
+    {
+      "id": "reliquary_enemy_23",
+      "kind": "crawler",
+      "cell": [
+        20.5,
+        14.5
+      ],
+      "yaw": 14.036
+    },
+    {
+      "id": "reliquary_enemy_24",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        15.5
+      ],
+      "yaw": -11.31
+    },
+    {
+      "id": "reliquary_enemy_25",
+      "kind": "worker",
+      "cell": [
+        20.5,
+        13.5
+      ],
+      "yaw": 18.435
+    },
+    {
+      "id": "reliquary_enemy_26",
+      "kind": "caster",
+      "cell": [
+        19.5,
+        15.5
+      ],
+      "yaw": -0.0
+    },
+    {
+      "id": "reliquary_enemy_27",
+      "kind": "crawler",
+      "cell": [
+        19.5,
+        5.5
+      ],
+      "yaw": -180.0
+    },
+    {
+      "id": "reliquary_enemy_28",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        4.5
+      ],
+      "yaw": -158.199
+    },
+    {
+      "id": "reliquary_enemy_29",
+      "kind": "worker",
+      "cell": [
+        20.5,
+        5.5
+      ],
+      "yaw": 146.31
+    },
+    {
+      "id": "reliquary_enemy_30",
+      "kind": "caster",
+      "cell": [
+        19.5,
+        2.5
+      ],
+      "yaw": -180.0
+    }
+  ],
+  "scenery": [
+    {
+      "art": "reliquary_bound_gate",
+      "cell": [
+        21.5,
+        36
+      ],
+      "yaw": 0,
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "solid": [
+        3.1615,
+        0.5,
+        0.925
+      ],
+      "tradition_aesthetic": "Shinto"
+    },
+    {
+      "art": "reliquary_cell_vault",
+      "cell": [
+        1.5,
+        15.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        3.77,
+        0.5,
+        1.43
+      ],
+      "tradition_aesthetic": "Islamic"
+    },
+    {
+      "art": "reliquary_tower_cluster",
+      "cell": [
+        15.5,
+        7.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        3.8025,
+        0.5,
+        2.3725
+      ],
+      "tradition_aesthetic": "Hindu"
+    },
+    {
+      "art": "reliquary_seven_vessels",
+      "cell": [
+        35.5,
+        6.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        4.165,
+        0.5,
+        1.68
+      ],
+      "tradition_aesthetic": "Jewish"
+    },
+    {
+      "art": "reliquary_winged_seal",
+      "cell": [
+        23,
+        26.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.615,
+        0.5,
+        1.885
+      ],
+      "tradition_aesthetic": "ancient Egyptian"
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        37.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        33.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        28.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        24.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        20.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        16.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        12.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        8.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        4.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        9.5,
+        27.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        9.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        15.5,
+        11.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        29.5,
+        28.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        29.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        12.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.2,
+        13.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        12.8,
+        19.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        5.5,
+        10.2
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        17.2,
+        22.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        21.8,
+        17.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        26.2,
+        17.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        36.8,
+        12.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        29.5,
+        8.2
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        20.8,
+        4.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        5.5,
+        18.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        11.5,
+        11.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        33.5,
+        19.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        28.5,
+        9.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        6,
+        20
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12,
+        18
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3,
+        14
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        10,
+        14.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        6,
+        11.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        27,
+        16
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        34,
+        18
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        33.5,
+        10
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        36,
+        14.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        29.5,
+        17.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        18,
+        24
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        21,
+        21
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        17.5,
+        17.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        21,
+        14.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16,
+        28
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        22,
+        30
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        17.15,
+        38.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.28,
+        0.62,
+        0.82
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        22.85,
+        37.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.28,
+        0.62,
+        0.82
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.15,
+        33.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.32,
+        0.68,
+        0.86
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.85,
+        32.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.85,
+        0.48,
+        0.19
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        15.15,
+        29.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        24.85,
+        26.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.86,
+        0.48,
+        0.2
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        6.15,
+        27.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.32,
+        0.68,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        14.5,
+        28.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        2.15,
+        13.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.27,
+        0.58,
+        0.82
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        0.15,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.85,
+        0.44,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        12.85,
+        19.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.84
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        5.5,
+        10.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.86,
+        0.4,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        4.5,
+        21.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.84
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        15.5,
+        12.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.84
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "reliquary_halo_return"
+    },
+    {
+      "cell": [
+        14.15,
+        7.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.84,
+        0.45,
+        0.2
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        17.15,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.85,
+        19.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.85,
+        9.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "reliquary_catalogue_feed"
+    },
+    {
+      "cell": [
+        31.85,
+        28.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.15,
+        24.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.32,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        30.85,
+        22.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.32,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        26.15,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.28,
+        0.62,
+        0.82
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        36.85,
+        17.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.32,
+        0.66,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        29.5,
+        8.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.85,
+        0.48,
+        0.18
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        26.5,
+        10.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.32,
+        0.66,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        37.85,
+        6.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.85,
+        0.48,
+        0.18
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.5,
+        11.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.84
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "reliquary_wheel_return"
+    },
+    {
+      "cell": [
+        18.15,
+        6.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.35,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "reliquary_exit_feed"
+    },
+    {
+      "cell": [
+        20.85,
+        3.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.84,
+        0.44,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "reliquary_halo_feed",
+      "cell": [
+        3.5,
+        12.5
+      ],
+      "height": 9,
+      "target": [
+        7.5,
+        16.5
+      ],
+      "color": [
+        0.85,
+        0.28,
+        0.13
+      ],
+      "energy": 6.4,
+      "range": 33,
+      "shadow": true
+    },
+    {
+      "id": "reliquary_halo_core",
+      "cell": [
+        11.5,
+        20.5
+      ],
+      "height": 9,
+      "target": [
+        7.5,
+        16.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 33,
+      "shadow": true
+    },
+    {
+      "id": "reliquary_wheel_feed",
+      "cell": [
+        27.5,
+        10.5
+      ],
+      "height": 9,
+      "target": [
+        31.5,
+        15.5
+      ],
+      "color": [
+        0.88,
+        0.46,
+        0.14
+      ],
+      "energy": 6.4,
+      "range": 33,
+      "shadow": true
+    },
+    {
+      "id": "reliquary_wheel_core",
+      "cell": [
+        35.5,
+        19.5
+      ],
+      "height": 9,
+      "target": [
+        31.5,
+        15.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 33,
+      "shadow": true
+    }
+  ],
+  "encounters": [
+    {
+      "id": "reliquary_halo_commit",
+      "region": [
+        2,
+        10,
+        13.9,
+        22.5
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_00",
+        "reliquary_enemy_01",
+        "reliquary_enemy_02",
+        "reliquary_enemy_03",
+        "reliquary_enemy_04",
+        "reliquary_enemy_05",
+        "reliquary_enemy_06",
+        "reliquary_enemy_07"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE FACE REGISTER OPENS ITS MOUTHS",
+        "light_ids": [
+          "reliquary_halo_feed",
+          "reliquary_halo_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "reliquary_wheel_commit",
+      "region": [
+        26,
+        8,
+        36.9,
+        21.25
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_08",
+        "reliquary_enemy_09",
+        "reliquary_enemy_10",
+        "reliquary_enemy_11",
+        "reliquary_enemy_12",
+        "reliquary_enemy_13",
+        "reliquary_enemy_14",
+        "reliquary_enemy_15"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE MEMORY DRUM ANSWERS OUT OF ORDER",
+        "light_ids": [
+          "reliquary_wheel_feed",
+          "reliquary_wheel_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "reliquary_halo_return",
+      "region": [
+        16.5,
+        10,
+        18.5,
+        13
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_16",
+        "reliquary_enemy_17",
+        "reliquary_enemy_18"
+      ],
+      "requires": [
+        "blood"
+      ],
+      "cue": {
+        "text": "THE INDEX SENDS YOUR FACE AHEAD",
+        "light_ids": [
+          "reliquary_halo_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "reliquary_wheel_return",
+      "region": [
+        21.5,
+        11,
+        22.5,
+        14
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_19",
+        "reliquary_enemy_20",
+        "reliquary_enemy_21"
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "cue": {
+        "text": "A MEMORY LEAVES THE DRUM WITHOUT YOU",
+        "light_ids": [
+          "reliquary_wheel_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "reliquary_catalogue",
+      "region": [
+        17,
+        9,
+        21.9,
+        9.5
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_22",
+        "reliquary_enemy_23",
+        "reliquary_enemy_24",
+        "reliquary_enemy_25",
+        "reliquary_enemy_26"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE COMMAND CHANNEL RECOGNIZES BOTH REGISTERS",
+        "light_ids": [
+          "reliquary_catalogue_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "reliquary_exit",
+      "region": [
+        18,
+        2.7,
+        20.9,
+        6.5
+      ],
+      "enemy_ids": [
+        "reliquary_enemy_27",
+        "reliquary_enemy_28",
+        "reliquary_enemy_29",
+        "reliquary_enemy_30"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE ARCHIVE HAS FILED YOUR ARRIVAL",
+        "light_ids": [
+          "reliquary_exit_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ]
+}

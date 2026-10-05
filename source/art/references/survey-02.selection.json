@@ -1,0 +1,7 @@
+{
+  "source": "GPT image model",
+  "reference": "survey-02.png",
+  "inspection": "Actual generated image inspected: selected copper/ivory rectangular survey instrument, explored amber cells, fine pale wall lines, orientation triangle, restrained legend; preserve existing native 38px HUD rather than copy generated mock HUD; do not show dotted undiscovered topology.",
+  "native_asset": "game/scripts/survey.gd",
+  "scope": "Original native UI drawing; no copied Doom code/art; unknown topology omitted; existing Blender world/character assets preserved"
+}

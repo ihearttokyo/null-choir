@@ -257,6 +257,11 @@
         7.8,
         0.55,
         5.6
+      ],
+      "seal": "blood",
+      "light_ids": [
+        "furnace_feed",
+        "furnace_core"
       ]
     },
     {
@@ -270,6 +275,11 @@
         7.8,
         0.55,
         5.6
+      ],
+      "seal": "ivory",
+      "light_ids": [
+        "crucible_feed",
+        "crucible_core"
       ]
     }
   ],
@@ -383,8 +393,8 @@
       "id": "furnace_ammo",
       "kind": "ammo",
       "cell": [
-        4.5,
-        10.5
+        6.5,
+        19.5
       ],
       "amount": 65,
       "weapon": 1
@@ -430,8 +440,8 @@
       "id": "crucible_ammo",
       "kind": "ammo",
       "cell": [
-        27,
-        8.5
+        23.5,
+        19.5
       ],
       "amount": 65,
       "weapon": 1
@@ -440,8 +450,8 @@
       "id": "foundry_gate_ammo",
       "kind": "ammo",
       "cell": [
-        10.5,
-        2.5
+        12.5,
+        6.5
       ],
       "amount": 60,
       "weapon": 1
@@ -498,8 +508,8 @@
       "id": "foundry_enemy_03",
       "kind": "worker",
       "cell": [
-        4.5,
-        18
+        4.25,
+        13
       ],
       "yaw": 237
     },
@@ -508,7 +518,7 @@
       "kind": "crawler",
       "cell": [
         4.5,
-        12
+        11.75
       ],
       "yaw": 316
     },
@@ -516,8 +526,8 @@
       "id": "foundry_enemy_05",
       "kind": "worker",
       "cell": [
-        10,
-        10.5
+        9.75,
+        16
       ],
       "yaw": 35
     },
@@ -570,8 +580,8 @@
       "id": "foundry_enemy_11",
       "kind": "worker",
       "cell": [
-        27.5,
-        14.4
+        27,
+        14
       ],
       "yaw": 149
     },
@@ -588,8 +598,8 @@
       "id": "foundry_enemy_13",
       "kind": "worker",
       "cell": [
-        27.5,
-        9.5
+        27,
+        9.8
       ],
       "yaw": 307
     },
@@ -660,8 +670,8 @@
       "id": "foundry_enemy_21",
       "kind": "crawler",
       "cell": [
-        10,
-        18
+        6.25,
+        17.75
       ],
       "yaw": 219
     },
@@ -669,8 +679,8 @@
       "id": "foundry_enemy_22",
       "kind": "worker",
       "cell": [
-        22,
-        10
+        22.25,
+        10.75
       ],
       "yaw": 298
     }
@@ -1047,10 +1057,10 @@
     {
       "art": "containment_capsule",
       "cell": [
-        3.7,
-        17.8
+        5,
+        15
       ],
-      "yaw": 35,
+      "yaw": 0,
       "solid": [
         2.2,
         4.9,
@@ -1177,7 +1187,7 @@
     {
       "art": "drain_altar",
       "cell": [
-        4,
+        3.6,
         14.7
       ],
       "yaw": 90,
@@ -1251,6 +1261,139 @@
         1.6,
         2.2
       ]
+    },
+    {
+      "art": "foundry_cross_spine",
+      "cell": [
+        4.3,
+        12.0
+      ],
+      "scale": [
+        0.95,
+        0.95,
+        0.95
+      ],
+      "yaw": 0,
+      "solid": [
+        5.605,
+        0.55,
+        2.945
+      ],
+      "tradition": "Christian"
+    },
+    {
+      "art": "foundry_slag_wheel",
+      "cell": [
+        27.5,
+        10.4
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "yaw": 0,
+      "solid": [
+        4.538,
+        0.55,
+        3.685
+      ],
+      "tradition": "Buddhist"
+    },
+    {
+      "art": "foundry_bound_furnace",
+      "cell": [
+        12.8,
+        30.3
+      ],
+      "scale": [
+        0.69,
+        0.69,
+        0.69
+      ],
+      "yaw": 0,
+      "solid": [
+        4.679,
+        0.55,
+        1.373
+      ],
+      "tradition": "Shinto"
+    },
+    {
+      "art": "foundry_pressure_canopy",
+      "cell": [
+        15.6,
+        17.9
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "yaw": 180,
+      "solid": [
+        3.705,
+        0.55,
+        3.185
+      ],
+      "tradition": "Islamic"
+    },
+    {
+      "art": "foundry_tower_cluster",
+      "cell": [
+        22.4,
+        9.2
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ],
+      "yaw": 0,
+      "solid": [
+        3.816,
+        0.55,
+        3.215
+      ],
+      "tradition": "Hindu"
+    },
+    {
+      "art": "foundry_lamp_manifold",
+      "cell": [
+        2.3,
+        13.7
+      ],
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ],
+      "yaw": 90,
+      "solid": [
+        4.363,
+        0.55,
+        2.088
+      ],
+      "tradition": "Jewish"
+    },
+    {
+      "art": "foundry_solar_crucible",
+      "cell": [
+        14.8,
+        1.2
+      ],
+      "scale": [
+        0.85,
+        0.85,
+        0.85
+      ],
+      "yaw": 0,
+      "solid": [
+        6.29,
+        0.55,
+        2.89
+      ],
+      "tradition": "ancient Egyptian"
     }
   ],
   "lights": [
@@ -1417,7 +1560,8 @@
         0.22
       ],
       "energy": 3.8,
-      "range": 15
+      "range": 15,
+      "id": "furnace_return"
     },
     {
       "cell": [
@@ -1432,7 +1576,8 @@
         0.22
       ],
       "energy": 3.8,
-      "range": 15
+      "range": 15,
+      "id": "foundry_nave_return"
     },
     {
       "cell": [
@@ -1507,7 +1652,8 @@
         0.83
       ],
       "energy": 3.8,
-      "range": 15
+      "range": 15,
+      "id": "crucible_return"
     },
     {
       "cell": [
@@ -1522,7 +1668,8 @@
         0.22
       ],
       "energy": 3.8,
-      "range": 15
+      "range": 15,
+      "id": "foundry_gate_feed"
     },
     {
       "cell": [
@@ -1556,7 +1703,8 @@
       ],
       "energy": 5.5,
       "range": 22,
-      "shadow": true
+      "shadow": true,
+      "id": "furnace_feed"
     },
     {
       "cell": [
@@ -1594,7 +1742,8 @@
       ],
       "energy": 5.5,
       "range": 22,
-      "shadow": true
+      "shadow": true,
+      "id": "crucible_feed"
     },
     {
       "cell": [
@@ -1655,7 +1804,8 @@
         0.04
       ],
       "energy": 2,
-      "range": 18
+      "range": 18,
+      "id": "furnace_core"
     },
     {
       "cell": [
@@ -1669,7 +1819,176 @@
         0.08
       ],
       "energy": 2,
-      "range": 18
+      "range": 18,
+      "id": "crucible_core"
+    },
+    {
+      "id": "foundry_pressure_canopy_rim",
+      "kind": "spot",
+      "cell": [
+        15.6,
+        18.9
+      ],
+      "height": 4.0,
+      "target_cell": [
+        15.6,
+        17.9
+      ],
+      "color": [
+        0.23,
+        0.43,
+        0.66
+      ],
+      "energy": 1.8,
+      "range": 10,
+      "shadow": false
+    }
+  ],
+  "encounters": [
+    {
+      "id": "foundry_furnace_crossfire",
+      "region": [
+        3.9,
+        10.9,
+        10.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "foundry_enemy_03",
+        "foundry_enemy_04",
+        "foundry_enemy_05",
+        "foundry_enemy_21"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE VERTEBRAL FEED OPENS ACROSS THE FLOOR",
+        "light_ids": [
+          "furnace_feed",
+          "furnace_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "foundry_crucible_ascent",
+      "region": [
+        21,
+        8,
+        28.75,
+        15.5
+      ],
+      "enemy_ids": [
+        "foundry_enemy_11",
+        "foundry_enemy_12",
+        "foundry_enemy_13",
+        "foundry_enemy_14",
+        "foundry_enemy_22"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE CRUCIBLE RECEIVES THE NEXT CAST",
+        "light_ids": [
+          "crucible_feed",
+          "crucible_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "foundry_nave_response",
+      "region": [
+        16,
+        7.9,
+        17.75,
+        16.75
+      ],
+      "enemy_ids": [
+        "foundry_enemy_08",
+        "foundry_enemy_09"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE RETURN FEED HAS FOUND A NEW ROUTE",
+        "light_ids": [
+          "foundry_nave_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "foundry_furnace_return",
+      "region": [
+        8,
+        6,
+        15.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "foundry_enemy_06",
+        "foundry_enemy_07"
+      ],
+      "requires": [
+        "blood"
+      ],
+      "cue": {
+        "text": "THE FURNACE RELEASES ITS NORTHERN TEETH",
+        "light_ids": [
+          "furnace_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "foundry_crucible_return",
+      "region": [
+        18,
+        6,
+        25.75,
+        7.75
+      ],
+      "enemy_ids": [
+        "foundry_enemy_15",
+        "foundry_enemy_16"
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "cue": {
+        "text": "IVORY HEAT CROSSES THE HIGH FEED",
+        "light_ids": [
+          "crucible_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "foundry_gate_release",
+      "region": [
+        12,
+        3.9,
+        13.75,
+        5.75
+      ],
+      "enemy_ids": [
+        "foundry_enemy_17",
+        "foundry_enemy_18",
+        "foundry_enemy_19",
+        "foundry_enemy_20"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE LAST CAST IS STILL MOVING",
+        "light_ids": [
+          "foundry_gate_feed"
+        ],
+        "sound": "seal_release"
+      }
     }
   ]
 }

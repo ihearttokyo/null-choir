@@ -38,7 +38,7 @@ def main():
     for script in args.scripts:
         try:
             result = subprocess.run(
-                ["godot", "--headless", "--audio-driver", "CoreAudio", "--path", str(ROOT / "game"), "--quit-after", "10000", "--script", script],
+                ["godot", "--headless", "--audio-driver", "CoreAudio", "--path", str(ROOT / "game"), "--script", script],
                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=args.timeout,
             )
         except subprocess.TimeoutExpired as error:

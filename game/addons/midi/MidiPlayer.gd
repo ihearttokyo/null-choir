@@ -409,17 +409,6 @@ func _ready( ):
 	if self.playing:
 		self.play( )
 
-## 通知
-## @param	what	通知要因
-func _notification( what:int ):
-	# 破棄時
-	if what == NOTIFICATION_PREDELETE:
-		pass
-		#再利用するので削除しないことにした
-		#AudioServer.remove_bus( AudioServer.get_bus_index( self.midi_master_bus_name ) )
-		#for i in range( 0, 16 ):
-		#	AudioServer.remove_bus( AudioServer.get_bus_index( self.midi_channel_bus_name % i ) )
-
 ## 再生前の初期化
 func _prepare_to_play( ) -> bool:
 	# ファイル読み込み
@@ -435,7 +424,7 @@ func _prepare_to_play( ) -> bool:
 			return false
 
 	self.sys_ex.initialize( )
-	self._init_track( )
+	if not self._init_track( ): return false
 	self._analyse_smf( )
 	self._init_channel( )
 
@@ -446,7 +435,7 @@ func _prepare_to_play( ) -> bool:
 	return true
 
 ## トラック初期化
-func _init_track( ) -> void:
+func _init_track( ) -> bool:
 	var track_status_events:Array[SMF.MIDIEventChunk] = []
 
 	if len( self.smf_data.tracks ) == 1:
@@ -480,9 +469,14 @@ func _init_track( ) -> void:
 					next_time = e_time
 			time = next_time
 
-	self.last_position = track_status_events[len(track_status_events)-1].time
 	self.track_status.events = track_status_events
 	self.track_status.event_pointer = 0
+	self.last_position = 0
+	if track_status_events.is_empty( ) or self.smf_data.timebase <= 0 or self.smf_data.timebase > 32767:
+		self.stop( )
+		return false
+	self.last_position = track_status_events[-1].time
+	return true
 
 ## SMF解析
 func _analyse_smf( ) -> void:
@@ -643,6 +637,7 @@ func set_smf_data( sd:SMF.SMFData ) -> void:
 ## テンポ設定
 ## @param	bpm	テンポ
 func set_tempo( bpm:float ) -> void:
+	if not is_finite( bpm ) or bpm <= 0: return
 	tempo = bpm
 	self.seconds_to_timebase = tempo / 60.0
 	self.timebase_to_seconds = 60.0 / tempo
@@ -822,6 +817,7 @@ func _process_track_event_note_on( channel:GodotMIDIPlayerChannelStatus, note:in
 	var track_key_shift:int = self.key_shift if not channel.drum_track else 0
 	var key_number:int = note + track_key_shift
 	var preset:Bank.Preset = self.bank.get_preset( channel.program, channel.bank )
+	if preset == null: return
 	if preset.instruments[key_number] == null:
 		return
 	var instruments:Array = preset.instruments[key_number] # Bank.Instrument
@@ -1108,7 +1104,7 @@ func _process_track_sys_ex_reset_all_channels( ) -> void:
 ## @return	AudioStreamPlayerADSR
 func _get_idle_player( ) -> AudioStreamPlayerADSR:
 	var released_audio_stream_player:AudioStreamPlayerADSR = null
-	var minimum_volume_db:float = -80.0
+	var minimum_volume_db:float = INF
 	# var releasing_audio_stream_player:AudioStreamPlayerADSR = null
 	var oldest_audio_stream_player:AudioStreamPlayerADSR = null
 	var oldest:float = -1.0
@@ -1151,7 +1147,7 @@ func load_from_bytes( byte_array: PackedByteArray ) -> bool:
 		return false
 
 	self.sys_ex.initialize( )
-	self._init_track( )
+	if not self._init_track( ): return false
 	self._analyse_smf( )
 	self._init_channel( )
 

@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: ambitious Blender construction/reference sheet, seven ORIGINAL religious-aesthetic set pieces for Level 1 THE INTAKE in NULL CHOIR, a fictional cosmic/body-horror shooter.
+Input image 1 is the chosen Intake environment, for ivory/copper/crimson materials, scale and cold-versus-amber lighting, not a picture to copy.
+Premise: an inhuman containment organism has intercepted human systems of worship and transformed their architecture into control machinery. The fictional manipulator is the villain, not any real religious people.
+Seven clearly separate monumental objects, each fully visible in generous dark cells with a small oblique detail inset, assembled from sculptable forms with strong near and distant silhouettes:
+1 Christian Gothic-inspired suspended throat bell in a pointed ribbed frame, a red stitched membrane and a crown of tiny organ mouths.
+2 Buddhist-inspired concentric wheel and lotus reservoir, a stone-pale open lotus surrounding a dark fluid cavity; rotary rings, copper nerve feeds.
+3 Shinto-inspired paired curved gate beams with an enormous knotted pale braided rope, paper-like blank hanging tags replaced by segmented membrane fins; a crimson valve between columns.
+4 Islamic-inspired geometric star-lattice pressure screen with a restrained pointed arch and repeated copper-and-ivory tessellation; no writing or sacred texts.
+5 Hindu-inspired tiered ascending shrine engine, stepped sculptural silhouettes and curling side conduits, glowing central vertical lumen.
+6 Jewish-inspired branching seven-arm lamp mechanism, pale intertwined supports and distinct copper cups, two blank segmented stone panels behind it.
+7 Ancient Egyptian-inspired tapered paired pylons/obelisk and wing-like radial solar pressure disc, pale incised stone, dark red sealed core.
+All seven are distinct bespoke artistic interpretations, neither actual sacred objects nor exact temple copies. Original gothic biomechanical anatomy binds their palettes without collapsing their differences. Do not use swastikas, real scriptures, readable text, logos, watermark or identifiable real people.
+Museum-quality articulated design, proper volumes and material relief, dark recesses, copper joints, veins and scars. Realistic but stylized production sculpt references, clear silhouettes, no haze or props hiding the objects, architectural bases and lateral conduits visible. Camera orthographic or slight oblique so editable Blender components and room-scale placement are understandable. No game HUD. Body horror can be extreme but make each component meaningful and visually readable. This is the first of eight distinct level-specific sets, not a repeated seven-prop kit.
