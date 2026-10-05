@@ -12,9 +12,11 @@ The exact uploaded Apple Silicon ZIP was downloaded and passed all eight native 
 
 The published 0.2.1 app missed the initial three-second title-frame target. Current source builds bake native Metal libraries into the development app; controlled launch comparisons show an improvement, with measurement limits recorded in [CHECKPOINT.md](CHECKPOINT.md). This does not certify reboot-cold or normal input-ready launch. Held physical controls, heard musical quality and full played pacing remain open. [DESIGN.md](DESIGN.md) owns requirements.
 
+Live-enemy save recovery remains a known development defect: surviving actors are rebuilt rather than retaining their damage and summoned companions. Corrected packed-app validation, full-campaign combat, listening and physical controls remain unfinished.
+
 ## Run and build
 
-[Private Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration PR](https://github.com/ihearttokyo/null-choir/pull/1) remains open pending final acceptance; focused ready improvements are merged separately.
+[Private Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
