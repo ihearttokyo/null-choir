@@ -33,8 +33,79 @@ func run() -> void:
 				if not await check_integration(index,difficulty,order):
 					await finish(1)
 					return
+			if index == 7 and not await check_heart_launcher(difficulty):
+				await finish(1)
+				return
 	print("PASS late native encounters: all four maps/three fixed modes/both seal orders, real capsule staging, isolated once-only memberships, finite pickups, checkpoint/Continue and bounded persistent summon creation. Controlled staging, not full fights.")
 	await finish(0)
+
+func check_heart_launcher(difficulty: int) -> bool:
+	# PREPARED ONLY / NOT RUN while native holds remain. Incoming inventory and
+	# free capacity are explicitly staged; proximity/recovery use production paths.
+	# No earlier weapon acquisition, combat route or boss victory is asserted.
+	for mode in ["missing","owned","full"]:
+		game.loaded_positions = false # Each staged case starts fresh, not as an imported save.
+		await boot(7,difficulty)
+		var pods: Array = game.level.layout.data.pickups.filter(func(spec): return spec.id == "heart_finale_launcher")
+		if not expect(pods.size() == 1,"Heart retains exactly its actual finale launcher pod"): return false
+		var spec: Dictionary = pods[0]
+		if not expect(spec.kind == "weapon" and int(spec.weapon) == 4 and spec.amount == 8 and spec.cell == [30.5,18.5],"Actual Heart pod grants weapon 4 with unchanged eight rounds and authored cell"): return false
+		var capacity: int = game.player.WEAPONS[4].max_ammo
+		# Controlled incoming state, not ownership earned in earlier native fights.
+		game.state.owned_weapons = [0,1,2] if mode == "missing" else [0,1,2,4]
+		game.state.ammo = [0,0,0,0,0,0]
+		game.state.ammo[4] = 0 if mode == "missing" else capacity-3 if mode == "owned" else capacity
+		game.state.weapon = 1
+		if not expect(game.playing and not game.placement_pending and flags().is_empty() and membership_matches() and game.level.markers.has(spec.id),"Staged Heart case begins live with its real pod and dormant encounters"): return false
+		if not move_to(spec.cell): return false
+		game._process(0) # Actual player proximity invokes Main's existing collector.
+		if mode == "full":
+			var full: Dictionary = game.state._resources().duplicate(true)
+			if not expect(game.state.ammo[4] == capacity and game.state.weapon == 1 and game.state.owned_weapons == [0,1,2,4] and not spec.id in game.state.removed and game.level.markers.has(spec.id),"Full owned launcher leaves its actual pod unconsumed without switching weapons"): return false
+			game._process(0)
+			if not expect(game.state._resources() == full and game.level.markers.has(spec.id),"Repeated full-capacity proximity still preserves the pod"): return false
+			game.state.ammo[4] = capacity-3 # Explicitly staged space, not a claimed fight.
+			game._process(0)
+		var expected_ammo: int = 8 if mode == "missing" else capacity
+		var expected_weapon: int = 4 if mode == "missing" else 1
+		if not expect(game.state.owned_weapons == [0,1,2,4] and game.state.weapon == expected_weapon and game.state.ammo == [0,0,0,0,expected_ammo,0] and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id),"Real proximity grants a missed launcher/eight rounds or caps owned ammo without a spurious switch"): return false
+		var collected: Dictionary = game.state._resources().duplicate(true)
+		game._process(0)
+		if not expect(game.state._resources() == collected and game.state.removed.count(spec.id) == 1,"Consumed actual launcher pod cannot grant ownership or ammo twice"): return false
+		# Earn the real seals and automatic checkpoint; only poses are staged.
+		for key in game.level.layout.data.interactions.filter(func(item): return item.kind == "key"):
+			if not await interact_at(key): return false
+		var checkpoint: Dictionary = interaction("checkpoint")
+		if not move_to(checkpoint.cell): return false
+		game._process(0)
+		var finale: Dictionary = group_named("heart_finale")
+		if not expect(game.state.checkpoint_id == checkpoint.id and checkpoint.id in game.state.removed and game.state.removed.count(spec.id) == 1 and group_dormant(finale) and membership_matches() and game._valid_saved_position(game.state.position),"Actual safe pre-final checkpoint captures the consumed launcher and dormant finale"): return false
+		var recovery: Dictionary = game.state.checkpoint.duplicate(true)
+		var saved: Dictionary = game.state.to_dict().duplicate(true)
+		game.pause_game()
+		if not press_button("Save and return to title"): return false
+		if not expect(not game.playing and game.level == null and FileAccess.file_exists(game.progress_path),"Launcher case saves only its isolated future campaign profile and returns to title"): return false
+		if not press_button("Continue"): return false
+		freeze()
+		game.music.stop()
+		await settle()
+		if not expect(game.playing and not game.placement_pending and game.state.level_index == 7 and game.state.difficulty == difficulty and game.state.to_dict() == saved and game._valid_saved_position(game.state.position) and game.player.position.is_equal_approx(game.state.position+Vector3.UP*0.04) and not game.level.markers.has(spec.id) and group_dormant(finale) and membership_matches(),"Actual safe Continue preserves exact launcher ownership/ammo/removal and checkpoint resources"): return false
+		if not move_to(spec.cell): return false
+		game._process(0)
+		if not expect(game.state._resources() == recovery and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id),"Revisiting the consumed launcher after Continue cannot recollect it"): return false
+		await tap_key(KEY_5)
+		game.player.camera.rotation.x = 1.1
+		var ammunition: int = game.state.ammo[4]
+		if not expect(game.state.weapon == 4 and game.player.fire() and game.state.ammo[4] == ammunition-1,"Real launcher selection/discharge spends one recovered round; not a boss fight"): return false
+		game.hurt_player(game.state.health+game.state.armor+1)
+		if not expect(game.state.health == 0 and not game.playing and paused,"Actual lethal damage enters launcher checkpoint recovery"): return false
+		if not press_button("Restore checkpoint"): return false
+		freeze()
+		game.music.stop()
+		await settle()
+		if not expect(game.playing and not game.placement_pending and game.state._resources() == recovery and game.state.checkpoint == recovery and game._valid_saved_position(game.state.position) and game.player.position.is_equal_approx(game.state.position+Vector3.UP*0.04) and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id) and group_dormant(finale) and membership_matches(),"Actual safe death restoration rewinds launcher spending without respawning its consumed pod or waking the finale"): return false
+	print("STAGED Heart launcher difficulty=",difficulty," cases=missing/owned/full; actual proximity and isolated recovery, not campaign/boss completion")
+	return true
 
 func boot(index: int, difficulty: int) -> void:
 	game.show_title()
