@@ -31,6 +31,7 @@ var message: String = ""
 var message_time: float = 0
 var damage_flash: float = 0
 var hit_flash: float = 0
+var quitting: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -619,12 +620,31 @@ func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> No
 	return best
 
 func quit_game() -> bool:
+	if quitting: return true
 	if level != null and state.health > 0 and _save() != OK:
 		pause_game()
-		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",func(): get_tree().quit()],["Resume",resume_game]])
+		_show_menu("SAVE FAILED",[["Retry save and quit",quit_game],["Quit without saving",_finish_quit],["Resume",resume_game]])
 		return false
-	get_tree().quit()
+	_finish_quit()
 	return true
+
+func _finish_quit() -> void:
+	if quitting: return
+	quitting = true
+	show_title()
+	menu_scroll.hide()
+	# Native audio playback references release on the next mixer pass.
+	await get_tree().create_timer(0.1).timeout
+	get_tree().quit()
+
+func _has_metal_shader_cache(root: String) -> bool:
+	if not DirAccess.dir_exists_absolute(root): return false
+	var directories = [root]
+	while not directories.is_empty():
+		var path = directories.pop_back()
+		if Array(DirAccess.get_files_at(path)).any(func(file): return file.ends_with(".metal.cache")): return true
+		for child in DirAccess.get_directories_at(path): directories.append(path.path_join(child))
+	return false
 
 # Fixed headless workflow for the release binary, which cannot execute external scripts.
 # Controlled packed-resource workflow; not played difficulty, art/audio quality or FPS acceptance.
@@ -636,6 +656,7 @@ func _verify_export() -> void:
 		return
 	progress_path = "user://export_validation.json"
 	var checks = {
+		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
 		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
 	start_campaign(1)
@@ -773,5 +794,6 @@ func _verify_export() -> void:
 	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices")
 	print("PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar")
+	print("PASS packaged native Metal shader caches")
 	print("PASS packaged isolated userdata")
 	get_tree().quit()
