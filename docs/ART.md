@@ -172,3 +172,9 @@ This prepared source lane makes no runtime mapping, import or app change. Game
 adoption, in-level visibility, collision/traversal, loading, memory and GPU
 acceptance remain separate. Do not interpret a source-only draft as a shipped
 marker pack or completed campaign.
+
+## Offline unused-UV candidate
+
+`tools/prune_untextured_uv.py` is an optional experiment, not part of export or runtime loading. It removes UV streams only from static, untextured GLBs within a strict eight-MiB input profile. Textures, extensions, sparse or shared accessors, interleaved views and unsupported references are rejected. Retained position, normal and index bytes, material values, node transforms and primitive order must remain exact. It accepts explicit input/output paths and writes only a fresh candidate outside the project; existing and symlink targets are rejected. The GLB packing follows the [Khronos glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#glb-file-format-specification).
+
+The engine-free checks are `python3 -B tests/test_prune_untextured_uv.py`. They exercise the real serializer and CLI with controlled geometry, unsafe references and protected output paths. Storage reduction does not prove smaller imported meshes, GPU memory or faster startup. Production GLBs, Blender sources, the manifest, import settings and export helpers remain unchanged. Native importer checks, runtime UV/UV2 consumer inspection and representative rendered parity/resource measurements are required before any asset adoption; all engine/GUI and promotion holds remain in force.
