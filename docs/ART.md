@@ -131,6 +131,48 @@ The original recipe now retains later manifest entries in stable order during ge
 
 Scenery scales use the existing JSON `[x, y, z]` array schema. Low collision bases use model-local dimensions and receive yaw once in the level builder. Do not pre-rotate their width/depth. Native staging verifies both the imported model and base dimensions/orientation. Lights and collision remain level-owned; authoring cameras and lights never ship inside the GLB.
 
+## Supporting marker producer (prepared)
+
+The prepared marker producer defines eight small original relics: ammo, health,
+armor, key, weapon, story, checkpoint and exit. The retained GPT image reference
+and original prompt belong at `source/art/references/marker-system-01.png` and
+`marker-system-01.prompt.txt`; `source/art/marker-inputs.json` records the selected
+image hash, concrete inspection observations and the two helper hashes. These
+supporting markers do not replace unique loop scenery or religious set pieces.
+
+`tools/build_marker_art.py` builds one explicit `--asset marker_NAME` per approved
+background Blender run. It preserves named editable parts in `source/art/`,
+exports compact world GLBs and keeps previews, geometry receipts and raw frames
+under `builds/marker-art/`. It refuses existing or partial outputs rather than
+overwriting them. Preserve manual edits and use an isolated output root when
+regenerating a changed recipe; prior artifacts retain their actual recipe hash.
+
+The marker validator uses fixed repository-owned inputs and counts only declared
+marker files, including partial outputs and per-asset logs. Unrelated project
+files do not consume its 64 MB family cap. The remaining limits are 2 MB combined
+GLBs, 20 MB logs, 2,500 triangles and eight material groups per asset, with
+ground-centered GLB Y-up bounds no larger than 0.9 x 1.2 x 0.9 metres. External
+resource checks still own transient usage, available disk, memory and deadlines.
+
+Engine-free regression checks use `python3 -m unittest discover -s tests -p
+test_marker_portability.py` and `python3 tests/test_marker_art.py --unit`. Actual
+generated-file validation uses `python3 tests/test_marker_art.py` only after an
+authorized build has produced the complete local family. Unit fixtures do not
+certify Blender output, visual quality or gameplay.
+
+The portable producer passed a local serial CPU build and actual-file checks for
+all eight assets. Its GLBs total 505,260 bytes; editable blend sources separately
+total 5,751,429 bytes. Models contain 472-2,008 triangles and three or four
+material groups. All eight sources reopened and accepted an in-memory vertex
+edit/restoration without saving; their recorded disk hashes remained unchanged.
+These results describe producer artifacts retained locally, not game performance
+or native assets included in the source-only draft.
+
+This prepared source lane makes no runtime mapping, import or app change. Game
+adoption, in-level visibility, collision/traversal, loading, memory and GPU
+acceptance remain separate. Do not interpret a source-only draft as a shipped
+marker pack or completed campaign.
+
 ## Offline unused-UV candidate
 
 `tools/prune_untextured_uv.py` is an optional experiment, not part of export or runtime loading. It removes UV streams only from static, untextured GLBs within a strict eight-MiB input profile. Textures, extensions, sparse or shared accessors, interleaved views and unsupported references are rejected. Retained position, normal and index bytes, material values, node transforms and primitive order must remain exact. It accepts explicit input/output paths and writes only a fresh candidate outside the project; existing and symlink targets are rejected. The GLB packing follows the [Khronos glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#glb-file-format-specification).

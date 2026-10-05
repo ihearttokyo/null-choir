@@ -17,6 +17,7 @@ def test_encoder():
     assert hashlib.sha256(gate).hexdigest() == 'e0b5300b4fef2cc08e0f9065c9ef55514d90f9c99ddc632db39fc019ca147cf4'
     spec = json.loads(gate)
     assert hashlib.sha256(compose(spec)).hexdigest() == '6dd153f678b00f3302fe18faf28a93896e33dfd597b024e0e397ee74a1f9dc99'
+    assert compose(spec) == (ROOT / 'game/audio/gate.mid').read_bytes()
     spec.update(sections=[{'name': 'Authored phrase', 'beats': 12,
                           'parts': {'guitar': ['a']}},
                          {'name': 'Release', 'beats': 4, 'parts': {}}],
