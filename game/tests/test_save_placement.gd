@@ -168,48 +168,101 @@ func run():
 	# Queued old startup must never reactivate title or overwrite a replacement map.
 	invalid = game.state.to_dict().duplicate(true)
 	invalid.position = bad.duplicate()
-	game.state.from_dict(invalid)
-	game._save()
-	for cancel in ["title","new_campaign","focus","pause","settings","controls","difficulty"]:
-		game.show_title()
-		game.continue_campaign()
-		if game.playing or not game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
-			push_error("Unverified native placement must remain nonplaying and uncaptured")
-			await finish(1)
-			return
-		game.resume_game()
-		if game.playing:
-			push_error("Resume must not bypass pending placement validation")
-			await finish(1)
-			return
-		match cancel:
-			"title": game.show_title()
-			"new_campaign":
-				game.start_campaign(0)
-				freeze()
-			"focus": game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
-			"pause": game.pause_game()
-			"settings": game.show_settings()
-			"controls": game.show_controls()
-			"difficulty": game.show_difficulty()
-		await physics_frame
-		await physics_frame
-		await physics_frame
-		if cancel == "new_campaign":
-			if not game.playing or game.state.level_index != 0 or game.state.difficulty != 0 or game.placement_pending:
-				push_error("Old pending continuation must not mutate replacement campaign")
+	for elapsed_frames in [0,1]:
+		for cancel in ["title","new_campaign","restart","focus","pause","settings","controls","difficulty"]:
+			if not game.state.from_dict(invalid) or game._save() != OK:
+				push_error("SETUP: each pending cancellation must use the same real imported save")
 				await finish(1)
 				return
-		elif game.playing or game.level != null or game.placement_pending:
-			push_error("INTENDED RED: pending startup must not reactivate after menu/cancellation: "+cancel)
-			await finish(1)
-			return
-		if cancel in ["settings","controls","difficulty"]:
-			var selected_menu = {"settings":"SETTINGS","controls":"CONTROLS","difficulty":"RECOVERY PROTOCOL"}[cancel]
-			if not game.menu_scroll.visible or game.menu.get_child(0).text != selected_menu:
-				push_error("Pending startup must retain the menu the player actually selected: "+cancel)
+			game.show_title()
+			game.continue_campaign()
+			freeze()
+			var old_level_id = game.level.get_instance_id()
+			var old_player_id = game.player.get_instance_id()
+			var pending_document: Dictionary = game.state.to_dict().duplicate(true)
+			if elapsed_frames == 1: await physics_frame
+			if game.playing or not game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+				push_error("Unverified native placement must remain nonplaying and uncaptured at wait phase="+str(elapsed_frames))
 				await finish(1)
 				return
+			game.resume_game()
+			if game.playing or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+				push_error("Resume must not bypass pending placement validation or capture the mouse")
+				await finish(1)
+				return
+			match cancel:
+				"title": game.show_title()
+				"new_campaign":
+					game.start_campaign(0)
+					freeze()
+				"restart":
+					game.restart_level()
+					freeze()
+				"focus": game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
+				"pause": game.pause_game()
+				"settings": game.show_settings()
+				"controls": game.show_controls()
+				"difficulty": game.show_difficulty()
+			var replacement = cancel in ["new_campaign","restart"]
+			var replacement_level_id = game.level.get_instance_id() if replacement else 0
+			var replacement_player_id = game.player.get_instance_id() if replacement else 0
+			if replacement and (replacement_level_id == old_level_id or replacement_player_id == old_player_id):
+				push_error("SETUP: replacement must create distinct native map and player identities")
+				await finish(1)
+				return
+			var expected_document = pending_document.duplicate(true)
+			if cancel == "restart":
+				expected_document.merge(pending_document.level_start,true)
+				expected_document.checkpoint = pending_document.level_start.duplicate(true)
+			elif cancel == "new_campaign":
+				var fresh = load("res://scripts/campaign.gd").new()
+				fresh.new_campaign(0)
+				var authored = load("res://scripts/level_data.gd").new()
+				if not authored.load_level(0):
+					push_error("SETUP: independent fresh-entry witness requires the registered Intake source")
+					await finish(1)
+					return
+				# Unattached native actors use only fresh resources and trusted source,
+				# never the live candidate's state, layout or captured actor records.
+				var witness = load("res://scripts/main.gd").new()
+				witness.state = fresh
+				witness.level = load("res://scripts/level.gd").new()
+				witness.level.layout = authored
+				witness.add_child(witness.level)
+				var specs: Dictionary = load("res://scripts/campaign.gd").actor_specs(authored)
+				fresh.actors = []
+				for spec in authored.data.enemies:
+					var actor = load("res://scripts/enemy.gd").new()
+					witness.level.add_child(actor)
+					actor.configure(witness,specs[spec.id])
+					fresh.actors.append(actor.snapshot())
+				witness.free()
+				fresh.mark_checkpoint("entry",authored.world_position(authored.data.spawn))
+				expected_document = fresh.to_dict()
+			for settled_frame in range(4):
+				if settled_frame > 0: await physics_frame
+				if game.state.to_dict() != expected_document:
+					push_error("Old pending continuation must preserve expected state/resources/snapshots: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
+					await finish(1)
+					return
+				if replacement:
+					var awaiting_restart = cancel == "restart" and settled_frame < 2
+					var expected_mouse = Input.MOUSE_MODE_VISIBLE if awaiting_restart else Input.MOUSE_MODE_CAPTURED
+					if game.playing == awaiting_restart or paused or game.placement_pending != awaiting_restart or not is_instance_valid(game.level) or not is_instance_valid(game.player) or game.level.get_instance_id() != replacement_level_id or game.player.get_instance_id() != replacement_player_id or Input.mouse_mode != expected_mouse or game.music.player.playing == awaiting_restart or game.menu_scroll.visible != awaiting_restart:
+						push_error("Old pending continuation must not prematurely activate/capture or overwrite replacement: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
+						await finish(1)
+						return
+				else:
+					if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.music.player.playing:
+						push_error("INTENDED RED: pending startup must not reactivate/capture after cancellation: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
+						await finish(1)
+						return
+					var selected_menu = {"title":"NULL CHOIR","focus":"NULL CHOIR","pause":"NULL CHOIR","settings":"SETTINGS","controls":"CONTROLS","difficulty":"RECOVERY PROTOCOL"}[cancel]
+					if not game.menu_scroll.visible or game.menu.get_child(0).text != selected_menu:
+						push_error("Pending startup must retain the selected menu: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
+						await finish(1)
+						return
+			print("PASS native pending cancellation=",cancel," phase=",elapsed_frames," three subsequent frames guarded")
 	# Revalidate existing alive-state invariants across the new native-frame yield.
 	game.show_title()
 	game.continue_campaign()

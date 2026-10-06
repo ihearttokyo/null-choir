@@ -69,6 +69,11 @@ func arena(kind: String, distance: float = 10.0, difficulty: int = 1) -> bool:
 	game.state.level_index = 4
 	game.start_level()
 	freeze_world()
+	# Synthetic role arenas deliberately exercise supported legacy actor-less campaigns.
+	# Authoritative authored-actor persistence remains covered by G07/trust/lifecycle.
+	var legacy: Dictionary = game.state.to_dict()
+	for envelope in [legacy,legacy.checkpoint,legacy.level_start]: envelope.erase("actors")
+	if not expect(game.state.from_dict(legacy) and game.state.to_dict() == legacy and game.state.actors == null and not game.state.checkpoint.has("actors") and not game.state.level_start.has("actors"),"SETUP: Validated exact legacy campaign before replacing authored guards with synthetic role actors"): return false
 	# Remove only this fixture's authored guards, not world geometry or production logic.
 	for guard in game.enemies: guard.queue_free()
 	game.enemies.clear()
@@ -365,7 +370,7 @@ func boss_fight(kind: String, difficulty: int) -> bool:
 	print("MEASURE late_role=",kind," difficulty=",difficulty," initial_hp=",initial_hp," shots=",successful_shots," remaining_ammo=",game.state.ammo[5]," health=",game.state.health," armor=",game.state.armor)
 	if not expect(actor.hp == 0 and game.state.health > 0 and successful_shots > 0 and game.state.ammo[5] > 0 and game.state.removed.count(identity) == 1,"Boss must be mortal in a real bounded-ammo native fight on every difficulty, without production invulnerability"): return false
 	game.hurt_player(10000)
-	game.restore_checkpoint()
+	await game.restore_checkpoint()
 	freeze_world()
 	if not expect(game.playing and game.state.health == 200 and game.state.armor == 100 and game.state.ammo[5] == 80 and not identity in game.state.removed,"Real death/checkpoint restoration returns exact pre-boss resources and removal state"): return false
 	for guard in game.enemies: guard.queue_free()

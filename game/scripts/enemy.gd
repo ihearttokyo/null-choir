@@ -42,16 +42,43 @@ var _attack_variant: int = 0
 var _summoned_total: int = 0
 var _summon_owner_id: String = ""
 
+static func health_cap(role: String, difficulty: int) -> int:
+	return int(LATE.get(role,{}).get("hp",50 if role == "crawler" else 90)*[0.85,1.0,1.3][difficulty])
+
+static func capsule_radius(role: String) -> float:
+	return LATE.get(role,{}).get("radius",0.42 if role == "crawler" else 0.34)
+
+static func capsule_height(role: String) -> float:
+	return LATE.get(role,{}).get("height",1.1 if role == "crawler" else 2.7)
+
+static func canonical_yaw(value: float) -> float:
+	if not is_finite(value): return value
+	if value < -PI or value >= PI: value = wrapf(value,-PI,PI)
+	# Float32 PI is outside [-PI,PI); this clamp rounds to its nearest interior float32.
+	return Vector3(0,clampf(value,-3.1415925,3.1415925),0).y
+
+func snapshot() -> Dictionary:
+	return {"id":id,"hp":hp,"position":[position.x,position.y,position.z],"yaw":canonical_yaw(rotation.y),"alerted":alerted}
+
+func restore_snapshot(record: Dictionary) -> void:
+	# Only called on freshly configured bodies: attacks, targets and physics reset.
+	hp = int(record.hp)
+	position = Vector3(record.position[0],record.position[1],record.position[2])
+	rotation.y = canonical_yaw(record.yaw)
+	alerted = record.alerted
+	phase = 1 if kind in ["nursery_warden","choir_avatar"] and hp < max_hp/2.0 else 0
+
 func configure(owner_game: Node, spec: Dictionary) -> void:
 	game = owner_game
 	id = spec.id
 	kind = spec.kind
 	encounter_id = spec.get("encounter","")
+	_summon_owner_id = spec.get("owner","")
 	active = encounter_id.is_empty() or "encounter:"+encounter_id in game.state.removed
 	alerted = active and not encounter_id.is_empty()
 	_strafe_sign = 1 if id.hash()%2 == 0 else -1
 	_profile = LATE.get(kind,{})
-	hp = int(_profile.get("hp",50 if kind == "crawler" else 90) * [0.85,1.0,1.3][game.state.difficulty])
+	hp = health_cap(kind,game.state.difficulty)
 	max_hp = hp
 	speed = _profile.get("speed",5.4 if kind == "crawler" else 3.1)
 	if kind == "summoner":
@@ -68,8 +95,8 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 		floor_snap_length = 0
 	var collider = CollisionShape3D.new()
 	var shape = CapsuleShape3D.new()
-	shape.radius = _profile.get("radius",0.42 if kind == "crawler" else 0.34)
-	shape.height = _profile.get("height",1.1 if kind == "crawler" else 2.7)
+	shape.radius = capsule_radius(kind)
+	shape.height = capsule_height(kind)
 	collider.shape = shape
 	collider.position.y = shape.height/2
 	add_child(collider)

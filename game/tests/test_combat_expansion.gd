@@ -13,7 +13,11 @@ func run() -> void:
 	game.progress_path = test_prefix+"_campaign.json"
 	game.settings_path = test_prefix+"_preferences.json"
 	root.add_child(game)
-	game.start_campaign(1)
+	# Controlled third-map entry, not an earned campaign route.
+	game.state.new_campaign(1)
+	game.state.level_index = 2
+	game.loaded_positions = false
+	await game.start_level()
 	freeze_actors()
 	if not (await check_pickups()): return
 	if not "--pickups-only" in OS.get_cmdline_user_args():
@@ -34,21 +38,24 @@ func freeze_actors() -> void:
 	for actor in game.enemies: actor.set_physics_process(false)
 
 func check_pickups() -> bool:
-	var spec = JSON.parse_string('{"id":"combat_scattergun","kind":"weapon","weapon":2,"amount":16,"cell":[14.5,30.5]}')
-	game.level.layout.data.pickups.append(spec)
-	var marker = Node3D.new()
-	game.level.add_child(marker)
-	game.level.markers["combat_scattergun"] = marker
-	game.collect_pickup("combat_scattergun")
+	var matches = game.level.layout.data.pickups.filter(func(pickup): return pickup.id == "processional_scattergun")
+	if not expect(matches.size() == 1,"SETUP: Use the single authored Processional scattergun"): return false
+	var spec: Dictionary = matches[0]
+	if not expect(game.state.level_index == 2 and game.level.layout.data.id == "processional" and spec.kind == "weapon" and spec.weapon is float and spec.weapon == 2 and spec.amount == 16 and spec.cell == [20.5,25.5],"SETUP: Preserve the actual JSON weapon index, amount and source cell"): return false
+	if not expect(game.level.markers.has(spec.id),"SETUP: Authored weapon must have its native marker"): return false
+	var marker = game.level.markers[spec.id]
+	if not expect(marker.position.is_equal_approx(game.level.layout.world_position(spec.cell)+Vector3.UP*0.06),"SETUP: Native pickup marker retains authored source geometry"): return false
+	game.collect_pickup(spec.id)
 	if not expect(2 in game.state.owned_weapons,"Weapon pickup must grant scattergun ownership"): return false
 	if not expect(game.state.weapon == 2 and game.state.ammo[2] == 16,"New scattergun must be selected and supplied"): return false
-	if not expect("combat_scattergun" in game.state.removed and not game.level.markers.has("combat_scattergun"),"Pickup must remove its marker"): return false
-	game.collect_pickup("combat_scattergun")
+	if not expect(spec.id in game.state.removed and not game.level.markers.has(spec.id),"Pickup must remove its marker"): return false
+	game.collect_pickup(spec.id)
 	if not expect(game.state.ammo[2] == 16 and game.state.owned_weapons == [0,1,2],"Duplicate pickup must not grant ammo or ownership twice"): return false
 	await process_frame
 	await physics_frame
 	await physics_frame
 	if not expect(not is_instance_valid(marker),"Collected marker must actually leave the scene"): return false
+	if not expect(game._capture_actor_state(),"SETUP: Shared production actor capture precedes the controlled combat checkpoint"): return false
 	game.state.mark_checkpoint("combat_checkpoint",game.player.position)
 	var profile = game.player.WEAPONS[2]
 	if not expect(profile.pellets == 7 and profile.damage == 15 and profile.interval == 0.7 and profile.range == 32.0 and profile.max_ammo == 32,"Scattergun retains its close-range profile and bounded reserve"): return false
@@ -65,28 +72,29 @@ func check_pickups() -> bool:
 	game.hurt_player(300)
 	await game.restore_checkpoint()
 	freeze_actors()
-	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 16 and game.state.weapon == 2 and "combat_scattergun" in game.state.removed,"Death restores checkpoint weapon, ammo and pickup removal"): return false
+	if not expect(game.playing and game.state.health == 100 and game.state.ammo[2] == 16 and game.state.weapon == 2 and spec.id in game.state.removed,"Death restores checkpoint weapon, ammo and pickup removal"): return false
 	if not expect(game._save() == OK,"Save earned scattergun through the real game path"): return false
 	game.show_title()
 	await game.continue_campaign()
 	freeze_actors()
-	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 16 and "combat_scattergun" in game.state.removed,"Save Continue restores earned inventory and one-shot removal"): return false
-	var refill = spec.duplicate()
-	refill.id = "combat_scattergun_refill"
-	game.level.layout.data.pickups.append(refill)
+	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 16 and spec.id in game.state.removed,"Save Continue restores earned inventory and one-shot removal"): return false
+	# Controlled reavailability of the same authored weapon tests the owned-weapon branch.
+	game.state.removed.erase(spec.id)
 	game.state.weapon = 1
 	game.state.ammo[2] = 31
-	game.collect_pickup(refill.id)
-	game.collect_pickup(refill.id)
+	game.collect_pickup(spec.id)
+	game.collect_pickup(spec.id)
 	if not expect(game.state.weapon == 1 and game.state.ammo[2] == 32 and game.state.owned_weapons == [0,1,2],"Owned weapon refill caps ammo, preserves selection and remains one-shot"): return false
+	if not expect(game.state.removed.count(spec.id) == 1,"Owned authored weapon refill records exactly one removal"): return false
 	await game.restart_level()
 	freeze_actors()
-	if not expect(game.state.owned_weapons == [0,1] and game.state.ammo[2] == 0 and game.state.weapon == 1 and not "combat_scattergun" in game.state.removed,"Level restart restores pre-pickup entry resources"): return false
+	if not expect(game.state.owned_weapons == [0,1] and game.state.ammo[2] == 0 and game.state.weapon == 1 and not spec.id in game.state.removed,"Level restart restores pre-pickup entry resources"): return false
 	await game.continue_campaign()
 	game.state.complete_level()
-	game.start_level()
+	game.loaded_positions = false
+	await game.start_level()
 	freeze_actors()
-	if not expect(game.state.level_index == 1 and game.state.owned_weapons == [0,1,2] and game.state.ammo[2] == 16 and game.state.weapon == 2 and game.state.removed.is_empty(),"Level progression retains earned inventory while resetting removals"): return false
+	if not expect(game.state.level_index == 3 and game.state.owned_weapons == [0,1,2] and game.state.ammo[2] == 16 and game.state.weapon == 2 and game.state.removed.is_empty(),"Level progression retains earned inventory while resetting removals"): return false
 	await process_frame
 	print("PASS native scattergun pickup, cap, firing/cooldown, checkpoint, save Continue, restart and progression")
 	return true
@@ -289,7 +297,8 @@ func check_projectiles() -> bool:
 	var sphere_ref = weakref(projectile.get_child(0).mesh)
 	var material_ref = weakref(projectile.get_child(0).material_override)
 	var light_ref = weakref(projectile.get_child(1))
-	game.start_level()
+	# Discard transient projectile-fixture IDs before building a real authored entry.
+	game.start_campaign(1)
 	freeze_actors()
 	projectile._physics_process(0.1)
 	if not expect(projectile.is_queued_for_deletion(),"Old-map projectile cannot act in the replacement level"): return false

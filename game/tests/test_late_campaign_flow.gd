@@ -205,6 +205,7 @@ func interaction(kind: String) -> Dictionary:
 
 func freeze() -> void:
 	game.set_process(false)
+	game.hud.survey.set_physics_process(false)
 	game.player.set_physics_process(false)
 	# Only real authored guards stop ticking; no HP, active state or collider changes.
 	var ids: Array = game.level.layout.data.enemies.map(func(spec): return spec.id)
