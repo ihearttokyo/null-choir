@@ -54,3 +54,11 @@ The isolated gate, export preset and Mac application are under ignored `builds/m
 The final gate report distinguishes deterministic timing, actual exported synthesis capture, objective instrument assessment, listening, and GUI checks. No headless assertion establishes usability or unheard musical quality.
 
 Before the first source commit, inherited trailing whitespace was removed from MidiPlayer.gd, SMF.gd and SoundFont.gd. The executable token/indentation content is unchanged by that cleanup. GeneralUser license bytes retain their original CRLF endings through scoped Git attributes.
+
+## Shutdown checks
+
+The corrected quit helper stops audio through `show_title()`, cancels pending placement, releases map/player ownership and schedules final quit after a 0.1-second mixer grace. Normal quit and explicit discard share this path. Save failure retains the recoverable session instead of starting shutdown.
+
+`python3 -B tests/test_native_shutdown_import.py` runs two mocked-subprocess checks. Importing the native runner must launch nothing; explicit entry must retain its normal/discard modes, isolated profile, deadline and strict error/leak assertions. These checks never run Godot.
+
+The separate `tests/test_native_shutdown.py` runner intentionally uses windowed Metal/CoreAudio because the retained headless diagnostic did not expose the playback leak. Its explicit entry remains held until engine/crash and nondisruptive GUI authority are cleared. Do not run it during ordinary import/discovery or assume headless physics can certify audio shutdown. Retained pre-hold native GREENs support the reviewed source identity; corrected packed-app behavior, expanded placement checks and release promotion still require their own acceptance evidence.

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "helper_sha256": {
+    "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95",
+    "tests/test_art.py": "8822098e8dc522536c594ed96784be6ef1b2ed5a3936aa2f727ab79b001c2d2f"
+  },
+  "reference": {
+    "path": "source/art/references/marker-system-01.png",
+    "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+    "inspection": {
+      "inspected_actual_pixels": true,
+      "observations": [
+        "marker_ammo: Three tall amber cartridge towers in a shallow fan; the center is tallest. Wide anchored foot, gaps above the lower manifold.",
+        "marker_health: Asymmetric rounded teal organ suspended in a low ivory basin, open side gap and a narrow overhead return pipe. Avoid a symmetric capsule.",
+        "marker_armor: Broad cobalt layered crescent wings; the upper center is cut away and the ivory inner rim follows a deep U aperture.",
+        "marker_key: Slender vertical fork, two blood-red blades with an open central slot, ivory lower ribs and a compact central circular lock.",
+        "marker_weapon: Low wide ivory U cradle around two horizontal parallel dark barrels. Visible muzzle holes and upper void distinguish it from ammo.",
+        "marker_story: Two tall pale outward-flared codex leaves separated by a dark vertical split and a narrow luminous spine; no filled rectangular plaque.",
+        "marker_checkpoint: Three separated tapering legs surround an amber suspended spherical core and cross-ring. The rear leg needs depth separation in the three-quarter preview.",
+        "marker_exit: Wide open upper ring descends through progressively smaller coils toward the ground; ivory frame and muted violet inner bands. Preserve visible spaces between levels."
+      ]
+    }
+  }
+}

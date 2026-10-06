@@ -130,3 +130,51 @@ remain separate checks; the generated reference is not a game screenshot.
 The original recipe now retains later manifest entries in stable order during geometry and texture rebuilds. `tests/test_art_manifest.py` exercises the real metadata path with simulated render callbacks; it is not art evidence. A helper change requires actual regeneration of dependent assets before updating their provenance. Preserve manual source edits and stop overlapping native writers first. The sorting repair rebuilt 21 identities in isolation, retained ten historical identities and passed strict parity plus actual game reimport/staging checks. Native export triangle order and tiny UV rounding can vary; always record actual produced bytes rather than invent new hashes for old files.
 
 Scenery scales use the existing JSON `[x, y, z]` array schema. Low collision bases use model-local dimensions and receive yaw once in the level builder. Do not pre-rotate their width/depth. Native staging verifies both the imported model and base dimensions/orientation. Lights and collision remain level-owned; authoring cameras and lights never ship inside the GLB.
+
+## Supporting marker producer (prepared)
+
+The prepared marker producer defines eight small original relics: ammo, health,
+armor, key, weapon, story, checkpoint and exit. The retained GPT image reference
+and original prompt belong at `source/art/references/marker-system-01.png` and
+`marker-system-01.prompt.txt`; `source/art/marker-inputs.json` records the selected
+image hash, concrete inspection observations and the two helper hashes. These
+supporting markers do not replace unique loop scenery or religious set pieces.
+
+`tools/build_marker_art.py` builds one explicit `--asset marker_NAME` per approved
+background Blender run. It preserves named editable parts in `source/art/`,
+exports compact world GLBs and keeps previews, geometry receipts and raw frames
+under `builds/marker-art/`. It refuses existing or partial outputs rather than
+overwriting them. Preserve manual edits and use an isolated output root when
+regenerating a changed recipe; prior artifacts retain their actual recipe hash.
+
+The marker validator uses fixed repository-owned inputs and counts only declared
+marker files, including partial outputs and per-asset logs. Unrelated project
+files do not consume its 64 MB family cap. The remaining limits are 2 MB combined
+GLBs, 20 MB logs, 2,500 triangles and eight material groups per asset, with
+ground-centered GLB Y-up bounds no larger than 0.9 x 1.2 x 0.9 metres. External
+resource checks still own transient usage, available disk, memory and deadlines.
+
+Engine-free regression checks use `python3 -m unittest discover -s tests -p
+test_marker_portability.py` and `python3 tests/test_marker_art.py --unit`. Actual
+generated-file validation uses `python3 tests/test_marker_art.py` only after an
+authorized build has produced the complete local family. Unit fixtures do not
+certify Blender output, visual quality or gameplay.
+
+The portable producer passed a local serial CPU build and actual-file checks for
+all eight assets. Its GLBs total 505,260 bytes; editable blend sources separately
+total 5,751,429 bytes. Models contain 472-2,008 triangles and three or four
+material groups. All eight sources reopened and accepted an in-memory vertex
+edit/restoration without saving; their recorded disk hashes remained unchanged.
+These results describe producer artifacts retained locally, not game performance
+or native assets included in the source-only draft.
+
+This prepared source lane makes no runtime mapping, import or app change. Game
+adoption, in-level visibility, collision/traversal, loading, memory and GPU
+acceptance remain separate. Do not interpret a source-only draft as a shipped
+marker pack or completed campaign.
+
+## Offline unused-UV candidate
+
+`tools/prune_untextured_uv.py` is an optional experiment, not part of export or runtime loading. It removes UV streams only from static, untextured GLBs within a strict eight-MiB input profile. Textures, extensions, sparse or shared accessors, interleaved views and unsupported references are rejected. Retained position, normal and index bytes, material values, node transforms and primitive order must remain exact. It accepts explicit input/output paths and writes only a fresh candidate outside the project; existing and symlink targets are rejected. The GLB packing follows the [Khronos glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#glb-file-format-specification).
+
+The engine-free checks are `python3 -B tests/test_prune_untextured_uv.py`. They exercise the real serializer and CLI with controlled geometry, unsafe references and protected output paths. Storage reduction does not prove smaller imported meshes, GPU memory or faster startup. Production GLBs, Blender sources, the manifest, import settings and export helpers remain unchanged. Native importer checks, runtime UV/UV2 consumer inspection and representative rendered parity/resource measurements are required before any asset adoption; all engine/GUI and promotion holds remain in force.

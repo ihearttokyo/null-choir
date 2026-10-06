@@ -48,15 +48,18 @@ def source_profiles():
     return weapons, roles
 
 
-def mixed_budgets(level, data, weapons, profiles, reachable):
+def mixed_budgets(level, data, weapons, profiles, reachable, incoming_weapons=None):
     """Fixed single-target spending trace, not an optimizer or native fight."""
     inherited = {0, 1}
     inherited_sources = []
-    for prior in list(FILES)[:list(FILES).index(level)]:
-        for p in json.loads((ROOT / "game/data" / (FILES[prior] + ".json")).read_text())["pickups"]:
-            if p["kind"] == "weapon":
-                inherited.add(p["weapon"])
-                inherited_sources.append(p["id"])
+    if incoming_weapons is None:
+        for prior in list(FILES)[:list(FILES).index(level)]:
+            for p in json.loads((ROOT / "game/data" / (FILES[prior] + ".json")).read_text())["pickups"]:
+                if p["kind"] == "weapon":
+                    inherited.add(p["weapon"])
+                    inherited_sources.append(p["id"])
+    else:
+        inherited = set(incoming_weapons)
     # No ammo carry, melee, infighting, splash or aligned-target subsidy. Six
     # close scatter pellets only. Guardian credit uses its CLOSED frontal armor.
     credit = [0, weapons[1]["damage"], weapons[2]["damage"] * min(6, weapons[2]["pellets"]),
@@ -133,11 +136,12 @@ def mixed_budgets(level, data, weapons, profiles, reachable):
                 activated.add(gid)
             output.append({"difficulty": difficulty, "scale": scale, "first_branch": order[0], "credit": credit,
                            "closed_guardian_credit": armored, "inherited_weapon_pickup_ids": inherited_sources,
-                           "incoming_ammo": [0] * 6, "trace": trace, "deficits": deficits, "remaining_ammo": ammo})
+                           "incoming_weapons": sorted(inherited), "incoming_ammo": [0] * 6,
+                           "trace": trace, "deficits": deficits, "remaining_ammo": ammo})
     return output
 
 
-def check_layout(level, data):
+def check_layout(level, data, incoming_weapons=None):
     assert data.get("id") == level and len(data.get("loops", [])) == 2, f"{level} requires its authored two-loop layout (intended RED)"
     assert data["cell_size"] == 4
     assert all(type(p.get("yaw")) in (int, float) and math.isfinite(p["yaw"]) for p in data["enemies"]), f"{level} requires finite authored actor yaw (intended RED)"
@@ -331,7 +335,7 @@ def check_layout(level, data):
         x, z = bridge["cell"]
         assert segment([x, z - 1.5], [x, z + 1.5]), "rib bridge central transport passage must remain open"
         assert sum(abs(c[0] - x) < 1 and abs(c[1] - z) < 1 for c, _, _ in solids) == 4, "four independent lateral bridge support bases"
-    budgets = mixed_budgets(level, data, weapons, profiles, reachable)
+    budgets = mixed_budgets(level, data, weapons, profiles, reachable, incoming_weapons)
     return {"level": level, "tiles": len(tiles), "actors": len(actors), "loops": 2, "planned_machines": 7,
             "baseline_pistol_support_only": reserve, "mixed_arsenal_routes": budgets}
 
@@ -343,6 +347,20 @@ def check(level, data):
     return result
 
 
+def check_minimum_heart_arsenal(data):
+    """Actual pools with missed optional weapons; a spending model, not native fights."""
+    routes = check_layout("heart", data, incoming_weapons=(0, 1, 2))["mixed_arsenal_routes"]
+    assert {(r["difficulty"], r["first_branch"]) for r in routes} == {
+        (mode, branch) for mode in range(3) for branch in ("first", "second")}
+    assert all(r["incoming_weapons"] == [0, 1, 2] and r["incoming_ammo"] == [0] * 6 for r in routes)
+    assert all(not r["deficits"] for r in routes), "Heart minimum arsenal needs finite before-commit pools without granting missed earlier weapons"
+    for route in routes:
+        finale = next(stage for stage in route["trace"] if stage["group"] == "heart_finale")
+        pod = next(p for p in finale["pickups_before_commit"] if p["id"] == "heart_finale_launcher")
+        assert pod["acquired"] and pod["weapon"] == 4 and pod["amount"] == 8
+    return routes
+
+
 if __name__ == "__main__":
     levels = [sys.argv[sys.argv.index("--level") + 1]] if "--level" in sys.argv else list(FILES)
     for level in levels:
@@ -351,6 +369,17 @@ if __name__ == "__main__":
         # Geometry/budget reporting is explicitly separate from integrated GREEN.
         layout_only = "--boundary-checks" in sys.argv or "--budget-report" in sys.argv
         print(json.dumps(check_layout(level, data) if layout_only else check(level, data), indent=2))
+        if level == "heart" and not layout_only:
+            check_minimum_heart_arsenal(data)
+            reverted = copy.deepcopy(data)
+            next(p for p in reverted["pickups"] if p["id"] == "heart_finale_launcher")["kind"] = "ammo"
+            try:
+                check_minimum_heart_arsenal(reverted)
+            except AssertionError as error:
+                assert str(error) == "Heart minimum arsenal needs finite before-commit pools without granting missed earlier weapons"
+            else:
+                raise AssertionError("Heart launcher catch-up regression was not rejected")
+            print("PASS modeled Heart minimum arsenal: six routes, actual catch-up pod, ammo-only reversion rejected; NOT native boss completion")
         if "--boundary-checks" in sys.argv:
             print("CHECKER BOUNDARIES: actual geometry/baseline control; not authored late-role/native GREEN")
             for label in ["broken_loop", "duplicate_membership", "one_seal_gate", "entry_activation", "shadow_overflow", "ammo_starvation", "light_above_roof", "missing_yaw", "nan_yaw", "infinite_yaw", "missing_unique_hero", "regular_id_loss", "nonfinite_pool", "negative_pool", "over_cap_pool", "actor_overlap", "enlarged_solid_overlap", "capsule_above_roof"]:

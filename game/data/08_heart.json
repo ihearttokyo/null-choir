@@ -720,7 +720,7 @@
     },
     {
       "id": "heart_finale_launcher",
-      "kind": "ammo",
+      "kind": "weapon",
       "weapon": 4,
       "amount": 8,
       "cell": [
