@@ -14,7 +14,8 @@ VOICES = {'guitar': (0, 30, 91, 48), 'bass': (1, 34, 94, 64),
 
 
 def vlq(value):
-    assert 0 <= value <= 0x0FFFFFFF
+    if not (0 <= value <= 0x0FFFFFFF):
+        raise AssertionError
     result = [value & 127]
     while value >> 7:
         value >>= 7
@@ -26,7 +27,8 @@ def track(events, end):
     output = bytearray()
     previous = 0
     for tick, event in sorted(events, key=lambda item: item[0]):
-        assert previous <= tick <= end
+        if not (previous <= tick <= end):
+            raise AssertionError
         output.extend(vlq(tick - previous) + event)
         previous = tick
     output.extend(vlq(end - previous) + b'\xff\x2f\x00')
@@ -81,10 +83,13 @@ def compose(spec):
 
 def compose_song(spec):
     ppq = spec['ppq']
-    assert isinstance(ppq, int) and 0 < ppq < 32768
+    if not (isinstance(ppq, int) and 0 < ppq < 32768):
+        raise AssertionError
     end = round(spec['beats'] * ppq)
-    assert end > 0 and sum(section['beats'] for section in spec['sections']) == spec['beats']
-    assert set(spec['phrases']) <= VOICES.keys()
+    if not (end > 0 and sum(section['beats'] for section in spec['sections']) == spec['beats']):
+        raise AssertionError
+    if not (set(spec['phrases']) <= VOICES.keys()):
+        raise AssertionError
 
     def meta(kind, text):
         data = text.encode('utf-8')
@@ -94,27 +99,35 @@ def compose_song(spec):
     previous = -1
     for beat, tempo in spec['tempos']:
         tick = round(beat * ppq)
-        assert previous < tick < end and 0 < tempo <= 0xFFFFFF
-        assert previous != -1 or tick == 0
+        if not (previous < tick < end and 0 < tempo <= 0xFFFFFF):
+            raise AssertionError
+        if not (previous != -1 or tick == 0):
+            raise AssertionError
         conductor.append((tick, b'\xff\x51\x03' + tempo.to_bytes(3, 'big')))
         previous = tick
-    assert previous >= 0
+    if not (previous >= 0):
+        raise AssertionError
     for beat, numerator, denominator in spec.get('meters', [[0, 4, 4]]):
-        assert numerator in range(1, 128) and denominator in (2, 4, 8, 16)
+        if not (numerator in range(1, 128) and denominator in (2, 4, 8, 16)):
+            raise AssertionError
         tick = round(beat * ppq)
-        assert 0 <= tick < end
+        if not (0 <= tick < end):
+            raise AssertionError
         conductor.append((tick, b'\xff\x58\x04' + bytes([
             numerator, denominator.bit_length() - 1, 24, 8])))
     start = 0
     for section in spec['sections']:
-        assert section['beats'] > 0 and set(section['parts']) <= VOICES.keys()
+        if not (section['beats'] > 0 and set(section['parts']) <= VOICES.keys()):
+            raise AssertionError
         conductor.append((start, meta(6, section['name'])))
         start += round(section['beats'] * ppq)
     tracks = [track(conductor, end)]
     for name, (channel, program, volume, pan) in VOICES.items():
-        assert spec['programs'].get(name, program) == program, 'Use the approved instrument palette'
+        if not (spec['programs'].get(name, program) == program):
+            raise AssertionError('Use the approved instrument palette')
         volume, pan = spec.get('mix', {}).get(name, [volume, pan])
-        assert volume in range(128) and pan in range(128)
+        if not (volume in range(128) and pan in range(128)):
+            raise AssertionError
         events = [(0, meta(3, name)), (0, bytes([0xB0 | channel, 0, 0])),
                   (0, bytes([0xB0 | channel, 32, 0])), (0, bytes([0xC0 | channel, program])),
                   (0, bytes([0xB0 | channel, 7, volume])), (0, bytes([0xB0 | channel, 10, pan])),
@@ -127,33 +140,41 @@ def compose_song(spec):
             if names:
                 phrases = [spec['phrases'][name][key] for key in names]
                 cycle = sum(round(phrase['beats'] * ppq) for phrase in phrases)
-                assert cycle > 0 and length % cycle == 0, 'Phrase cycle must fit its section exactly'
+                if not (cycle > 0 and length % cycle == 0):
+                    raise AssertionError('Phrase cycle must fit its section exactly')
                 offset = section_start
                 for _ in range(length // cycle):
                     for phrase in phrases:
                         phrase_length = round(phrase['beats'] * ppq)
-                        assert phrase_length > 0
+                        if not (phrase_length > 0):
+                            raise AssertionError
                         spans = {}
                         for beat, duration, pitches, velocity in phrase['notes']:
                             on, off = round(beat * ppq), round((beat + duration) * ppq)
-                            assert 0 <= on < off <= phrase_length and velocity in range(1, 128)
-                            assert pitches and len(pitches) == len(set(pitches))
+                            if not (0 <= on < off <= phrase_length and velocity in range(1, 128)):
+                                raise AssertionError
+                            if not (pitches and len(pitches) == len(set(pitches))):
+                                raise AssertionError
                             for pitch in pitches:
-                                assert pitch in range(128)
+                                if not (pitch in range(128)):
+                                    raise AssertionError
                                 spans.setdefault(pitch, []).append((on, off))
                                 events.extend([(offset + on, bytes([0x90 | channel, pitch, velocity])),
                                                (offset + off, bytes([0x80 | channel, pitch, 0]))])
                         for intervals in spans.values():
                             ordered = sorted(intervals)
-                            assert all(a[1] <= b[0] for a, b in zip(ordered, ordered[1:])), 'Same-key overlaps lose voices'
+                            if not (all(a[1] <= b[0] for a, b in zip(ordered, ordered[1:]))):
+                                raise AssertionError('Same-key overlaps lose voices')
                         bends = phrase.get('bends', [])
                         previous_bend = -1
                         for beat, value in bends:
                             tick = round(beat * ppq)
-                            assert channel != 9 and previous_bend < tick <= phrase_length and value in range(16384)
+                            if not (channel != 9 and previous_bend < tick <= phrase_length and value in range(16384)):
+                                raise AssertionError
                             events.append((offset + tick, bytes([0xE0 | channel, value & 127, value >> 7])))
                             previous_bend = tick
-                        assert not bends or bends[-1][1] == 8192, 'Every bent phrase must return to center'
+                        if not (not bends or bends[-1][1] == 8192):
+                            raise AssertionError('Every bent phrase must return to center')
                         offset += phrase_length
             section_start += length
         # Note-offs precede retriggers at the same tick; initialization stays before notes.
@@ -164,14 +185,17 @@ def compose_song(spec):
 
 
 if __name__ == '__main__':
-    assert vlq(0) == b'\x00' and vlq(127) == b'\x7f'
-    assert vlq(128) == b'\x81\x00' and vlq(0x0FFFFFFF) == b'\xff\xff\xff\x7f'
+    if not (vlq(0) == b'\x00' and vlq(127) == b'\x7f'):
+        raise AssertionError
+    if not (vlq(128) == b'\x81\x00' and vlq(0x0FFFFFFF) == b'\xff\xff\xff\x7f'):
+        raise AssertionError
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--gate', action='store_true', help='Verify the frozen fixture; never overwrite it')
     args = parser.parse_args()
     if args.gate:
         data = compose(json.loads((ROOT / 'source/music/gate.json').read_text()))
-        assert data == (ROOT / 'game/audio/gate.mid').read_bytes()
+        if not (data == (ROOT / 'game/audio/gate.mid').read_bytes()):
+            raise AssertionError
         print('GATE_GREEN: byte-identical; six tracks; 7680 ticks; 7.2 seconds')
     else:
         scores = []
