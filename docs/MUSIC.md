@@ -28,7 +28,7 @@ python3 -B tests/test_music.py
 godot --headless --audio-driver Dummy --path game --script res://tests/test_campaign_music.gd
 ```
 
-The default command regenerates only the eight campaign files. `--gate` verifies, but never overwrites, the frozen gate fixture. The encoder rejects section tiling errors, same-key overlaps, notes extending beyond a phrase, unsorted/unresolved bends and palette changes.
+The default command validates and encodes all eight scores before writing any campaign file. A missing, malformed or invalid score therefore leaves the existing MIDI files unchanged. This does not make the write phase a filesystem transaction: an I/O failure during writing can still leave partial output. `--gate` verifies, but never overwrites, the frozen gate fixture. The encoder rejects section tiling errors, same-key overlaps, notes extending beyond a phrase, unsorted/unresolved bends and palette changes.
 
 ## Palette and loop contract
 
@@ -37,6 +37,16 @@ Zero-based GM programs remain Distortion Guitar 30 on channel 0, Pick Bass 34 on
 Each score ends with a deliberately empty release section lasting at least two seconds; note-offs occur before that section. Pitch bends return to center, sustain stays off, and same-tick note-offs precede retriggers. The runtime can therefore reset a loop without outstanding MIDI notes or controller state. This does not prove the SoundFont release envelope is inaudible at the boundary. Audition the actual loop.
 
 ## Evidence and playback
+
+Encoder guards remain active under normal Python, `-O` and `-OO`, including
+invalid score rejection and the frozen gate comparison. They preserve the
+existing `AssertionError` behavior through explicit runtime checks: Python's
+[optimization option](https://docs.python.org/3/using/cmdline.html#cmdoption-O)
+removes ordinary `assert` statements. `tests/test_music_runtime_guards.py`
+checks those interpreter modes, unchanged MIDI bytes and late-failure write
+protection using private fixture copies; it never edits the source project's
+scores or tracks. These are Python source/CLI checks, not heard or native-game
+acceptance.
 
 Python assertions check deterministic source/output parity, the frozen gate hash, encoder guards, 60–120 second duration, release sections, phrase use and arrangement variation. Normalized main riffs and drum patterns differ across all eight scores; this is a structural check, not a claim of heard quality. Godot assertions use the shipped SMF reader to check actual track events, note balance, programs/channels/controllers, tempo/meter/section parity, end-of-track and release duration. They also load the actual bank and require every authored pitch/velocity to have a matching zone. Bank release envelopes and percussion auto-release/finite-PCM bounds must finish before the loop, including a 100 ms dispatch/buffer allowance. This deterministic bound does not replace listening or cover arbitrary frame stalls.
 
