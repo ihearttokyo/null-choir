@@ -246,6 +246,7 @@ func check_persistence() -> bool:
 	var group = game.level.layout.data.encounters[0]
 	var flag = "encounter:"+group.id
 	var dead_id = group.enemy_ids[0]
+	if not expect(game._capture_actor_state(),"SETUP: shared production actor capture precedes controlled encounter_before checkpoint"): return false
 	game.state.mark_checkpoint("encounter_before",game.player.position)
 	actor_with_id(dead_id).take_damage(1000,game.player)
 	if not expect(flag in game.state.removed and dead_id in game.state.removed,"Lethal first hit records group activation and original enemy removal"): return false
@@ -261,6 +262,7 @@ func check_persistence() -> bool:
 	game.hurt_player(27)
 	var ammo = game.state.ammo.duplicate()
 	var health = game.state.health
+	if not expect(game._capture_actor_state(),"SETUP: shared production actor capture precedes controlled encounter_active checkpoint"): return false
 	game.state.mark_checkpoint("encounter_active",game.player.position)
 	await create_timer(1.0).timeout
 	var lights = light_state(group.cue.light_ids)

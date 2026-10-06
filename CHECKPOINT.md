@@ -3,7 +3,70 @@
 Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
-## Current tools and native-baked development candidate
+## Current recovery and hill-climb — 2026-10-06
+
+Jared released the NULL CHOIR launch, native, GUI and project promotion holds.
+Root AGENTS.md records the current authority. Older hold paragraphs below are
+historical evidence, not current permission gates. Preserve isolated saves,
+original assets, unrelated sync pauses and platform safeguards.
+
+Private main includes merged instruction PR17, music-guard PR12, marker-sharing
+PR18 and HUD-visibility PR19 (`f9ac67ef`).
+The eight-level project and cumulative 30M goal remain active; queue up to 30
+independent improvement tracks within actual concurrency and resource limits.
+
+The current candidate adds optional version-1 living-actor records to current,
+checkpoint and entry snapshots. Legacy absence differs from authoritative empty.
+Native G07's nine controlled recovery cases, exact disk-codec/trust and owner-
+death/legacy/empty/retired-level lifecycle checks pass. Four small NPC position
+repairs preserve their original tiles, floors, IDs, profiles, yaws and encounters;
+all eight actual worlds at three difficulties pass native clearance (24 cases).
+These results do not establish played campaign victory.
+
+The current Metal/CoreAudio placement fixture passes Settings, Controls and
+difficulty at both wait phases, plus cancel/restart/new-campaign and stale level/
+player guards. Eight-map fallback retains resources and story/routes. The native
+run completed in 16.16 seconds without errors or leaks. Headless mode reports
+visible mouse mode when capture is requested and cannot certify this regression.
+An earlier native attempt hit the parent's undersized file limit before the
+fixture; it is not a game pass or demonstrated game defect.
+
+Independent clean reviews and native checks support two resource changes:
+collectible spheres use 8 mesh resources instead of 177 in the consumed-marker
+fixture, with identical arrays/materials and released weak references; settled
+HUD refreshes emit zero visibility transitions instead of 48, with exact
+presentation/state parity across 12 cases. These are resource/mutation counts,
+not FPS, GPU or whole-process memory gains. The scenery source binding and its
+28 affected checks pass.
+
+Broader campaign, save-failure, level-transition, world-lifecycle, HUD, boss-HUD
+and survey checks pass. Encounter fixtures now capture through the shared
+production boundary before controlled checkpoints or exact saved-state witnesses.
+Late flow freezes the unrelated survey writer during controlled teleports; its
+trace isolated exploration as the only mismatch. Original full-dictionary,
+resource, membership and birth-budget assertions remain intact. Encounter, late
+encounter, late flow, weapon-efficiency, HUD-visibility and marker-sharing checks
+pass. All eight religious set-piece checks pass after resolving actual collision
+children by type rather than assuming an obsolete visual-child index. Current
+fixture-delta reviews are clean. The assembled cohort now passes 57 of 58
+registered headless targets; the unchanged eight-score full-repeat PCM test is
+running with its proper long deadline. Both actual save/discard shutdown paths
+pass. Synthetic role arenas explicitly use the supported validated legacy
+format; all 66 original role assertions remain, and six boss/difficulty fights
+complete with finite ammunition. This is not played campaign victory or new-
+format boss-persistence certification. The authored-actor suite independently
+retains current-schema coverage. The new phase-local build controller remains
+unaccepted pending three independent findings, targeted fixes and a real OS
+process-group canary; it is not part of this repository change.
+
+Land the reviewed actor/source improvement, finish the full PCM repeat and
+corrected build-control acceptance, then
+build a new source-bound Apple Silicon app under the reserved 3 GB build phase.
+The corrected packed app, manual usability, listening/pacing and performance
+remain unverified. Notarization requires real authentication; no credential or
+security policy is created here. Source progress is not full project completion.
+
+## Earlier tools and native-baked development candidate
 
 Xcode 27.0/27A266a and the official Metal Toolchain are installed. An actual
 Metal kernel compiled to AIR and linked into a metallib; installation no longer

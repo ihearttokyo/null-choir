@@ -304,6 +304,7 @@ func check_creation_budget(recovery: Dictionary, finale: Dictionary) -> bool:
 	game.player.camera.rotation.x = 1.1
 	var ammunition: int = game.state.ammo[1]
 	if not expect(game.state.weapon == 1 and game.player.fire() and game.state.ammo[1] == ammunition-1,"Real pistol discharge spends an actual resource before the save/recovery boundary"): return false
+	if not expect(game._capture_actor_state(),"SETUP: actual shared save capture precedes the exact observed campaign boundary"): return false
 	var saved: Dictionary = game.state.to_dict().duplicate(true)
 	var cue_lights: Array = []
 	for group in game.level.layout.data.encounters: cue_lights.append(light_colors(group.cue.light_ids))

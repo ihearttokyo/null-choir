@@ -17,6 +17,10 @@ Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.
 
 Before creating or substantially redesigning assets, generate and inspect GPT Image references, retain them and verify each implementing worker inspected the actual selected images. Then derive editable Blender sources and compact runtime assets. Existing faithful mechanical fixes do not require new art.
 
+Queue up to 30 distinct, disjoint exploration tracks in resource-safe waves. Use wide "wacky" and lateral hypotheses alongside ordinary optimization, but promote only measured wins that preserve the approved game. Stay within actual concurrency and resource limits; serialize heavy experiments.
+
+For sparse Git worktrees created without checkout, materialize the base index before staging. Verify the staged and committed path sets match the intended change before any push; a partial index must never publish deletions of untouched files.
+
 ## Workers and completion
 
 Use named native Codex CLI children with explicit gpt-6.1-sol/xhigh and priority requested; actual telemetry governs profile claims. Partition file ownership, pass current source/evidence and authority, and tell workers they are not alone. Parent owns integration, tests and PR hygiene. Serialize heavy/native jobs until headroom is measured; preserve the 8 GB free-space reserve.

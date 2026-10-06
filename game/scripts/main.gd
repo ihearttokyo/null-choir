@@ -32,6 +32,7 @@ var message_time: float = 0
 var damage_flash: float = 0
 var hit_flash: float = 0
 var quitting: bool = false
+var _scene_level_index: int = -1
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -139,6 +140,12 @@ func start_campaign(mode: int) -> void:
 	start_level()
 
 func start_level() -> void:
+	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
+	var candidate = Campaign.new()
+	if not candidate.from_dict(state.to_dict()):
+		show_title()
+		notify("NO VALID RECOVERY IMAGE",8)
+		return
 	if hud != null: hud.survey.hide()
 	get_tree().paused = false
 	playing = false
@@ -153,24 +160,29 @@ func start_level() -> void:
 	level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(level)
 	level.build(self,state.level_index)
+	_scene_level_index = state.level_index
 	player = Player.new()
 	level.add_child(player)
 	player.configure(self)
-	if state.position == Vector3.ZERO and not loaded_positions:
-		state.mark_checkpoint("entry",level.layout.world_position(level.layout.data.spawn))
+	var fresh_entry: bool = state.position == Vector3.ZERO and not loaded_positions
+	if fresh_entry: state.position = level.layout.world_position(level.layout.data.spawn)
 	player.position = state.position + Vector3(0,0.04,0)
 	player.rotation.y = deg_to_rad(level.layout.data.spawn_yaw)
-	for authored in level.layout.data.enemies:
-		var spec = authored.duplicate()
-		if spec.id in state.removed: continue
-		for group in level.layout.data.get("encounters",[]):
-			if spec.id in group.enemy_ids:
-				spec["encounter"] = group.id
-				break
+	var specs: Dictionary = Campaign.actor_specs(level.layout)
+	var records: Array = state.actors if state.actors != null else level.layout.data.enemies
+	for record in records:
+		if record.id in state.removed: continue
 		var actor = Enemy.new()
 		level.add_child(actor)
-		actor.configure(self,spec)
+		actor.configure(self,specs[record.id])
+		if state.actors != null: actor.restore_snapshot(record)
 		enemies.append(actor)
+	if fresh_entry:
+		if not _capture_actor_state():
+			show_title()
+			notify("NO VALID ENTRY ACTOR IMAGE",8)
+			return
+		state.mark_checkpoint("entry",state.position)
 	for group in level.layout.data.get("encounters",[]):
 		if "encounter:"+group.id in state.removed: level.apply_encounter_cue(group,true)
 	damage_flash = 0
@@ -180,19 +192,21 @@ func start_level() -> void:
 	if state.health <= 0:
 		show_recovery()
 		return
-	if loaded_positions:
+	if loaded_positions or (state.actors != null and not fresh_entry):
 		placement_pending = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if music != null: music.set_paused(true)
 		var pending_level = level
 		var pending_player = player
 		# New native bodies are not queryable reliably in their construction frame.
 		await get_tree().physics_frame
 		await get_tree().physics_frame
-		if level != pending_level or player != pending_player or not is_instance_valid(pending_level) or pending_level.is_queued_for_deletion(): return
+		if not placement_pending or level != pending_level or player != pending_player or not is_instance_valid(pending_level) or pending_level.is_queued_for_deletion() or not is_instance_valid(pending_player) or pending_player.is_queued_for_deletion() or _scene_level_index != state.level_index: return
 		placement_pending = false
 		if state.health <= 0:
 			show_recovery()
 			return
-		if not _repair_loaded_position():
+		if not _valid_restored_actors() or not _repair_loaded_position():
 			show_title()
 			notify("NO SAFE RECOVERY POSITION",8)
 			return
@@ -203,6 +217,40 @@ func start_level() -> void:
 		music.set_paused(false)
 		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _valid_restored_actors() -> bool:
+	var layout = level.layout
+	var space = level.get_world_3d().direct_space_state
+	for actor in enemies:
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0: return false
+		var collider: CollisionShape3D = actor.get_child(0)
+		var query = PhysicsShapeQueryParameters3D.new()
+		query.shape = collider.shape
+		query.transform = collider.global_transform
+		# Player clearance is repaired against these survivors below, not vice versa.
+		query.collision_mask = 1|4
+		query.exclude = [actor.get_rid()]
+		if not space.intersect_shape(query,1).is_empty(): return false
+		var cell = Vector2(actor.position.x,actor.position.z)/float(layout.data.cell_size)
+		var floor_point: Vector3 = layout.world_position([cell.x,cell.y])
+		var support = PhysicsRayQueryParameters3D.create(floor_point+Vector3.UP*0.5,floor_point-Vector3.UP,1)
+		var hit = space.intersect_ray(support)
+		if hit.is_empty() or hit.normal.y < 0.5 or absf(hit.position.y-floor_point.y) > 0.08: return false
+	return true
+
+func _capture_actor_state() -> bool:
+	# Paused scenes are valid; missing, pending and retired scenes are not captures.
+	if placement_pending or not is_instance_valid(level) or level.is_queued_for_deletion() or not is_instance_valid(player) or player.is_queued_for_deletion() or player.get_parent() != level or _scene_level_index != state.level_index: return true
+	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"actors":[]}
+	for actor in enemies:
+		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0:
+			snapshot.actors.append(actor.snapshot())
+	if not state._valid_actor_resources(snapshot,level.layout,state.difficulty):
+		# Legacy Continue may have lost born-not-dead nodes before this feature existed.
+		# Keep that envelope unknown; never invent deaths, HP or replacement births.
+		return state.actors == null and state._valid_actor_resources(snapshot,level.layout,state.difficulty,true)
+	state.actors = snapshot.actors
+	return true
 
 func _valid_saved_position(point: Vector3) -> bool:
 	var size: float = level.layout.data.cell_size
@@ -256,6 +304,10 @@ func _process(delta: float) -> void:
 		for spec in level.layout.data.interactions:
 			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
 				state.removed.append(spec.id)
+				if not _capture_actor_state():
+					state.removed.erase(spec.id)
+					notify("RECOVERY ACTOR CAPTURE FAILED",8)
+					continue
 				state.mark_checkpoint(spec.id,player.position)
 				if _save() == OK: notify(spec.text)
 				else: notify("RECOVERY MEMORY ONLY: "+message,8)
@@ -388,6 +440,9 @@ func interact() -> void:
 				if not id in state.removed:
 					notify("THE MANIFESTATION HOLDS THE RESTRAINT")
 					return
+			if not _capture_actor_state():
+				notify("RECOVERY ACTOR CAPTURE FAILED",8)
+				return
 			var prior = state.to_dict()
 			state.complete_level()
 			if _save() != OK:
@@ -452,6 +507,9 @@ func resume_game() -> void:
 	if effects != null: effects.set_paused(false)
 
 func _save() -> Error:
+	if not _capture_actor_state():
+		notify("SAVE FAILED: INVALID ACTOR IMAGE",8)
+		return ERR_INVALID_DATA
 	var result = state.save_progress(progress_path)
 	if result != OK: notify("SAVE FAILED: "+error_string(result),8)
 	return result
@@ -466,6 +524,7 @@ func show_title() -> void:
 	if hud != null: hud.survey.hide()
 	playing = false
 	placement_pending = false
+	_scene_level_index = -1
 	if level != null:
 		level.queue_free()
 		level = null
@@ -670,7 +729,7 @@ func _verify_export() -> void:
 	checks["fire"] = player.fire() and state.ammo[1] == 89
 	pause_game()
 	checks["pause"] = get_tree().paused and not playing
-	restore_checkpoint()
+	await restore_checkpoint()
 	checks["checkpoint"] = playing and state.ammo[1] == 90
 	var retained_bank = music.player.bank
 	var map_ids = ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"]

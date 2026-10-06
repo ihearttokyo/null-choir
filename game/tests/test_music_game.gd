@@ -27,7 +27,7 @@ func run() -> void:
 	game.resume_game()
 	music.player._process(0.1)
 	if not expect(music.player.position > position,"Game resume must continue MIDI clock"): return
-	game.restart_level()
+	await game.restart_level()
 	if not expect(game.music == music and music.player.bank == bank and music.player.position == 0,"Level restart must reuse bank and restart song"): return
 	game.show_title()
 	if not expect(music.player.get_now_playing_polyphony() == 0,"Title must stop all music voices"): return

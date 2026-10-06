@@ -106,12 +106,12 @@ func run() -> void:
 			for support in supports:
 				var p = layout.world_position(support.cell)
 				var hit = space.intersect_ray(PhysicsRayQueryParameters3D.create(p+Vector3.UP*.6,p+Vector3.UP*.05,1))
-				if not expect(not hit.is_empty() and hit.collider is StaticBody3D and hit.collider.get_child(1).shape is BoxShape3D and hit.collider.get_child(1).shape.size.is_equal_approx(Vector3(.85,.3,.8)),"Each lateral bridge support retains its small authored native collision"): return
+				if not expect(not hit.is_empty() and hit.collider is StaticBody3D and _collision_shape(hit.collider) is BoxShape3D and _collision_shape(hit.collider).size.is_equal_approx(Vector3(.85,.3,.8)),"Each lateral bridge support retains its small authored native collision"): return
 			continue
 		var base_position = model.position+Vector3.UP*solid[1]/2.0
-		if not expect(game.level.get_children().any(func(node): return node is StaticBody3D and node.position.is_equal_approx(base_position) and node.get_child(1).shape is BoxShape3D),"Explicit low authored base prevents phasing through floor machinery"): return
+		if not expect(game.level.get_children().any(func(node): return node is StaticBody3D and node.position.is_equal_approx(base_position) and _collision_shape(node) is BoxShape3D),"Explicit low authored base prevents phasing through floor machinery"): return
 		var base = game.level.get_children().filter(func(node): return node is StaticBody3D and node.position.is_equal_approx(base_position))[0]
-		var size = base.get_child(1).shape.size
+		var size = _collision_shape(base).size
 		var footprint = local_bounds.size*model.scale
 		if not expect(absf(size.x-footprint.x) < .003 and absf(size.z-footprint.z) < .003 and base.rotation.is_equal_approx(model.rotation),"Base footprint uses model-local dimensions and rotates with the model exactly once: "+art): return
 	if not expect(layout.data.heroes.size() == 2 and layout.data.loops.size() == 2 and game.level.get_children().filter(func(node): return node is Light3D and node.shadow_enabled).size() == 4,"Original loop heroes and four-shadow budget remain intact"): return
@@ -129,6 +129,11 @@ func run() -> void:
 	await process_frame
 	print("PASS seven actual Blender set pieces, traditions, staging, ceiling clearance, low bases and preserved loop/shadow budgets: "+layout.data.id)
 	quit()
+
+func _collision_shape(node: Node) -> Shape3D:
+	for child in node.get_children():
+		if child is CollisionShape3D: return child.shape
+	return null
 
 func expect(condition: bool, detail: String) -> bool:
 	if not condition:
