@@ -268,8 +268,11 @@ class CensusTests(unittest.TestCase):
             cost.read_glb(io.BytesIO(), cost.MAX_GLB + 1)
 
     def test_source_pins_are_the_accepted_compatibility_contract(self):
+        actual = Path(__file__).absolute().parents[1] / "game/scripts/level.gd"
+        self.assertEqual(hashlib.sha256(actual.read_bytes()).hexdigest(),
+                         cost.SOURCE_PINS["game/scripts/level.gd"])
         self.assertEqual(cost.SOURCE_PINS, {
-            "game/scripts/level.gd": "904359b7c24d0eb1a51f1b0569770c7a3e6ffd447bba3ce3fac485b6c5395fb5",
+            "game/scripts/level.gd": "fbeb3f64a587a999dd46b81d2b5b73cf8d477f82af500502810d97ca0d64dc35",
             "game/scripts/level_data.gd": "402f065c8b284b06b947aa4bedf1940e6f314538c3aa69f9fe4bfd2c08019758"})
 
 

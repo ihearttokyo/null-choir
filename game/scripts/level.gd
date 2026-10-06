@@ -32,6 +32,9 @@ func build(owner_game: Node, index: int) -> void:
 		var door = _box(Vector3(spec.size[0],spec.size[1],spec.size[2]), layout.world_position(spec.cell) + Vector3(0,spec.size[1]/2,0), _material(Color(0.14,0.08,0.09)), true)
 		door.rotation.y = deg_to_rad(spec.yaw)
 		doors[spec.id] = door
+	var marker_mesh = SphereMesh.new()
+	marker_mesh.radius = 0.8
+	marker_mesh.height = 1.6
 	for spec in layout.data.pickups + layout.data.interactions:
 		if spec.id in game.state.removed:
 			continue
@@ -42,9 +45,7 @@ func build(owner_game: Node, index: int) -> void:
 		var marker = _place_model("containment_capsule",layout.world_position(spec.cell)+Vector3.UP*0.06,0,[0.25,0.17,0.25])
 		# Reuse the Blender cage at collectible scale; its fluid core keeps the original color cue.
 		var core = MeshInstance3D.new()
-		core.mesh = SphereMesh.new()
-		core.mesh.radius = 0.8
-		core.mesh.height = 1.6
+		core.mesh = marker_mesh
 		core.material_override = _material(color,0.7)
 		core.position.y = 2.2
 		marker.add_child(core)

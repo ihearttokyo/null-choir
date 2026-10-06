@@ -14,7 +14,7 @@ import sys
 MAPS = ("01_intake", "02_foundry", "03_processional", "04_reliquary",
         "05_nursery", "06_ossuary", "07_inversion", "08_heart")
 SOURCE_PINS = {
-    "game/scripts/level.gd": "904359b7c24d0eb1a51f1b0569770c7a3e6ffd447bba3ce3fac485b6c5395fb5",
+    "game/scripts/level.gd": "fbeb3f64a587a999dd46b81d2b5b73cf8d477f82af500502810d97ca0d64dc35",
     "game/scripts/level_data.gd": "402f065c8b284b06b947aa4bedf1940e6f314538c3aa69f9fe4bfd2c08019758",
 }
 MAX_GLB = 4 * 1024 * 1024
