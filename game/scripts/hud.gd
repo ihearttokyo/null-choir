@@ -137,7 +137,9 @@ func draw_state() -> Dictionary:
 func _process(_delta: float) -> void:
 	view = draw_state()
 	var active: bool = not view.is_empty() and game.playing
-	for id in labels: labels[id].visible = active
+	for id in labels:
+		if id not in ["InteractionPrompt","InteractionBinding","BossTitle","BossHealth","BossPhase","Transmission"]:
+			labels[id].visible = active
 	if not view.is_empty():
 		labels.LevelTitle.text = view.title
 		labels.Discovery.text = view.discovery_text
