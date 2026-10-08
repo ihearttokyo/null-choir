@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Export offline Mac app; temporary files stay outside cloud-backed folders."""
 from pathlib import Path
+import argparse
 import hashlib
 import os
 import plistlib
@@ -47,7 +48,9 @@ def run(*args):
     return result.stdout
 
 
-def main():
+def main(*, allow_window=False):
+    if not allow_window:
+        raise RuntimeError('Metal shader baking requires a graphics window and may activate Godot. Run with --allow-window only when foreground use is intended.')
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='null-choir-build-', dir='/private/tmp') as tmp:
         tmp = Path(tmp)
@@ -56,7 +59,7 @@ def main():
         shutil.copytree(ROOT / 'game', game, ignore=shutil.ignore_patterns('.godot'))
         print(run('godot', '--headless', '--path', str(game), '--script', str(ROOT / 'tools/export_engine_licenses.gd')))
         print(run('godot', '--headless', '--editor', '--path', str(game), '--import'))
-        print(run('godot', '--path', str(game), '--export-release', 'macOS', str(export)))
+        print(run('godot', '--rendering-driver', 'metal', '--path', str(game), '--export-release', 'macOS', str(export)))
         run('ditto', '-x', '-k', str(export), str(tmp))
         app, = tmp.glob('*.app')
         info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())
@@ -71,4 +74,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--allow-window', action='store_true', help='Permit Godot to open/activate a graphics window for native Metal baking')
+    args = parser.parse_args()
+    main(allow_window=args.allow_window)
