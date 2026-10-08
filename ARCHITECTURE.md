@@ -20,6 +20,8 @@ Public music boundary: a Node at `game/audio/music.gd` with `play_level(index)`,
 
 Level JSON owns authored scenery transforms and light positions. `level.gd` instantiates Blender models, dresses boundary walls with shared kit, and builds local floor/ceiling meshes so the Mobile renderer's per-mesh light limit does not apply to a single whole-map floor. Four shadowed landmark spotlights and native depth fog supply the chamber lighting; ordinary supporting lamps have no shadows. Renderer constraints are documented by [Godot](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html).
 
+Each level retains one native PackedScene per used world-art ID. The native resource probe showed that scene instances kept meshes alive while their temporary PackedScene left the resource cache, causing repeated scene loading during construction. Level-owned scene references preserve the existing instance transforms, meshes and materials; level destruction releases those references. This is per-level resource ownership, without a global cache or rendering rewrite.
+
 Blender world fronts authored toward -Y export toward Godot +Z. Level JSON uses Godot-space yaw; wall art faces inward and its backing faces the boundary. Native scenery assertions cover front direction, wall mounting and light clearance below ceilings.
 
 Static boundary walls alone own inset native BoxOccluder3D instances. Project-level occlusion hides fully blocked geometry without changing authored assets, lighting or camera range. Floor/ceiling triangles use Godot clockwise front faces; native assertions cover both winding and conservative wall occluder bounds. [SCENERY.md](docs/SCENERY.md) owns visual and GPU comparison evidence.
