@@ -4,11 +4,16 @@ from pathlib import Path
 import runpy
 import sys
 import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
 
-main = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'tools/build_art.py'))['main']
+# Only version metadata is used; geometry callbacks below are deliberately simulated.
+with patch.dict(sys.modules, {'bpy': SimpleNamespace(app=SimpleNamespace(version_string='metadata fixture')),
+                             'mathutils': SimpleNamespace(Vector=None)}):
+    main = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'tools/build_art.py'))['main']
 g = main.__globals__
 foreign = [{'id': name, 'recipe_sha256': 'retained', 'retained': {'source': name, 'values': [1, 2]}}
-           for name in ('vertebral_furnace', 'caster', 'intake_throat_frame')]
+           for name in ('vertebral_furnace', 'caster', 'intake_throat_frame', 'ammo_vfx')]
 failures = []
 with tempfile.TemporaryDirectory(prefix='art-manifest-metadata-') as folder:
     root = Path(folder)
