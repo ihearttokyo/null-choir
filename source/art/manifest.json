@@ -415,17 +415,28 @@
     {
       "id": "conduit",
       "source": "source/art/conduit.blend",
-      "source_sha256": "fa74edb2a38f43a9a84ac85b69a88b2946b4da6dfa3e48e421b8850cba50b3cb",
+      "source_sha256": "e4b4169bcc4853b556d690b06c4cdeb3d64477f0bbd91411fcf2535f7998f692",
+      "recipe_sha256": "90f350b3cf8aa626809dfe6d2905028a213b2abeb49123800ec3f1ed0087195a",
       "outputs": [
         {
           "path": "game/assets/art/world/conduit.glb",
-          "sha256": "ae96ea8bc94a8b0fd17c066c9f0e5c253c49573ef9e7a1ec2ba803b00c24f349",
-          "bytes": 255760
+          "sha256": "21749d90da038832125fa3363a672388cc1ff15402f11112821ffa0605ea7949",
+          "bytes": 232364
         }
       ],
       "provenance": {
-        "method": "original Blender geometry and authored pixel textures",
-        "authoring_script": "tools/build_art.py",
+        "method": "original editable Blender geometry and packed authored PBR textures",
+        "authoring_script": "tools/build_conduit_art.py",
+        "references": [
+          {
+            "path": "source/art/references/conduit-braid05.png",
+            "sha256": "46bc1fbc1712c7212f7f008432ff2f780a766c97fb4ac7a5436a8d947003b8d1"
+          },
+          {
+            "path": "source/art/references/conduit-material03.png",
+            "sha256": "ae17abbb2ef1994bb755d422cbed514db5ed0ebc69cbec2e58e7d2bca498b76d"
+          }
+        ],
         "imports": [],
         "license": "Original NULL CHOIR project art"
       },
@@ -438,21 +449,19 @@
         "max": [
           0.49,
           2.022,
-          0.59
+          0.585
         ],
         "size": [
           0.98,
           4.028,
-          0.59
+          0.585
         ],
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 3660,
-      "runtime_mesh_nodes": 4,
-      "material_count": 4,
-      "loop_id": null,
-      "recipe_sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
+      "triangles": 2912,
+      "material_count": 2,
+      "runtime_mesh_nodes": 1
     },
     {
       "id": "arch",
@@ -6280,10 +6289,10 @@
   ],
   "build": {
     "blender_version": "5.2.2 LTS",
-    "script_sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95",
-    "render_engine": "Cycles CPU",
+    "script_sha256": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "render_engine": "none",
     "threads": 4,
-    "samples": 16,
-    "native_pixel_render": true
+    "samples": 0,
+    "native_pixel_render": false
   }
 }

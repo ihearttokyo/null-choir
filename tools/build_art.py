@@ -1,4 +1,4 @@
-"""Original Intake art. Run: blender -b -t 4 --python tools/build_art.py -- [--asset ID]."""
+"""Original Intake art. Run: blender -b -t 4 --python-exit-code 1 --python tools/build_art.py -- [--asset ID]."""
 import argparse
 import hashlib
 import json
@@ -908,15 +908,6 @@ def kit(name):
                 egg(f'Wall rib pin {i} {z}', (x, -.30, z), (.11, .05, .11), 'steel', 10, 6)
         for i in range(12):
             box(f'Wall machine seam {i}', (-1.7 + i * .31, -.015, .5), (.08, .055, .15), 'steel')
-    elif name == 'conduit':
-        for side in (-1, 1):
-            tube(f'Twin industrial organ conduit {side}', [(side * .17, -2, .32), (side * .17, -.6, .32),
-                 (side * .2, .5, .45), (side * .35, 1.5, .4), (side * .35, 2, .32)], .14, 'iron', 12)
-            for i in range(8):
-                ring(f'Conduit pressure rib {side} {i}', (side * .17, -1.75 + i * .5, .32), .17, .03, 'bone', 'XZ', 12)
-        tube('Braided conduit vascular insert', [(0, -2, .35), (.09, -.9, .42), (-.09, .4, .47), (.1, 1.1, .4), (0, 2, .3)], .055, 'skin')
-        for y in (-1.5, 1.5):
-            box(f'Conduit anchor {y}', (0, y, .12), (.92, .22, .24), 'steel', .025)
     else:
         for side in (-1, 1):
             tube(f'Cathedral doorway load rib {side}', [(side * 2.0, 0, .1), (side * 2.0, 0, 2.5),
@@ -932,9 +923,13 @@ def kit(name):
 
 
 def world_export(name):
+    if name == 'conduit':
+        sys.path.insert(0, str(ROOT / 'tools'))
+        from build_conduit_art import export_conduit
+        return export_conduit(globals())
     scene = setup()
     (bell if name == 'skin_bell' else siphon if name == 'siphon_heart' else
-     lambda: kit(name) if name in ('arch', 'ribbed_wall', 'conduit') else scenery(name))()
+     lambda: kit(name) if name in ('arch', 'ribbed_wall') else scenery(name))()
     bpy.context.view_layer.update()
     objects = [o for o in scene.objects if o.type == 'MESH']
     extent = bounds(objects)
@@ -1023,12 +1018,15 @@ def main():
     path = ART / 'manifest.json'
     current = json.loads(path.read_text()) if path.exists() else {'schema_version': 1, 'palette': PALETTE, 'assets': []}
     for entry in current['assets']:
-        entry.setdefault('recipe_sha256', current.get('build', {}).get('script_sha256'))
+        if opts.asset != 'conduit':
+            entry.setdefault('recipe_sha256', current.get('build', {}).get('script_sha256'))
     selected = [opts.asset] if opts.asset else IDS
     current['build'] = {'blender_version': bpy.app.version_string, 'script_sha256': sha(Path(__file__)),
-                        'render_engine': 'Cycles CPU', 'threads': 4, 'samples': 16, 'native_pixel_render': True}
+                        'render_engine': 'none' if opts.asset == 'conduit' else 'Cycles CPU',
+                        'threads': 4, 'samples': 0 if opts.asset == 'conduit' else 16,
+                        'native_pixel_render': opts.asset != 'conduit'}
     # Textures are one tiny editable source and shared runtime library.
-    if any(name in selected for name in ('floor', 'grate', 'wall')) or not (OUT / 'textures/surface_atlas.png').exists():
+    if any(name in selected for name in ('floor', 'grate', 'wall')) or (selected != ['conduit'] and not (OUT / 'textures/surface_atlas.png').exists()):
         entries = build_textures()
         current['assets'] = [a for a in current['assets'] if a['id'] not in ('floor', 'grate', 'wall')] + entries
         target(path).write_text(json.dumps(current, indent=2) + '\n')
