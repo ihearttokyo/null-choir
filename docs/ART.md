@@ -178,3 +178,34 @@ marker pack or completed campaign.
 `tools/prune_untextured_uv.py` is an optional experiment, not part of export or runtime loading. It removes UV streams only from static, untextured GLBs within a strict eight-MiB input profile. Textures, extensions, sparse or shared accessors, interleaved views and unsupported references are rejected. Retained position, normal and index bytes, material values, node transforms and primitive order must remain exact. It accepts explicit input/output paths and writes only a fresh candidate outside the project; existing and symlink targets are rejected. The GLB packing follows the [Khronos glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#glb-file-format-specification).
 
 The engine-free checks are `python3 -B tests/test_prune_untextured_uv.py`. They exercise the real serializer and CLI with controlled geometry, unsafe references and protected output paths. Storage reduction does not prove smaller imported meshes, GPU memory or faster startup. Production GLBs, Blender sources, the manifest, import settings and export helpers remain unchanged. Native importer checks, runtime UV/UV2 consumer inspection and representative rendered parity/resource measurements are required before any asset adoption; all engine/GUI and promotion holds remain in force.
+
+## Braided conduit editable-source export
+
+The conduit uses its editable `source/art/conduit.blend` as the authoring source.
+Its selected GPT references are retained as `source/art/references/conduit-braid05.png`
+and `conduit-material03.png`. The exporter records their pins with the current
+source, recipe and output.
+
+```sh
+blender -b -t 4 --python-exit-code 1 --python tools/build_art.py -- --asset conduit
+```
+
+This command opens the packed source in background Blender, joins runtime
+geometry in memory and exports the existing `game/assets/art/world/conduit.glb`
+path. It never saves the joined mesh over the editable source. Conduit-only
+export does not regenerate the floor/grate/wall texture library or change
+other manifest entries. Preserve manual source edits; the exporter intentionally
+does not pin the blend file to one immutable hash.
+
+The source keeps separate anatomical parts and three shared packed 256-pixel
+PBR textures. The runtime contract is one mesh, two material surfaces, at most
+3,000 triangles and the established ground-centered envelope. Cancelled native
+join/export operators fail before stale output can be recorded.
+
+The asset-specific Godot post-import script preserves non-mip linear sampling
+on the emission-bearing material and mip filtering on the organic material.
+Godot shares filtering within a standard material, so metal base-color and
+roughness/metallic also use non-mip sampling. Distant aliasing and actual GPU
+performance require rendered validation. Embedded-image import avoids duplicate
+extracted PNGs. Headless asset/campaign fixtures establish resource and scene
+integration, not rendered appearance or packed-app acceptance.
