@@ -44,10 +44,9 @@ func run() -> void:
 	game.player.fire()
 	if not expect(target.hp == hp-22 and hidden.hp == hidden_hp,"Occluded nearer candidate must not suppress exposed crawler assistance"): return
 	game.pause_game()
-	game.queue_free()
 	paused = false
 	print("PASS native classic auto-aim: visible low target with background wall; occlusion still blocks damage")
-	quit()
+	game._finish_quit()
 
 func expect(condition: bool, detail: String) -> bool:
 	if not condition:
