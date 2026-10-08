@@ -30,8 +30,7 @@ func run():
 	if not expect(int(crawler.sprite.frame/8) == 4): return
 	game.playing = false
 	print("PASS native enemy damage, infighting, attack/death pose and one-shot corpse removal")
-	game.queue_free()
-	quit()
+	game._finish_quit()
 
 func expect(condition: bool) -> bool:
 	if not condition:
