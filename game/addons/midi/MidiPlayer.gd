@@ -453,7 +453,7 @@ func _init_track( ) -> bool:
 		while not finished:
 			finished = true
 
-			var next_time:int = 0x7fffffff
+			var next_time:int = 0x7fffffffffffffff
 			for track in tracks:
 				var p = track.pointer
 				if track.length <= p: continue
