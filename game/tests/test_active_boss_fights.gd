@@ -105,6 +105,9 @@ func fight(index: int) -> bool:
 	game._process(0) # Real finale activation through its authored region, not an active-state edit.
 	if not expect("encounter:"+finale.id in game.state.removed and boss.active and dormant_except(finale.id),"Only the actual finale region activates its authored actors"): return false
 	if not expect(game.state.health == 100 and game.state.ammo[1] == (150 if index == 4 else 170) and game.state.armor == (60 if index == 4 else 40),"Staged resources are exactly default plus finite finale supplies"): return false
+	return await battle(index,boss,finale)
+
+func battle(index: int, boss, finale: Dictionary) -> bool:
 	game.attacks = [0,0]
 	game.deaths = 0
 	game.player_finish = false
@@ -155,7 +158,7 @@ func fight(index: int) -> bool:
 		game.firing = false
 		if accepted: shots += 1
 		if not expect(game.state.weapon == 1 and game.state.ammo[1] == before-(1 if accepted else 0) and game.state.ammo[1] == rounds-shots,"Each accepted pistol shot spends one round; rejected calls spend zero"): return false
-		if not expect(dormant_except(finale.id),"Battle must not activate unrelated authored groups"): return false
+		if not battle_groups_ok(finale.id): return false
 		if tick%300 == 0: print("FIGHT index=",index," tick=",tick," hp=",game.state.health," boss_hp=",boss.hp," phase=",boss.phase," rounds=",game.state.ammo[1]," position=",game.player.position," attacks=",game.attacks)
 	release_actions()
 	if not expect(projectile_steps > 0,"Boss-owned native projectile position and lifetime must progress across automatic physics ticks"): return false
@@ -165,6 +168,9 @@ func fight(index: int) -> bool:
 	if not expect(game.rate_ok and game.ticks > 15 and travelled > 9.0,"Actual automatic 60-Hz physics and nonstationary player movement are observed"): return false
 	print("ACTIVE_FIGHT index=",index," ticks=",game.ticks," shots=",shots," hp=",game.state.health," armor=",game.state.armor," travelled=",travelled," attacks=",game.attacks," deaths=",game.deaths," projectile_steps=",projectile_steps)
 	return true
+
+func battle_groups_ok(finale: String) -> bool:
+	return expect(dormant_except(finale),"Battle must not activate unrelated authored groups")
 
 func dormant_except(finale: String) -> bool:
 	for actor in game.enemies:
