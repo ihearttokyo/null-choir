@@ -17,13 +17,9 @@ func configure(owner_game: Node, source: CollisionObject3D, origin: Vector3, des
 	global_position = origin
 	velocity = (destination-origin).normalized()*(MARROW_SPEED if blast_damage > 0 else SPEED)
 	if blast_damage > 0:
-		# Reuse the editable Blender cage as the travelling pressure capsule; no new art.
-		var capsule = load("res://assets/art/world/containment_capsule.glb").instantiate()
-		add_child(capsule)
-		capsule.scale = Vector3.ONE*0.09
-		capsule.rotation.x = -PI/2
-		capsule.position.z = 0.225
-		look_at(origin+velocity,Vector3.RIGHT if absf(velocity.normalized().dot(Vector3.UP)) > 0.99 else Vector3.UP)
+		if game.has_method("ammo_visuals"):
+			var visuals = game.ammo_visuals()
+			if visuals != null: visuals.marrow(self)
 		return
 	var mesh = MeshInstance3D.new()
 	mesh.mesh = SphereMesh.new()

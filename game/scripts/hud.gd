@@ -1,6 +1,7 @@
 extends Node2D
 
 const Survey = preload("res://scripts/survey.gd")
+const AMMO_ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
 
 # Native translation of the selected source/art/references/overhaul-01.png instrument.
 const IVORY = Color(0.9,0.85,0.72)
@@ -33,7 +34,7 @@ func _ready() -> void:
 	for index in 6:
 		_label("ArsenalSlot"+str(index+1),Rect2(166+index*30,325,12,12),7)
 	_label("AmmoValue",Rect2(367,323,105,27),18)
-	_label("AmmoCapacity",Rect2(428,348,44,12),8,HORIZONTAL_ALIGNMENT_RIGHT)
+	_label("AmmoCapacity",Rect2(428,348,44,12),7,HORIZONTAL_ALIGNMENT_RIGHT)
 	_label("AmmoStatus",Rect2(367,348,59,12),8)
 	_label("RecoveryProgress",Rect2(558,348,76,12),8,HORIZONTAL_ALIGNMENT_RIGHT)
 	_label("InteractionPrompt",Rect2(128,250,384,32),12,HORIZONTAL_ALIGNMENT_CENTER)
@@ -130,7 +131,7 @@ func draw_state() -> Dictionary:
 		"progress_text":"RECORDS %d/8" % state.discoveries.size(),
 		"health":state.health,"armor":state.armor,"weapon_name":profile.name,
 		"ammo":"TOOL" if state.weapon == 0 else "EMPTY" if empty else str(state.ammo[state.weapon]),
-		"capacity":"CAP %d" % capacity if state.weapon > 0 and capacity > 0 else "RESERVE" if state.weapon > 0 else "NO AMMO",
+		"capacity":"CAP %d" % capacity if state.weapon > 0 and capacity > 0 else "RESERVE" if state.weapon > 0 else "AMMO-FREE",
 		"ammo_status":"EMPTY" if empty else "LOW" if low else "CYCLING" if game.player.cooldown > 0 else "READY",
 		"prompt":prompt,"binding":game.preferences.binding_text("interact") if not prompt.is_empty() else ""}
 
@@ -194,9 +195,14 @@ func _draw() -> void:
 			weapon_asset = profile.asset
 			weapon_texture = load(path) if ResourceLoader.exists(path) else null
 		if weapon_texture != null:
-			var frame = 1 if player.shot_flash > 0.07 else 2 if player.cooldown > 0.1 else 0
+			var frame = player.weapon_frame()
 			var sway = Vector2(sin(player.stride)*3,cos(player.stride*2)*2) if game.settings.head_bob else Vector2.ZERO
 			draw_texture_rect_region(weapon_texture,Rect2(Vector2(180,143)+sway+Vector2(0,player.recoil*8),Vector2(320,200)),Rect2(frame*320,0,320,200))
+			var flash_duration: float = minf(0.12,profile.interval)
+			var elapsed: float = profile.interval-player.cooldown
+			if game.state.weapon > 0 and player.cooldown > 0 and elapsed < flash_duration:
+				var flash_frame = mini(3,int(elapsed/flash_duration*4))
+				draw_texture_rect_region(AMMO_ATLAS,Rect2(Vector2(272,157)+sway,Vector2(96,96)),Rect2(flash_frame*64,0,64,64))
 		_instrument_frame()
 		_vital_glyph(Vector2(17,341),DANGER if view.health <= 25 else IVORY)
 		_armor_glyph(Vector2(95,340))

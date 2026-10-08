@@ -62,6 +62,7 @@ LATE_COMBAT = LATE_WEAPONS | LATE_ROLES | LATE_BOSSES
 EXPECTED.update(LATE_COMBAT)
 ATMOSPHERE = {'nursery_growth_vault', 'ossuary_sorting_vault', 'inversion_cosmic_membrane', 'heart_arterial_vault'}
 EXPECTED.update(ATMOSPHERE)
+EXPECTED.add('ammo_vfx')
 SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
 
 

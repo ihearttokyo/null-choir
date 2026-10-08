@@ -6276,6 +6276,88 @@
       },
       "facing": "front Blender -Y; exported Godot +Z",
       "collision": "none; parent mounts under existing ceilings"
+    },
+    {
+      "id": "ammo_vfx",
+      "source": "source/art/ammo_vfx.blend",
+      "source_sha256": "d70f9b1c6912069e7553a873b3adb93e963b0fa9b2d4e630c02c77d35cae5e30",
+      "outputs": [
+        {
+          "path": "game/assets/art/effects/ammo_vfx.png",
+          "sha256": "d02bbbf57969cf1292ec4df8a6f45b6486c0c954d8d1a18af9388b544a556e2c",
+          "bytes": 13750,
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_ammo_vfx.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "395ad82edb068ffeb229ad85f94aa9ec6f970373d352cffec6fe83fedd4f5612",
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/ammo-vfx-reference-01.png",
+          "sha256": "53de35208610843cf81fa358de5eef50d43a0fb9517e5c65c973c89122c67cf3"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 4,
+      "families": [
+        "amber_muzzle",
+        "copper_casing",
+        "marrow_vent",
+        "broken_pressure_ring"
+      ],
+      "pose_collections": [
+        "amber_muzzle_0",
+        "amber_muzzle_1",
+        "amber_muzzle_2",
+        "amber_muzzle_3",
+        "copper_casing_0",
+        "copper_casing_1",
+        "copper_casing_2",
+        "copper_casing_3",
+        "marrow_vent_0",
+        "marrow_vent_1",
+        "marrow_vent_2",
+        "marrow_vent_3",
+        "broken_pressure_ring_0",
+        "broken_pressure_ring_1",
+        "broken_pressure_ring_2",
+        "broken_pressure_ring_3"
+      ],
+      "triangles": 8048,
+      "filter": "nearest",
+      "clear_border": 4,
+      "frame_alpha_pixels": [
+        152,
+        439,
+        228,
+        61,
+        503,
+        538,
+        542,
+        450,
+        580,
+        617,
+        665,
+        726,
+        175,
+        255,
+        318,
+        346
+      ]
     }
   ],
   "build": {
