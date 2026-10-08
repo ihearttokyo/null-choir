@@ -430,3 +430,13 @@ separate clean import and the original three-second target.
 Music listening, held physical controls, full played campaign/pacing and release
 notarization authentication remain open. The complete eight-level objective is
 unchanged; diagnostic warm frames do not establish completion.
+
+## Current delivery and gates — 2026-10-08
+
+The delivery/startup entries above are historical. [PR1](https://github.com/ihearttokyo/null-choir/pull/1) merged on 2026-10-05. Current `main` and the published [private v0.2.2-dev prerelease](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-dev) both pin `acbb99bdc2f3fa578692ae7eaf7ad008548ce07b`. Hosted asset metadata records `NULL.CHOIR-arm64.zip`, 100,161,084 bytes, SHA256 `72a3615e5aea7c167a0577a5fa550ec2d6c1751caa4fdaff811f8c5a09791d7f`; this readback did not redownload or retest the release.
+
+Xcode is now present at `/Applications/Xcode.app`, and `xcode-select -p` selects `/Applications/Xcode.app/Contents/Developer`. The retained Metal Toolchain's executable `usr/bin/metal` also exists. These live filesystem checks remove the earlier missing-installation diagnosis; they do not establish compiler health or current app acceptance. No developer-path, security or account setting was changed.
+
+[Draft PR21](https://github.com/ihearttokyo/null-choir/pull/21) contains the bounded ammo presentation and metadata-test repair. Its source milestone is `f5dd650d7f9a519b74abdbb2d4ff5c43e58fd9e8`; documentation followthrough does not replace its runtime evidence. Source-overlay native regressions, actual art-byte checks and independent correctness/Ponytail reviews pass. The metadata regression runs under ordinary Python with simulated geometry callbacks. Hosted checks are absent.
+
+Native import, broader combat and protected two-frame Settings/Controls/difficulty/cancel/restart/stale-player regressions, updated app export, rendered readability, held-fire and performance acceptance remain open. Actual disk headroom is below this project's preserved 8 GB reserve; recompute free space and peak allocation before launching those jobs. Retain the existing release and artifacts, reconcile the exact PR head, then validate before merge/promotion. Full campaign playthrough, heard music, physical controls and notarization authentication are not certified by these source milestones.
