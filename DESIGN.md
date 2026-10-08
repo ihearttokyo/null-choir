@@ -64,7 +64,7 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 
 ## Authority, ownership, and rollback
 
-Jared permits necessary tools, unlimited spending, incremental autonomous work after confirmation, and useful named CLI child tasks. Testing and child work use `gpt-6.1-sol`, `xhigh`, Fast off, and explicitly pinned `service_tier="default"`, except the religious-set-piece child for which Jared expressly requested Fast on 2026-10-02. That child requests `service_tier="fast"` and `features.fast_mode=true`; the exception changes no other worker or global default. Inspect available runtime evidence; missing telemetry is a reporting limitation, not a blocker. Follow the successful bundled-CLI runtime receipt in [RESEARCH.md](RESEARCH.md). Bound concurrency and preserve other work; serialize heavy jobs until observed headroom supports more.
+Current execution authority, worker profiles, concurrency and desktop safeguards are governed by [AGENTS.md](AGENTS.md) and Jared's current global instructions. Dated approvals in this brief preserve design history; they do not override current restrictions or establish actual runtime telemetry. Use the installed tools and retained runtime evidence; size-preflight substantial operations and serialize heavy jobs until headroom is observed.
 
 The parent owns integration. Give children bounded missions and nonoverlapping files, verify task identity/tool state, preserve receipts, and archive unneeded finished children. Exact encounter layouts, animation details, palettes, composition structure, clue wording, and balancing may be authored within this agreed brief; material scope or authority changes require Jared.
 
