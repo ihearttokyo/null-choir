@@ -30,11 +30,11 @@ With Python 3.11 or newer, matching Godot 4.7.2 Mac export templates, Xcode and 
 
 ```sh
 python3 tests/test_build_deadline.py
-python3 tests/test_build_source.py
+python3 tests/test_build_source.py --allow-window
 python3 tests/test_macos.py
 ```
 
-Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
+Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The build and native source-preservation test refuse by default before creating outputs or launching Godot. Use `--allow-window` only when opening and activating a Godot graphics window is intended; license generation and import remain headless. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
 
 Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 

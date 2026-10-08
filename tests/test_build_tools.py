@@ -50,7 +50,7 @@ def check_notice_isolation(build):
 
             with patch.object(build, 'ROOT', root), patch.object(build, 'OUTPUT', root / 'builds/delivery.zip'), patch.object(build, 'run', engine):
                 try:
-                    build.main()
+                    build.main(allow_window=True)
                 except ExportHeld:
                     pass
                 else:
