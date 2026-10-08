@@ -6289,12 +6289,12 @@
     {
       "id": "ammo_vfx",
       "source": "source/art/ammo_vfx.blend",
-      "source_sha256": "d70f9b1c6912069e7553a873b3adb93e963b0fa9b2d4e630c02c77d35cae5e30",
+      "source_sha256": "26128f3fc6da9e947a7862f9813b2f8ff6f923748bd2bb5ff85d879b288b0e2c",
       "outputs": [
         {
           "path": "game/assets/art/effects/ammo_vfx.png",
-          "sha256": "d02bbbf57969cf1292ec4df8a6f45b6486c0c954d8d1a18af9388b544a556e2c",
-          "bytes": 13750,
+          "sha256": "5d27dbae8431b9a11bcfdc3c93eccf00e17e94975201eafe0a277c46e9ac2d88",
+          "bytes": 13752,
           "dimensions": [
             256,
             256
@@ -6307,9 +6307,9 @@
         "imports": [],
         "license": "Original NULL CHOIR project art"
       },
-      "recipe_sha256": "395ad82edb068ffeb229ad85f94aa9ec6f970373d352cffec6fe83fedd4f5612",
+      "recipe_sha256": "4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d",
       "recipe_dependencies": {
-        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581"
       },
       "reference_images": [
         {

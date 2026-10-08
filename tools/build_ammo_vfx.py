@@ -14,7 +14,7 @@ SOURCE = Path(__file__).resolve().parent
 ROOT = SOURCE.parent
 REFERENCE = ROOT/'source/art/references/ammo-vfx-reference-01.png'
 REFERENCE_SHA = '53de35208610843cf81fa358de5eef50d43a0fb9517e5c65c973c89122c67cf3'
-HELPER_SHA = '25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95'
+HELPER_SHA = '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'
 FAMILIES = ('amber_muzzle', 'copper_casing', 'marrow_vent', 'broken_pressure_ring')
 PALETTE = {'copper': '#9d6546', 'burgundy': '#713d48', 'ivory': '#d1ba8f',
            'amber': '#e9a347', 'hot_core': '#ffe9b1', 'cyan': '#99e7f4', 'violet': '#965dca'}
@@ -102,8 +102,10 @@ def main():
     pinned(REFERENCE, REFERENCE_SHA)
     helper = SOURCE/'build_art.py'
     pinned(helper, HELPER_SHA)
-    output.mkdir(parents=True)
     import bpy
+    if not bpy.app.background:
+        raise RuntimeError('Blender background CLI only')
+    output.mkdir(parents=True)
     from mathutils import Matrix, Vector
     spec = importlib.util.spec_from_file_location('retained_art', helper)
     art = importlib.util.module_from_spec(spec)
