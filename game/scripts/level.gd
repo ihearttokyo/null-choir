@@ -6,6 +6,8 @@ var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
 var machine_lights: Dictionary = {}
+# Instances retain meshes, not their PackedScene; keep one owner per art ID.
+var _model_scenes: Dictionary = {}
 
 func build(owner_game: Node, index: int) -> void:
 	game = owner_game
@@ -141,7 +143,9 @@ func _build_geometry() -> void:
 
 # Blender -Y fronts export as Godot +Z; these are Godot-space yaw angles.
 func _place_model(id: String, position_world: Vector3, yaw: float = 0.0, scale_model: Array = [1,1,1]) -> Node3D:
-	var model = load("res://assets/art/world/"+id+".glb").instantiate()
+	if not _model_scenes.has(id):
+		_model_scenes[id] = load("res://assets/art/world/"+id+".glb")
+	var model = _model_scenes[id].instantiate()
 	add_child(model)
 	model.position = position_world
 	model.rotation.y = deg_to_rad(yaw)
