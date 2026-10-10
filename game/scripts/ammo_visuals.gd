@@ -22,7 +22,6 @@ func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3
 			sprite.texture = ATLAS
 			sprite.hframes = 4
 			sprite.vframes = 4
-			sprite.pixel_size = 0.012
 			sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 			sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 			sprite.shaded = false
@@ -46,6 +45,7 @@ func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3
 	slot.motion = motion
 	slot.target = weakref(target) if target != null else null
 	slot.sprite.frame = row*4
+	slot.sprite.pixel_size = 0.0012 if row == 1 else 0.012
 	slot.sprite.rotation.z = 0
 	slot.sprite.global_position = point
 	slot.sprite.visible = true
