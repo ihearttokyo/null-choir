@@ -166,6 +166,25 @@ class CensusTests(unittest.TestCase):
                     mutate(g)
                     cost.analyze_glb(g, 44)
 
+    def test_shared_atlas_is_metadata_only_and_never_followed(self):
+        atlas = "../textures/cathedral_kit_atlas.png"
+        g = geometry()
+        g["images"] = [{"mimeType": "image/png", "uri": atlas}]
+        report = cost.analyze_glb(g, 44)
+        self.assertEqual(report["external_image_uris"], [atlas])
+        self.assertEqual(report["encoded_image_view_bytes"], 0)
+        self.assertEqual(report["stored"]["image_definitions"], 1)
+        for uri in ("../textures/other.png", "https://example.org/atlas.png", "file:///tmp/atlas.png",
+                    "../../textures/cathedral_kit_atlas.png", "../textures/%63athedral_kit_atlas.png"):
+            bad = copy.deepcopy(g); bad["images"][0]["uri"] = uri
+            with self.subTest(uri=uri), self.assertRaises(cost.CensusError): cost.analyze_glb(bad, 44)
+        for change in (lambda x: x["images"][0].update(bufferView=0),
+                       lambda x: x["images"][0].update(mimeType="image/jpeg"),
+                       lambda x: x["buffers"][0].update(uri=atlas),
+                       lambda x: x["materials"][0].update(uri=atlas)):
+            bad = copy.deepcopy(g); change(bad)
+            with self.assertRaises(cost.CensusError): cost.analyze_glb(bad, 44)
+
     def test_unsupported_features_and_modes(self):
         mutations = [lambda g: g.update(animations=[]), lambda g: g.update(skins=[]),
                      lambda g: g.update(extensionsUsed=["EXT_mesh_gpu_instancing"]),
@@ -267,12 +286,12 @@ class CensusTests(unittest.TestCase):
         with self.assertRaises(cost.CensusError):
             cost.read_glb(io.BytesIO(), cost.MAX_GLB + 1)
 
-    def test_source_pins_are_the_accepted_compatibility_contract(self):
+    def test_source_pins_are_the_current_placement_contract(self):
         actual = Path(__file__).absolute().parents[1] / "game/scripts/level.gd"
         self.assertEqual(hashlib.sha256(actual.read_bytes()).hexdigest(),
                          cost.SOURCE_PINS["game/scripts/level.gd"])
         self.assertEqual(cost.SOURCE_PINS, {
-            "game/scripts/level.gd": "fbeb3f64a587a999dd46b81d2b5b73cf8d477f82af500502810d97ca0d64dc35",
+            "game/scripts/level.gd": "af59f7b3693c6f3c8e487d6a6cb06d1d0eac358abead8492a6eb8b61c061ffa8",
             "game/scripts/level_data.gd": "402f065c8b284b06b947aa4bedf1940e6f314538c3aa69f9fe4bfd2c08019758"})
 
 

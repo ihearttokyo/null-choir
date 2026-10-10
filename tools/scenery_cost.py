@@ -14,9 +14,10 @@ import sys
 MAPS = ("01_intake", "02_foundry", "03_processional", "04_reliquary",
         "05_nursery", "06_ossuary", "07_inversion", "08_heart")
 SOURCE_PINS = {
-    "game/scripts/level.gd": "fbeb3f64a587a999dd46b81d2b5b73cf8d477f82af500502810d97ca0d64dc35",
+    "game/scripts/level.gd": "af59f7b3693c6f3c8e487d6a6cb06d1d0eac358abead8492a6eb8b61c061ffa8",
     "game/scripts/level_data.gd": "402f065c8b284b06b947aa4bedf1940e6f314538c3aa69f9fe4bfd2c08019758",
 }
+SHARED_ATLAS_URI = "../textures/cathedral_kit_atlas.png"
 MAX_GLB = 4 * 1024 * 1024
 MAX_JSON = 256 * 1024
 MAX_MAP = 128 * 1024
@@ -213,12 +214,16 @@ def check_profile(g, materials):
         for name in array(g.get(key, []), key):
             require(name == ALLOWED_EXTENSION, f"unsupported extension: {name}")
     material_ids = {id(material) for material in materials}
+    image_ids = {id(image) for image in array(g.get("images", []), "images")}
     pending = [(g, 0)]
     while pending:
         value, depth = pending.pop()
         require(depth <= 32, "JSON nesting cap")
         if type(value) is dict:
-            require("uri" not in value, "external/URI resources unsupported")
+            if "uri" in value:
+                require(id(value) in image_ids and value["uri"] == SHARED_ATLAS_URI
+                        and value.get("mimeType") == "image/png" and "bufferView" not in value,
+                        "unsupported external URI or mixed image storage")
             if "extensions" in value:
                 ext = object_(value["extensions"], "extensions")
                 require(id(value) in material_ids and set(ext) <= {ALLOWED_EXTENSION},
@@ -356,9 +361,13 @@ def analyze_glb(g, bin_bytes):
             used_materials.update(used)
     scene.update(reachable_nodes=len(seen), used_materials=len(used_materials))
     images = array(g.get("images", []), "images")
-    intervals = []
+    intervals, external = [], []
     for image in images:
         object_(image, "image")
+        if "uri" in image:
+            # Record the known atlas reference only; never follow it or read its bytes.
+            external.append(image["uri"])
+            continue
         view = views[reference(image.get("bufferView"), views, "image view")]
         require(image.get("mimeType") in ("image/png", "image/jpeg"), "unsupported image MIME")
         start = view.get("byteOffset", 0)
@@ -368,6 +377,7 @@ def analyze_glb(g, bin_bytes):
         encoded += max(0, stop - max(start, end))
         end = max(end, stop)
     return {"declared_buffer_bytes": buffer_bytes, "encoded_image_view_bytes": encoded,
+            "external_image_uris": external,
             "stored": {"mesh_definitions": len(meshes), "primitive_definitions": primitive_total,
                        "material_definitions": len(materials), "image_definitions": len(images),
                        "position_accessor_elements": sum(accessors[i]["count"] for i in position_ids),
@@ -502,7 +512,10 @@ def census(project_root):
         result = {"schema_version": 1, "status": "complete", "evidence_kind": "source_metadata_only",
                   "placement_semantics": "pinned_level_fresh_removed_empty_v1", "root": identity,
                   "source_evidence": hashes, "assets": measured, "levels": levels,
-                  "full_binary_verified": False, "runtime_measured": False}
+                  "full_binary_verified": False, "runtime_measured": False,
+                  "external_image_bytes_measured": False,
+                  "unmeasured_costs": ["external image bytes/content", "native collision/support nodes",
+                                       "runtime lighting, memory, GPU and timings"]}
     return result
 
 
