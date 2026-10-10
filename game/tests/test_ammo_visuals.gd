@@ -41,6 +41,13 @@ func run() -> void:
 	if not expect(sprite.frame>=12 and sprite.frame<=15,"Pressure impacts select only ring-family frames"): return
 	if not expect(game.state.to_dict()==before,"Presentation impact does not change ammo/health/campaign"): return
 	var driver = sprite.get_parent()
+	if not expect(is_equal_approx(sprite.pixel_size,0.012),"Impact family retains its authored world scale"): return
+	sprite.visible = false
+	driver.casing(player)
+	if not expect(driver.slots.size()==1 and driver.slots[0].sprite==sprite and is_equal_approx(sprite.pixel_size,0.0012),"Casing resets reused sprite to centimetre scale, not the 0.768m impact sheet (intended RED)"): return
+	sprite.visible = false
+	game.impact(point)
+	if not expect(driver.slots.size()==1 and driver.slots[0].sprite==sprite and is_equal_approx(sprite.pixel_size,0.012),"Recycled casing restores impact-family scale"): return
 	driver.set_process(false)
 	if not expect(driver.has_method("_process"),"Level-scoped driver uses one existing Godot process callback"): return
 	var frame_before: int = sprite.frame

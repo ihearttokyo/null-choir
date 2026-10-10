@@ -140,10 +140,16 @@ def check():
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
     religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
-        assert a['provenance']['method'] == ('Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
+        assert a['provenance']['method'] == ('original primitive Blender geometry and editable procedural material nodes' if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py' else 'Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
         resolve_recipe(ROOT, a['provenance']['authoring_script'], a['recipe_sha256'])
         for helper, digest in a.get('recipe_dependencies', {}).items():
             resolve_recipe(ROOT, helper, digest)
+        if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py':
+            validate_recipe(ROOT, a, 'tools/build_rivet_pistol_v2.py', ['tools/build_art.py'])
+            assert a['source']=='source/art/rivet_pistol_v2.blend' and a['frames']==['idle','fire','recover']
+            assert a['provenance']['references']==[{'path':'source/art/references/rivet-pistol-reference-v2.png', 'sha256':'246d6f6b39d252115465feac28832664285686567f1612db9df9301cfeff8e15'}]
+            for reference in a['provenance']['references']:
+                assert hashlib.sha256((ROOT/reference['path']).read_bytes()).hexdigest()==reference['sha256']
         if a['id'] == 'conduit':
             validate_recipe(ROOT, a, 'tools/build_conduit_art.py', ['tools/build_art.py'])
             references = runpy.run_path(str(ROOT / 'tools/build_conduit_art.py'))['REFERENCE_PINS']
