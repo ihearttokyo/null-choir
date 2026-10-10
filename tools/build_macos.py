@@ -59,7 +59,7 @@ def main(*, allow_window=False):
         shutil.copytree(ROOT / 'game', game, ignore=shutil.ignore_patterns('.godot'))
         print(run('godot', '--headless', '--path', str(game), '--script', str(ROOT / 'tools/export_engine_licenses.gd')))
         print(run('godot', '--headless', '--editor', '--path', str(game), '--import'))
-        print(run('godot', '--rendering-driver', 'metal', '--path', str(game), '--export-release', 'macOS', str(export)))
+        print(run('godot', '--rendering-method', 'mobile', '--rendering-driver', 'metal', '--path', str(game), '--export-release', 'macOS', str(export)))
         run('ditto', '-x', '-k', str(export), str(tmp))
         app, = tmp.glob('*.app')
         info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())

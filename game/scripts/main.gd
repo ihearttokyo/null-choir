@@ -713,6 +713,9 @@ func _finish_quit() -> void:
 	get_tree().quit()
 
 func _has_metal_shader_cache(root: String) -> bool:
+	return _contains_metal_cache(root.path_join("SceneForwardMobileShaderRD")) and _contains_metal_cache(root.path_join("CanvasShaderRD"))
+
+func _contains_metal_cache(root: String) -> bool:
 	if not DirAccess.dir_exists_absolute(root): return false
 	var directories = [root]
 	while not directories.is_empty():

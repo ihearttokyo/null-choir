@@ -45,4 +45,5 @@ with tempfile.TemporaryDirectory() as directory:
     export = commands[2]
     assert '--headless' not in export, 'Dummy rendering cannot bake native Metal shaders'
     assert export[export.index('--rendering-driver') + 1] == 'metal'
+    assert '--rendering-method' in export and export[export.index('--rendering-method') + 1] == 'mobile', 'INTENDED RED: bake the shipped Mobile renderer, not driver-default Forward+'
 print('PASS default build has no engine/filesystem effects; explicit window opt-in retains native Metal export')
