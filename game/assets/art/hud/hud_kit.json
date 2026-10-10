@@ -1,0 +1,419 @@
+{
+  "atlas": "res://assets/art/hud/hud_kit.png",
+  "dimensions": [
+    512,
+    192
+  ],
+  "cell_size": [
+    64,
+    64
+  ],
+  "columns": 8,
+  "filter": "nearest",
+  "clear_border": 4,
+  "sprites": {
+    "heart": {
+      "region": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        12,
+        5,
+        40,
+        50
+      ],
+      "alpha_pixels": 1484,
+      "triangles": 3472
+    },
+    "shield": {
+      "region": [
+        64,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        14,
+        8,
+        36,
+        48
+      ],
+      "alpha_pixels": 1271,
+      "triangles": 412
+    },
+    "impact_tool": {
+      "region": [
+        128,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        15,
+        14,
+        34,
+        40
+      ],
+      "alpha_pixels": 501,
+      "triangles": 384
+    },
+    "rivet_pistol": {
+      "region": [
+        192,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        11,
+        17,
+        43,
+        33
+      ],
+      "alpha_pixels": 663,
+      "triangles": 956
+    },
+    "scattergun": {
+      "region": [
+        256,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        8,
+        16,
+        49,
+        27
+      ],
+      "alpha_pixels": 780,
+      "triangles": 724
+    },
+    "sawtooth_repeater": {
+      "region": [
+        320,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        11,
+        17,
+        45,
+        29
+      ],
+      "alpha_pixels": 756,
+      "triangles": 360
+    },
+    "marrow_launcher": {
+      "region": [
+        384,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        9,
+        15,
+        47,
+        34
+      ],
+      "alpha_pixels": 996,
+      "triangles": 1712
+    },
+    "choir_disruptor": {
+      "region": [
+        448,
+        0,
+        64,
+        64
+      ],
+      "content_rect": [
+        16,
+        10,
+        32,
+        46
+      ],
+      "alpha_pixels": 507,
+      "triangles": 1004
+    },
+    "seal_blood": {
+      "region": [
+        0,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        10,
+        10,
+        44,
+        44
+      ],
+      "alpha_pixels": 1545,
+      "triangles": 2184
+    },
+    "seal_ivory": {
+      "region": [
+        64,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        10,
+        10,
+        44,
+        44
+      ],
+      "alpha_pixels": 1545,
+      "triangles": 3420
+    },
+    "seal_empty": {
+      "region": [
+        128,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        10,
+        10,
+        44,
+        44
+      ],
+      "alpha_pixels": 1546,
+      "triangles": 2144
+    },
+    "story_empty": {
+      "region": [
+        192,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        15,
+        16,
+        33,
+        32
+      ],
+      "alpha_pixels": 842,
+      "triangles": 1244
+    },
+    "story_filled": {
+      "region": [
+        256,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        16,
+        16,
+        32,
+        33
+      ],
+      "alpha_pixels": 848,
+      "triangles": 1784
+    },
+    "ammo": {
+      "region": [
+        320,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        17,
+        14,
+        30,
+        34
+      ],
+      "alpha_pixels": 554,
+      "triangles": 324
+    },
+    "frame_corner": {
+      "region": [
+        384,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        8,
+        8,
+        47,
+        47
+      ],
+      "alpha_pixels": 955,
+      "triangles": 260
+    },
+    "frame_tile": {
+      "region": [
+        448,
+        64,
+        64,
+        64
+      ],
+      "content_rect": [
+        5,
+        16,
+        54,
+        32
+      ],
+      "alpha_pixels": 1672,
+      "triangles": 172
+    },
+    "slot_base": {
+      "region": [
+        0,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        6,
+        15,
+        52,
+        34
+      ],
+      "alpha_pixels": 1768,
+      "triangles": 220
+    },
+    "slot_selected": {
+      "region": [
+        64,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        5,
+        14,
+        54,
+        37
+      ],
+      "alpha_pixels": 1943,
+      "triangles": 280
+    },
+    "lock": {
+      "region": [
+        128,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        21,
+        15,
+        22,
+        29
+      ],
+      "alpha_pixels": 495,
+      "triangles": 620
+    },
+    "dry": {
+      "region": [
+        192,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        7,
+        14,
+        50,
+        36
+      ],
+      "alpha_pixels": 263,
+      "triangles": 84
+    },
+    "low_health": {
+      "region": [
+        256,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        13,
+        19,
+        38,
+        28
+      ],
+      "alpha_pixels": 210,
+      "triangles": 32
+    },
+    "divider": {
+      "region": [
+        320,
+        128,
+        64,
+        64
+      ],
+      "content_rect": [
+        28,
+        9,
+        8,
+        46
+      ],
+      "alpha_pixels": 368,
+      "triangles": 96
+    }
+  },
+  "native_render": true,
+  "render_engine": "CYCLES",
+  "render_device": "CPU",
+  "render_threads": 2,
+  "samples": 24,
+  "scene_collection_names": [
+    "heart",
+    "shield",
+    "impact_tool",
+    "rivet_pistol",
+    "scattergun",
+    "sawtooth_repeater",
+    "marrow_launcher",
+    "choir_disruptor",
+    "seal_blood",
+    "seal_ivory",
+    "seal_empty",
+    "story_empty",
+    "story_filled",
+    "ammo",
+    "frame_corner",
+    "frame_tile",
+    "slot_base",
+    "slot_selected",
+    "lock",
+    "dry",
+    "low_health",
+    "divider"
+  ],
+  "lights": 1,
+  "blender_version": "5.2.2 LTS",
+  "reference_sha256": "16045d1e30d36fe544f4939d871a4f67b34b409eb7e39b8ec63213d6d7ee7f8e",
+  "palette": {
+    "basalt": "#17191d",
+    "shadow": "#08090c",
+    "ivory": "#d8c7a4",
+    "brass": "#a8793e",
+    "wear": "#e1bd7d",
+    "oxblood": "#762b30",
+    "flesh": "#aa544c",
+    "amber": "#eab15d",
+    "core": "#ffe2a6"
+  },
+  "state_shapes": {
+    "selected": "double rim, inward corner teeth and lower tab",
+    "locked": "thick lock body and open shackle",
+    "dry": "heavy diagonal strike-through with capped ends",
+    "low_health": "paired wound-warning fangs",
+    "story_empty": "dark recessed center",
+    "story_filled": "convex pale raised diamond"
+  }
+}

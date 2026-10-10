@@ -15,7 +15,7 @@ func _initialize() -> void:
 			elif point.x >= 20 and point.y >= 10 and point.y <= 18: expected = 2.0
 			elif point.x >= 22 and point.y >= 18: expected = clampf((24-point.y)/3,0,2)
 			if not expect(is_equal_approx(layout.height_at(point),expected)): return
-		if not expect(is_equal_approx(layout.roof_height(tile),10.0 if tile.x < 10 and tile.y > 11 and tile.y < 19 else 6.0)): return
+		if not expect(is_equal_approx(layout.roof_height(tile),26.0 if tile.x >= 13 and tile.x <= 15 and tile.y >= 10 and tile.y <= 30 else 14.0 if tile.x >= 11 and tile.x <= 17 and tile.y >= 10 and tile.y <= 30 else 10.0 if tile.x < 10 and tile.y > 11 and tile.y < 19 else 6.0)): return
 	if not expect(layout.data.loops.size() >= 2): return
 	var art = {}
 	for loop in layout.data.loops:

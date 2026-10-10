@@ -2,6 +2,8 @@ extends Node2D
 
 const Survey = preload("res://scripts/survey.gd")
 const AMMO_ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
+const HUD_ATLAS = preload("res://assets/art/hud/hud_kit.png")
+const WEAPON_ART = ["impact_tool","rivet_pistol","scattergun","sawtooth_repeater","marrow_launcher","choir_disruptor"]
 
 # Native translation of the selected source/art/references/overhaul-01.png instrument.
 const IVORY = Color(0.9,0.85,0.72)
@@ -17,8 +19,10 @@ var weapon_asset: String = ""
 var labels: Dictionary = {}
 var view: Dictionary = {}
 var survey: Node2D
+var hud_art: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/art/hud/hud_kit.json")).sprites
 
 func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	_label("LevelTitle",Rect2(12,8,306,22),14)
 	_label("Discovery",Rect2(12,30,306,18),10)
 	_label("Objective",Rect2(348,8,280,20),12,HORIZONTAL_ALIGNMENT_RIGHT)
@@ -204,36 +208,7 @@ func _draw() -> void:
 				var flash_frame = mini(3,int(elapsed/flash_duration*4))
 				draw_texture_rect_region(AMMO_ATLAS,Rect2(Vector2(272,157)+sway,Vector2(96,96)),Rect2(flash_frame*64,0,64,64))
 		_instrument_frame()
-		_vital_glyph(Vector2(17,341),DANGER if view.health <= 25 else IVORY)
-		_armor_glyph(Vector2(95,340))
-		for x in [350,355,360]:
-			draw_colored_polygon(PackedVector2Array([Vector2(x,330),Vector2(x+1,326),Vector2(x+3,330),Vector2(x+3,343),Vector2(x,343)]),IVORY)
-			draw_line(Vector2(x,333),Vector2(x+3,333),COPPER,1)
-		for index in view.arsenal.size():
-			var slot: Dictionary = view.arsenal[index]
-			var cell = Rect2(164+index*30,324,28,21)
-			var origin = Vector2(183+index*30,335)
-			var color = DANGER if slot.empty else AMBER if slot.low else IVORY if slot.owned else IVORY.darkened(0.65)
-			draw_rect(cell,COPPER.darkened(0.4),false,1)
-			if slot.selected:
-				draw_rect(cell,Color(AMBER,0.12))
-				draw_rect(cell,AMBER,false,1)
-				draw_line(cell.position+Vector2(3,1),cell.position+Vector2(24,1),IVORY,1)
-			_tool_glyph(index,origin,color)
-			if not slot.owned or slot.empty:
-				draw_line(origin+Vector2(-7,-7),origin+Vector2(7,7),color,1)
-			if not slot.owned:
-				draw_line(origin+Vector2(-7,7),origin+Vector2(7,-7),color,1)
-		for index in view.seals.size():
-			var spacing = 72.0/view.seals.size()
-			_seal_socket(Vector2(480+(index+0.5)*spacing,339),minf(12,spacing/2-2),view.seals[index].owned)
-		draw_line(Vector2(564,335),Vector2(627,335),COPPER.darkened(0.25),1)
-		for index in view.progress.size():
-			var pip: Dictionary = view.progress[index]
-			var center = Vector2(564+index*9,335)
-			draw_circle(center,3,INK)
-			draw_arc(center,3,0,TAU,8,IVORY if pip.current else COPPER,1)
-			if pip.discovered: draw_circle(center,1.5,AMBER)
+		_instrument_art()
 		if game.playing:
 			draw_line(Vector2(348,28),Vector2(628,28),COPPER.darkened(0.3),1)
 			if not view.boss.is_empty(): _restraint_instrument()
@@ -285,62 +260,51 @@ func _restraint_instrument() -> void:
 
 func _instrument_frame() -> void:
 	draw_rect(Rect2(0,322,640,38),INK)
-	draw_line(Vector2(6,322),Vector2(634,322),COPPER,1)
-	draw_line(Vector2(8,324),Vector2(632,324),IVORY.darkened(0.65),1)
-	draw_line(Vector2(6,359),Vector2(634,359),COPPER.darkened(0.2),1)
-	for x in [3,82,160,345,476,554,636]:
-		for y in [328,353]:
-			draw_line(Vector2(x-2,y-3),Vector2(x+1,y+3),COPPER,1)
-			draw_line(Vector2(x-1,y-3),Vector2(x+2,y),IVORY.darkened(0.5),1)
-	for x in [7,157,478,633]:
-		draw_rect(Rect2(x,325,2,2),COPPER)
-		draw_rect(Rect2(x,355,2,2),COPPER)
+	for x in range(0,640,64):
+		_hud_sprite("frame_tile",Rect2(x,322,64,38),Color(0.36,0.36,0.36))
+	for x in [82,160,345,476,554]:
+		_hud_sprite("divider",Rect2(x-1,327,3,28))
+	_hud_sprite("frame_corner",Rect2(0,322,14,14))
+	_hud_sprite("frame_corner",Rect2(626,322,14,14),Color.WHITE,Vector2(-1,1))
+	_hud_sprite("frame_corner",Rect2(0,346,14,14),Color.WHITE,Vector2(1,-1))
+	_hud_sprite("frame_corner",Rect2(626,346,14,14),Color.WHITE,Vector2(-1,-1))
 
-func _vital_glyph(origin: Vector2, color: Color) -> void:
-	draw_colored_polygon(PackedVector2Array([origin+Vector2(-7,-9),origin+Vector2(-1,-10),origin+Vector2(3,-6),origin+Vector2(6,-8),origin+Vector2(10,-4),origin+Vector2(9,2),origin+Vector2(4,11),origin+Vector2(-2,12),origin+Vector2(-7,7),origin+Vector2(-10,0),origin+Vector2(-9,-5)]),Color(0.28,0.13,0.14))
-	draw_polyline(PackedVector2Array([origin+Vector2(-6,-6),origin+Vector2(-4,2),origin+Vector2(0,9),origin+Vector2(5,4),origin+Vector2(7,-3)]),color,1)
-	draw_polyline(PackedVector2Array([origin+Vector2(-1,-7),origin+Vector2(-1,-14),origin+Vector2(3,-15),origin+Vector2(5,-11)]),COPPER.lightened(0.2),2)
-	draw_line(origin+Vector2(2,-7),origin+Vector2(6,-14),color,2)
-	for y in [-3,1,5]:
-		draw_line(origin+Vector2(-5,y),origin+Vector2(0,y+4),COPPER.lightened(0.1),1)
-		draw_line(origin+Vector2(0,y+4),origin+Vector2(6,y),color.darkened(0.25),1)
+func _instrument_art() -> void:
+	_hud_sprite("heart",Rect2(1,324,32,34))
+	_hud_sprite("shield",Rect2(81,324,30,34))
+	_hud_sprite("ammo",Rect2(346,327,20,22))
+	if view.health <= 25: _hud_sprite("low_health",Rect2(1,326,32,30))
+	for index in view.arsenal.size():
+		var slot: Dictionary = view.arsenal[index]
+		var cell = Rect2(164+index*30,324,28,21)
+		_hud_sprite("slot_selected" if slot.selected else "slot_base",cell,Color(0.8,0.8,0.8) if slot.selected else Color(0.5,0.5,0.5))
+		var icon = Rect2(cell.position+Vector2(9,1),Vector2(20,20))
+		_hud_sprite(WEAPON_ART[index],icon,Color.WHITE.darkened(0.7) if not slot.owned else AMBER if slot.low else Color.WHITE)
+		if not slot.owned:
+			_hud_sprite("lock",Rect2(cell.position+Vector2(17,10),Vector2(8,10)))
+		elif slot.empty:
+			_hud_sprite("dry",icon)
+	for index in view.seals.size():
+		var seal: Dictionary = view.seals[index]
+		var spacing = 72.0/view.seals.size()
+		var diameter = minf(24,spacing-4)
+		var center = Vector2(480+(index+0.5)*spacing,339)
+		_hud_sprite("seal_"+str(seal.key) if seal.owned else "seal_empty",Rect2(center-Vector2.ONE*diameter/2,Vector2.ONE*diameter))
+	for index in view.progress.size():
+		var pip: Dictionary = view.progress[index]
+		if pip.current: _hud_sprite("slot_selected",Rect2(559+index*9,330,10,10))
+		_hud_sprite("story_filled" if pip.discovered else "story_empty",Rect2(560+index*9,331,8,8))
 
-func _armor_glyph(origin: Vector2) -> void:
-	draw_colored_polygon(PackedVector2Array([origin+Vector2(-10,-12),origin+Vector2(0,-10),origin+Vector2(10,-12),origin+Vector2(8,5),origin+Vector2(0,14),origin+Vector2(-8,5)]),IVORY.darkened(0.5))
-	draw_polyline(PackedVector2Array([origin+Vector2(-9,-11),origin+Vector2(-7,4),origin+Vector2(0,12),origin+Vector2(7,4),origin+Vector2(9,-11)]),IVORY,1)
-	draw_line(origin+Vector2(0,-9),origin+Vector2(0,10),COPPER,2)
-	for y in [-5,0,5]:
-		for side in [-1,1]: draw_line(origin+Vector2(0,y),origin+Vector2(side*6,y-3),IVORY,1)
+func _hud_region(id: String) -> Rect2:
+	var data: Dictionary = hud_art[id]
+	var cell: Array = data.region
+	var region = Rect2(cell[0],cell[1],cell[2],cell[3])
+	if id in ["frame_tile","frame_corner","divider","slot_base","slot_selected","lock","seal_blood","seal_ivory","seal_empty","story_empty","story_filled"]:
+		var content: Array = data.content_rect
+		region = Rect2(region.position+Vector2(content[0],content[1]),Vector2(content[2],content[3]))
+	return region
 
-func _seal_socket(origin: Vector2, radius: float, owned: bool) -> void:
-	draw_circle(origin,radius,INK)
-	draw_arc(origin,radius,0,TAU,16,COPPER,2)
-	draw_arc(origin,radius-2,-PI,0,8,IVORY.darkened(0.5),1)
-	if owned:
-		draw_circle(origin,maxf(1,radius-3),Color(0.23,0.09,0.025))
-		draw_line(origin+Vector2(0,-radius*0.5),origin+Vector2(0,radius*0.5),AMBER,2)
-		draw_line(origin+Vector2(-radius*0.3,0),origin+Vector2(radius*0.3,0),IVORY,1)
-
-func _tool_glyph(index: int, origin: Vector2, color: Color) -> void:
-	match index:
-		0:
-			draw_line(origin+Vector2(-5,6),origin+Vector2(1,-2),color,2)
-			draw_polyline(PackedVector2Array([origin+Vector2(-3,-6),origin+Vector2(6,-2),origin+Vector2(3,1)]),color,2)
-		1:
-			draw_polyline(PackedVector2Array([origin+Vector2(-6,-4),origin+Vector2(7,-4),origin+Vector2(7,-1),origin+Vector2(-1,-1),origin+Vector2(-3,6),origin+Vector2(-6,6),origin+Vector2(-6,-4)]),color,1)
-		2:
-			for y in [-3,0]: draw_line(origin+Vector2(-5,y),origin+Vector2(7,y-2),color,1)
-			draw_polyline(PackedVector2Array([origin+Vector2(-5,-2),origin+Vector2(-7,3),origin+Vector2(-3,3),origin+Vector2(-1,-1)]),color,2)
-		3:
-			draw_arc(origin+Vector2(2,-1),4,0,TAU,8,color,1)
-			for tooth in 6:
-				var direction = Vector2.from_angle(tooth*TAU/6)
-				draw_line(origin+Vector2(2,-1)+direction*4,origin+Vector2(2,-1)+direction*6,color,1)
-			draw_line(origin+Vector2(-7,4),origin+Vector2(2,4),color,2)
-		4:
-			draw_rect(Rect2(origin+Vector2(-7,-4),Vector2(13,7)),color,false,1)
-			for x in [-3,3]: draw_line(origin+Vector2(x,-5),origin+Vector2(x,4),color,1)
-			draw_line(origin+Vector2(-4,3),origin+Vector2(-2,6),color,2)
-		5:
-			draw_polyline(PackedVector2Array([origin+Vector2(-6,5),origin+Vector2(-6,-5),origin+Vector2(0,-1),origin+Vector2(6,-5),origin+Vector2(6,5)]),color,1)
-			draw_arc(origin+Vector2(0,3),3,0,TAU,8,color,1)
+func _hud_sprite(id: String, rect: Rect2, tint: Color = Color.WHITE, flip: Vector2 = Vector2.ONE) -> void:
+	draw_set_transform(rect.get_center(),0,flip)
+	draw_texture_rect_region(HUD_ATLAS,Rect2(-rect.size/2,rect.size),_hud_region(id),tint)
+	draw_set_transform(Vector2.ZERO)

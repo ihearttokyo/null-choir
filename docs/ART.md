@@ -209,3 +209,11 @@ roughness/metallic also use non-mip sampling. Distant aliasing and actual GPU
 performance require rendered validation. Embedded-image import avoids duplicate
 extracted PNGs. Headless asset/campaign fixtures establish resource and scene
 integration, not rendered appearance or packed-app acceptance.
+
+## Recorded recipe generations
+
+Validate each asset's logical authoring recipe and helper dependencies against its recorded SHA-256. `tools/art_recipe.py` resolves exact current bytes first, then exact archived bytes under `source/art/recipe_history/<sha256>/<logical-path>.txt`; missing, modified or symlinked inputs fail closed. The two `tools/build_art.py.txt` snapshots are immutable authoring sources, not runtime assets or a cache. Keep the current helper equal to `manifest.build.script_sha256`; do not rewrite old pins when that helper changes.
+
+For historical regeneration, copy the recorded recipe and dependencies unchanged into an isolated project's original logical `tools/` layout, alongside the required pinned inputs. Run the existing Blender command there, never the `.py.txt` archive in place: original recipes derive their project root from their location. Check actual generated sources/exports and retain native editability evidence before adopting any result. The archive proves source availability, not that a new native regeneration ran.
+
+The accepted conduit generation uses `tools/build_conduit_art.py` and helper `tools/build_art.py` at `285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581` (integration commit `b776052d31036282615b25c1ab095fab95f1b324`). Its added helper dependency records the existing generation; it does not regenerate or relabel the source, references, recipe or exports.

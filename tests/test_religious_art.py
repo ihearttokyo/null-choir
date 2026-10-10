@@ -10,6 +10,7 @@ import struct
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
+validate_recipe = runpy.run_path(str(ROOT / 'tools/art_recipe.py'))['validate_recipe']
 recipe = runpy.run_path(str(ROOT / 'tools/build_religious_art.py'))
 
 
@@ -65,9 +66,8 @@ def check_candidates(receipt_root):
         assert entry['level_id'] == 'intake' and entry['loop_id'] is None
         assert entry['facing'] == 'front Blender -Y; exported Godot +Z'
         assert entry['provenance']['authoring_script'] == 'tools/build_religious_art.py'
-        assert entry['recipe_sha256'] == hashlib.sha256((ROOT / 'tools/build_religious_art.py').read_bytes()).hexdigest()
-        assert entry['recipe_dependencies'] == {p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest()
-                                                for p in ('tools/build_art.py', 'tools/build_foundry_art.py')}
+        validate_recipe(ROOT, entry, 'tools/build_religious_art.py',
+                        ('tools/build_art.py', 'tools/build_foundry_art.py'))
         assert entry['reference_images'] == [{'path': p, 'sha256': h} for p, h in recipe['REFERENCES'].items()]
         for reference in entry['reference_images']:
             assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']

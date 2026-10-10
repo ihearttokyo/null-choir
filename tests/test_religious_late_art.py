@@ -8,6 +8,7 @@ import runpy
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
+validate_recipe = runpy.run_path(str(ROOT / 'tools/art_recipe.py'))['validate_recipe']
 recipe = runpy.run_path(str(ROOT / 'tools/build_religious_late_art.py'))
 
 
@@ -58,8 +59,8 @@ def check_candidates(receipt, levels):
     """Read actual Blender/GLB output only; appearance and source editability stay native gates."""
     geometry = runpy.run_path(str(ROOT / 'tests/test_art.py'))['world_geometry']
     sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
-    dependencies = {p: sha(ROOT / p) for p in ('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_processional_art.py',
-                                               'tools/build_religious_art.py', 'tools/build_religious_foundry_art.py')}
+    dependencies = ('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_processional_art.py',
+                                               'tools/build_religious_art.py', 'tools/build_religious_foundry_art.py')
     digests = set()
     for level in levels:
         total = 0
@@ -72,8 +73,7 @@ def check_candidates(receipt, levels):
             assert entry['id'] == asset and entry['level_id'] == level and entry['loop_id'] is None
             assert entry['loop_hero_candidate'] == (asset in recipe['HEROES'])
             assert entry['tradition_aesthetic'] == recipe['TRADITIONS'][asset] and entry['machine_purpose'] == recipe['PURPOSES'][asset]
-            assert entry['recipe_sha256'] == sha(ROOT / 'tools/build_religious_late_art.py')
-            assert entry['recipe_dependencies'] == dependencies
+            validate_recipe(ROOT, entry, 'tools/build_religious_late_art.py', dependencies)
             assert entry['reference_images'] == [{'path': ref, 'sha256': recipe['REFERENCES'][level]}]
             assert entry['facing'] == 'front Blender -Y; exported Godot +Z' and entry['collision'].startswith('none;')
             assert entry['provenance']['authoring_script'] == 'tools/build_religious_late_art.py'

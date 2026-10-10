@@ -164,6 +164,14 @@ func _build_scenery() -> void:
 	for spec in layout.data.scenery:
 		var position_world = layout.world_position(spec.cell)+Vector3.UP*spec.get("height",0.0)
 		_place_model(spec.art,position_world,spec.get("yaw",0),spec.get("scale",[1,1,1]))
+		for support in spec.get("supports",[]):
+			var scale_model = spec.get("scale",[1,1,1])
+			var factor = Vector3(scale_model[0],scale_model[1],scale_model[2])
+			var dimensions = Vector3(support.size[0],support.size[1],support.size[2])*factor
+			var offset = Vector3(support.offset[0],support.offset[1],support.offset[2])*factor
+			var base = _box(dimensions,position_world+offset.rotated(Vector3.UP,deg_to_rad(spec.get("yaw",0)))+Vector3.UP*dimensions.y/2,null,true)
+			base.name = "ScenerySupport_"+spec.art
+			base.rotation.y = deg_to_rad(spec.get("yaw",0))
 		if spec.has("solid"):
 			var dimensions = Vector3(spec.solid[0],spec.solid[1],spec.solid[2])
 			var base = _box(dimensions,position_world+Vector3.UP*dimensions.y/2,null,true)

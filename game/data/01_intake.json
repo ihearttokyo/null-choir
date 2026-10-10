@@ -606,81 +606,237 @@
   ],
   "scenery": [
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
         28
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
         26
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
-        23
+        24.5
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
         20
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
         16
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
-      "art": "vault_span",
+      "art": "cathedral_vault_9m",
       "cell": [
         14.5,
         12
       ],
       "yaw": 0,
       "scale": [
-        3.5,
-        1,
+        2.8,
+        2.8,
         1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
       ]
     },
     {
@@ -855,42 +1011,6 @@
         1,
         1
       ]
-    },
-    {
-      "art": "witness_relief",
-      "cell": [
-        11.1,
-        28.5
-      ],
-      "yaw": 90,
-      "height": 0.6
-    },
-    {
-      "art": "witness_relief",
-      "cell": [
-        17.9,
-        26.7
-      ],
-      "yaw": 270,
-      "height": 0.6
-    },
-    {
-      "art": "witness_relief",
-      "cell": [
-        11.1,
-        16.5
-      ],
-      "yaw": 90,
-      "height": 0.6
-    },
-    {
-      "art": "witness_relief",
-      "cell": [
-        17.9,
-        12.5
-      ],
-      "yaw": 270,
-      "height": 0.6
     },
     {
       "art": "witness_relief",
@@ -1336,6 +1456,658 @@
         0.55,
         2.065
       ]
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        25.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        25.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        18.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        18.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        12.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        12.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        28.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        28.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        12.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        12.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
     }
   ],
   "lights": [
@@ -1712,28 +2484,28 @@
         14.5,
         29
       ],
-      "height": 4.8,
+      "height": 10.5,
       "color": [
-        0.28,
-        0.5,
-        0.6
+        0.25,
+        0.44,
+        0.8
       ],
-      "energy": 2.5,
-      "range": 18
+      "energy": 4.2,
+      "range": 24
     },
     {
       "cell": [
         14.5,
         16
       ],
-      "height": 5.5,
+      "height": 10.5,
       "color": [
-        0.28,
-        0.45,
-        0.65
+        0.25,
+        0.44,
+        0.8
       ],
-      "energy": 2.5,
-      "range": 18
+      "energy": 4.2,
+      "range": 24
     },
     {
       "cell": [
@@ -1806,6 +2578,24 @@
     }
   ],
   "ceilings": [
+    {
+      "rect": [
+        13,
+        10,
+        15,
+        30
+      ],
+      "height": 26
+    },
+    {
+      "rect": [
+        11,
+        10,
+        17,
+        30
+      ],
+      "height": 14
+    },
     {
       "rect": [
         0,

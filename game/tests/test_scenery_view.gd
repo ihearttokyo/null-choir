@@ -65,6 +65,11 @@ func run() -> void:
 			if view.id == "combat": game.state.health = 100 # Controlled survival; native combat/physics still execute.
 			await RenderingServer.frame_post_draw
 			frames += 1
+		if not game.playing or game.menu_scroll.visible:
+			push_error("Controlled scenery capture requires active gameplay, not a paused menu overlay")
+			await game._finish_quit()
+			quit(1)
+			return
 		var pixels = root.get_texture().get_image()
 		if pixels.is_empty() or pixels.save_png(output+"/"+view.id+".png") != OK:
 			push_error("Rendered scenery capture failed: "+view.id)
