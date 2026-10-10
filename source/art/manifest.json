@@ -461,7 +461,10 @@
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
       "triangles": 2912,
       "material_count": 2,
-      "runtime_mesh_nodes": 1
+      "runtime_mesh_nodes": 1,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581"
+      }
     },
     {
       "id": "arch",
@@ -6285,6 +6288,800 @@
       },
       "facing": "front Blender -Y; exported Godot +Z",
       "collision": "none; parent mounts under existing ceilings"
+    },
+    {
+      "id": "ammo_vfx",
+      "source": "source/art/ammo_vfx.blend",
+      "source_sha256": "26128f3fc6da9e947a7862f9813b2f8ff6f923748bd2bb5ff85d879b288b0e2c",
+      "outputs": [
+        {
+          "path": "game/assets/art/effects/ammo_vfx.png",
+          "sha256": "5d27dbae8431b9a11bcfdc3c93eccf00e17e94975201eafe0a277c46e9ac2d88",
+          "bytes": 13752,
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_ammo_vfx.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/ammo-vfx-reference-01.png",
+          "sha256": "53de35208610843cf81fa358de5eef50d43a0fb9517e5c65c973c89122c67cf3"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 4,
+      "families": [
+        "amber_muzzle",
+        "copper_casing",
+        "marrow_vent",
+        "broken_pressure_ring"
+      ],
+      "pose_collections": [
+        "amber_muzzle_0",
+        "amber_muzzle_1",
+        "amber_muzzle_2",
+        "amber_muzzle_3",
+        "copper_casing_0",
+        "copper_casing_1",
+        "copper_casing_2",
+        "copper_casing_3",
+        "marrow_vent_0",
+        "marrow_vent_1",
+        "marrow_vent_2",
+        "marrow_vent_3",
+        "broken_pressure_ring_0",
+        "broken_pressure_ring_1",
+        "broken_pressure_ring_2",
+        "broken_pressure_ring_3"
+      ],
+      "triangles": 8048,
+      "filter": "nearest",
+      "clear_border": 4,
+      "frame_alpha_pixels": [
+        152,
+        439,
+        228,
+        61,
+        503,
+        538,
+        542,
+        450,
+        580,
+        617,
+        665,
+        726,
+        175,
+        255,
+        318,
+        346
+      ]
+    },
+    {
+      "id": "cathedral_vault_6m",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_vault_6m",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_vault_6m.glb",
+          "sha256": "c64a835883fb8010dd65334c96fd81e38c2e2c968ec0d44cdbe349757b210937",
+          "bytes": 685144
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_vault_6m.glb",
+        "raw_sha256": "d46a5e047537ae4b20130562e880cff9be0c2294aa81c55b23a336d038b8fd4e",
+        "raw_bytes": 953216,
+        "packed_sha256": "c64a835883fb8010dd65334c96fd81e38c2e2c968ec0d44cdbe349757b210937",
+        "packed_bytes": 685144,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 10080,
+      "runtime_mesh_nodes": 2,
+      "material_count": 2,
+      "physical_bounds_m": {
+        "min": [
+          -2.06,
+          -0.395,
+          0.0
+        ],
+        "max": [
+          2.06,
+          0.362,
+          5.88
+        ],
+        "size": [
+          4.12,
+          0.756,
+          5.88
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "floor",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "central_passage_width_m": 3.0,
+        "central_passage_height_m": 2.7
+      },
+      "ceiling_m": 6,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_vault_9m",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_vault_9m",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_vault_9m.glb",
+          "sha256": "ddeb1208004d25b1f6ba37ebfb6e5d58674b21f2697d6f1edc33be51eebfeaac",
+          "bytes": 685144
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_vault_9m.glb",
+        "raw_sha256": "d889b5246cbe98be451ad184edc0d134179ce27c8134ec4660a82ff8561631e9",
+        "raw_bytes": 953216,
+        "packed_sha256": "ddeb1208004d25b1f6ba37ebfb6e5d58674b21f2697d6f1edc33be51eebfeaac",
+        "packed_bytes": 685144,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 10080,
+      "runtime_mesh_nodes": 2,
+      "material_count": 2,
+      "physical_bounds_m": {
+        "min": [
+          -2.06,
+          -0.395,
+          0.0
+        ],
+        "max": [
+          2.06,
+          0.362,
+          8.88
+        ],
+        "size": [
+          4.12,
+          0.756,
+          8.88
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "floor",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "central_passage_width_m": 3.0,
+        "central_passage_height_m": 2.7
+      },
+      "ceiling_m": 9,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_cluster_pier",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_cluster_pier",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_cluster_pier.glb",
+          "sha256": "0f1652af278472a6b10a305cef0ae5d9c1d096e7f119e8a17000097175c665f9",
+          "bytes": 495132
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_cluster_pier.glb",
+        "raw_sha256": "142c8f38206ca15c219c598c414310cb1eeeb02fffc8a45ad6fd12ac48807583",
+        "raw_bytes": 763204,
+        "packed_sha256": "0f1652af278472a6b10a305cef0ae5d9c1d096e7f119e8a17000097175c665f9",
+        "packed_bytes": 495132,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 7956,
+      "runtime_mesh_nodes": 2,
+      "material_count": 2,
+      "physical_bounds_m": {
+        "min": [
+          -0.525,
+          -0.525,
+          0.0
+        ],
+        "max": [
+          0.525,
+          0.525,
+          5.383
+        ],
+        "size": [
+          1.051,
+          1.051,
+          5.383
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "floor",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_lancet_bay",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_lancet_bay",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_lancet_bay.glb",
+          "sha256": "cdcd9143c327b523f418d4309972d4811abc852afcf76ae597a55455165249f4",
+          "bytes": 561936
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_lancet_bay.glb",
+        "raw_sha256": "0c608aa83bd4a2ba63178b9b88f6d5765080805cf8f5eba1b31f0218d4887c26",
+        "raw_bytes": 830008,
+        "packed_sha256": "cdcd9143c327b523f418d4309972d4811abc852afcf76ae597a55455165249f4",
+        "packed_bytes": 561936,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 7913,
+      "runtime_mesh_nodes": 2,
+      "material_count": 2,
+      "physical_bounds_m": {
+        "min": [
+          -2.0,
+          -0.445,
+          0.0
+        ],
+        "max": [
+          2.0,
+          0.44,
+          5.6
+        ],
+        "size": [
+          4.0,
+          0.885,
+          5.6
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "boundary wall",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_corner_rib",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_corner_rib",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_corner_rib.glb",
+          "sha256": "3ebe6ebfc2a647a4efa63a7e9baa4cb89fe3a8c8b44432f802f32e2197649da9",
+          "bytes": 170624
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_corner_rib.glb",
+        "raw_sha256": "d2a9a902d98dc8f86a2b808c2de1da9d27c1f38ad8ff64fcf117083c5f8c0b70",
+        "raw_bytes": 438696,
+        "packed_sha256": "3ebe6ebfc2a647a4efa63a7e9baa4cb89fe3a8c8b44432f802f32e2197649da9",
+        "packed_bytes": 170624,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 2378,
+      "runtime_mesh_nodes": 1,
+      "material_count": 1,
+      "physical_bounds_m": {
+        "min": [
+          -1.37,
+          -0.428,
+          0.0
+        ],
+        "max": [
+          1.37,
+          0.465,
+          3.373
+        ],
+        "size": [
+          2.741,
+          0.893,
+          3.373
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "boundary wall",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "ceiling minus3.55",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_skeletal_dado",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_skeletal_dado",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_skeletal_dado.glb",
+          "sha256": "726c95e6ebf025e11b1a03d437d307a9889eaf8b8dc4634095b2d5c98850484a",
+          "bytes": 983220
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_skeletal_dado.glb",
+        "raw_sha256": "d25c17ca1d4b724181991975584937d3c6dd27229a8c447c1bda8a3848a4290c",
+        "raw_bytes": 1251292,
+        "packed_sha256": "726c95e6ebf025e11b1a03d437d307a9889eaf8b8dc4634095b2d5c98850484a",
+        "packed_bytes": 983220,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 13612,
+      "runtime_mesh_nodes": 1,
+      "material_count": 1,
+      "physical_bounds_m": {
+        "min": [
+          -2.0,
+          -0.3,
+          0.0
+        ],
+        "max": [
+          2.0,
+          0.4,
+          2.11
+        ],
+        "size": [
+          4.0,
+          0.7,
+          2.11
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "boundary wall",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_brass_lamp",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_brass_lamp",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_brass_lamp.glb",
+          "sha256": "f9ab2440e4a76ea552f68346546e3e73577d9c970198cb53551202fb8ab59418",
+          "bytes": 319300
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_brass_lamp.glb",
+        "raw_sha256": "dd5ce7c1f2b9f9c45e38ee1e59993801dd53974ca8cc441d044f222b9dd5951b",
+        "raw_bytes": 587372,
+        "packed_sha256": "f9ab2440e4a76ea552f68346546e3e73577d9c970198cb53551202fb8ab59418",
+        "packed_bytes": 319300,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 4592,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "physical_bounds_m": {
+        "min": [
+          -0.355,
+          -1.395,
+          0.11
+        ],
+        "max": [
+          0.355,
+          0.21,
+          2.29
+        ],
+        "size": [
+          0.71,
+          1.605,
+          2.18
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "boundary wall",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "2.65",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_inlay_tile",
+      "source": "source/art/cathedral_kit.blend",
+      "source_collection": "cathedral_inlay_tile",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/cathedral_inlay_tile.glb",
+          "sha256": "5fa11d489b33be2ba7bac57e1cc425fc9c796a96395c590561d48bef7d3fa622",
+          "bytes": 185164
+        }
+      ],
+      "packaging": {
+        "raw_export": "previews/raw_exports/cathedral_inlay_tile.glb",
+        "raw_sha256": "7f774626cf8c7b88aeb0f7cc1c3ad818915ab6734c9f4109cf89344e3f60510d",
+        "raw_bytes": 453236,
+        "packed_sha256": "5fa11d489b33be2ba7bac57e1cc425fc9c796a96395c590561d48bef7d3fa622",
+        "packed_bytes": 185164,
+        "atlas_sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+        "atlas_uri": "../textures/cathedral_kit_atlas.png",
+        "method": "Identical PNG externalized; all non-image buffer view bytes preserved"
+      },
+      "triangles": 2564,
+      "runtime_mesh_nodes": 2,
+      "material_count": 2,
+      "physical_bounds_m": {
+        "min": [
+          -2.0,
+          -2.0,
+          0.0
+        ],
+        "max": [
+          2.0,
+          2.0,
+          0.094
+        ],
+        "size": [
+          4.0,
+          4.0,
+          0.094
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "bay_width_m": 4,
+      "front": "Blender -Y -> Godot +Z; Blender Z up -> Godot Y up",
+      "origin": "Ground centered; Blender Z=0 mounts to existing floor unless mount specifies otherwise",
+      "mounting": {
+        "surface": "floor",
+        "backing_axis": "Blender +Y; Godot -Z",
+        "recommended_origin_height_m": "0",
+        "collision": "Visual only; preserve existing native floor and wall collisions"
+      },
+      "safe_clearance": {
+        "rule": "Keep outside traversable aisle; mount backing against boundary; use native bounds to check player capsule"
+      },
+      "ceiling_m": null,
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ],
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      }
+    },
+    {
+      "id": "cathedral_kit_atlas",
+      "source": "source/art/cathedral_kit.blend",
+      "source_sha256": "a1368bf0bf4ed9843d190ced17206331bf2e70a96cc251b8ee895059e46678f4",
+      "outputs": [
+        {
+          "path": "game/assets/art/textures/cathedral_kit_atlas.png",
+          "sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+          "bytes": 268046,
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "Original modeled geometry and deterministic authored texture atlas",
+        "authoring_script": "tools/build_cathedral_kit.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+      },
+      "recipe_sha256": "efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/share_cathedral_atlas.py": "8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/cathedral-kit-reference-v1.png",
+          "sha256": "67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3"
+        }
+      ]
+    },
+    {
+      "id": "hud_kit",
+      "source": "source/art/hud_kit.blend",
+      "source_sha256": "aef42c4cccb3b025a45921e12d35fed46963fdadedbbb89e9daf0c478e6ddce7",
+      "outputs": [
+        {
+          "path": "game/assets/art/hud/hud_kit.png",
+          "sha256": "3dfc6910639952edbac1c83cc445b5e2a28780adef4275969cdd37e13fe18885",
+          "bytes": 25712,
+          "dimensions": [
+            512,
+            192
+          ]
+        },
+        {
+          "path": "game/assets/art/hud/hud_kit.json",
+          "sha256": "9cad4cb605335f1f39c4aa33499036e6bfb405bf8e049f5f5039e43c0a2a098b",
+          "bytes": 6559
+        }
+      ],
+      "provenance": {
+        "method": "original sculpted Blender geometry, native CPU orthographic render",
+        "authoring_script": "tools/build_hud_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "c224381a98b316b7d41d5c77d0f95f9f3bbea061a99eaa3d56d6bdce6ad25a26",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/hud-reference-v1.png",
+          "sha256": "16045d1e30d36fe544f4939d871a4f67b34b409eb7e39b8ec63213d6d7ee7f8e"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 8,
+      "filter": "nearest",
+      "clear_border": 4,
+      "pose_collections": [
+        "heart",
+        "shield",
+        "impact_tool",
+        "rivet_pistol",
+        "scattergun",
+        "sawtooth_repeater",
+        "marrow_launcher",
+        "choir_disruptor",
+        "seal_blood",
+        "seal_ivory",
+        "seal_empty",
+        "story_empty",
+        "story_filled",
+        "ammo",
+        "frame_corner",
+        "frame_tile",
+        "slot_base",
+        "slot_selected",
+        "lock",
+        "dry",
+        "low_health",
+        "divider"
+      ],
+      "triangles": 21888,
+      "build": {
+        "blender_version": "5.2.2 LTS",
+        "render_engine": "CYCLES",
+        "device": "CPU",
+        "threads": 2,
+        "samples": 24
+      }
     }
   ],
   "build": {

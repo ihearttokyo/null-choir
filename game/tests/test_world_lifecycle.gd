@@ -20,6 +20,7 @@ func run() -> void:
 			if hero.has("base"): expected += 1
 		for prop in owner.level.layout.data.scenery:
 			if prop.has("solid"): expected += 1
+			expected += prop.get("supports",[]).size()
 		var envelopes = 0
 		for node in owner.level.get_children():
 			if node is not StaticBody3D: continue

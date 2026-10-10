@@ -430,3 +430,22 @@ separate clean import and the original three-second target.
 Music listening, held physical controls, full played campaign/pacing and release
 notarization authentication remain open. The complete eight-level objective is
 unchanged; diagnostic warm frames do not establish completion.
+
+## Current delivery and gates — 2026-10-08
+
+The delivery/startup entries above are historical. [PR1](https://github.com/ihearttokyo/null-choir/pull/1) merged on 2026-10-05. Current `main` and the published [private v0.2.2-dev prerelease](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-dev) both pin `acbb99bdc2f3fa578692ae7eaf7ad008548ce07b`. Hosted asset metadata records `NULL.CHOIR-arm64.zip`, 100,161,084 bytes, SHA256 `72a3615e5aea7c167a0577a5fa550ec2d6c1751caa4fdaff811f8c5a09791d7f`; this readback did not redownload or retest the release.
+
+Xcode is now present at `/Applications/Xcode.app`, and `xcode-select -p` selects `/Applications/Xcode.app/Contents/Developer`. The retained Metal Toolchain's executable `usr/bin/metal` also exists. These live filesystem checks remove the earlier missing-installation diagnosis; they do not establish compiler health or current app acceptance. No developer-path, security or account setting was changed.
+
+[Draft PR21](https://github.com/ihearttokyo/null-choir/pull/21) contains the bounded ammo presentation and metadata-test repair. Its source milestone is `f5dd650d7f9a519b74abdbb2d4ff5c43e58fd9e8`; documentation followthrough does not replace its runtime evidence. Source-overlay native regressions, actual art-byte checks and independent correctness/Ponytail reviews pass. The metadata regression runs under ordinary Python with simulated geometry callbacks. Hosted checks are absent.
+
+Current complete resident-project import, selected weapon poses, ammo-VFX pool/lifecycle, late weapons and all eight collision-world lifecycles pass headless native checks. The focused Settings/Controls/difficulty fixture passes both placement-wait phases and three subsequent physics frames; removing production menu cancellation produces its intended failure. The original full placement fixture is unchanged: a headless run fails only at requested mouse capture (mode 2 reads back as 0), which the actual display-capability probe confirms is unsupported. Physical cursor/foreground, full original placement acceptance, current rendered readability, held-fire and performance remain unverified. Jared removed the fixed 8 GB reserve on 2026-10-08 and authorized development-cache cleanup. Use actual free space and a bounded peak-allocation preflight rather than the retired reserve threshold. Retain the existing release and artifacts, reconcile the exact PR head, then validate before merge/promotion. Full campaign playthrough, heard music, physical controls and notarization authentication are not certified by these source milestones.
+
+
+## Background build correction and cache cleanup — 2026-10-08
+
+Six verified inactive Homebrew installer archives were removed, totaling 1,225,867,264 allocated bytes. Installed tools, editable sources, saves, retained apps, validation evidence and other projects’ Xcode DerivedData remain intact. The fixed 8 GB reserve is removed; actual free space and next-operation peak checks replace it.
+
+An experimental all-headless export produced an ad-hoc-signed arm64 ZIP but failed the unchanged actual app contract at `native_metal_caches`. Godot 4.7.2 requires an active native renderer for shader baking; its macOS graphics startup may activate the application. No supported no-window/no-focus bake route was found. The failed ZIP remains diagnostic only, not a promoted release. No retained cache was copied to fake current shader coverage.
+
+The build now refuses before engine or filesystem effects by default. Explicit `--allow-window` permits the native Metal exporter; notice generation and import remain headless. The source-preservation build test propagates the same explicit option. Simulated command/refusal checks pass; a fresh windowed bake and actual current-asset graphics/cursor acceptance are NOT RUN while preserving Jared’s desktop. Existing private v0.2.2-dev remains the verified rollback release.

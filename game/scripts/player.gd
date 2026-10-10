@@ -91,6 +91,10 @@ func cycle_weapon(direction: int) -> void:
 	var index = inventory.find(game.state.weapon)
 	game.state.weapon = inventory[posmod(index+direction,inventory.size())]
 
+func weapon_frame() -> int:
+	if cooldown <= 0: return 0
+	return 1 if cooldown > WEAPONS[game.state.weapon].interval*0.5 else 2
+
 func fire() -> bool:
 	if not _current_map() or not game.playing or game.state.health <= 0: return false
 	var index = game.state.weapon

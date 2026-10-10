@@ -42,8 +42,8 @@ def archive_app(app, output):
         path.unlink(missing_ok=True)
 
 
-def run(*args):
-    result = subprocess.run(args, timeout=180, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+def run(*args, timeout=180):
+    result = subprocess.run(args, timeout=timeout, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if result.returncode: raise RuntimeError(result.stdout)
     return result.stdout
 
@@ -59,7 +59,7 @@ def main(*, allow_window=False):
         shutil.copytree(ROOT / 'game', game, ignore=shutil.ignore_patterns('.godot'))
         print(run('godot', '--headless', '--path', str(game), '--script', str(ROOT / 'tools/export_engine_licenses.gd')))
         print(run('godot', '--headless', '--editor', '--path', str(game), '--import'))
-        print(run('godot', '--rendering-driver', 'metal', '--path', str(game), '--export-release', 'macOS', str(export)))
+        print(run('godot', '--rendering-method', 'mobile', '--rendering-driver', 'metal', '--path', str(game), '--export-release', 'macOS', str(export), timeout=600))
         run('ditto', '-x', '-k', str(export), str(tmp))
         app, = tmp.glob('*.app')
         info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())

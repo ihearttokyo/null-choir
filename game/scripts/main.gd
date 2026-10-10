@@ -8,6 +8,7 @@ const Hud = preload("res://scripts/hud.gd")
 const Music = preload("res://audio/music.gd")
 const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
+const AmmoVisuals = preload("res://scripts/ammo_visuals.gd")
 var state = Campaign.new()
 var playing: bool = false
 var loaded_positions: bool = false
@@ -650,6 +651,9 @@ func notify(text: String, duration: float = 3) -> void:
 
 func shot(weapon: int) -> void:
 	if effects != null: effects.play(["tool","rivet","scatter","rivet","scatter","caster_charge"][clampi(weapon,0,5)])
+	if weapon in [1,2,3]:
+		var visuals = ammo_visuals()
+		if visuals != null and is_instance_valid(player): visuals.casing(player)
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0 and actor.active and actor.position.distance_to(player.position) < 34:
 			actor.alerted = true
@@ -658,8 +662,20 @@ func hit_feedback() -> void:
 	if effects != null and hit_flash <= 0: effects.play("flesh")
 	hit_flash = 0.12
 
-func impact(_point: Vector3) -> void:
+func ammo_visuals() -> Node3D:
+	if not playing or not is_instance_valid(level) or level.is_queued_for_deletion(): return null
+	var visuals = level.get_node_or_null("AmmoVisuals")
+	if visuals == null:
+		visuals = AmmoVisuals.new()
+		visuals.name = "AmmoVisuals"
+		visuals.game = self
+		level.add_child(visuals)
+	return visuals
+
+func impact(point: Vector3) -> void:
 	if effects != null: effects.play("impact",-12)
+	var visuals = ammo_visuals()
+	if visuals != null: visuals.impact(point)
 
 func dry_fire(_weapon: int) -> void:
 	if effects != null: effects.play("dry")
@@ -697,6 +713,9 @@ func _finish_quit() -> void:
 	get_tree().quit()
 
 func _has_metal_shader_cache(root: String) -> bool:
+	return _contains_metal_cache(root.path_join("SceneForwardMobileShaderRD")) and _contains_metal_cache(root.path_join("CanvasShaderRD"))
+
+func _contains_metal_cache(root: String) -> bool:
 	if not DirAccess.dir_exists_absolute(root): return false
 	var directories = [root]
 	while not directories.is_empty():

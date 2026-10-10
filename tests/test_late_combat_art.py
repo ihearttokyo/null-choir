@@ -9,6 +9,7 @@ import tempfile
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
+validate_recipe = runpy.run_path(str(ROOT / 'tools/art_recipe.py'))['validate_recipe']
 recipe = runpy.run_path(str(ROOT / 'tools/build_late_combat_art.py'))
 IDS = ('sawtooth_repeater', 'marrow_launcher', 'choir_disruptor',
        'brute', 'guardian', 'summoner', 'nursery_warden', 'choir_avatar')
@@ -83,8 +84,8 @@ def check_candidates(receipt, assets):
         entry = candidate['asset']
         output = Path(candidate['output_root']).resolve()
         assert output.is_relative_to(receipt.resolve()) and not output.is_relative_to(ROOT)
-        assert entry['id'] == asset and entry['recipe_sha256'] == sha(ROOT / 'tools/build_late_combat_art.py')
-        assert entry['recipe_dependencies'] == {p: sha(ROOT / p) for p in recipe['DEPENDENCIES']}
+        assert entry['id'] == asset
+        validate_recipe(ROOT, entry, 'tools/build_late_combat_art.py', recipe['DEPENDENCIES'])
         assert entry['provenance']['authoring_script'] == 'tools/build_late_combat_art.py'
         assert entry['reference_images'] == [recipe['reference'](asset)]
         assert sha(ROOT / entry['reference_images'][0]['path']) == entry['reference_images'][0]['sha256']

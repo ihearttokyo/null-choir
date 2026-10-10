@@ -1,11 +1,14 @@
 """Direct, stdlib-only authored art contract: python3 tests/test_art.py."""
 import hashlib
 import json
+import runpy
 from pathlib import Path
 import struct
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
+recipe_guard = runpy.run_path(str(ROOT / 'tools/art_recipe.py'))
+resolve_recipe, validate_recipe = recipe_guard['resolve_recipe'], recipe_guard['validate_recipe']
 EXPECTED = {'crawler', 'worker', 'impact_tool', 'rivet_pistol', 'skin_bell',
             'siphon_heart', 'ribbed_wall', 'conduit', 'arch', 'floor', 'grate', 'wall',
             'vault_span', 'lumen_sconce', 'witness_relief', 'suspended_cadaver',
@@ -62,6 +65,12 @@ LATE_COMBAT = LATE_WEAPONS | LATE_ROLES | LATE_BOSSES
 EXPECTED.update(LATE_COMBAT)
 ATMOSPHERE = {'nursery_growth_vault', 'ossuary_sorting_vault', 'inversion_cosmic_membrane', 'heart_arterial_vault'}
 EXPECTED.update(ATMOSPHERE)
+EXPECTED.add('ammo_vfx')
+CATHEDRAL = {'cathedral_vault_6m','cathedral_vault_9m','cathedral_cluster_pier',
+             'cathedral_lancet_bay','cathedral_corner_rib','cathedral_skeletal_dado',
+             'cathedral_brass_lamp','cathedral_inlay_tile','cathedral_kit_atlas'}
+EXPECTED.update(CATHEDRAL)
+EXPECTED.add('hud_kit')
 SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
 
 
@@ -131,18 +140,25 @@ def check():
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
     religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
-        assert a['provenance']['method'] == 'original Blender geometry and authored pixel textures'
+        assert a['provenance']['method'] == ('Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
+        resolve_recipe(ROOT, a['provenance']['authoring_script'], a['recipe_sha256'])
+        for helper, digest in a.get('recipe_dependencies', {}).items():
+            resolve_recipe(ROOT, helper, digest)
+        if a['id'] == 'conduit':
+            validate_recipe(ROOT, a, 'tools/build_conduit_art.py', ['tools/build_art.py'])
+            references = runpy.run_path(str(ROOT / 'tools/build_conduit_art.py'))['REFERENCE_PINS']
+            assert a['provenance']['references'] == [{'path': 'source/art/references/' + name, 'sha256': pin}
+                                                    for name, pin in references.items()]
+            for reference in a['provenance']['references']:
+                assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
         source = ROOT / a['source']
         assert source.is_relative_to(ROOT / 'source/art') and source.suffix == '.blend'
         assert source.is_file() and source.read_bytes()[:7] == b'BLENDER', a['id']
         assert hashlib.sha256(source.read_bytes()).hexdigest() == a['source_sha256'], a['id']
         if a['id'] in LATE_COMBAT:
             recipe = 'tools/build_late_combat_art.py'
-            assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
             assert a['provenance']['authoring_script'] == recipe
-            assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
-                                                for helper in ('tools/build_art.py', 'tools/build_foundry_art.py',
-                                                               'tools/build_processional_art.py', 'tools/build_religious_art.py')}
+            assert set(a['recipe_dependencies']) == set(('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_processional_art.py', 'tools/build_religious_art.py'))
             assert len(a['reference_images']) == 1
             reference = a['reference_images'][0]
             assert (ROOT / reference['path']).resolve().is_relative_to((ROOT / 'source/art/references').resolve())
@@ -153,10 +169,8 @@ def check():
             assert set(a['pose_triangles']) == set(a['frames']) and all(0 < count <= cap for count in a['pose_triangles'].values())
         if a['id'] in PROCESSIONAL_ASSETS:
             recipe = 'tools/build_processional_art.py'
-            assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
             assert a['provenance']['authoring_script'] == recipe
-            assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
-                                                 for helper in ('tools/build_art.py', 'tools/build_foundry_art.py')}
+            assert set(a['recipe_dependencies']) == set(('tools/build_art.py', 'tools/build_foundry_art.py'))
         for output in a['outputs']:
             file = ROOT / output['path']
             assert file.is_relative_to(ROOT / 'game/assets/art')
@@ -224,15 +238,13 @@ def check():
                         recipe = {'intake': 'tools/build_religious_art.py', 'foundry': 'tools/build_religious_foundry_art.py',
                                   'processional': 'tools/build_religious_processional_art.py',
                                   **dict.fromkeys(('reliquary', 'nursery', 'ossuary', 'inversion', 'heart'), 'tools/build_religious_late_art.py')}[level]
-                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
                         assert a['provenance']['authoring_script'] == recipe
                         helpers = ['tools/build_art.py', 'tools/build_foundry_art.py']
                         if level != 'intake':
                             helpers.append('tools/build_religious_art.py')
                         if level not in ('intake', 'foundry'):
                             helpers.extend(['tools/build_processional_art.py', 'tools/build_religious_foundry_art.py'])
-                        assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
-                                                            for helper in helpers}
+                        assert set(a['recipe_dependencies']) == set(helpers)
                         assert a['tradition_aesthetic'] == traditions[a['id']] and a['level_id'] == level
                         assert a['loop_id'] == {'reliquary_face_halo': 'reliquary_loop_halo',
                                                 'reliquary_memory_wheel': 'reliquary_loop_wheel',
@@ -252,10 +264,8 @@ def check():
                     elif a['id'] in ATMOSPHERE:
                         atmosphere_bytes += len(data)
                         recipe = 'tools/build_world_atmosphere_art.py'
-                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
                         assert a['provenance']['authoring_script'] == recipe
-                        assert a['recipe_dependencies'] == {helper: hashlib.sha256((ROOT / helper).read_bytes()).hexdigest()
-                                                            for helper in ('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_religious_art.py')}
+                        assert set(a['recipe_dependencies']) == set(('tools/build_art.py', 'tools/build_foundry_art.py', 'tools/build_religious_art.py'))
                         assert a['level_id'] == a['id'].split('_', 1)[0] and a['loop_id'] is None
                         assert a['triangles'] <= 22000 and a['runtime_mesh_nodes'] <= 5 and a['material_count'] <= 5
                         assert a['source_hierarchy_groups'] >= 4 and len(set(a['assembly_names'])) == a['source_hierarchy_groups']
@@ -275,9 +285,8 @@ def check():
                     elif a['id'] in FOUNDRY:
                         foundry_bytes += len(data)
                         recipe = 'tools/build_foundry_art.py'
-                        assert a['recipe_sha256'] == hashlib.sha256((ROOT / recipe).read_bytes()).hexdigest()
                         assert a['provenance']['authoring_script'] == recipe
-                        assert a['recipe_dependencies'] == {'tools/build_art.py': manifest['build']['script_sha256']}
+                        assert set(a['recipe_dependencies']) == {'tools/build_art.py'}
                         assert a['triangles'] <= 30000 and a['source_mesh_count'] >= 100
                         assert a['loop_id'] == ('foundry_loop_furnace' if a['id'] == 'vertebral_furnace' else 'foundry_loop_crucible')
                         assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
@@ -291,7 +300,6 @@ def check():
                     else:
                         scenery_bytes += len(data)
                         assert a['provenance']['authoring_script'] == 'tools/build_art.py'
-                        assert a['recipe_sha256'] == manifest['build']['script_sha256']
                     binary_size, binary_kind = struct.unpack_from('<I4s', data, 20 + n)
                     assert binary_kind == b'BIN\x00'
                     points, triangles = world_geometry(gltf, data[28 + n:28 + n + binary_size])
@@ -339,6 +347,7 @@ def check():
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
+    actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'
     assert processional_bytes < 4 * 1024 * 1024, 'two Processional GLBs exceed their runtime budget'
