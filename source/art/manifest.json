@@ -329,45 +329,62 @@
     },
     {
       "id": "skin_bell",
-      "source": "source/art/skin_bell.blend",
-      "source_sha256": "b044b449d4ebfeed02f17793a75347f1fdb696adbf627155e3387cfd148d557d",
-      "recipe_sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95",
+      "source": "source/art/skin_bell_v2.blend",
+      "source_sha256": "f7a208e8a727df03a079e1e26e0e954c44ed4a6615b862be85f5391ba15fde7a",
+      "recipe_sha256": "e3e577b19a0e5dd34648511c639b79e664c66c23ce15329c66b9b8b8103c146e",
+      "recipe_dependencies": {
+        "tools/art_recipe.py": "32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6"
+      },
       "outputs": [
         {
           "path": "game/assets/art/world/skin_bell.glb",
-          "sha256": "e6e4f69da8c64824408cb1ebe0461039cf1baa16ff0fd19c7d2c23a117307a04",
-          "bytes": 1675504
+          "sha256": "bbfb0c8a7b8bb23d9a695c6aa110ffcb68f22d310be733010e438bc12a60a054",
+          "bytes": 1283784
         }
       ],
-      "provenance": {
-        "method": "original Blender geometry and authored pixel textures",
-        "authoring_script": "tools/build_art.py",
-        "imports": [],
-        "license": "Original NULL CHOIR project art"
-      },
       "physical_bounds_m": {
         "min": [
-          -3.24,
-          -3.24,
-          0.0
+          -3.161352993211135,
+          -3.1613529932111346,
+          0
         ],
         "max": [
-          3.24,
-          3.24,
-          8.2
+          3.161352993211135,
+          3.161352993211135,
+          8.18
         ],
         "size": [
-          6.48,
-          6.48,
-          8.2
+          6.32270598642227,
+          6.322705986422269,
+          8.18
         ],
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 21312,
-      "runtime_mesh_nodes": 7,
-      "material_count": 7,
-      "loop_id": "intake_loop_bell"
+      "loop_id": "intake_loop_bell",
+      "triangles": 19264,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "provenance": {
+        "method": "original image-derived editable geometry and authored opaque pixel atlas",
+        "authoring_script": "tools/build_skin_bell_v2.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art",
+        "reference_sha256": "93a7a08843e1cf8414c93513892f5ac621c4469095fd0a86f468adb0987d43be",
+        "reference_is_not_runtime_texture": true,
+        "material_reference_sha256": "eed15e41ba0bf85de489dbe4e25364324e8ead8e33a333182edeca89077b6ac7",
+        "atlas_method": "Blender Image.copy/scale to 512; exact full material input separately packed",
+        "references": [
+          {
+            "path": "source/art/references/skin-bell-v2.png",
+            "sha256": "93a7a08843e1cf8414c93513892f5ac621c4469095fd0a86f468adb0987d43be"
+          },
+          {
+            "path": "source/art/references/skin-bell-material-v3.png",
+            "sha256": "eed15e41ba0bf85de489dbe4e25364324e8ead8e33a333182edeca89077b6ac7"
+          }
+        ]
+      }
     },
     {
       "id": "siphon_heart",

@@ -127,6 +127,44 @@ def png(path):
     return size, b''.join(rows)
 
 
+def check_skin_bell_dimensions(declared, measured):
+    assert len(declared) == len(measured) == 3
+    assert all(type(v) in (int, float) and 0 < v <= cap + .003
+               for v, cap in zip(measured, (6.48, 6.48, 8.2)))
+    assert all(type(v) in (int, float) and abs(v - w) <= .002
+               for v, w in zip(declared, measured))
+
+
+def check_skin_bell_v2(a):
+    assert a['id'] == 'skin_bell', 'v2 bell contract is identity-specific'
+    validate_recipe(ROOT, a, 'tools/build_skin_bell_v2.py', ['tools/art_recipe.py'])
+    assert a['provenance']['method'] == 'original image-derived editable geometry and authored opaque pixel atlas'
+    assert a['source'] == 'source/art/skin_bell_v2.blend'
+    source = ROOT / a['source']
+    data = source.read_bytes()
+    assert hashlib.sha256(data).hexdigest() == a['source_sha256']
+    assert data[:7] == b'BLENDER'
+    assert a['loop_id'] == 'intake_loop_bell'
+    assert a['origin'] == 'ground-centered at Blender (0,0,0); GLB Y up'
+    size = a['physical_bounds_m']['size']
+    check_skin_bell_dimensions(size, size)
+    references = [
+        {'path': 'source/art/references/skin-bell-v2.png',
+         'sha256': '93a7a08843e1cf8414c93513892f5ac621c4469095fd0a86f468adb0987d43be'},
+        {'path': 'source/art/references/skin-bell-material-v3.png',
+         'sha256': 'eed15e41ba0bf85de489dbe4e25364324e8ead8e33a333182edeca89077b6ac7'}]
+    assert a['provenance']['references'] == references
+    assert a['provenance']['reference_sha256'] == references[0]['sha256']
+    assert a['provenance']['material_reference_sha256'] == references[1]['sha256']
+    assert a['provenance']['reference_is_not_runtime_texture'] is True
+    for reference in references:
+        assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
+    assert len(a['outputs']) == 1 and a['outputs'][0]['path'] == 'game/assets/art/world/skin_bell.glb'
+    output = a['outputs'][0]
+    data = (ROOT / output['path']).read_bytes()
+    assert len(data) == output['bytes'] and hashlib.sha256(data).hexdigest() == output['sha256']
+
+
 def check():
     path = ROOT / 'source/art/manifest.json'
     assert path.is_file(), 'required art manifest absent (intended RED)'
@@ -140,7 +178,11 @@ def check():
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
     religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
-        assert a['provenance']['method'] == ('original primitive Blender geometry and editable procedural material nodes' if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py' else 'Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
+        skin_bell_v2 = a['id'] == 'skin_bell' and a['provenance']['authoring_script'] == 'tools/build_skin_bell_v2.py'
+        if skin_bell_v2:
+            check_skin_bell_v2(a)
+        else:
+            assert a['provenance']['method'] == ('original primitive Blender geometry and editable procedural material nodes' if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py' else 'Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
         resolve_recipe(ROOT, a['provenance']['authoring_script'], a['recipe_sha256'])
         for helper, digest in a.get('recipe_dependencies', {}).items():
             resolve_recipe(ROOT, helper, digest)
@@ -159,7 +201,7 @@ def check():
                 assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
         source = ROOT / a['source']
         assert source.is_relative_to(ROOT / 'source/art') and source.suffix == '.blend'
-        assert source.is_file() and source.read_bytes()[:7] == b'BLENDER', a['id']
+        assert source.is_file() and (skin_bell_v2 or source.read_bytes()[:7] == b'BLENDER'), a['id']
         assert hashlib.sha256(source.read_bytes()).hexdigest() == a['source_sha256'], a['id']
         if a['id'] in LATE_COMBAT:
             recipe = 'tools/build_late_combat_art.py'
@@ -305,7 +347,7 @@ def check():
                         assert gltf.get('images') and all('bufferView' in im and 'uri' not in im for im in gltf['images'])
                     else:
                         scenery_bytes += len(data)
-                        assert a['provenance']['authoring_script'] == 'tools/build_art.py'
+                        assert a['provenance']['authoring_script'] == ('tools/build_skin_bell_v2.py' if skin_bell_v2 else 'tools/build_art.py')
                     binary_size, binary_kind = struct.unpack_from('<I4s', data, 20 + n)
                     assert binary_kind == b'BIN\x00'
                     points, triangles = world_geometry(gltf, data[28 + n:28 + n + binary_size])
@@ -319,6 +361,7 @@ def check():
                     for key, values in [('min', actual_lo), ('max', actual_hi)]:
                         assert all(abs(v - w) <= .002 for v, w in zip(values, a['physical_bounds_m'][key])), (a['id'], key)
                     size = [actual_hi[i] - actual_lo[i] for i in range(3)]
+                    if skin_bell_v2: check_skin_bell_dimensions(a['physical_bounds_m']['size'], size)
                     assert all(v <= cap + .003 for v, cap in zip(size, SCENERY[a['id']])), (a['id'], size)
                     assert -.002 <= lo[1] <= .002, 'scenery must have a true ground origin'
                     assert any(any(v > 0 for v in m.get('emissiveFactor', [])) for m in gltf['materials']), a['id']
