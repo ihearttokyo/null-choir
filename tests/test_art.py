@@ -74,6 +74,9 @@ EXPECTED.add('hud_kit')
 SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
 MARKERS = {'marker_' + kind for kind in ('ammo', 'health', 'armor', 'key', 'weapon', 'story', 'checkpoint', 'exit')}
 EXPECTED.update(MARKERS)
+EXPECTED.add('marker_glyphs')
+MARKER_IDENTITIES = {'marker_ivorykey', 'marker_ammo_shells', 'marker_ammo_sawtooth', 'marker_ammo_marrow', 'marker_ammo_choir'}
+EXPECTED.update(MARKER_IDENTITIES)
 
 
 def world_geometry(gltf, binary):
@@ -118,6 +121,7 @@ def png(path):
             compressed.extend(payload)
         pos += 12 + length
         if kind == b'IEND':
+            assert length == 0 and pos == len(data), 'PNG closure'
             break
     assert size, path
     w, h = size
@@ -177,6 +181,8 @@ def check():
     assert len(assets) == len(EXPECTED)
     import test_marker_art as marker
     marker.validate_main_entries(assets)
+    import test_marker_identity_artifact as identities
+    identities.check(ROOT)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
@@ -185,6 +191,11 @@ def check():
         skin_bell_v2 = a['id'] == 'skin_bell' and a['provenance']['authoring_script'] == 'tools/build_skin_bell_v2.py'
         if a['id'] in MARKERS:
             marker.validate_lineage(a)
+        elif a['id'] in MARKER_IDENTITIES:
+            pass  # The complete identity family was checked above.
+        elif a['id'] == 'marker_glyphs':
+            from test_marker_glyph_artifact import validate_entry
+            validate_entry(a, ROOT, ROOT)
         elif skin_bell_v2:
             check_skin_bell_v2(a)
         else:
@@ -283,7 +294,7 @@ def check():
                     for primitive in mesh['primitives']:
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
-                if a['id'] in MARKERS:
+                if a['id'] in MARKERS | MARKER_IDENTITIES:
                     marker.validate_model(*marker.read_model(data), a)
                 if a['id'] in SCENERY:
                     if any(a['id'] in pieces for pieces in RELIGIOUS_SETS.values()):
@@ -403,7 +414,7 @@ def check():
         if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun') or a['id'] in LATE_WEAPONS:
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
-    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
+    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'

@@ -54,14 +54,24 @@ func check_purposes() -> bool:
 		if not expect(seen.has(id),"Campaign purpose coverage: "+id): return false
 	return true
 
+static func expected_art(spec: Dictionary) -> String:
+	if spec.kind == "key" and spec.key == "ivory": return "marker_ivorykey"
+	if spec.kind == "ammo":
+		match int(spec.weapon):
+			2: return "marker_ammo_shells"
+			3: return "marker_ammo_sawtooth"
+			4: return "marker_ammo_marrow"
+			5: return "marker_ammo_choir"
+	return PURPOSE_ART[spec.kind]
+
 static func check_marker(level, spec: Dictionary, check: Callable) -> bool:
 	if not check.call(PURPOSE_ART.has(spec.kind),"Known authored marker purpose: "+spec.kind): return false
 	if not check.call(level.markers.has(spec.id),"Missing marker: "+spec.id): return false
 	var marker = level.markers[spec.id]
-	var path: String = "res://assets/art/world/"+PURPOSE_ART[spec.kind]+".glb"
+	var path: String = "res://assets/art/world/"+expected_art(spec)+".glb"
 	if not check.call(marker is Node3D and marker.get_parent() == level and marker.scene_file_path == path,"Purpose-specific native scene: "+spec.id+" expected="+path): return false
 	var anchor = level.layout.world_position(spec.cell)+Vector3.UP*0.06
-	if not check.call(marker.visible and marker.position.is_equal_approx(anchor) and marker.scale.is_equal_approx(Vector3.ONE),"Metre-authored visible marker retains exact anchor/default scale: "+spec.id): return false
+	if not check.call(marker.visible and marker.position.is_equal_approx(anchor) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180)),"Metre-authored visible marker retains exact anchor/default scale: "+spec.id): return false
 	if not check.call(collision_nodes(marker).is_empty(),"Visual-only marker has no CollisionObject/CollisionShape/CollisionPolygon: "+spec.id): return false
 	var meshes = mesh_nodes(marker)
 	if not check.call(not meshes.is_empty(),"Purpose scene has native meshes: "+spec.id): return false

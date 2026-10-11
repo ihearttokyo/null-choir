@@ -1,0 +1,117 @@
+{
+  "id": "marker_ammo_marrow",
+  "source": "source/art/marker_ammo_marrow.blend",
+  "source_sha256": "374a70deb50866ef974bf2adaaaef8008618c0a26d43f00123f6a553b9e04581",
+  "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+  "outputs": [
+    {
+      "path": "game/assets/art/world/marker_ammo_marrow.glb",
+      "sha256": "a041e1ecca0321e0391716774437aabdaa1ed91e1cb496e3818f62a82ab9ab5a",
+      "bytes": 18564
+    }
+  ],
+  "provenance": {
+    "method": "image-derived original Blender geometry",
+    "authoring_script": "tools/build_marker_identities.py",
+    "imports": [],
+    "license": "Original NULL CHOIR project art"
+  },
+  "physical_bounds_m": {
+    "min": [
+      -0.25,
+      -0.0978824570775032,
+      0.0
+    ],
+    "max": [
+      0.25,
+      0.0978824570775032,
+      1.0850000381469727
+    ],
+    "size": [
+      0.5,
+      0.1957649141550064,
+      1.0850000381469727
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+  "triangles": 300,
+  "runtime_mesh_nodes": 3,
+  "material_count": 3,
+  "loop_id": null,
+  "recipe_dependencies": {
+    "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+  },
+  "reference_images": [
+    {
+      "path": "source/art/references/marker-identities-v2.png",
+      "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+    }
+  ],
+  "facing": "front Blender -Y; exported Godot +Z",
+  "collision": "none; marker visuals only",
+  "preview": {
+    "path": "builds/marker-identities/marker_ammo_marrow_preview.png",
+    "sha256": "8fc00a46f0d493f1895fb73e911a55e641f4857c1e2663b0f3e472dba6b0d532",
+    "bytes": 3068,
+    "dimensions": [
+      128,
+      128
+    ]
+  },
+  "source_meshes": [
+    {
+      "name": "Hollow marrow spear side -1",
+      "vertices": 14,
+      "triangles": 24
+    },
+    {
+      "name": "Splayed marrow fin -1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Marrow side suture -1",
+      "vertices": 10,
+      "triangles": 16
+    },
+    {
+      "name": "Hollow marrow spear side 1",
+      "vertices": 14,
+      "triangles": 24
+    },
+    {
+      "name": "Splayed marrow fin 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Marrow side suture 1",
+      "vertices": 10,
+      "triangles": 16
+    },
+    {
+      "name": "Marrow lance tip",
+      "vertices": 6,
+      "triangles": 8
+    },
+    {
+      "name": "Marrow basal socket",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Marrow socket collar",
+      "vertices": 80,
+      "triangles": 160
+    }
+  ],
+  "native_source_saved_before_runtime_merge": true,
+  "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

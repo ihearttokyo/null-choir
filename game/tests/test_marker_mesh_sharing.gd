@@ -34,6 +34,19 @@ func check_sharing() -> bool:
 		var level = owner.level
 		var level_id = level.layout.data.id
 		var specs = level.layout.data.pickups+level.layout.data.interactions
+		if not expect(level.markers.size() == specs.size()-owner.state.removed.size(),"Original authored live-marker count before sharing witnesses"): return false
+		# One controlled duplicate per exact art also covers single authored variants.
+		var witnessed = {}
+		for spec in specs.duplicate():
+			if spec.id in owner.state.removed: continue
+			if not PurposeContract.check_marker(level,spec,expect): return false
+			var art: String = PurposeContract.expected_art(spec)
+			if witnessed.has(art): continue
+			witnessed[art] = true
+			var peer: Dictionary = spec.duplicate(true)
+			peer.id = "sharing_"+spec.id
+			level.markers[peer.id] = level._place_marker(peer)
+			specs.append(peer)
 		var resources = {"meshes":{},"materials":{},"scenes":{}}
 		var ids = {}
 		var by_art = {}
@@ -43,7 +56,7 @@ func check_sharing() -> bool:
 				if not expect(not level.markers.has(spec.id),"Consumed marker absent: "+spec.id): return false
 				continue
 			if not PurposeContract.check_marker(level,spec,expect): return false
-			var art: String = PurposeContract.PURPOSE_ART[spec.kind]
+			var art: String = PurposeContract.expected_art(spec)
 			if not expect(level._model_scenes.has(art) and level._model_scenes[art] is PackedScene,"One level-owned PackedScene per used purpose: "+art): return false
 			var marker = level.markers[spec.id]
 			if not expect(level._model_scenes[art].resource_path == marker.scene_file_path,"Owned native scene matches marker purpose: "+spec.id): return false
@@ -56,7 +69,8 @@ func check_sharing() -> bool:
 		var count = level.markers.size()
 		if not expect(count > 1 and count == specs.size()-owner.state.removed.size() and ids.size() == count,"One native scene per nonremoved spec"): return false
 		if not expect(repeated,"Each map exercises repeated same-art markers"): return false
-		if not await check_removal(level,specs,ids,resources): return false
+		for art in by_art:
+			if not await check_removal(level,specs,ids,resources,art): return false
 		level.free()
 		owner.level = null
 		await process_frame
@@ -86,12 +100,12 @@ func capture_marker(marker: Node3D, resources: Dictionary) -> Dictionary:
 		snapshot[str(marker.get_path_to(node))] = [node.mesh.get_instance_id(),materials,node.transform]
 	return snapshot
 
-func check_removal(level, specs: Array, ids: Dictionary, resources: Dictionary) -> bool:
+func check_removal(level, specs: Array, ids: Dictionary, resources: Dictionary, art: String) -> bool:
 	var id: String = ""
 	for spec in specs:
-		if not ids.has(spec.id): continue
+		if not ids.has(spec.id) or PurposeContract.expected_art(spec) != art: continue
 		for peer in specs:
-			if peer.id != spec.id and ids.has(peer.id) and peer.kind == spec.kind:
+			if peer.id != spec.id and ids.has(peer.id) and PurposeContract.expected_art(peer) == PurposeContract.expected_art(spec):
 				id = spec.id
 				break
 		if not id.is_empty(): break
@@ -117,7 +131,9 @@ func check_removal(level, specs: Array, ids: Dictionary, resources: Dictionary) 
 	await process_frame
 	if not expect(marker_ref.get_ref() == null and node_ref.get_ref() == null,"Removed marker/mesh freed"): return false
 	if not expect(level.markers.size() == count-1,"Other markers retained"): return false
-	return survivors(level,specs,ids,id,resources)
+	if not survivors(level,specs,ids,id,resources): return false
+	ids.erase(id)
+	return true
 
 func survivors(level, specs: Array, ids: Dictionary, skip_id: String, resources: Dictionary) -> bool:
 	for spec in specs:

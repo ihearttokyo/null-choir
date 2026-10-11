@@ -7,6 +7,8 @@ const PURPOSE_ART = {
 	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
 	"checkpoint":"marker_checkpoint", "exit":"marker_exit"
 }
+const AMMO_ART = ["marker_ammo","marker_ammo","marker_ammo_shells","marker_ammo_sawtooth","marker_ammo_marrow","marker_ammo_choir"]
+var _marker_glyphs: Texture2D
 var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
@@ -42,10 +44,33 @@ func build(owner_game: Node, index: int) -> bool:
 	for spec in layout.data.pickups + layout.data.interactions:
 		if spec.id in game.state.removed:
 			continue
-		markers[spec.id] = _place_model(PURPOSE_ART[spec.kind],layout.world_position(spec.cell)+Vector3.UP*0.06,180)
+		markers[spec.id] = _place_marker(spec)
 	refresh_machine_lights()
 	_build_navigation()
 	return true
+
+func _place_marker(spec: Dictionary) -> Node3D:
+	var art: String = PURPOSE_ART[spec.kind]
+	if spec.kind == "key" and spec.key == "ivory": art = "marker_ivorykey"
+	elif spec.kind == "ammo": art = AMMO_ART[int(spec.weapon)]
+	var marker = _place_model(art,layout.world_position(spec.cell)+Vector3.UP*0.06,180)
+	if spec.kind == "weapon":
+		if _marker_glyphs == null: _marker_glyphs = load("res://assets/art/hud/marker_glyphs.png")
+		var emblem = Sprite3D.new()
+		emblem.name = "WeaponIdentity"
+		emblem.texture = _marker_glyphs
+		emblem.hframes = 4
+		emblem.vframes = 4
+		emblem.frame = 10+int(spec.weapon)
+		emblem.position = Vector3(0,1.04,0)
+		emblem.pixel_size = 0.008
+		emblem.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		emblem.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		emblem.shaded = false
+		emblem.double_sided = true
+		emblem.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		marker.add_child(emblem)
+	return marker
 
 func _build_navigation() -> void:
 	var actor = preload("res://scripts/enemy.gd")
