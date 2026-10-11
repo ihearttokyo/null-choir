@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 const Layout = preload("res://scripts/level_data.gd")
 const MAPS = ["nursery","ossuary","inversion","heart"]
 var game
@@ -105,6 +107,7 @@ func check_map(index: int) -> bool:
 	var final_flag: String = "encounter:"+finale.id
 	if not move_to(checkpoint.cell): return false
 	if not expect(not in_region(checkpoint.cell,finale.region),"Checkpoint stands before, not inside, the final commitment region"): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.checkpoint_id == checkpoint.id and checkpoint.id in game.state.removed and not final_flag in game.state.removed and group_dormant(finale) and FileAccess.file_exists(game.progress_path) and game.message == checkpoint.text,"Both seals automatically save recovery before the final encounter"): return false
 	var recovery: Dictionary = game.state.checkpoint.duplicate(true)
@@ -182,6 +185,7 @@ func check_late_pickup(index: int) -> bool:
 	var acquired: bool = not weapon in game.state.owned_weapons
 	if not expect((kind == "weapon" and acquired) or (kind == "ammo" and not acquired),"Late progression introduces each weapon once, then supplies the carried disruptor"): return false
 	if not move_to(spec.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	var capacity: int = game.player.WEAPONS[weapon].max_ammo
 	if not expect(weapon in game.state.owned_weapons and game.state.ammo[weapon] == mini(capacity,amount+int(spec.amount)) and spec.id in game.state.removed and not game.level.markers.has(spec.id),"Actual proximity pickup grants finite authored ammo and removes its marker"): return false
@@ -189,6 +193,7 @@ func check_late_pickup(index: int) -> bool:
 	await tap_key(KEY_1+weapon)
 	if not expect(game.state.weapon == weapon,"Actual numeric weapon input selects the owned late weapon"): return false
 	var after: Array = game.state.ammo.duplicate()
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	return expect(game.state.ammo == after and game.state.removed.count(spec.id) == 1,"Repeated pickup processing cannot duplicate finite ammunition")
 
@@ -196,6 +201,7 @@ func check_locked(gate: Dictionary, checkpoint: Dictionary, seals: int) -> bool:
 	if not await interact_at(gate): return false
 	if not expect(game.state.keys.size() == seals and not gate.id in game.state.removed and game.level.doors.has(gate.id) and game.level.doors[gate.id].collision_layer == 1 and game.message == "BLOOD AND IVORY SEALS REQUIRED","Native gate stays solid with "+str(seals)+" seals"): return false
 	if not move_to(checkpoint.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	return expect(game.state.checkpoint_id == "entry" and not checkpoint.id in game.state.removed,"Automatic checkpoint cannot commit with "+str(seals)+" seals")
 

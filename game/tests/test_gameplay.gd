@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 func _initialize():
 	call_deferred("run")
 
@@ -11,11 +13,19 @@ func run():
 	game.start_campaign(1)
 	if not expect(game.playing): return
 	if not expect(game.player != null and game.level != null): return
+	# Hold automatic callbacks during this controlled passive check.
+	game.set_process(false)
+	game.player.set_physics_process(false)
+	for actor in game.enemies: actor.set_physics_process(false)
 	if not expect(game.level.doors.has("containment_gate")): return
 	if not expect(not game.unlock_door("containment_gate")): return
 	game.player.position = game.level.layout.world_position([13.5,10.5])
+	if not expect(await PassivePhysicsStep.scan(game)): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "entry"): return
+	game.set_process(true)
+	game.player.set_physics_process(true)
+	for actor in game.enemies: actor.set_physics_process(true)
 	game.collect_key("blood_key")
 	game.collect_key("ivory_key")
 	if not expect(game.state.keys == ["blood","ivory"]): return

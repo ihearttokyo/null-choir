@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 func _initialize() -> void: call_deferred("run")
 
 func run() -> void:
@@ -48,6 +50,7 @@ func run() -> void:
 	game.collect_key("foundry_ivory")
 	if not expect(game.unlock_door("foundry_gate"),"Both Foundry keys open its actual gate"): return
 	game.player.position = game.level.layout.world_position([16.5,8.5])
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "foundry_checkpoint","Authored automatic checkpoint must trigger"): return
 	game.hurt_player(300)

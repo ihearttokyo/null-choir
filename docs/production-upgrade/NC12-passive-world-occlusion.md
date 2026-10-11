@@ -1,17 +1,29 @@
 # Passive world occlusion
 
-Passive pickups and checkpoints now require a clear world ray to their tangible marker envelope, in addition to the unchanged1.4m/3.2m proximity and existing key requirements. One shared helper uses the actual small imported mesh bounds, two usable player-capsule origins and two floor-body heights. It rejects paused, dead, pending, stale or retired participants before querying. No global cache, scene ownership or resource/save policy changed.
+Passive pickups and checkpoints require a clear world ray to their tangible marker envelope, alongside the unchanged 1.4m/3.2m proximity and key requirements. The helper uses actual compact mesh bounds, two usable player-capsule origins and two floor-body heights. Synthetic thin-wall and near-mesh-edge pairs preserve resources, markers, stories, actor images and save bytes while blocked; the same pose grants or saves once after removal. Full and legacy-over-cap supplies stay available; partial supplies grant only remaining capacity.
 
-The native regression reproduced both pickup and checkpoint activation across a thin registered wall. Current paired cases preserve resources, story, markers, actor images and disk bytes while blocked; the same pose grants or saves once after removal. A second wall sits0.02m before the nearest tangible mesh edge. Full and legacy-over-cap supplies remain available, and a partial supply grants only remaining capacity.
+The authored entry-ammo center lies partly inside a low scenery base. A decorative-center ray would reject it; the nearest exposed part of its actual mesh envelope remains reachable. The virtual-input entry/combat/west-seal regressions retain their resources and deadlines. The first extended fixture incorrectly held Main processing before tree entry, which re-enabled it. Holding after entry repaired that fixture; the production baseline still failed both blocked assertions.
 
-The authored entry-ammo center lies partly inside a low scenery base. A decorative-center ray would reject it. The helper instead reaches the exposed nearest part of the actual compact marker envelope. Both the staged retained west-aisle pose and the real virtual-input entry walk/combat/west-seal fixtures remain green, with their original resources and deadlines.
+## Physics ownership correction
 
-The first extended fixture held Main processing before entry into the tree, where native callback registration re-enabled it. An unblocked wait therefore collected the marker before the next wall. Holding after entry, with an explicit assertion, repairs only that fixture. The original production baseline still fails both blocked assertions under the corrected hold. No assertion was weakened.
+Hosted PR48 review identified unsafe direct-space queries from render processing. The existing Player physics callback now publishes the passive scan after firing/observation. Main rejects nonphysics, paused, dead, pending, stale or retired participants before querying; a tick latch precedes mutations, and lifecycle checks follow collection/capture/save callbacks. Render processing retains encounters, music pressure, feedback clocks and HUD redraw, without passive queries or grants. There is no visibility cache, new gameplay timer or Main physics override.
 
-Independent correctness and Ponytail reviews are clean. Twelve affected assembled source-native scripts pass, including earned routes, interaction, story, encounters, marker purposes, facing recovery, damage-flash preferences and the two-frame Settings/Controls/difficulty regressions.
+Actual callback cases cover duplicate calls within one tick, resource/pose changes, pause/resume, placement, wrong Player, restart/drain and title-on-collection reentry. Rejecting a nonphysics helper call fails on the baseline. The assembled candidate also passes with the isolated project's separate 3D physics-thread setting read back as true; the project configuration is restored afterward. This establishes source-native callback behavior, not GPU or standalone-app validation.
+
+Thirty staged passive sites across ten fixtures now await a small real Node callback probe. All original 282 assertion/error statements and 41 render calls remain; eleven encounter-only render sites are untouched. Six newly asynchronous callers await their result. The helper verifies staged identities/pose, bounds completion to four physics signals and drains its owned Node. The old Processional fixture reproduces the missing-scattergun assertion; the migrated fixture passes without changing that assertion.
+
+An equivalent actual callback bridge handles the two export-verifier pickup sites. This does not repair the verifier's preexisting nonphysics direct-fire dependency or certify a current app. Native source tests and packaged checks remain distinct.
+
+## Checkpoint failure feedback
+
+Moving checkpoint work into physics exposed a render-order defect: an encounter cue could immediately overwrite a disk-failure warning. Encounter text now preserves an active checkpoint disk-failure message until expiry, without suppressing actors, lights or sounds. The unchanged save-failure regression reproduces the defect and passes the correction. Extra transient cue probes verify activation and expiry, then restore only their own fixture data before canonical save/Continue checks. Their initial unretired synthetic flags failed canonical validation; that failed run is retained.
+
+## Evidence and limits
+
+Independent correctness and Ponytail reviews cover the production boundary, fixture migration and export bridge. The feedback correction has clean independent closure reviews. Twenty-three affected source-native scripts pass, including all ten migrated fixtures, late maps/all difficulties/both seal orders, active bosses, actor recovery and controlled eight-map continuity. Controlled staging and virtual actions do not establish human campaign completion.
 
 ```sh
-python3 tools/check_game.py tests/test_passive_trigger_occlusion.gd tests/test_intake_west_seal.gd
+python3 tools/check_game.py --timeout 90 tests/test_passive_trigger_occlusion.gd tests/test_passive_trigger_physics.gd tests/test_save_failure.gd
 ```
 
-This is bounded mesh-envelope visibility, not exact-triangle contact or proof of wall incidence in every authored map. Synthetic paired tests hold actors and explicitly invoke the production proximity callback; earned-route checks run native gameplay automatically under virtual actions and scripted aim. Human controls, GPU/performance and the current standalone app remain unverified. Rollback reverts this helper, its two guards and the new fixture/document; existing saves and maps remain unchanged.
+This is bounded mesh-envelope visibility, not exact-triangle contact or every-map wall coverage. Human controls, listening, GPU/performance and the current standalone app remain unverified. Rollback reverts this PR's production helpers/hook, fixture migration and document; saves and map sources are unchanged.
