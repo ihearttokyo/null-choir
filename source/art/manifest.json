@@ -7140,6 +7140,510 @@
         "threads": 2,
         "samples": 24
       }
+    },
+    {
+      "id": "marker_ammo",
+      "source": "source/art/marker_ammo.blend",
+      "source_sha256": "7ead11b21eb3ff1a710395eb59a45c75b4cb9b05035897e038266a9a8271dff6",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo.glb",
+          "sha256": "67d4b3cb37715551e9a126bd3680c1132002d4b3481ab48ea00273ecb9ef342f",
+          "bytes": 81172
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.366,
+          -0.165,
+          0.0
+        ],
+        "max": [
+          0.366,
+          0.165,
+          1.02
+        ],
+        "size": [
+          0.731,
+          0.33,
+          1.02
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1320,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_ammo_preview.png",
+        "sha256": "a16d35bc478b307aa19c0286dcea04e60c89c7b9afbd19f192c47ac4aeb62e73",
+        "bytes": 6092,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_ammo_geometry.json"
+    },
+    {
+      "id": "marker_health",
+      "source": "source/art/marker_health.blend",
+      "source_sha256": "7c873d5502260a5e88ba5e073c43b490d13cff5531d0d89ca260bc2652378cbd",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_health.glb",
+          "sha256": "0cf41b8e217852c36eefa2cbb39ec6f7e76f8d8ae6516f45258435c231f86fb0",
+          "bytes": 49316
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.374,
+          -0.315,
+          -0.0
+        ],
+        "max": [
+          0.374,
+          0.315,
+          0.919
+        ],
+        "size": [
+          0.749,
+          0.63,
+          0.919
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 762,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_health_preview.png",
+        "sha256": "ae1d720a4a3c02ebeee8a0ad56a6f5f9cc83e98b79f3150affb34e5606cf979f",
+        "bytes": 5909,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_health_geometry.json"
+    },
+    {
+      "id": "marker_armor",
+      "source": "source/art/marker_armor.blend",
+      "source_sha256": "633111fd55438314de3d0f2c31b8a1b22447942b71d58a383160f3950fee69d8",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_armor.glb",
+          "sha256": "a0544bcba64a32e13585da78fff08b4892ae6c37d58841e7ce404100ce7ca4c2",
+          "bytes": 51264
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.39,
+          -0.16,
+          0.0
+        ],
+        "max": [
+          0.39,
+          0.16,
+          1.02
+        ],
+        "size": [
+          0.78,
+          0.32,
+          1.02
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 652,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_armor_preview.png",
+        "sha256": "e0a49ab37628b73c2b6086586be7ad785d29936797c7620c87fe324597a273aa",
+        "bytes": 6134,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_armor_geometry.json"
+    },
+    {
+      "id": "marker_key",
+      "source": "source/art/marker_key.blend",
+      "source_sha256": "ba40d0824742951ddbb34cced2fe2a37992b72cc32c239e20010592f465bf005",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_key.glb",
+          "sha256": "ae5966d692afd0badd02a93a4e8b547544256cd0a2ec9b8558fbba26ea357e16",
+          "bytes": 49268
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.135,
+          -0.105,
+          0.0
+        ],
+        "max": [
+          0.135,
+          0.105,
+          1.11
+        ],
+        "size": [
+          0.27,
+          0.21,
+          1.11
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 712,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_key_preview.png",
+        "sha256": "96fb8680cedaa799f3e8c20207efda6a239547017d9f8341f52ec7f5716162f8",
+        "bytes": 2818,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_key_geometry.json"
+    },
+    {
+      "id": "marker_weapon",
+      "source": "source/art/marker_weapon.blend",
+      "source_sha256": "9efa456e08d67030291c8d8c6094d6cb6fd1b9cce0608abcbb9941b25f5f2443",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_weapon.glb",
+          "sha256": "0206b0782f9cbfbea1d593ec6ebbcd422b6a0c7a82d6fb6489bbddd8598102b4",
+          "bytes": 79404
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.414,
+          -0.242,
+          0.0
+        ],
+        "max": [
+          0.414,
+          0.242,
+          0.701
+        ],
+        "size": [
+          0.828,
+          0.483,
+          0.701
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1312,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_weapon_preview.png",
+        "sha256": "b526a1a4a8543ed7607b612fd1e11fa060574579983a0652e9a85e762d7abdbd",
+        "bytes": 7534,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_weapon_geometry.json"
+    },
+    {
+      "id": "marker_story",
+      "source": "source/art/marker_story.blend",
+      "source_sha256": "69d18f7668369dbc644ae0ba9d9add9ced54204c2633a3454203fe9cbf09eaf9",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_story.glb",
+          "sha256": "420c49d230fa0d307cd9c81e3f1ddea18fda6df748fe51394ad96f54dbe00160",
+          "bytes": 33236
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.419,
+          -0.15,
+          0.0
+        ],
+        "max": [
+          0.419,
+          0.15,
+          0.964
+        ],
+        "size": [
+          0.837,
+          0.3,
+          0.964
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 472,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_story_preview.png",
+        "sha256": "09167e6e27e2ae0d863508cb3419bea124abd8324cd1f241370f8fc368698ade",
+        "bytes": 7229,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_story_geometry.json"
+    },
+    {
+      "id": "marker_checkpoint",
+      "source": "source/art/marker_checkpoint.blend",
+      "source_sha256": "8c9c5e3f9b88f93565d843bfdad0c5730e97e642acda429341f2093f2b72da2c",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_checkpoint.glb",
+          "sha256": "ee4731f42ad44bce933682bce9d0feeb058faf63f53c05d49e04b08c1c873d6f",
+          "bytes": 52548
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.343,
+          -0.309,
+          0.0
+        ],
+        "max": [
+          0.343,
+          0.309,
+          1.027
+        ],
+        "size": [
+          0.686,
+          0.618,
+          1.027
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 872,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_checkpoint_preview.png",
+        "sha256": "45e1e5fedd9c38227ca062ee184c58f4c1b22ecc5873edfcb985756674123d1d",
+        "bytes": 3834,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_checkpoint_geometry.json"
+    },
+    {
+      "id": "marker_exit",
+      "source": "source/art/marker_exit.blend",
+      "source_sha256": "92589c029cdd5f72ffa0ca34f262681800224c5c9bec1ef53d62673dd607f9df",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_exit.glb",
+          "sha256": "44b7214f50343c697ece1cbae00147a32123cbaab0cafef7ae259b5054e5f111",
+          "bytes": 109052
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.363,
+          -0.363,
+          -0.0
+        ],
+        "max": [
+          0.363,
+          0.363,
+          0.895
+        ],
+        "size": [
+          0.725,
+          0.726,
+          0.895
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 2008,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_exit_preview.png",
+        "sha256": "47cbf834d31ee2d0879706f0669e14f6f9fa4a867e029c8a5b0ceb32c7183d8b",
+        "bytes": 6708,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_exit_geometry.json"
     }
   ],
   "build": {

@@ -2,6 +2,11 @@ extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
+const PURPOSE_ART = {
+	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
+	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
+	"checkpoint":"marker_checkpoint", "exit":"marker_exit"
+}
 var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
@@ -34,24 +39,10 @@ func build(owner_game: Node, index: int) -> bool:
 		var door = _box(Vector3(spec.size[0],spec.size[1],spec.size[2]), layout.world_position(spec.cell) + Vector3(0,spec.size[1]/2,0), _material(Color(0.14,0.08,0.09)), true)
 		door.rotation.y = deg_to_rad(spec.yaw)
 		doors[spec.id] = door
-	var marker_mesh = SphereMesh.new()
-	marker_mesh.radius = 0.8
-	marker_mesh.height = 1.6
 	for spec in layout.data.pickups + layout.data.interactions:
 		if spec.id in game.state.removed:
 			continue
-		var color = Color(0.85,0.59,0.22)
-		if spec.kind == "health": color = Color(0.4,0.7,0.65)
-		if spec.kind == "armor": color = Color(0.34,0.5,0.86)
-		if spec.kind == "key" and spec.key == "blood": color = Color(0.7,0.12,0.11)
-		var marker = _place_model("containment_capsule",layout.world_position(spec.cell)+Vector3.UP*0.06,0,[0.25,0.17,0.25])
-		# Reuse the Blender cage at collectible scale; its fluid core keeps the original color cue.
-		var core = MeshInstance3D.new()
-		core.mesh = marker_mesh
-		core.material_override = _material(color,0.7)
-		core.position.y = 2.2
-		marker.add_child(core)
-		markers[spec.id] = marker
+		markers[spec.id] = _place_model(PURPOSE_ART[spec.kind],layout.world_position(spec.cell)+Vector3.UP*0.06,180)
 	refresh_machine_lights()
 	_build_navigation()
 	return true

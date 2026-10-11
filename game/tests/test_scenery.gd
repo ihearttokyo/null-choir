@@ -1,17 +1,28 @@
 extends SceneTree
 
+const PurposeContract = preload("res://tests/test_marker_purposes.gd")
+
+var game
+var master_muted := false
+var mouse_mode: int
+
 func _initialize() -> void:
+	master_muted = AudioServer.is_bus_mute(0)
+	mouse_mode = Input.mouse_mode
+	AudioServer.set_bus_mute(0,true)
 	call_deferred("run")
 
 func run() -> void:
-	var game = load("res://scripts/main.gd").new()
-	game.settings_path = "user://scenery_contract_preferences.json"
-	game.progress_path = "user://scenery_contract_progress.json"
+	game = load("res://scripts/main.gd").new()
+	var prefix = "user://scenery_contract_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
+	game.settings_path = prefix+"_preferences.json"
+	game.progress_path = prefix+"_progress.json"
 	root.add_child(game)
 	game.state.new_campaign(0)
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--level="): game.state.level_index = int(arg.trim_prefix("--level="))
-	game.start_level()
+	await game.start_level()
+	if not expect(is_instance_valid(game.level) and game.playing,"Main must start the authored scenery level"): return
 	game.pause_game()
 	if not expect(root.use_occlusion_culling,"Native static-wall occlusion must be enabled"): return
 	var occluders = 0
@@ -61,9 +72,11 @@ func run() -> void:
 			if not game.level.layout.is_walkable(cell+direction): boundary_count += 1
 	if not expect(occluders == boundary_count,"Every boundary wall has native conservative occlusion; no invented blocking geometry"): return
 	if game.state.level_index == 0 and not expect(occluders == 214,"Preserve exact Intake boundary count"): return
-	for marker in game.level.markers.values():
-		if not expect(marker.scene_file_path == "res://assets/art/world/containment_capsule.glb","Pickups/interaction markers must use Blender containment pods rather than conspicuous placeholder cubes"): return
-		if not expect(marker.scale == Vector3(0.25,0.17,0.25),"Collectible pods must remain small enough to preserve level routes"): return
+	for spec in game.level.layout.data.pickups+game.level.layout.data.interactions:
+		if spec.id in game.state.removed:
+			if not expect(not game.level.markers.has(spec.id),"Consumed marker absent: "+spec.id): return
+			continue
+		if not PurposeContract.check_marker(game.level,spec,expect): return
 	if not expect(floors > 10 and ceilings == floors,"Local lit floor and ceiling coverage required"): return
 	for id in ["ribbed_wall","conduit","vault_span","lumen_sconce","witness_relief","suspended_cadaver","containment_capsule","drain_altar"]:
 		if not expect(art.get(id,0) >= 2,"Scenery missing from playable scene: "+id): return
@@ -91,15 +104,31 @@ func run() -> void:
 			continue
 		if not expect(not game.level.get_world_3d().direct_space_state.intersect_ray(query).is_empty(),"Landmark base requires collision: "+hero.id): return
 	var level_id = game.level.layout.data.id
-	game.queue_free()
-	paused = false
+	cleanup()
 	await process_frame
 	await process_frame
+	Input.mouse_mode = mouse_mode
+	AudioServer.set_bus_mute(0,master_muted)
 	print("PASS ",level_id," scene contains Blender scenery, local lit floors/ceilings, bounded shadow lighting and combat-readable depth fog")
 	quit()
 
+func cleanup() -> void:
+	paused = false
+	if is_instance_valid(game):
+		game.playing = false
+		game.placement_pending = false
+		if game.music != null: game.music.stop()
+		if game.effects != null: game.effects.stop()
+		for path in [game.settings_path,game.settings_path+".tmp",game.progress_path,game.progress_path+".tmp"]:
+			if FileAccess.file_exists(path): DirAccess.remove_absolute(path)
+		game.queue_free()
+	game = null
+
 func expect(condition: bool, detail: String) -> bool:
 	if not condition:
+		cleanup()
+		Input.mouse_mode = mouse_mode
+		AudioServer.set_bus_mute(0,master_muted)
 		push_error(detail)
 		quit(1)
 	return condition

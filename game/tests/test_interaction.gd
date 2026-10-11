@@ -3,6 +3,7 @@ extends SceneTree
 func _initialize(): call_deferred("run")
 
 func run():
+	AudioServer.set_bus_mute(0,true)
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)
 	await process_frame
@@ -21,9 +22,12 @@ func run():
 	if not expect(game.nearest_interaction().get("id") == "blood_key"): return
 	game.interact()
 	if not expect("blood" in game.state.keys and "blood_key" in game.state.removed): return
-	game.playing = false
+	game.show_title()
+	await process_frame
+	game.free()
+	paused = false
+	await process_frame
 	print("PASS native interaction ray: blocked by world wall, then visible key can be recovered")
-	game.queue_free()
 	quit()
 
 func expect(condition: bool) -> bool:
