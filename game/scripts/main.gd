@@ -34,6 +34,8 @@ var damage_flash: float = 0
 var hit_flash: float = 0
 var quitting: bool = false
 var _scene_level_index: int = -1
+var aim_observation: Dictionary = {}
+var interaction_observation: Dictionary = {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -407,7 +409,7 @@ func unlock_door(id: String) -> bool:
 	return false
 
 func nearest_interaction() -> Dictionary:
-	if player == null: return {}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map(): return {}
 	var nearest: Dictionary = {}
 	var distance = 4.5
 	for spec in level.layout.data.interactions + level.layout.data.doors:
@@ -685,19 +687,98 @@ func impact(point: Vector3) -> void:
 func dry_fire(_weapon: int) -> void:
 	if effects != null: effects.play("dry")
 
-func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
-	var best: Node3D
-	var distance = max_range
+func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: bool = false) -> Dictionary:
+	var result := {"level":level,"player":player,"tick":Engine.get_physics_frames(),"weapon":state.weapon,"origin":origin,"manual_direction":direction,"direction":direction,"range":max_range,"contact":{},"actor_id":"","assisted":false}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0 or not origin.is_finite() or not direction.is_finite() or not is_finite(max_range) or max_range <= 0 or not is_equal_approx(direction.length_squared(),1.0): return result
+	var space := level.get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(origin,origin+direction*max_range,1|4)
+	query.exclude = [player.get_rid()]
+	var manual := space.intersect_ray(query)
+	result.contact = manual
+	if not manual.is_empty() and manual.collider.has_method("take_damage"):
+		if manual.collider.has_method("_current_map") and manual.collider._current_map() and manual.collider.hp > 0:
+			result.actor_id = str(manual.collider.id)
+		return result
+	if not settings.auto_aim: return result
+	var best_angle := -1.0
+	var best_distance := INF
+	var best_id := ""
+	var manual_flat := Vector2(direction.x,direction.z).normalized()
 	for actor in enemies:
-		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0: continue
-		var offset = actor.global_position+Vector3(0,0.85,0)-origin
-		var range_to_target = offset.length()
-		if range_to_target < distance and direction.dot(offset.normalized()) > 0.975:
-			var sight = PhysicsRayQueryParameters3D.create(origin,origin+offset,1)
-			if not get_world_3d().direct_space_state.intersect_ray(sight).is_empty(): continue
-			best = actor
-			distance = range_to_target
-	return best
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0 or not actor.active: continue
+		var shape_node: CollisionShape3D
+		for child in actor.get_children():
+			if child is CollisionShape3D and child.shape is CapsuleShape3D:
+				shape_node = child
+				break
+		if shape_node == null: continue
+		var capsule: CapsuleShape3D = shape_node.shape
+		var center := shape_node.global_position
+		var half_line := maxf(0,capsule.height*.5-capsule.radius)
+		var toward_camera := shape_node.global_basis.inverse()*(origin-center)
+		var points: Array[Vector3] = []
+		for height in [clampf(toward_camera.y,-half_line,half_line),0.0,half_line]:
+			points.append(shape_node.to_global(Vector3(0,height,0)))
+		for point in points:
+			var offset := point-origin
+			if offset.length_squared() < .000001: continue
+			var resolved := offset.normalized()
+			var angular := direction.dot(resolved)
+			if melee:
+				angular = manual_flat.dot(Vector2(offset.x,offset.z).normalized())
+				# Classic correction is bounded; the final native contact still uses finite 3D reach.
+				if absf(direction.y-resolved.y) > .8: continue
+			if angular <= .975: continue
+			query.to = origin+resolved*max_range
+			var hit := space.intersect_ray(query)
+			if hit.is_empty() or hit.collider != actor: continue
+			var distance := origin.distance_to(hit.position)
+			if distance > max_range+.00001: continue
+			var better: bool = angular > best_angle or (angular == best_angle and (distance < best_distance or (distance == best_distance and str(actor.id) < best_id)))
+			if not better: continue
+			best_angle = angular
+			best_distance = distance
+			best_id = str(actor.id)
+			result.direction = resolved
+			result.contact = hit
+			result.actor_id = best_id
+			result.assisted = true
+	return result
+
+func clear_observations() -> void:
+	aim_observation = {}
+	interaction_observation = {}
+
+func observe_player() -> void:
+	clear_observations()
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0: return
+	var profile: Dictionary = Player.WEAPONS[state.weapon]
+	aim_observation = resolve_aim(player.camera.global_position,-player.camera.global_basis.z,profile.range,state.weapon == 0)
+	observe_interaction()
+
+func observe_interaction() -> void:
+	interaction_observation = {}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0: return
+	interaction_observation = {"level":level,"player":player,"tick":Engine.get_physics_frames(),"origin":player.camera.global_position,"direction":-player.camera.global_basis.z,"spec":nearest_interaction()}
+
+func _observation_current(observation: Dictionary) -> bool:
+	return not observation.is_empty() and playing and state.health > 0 and is_instance_valid(player) and player._current_map() and observation.level == level and observation.player == player and Engine.get_physics_frames()-int(observation.tick) <= 1 and observation.origin == player.camera.global_position and observation.get("manual_direction",observation.get("direction")) == -player.camera.global_basis.z
+
+func aim_display() -> Dictionary:
+	if not _observation_current(aim_observation) or aim_observation.weapon != state.weapon: return {}
+	if not aim_observation.actor_id.is_empty():
+		var actor = aim_observation.contact.get("collider")
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0 or str(actor.id) != aim_observation.actor_id: return {}
+	return aim_observation
+
+func interaction_display() -> Dictionary:
+	if not _observation_current(interaction_observation): return {}
+	var spec: Dictionary = interaction_observation.spec
+	return {} if spec.get("id","") in state.removed else spec
+
+func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
+	var solution := resolve_aim(origin,direction,max_range,max_range <= Player.WEAPONS[0].range)
+	return solution.contact.get("collider") if not solution.actor_id.is_empty() else null
 
 func quit_game() -> bool:
 	if quitting: return true

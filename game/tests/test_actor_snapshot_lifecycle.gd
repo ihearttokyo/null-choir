@@ -84,6 +84,7 @@ func level_history() -> bool:
 	if not await interact_at(exit_spec): return false
 	# Native E stages the actual exit. Freeze the next retry's exact boundary,
 	# rather than comparing against the player's earlier pre-interaction pose.
+	await physics_frame
 	var prior: Dictionary = game.state.to_dict()
 	if not expect(game.nearest_interaction().get("id","") == exit_spec.id,"Actual failed exit remains the nearest native interaction"): return false
 	game.interact()

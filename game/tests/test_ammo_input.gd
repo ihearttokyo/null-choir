@@ -134,6 +134,8 @@ func arena():
 	var level = game.Level.new()
 	level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game.add_child(level)
+	var metadata_loaded: bool = level.layout.load_level(0)
+	assert(metadata_loaded,"SETUP native observation needs actual authored interaction metadata")
 	level._box(Vector3(40,1,40),Vector3(0,-0.5,0),null,true)
 	return level
 

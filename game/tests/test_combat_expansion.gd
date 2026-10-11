@@ -28,6 +28,10 @@ func run() -> void:
 	paused = false
 	await process_frame
 	await process_frame
+	# Fixed-fps simulation timers can outrun the real audio thread at teardown.
+	OS.delay_msec(100)
+	await process_frame
+	await process_frame
 	if FileAccess.file_exists(progress): DirAccess.remove_absolute(progress)
 	print("PASS native combat expansion"+(" pickups only" if "--pickups-only" in OS.get_cmdline_user_args() else " pickups, caster flight, swept collision, infighting, pause, lifetime and map cleanup"))
 	quit()

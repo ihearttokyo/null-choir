@@ -20,7 +20,7 @@ PR35 retains the sharper-world/pixel-HUD experiment; no competing renderer patch
 
 ## Continuation
 
-Next implement NC-02 through the actual input, readiness, accepted-shot-age and HUD callers after freezing its lifecycle tests. Preserve all six weapon behaviors, dry fallback, stale/reentrant callback guards and asynchronous menu/placement regressions. All14 spec contracts and section19 gates remain in scope. Source progress does not complete the full campaign/app goal.
+NC-01, NC-02 and the geometric NC-10 repair have supporting source acceptance. NC-03 follows below. Next repair incoming damage geometry, then continue the remaining contracts and section19 gates. Source progress does not complete the campaign/app goal.
 
 ## NC-10: geometric ramp normals
 
@@ -48,3 +48,23 @@ python3 tools/check_game.py tests/test_player.gd tests/test_ammo_input.gd tests/
 Existing fixtures now enter physics before valid direct fire. Pose-unit fixtures stage timestamps honestly and assert read-only clocks; separate real discharges check first-post-shot age. Pause/Resume tests retain exact recovery before time advances, with an actual reset mutation failing. A pose-clock mutation also fails. Original damage, ammunition, resource, birth-ledger and cancellation assertions remain. Independent correctness/Ponytail findings were repaired before broader checks.
 
 The current focused pending-menu fixture passes all six Settings/Controls/difficulty cases at both wait phases and three following physics frames. This is headless state evidence; physical capture, cursor/focus and full original app-path placement acceptance remain unproved. Full campaign play with human-earned inventory, heard standalone audio, current GPU/readability/performance and an updated packaged app are still pending.
+
+
+## NC-03: finite contact truth and physics-owned HUD observations
+
+The shared resolver preserves valid manual contact first, including dormant activation. Optional fallback samples native capsule points, ranks angular proximity before actual contact distance and stable authored ID, and accepts only a finite first collision with the selected current-map actor. Classic tool correction has separate horizontal and bounded vertical limits; no collider was enlarged. Wrong-map manual identity and order-dependent near-equal ranking were reproduced and repaired.
+
+Native cases cover horizontal crawlers at1.0/1.8/2.4m, surface rather than center reach, floor offsets, cone/vertical limits, low/tall/floating capsules, thin walls, intervening dormant actors, partial cover, manual priority, disabled assistance, death and scene replacement. Removing the native collider-identity fence or the exposed upper sample fails the retained cover regressions; exact production source was restored afterward.
+
+A transient physics observation supplies the HUD contact cue and interaction prompt. Display performs no collision query. A real Player-driven fixture proves one resolver call per ordinary or accepted-shot tick and rejects observation calls after synchronous shot/dry callbacks replace the scene. Cancellation, look, weapon mismatch, death and map retirement invalidate the result. Shot geometry is revalidated rather than firing a cached preview.
+
+The actual GPT image reference was generated, inspected and retained at [aim-cue-reference.png](aim-cue-reference.png). Its small amber contact corners complement the existing ivory manual reticle; they never promise a future projectile hit or every pellet. Projection uses the actual camera viewport and HUD canvas transform, with no fixed division by two. Native scaled/translated-canvas checks prove coordinate agreement; rendered readability remains unproved. PR35 uses canvas-items stretch. Its actual configuration and GPU comparison remain separate integration checks.
+
+```sh
+python3 tools/check_game.py tests/test_close_melee.gd tests/test_aim_resolution.gd
+python3 tools/check_game.py tests/test_aim_observation.gd tests/test_aim_publication.gd
+```
+
+Existing observer fixtures now enter physics or publish on its clock without dropping their prior assertions. The synthetic firing arenas load actual interaction metadata. Combat teardown gives the real audio thread a bounded100ms wall-clock interval; a simulation timer was insufficient in one retained trial. This is fixture calibration, not an audio performance gain or proof of app-exit behavior.
+
+The full save-placement fixture remains blocked on the real window/capture path: headless reports visible mouse mode where it expects capture. Both unchanged72f44 source and this candidate reproduce that limitation with correct replacement identities, playing/music/menu state. The original capture assertion remains intact. Settings/Controls/difficulty wait-frame state checks are separate and do not certify physical capture or cursor behavior.

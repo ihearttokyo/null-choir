@@ -105,6 +105,7 @@ func check_fire_intent() -> bool:
 	game.level = game.Level.new()
 	game.level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game.add_child(game.level)
+	if not expect(game.level.layout.load_level(0),"SETUP native observation needs actual authored interaction metadata"): return false
 	game.level._box(Vector3(40,1,40),Vector3(0,-.5,0),null,true)
 	driver = Driver.new()
 	driver.process_mode = Node.PROCESS_MODE_PAUSABLE

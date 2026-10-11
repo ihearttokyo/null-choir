@@ -7,9 +7,9 @@ class NativeGame extends "res://scripts/main.gd":
 	var fired_weapons: Array = []
 	func _ready() -> void:
 		set_process(false)
-	func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
+	func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: bool = false) -> Dictionary:
 		assist_calls += 1
-		return super.autoaim_target(origin,direction,max_range)
+		return super.resolve_aim(origin,direction,max_range,melee)
 	func shot(index: int) -> void:
 		fired_weapons.append(index)
 		super.shot(index)

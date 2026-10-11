@@ -68,6 +68,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_action_pressed("weapon_"+str(index+1)): _weapon_intent = index
 
 func look(delta: Vector2) -> void:
+	if delta != Vector2.ZERO and game.has_method("clear_observations"): game.clear_observations()
 	rotation.y -= delta.x
 	camera.rotation.x = clampf(camera.rotation.x - delta.y * (-1 if game.settings.invert_y else 1), -1.35, 1.35)
 
@@ -117,7 +118,10 @@ func _physics_process(delta: float) -> void:
 	if _repeat_weapon >= 0 and _repeat_weapon != game.state.weapon: _end_repeat()
 	var attempt := _fire_pressed or (Input.is_action_pressed("fire") and not _fire_release_required)
 	_fire_pressed = false
-	if attempt: fire()
+	var fired := fire() if attempt else false
+	if not _current_map() or not game.playing: return
+	if not fired and game.has_method("observe_player"): game.observe_player()
+	elif fired and game.has_method("observe_interaction"): game.observe_interaction()
 	if not _current_map() or not game.playing: return
 	game.state.position = position
 	if position.y < -12: game.hurt_player(200)
@@ -144,6 +148,7 @@ func _end_repeat() -> void:
 	_repeat_weapon = -1
 
 func cancel_actions() -> void:
+	if game.has_method("clear_observations"): game.clear_observations()
 	_end_repeat()
 	_fire_pressed = false
 	_weapon_intent = -1
@@ -193,12 +198,10 @@ func fire() -> bool:
 	var query = PhysicsRayQueryParameters3D.create(origin,origin+direction*weapon.range,1|4)
 	query.exclude = [get_rid()]
 	var space = get_world_3d().direct_space_state
-	if game.settings.auto_aim and game.has_method("autoaim_target"):
-		var center = space.intersect_ray(query)
-		if center.is_empty() or not center.collider.has_method("take_damage"):
-			var target = game.autoaim_target(origin,direction,weapon.range)
-			if target != null:
-				direction = (target.global_position+Vector3(0,0.85,0)-origin).normalized()
+	if game.has_method("resolve_aim"):
+		var solution: Dictionary = game.resolve_aim(origin,direction,weapon.range,index == 0)
+		direction = solution.direction
+		game.aim_observation = solution
 	if index == 4:
 		var projectile = Projectile.new()
 		game.level.add_child(projectile)

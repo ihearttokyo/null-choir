@@ -109,7 +109,7 @@ func draw_state() -> Dictionary:
 	var progress: Array = []
 	for index in 8:
 		progress.append({"discovered":index in state.discoveries,"current":index == state.level_index})
-	var interaction: Dictionary = game.nearest_interaction() if game.playing else {}
+	var interaction: Dictionary = game.interaction_display() if game.playing else {}
 	var prompt: String = ""
 	if not interaction.is_empty():
 		var missing: PackedStringArray = []
@@ -181,6 +181,18 @@ func _process(_delta: float) -> void:
 	message_label.size = Vector2(608,68) if active else Vector2(608,36)
 	queue_redraw()
 
+# Camera and HUD canvas transforms determine placement; no fixed resolution ratio.
+func aim_cue() -> Dictionary:
+	var observation: Dictionary = game.aim_display()
+	if observation.is_empty() or not observation.assisted or observation.actor_id.is_empty(): return {}
+	var camera: Camera3D = game.player.camera
+	var point: Vector3 = observation.contact.position
+	if camera.is_position_behind(point) or camera.get_viewport() != get_viewport(): return {}
+	var position := get_global_transform_with_canvas().affine_inverse()*camera.unproject_position(point)
+	if not Rect2(8,8,624,304).has_point(position): return {}
+	return {"position":position,"actor_id":observation.actor_id,"contact":point,"weapon":observation.weapon,
+		"meaning":["contact","contact","center direction","spread direction","initial path","first piercing contact"][observation.weapon]}
+
 func _draw() -> void:
 	if view.is_empty() or game.level == null or game.player == null:
 		draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029))
@@ -218,6 +230,16 @@ func _draw() -> void:
 				for side in [124,515]:
 					draw_line(Vector2(side,250),Vector2(side,278),COPPER,1)
 					draw_line(Vector2(side-2,252),Vector2(side-2,263),IVORY.darkened(0.3),1)
+		if game.playing:
+			var cue := aim_cue()
+			if not cue.is_empty():
+				var center: Vector2 = cue.position.round()
+				for corner in [Vector2(-1,-1),Vector2(1,-1),Vector2(-1,1),Vector2(1,1)]:
+					var edge: Vector2 = center+corner*5
+					for color in [INK,AMBER]:
+						var width := 3 if color == INK else 1
+						draw_line(edge,edge-Vector2(corner.x*3,0),color,width)
+						draw_line(edge,edge-Vector2(0,corner.y*3),color,width)
 		for offset in [-1,1]:
 			draw_line(Vector2(320+offset*4,180),Vector2(320+offset*8,180),IVORY,1)
 			draw_line(Vector2(320,180+offset*4),Vector2(320,180+offset*8),IVORY,1)
