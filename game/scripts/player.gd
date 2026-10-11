@@ -22,6 +22,14 @@ var shot_flash: float = 0.0
 var stride: float = 0.0
 var recoil: float = 0.0
 var _repeater_spread: float = 0.0
+var active_play_time: float = 0.0
+var _last_shots: Array[float] = [-INF,-INF,-INF,-INF,-INF,-INF]
+var _repeat_weapon: int = -1
+var _fire_pressed: bool = false
+var _weapon_intent: int = -1
+var _fire_release_required: bool = false
+var _interact_release_required: bool = false
+var _interact_pressed: bool = false
 
 func configure(owner_game: Node) -> void:
 	game = owner_game
@@ -43,19 +51,37 @@ func configure(owner_game: Node) -> void:
 	camera.current = true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if game == null or not game.playing: return
+	if not _current_map() or not game.playing: return
 	if event is InputEventMouseMotion:
 		look(event.screen_relative * game.settings.sensitivity * 0.002)
-	if event.is_action_pressed("fire"): fire()
+	if event.is_action_released("interact"): _interact_release_required = false
+	if event.is_action_pressed("interact") and not event.is_echo() and not _interact_release_required: _interact_pressed = true
+	if event.is_action_released("fire"):
+		_end_repeat()
+		_fire_release_required = false
+	if event.is_action_pressed("fire") and not event.is_echo() and not _fire_release_required:
+		_fire_pressed = true
+	if not event.is_echo():
+		if event.is_action_pressed("weapon_next"): _weapon_intent = 6
+		if event.is_action_pressed("weapon_previous"): _weapon_intent = 7
+		for index in range(6):
+			if event.is_action_pressed("weapon_"+str(index+1)): _weapon_intent = index
 
 func look(delta: Vector2) -> void:
+	if delta != Vector2.ZERO and game.has_method("clear_observations"): game.clear_observations()
 	rotation.y -= delta.x
 	camera.rotation.x = clampf(camera.rotation.x - delta.y * (-1 if game.settings.invert_y else 1), -1.35, 1.35)
 
 func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing or game.state.health <= 0: return
+	var held := Input.is_action_pressed("fire") and not _fire_release_required
+	if _repeat_weapon >= 0 and (not held or _repeat_weapon != game.state.weapon): _end_repeat()
+	active_play_time += delta
 	for index in range(weapon_cooldowns.size()):
-		weapon_cooldowns[index] = maxf(0,weapon_cooldowns[index]-delta)
+		var remaining := weapon_cooldowns[index]-delta
+		weapon_cooldowns[index] = remaining if index == _repeat_weapon and held else maxf(0,remaining)
+	if not Input.is_action_pressed("fire"): _fire_release_required = false
+	if not Input.is_action_pressed("interact"): _interact_release_required = false
 	if game.state.weapon != 3 or not Input.is_action_pressed("fire"):
 		_repeater_spread = move_toward(_repeater_spread,0,delta*0.06)
 	dry_fire_time = maxf(0,dry_fire_time-delta)
@@ -63,8 +89,9 @@ func _physics_process(delta: float) -> void:
 	recoil = move_toward(recoil,0,delta*7)
 	var axes = Input.get_vector("move_left","move_right","move_forward","move_back")
 	var direction = basis * Vector3(axes.x,0,axes.y)
-	velocity.x = move_toward(velocity.x,direction.x*9.0,delta*50)
-	velocity.z = move_toward(velocity.z,direction.z*9.0,delta*50)
+	var planar := Vector2(velocity.x,velocity.z).move_toward(Vector2(direction.x,direction.z)*9.0,delta*50)
+	velocity.x = planar.x
+	velocity.z = planar.y
 	if not is_on_floor(): velocity.y -= delta*24
 	else: velocity.y = -0.5
 	move_and_slide()
@@ -74,14 +101,27 @@ func _physics_process(delta: float) -> void:
 	camera.position.y = 1.55 + (sin(stride*1.8)*0.035 if game.settings.head_bob else 0.0)
 	if game.settings.camera_shake: camera.position.x = sin(shot_flash*200)*shot_flash*0.1
 	else: camera.position.x = 0
-	if Input.is_action_just_pressed("interact"): game.interact()
-	if not game.playing: return # Exit interaction invalidates this map and its pending position write.
-	if Input.is_action_just_pressed("weapon_next"): cycle_weapon(1)
-	if Input.is_action_just_pressed("weapon_previous"): cycle_weapon(-1)
-	for index in range(6):
-		if Input.is_action_just_pressed("weapon_"+str(index+1)) and index in game.state.owned_weapons:
-			game.state.weapon = index
-	if Input.is_action_pressed("fire"): fire()
+	var interaction := _interact_pressed or (Input.is_action_just_pressed("interact") and not _interact_release_required)
+	_interact_pressed = false
+	if interaction: game.interact()
+	if not _current_map() or not game.playing: return # Interaction may retire this player/map.
+	var selection := _weapon_intent
+	_weapon_intent = -1
+	if selection < 0:
+		if Input.is_action_just_pressed("weapon_next"): selection = 6
+		if Input.is_action_just_pressed("weapon_previous"): selection = 7
+		for index in range(6):
+			if Input.is_action_just_pressed("weapon_"+str(index+1)): selection = index
+	if selection == 6: cycle_weapon(1)
+	elif selection == 7: cycle_weapon(-1)
+	elif selection in game.state.owned_weapons: game.state.weapon = selection
+	if _repeat_weapon >= 0 and _repeat_weapon != game.state.weapon: _end_repeat()
+	var attempt := _fire_pressed or (Input.is_action_pressed("fire") and not _fire_release_required)
+	_fire_pressed = false
+	var fired := fire() if attempt else false
+	if not _current_map() or not game.playing: return
+	if not fired and game.has_method("observe_player"): game.observe_player()
+	elif fired and game.has_method("observe_interaction"): game.observe_interaction()
 	if not _current_map() or not game.playing: return
 	game.state.position = position
 	if position.y < -12: game.hurt_player(200)
@@ -91,11 +131,33 @@ func cycle_weapon(direction: int) -> void:
 	var index = inventory.find(game.state.weapon)
 	game.state.weapon = inventory[posmod(index+direction,inventory.size())]
 
+func shot_age(index: int = -1) -> float:
+	if index < 0: index = game.state.weapon
+	return active_play_time-_last_shots[index]
+
 func weapon_frame() -> int:
-	if cooldown <= 0: return 0
-	return 1 if cooldown > WEAPONS[game.state.weapon].interval*0.5 else 2
+	var age := shot_age()
+	var interval: float = WEAPONS[game.state.weapon].interval
+	if age >= interval: return 0
+	return 1 if age < interval*0.5 else 2
+
+func _end_repeat() -> void:
+	if _repeat_weapon < 0: return
+	var index := _repeat_weapon
+	weapon_cooldowns[index] = maxf(weapon_cooldowns[index],WEAPONS[index].interval-shot_age(index))
+	_repeat_weapon = -1
+
+func cancel_actions() -> void:
+	if game.has_method("clear_observations"): game.clear_observations()
+	_end_repeat()
+	_fire_pressed = false
+	_weapon_intent = -1
+	_interact_pressed = false
+	_fire_release_required = Input.is_action_pressed("fire")
+	_interact_release_required = Input.is_action_pressed("interact")
 
 func fire() -> bool:
+	if not Engine.is_in_physics_frame(): return false
 	if not _current_map() or not game.playing or game.state.health <= 0: return false
 	var index = game.state.weapon
 	if index > 0 and game.state.ammo[index] <= 0:
@@ -111,11 +173,22 @@ func fire() -> bool:
 			if candidate > 0 and game.state.ammo[candidate] > 0:
 				game.state.weapon = candidate
 				break
+		_end_repeat()
 		return false
 	if cooldown > 0: return false
 	if index > 0: game.state.ammo[index] -= 1
 	var weapon = WEAPONS[index]
-	cooldown = weapon.interval
+	var held := Input.is_action_pressed("fire") and not _fire_release_required
+	var recovery: float = weapon.interval
+	if _repeat_weapon == index and held:
+		recovery += cooldown
+		# Skip missed slots after a hitch; never discharge more than once in this tick.
+		if recovery <= 0:
+			recovery = weapon.interval-fposmod(-cooldown,weapon.interval)
+		if is_zero_approx(recovery): recovery = weapon.interval
+	cooldown = recovery
+	_last_shots[index] = active_play_time
+	_repeat_weapon = index if held else -1
 	shot_flash = 0.12
 	recoil = 1
 	game.shot(index)
@@ -125,12 +198,10 @@ func fire() -> bool:
 	var query = PhysicsRayQueryParameters3D.create(origin,origin+direction*weapon.range,1|4)
 	query.exclude = [get_rid()]
 	var space = get_world_3d().direct_space_state
-	if game.settings.auto_aim and game.has_method("autoaim_target"):
-		var center = space.intersect_ray(query)
-		if center.is_empty() or not center.collider.has_method("take_damage"):
-			var target = game.autoaim_target(origin,direction,weapon.range)
-			if target != null:
-				direction = (target.global_position+Vector3(0,0.85,0)-origin).normalized()
+	if game.has_method("resolve_aim"):
+		var solution: Dictionary = game.resolve_aim(origin,direction,weapon.range,index == 0)
+		direction = solution.direction
+		game.aim_observation = solution
 	if index == 4:
 		var projectile = Projectile.new()
 		game.level.add_child(projectile)

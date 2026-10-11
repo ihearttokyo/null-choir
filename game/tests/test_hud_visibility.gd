@@ -15,6 +15,8 @@ func run() -> void:
 	game.settings_path = prefix+"_preferences.json"
 	game.progress_path = prefix+"_campaign.json"
 	root.add_child(game)
+	# Frozen-player presentation fixtures still publish on the native physics clock.
+	physics_frame.connect(game.observe_player)
 	game.set_process(false)
 	game.set_process_unhandled_input(false)
 	game.hud.set_process(false)
@@ -139,6 +141,7 @@ func presentation() -> Dictionary:
 	return snapshot
 
 func stable(stage: String) -> bool:
+	await physics_frame
 	# Settle legitimate stage changes before counting synchronous native signals.
 	game.hud._process(0)
 	await process_frame

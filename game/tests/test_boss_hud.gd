@@ -12,6 +12,8 @@ func run() -> void:
 	game.settings_path = prefix+"_preferences.json"
 	game.progress_path = prefix+"_campaign.json"
 	root.add_child(game)
+	# Frozen-player presentation fixtures still publish on the native physics clock.
+	physics_frame.connect(game.observe_player)
 	for index in [4,7]:
 		game.state.new_campaign(2)
 		game.state.level_index = index
@@ -54,6 +56,7 @@ func run() -> void:
 		game.hud._process(0)
 		if not expect(not title.visible and not health.visible and not phase.visible,"Paused menus hide all encounter labels"): return
 		game.resume_game()
+		await settle()
 		boss.take_damage(100000,game.player)
 		game.hud._process(0)
 		view = game.hud.draw_state()
@@ -74,7 +77,6 @@ func freeze() -> void:
 func settle() -> void:
 	await physics_frame
 	await physics_frame
-	await process_frame
 
 func expect(condition: bool, detail: String) -> bool:
 	if not condition:

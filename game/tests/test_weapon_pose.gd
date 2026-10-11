@@ -30,19 +30,25 @@ func run() -> void:
 	for index in player.WEAPONS.size():
 		game.state.weapon = index
 		var interval: float = player.WEAPONS[index].interval
+		player._last_shots.fill(-INF) # Synthetic timestamp unit boundary; real discharge is covered by test_fire_intent.
 		player.weapon_cooldowns.fill(0.06)
 		player.cooldown = 0
 		player.shot_flash = 0.12
 		if not expect(pure_pose(player)==0,"Unfired selected weapon remains idle despite another weapon's camera flash"): return
+		player._last_shots[index] = player.active_play_time
 		player.cooldown = interval
 		player.shot_flash = 0
 		if not expect(pure_pose(player)==1,"Every real weapon interval starts with its own firing pose"): return
+		player._last_shots[index] = player.active_play_time-interval*0.75
 		player.cooldown = interval*0.25
 		if not expect(pure_pose(player)==2,"Every weapon, including the 85ms repeater, reaches recovery before idle"): return
 		var clocks_before: Array[float] = player.weapon_cooldowns.duplicate()
+		var timestamps_before: Array[float] = player._last_shots.duplicate()
+		var play_time_before: float = player.active_play_time
 		player.weapon_frame()
 		player.weapon_frame()
 		if not expect(player.weapon_cooldowns == clocks_before,"Reading presentation never advances or resets combat cooldowns"): return
+		if not expect(player._last_shots == timestamps_before and player.active_play_time == play_time_before,"Reading presentation preserves all accepted-shot clocks"): return
 		player.cooldown = 0
 	game.state.weapon = campaign_before.weapon
 	if not expect(game.state.to_dict() == campaign_before,"Pose derivation never changes ammo, health or campaign state"): return
@@ -57,9 +63,12 @@ func run() -> void:
 
 func pure_pose(player) -> int:
 	var clocks: Array[float] = player.weapon_cooldowns.duplicate()
+	var timestamps: Array[float] = player._last_shots.duplicate()
+	var play_time: float = player.active_play_time
 	var before: Dictionary = game.state.to_dict().duplicate(true)
 	var pose: int = player.weapon_frame()
 	if not expect(player.weapon_cooldowns==clocks and game.state.to_dict()==before,"Every pose read preserves selected and nonselected clocks and campaign"): return -1
+	if not expect(player._last_shots == timestamps and player.active_play_time == play_time,"Every pose read preserves all accepted-shot clocks"): return -1
 	return pose
 
 func expect(condition: bool, detail: String) -> bool:

@@ -113,6 +113,7 @@ func check_map(index: int) -> bool:
 	if not enter_region(finale): return false
 	game._process(0)
 	if not expect(final_flag in game.state.removed and group_active(finale),"Final threshold activates its actual authored guards"): return false
+	await physics_frame # Commit the staged resource spend in native physics.
 	var weapon: int = game.state.weapon
 	var ammunition: int = game.state.ammo[weapon]
 	game.player.camera.rotation.x = 1.1
@@ -260,6 +261,7 @@ func interact_at(spec: Dictionary) -> bool:
 			var aim: Vector3 = location+Vector3.UP*(spec.size[1]/2.0 if spec.has("size") else 0.7)
 			game.player.look_at(Vector3(aim.x,position.y,aim.z),Vector3.UP)
 			game.player.camera.look_at(aim,Vector3.UP)
+			await physics_frame
 			if game.nearest_interaction().get("id","") != spec.id: continue
 			game._process(0)
 			await tap_key(KEY_E)

@@ -107,6 +107,7 @@ func interact_at(spec: Dictionary) -> bool:
 			game.player.look_at(Vector3(aim.x,position.y,aim.z),Vector3.UP)
 			game.player.camera.look_at(aim,Vector3.UP)
 			await settle()
+			await physics_frame
 			if game.nearest_interaction().get("id","") != spec.id: continue
 			game.interact()
 			return true

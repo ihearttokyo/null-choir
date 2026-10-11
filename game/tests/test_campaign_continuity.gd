@@ -223,6 +223,7 @@ func interact_at(spec: Dictionary) -> bool:
 			var aim: Vector3 = location+Vector3.UP*(spec.size[1]/2.0 if spec.has("size") else 0.7)
 			game.player.look_at(Vector3(aim.x,pose.y,aim.z),Vector3.UP)
 			game.player.camera.look_at(aim,Vector3.UP)
+			await physics_frame
 			if game.nearest_interaction().get("id","") != spec.id: continue
 			game._process(0)
 			await tap_key(KEY_E)

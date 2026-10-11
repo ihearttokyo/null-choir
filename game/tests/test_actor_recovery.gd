@@ -81,6 +81,7 @@ func check_actor_recovery(difficulty: int, boundary: String) -> bool:
 	if not expect(game.state.checkpoint_id == "entry" and not checkpoint_spec.id in game.state.removed,label+"actual checkpoint is still uncommitted before the staged actor/resource boundary"): return false
 	if not move_to(checkpoint_spec.cell): return false
 	game.player.camera.rotation.x = 1.1
+	await physics_frame # Spend through the physics-owned firing boundary before capture.
 	var ammo_before: int = game.state.ammo[1]
 	if not expect(game.state.weapon == 1 and game.player.fire() and game.state.ammo[1] == ammo_before-1,label+"actual pistol fire spends a round before the recovery snapshot"): return false
 	var retained_actors: Array = [actor_record(fifth),actor_record(sixth),actor_record(survivor),actor_record(summoner)]

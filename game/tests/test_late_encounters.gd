@@ -95,6 +95,7 @@ func check_heart_launcher(difficulty: int) -> bool:
 		if not expect(game.state._resources() == recovery and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id),"Revisiting the consumed launcher after Continue cannot recollect it"): return false
 		await tap_key(KEY_5)
 		game.player.camera.rotation.x = 1.1
+		await physics_frame # Discharge through the native physics-owned boundary.
 		var ammunition: int = game.state.ammo[4]
 		if not expect(game.state.weapon == 4 and game.player.fire() and game.state.ammo[4] == ammunition-1,"Real launcher selection/discharge spends one recovered round; not a boss fight"): return false
 		game.hurt_player(game.state.health+game.state.armor+1)
@@ -302,6 +303,7 @@ func check_creation_budget(recovery: Dictionary, finale: Dictionary) -> bool:
 		if not capsule_clear(add): return false
 		add.take_damage(10000,game.player) # Actual mortality/removed strings, not a scripted battle claim.
 	game.player.camera.rotation.x = 1.1
+	await physics_frame # Capture follows an actual physics-owned resource spend.
 	var ammunition: int = game.state.ammo[1]
 	if not expect(game.state.weapon == 1 and game.player.fire() and game.state.ammo[1] == ammunition-1,"Real pistol discharge spends an actual resource before the save/recovery boundary"): return false
 	if not expect(game._capture_actor_state(),"SETUP: actual shared save capture precedes the exact observed campaign boundary"): return false

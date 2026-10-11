@@ -62,6 +62,8 @@ func run() -> void:
 	game.shot(1)
 	if not expect(not stale.alerted,"Firing cannot alert a wrong-map actor"): return
 	stale.position = game.player.position+Vector3(0,0,-2)
+	await physics_frame
+	await physics_frame
 	var origin = game.player.camera.global_position
 	var aim = (stale.global_position+Vector3.UP*0.85-origin).normalized()
 	if not expect(game.autoaim_target(origin,aim,35) != stale,"Aim assistance cannot select a wrong-map actor"): return
