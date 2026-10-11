@@ -171,7 +171,10 @@ func start_level() -> void:
 	var fresh_entry: bool = state.position == Vector3.ZERO and not loaded_positions
 	if fresh_entry: state.position = level.layout.world_position(level.layout.data.spawn)
 	player.position = state.position + Vector3(0,0.04,0)
-	player.rotation.y = deg_to_rad(level.layout.data.spawn_yaw)
+	player.rotation.y = state.yaw if state.yaw != null and not fresh_entry else deg_to_rad(level.layout.data.spawn_yaw)
+	player.camera.rotation.x = state.pitch if state.pitch != null and not fresh_entry else 0.0
+	state.yaw = Enemy.canonical_yaw(player.rotation.y)
+	state.pitch = clampf(player.camera.rotation.x,-1.35,1.35)
 	var specs: Dictionary = Campaign.actor_specs(level.layout)
 	var records: Array = state.actors if state.actors != null else level.layout.data.enemies
 	for record in records:
@@ -246,6 +249,11 @@ func _valid_restored_actors() -> bool:
 func _capture_actor_state() -> bool:
 	# Paused scenes are valid; missing, pending and retired scenes are not captures.
 	if placement_pending or not is_instance_valid(level) or level.is_queued_for_deletion() or not is_instance_valid(player) or player.is_queued_for_deletion() or player.get_parent() != level or _scene_level_index != state.level_index: return true
+	var captured_yaw: float = Enemy.canonical_yaw(player.rotation.y)
+	var raw_pitch: float = player.camera.rotation.x
+	if not is_finite(raw_pitch) or absf(raw_pitch) > Vector3(1.35,0,0).x: return false
+	var captured_pitch: float = clampf(raw_pitch,-1.35,1.35)
+	if not is_finite(captured_yaw) or not is_finite(captured_pitch): return false
 	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"actors":[]}
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0:
@@ -253,8 +261,11 @@ func _capture_actor_state() -> bool:
 	if not state._valid_actor_resources(snapshot,level.layout,state.difficulty):
 		# Legacy Continue may have lost born-not-dead nodes before this feature existed.
 		# Keep that envelope unknown; never invent deaths, HP or replacement births.
-		return state.actors == null and state._valid_actor_resources(snapshot,level.layout,state.difficulty,true)
-	state.actors = snapshot.actors
+		if not (state.actors == null and state._valid_actor_resources(snapshot,level.layout,state.difficulty,true)): return false
+	else:
+		state.actors = snapshot.actors
+	state.yaw = captured_yaw
+	state.pitch = captured_pitch
 	return true
 
 func _valid_saved_position(point: Vector3) -> bool:

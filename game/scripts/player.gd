@@ -124,6 +124,9 @@ func _physics_process(delta: float) -> void:
 	elif fired and game.has_method("observe_interaction"): game.observe_interaction()
 	if not _current_map() or not game.playing: return
 	game.state.position = position
+	game.state.yaw = preload("res://scripts/enemy.gd").canonical_yaw(rotation.y)
+	# Native float32 Euler limits can round beyond the serialized +/-1.35 bound.
+	game.state.pitch = clampf(camera.rotation.x,-1.35,1.35)
 	if position.y < -12: game.hurt_player(200)
 
 func cycle_weapon(direction: int) -> void:
@@ -148,6 +151,7 @@ func _end_repeat() -> void:
 	_repeat_weapon = -1
 
 func cancel_actions() -> void:
+	velocity = Vector3.ZERO
 	if game.has_method("clear_observations"): game.clear_observations()
 	_end_repeat()
 	_fire_pressed = false
