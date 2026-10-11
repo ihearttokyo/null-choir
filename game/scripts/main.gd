@@ -324,10 +324,10 @@ func _process(delta: float) -> void:
 			if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
 				activate_encounter(group.id)
 		for spec in level.layout.data.pickups:
-			if not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4:
+			if not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4 and _passive_trigger_visible(spec):
 				collect_pickup(spec.id)
 		for spec in level.layout.data.interactions:
-			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
+			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])) and _passive_trigger_visible(spec):
 				state.removed.append(spec.id)
 				if not _capture_actor_state():
 					state.removed.erase(spec.id)
@@ -338,6 +338,42 @@ func _process(delta: float) -> void:
 				else: notify("RECOVERY MEMORY ONLY: "+message,8)
 		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
+
+func _passive_trigger_visible(spec: Dictionary) -> bool:
+	if not is_inside_tree() or not playing or get_tree().paused or placement_pending or state.health <= 0 or _scene_level_index != state.level_index: return false
+	if not is_instance_valid(level) or level.is_queued_for_deletion() or level.get_parent() != self or not level.is_inside_tree(): return false
+	if not is_instance_valid(player) or not player._current_map() or not player.global_position.is_finite(): return false
+	var marker = level.markers.get(spec.id)
+	if not is_instance_valid(marker) or marker.is_queued_for_deletion() or marker.get_parent() != level: return false
+	var collider: CollisionShape3D = player.get_child(0)
+	if collider == null or not collider.shape is CapsuleShape3D: return false
+	var capsule: CapsuleShape3D = collider.shape
+	var usable: float = capsule.height/2-capsule.radius
+	var bounds = AABB()
+	var first = true
+	for child in marker.find_children("*","MeshInstance3D",true,false):
+		var box: AABB = marker.global_transform.affine_inverse()*child.global_transform*child.mesh.get_aabb()
+		bounds = box if first else bounds.merge(box)
+		first = false
+	if first or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x <= 0 or bounds.size.z <= 0: return false
+	# Use the actual compact marker envelope, not the trigger radius or its decorative center.
+	var near: Vector3 = marker.to_local(player.global_position)
+	near.x = clampf(near.x,bounds.position.x,bounds.end.x)
+	near.z = clampf(near.z,bounds.position.z,bounds.end.z)
+	near.y = 0
+	var endpoint: Vector3 = marker.to_global(near)
+	var floor_point: Vector3 = level.to_global(level.layout.world_position(spec.cell))
+	if not endpoint.is_finite() or not floor_point.is_finite(): return false
+	var space = level.get_world_3d().direct_space_state
+	# shortcut: two floor-body heights within a tight XZ envelope, add mesh samples if authored cases require them.
+	for origin in [collider.to_global(Vector3.DOWN*usable),collider.to_global(Vector3.UP*usable)]:
+		if not origin.is_finite(): return false
+		for height in [0.08,0.35]:
+			endpoint.y = floor_point.y+height
+			var ray = PhysicsRayQueryParameters3D.create(origin,endpoint,1)
+			ray.hit_from_inside = true
+			if space.intersect_ray(ray).is_empty(): return true
+	return false
 
 func _combat_pressure() -> float:
 	var threats = 0
