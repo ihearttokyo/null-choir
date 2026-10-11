@@ -63,8 +63,9 @@ func _physics_process(delta: float) -> void:
 	recoil = move_toward(recoil,0,delta*7)
 	var axes = Input.get_vector("move_left","move_right","move_forward","move_back")
 	var direction = basis * Vector3(axes.x,0,axes.y)
-	velocity.x = move_toward(velocity.x,direction.x*9.0,delta*50)
-	velocity.z = move_toward(velocity.z,direction.z*9.0,delta*50)
+	var planar := Vector2(velocity.x,velocity.z).move_toward(Vector2(direction.x,direction.z)*9.0,delta*50)
+	velocity.x = planar.x
+	velocity.z = planar.y
 	if not is_on_floor(): velocity.y -= delta*24
 	else: velocity.y = -0.5
 	move_and_slide()
