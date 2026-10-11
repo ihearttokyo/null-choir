@@ -100,3 +100,12 @@ python3 tools/check_game.py tests/test_player_facing_codec.gd tests/test_player_
 ```
 
 Physical capture, actual GPU/app paths and normal earned campaign play remain separate acceptance. This source slice introduces no art, collider or balance change.
+
+
+## NC-04 supporting combat-state interface
+
+A read-only actor view now exposes phase, normalized progress, committed variant, facing, hurt and boss phase from existing mechanics. It captures initial mechanical timer durations and the committed variant, without adding a presentation clock or changing sprite assets, frame selection, attack timing, damage or balance.
+
+Native cases and two independent reviews caught release changing during pause and early-wall recovery finishing before its remaining pose. Release now belongs to the actor's eligible step; recovery uses the same maximum remaining and initial durations. Eight-role reads preserve timers/resources. Actual counters/death, target loss, dormancy, fresh restoration, both boss variants and half-health pattern transitions have focused coverage. Missing release and constant boss-phase mutations fail their intended native assertions; exact source was restored.
+
+Thirteen affected native scripts pass after current correctness/Ponytail closure. This interface prepares truthful animation selection; it does not establish rendered cues, authored frames or physical readability. The generated actor board was inspected and its guardian row corrected to keep the real weak organ exposed throughout vulnerable windows before asset execution. That art lane remains unfinished.

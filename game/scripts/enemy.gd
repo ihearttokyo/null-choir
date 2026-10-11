@@ -39,6 +39,10 @@ var max_hp: int
 var phase: int = 0
 var _profile: Dictionary = {}
 var _attack_variant: int = 0
+var _committed_variant: int = -1
+var _released: bool = false
+var _rush_duration: float = 0
+var _recovery_duration: float = 0
 var _summoned_total: int = 0
 var _summon_owner_id: String = ""
 
@@ -115,6 +119,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing or not is_instance_valid(game.player) or game.player.is_queued_for_deletion(): return
+	_released = false
 	age += delta
 	hurt_time = maxf(0,hurt_time-delta)
 	attack_time = maxf(0,attack_time-delta)
@@ -139,6 +144,8 @@ func _physics_process(delta: float) -> void:
 		telegraph_time = 0
 		_rush_time = 0
 		pose_time = 0
+		_committed_variant = -1
+		_released = false
 	var aim = target.global_position+Vector3(0,1.0,0)
 	var query = PhysicsRayQueryParameters3D.create(global_position+Vector3(0,1,0),aim,1)
 	var sight = get_world_3d().direct_space_state.intersect_ray(query)
@@ -199,6 +206,30 @@ func _physics_process(delta: float) -> void:
 	if not _profile.is_empty() and hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
 	if kind in ["worker","caster"] and sight.is_empty() and is_on_wall(): _strafe_sign = -_strafe_sign
 
+func combat_visual_state() -> Dictionary:
+	if not _current_map(): return {}
+	var stage := "idle"
+	var progress := 0.0
+	if hp <= 0:
+		stage = "dead"
+		progress = 1.0
+	elif not active: stage = "dormant"
+	elif stagger_time > 0:
+		stage = "stagger"
+		progress = 1.0-stagger_time/.25
+	elif telegraph_time > 0:
+		stage = "windup"
+		progress = 1.0-telegraph_time/float(WINDUPS[kind])
+	elif _rush_time > 0 or _released:
+		stage = "release"
+		progress = 1.0-_rush_time/_rush_duration if _rush_duration > 0 and _rush_time > 0 else 1.0
+	elif recovery_time > 0 or pose_time > 0:
+		stage = "recovery"
+		progress = 1.0-maxf(recovery_time,pose_time)/_recovery_duration if _recovery_duration > 0 else 0.0
+	elif alerted and Vector2(velocity.x,velocity.z).length_squared() > .001: stage = "move"
+	return {"phase":stage,"progress":clampf(progress,0,1),"variant":_committed_variant if stage in ["windup","release","recovery"] else -1,
+		"facing":sprite.frame%8,"hurt":hurt_time > 0,"boss_phase":phase}
+
 func _current_map() -> bool:
 	return is_instance_valid(game) and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and not is_queued_for_deletion()
 
@@ -213,6 +244,8 @@ func _event(event: String) -> void:
 
 func _begin_attack(aim: Vector3) -> void:
 	_committed_target = target
+	_committed_variant = _attack_variant
+	_released = false
 	_committed_aim = aim
 	telegraph_time = WINDUPS[kind]
 	velocity.x = 0
@@ -221,8 +254,10 @@ func _begin_attack(aim: Vector3) -> void:
 
 func _release_attack() -> void:
 	if not _valid_target(_committed_target): return
+	_released = true
 	attack_time = _profile.get("cooldown",0.8 if kind == "crawler" else 1.7 if kind == "worker" else 2.2)*(0.8 if phase > 0 else 1.0)
 	recovery_time = _profile.get("recovery",0.45 if kind == "crawler" else 0.65 if kind == "worker" else 0.9)
+	_recovery_duration = recovery_time
 	pose_time = (0.4 if kind == "caster" else 0.22) if _profile.is_empty() else recovery_time
 	_event("attack")
 	if not _current_map() or not game.playing: return
@@ -235,6 +270,7 @@ func _release_attack() -> void:
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
 		_rush_time = 0.18
+		_rush_duration = _rush_time
 		_rush_hit = false
 		velocity.x = _rush_direction.x*9.0
 		velocity.z = _rush_direction.z*9.0
@@ -256,6 +292,7 @@ func _release_late_attack() -> void:
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
 		_rush_time = 0.9 if kind == "brute" else 0.7
+		_rush_duration = _rush_time
 		_rush_hit = false
 		recovery_time = 0
 		pose_time = _rush_time
@@ -277,6 +314,7 @@ func _finish_charge() -> void:
 	velocity.z = 0
 	recovery_time = maxf(recovery_time,_profile.recovery)
 	pose_time = maxf(pose_time,recovery_time)
+	_recovery_duration = maxf(recovery_time,pose_time)
 
 func _fire_pattern(count: int, radial: bool = false) -> void:
 	var origin = global_position+Vector3.UP*(1.65 if kind == "guardian" else 2.8)
@@ -382,6 +420,8 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 	if not _current_map(): return
 	if source != self and _valid_target(source) and source.get_parent() == game.level: target = source
 	if hp == 0:
+		_committed_variant = -1
+		_released = false
 		telegraph_time = 0
 		stagger_time = 0
 		recovery_time = 0
@@ -392,10 +432,13 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 		if not id in game.state.removed: game.state.removed.append(id)
 		_event("death")
 	elif telegraph_time > 0 and _counter_time <= 0:
+		_committed_variant = -1
+		_released = false
 		telegraph_time = 0
 		pose_time = 0
 		stagger_time = 0.25
 		recovery_time = 0.35
+		_recovery_duration = recovery_time
 		attack_time = maxf(attack_time,0.45)
 		# The lock exceeds retry + the longest windup; further hits cannot refresh it.
 		_counter_time = 1.4 if _profile.is_empty() else 2.0
