@@ -914,6 +914,47 @@ func _verify_passive_tick() -> void:
 	while not driver.completed: await get_tree().physics_frame
 	driver.free()
 
+func _export_art_checks() -> Dictionary:
+	var expected_art = {"ribbed_wall":1,"conduit":1}
+	for art in Level.PURPOSE_ART.values()+Level.AMMO_ART+["marker_ivorykey"]: expected_art[art] = 0
+	for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
+	for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
+	var models = {}
+	var marker_models = {}
+	for node in level.get_children():
+		if node.scene_file_path.get_extension() != "glb": continue
+		var art = node.scene_file_path.get_file().get_basename()
+		var parts = [node]+node.find_children("*","MeshInstance3D",true,false)
+		var meshes = parts.filter(func(part): return part is MeshInstance3D)
+		if meshes.any(func(part): return part.mesh != null and part.mesh.get_surface_count() > 0):
+			models[art] = models.get(art,0)+1
+		if art.begins_with("marker_"):
+			var nodes = [node]+node.find_children("*","",true,false)
+			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
+			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.visible and part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
+				marker_models[node.get_instance_id()] = art
+	var checks = {}
+	var marker_ids = []
+	var remaining = 0
+	for spec in level.layout.data.pickups+level.layout.data.interactions:
+		if spec.id in state.removed: continue
+		remaining += 1
+		var art: String = Level.PURPOSE_ART[spec.kind]
+		if spec.kind == "key" and spec.key == "ivory": art = "marker_ivorykey"
+		elif spec.kind == "ammo": art = Level.AMMO_ART[int(spec.weapon)]
+		expected_art[art] = expected_art.get(art,0)+1
+		var marker = level.markers.get(spec.id)
+		var valid = is_instance_valid(marker) and marker is Node3D
+		if valid:
+			valid = marker.get_parent() == level and marker.scene_file_path == "res://assets/art/world/"+art+".glb" and marker_models.get(marker.get_instance_id(),"") == art and not marker.get_instance_id() in marker_ids
+			valid = valid and marker.visible and marker.position.is_equal_approx(level.layout.world_position(spec.cell)+Vector3.UP*0.06) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
+			marker_ids.append(marker.get_instance_id())
+		checks["marker_"+spec.id] = valid
+	checks["marker_count"] = level.markers.size() == remaining
+	for art in expected_art:
+		checks["art_"+art] = models.get(art,0) == expected_art[art] if art.begins_with("marker_") else models.get(art,0) >= expected_art[art]
+	return checks
+
 func _verify_export() -> void:
 	var validation_home = OS.get_environment("HOME")
 	if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):
@@ -950,17 +991,8 @@ func _verify_export() -> void:
 		checks[id+"_track"] = music.player.file == "res://audio/"+id+".mid" and retained_bank != null and music.player.bank == retained_bank
 		music.player._process(0.2)
 		checks[id+"_synthesis"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
-		var models = {}
-		for node in level.get_children():
-			if node.scene_file_path.get_extension() != "glb": continue
-			var art = node.scene_file_path.get_file().get_basename()
-			var meshes = [node]+node.find_children("*","MeshInstance3D",true,false)
-			if meshes.any(func(part): return part is MeshInstance3D and part.mesh != null and part.mesh.get_surface_count() > 0):
-				models[art] = models.get(art,0)+1
-		var expected_art = {"ribbed_wall":1,"conduit":1,"containment_capsule":1}
-		for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
-		for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
-		for art in expected_art: checks[id+"_art_"+art] = models.get(art,0) >= expected_art[art]
+		var art_checks = _export_art_checks()
+		for check in art_checks: checks[id+"_"+check] = art_checks[check]
 		player.set_physics_process(false)
 		for actor in enemies:
 			actor.set_physics_process(false)
