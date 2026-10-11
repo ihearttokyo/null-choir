@@ -147,6 +147,9 @@ func start_level() -> void:
 	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
 	var candidate = Campaign.new()
 	if not candidate.from_dict(state.to_dict()):
+		if not candidate.level_load_error.is_empty():
+			_level_load_failed(candidate.level_load_error)
+			return
 		show_title()
 		notify("NO VALID RECOVERY IMAGE",8)
 		return
@@ -163,7 +166,9 @@ func start_level() -> void:
 	level = Level.new()
 	level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(level)
-	level.build(self,state.level_index)
+	if not level.build(self,state.level_index):
+		_level_load_failed(level.layout.load_error)
+		return
 	_scene_level_index = state.level_index
 	player = Player.new()
 	level.add_child(player)
@@ -225,6 +230,10 @@ func start_level() -> void:
 		music.set_paused(false)
 		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _level_load_failed(detail: String) -> void:
+	show_title()
+	notify("LEVEL LOAD FAILED: "+detail+"\nRestore the level file and retry.",8)
 
 func _valid_restored_actors() -> bool:
 	var layout = level.layout
@@ -474,6 +483,9 @@ func interact() -> void:
 			var actions = [["Return to title",show_title]]
 			if next_layout.load_level(state.level_index):
 				actions.push_front(["Descend to "+next_layout.data.title.capitalize(),start_level])
+			else:
+				_level_load_failed(next_layout.load_error)
+				return
 			_show_menu(completed_title,actions)
 
 func hurt_player(amount: int) -> void:
@@ -559,6 +571,9 @@ func show_title() -> void:
 
 func continue_campaign() -> void:
 	if not state.load_progress(progress_path):
+		if not state.level_load_error.is_empty():
+			_level_load_failed(state.level_load_error)
+			return
 		notify("NO VALID RECOVERY IMAGE",5)
 		return
 	if state.level_index == 8:
