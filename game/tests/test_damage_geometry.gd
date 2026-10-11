@@ -1,0 +1,217 @@
+extends SceneTree
+
+class NativeGame extends "res://scripts/main.gd":
+	func _ready() -> void: set_process(false)
+
+var failures := 0
+
+func _initialize() -> void:
+	AudioServer.set_bus_mute(0,true)
+	call_deferred("run")
+
+func run() -> void:
+	for shooter_z in [-8.0,8.0]:
+		var game = NativeGame.new()
+		root.add_child(game)
+		game.state.new_campaign(1)
+		game.level = game.Level.new()
+		game.add_child(game.level)
+		game.level.layout.load_level(0)
+		game.playing = true
+		game.player = game.Player.new()
+		game.level.add_child(game.player)
+		game.player.configure(game)
+		game.player.set_physics_process(false)
+		game.player.position = Vector3(20,.04,0)
+		var guardian = game.Enemy.new()
+		game.level.add_child(guardian)
+		guardian.configure(game,{"id":"geometry_guardian","kind":"guardian","cell":[.5,.5],"yaw":0})
+		guardian.position = Vector3.ZERO
+		guardian.set_physics_process(false)
+		game.enemies = [guardian]
+		var source = CharacterBody3D.new()
+		game.level.add_child(source)
+		source.position = Vector3(0,0,-8)
+		var shot = preload("res://scripts/projectile.gd").new()
+		game.level.add_child(shot)
+		shot.configure(game,source,Vector3(0,1,-6),Vector3(0,1,0))
+		shot.set_physics_process(false)
+		source.position.z = shooter_z
+		await physics_frame
+		await physics_frame
+		var hp: int = guardian.hp
+		shot._physics_process(.7)
+		var damage: int = hp-guardian.hp
+		print("MEASURE identical front projectile source_z=",shooter_z," damage=",damage)
+		if damage != 4:
+			failures += 1
+			push_error("Guardian front armor must use actual projectile arrival, not moved shooter position")
+		game.free()
+		await process_frame
+	await check_arrivals()
+	await check_open_windows()
+	await check_blasts()
+	await check_context()
+	if failures == 0: print("PASS native damage geometry/identity, armor windows, blasts and cover; manually stepped synthetic arena, not physical/GPU/campaign acceptance")
+	quit(0 if failures == 0 else 1)
+
+func expect(condition: bool, detail: String) -> void:
+	if condition: return
+	failures += 1
+	push_error(detail)
+
+func fixture():
+	var game = NativeGame.new()
+	root.add_child(game)
+	game.state.new_campaign(1)
+	game.level = game.Level.new()
+	game.add_child(game.level)
+	expect(game.level.layout.load_level(0),"SETUP actual level metadata loads")
+	game.playing = true
+	game.player = game.Player.new()
+	game.level.add_child(game.player)
+	game.player.configure(game)
+	game.player.set_physics_process(false)
+	game.player.position = Vector3(20,.04,0)
+	return game
+
+func body(game, id: String, role: String, location: Vector3):
+	var actor = game.Enemy.new()
+	game.level.add_child(actor)
+	actor.configure(game,{"id":id,"kind":role,"cell":[.5,.5],"yaw":0})
+	actor.position = location
+	actor.set_physics_process(false)
+	actor.active = true
+	game.enemies.append(actor)
+	return actor
+
+func projectile(game, source, side: float, damage: int = 0):
+	var shot = preload("res://scripts/projectile.gd").new()
+	game.level.add_child(shot)
+	shot.configure(game,source,Vector3(0,1,side*6),Vector3(0,1,0),damage)
+	shot.set_physics_process(false)
+	return shot
+
+func dispose(game) -> void:
+	var released: WeakRef = weakref(game)
+	game.free()
+	await process_frame
+	expect(released.get_ref() == null,"Owned fixture game is freed after teardown")
+
+func check_arrivals() -> void:
+	# Path side, final shooter side, guardian yaw, freed shooter, expected damage.
+	for row in [[-1.0,-8.0,0.0,true,4], [1.0,-8.0,0.0,false,14], [1.0,8.0,0.0,false,14], [1.0,8.0,0.0,true,14], [-1.0,-8.0,PI,false,14], [1.0,-8.0,PI,false,4]]:
+		var game = fixture()
+		var guardian = body(game,"arrival_guardian","guardian",Vector3.ZERO)
+		guardian.rotation.y = row[2]
+		var source = body(game,"arrival_source","worker",Vector3(0,0,-8))
+		var shot = projectile(game,source,row[0])
+		source.position.z = row[1]
+		if row[3]: source.free()
+		await physics_frame
+		await physics_frame
+		expect(Engine.is_in_physics_frame(),"Projectile step belongs to native physics")
+		var hp: int = guardian.hp
+		var ammo: Array = game.state.ammo.duplicate()
+		shot._physics_process(.7)
+		expect(shot.is_queued_for_deletion(),"Real capsule contact retires traveling projectile")
+		expect(hp-guardian.hp == row[4],"Actual arrival path/guardian rotation determine armor, not shooter location or survival: "+str(row))
+		expect(game.state.ammo == ammo,"NPC projectile geometry does not spend campaign ammunition")
+		expect(guardian.target == null if row[3] else guardian.target == source,"Retaliation retains only the actual living eligible source")
+		await dispose(game)
+
+func check_open_windows() -> void:
+	for phase in ["telegraph_time","pose_time","recovery_time"]:
+		var game = fixture()
+		var guardian = body(game,"open_guardian","guardian",Vector3.ZERO)
+		guardian.set(phase,.2)
+		var source = body(game,"open_source","worker",Vector3(0,0,-8))
+		var shot = projectile(game,source,-1)
+		await physics_frame
+		await physics_frame
+		var hp: int = guardian.hp
+		shot._physics_process(.7)
+		expect(shot.is_queued_for_deletion() and hp-guardian.hp == 14,"Front projectile retains full14 damage during "+phase)
+		await dispose(game)
+
+func check_blasts() -> void:
+	# Direct calls isolate radial-origin policy; traveling cases below exercise the full contact path.
+	for side in [-1.0,1.0]:
+		var game = fixture()
+		var guardian = body(game,"radial_guardian","guardian",Vector3.ZERO)
+		var source = body(game,"radial_source","worker",Vector3(0,0,-side*8))
+		var shot = projectile(game,source,side,110)
+		await physics_frame
+		await physics_frame
+		var hp: int = guardian.hp
+		shot._blast(Vector3(0,.85,side*2),null)
+		expect(hp-guardian.hp == (19 if side < 0 else 55),"Radial armor uses actual front/rear detonation origin despite shooter on opposite side")
+		expect(guardian.target == source,"Blast geometry does not replace eligible retaliation identity")
+		await dispose(game)
+	for covered in [false,true]:
+		var game = fixture()
+		var guardian = body(game,"direct_guardian","guardian",Vector3.ZERO)
+		var splash = body(game,"splash_worker","worker",Vector3(1.5,0,0))
+		var source = body(game,"blast_source","worker",Vector3(0,0,8))
+		if covered: game.level._box(Vector3(.1,4,4),Vector3(.75,2,0),null,true)
+		var shot = projectile(game,source,-1,110)
+		await physics_frame
+		await physics_frame
+		var guardian_hp: int = guardian.hp
+		var splash_hp: int = splash.hp
+		var ammo: Array = game.state.ammo.duplicate()
+		shot._physics_process(.7)
+		expect(shot.is_queued_for_deletion(),"Real marrow first contact retires projectile")
+		expect(guardian_hp-guardian.hp == 38,"Direct guardian receives exactly one110 hit with retained front multiplier, never an added splash hit")
+		expect(splash_hp-splash.hp == (0 if covered else 64),"Actual blast falloff reaches exposed worker exactly once, while thin native cover blocks it")
+		expect(game.state.ammo == ammo,"Manual projectile stepping does not alter finite ammunition")
+		await dispose(game)
+
+func check_context() -> void:
+	var game = fixture()
+	var guardian = body(game,"context_guardian","guardian",Vector3.ZERO)
+	var source = body(game,"context_source","worker",Vector3(0,0,-8))
+	var hp: int = 0
+	await physics_frame
+	await physics_frame
+	expect(Engine.is_in_physics_frame(),"Damage context checks run inside native physics")
+	var accepts_context := false
+	for method in guardian.get_method_list():
+		if method.name == "take_damage" and method.args.size() == 3: accepts_context = true
+	if not accepts_context:
+		expect(false,"Proposed optional damage context is not implemented; earlier real projectile witnesses establish semantic RED independently")
+		await dispose(game)
+		return
+	# Expected damage is the frozen contract, not a copy of the production bearing calculation.
+	var cases := [
+		[{"incoming_direction":Vector3(0,0,1)},8.0,4],
+		[{"incoming_direction":Vector3(0,0,-1)},-8.0,14],
+		[{"origin":Vector3(0,0,-2)},8.0,4],
+		[{"origin":Vector3(0,0,2)},-8.0,14],
+		[{"incoming_direction":Vector3.ZERO},-8.0,14],
+		[{"incoming_direction":Vector3.UP},-8.0,14],
+		[{"incoming_direction":Vector3(INF,0,1)},-8.0,14],
+		[{"incoming_direction":Vector3(0,NAN,1)},-8.0,14],
+		[{"incoming_direction":Vector3(0,INF,1)},-8.0,14],
+		[{"origin":Vector3(0,NAN,-2)},-8.0,14],
+		[{"origin":Vector3(0,INF,-2)},-8.0,14],
+		[{"origin":Vector3(INF,0,0)},-8.0,14],
+		[{"origin":Vector3.ZERO},-8.0,14],
+		[{"origin":Vector3.UP},-8.0,14],
+		[{"attack_kind":"projectile"},-8.0,14],
+		[{},-8.0,4],
+		[{},8.0,14]]
+	for row in cases:
+		source.position.z = row[1]
+		guardian.target = null
+		hp = guardian.hp
+		guardian.call("take_damage",14,source,row[0])
+		expect(hp-guardian.hp == row[2],"Explicit finite/invalid/legacy context follows declared armor fallback: "+str(row[0]))
+		expect(guardian.target == source,"Geometry validity remains independent of eligible retaliation identity")
+	# A live but retired-map source cannot become the retaliation target.
+	source.reparent(game)
+	guardian.target = null
+	hp = guardian.hp
+	guardian.call("take_damage",14,source,{"incoming_direction":Vector3(0,0,1)})
+	expect(hp-guardian.hp == 4 and guardian.target == null,"Retired-map source retains valid incoming geometry but cannot cause retaliation")
+	await dispose(game)

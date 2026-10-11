@@ -26,7 +26,7 @@ class Target extends StaticBody3D:
 	var game
 	var hits = 0
 	var stop_on_damage = false
-	func take_damage(_damage, _source):
+	func take_damage(_damage, _source, _context: Dictionary = {}):
 		hits += 1
 		if stop_on_damage: game.playing = false
 

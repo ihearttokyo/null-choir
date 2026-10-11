@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		elif hit.collider == game.player:
 			game.hurt_player(int(DAMAGE*[0.7,1.0,1.4][game.state.difficulty]))
 		elif hit.collider.has_method("take_damage"):
-			hit.collider.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null)
+			hit.collider.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null,{"attack_kind":"projectile","incoming_direction":velocity.normalized(),"hit_position":hit.position})
 		if _current_map() and game.playing and game.has_method("impact"):
 			game.impact(hit.position)
 		return
@@ -89,5 +89,5 @@ func _blast(origin: Vector3, direct_hit: Node) -> void:
 		if is_player:
 			game.hurt_player(int(amount*[0.7,1.0,1.4][game.state.difficulty]))
 		else:
-			victim.take_damage(amount,shooter if is_instance_valid(shooter) else null)
+			victim.take_damage(amount,shooter if is_instance_valid(shooter) else null,{"attack_kind":"blast","origin":origin})
 			if _current_map() and game.playing and game.has_method("hit_feedback"): game.hit_feedback()

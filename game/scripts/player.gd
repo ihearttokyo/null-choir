@@ -219,7 +219,7 @@ func fire() -> bool:
 				break
 			# Keep the same finite ray, excluding each real capsule once; walls remain queryable.
 			query.exclude = query.exclude+[hit.collider.get_rid()]
-			hit.collider.take_damage(weapon.damage,self)
+			hit.collider.take_damage(weapon.damage,self,{"attack_kind":"piercing","weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position})
 			if not _current_map() or not game.playing: break
 			if game.has_method("hit_feedback"): game.hit_feedback()
 			if _current_map() and game.playing and game.has_method("impact"): game.impact(hit.position)
@@ -241,7 +241,7 @@ func fire() -> bool:
 				if index == 2:
 					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
 					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
-				hit.collider.take_damage(damage,self)
+				hit.collider.take_damage(damage,self,{"attack_kind":"melee" if index == 0 else "hitscan","weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position})
 				if not _current_map() or not game.playing: break
 				if game.has_method("hit_feedback"): game.hit_feedback()
 			if not _current_map() or not game.playing: break

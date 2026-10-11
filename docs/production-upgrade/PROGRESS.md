@@ -68,3 +68,18 @@ python3 tools/check_game.py tests/test_aim_observation.gd tests/test_aim_publica
 Existing observer fixtures now enter physics or publish on its clock without dropping their prior assertions. The synthetic firing arenas load actual interaction metadata. Combat teardown gives the real audio thread a bounded100ms wall-clock interval; a simulation timer was insufficient in one retained trial. This is fixture calibration, not an audio performance gain or proof of app-exit behavior.
 
 The full save-placement fixture remains blocked on the real window/capture path: headless reports visible mouse mode where it expects capture. Both unchanged72f44 source and this candidate reproduce that limitation with correct replacement identities, playing/music/menu state. The original capture assertion remains intact. Settings/Controls/difficulty wait-frame state checks are separate and do not certify physical capture or cursor behavior.
+
+
+## NC-04 supporting geometry slice
+
+Guardian armor now reads accepted incoming geometry independently of shooter identity. Hitscan, pellets, melee and piercing carry their actual ray direction; traveling projectiles carry arrival direction; radial damage carries detonation origin. The35% closed-armor multiplier and three existing open windows remain unchanged. Eligible living current-map sources still govern retaliation; moved, freed or retired sources cannot supply replacement geometry.
+
+The native fixed front-projectile witness formerly changed from4 to14 damage when its shooter moved behind the guardian. It now remains4. Additional actual-collision and direct radial-policy cases cover rear arrival, guardian rotation, freed shooter, open windows, front/rear detonation, direct/splash deduplication, thin cover and eligible infighting. Explicit zero/invalid geometry has no armor-bearing direction; legacy empty contexts retain the old valid-source fallback.
+
+Both independent reviews caught nonfinite vertical data being erased before validation. A native NaN-Y probe failed before correction; full-vector validation now precedes horizontal projection, with four added NaN/Inf-Y table cases. Current reviews are qualified clean. Twenty-one affected source-native scripts and both isolated muted CoreAudio save/discard shutdown paths pass; these are synthetic/native evidence, not human combat, heard audio or packaged-app acceptance.
+
+```sh
+python3 tools/check_game.py tests/test_damage_geometry.gd tests/test_late_weapons.gd
+```
+
+Attack-state art, hostile spatial audio and source-bearing visual feedback remain open NC-04 work. This geometry slice does not certify the complete presentation contract.

@@ -243,7 +243,7 @@ func _release_attack() -> void:
 		shot.exclude = [get_rid()]
 		shot.hit_from_inside = true
 		var hit = get_world_3d().direct_space_state.intersect_ray(shot)
-		if not hit.is_empty(): _attack(hit.collider,10)
+		if not hit.is_empty(): _attack(hit.collider,10,{"attack_kind":"hitscan","origin":origin,"incoming_direction":(shot.to-shot.from).normalized(),"hit_position":hit.position})
 	elif kind == "caster":
 		var projectile = Projectile.new()
 		game.level.add_child(projectile)
@@ -350,22 +350,29 @@ func _try_melee() -> void:
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
 	if not hit.is_empty() and (hit.collider == game.player or hit.collider.has_method("take_damage")):
 		_rush_hit = true
-		_attack(hit.collider,24 if kind == "brute" else 32 if kind == "nursery_warden" else 12)
+		_attack(hit.collider,24 if kind == "brute" else 32 if kind == "nursery_warden" else 12,{"attack_kind":"melee","origin":query.from,"incoming_direction":(query.to-query.from).normalized(),"hit_position":hit.position})
 
-func _attack(victim: Node, amount: int) -> void:
+func _attack(victim: Node, amount: int, context: Dictionary = {}) -> void:
 	if not _current_map() or not game.playing or hp <= 0 or not active or not is_instance_valid(victim) or victim.is_queued_for_deletion(): return
 	pose_time = 0.22
 	if victim == game.player:
 		game.hurt_player(int(amount*[0.7,1.0,1.4][game.state.difficulty]))
 	elif victim.has_method("take_damage"):
-		victim.take_damage(amount,self)
+		victim.take_damage(amount,self,context)
 
-func take_damage(amount: int, source: Node3D) -> void:
+func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 	if hp <= 0 or amount <= 0 or not _current_map() or not game.playing: return
-	if kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0 and is_instance_valid(source):
-		var incoming = source.global_position-global_position
-		incoming.y = 0
-		if incoming.length_squared() > 0.0001 and (-global_basis.z).dot(incoming.normalized()) > 0.5: amount = maxi(1,int(amount*0.35))
+	if kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0:
+		var incoming := Vector3.ZERO
+		if context.is_empty():
+			if is_instance_valid(source): incoming = source.global_position-global_position
+		elif context.get("incoming_direction") is Vector3:
+			incoming = -context.incoming_direction
+		elif context.get("origin") is Vector3:
+			incoming = context.origin-global_position
+		# Explicit invalid or vertical geometry has no front bearing; never use a moved shooter.
+		if incoming.is_finite(): incoming.y = 0
+		if incoming.is_finite() and incoming.length_squared() > 0.0001 and (-global_basis.z).dot(incoming.normalized()) > 0.5: amount = maxi(1,int(amount*0.35))
 	hp = maxi(0,hp-amount)
 	hurt_time = 0.12
 	alerted = true
@@ -373,7 +380,7 @@ func take_damage(amount: int, source: Node3D) -> void:
 		active = true
 		if not encounter_id.is_empty() and game.has_method("activate_encounter"): game.activate_encounter(encounter_id)
 	if not _current_map(): return
-	if source != self: target = source
+	if source != self and _valid_target(source) and source.get_parent() == game.level: target = source
 	if hp == 0:
 		telegraph_time = 0
 		stagger_time = 0
