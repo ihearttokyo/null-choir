@@ -101,17 +101,17 @@ func _build_geometry() -> void:
 		var chunk = Vector2i(floori(cell.x/4.0),floori(cell.y/4.0))
 		if not chunks.has(chunk):
 			chunks[chunk] = [SurfaceTool.new(),SurfaceTool.new()]
-			for tool in chunks[chunk]: tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for tool in chunks[chunk]:
+				tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+				tool.set_smooth_group(-1)
 		var corners: Array[Vector3] = []
 		for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.ONE,Vector2.DOWN]:
 			var point = Vector2(cell)+offset
 			corners.append(Vector3(point.x*size,layout.height_at(point),point.y*size))
 		for i in [0,1,2,0,2,3]:
-			chunks[chunk][0].set_normal(Vector3.UP)
 			chunks[chunk][0].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
 			chunks[chunk][0].add_vertex(corners[i])
 		for i in [0,2,1,0,3,2]:
-			chunks[chunk][1].set_normal(Vector3.DOWN)
 			chunks[chunk][1].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
 			chunks[chunk][1].add_vertex(corners[i]+Vector3.UP*_roof_height(cell))
 		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
@@ -134,6 +134,7 @@ func _build_geometry() -> void:
 		for i in range(2):
 			var mesh = MeshInstance3D.new()
 			mesh.name = ("Floor" if i == 0 else "Ceiling")+str(chunk.x)+"_"+str(chunk.y)
+			chunks[chunk][i].generate_normals()
 			mesh.mesh = chunks[chunk][i].commit()
 			mesh.material_override = floor_material if i == 0 else roof_material
 			add_child(mesh)
