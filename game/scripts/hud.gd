@@ -3,6 +3,10 @@ extends Node2D
 const Survey = preload("res://scripts/survey.gd")
 const AMMO_ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
 const HUD_ATLAS = preload("res://assets/art/hud/hud_kit.png")
+const MARKER_ATLAS = preload("res://assets/art/hud/marker_glyphs.png")
+# Opaque-content gutters keep two-character slot status clear of adjacent motifs.
+const ARSENAL_LABEL_X = [162,197,221,253,290,311]
+const WEAPON_GLYPH_X = [166,196,226,260,288,316]
 const WEAPON_ART = ["impact_tool","rivet_pistol","scattergun","sawtooth_repeater","marrow_launcher","choir_disruptor"]
 
 # Native translation of the selected source/art/references/overhaul-01.png instrument.
@@ -19,6 +23,7 @@ var weapon_asset: String = ""
 var labels: Dictionary = {}
 var view: Dictionary = {}
 var survey: Node2D
+var marker_art: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/art/hud/marker_glyphs.json")).sprites
 var hud_art: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/art/hud/hud_kit.json")).sprites
 
 func _ready() -> void:
@@ -36,7 +41,7 @@ func _ready() -> void:
 	_label("ArmorValue",Rect2(111,323,49,27),18)
 	_label("WeaponName",Rect2(164,345,180,15),10,HORIZONTAL_ALIGNMENT_CENTER)
 	for index in 6:
-		_label("ArsenalSlot"+str(index+1),Rect2(166+index*30,325,12,12),7)
+		_label("ArsenalSlot"+str(index+1),Rect2(ARSENAL_LABEL_X[index],331,9,12),7)
 	_label("AmmoValue",Rect2(367,323,105,27),18)
 	_label("AmmoCapacity",Rect2(428,348,44,12),7,HORIZONTAL_ALIGNMENT_RIGHT)
 	_label("AmmoStatus",Rect2(367,348,59,12),8)
@@ -226,7 +231,7 @@ func _draw() -> void:
 			if not view.boss.is_empty(): _restraint_instrument()
 			if not view.prompt.is_empty():
 				draw_rect(Rect2(124,246,392,38),Color(0.025,0.022,0.029,0.85))
-				draw_rect(Rect2(92,284,456,34),Color(0.025,0.022,0.029,0.85))
+				draw_rect(Rect2(92,284,456,32),Color(0.025,0.022,0.029,0.85))
 				for side in [124,515]:
 					draw_line(Vector2(side,250),Vector2(side,278),COPPER,1)
 					draw_line(Vector2(side-2,252),Vector2(side-2,263),IVORY.darkened(0.3),1)
@@ -281,13 +286,13 @@ func _restraint_instrument() -> void:
 	draw_line(Vector2(395,88),Vector2(486,88),COPPER,1)
 
 func _instrument_frame() -> void:
-	draw_rect(Rect2(0,322,640,38),INK)
+	draw_rect(Rect2(0,316,640,44),INK)
 	for x in range(0,640,64):
-		_hud_sprite("frame_tile",Rect2(x,322,64,38),Color(0.36,0.36,0.36))
+		_hud_sprite("frame_tile",Rect2(x,316,64,44),Color(0.36,0.36,0.36))
 	for x in [82,160,345,476,554]:
 		_hud_sprite("divider",Rect2(x-1,327,3,28))
-	_hud_sprite("frame_corner",Rect2(0,322,14,14))
-	_hud_sprite("frame_corner",Rect2(626,322,14,14),Color.WHITE,Vector2(-1,1))
+	_hud_sprite("frame_corner",Rect2(0,316,14,14))
+	_hud_sprite("frame_corner",Rect2(626,316,14,14),Color.WHITE,Vector2(-1,1))
 	_hud_sprite("frame_corner",Rect2(0,346,14,14),Color.WHITE,Vector2(1,-1))
 	_hud_sprite("frame_corner",Rect2(626,346,14,14),Color.WHITE,Vector2(-1,-1))
 
@@ -300,33 +305,35 @@ func _instrument_art() -> void:
 		var slot: Dictionary = view.arsenal[index]
 		var cell = Rect2(164+index*30,324,28,21)
 		_hud_sprite("slot_selected" if slot.selected else "slot_base",cell,Color(0.8,0.8,0.8) if slot.selected else Color(0.5,0.5,0.5))
-		var icon = Rect2(cell.position+Vector2(9,1),Vector2(20,20))
-		_hud_sprite(WEAPON_ART[index],icon,Color.WHITE.darkened(0.7) if not slot.owned else AMBER if slot.low else Color.WHITE)
-		if not slot.owned:
-			_hud_sprite("lock",Rect2(cell.position+Vector2(17,10),Vector2(8,10)))
-		elif slot.empty:
-			_hud_sprite("dry",icon)
+	for index in view.arsenal.size():
+		var slot: Dictionary = view.arsenal[index]
+		# Full cells keep hollow motifs intact; slot text carries locks/dry state without masking them.
+		var icon = Rect2(WEAPON_GLYPH_X[index],313,32,32)
+		_hud_sprite(WEAPON_ART[index],icon,Color.WHITE.darkened(0.5) if not slot.owned else DANGER if slot.empty else AMBER if slot.low else Color.WHITE)
 	for index in view.seals.size():
 		var seal: Dictionary = view.seals[index]
 		var spacing = 72.0/view.seals.size()
-		var diameter = minf(24,spacing-4)
-		var center = Vector2(480+(index+0.5)*spacing,339)
-		_hud_sprite("seal_"+str(seal.key) if seal.owned else "seal_empty",Rect2(center-Vector2.ONE*diameter/2,Vector2.ONE*diameter))
+		var center = Vector2(480+(index+0.5)*spacing,329)
+		_hud_sprite("seal_"+str(seal.key),Rect2(center-Vector2(16,16),Vector2(32,32)),Color.WHITE if seal.owned else Color.WHITE.darkened(0.5))
 	for index in view.progress.size():
 		var pip: Dictionary = view.progress[index]
 		if pip.current: _hud_sprite("slot_selected",Rect2(559+index*9,330,10,10))
 		_hud_sprite("story_filled" if pip.discovered else "story_empty",Rect2(560+index*9,331,8,8))
 
+func _hud_texture(id: String) -> Texture2D:
+	return MARKER_ATLAS if id in WEAPON_ART or id in ["seal_blood","seal_ivory"] else HUD_ATLAS
+
 func _hud_region(id: String) -> Rect2:
-	var data: Dictionary = hud_art[id]
+	var glyph: bool = _hud_texture(id) == MARKER_ATLAS
+	var data: Dictionary = marker_art[id] if glyph else hud_art[id]
 	var cell: Array = data.region
 	var region = Rect2(cell[0],cell[1],cell[2],cell[3])
-	if id in ["frame_tile","frame_corner","divider","slot_base","slot_selected","lock","seal_blood","seal_ivory","seal_empty","story_empty","story_filled"]:
+	if not glyph and id in ["frame_tile","frame_corner","divider","slot_base","slot_selected","lock","seal_blood","seal_ivory","seal_empty","story_empty","story_filled"]:
 		var content: Array = data.content_rect
 		region = Rect2(region.position+Vector2(content[0],content[1]),Vector2(content[2],content[3]))
 	return region
 
 func _hud_sprite(id: String, rect: Rect2, tint: Color = Color.WHITE, flip: Vector2 = Vector2.ONE) -> void:
 	draw_set_transform(rect.get_center(),0,flip)
-	draw_texture_rect_region(HUD_ATLAS,Rect2(-rect.size/2,rect.size),_hud_region(id),tint)
+	draw_texture_rect_region(_hud_texture(id),Rect2(-rect.size/2,rect.size),_hud_region(id),tint)
 	draw_set_transform(Vector2.ZERO)

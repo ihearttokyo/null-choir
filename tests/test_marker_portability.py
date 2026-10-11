@@ -115,8 +115,10 @@ class PortabilityFixtures(unittest.TestCase):
     def test_main_discovery_keeps_original_103_and_eight_markers(self):
         import test_art as art
         self.assertTrue(set(marker.IDS) <= art.EXPECTED)
-        self.assertEqual(len(art.EXPECTED - set(marker.IDS)), 103)
-        self.assertEqual(len(art.EXPECTED), 111)
+        original = art.EXPECTED - {'marker_glyphs'} - art.MARKER_IDENTITIES
+        self.assertEqual(len(original - set(marker.IDS)), 103)
+        self.assertEqual(len(original), 111)
+        self.assertEqual(len(art.EXPECTED), 117)
 
     def test_main_manifest_requires_exact_complete_family_metadata(self):
         # Parity seam only: mock the actual-file check, never claim synthetic art passes it.

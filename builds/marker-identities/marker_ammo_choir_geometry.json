@@ -1,0 +1,117 @@
+{
+  "id": "marker_ammo_choir",
+  "source": "source/art/marker_ammo_choir.blend",
+  "source_sha256": "12eca21630f90ef8ff5a7af65f5f8571de2ed656718db3b6b4f504aa50a5c3db",
+  "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+  "outputs": [
+    {
+      "path": "game/assets/art/world/marker_ammo_choir.glb",
+      "sha256": "e4fb459837c383857298374db83745993eb0aa018f5eb23766de3f00c319018f",
+      "bytes": 24324
+    }
+  ],
+  "provenance": {
+    "method": "image-derived original Blender geometry",
+    "authoring_script": "tools/build_marker_identities.py",
+    "imports": [],
+    "license": "Original NULL CHOIR project art"
+  },
+  "physical_bounds_m": {
+    "min": [
+      -0.2694273591041565,
+      -0.07192562520503998,
+      0.0
+    ],
+    "max": [
+      0.2694273591041565,
+      0.07192562520503998,
+      1.0950000286102295
+    ],
+    "size": [
+      0.538854718208313,
+      0.14385125041007996,
+      1.0950000286102295
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+  "triangles": 396,
+  "runtime_mesh_nodes": 4,
+  "material_count": 4,
+  "loop_id": null,
+  "recipe_dependencies": {
+    "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+  },
+  "reference_images": [
+    {
+      "path": "source/art/references/marker-identities-v2.png",
+      "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+    }
+  ],
+  "facing": "front Blender -Y; exported Godot +Z",
+  "collision": "none; marker visuals only",
+  "preview": {
+    "path": "builds/marker-identities/marker_ammo_choir_preview.png",
+    "sha256": "1fb1e9eefe646be4106ad0aa7ffe2d2d0394ec715763bd8309045a54b3486bd2",
+    "bytes": 3213,
+    "dimensions": [
+      128,
+      128
+    ]
+  },
+  "source_meshes": [
+    {
+      "name": "Resonant tine -1",
+      "vertices": 14,
+      "triangles": 24
+    },
+    {
+      "name": "Teal inner resonance rail -1",
+      "vertices": 15,
+      "triangles": 26
+    },
+    {
+      "name": "Splayed choir brace -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Resonant tine 1",
+      "vertices": 14,
+      "triangles": 24
+    },
+    {
+      "name": "Teal inner resonance rail 1",
+      "vertices": 15,
+      "triangles": 26
+    },
+    {
+      "name": "Splayed choir brace 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Choir tuning stem",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Choir transverse root",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Choir lower vertebral cuff",
+      "vertices": 80,
+      "triangles": 160
+    }
+  ],
+  "native_source_saved_before_runtime_merge": true,
+  "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}
