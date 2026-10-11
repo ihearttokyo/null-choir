@@ -85,6 +85,7 @@ func check_actor_recovery(difficulty: int, boundary: String) -> bool:
 	var ammo_before: int = game.state.ammo[1]
 	if not expect(game.state.weapon == 1 and game.player.fire() and game.state.ammo[1] == ammo_before-1,label+"actual pistol fire spends a round before the recovery snapshot"): return false
 	var retained_actors: Array = [actor_record(fifth),actor_record(sixth),actor_record(survivor),actor_record(summoner)]
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.checkpoint_id == checkpoint_spec.id and game.state.removed.count(checkpoint_spec.id) == 1 and game.state.position.is_equal_approx(game.player.position) and game.state.ammo[1] == ammo_before-1 and game.state.checkpoint.ammo[1] == ammo_before-1 and FileAccess.file_exists(game.progress_path),label+"actual proximity commits spent ammo and the moved player's native pose, not stale frozen campaign.position"): return false
 	var checkpoint_resources: Dictionary = player_record()

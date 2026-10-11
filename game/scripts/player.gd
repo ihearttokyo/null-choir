@@ -122,6 +122,7 @@ func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing: return
 	if not fired and game.has_method("observe_player"): game.observe_player()
 	elif fired and game.has_method("observe_interaction"): game.observe_interaction()
+	if game.has_method("update_passive_triggers"): game.update_passive_triggers(self)
 	if not _current_map() or not game.playing: return
 	game.state.position = position
 	game.state.yaw = preload("res://scripts/enemy.gd").canonical_yaw(rotation.y)

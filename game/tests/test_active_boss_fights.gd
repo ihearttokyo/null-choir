@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 const ROUTES = {
 	4: [[25.5,4.75],[35.5,4.75],[35.5,14.0],[25.5,14.0]],
 	7: [[41.0,15.5],[41.0,4.5],[27.5,4.5],[27.5,15.5]]}
@@ -89,12 +91,14 @@ func fight(index: int) -> bool:
 		var pod: Dictionary = data.pickups.filter(func(spec): return spec.id == data.id+"_finale_"+kind)[0]
 		if not stage(pod.cell): return false
 		var before: int = game.state.ammo[1] if kind == "rivets" else game.state.armor
-		game._process(0) # Production proximity collection, only while setup physics is held.
+		if not await PassivePhysicsStep.scan(game): return false
+		game._process(0) # Render semantics only; staged player/actor physics stays held.
 		var after: int = game.state.ammo[1] if kind == "rivets" else game.state.armor
 		var capacity: int = game.player.WEAPONS[1].max_ammo if kind == "rivets" else 200
 		if not expect(after == mini(capacity,before+int(pod.amount)) and game.state.removed.count(pod.id) == 1 and not game.level.markers.has(pod.id),"Finite authored finale pickup uses production cap/removal: "+pod.id): return false
 	var checkpoint: Dictionary = data.interactions.filter(func(spec): return spec.kind == "checkpoint")[0]
 	if not stage(checkpoint.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.checkpoint_id == checkpoint.id and FileAccess.file_exists(game.progress_path) and dormant_except(""),"Synthetic pose captures actual pre-finale checkpoint with dormant actors"): return false
 	var saved = load("res://scripts/campaign.gd").new()

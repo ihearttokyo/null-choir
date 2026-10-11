@@ -38,13 +38,14 @@ func check_map(index: int) -> bool:
 	if not await interact_at(story): return false
 	if not expect(game.state.discoveries == range(index+1) and game.state.removed.count(story.id) == 1 and not game.level.markers.has(story.id) and game.message == story.text,"E discovers exactly one authored story and consumes its marker/text"): return false
 	for spec in data.pickups:
-		if not collect_supply(spec): return false
+		if not await collect_supply(spec): return false
 	for key in data.interactions.filter(func(spec): return spec.kind == "key"):
 		if not await interact_at(key): return false
 		if not expect(key.key in game.state.keys and game.state.removed.count(key.id) == 1 and not game.level.markers.has(key.id) and game.message == key.text,"Actual E earns each seal and its authored message once"): return false
 	if not expect(game.state.keys.size() == 2,"Both seals are earned without direct state edits"): return false
 	var checkpoint: Dictionary = interaction("checkpoint")
 	if not move_to(checkpoint.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	var saved = load("res://scripts/campaign.gd").new()
 	print("PREFIX_CHECKPOINT expected=",checkpoint.id," actual=",game.state.checkpoint_id," removed=",game.state.removed.count(checkpoint.id)," marker=",game.level.markers.has(checkpoint.id)," load=",saved.load_progress(game.progress_path)," saved_index=",saved.level_index," saved_checkpoint=",saved.checkpoint_id," saved_discoveries=",saved.discoveries," current_discoveries=",game.state.discoveries," message=",game.message)
@@ -158,12 +159,14 @@ func collect_supply(spec: Dictionary) -> bool:
 	var capacity: int = game.player.WEAPONS[weapon].max_ammo if field == "ammo" else (100 if field == "health" else 200)
 	var acquired: bool = spec.kind == "weapon" and not weapon in game.state.owned_weapons
 	if not move_proximity(spec.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	var after: int = game.state.ammo[weapon] if field == "ammo" else game.state.get(field)
 	var consumed: bool = before < capacity or acquired
 	if not expect(after == mini(capacity,before+int(spec.amount)) and game.state.removed.count(spec.id) == (1 if consumed else 0) and game.level.markers.has(spec.id) == (not consumed),"Finite authored supply obeys its cap and removal rule: "+spec.id): return false
 	if not expect(not acquired or (weapon in game.state.owned_weapons and game.state.weapon == weapon),"Real weapon pickup grants ownership/selection: "+spec.id): return false
 	print("PREFIX_SUPPLY id=",spec.id," before=",before," after=",after," consumed=",consumed)
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	return expect((game.state.ammo[weapon] if field == "ammo" else game.state.get(field)) == after and game.state.removed.count(spec.id) == (1 if consumed else 0),"Repeated proximity processing cannot duplicate finite supplies: "+spec.id)
 

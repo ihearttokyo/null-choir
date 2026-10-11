@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -20,12 +22,39 @@ func run() -> void:
 		if spec.kind != "checkpoint": continue
 		game.state.keys = spec.get("requires",[]).duplicate()
 		game.player.position = game.level.layout.world_position(spec.cell)
+		if not await PassivePhysicsStep.scan(game):
+			quit(1)
+			return
 		game._process(0)
 		if game.state.checkpoint_id != spec.id or not game.message.begins_with("RECOVERY MEMORY ONLY: SAVE FAILED"):
 			push_error("Actual automatic checkpoint disk failure must never display stored-success feedback")
 			quit(1)
 			return
 		break
+	# Encounter presentation still activates, but cannot hide an active disk failure.
+	var authored_encounters: Array = game.level.layout.data.encounters.duplicate(true)
+	var authored_removed: Array = game.state.removed.duplicate()
+	var recovery_message: String = game.message
+	var cue: Dictionary = game.level.layout.data.encounters[0].duplicate(true)
+	cue.id = "fixture_after_checkpoint_failure"
+	game.level.layout.data.encounters.append(cue)
+	game.activate_encounter(cue.id)
+	if game.message != recovery_message or not "encounter:"+cue.id in game.state.removed:
+		push_error("Encounter activation must retain active checkpoint disk-failure feedback")
+		quit(1)
+		return
+	game.message_time = 0
+	cue = cue.duplicate(true)
+	cue.id = "fixture_after_failure_expiry"
+	game.level.layout.data.encounters.append(cue.duplicate(true))
+	game.activate_encounter(cue.id)
+	if game.message != cue.cue.text or game.message_time != 5:
+		push_error("Expired recovery failure must not suppress subsequent encounter text")
+		quit(1)
+		return
+	# Retire only this transient fixture data before canonical save validation.
+	game.level.layout.data.encounters = authored_encounters
+	game.state.removed = authored_removed
 	game.pause_game()
 	var current = game.level
 	game.save_and_title()

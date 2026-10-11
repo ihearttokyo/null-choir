@@ -36,6 +36,7 @@ var quitting: bool = false
 var _scene_level_index: int = -1
 var aim_observation: Dictionary = {}
 var interaction_observation: Dictionary = {}
+var _passive_scan_tick: int = -1
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -323,21 +324,75 @@ func _process(delta: float) -> void:
 			# World positions are float32; preserve inclusive authored edges after cell conversion.
 			if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
 				activate_encounter(group.id)
-		for spec in level.layout.data.pickups:
-			if not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4:
-				collect_pickup(spec.id)
-		for spec in level.layout.data.interactions:
-			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
-				state.removed.append(spec.id)
-				if not _capture_actor_state():
-					state.removed.erase(spec.id)
-					notify("RECOVERY ACTOR CAPTURE FAILED",8)
-					continue
-				state.mark_checkpoint(spec.id,player.position)
-				if _save() == OK: notify(spec.text)
-				else: notify("RECOVERY MEMORY ONLY: "+message,8)
 		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
+
+func _passive_scan_current(observer: CharacterBody3D, scene: Node3D) -> bool:
+	if not Engine.is_in_physics_frame() or not is_inside_tree() or not playing or get_tree().paused or placement_pending or state.health <= 0 or _scene_level_index != state.level_index: return false
+	if not is_instance_valid(scene) or level != scene or scene.is_queued_for_deletion() or scene.get_parent() != self or not scene.is_inside_tree(): return false
+	return is_instance_valid(observer) and player == observer and observer._current_map() and observer.global_position.is_finite()
+
+func update_passive_triggers(observer: CharacterBody3D) -> void:
+	var scene = level
+	if not _passive_scan_current(observer,scene) or _passive_scan_tick == Engine.get_physics_frames(): return
+	# Latch before mutations: callbacks may reenter or retire this player/map.
+	_passive_scan_tick = Engine.get_physics_frames()
+	for spec in scene.layout.data.pickups:
+		if not _passive_scan_current(observer,scene): return
+		if not spec.id in state.removed and observer.position.distance_to(scene.layout.world_position(spec.cell)) < 1.4 and _passive_trigger_visible(spec):
+			if not _passive_scan_current(observer,scene): return
+			collect_pickup(spec.id)
+	if not _passive_scan_current(observer,scene): return
+	for spec in scene.layout.data.interactions:
+		if not _passive_scan_current(observer,scene): return
+		if spec.kind == "checkpoint" and not spec.id in state.removed and observer.position.distance_to(scene.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])) and _passive_trigger_visible(spec):
+			if not _passive_scan_current(observer,scene): return
+			state.removed.append(spec.id)
+			var captured: bool = _capture_actor_state()
+			if not _passive_scan_current(observer,scene): return
+			if not captured:
+				state.removed.erase(spec.id)
+				notify("RECOVERY ACTOR CAPTURE FAILED",8)
+				continue
+			state.mark_checkpoint(spec.id,observer.position)
+			var saved: Error = _save()
+			if not _passive_scan_current(observer,scene): return
+			if saved == OK: notify(spec.text)
+			else: notify("RECOVERY MEMORY ONLY: "+message,8)
+
+func _passive_trigger_visible(spec: Dictionary) -> bool:
+	if not Engine.is_in_physics_frame() or not _passive_scan_current(player,level): return false
+	var marker = level.markers.get(spec.id)
+	if not is_instance_valid(marker) or marker.is_queued_for_deletion() or marker.get_parent() != level: return false
+	var collider: CollisionShape3D = player.get_child(0)
+	if collider == null or not collider.shape is CapsuleShape3D: return false
+	var capsule: CapsuleShape3D = collider.shape
+	var usable: float = capsule.height/2-capsule.radius
+	var bounds = AABB()
+	var first = true
+	for child in marker.find_children("*","MeshInstance3D",true,false):
+		var box: AABB = marker.global_transform.affine_inverse()*child.global_transform*child.mesh.get_aabb()
+		bounds = box if first else bounds.merge(box)
+		first = false
+	if first or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x <= 0 or bounds.size.z <= 0: return false
+	# Use the actual compact marker envelope, not the trigger radius or its decorative center.
+	var near: Vector3 = marker.to_local(player.global_position)
+	near.x = clampf(near.x,bounds.position.x,bounds.end.x)
+	near.z = clampf(near.z,bounds.position.z,bounds.end.z)
+	near.y = 0
+	var endpoint: Vector3 = marker.to_global(near)
+	var floor_point: Vector3 = level.to_global(level.layout.world_position(spec.cell))
+	if not endpoint.is_finite() or not floor_point.is_finite(): return false
+	var space = level.get_world_3d().direct_space_state
+	# shortcut: two floor-body heights within a tight XZ envelope, add mesh samples if authored cases require them.
+	for origin in [collider.to_global(Vector3.DOWN*usable),collider.to_global(Vector3.UP*usable)]:
+		if not origin.is_finite(): return false
+		for height in [0.08,0.35]:
+			endpoint.y = floor_point.y+height
+			var ray = PhysicsRayQueryParameters3D.create(origin,endpoint,1)
+			ray.hit_from_inside = true
+			if space.intersect_ray(ray).is_empty(): return true
+	return false
 
 func _combat_pressure() -> float:
 	var threats = 0
@@ -357,7 +412,9 @@ func activate_encounter(id: String) -> void:
 				actor.active = true
 				actor.alerted = true
 		level.apply_encounter_cue(group,false)
-		notify(group.cue.text,5)
+		# Physics checkpoint failures must survive a later render encounter cue.
+		if message_time <= 0 or not message.begins_with("RECOVERY MEMORY ONLY: SAVE FAILED"):
+			notify(group.cue.text,5)
 		if effects != null: effects.play(group.cue.sound,-6)
 		return
 
@@ -838,6 +895,25 @@ func _contains_metal_cache(root: String) -> bool:
 
 # Fixed headless workflow for the release binary, which cannot execute external scripts.
 # Controlled packed-resource workflow; not played difficulty, art/audio quality or FPS acceptance.
+class ExportPassiveTick:
+	extends Node
+	var game
+	var observer
+	var completed: bool = false
+	func _physics_process(_delta: float) -> void:
+		if is_instance_valid(game) and is_instance_valid(observer): game.update_passive_triggers(observer)
+		completed = true
+		set_physics_process(false)
+
+func _verify_passive_tick() -> void:
+	var driver = ExportPassiveTick.new()
+	driver.game = self
+	driver.observer = player
+	driver.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(driver)
+	while not driver.completed: await get_tree().physics_frame
+	driver.free()
+
 func _verify_export() -> void:
 	var validation_home = OS.get_environment("HOME")
 	if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):
@@ -922,6 +998,7 @@ func _verify_export() -> void:
 			if actor.id == "processional_enemy_11": caster = actor
 	checks["caster_art"] = caster_count == 4
 	player.position = level.layout.world_position([20.5,25.5])
+	await _verify_passive_tick()
 	_process(0)
 	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/scattergun.png")
 	checks["scattergun_fire"] = player.fire() and state.ammo[2] == 15
@@ -952,6 +1029,7 @@ func _verify_export() -> void:
 			var profile = Player.WEAPONS[weapon]
 			var before = state.ammo[weapon]
 			player.position = level.layout.world_position(spec.cell)
+			await _verify_passive_tick()
 			_process(0)
 			checks[profile.asset+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
 			before = state.ammo[weapon]

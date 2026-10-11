@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 func _initialize() -> void: call_deferred("run")
 
 func run() -> void:
@@ -39,8 +41,10 @@ func run() -> void:
 	for actor in game.enemies: actor.set_physics_process(false)
 	if not expect(game.state.ammo[1] == 111 and game.state.discoveries == [1],"Campaign resources and discoveries persist"): return
 	game.player.position = game.level.layout.world_position([20.5,25.5])
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 16,"Actual entry pickup must introduce and select the scattergun"): return
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.ammo[2] == 16,"Entry pickup cannot grant duplicate shells"): return
 	game.player.position = game.level.layout.world_position([1.2,13.5])
@@ -53,6 +57,7 @@ func run() -> void:
 	game.collect_key("processional_ivory")
 	if not expect(game.unlock_door("processional_gate"),"Both earned seals open the actual exit gate"): return
 	game.player.position = game.level.layout.world_position([16.5,8.5])
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "processional_checkpoint","Automatic checkpoint requires the earned seals"): return
 	game.player.cooldown = 0
