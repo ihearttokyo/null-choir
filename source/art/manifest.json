@@ -4560,65 +4560,95 @@
     },
     {
       "id": "nursery_gestation_engine",
-      "source": "source/art/nursery_gestation_engine.blend",
-      "source_sha256": "e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0",
-      "recipe_sha256": "f1fa327818fd7b2cfc45ba2aeebb45d8bcd65265b91bf0e97fb5cd6659e20331",
+      "source": "source/art/nursery_gestation_engine_v2.blend",
+      "source_sha256": "1311ee02d69ee6d13ce40f0737d7c539ebebbd2c260c079693cd8f70454e7522",
+      "recipe_sha256": "22bd2d6c56fd70c3fe73f764e9a3c81a4dc57121e0c6f5449d7ed5f3e799434d",
       "outputs": [
         {
           "path": "game/assets/art/world/nursery_gestation_engine.glb",
-          "sha256": "5d7921f949b3898d4293ec9c019f08dcd9df21a22bcb7e8977cc4c9c1a42502f",
-          "bytes": 481504
+          "bytes": 1523484,
+          "sha256": "0b1cab71fdce1dcedb61b49df337a6e428888935cbc449377238bc9e8c298513"
         }
       ],
       "provenance": {
         "method": "original Blender geometry and authored pixel textures",
-        "authoring_script": "tools/build_religious_late_art.py",
+        "authoring_script": "tools/build_nursery_gestation_v2.py",
         "imports": [],
         "license": "Original NULL CHOIR project art",
-        "fiction": "Fictional controller commandeering worship systems; no real-community villains or historical claims"
+        "fiction": "Fictional controller commandeering worship systems; no real-community villains or historical claims",
+        "references": [
+          {
+            "path": "source/art/references/nursery-transparent-v2.png",
+            "sha256": "3c046b70ff27b05aba6b850a6c7f430af22feeb8028f010b6f2241af14235144"
+          },
+          {
+            "path": "source/art/references/nursery-membrane-wrap-v1.png",
+            "sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0"
+          },
+          {
+            "path": "source/art/references/nursery-material-atlas-v2.png",
+            "sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781"
+          }
+        ],
+        "image_derived": true,
+        "material_reference_sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781",
+        "geometry_reference_sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0",
+        "original_source": {
+          "path": "source/art/nursery_gestation_engine.blend",
+          "sha256": "e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0"
+        }
       },
       "physical_bounds_m": {
         "min": [
           -1.925,
           -1.575,
-          0.0
+          0
         ],
         "max": [
           1.925,
           1.575,
-          8.465
+          8.43
         ],
         "size": [
           3.85,
           3.15,
-          8.465
+          8.43
         ],
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 5664,
-      "runtime_mesh_nodes": 7,
-      "material_count": 7,
+      "triangles": 15650,
+      "runtime_mesh_nodes": 5,
+      "material_count": 5,
       "loop_id": "nursery_loop_gestation",
-      "source_mesh_count": 69,
+      "source_mesh_count": 227,
       "source_hierarchy_groups": 4,
       "assembly_names": [
-        "Gestation narrow grounded chassis and root feeds",
-        "Elongated pointed hollow chamber and thick membrane ribs",
-        "Visible growing body and branching tendril anatomy",
-        "Four thin satellite needles and chamber controls"
+        "Editable architecture",
+        "Editable vessel",
+        "Editable anatomy",
+        "Editable controls"
       ],
       "recipe_dependencies": {
-        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95",
-        "tools/build_foundry_art.py": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587",
-        "tools/build_processional_art.py": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a",
-        "tools/build_religious_art.py": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde",
-        "tools/build_religious_foundry_art.py": "8bd536a293d3ceebfaadc9367cabb26c7ba2f24954c45f505c7ccf09785e40dc"
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/art_recipe.py": "32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6"
       },
       "reference_images": [
         {
           "path": "source/art/references/religion-nursery-01.png",
           "sha256": "ce876b7f9cd940c17222a836a82f9540fcdfb0124b00b7d7ecd7d4e30837c71f"
+        },
+        {
+          "path": "source/art/references/nursery-transparent-v2.png",
+          "sha256": "3c046b70ff27b05aba6b850a6c7f430af22feeb8028f010b6f2241af14235144"
+        },
+        {
+          "path": "source/art/references/nursery-membrane-wrap-v1.png",
+          "sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0"
+        },
+        {
+          "path": "source/art/references/nursery-material-atlas-v2.png",
+          "sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781"
         }
       ],
       "level_id": "nursery",
@@ -4626,11 +4656,18 @@
       "machine_purpose": "Grows a new control body in an elongated pointed gestation chamber",
       "loop_hero_candidate": true,
       "loop_assignment": "parent map-owned; no loop ID invented",
-      "texture_dependencies": {
-        "game/assets/art/textures/surface_atlas.png": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39"
-      },
+      "texture_dependencies": {},
       "facing": "front Blender -Y; exported Godot +Z",
-      "collision": "none; parent authors explicit bases/solid cover"
+      "collision": "none; parent authors explicit bases/solid cover",
+      "atlas": {
+        "embedded": true,
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "8d82afdae9e1ee615f0c84ead5020858d12151f7a200d53344cb2dbf125d88f0",
+        "sampling": "nearest/no-mip"
+      }
     },
     {
       "id": "nursery_seed_orrery",
