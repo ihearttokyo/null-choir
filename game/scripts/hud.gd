@@ -198,6 +198,9 @@ func aim_cue() -> Dictionary:
 	return {"position":position,"actor_id":observation.actor_id,"contact":point,"weapon":observation.weapon,
 		"meaning":["contact","contact","center direction","spread direction","initial path","first piercing contact"][observation.weapon]}
 
+func damage_flash_alpha() -> float:
+	return minf(0.45,game.damage_flash*1.3)*(0.6 if game.settings.reduced_damage_flashes else 1.0)
+
 func _draw() -> void:
 	if view.is_empty() or game.level == null or game.player == null:
 		draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029))
@@ -252,7 +255,7 @@ func _draw() -> void:
 			for direction in [Vector2(1,1),Vector2(-1,1),Vector2(1,-1),Vector2(-1,-1)]:
 				draw_line(Vector2(320,180)+direction*9,Vector2(320,180)+direction*13,Color.WHITE,1)
 		if game.damage_flash > 0:
-			var wound = Color(0.85,0.12,0.08,minf(0.45,game.damage_flash*1.3)*(1.0 if game.settings.camera_shake else 0.6))
+			var wound = Color(0.85,0.12,0.08,damage_flash_alpha())
 			for rect in [Rect2(0,0,640,4),Rect2(0,4,5,318),Rect2(635,4,5,318)]: draw_rect(rect,wound)
 			for x in [0,640]:
 				var sign_x = 1 if x == 0 else -1
