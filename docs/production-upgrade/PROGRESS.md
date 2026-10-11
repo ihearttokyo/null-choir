@@ -83,3 +83,20 @@ python3 tools/check_game.py tests/test_damage_geometry.gd tests/test_late_weapon
 ```
 
 Attack-state art, hostile spatial audio and source-bearing visual feedback remain open NC-04 work. This geometry slice does not certify the complete presentation contract.
+
+
+## NC-06: envelope-specific player facing
+
+Current, checkpoint and level-start resources now carry optional yaw/pitch without changing save version1. Each missing legacy component falls back to authored entry yaw or zero camera pitch; malformed present values reject the whole import before mutation. Yaw reuses actor canonicalization. Pitch serialization stays within±1.35 while native capture permits only that boundary's actual float32 representation.
+
+Continue, checkpoint death and restart select their own facing/resources. Position repair preserves selected facing and saved recovery envelopes. Native physics records pose with position; capture validates raw pitch before normalization, and existing cancellation also clears velocity. No queued input, target cue or half-completed attack is serialized.
+
+Both independent reviews found invalid live pitch being clamped into a valid save. Four native±Inf/±2 cases now require failed capture, unchanged actor/facing state and unchanged disk bytes. The valid±1.35 positives use the real Main save path; replacing its native threshold with plain1.35 fails the retained mutation. Current source reviews are qualified clean.
+
+Sixteen isolated source-native checks pass on the existing permitted parent CoreAudio route. Ten additional exact assembled-runtime checks retain the merged incoming-damage geometry, with the unaccepted presentation experiment excluded. Child sandbox certificate/CoreAudio-error runs remain retained as qualified evidence, never relabeled clean; no security setting was changed.
+
+```sh
+python3 tools/check_game.py tests/test_player_facing_codec.gd tests/test_player_facing_recovery.gd
+```
+
+Physical capture, actual GPU/app paths and normal earned campaign play remain separate acceptance. This source slice introduces no art, collider or balance change.
