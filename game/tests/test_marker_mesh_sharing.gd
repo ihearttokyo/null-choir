@@ -1,119 +1,138 @@
 extends SceneTree
 
+const PurposeContract = preload("res://tests/test_marker_purposes.gd")
+
 class MarkerOwner extends Node:
 	var state = preload("res://scripts/campaign.gd").new()
 	var level
 
-var failures = 0
+var owner
 
 func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var owner = MarkerOwner.new()
+	var passed: bool = await check_sharing()
+	cleanup()
+	if passed: print("PASS eight builds: purpose fidelity, same-art mesh/material sharing, independent transforms, removal and full resource teardown")
+	quit(0 if passed else 1)
+
+func check_sharing() -> bool:
+	owner = MarkerOwner.new()
 	root.add_child(owner)
-	var sphere = SphereMesh.new()
-	sphere.radius = 0.8
-	sphere.height = 1.6
 	for index in range(8):
 		owner.state.new_campaign(1)
 		owner.state.level_index = index
-		var level = load("res://scripts/level.gd").new()
-		owner.level = level
-		owner.add_child(level)
-		if not expect(level.layout.load_level(index),"Authored map must load"):
-			level.free()
-			continue
+		owner.level = load("res://scripts/level.gd").new()
+		owner.add_child(owner.level)
+		if not expect(owner.level.layout.load_level(index),"Authored map must load"): return false
 		# Actual consumed-spec filter.
-		owner.state.removed = [level.layout.data.pickups[0].id]
+		owner.state.removed = [owner.level.layout.data.pickups[0].id]
 		var started = Time.get_ticks_usec()
-		level.build(owner,index)
+		if not expect(owner.level.build(owner,index),"Authored map must build"): return false
 		var build_us = Time.get_ticks_usec()-started
+		var level = owner.level
 		var level_id = level.layout.data.id
 		var specs = level.layout.data.pickups+level.layout.data.interactions
-		var meshes = {}
-		var materials = {}
+		var resources = {"meshes":{},"materials":{},"scenes":{}}
 		var ids = {}
+		var by_art = {}
+		var repeated = false
 		for spec in specs:
 			if spec.id in owner.state.removed:
-				expect(not level.markers.has(spec.id),"Consumed marker absent: "+spec.id)
+				if not expect(not level.markers.has(spec.id),"Consumed marker absent: "+spec.id): return false
 				continue
-			var core = check_core(level,spec,sphere)
-			if core == null: continue
-			meshes[core.mesh.get_instance_id()] = weakref(core.mesh)
-			materials[core.material_override.get_instance_id()] = true
-			ids[spec.id] = [core.mesh.get_instance_id(),core.material_override.get_instance_id()]
+			if not PurposeContract.check_marker(level,spec,expect): return false
+			var art: String = PurposeContract.PURPOSE_ART[spec.kind]
+			if not expect(level._model_scenes.has(art) and level._model_scenes[art] is PackedScene,"One level-owned PackedScene per used purpose: "+art): return false
+			var marker = level.markers[spec.id]
+			if not expect(level._model_scenes[art].resource_path == marker.scene_file_path,"Owned native scene matches marker purpose: "+spec.id): return false
+			resources.scenes[art] = weakref(level._model_scenes[art])
+			ids[spec.id] = {"placement":marker.transform,"meshes":capture_marker(marker,resources)}
+			if by_art.has(art):
+				if not expect(ids[spec.id].meshes == by_art[art],"Same-art native meshes/materials and authored local transforms shared: "+spec.id): return false
+				repeated = true
+			else: by_art[art] = ids[spec.id].meshes
 		var count = level.markers.size()
-		expect(count > 1 and count == specs.size()-owner.state.removed.size() and ids.size() == count,"Core per nonremoved spec")
-		expect(materials.size() == count,"Independent core materials")
-		# Baseline RED: one mesh per marker.
-		expect(meshes.size() == 1,"MESH_IDENTITY level="+level_id+" expected=1 actual="+str(meshes.size()))
-		if not ids.is_empty():
-			var id = ids.keys()[0]
-			var marker = level.markers[id]
-			var core = marker.get_child(marker.get_child_count()-1)
-			var placement = marker.transform
-			var color = core.material_override.albedo_color
-			marker.position += Vector3.RIGHT
-			core.position += Vector3.UP
-			core.material_override.albedo_color = Color.MAGENTA
-			core.material_override.emission = Color.MAGENTA
-			survivors(level,specs,ids,id,sphere)
-			marker.transform = placement
-			core.position = Vector3(0,2.2,0)
-			core.material_override.albedo_color = color
-			core.material_override.emission = color
-			level.remove_marker(id)
-			expect(not level.markers.has(id) and marker.is_queued_for_deletion(),"Marker erased/queued")
-			await process_frame
-			await process_frame
-			expect(not is_instance_valid(marker) and not is_instance_valid(core),"Removed marker/core freed")
-			expect(level.markers.size() == count-1,"Other markers retained")
-			survivors(level,specs,ids,id,sphere)
+		if not expect(count > 1 and count == specs.size()-owner.state.removed.size() and ids.size() == count,"One native scene per nonremoved spec"): return false
+		if not expect(repeated,"Each map exercises repeated same-art markers"): return false
+		if not await check_removal(level,specs,ids,resources): return false
 		level.free()
+		owner.level = null
 		await process_frame
-		var released = 0
-		for mesh_ref in meshes.values():
-			if mesh_ref.get_ref() == null: released += 1
-		expect(released == meshes.size(),"Build meshes released: "+level_id)
-		print("MEASURE marker_mesh_sharing level=",level_id," markers=",count," mesh_resources=",meshes.size()," build_us=",build_us," released=",released)
-	owner.free()
-	if failures == 0: print("PASS eight builds: fidelity/sharing/teardown")
-	quit(0 if failures == 0 else 1)
+		await process_frame
+		for kind in resources:
+			for resource_ref in resources[kind].values():
+				if not expect(resource_ref.get_ref() == null,"Build "+kind+" released: "+level_id): return false
+		print("MEASURE marker_mesh_sharing level=",level_id," markers=",count," mesh_resources=",resources.meshes.size()," material_resources=",resources.materials.size()," marker_scenes=",resources.scenes.size()," build_us=",build_us," released=all")
+	return true
 
-func check_core(level, spec: Dictionary, sphere: SphereMesh) -> MeshInstance3D:
-	if not expect(level.markers.has(spec.id),"Missing marker: "+spec.id): return null
-	var marker = level.markers[spec.id]
-	expect(marker.get_parent() == level and marker.scene_file_path == "res://assets/art/world/containment_capsule.glb","Capsule hierarchy: "+spec.id)
-	var transform = Transform3D(Basis.from_scale(Vector3(0.25,0.17,0.25)),level.layout.world_position(spec.cell)+Vector3.UP*0.06)
-	expect(marker.visible and marker.transform.is_equal_approx(transform),"Capsule transform: "+spec.id)
-	var cores = marker.get_children().filter(func(child): return child is MeshInstance3D and child.mesh is SphereMesh)
-	if not expect(cores.size() == 1,"One sphere core: "+spec.id): return null
-	var core: MeshInstance3D = cores[0]
-	expect(core == marker.get_child(marker.get_child_count()-1) and core.visible and core.transform.is_equal_approx(Transform3D(Basis.IDENTITY,Vector3(0,2.2,0))),"Core hierarchy/transform: "+spec.id)
-	var mesh: SphereMesh = core.mesh
-	expect(is_equal_approx(mesh.radius,0.8) and is_equal_approx(mesh.height,1.6) and mesh.radial_segments == sphere.radial_segments and mesh.rings == sphere.rings and mesh.is_hemisphere == sphere.is_hemisphere,"Dimensions/default tessellation: "+spec.id)
-	if expect(mesh.get_surface_count() == 1,"One sphere surface: "+spec.id):
-		var arrays = mesh.surface_get_arrays(0)
-		expect(mesh.surface_get_material(0) == null and arrays.size() == Mesh.ARRAY_MAX and arrays[Mesh.ARRAY_VERTEX] is PackedVector3Array and not arrays[Mesh.ARRAY_VERTEX].is_empty() and arrays == sphere.surface_get_arrays(0),"Sphere arrays: "+spec.id)
-	if not expect(core.material_override is StandardMaterial3D,"Material override: "+spec.id): return null
-	var color = Color(0.85,0.59,0.22)
-	if spec.kind == "health": color = Color(0.4,0.7,0.65)
-	if spec.kind == "armor": color = Color(0.34,0.5,0.86)
-	if spec.kind == "key" and spec.key == "blood": color = Color(0.7,0.12,0.11)
-	var material: StandardMaterial3D = core.material_override
-	expect(material.albedo_color == color and material.emission == color and material.emission_enabled and is_equal_approx(material.emission_energy_multiplier,0.7) and is_equal_approx(material.roughness,0.83) and material.texture_filter == BaseMaterial3D.TEXTURE_FILTER_NEAREST,"Core material: "+spec.id)
-	return core
+func capture_marker(marker: Node3D, resources: Dictionary) -> Dictionary:
+	# Only IDs, value transforms and WeakRefs escape; no retained native resources.
+	var snapshot = {}
+	for node in PurposeContract.mesh_nodes(marker):
+		resources.meshes[node.mesh.get_instance_id()] = weakref(node.mesh)
+		var materials = []
+		var native_materials = [node.material_override,node.material_overlay]
+		for surface in range(node.mesh.get_surface_count()):
+			native_materials.append(node.mesh.surface_get_material(surface))
+			native_materials.append(node.get_active_material(surface))
+		for material in native_materials:
+			if material == null:
+				materials.append(null)
+				continue
+			materials.append([material.get_instance_id(),material.albedo_color,material.emission,material.emission_enabled,material.emission_energy_multiplier,material.roughness,material.texture_filter])
+			resources.materials[material.get_instance_id()] = weakref(material)
+		snapshot[str(marker.get_path_to(node))] = [node.mesh.get_instance_id(),materials,node.transform]
+	return snapshot
 
-func survivors(level, specs: Array, ids: Dictionary, skip_id: String, sphere: SphereMesh) -> void:
+func check_removal(level, specs: Array, ids: Dictionary, resources: Dictionary) -> bool:
+	var id: String = ""
+	for spec in specs:
+		if not ids.has(spec.id): continue
+		for peer in specs:
+			if peer.id != spec.id and ids.has(peer.id) and peer.kind == spec.kind:
+				id = spec.id
+				break
+		if not id.is_empty(): break
+	if not expect(not id.is_empty(),"Transform/removal witness has a live same-art peer"): return false
+	var marker = level.markers[id]
+	var mesh_node = PurposeContract.mesh_nodes(marker)[0]
+	var placement: Transform3D = marker.transform
+	var local_transform: Transform3D = mesh_node.transform
+	marker.position += Vector3.RIGHT
+	mesh_node.position += Vector3.UP
+	# Imported materials are immutable shared art, not per-instance color state.
+	if not survivors(level,specs,ids,id,resources): return false
+	marker.transform = placement
+	mesh_node.transform = local_transform
+	var marker_ref = weakref(marker)
+	var node_ref = weakref(mesh_node)
+	var count = level.markers.size()
+	level.remove_marker(id)
+	if not expect(not level.markers.has(id) and marker.is_queued_for_deletion(),"Marker erased/queued"): return false
+	marker = null
+	mesh_node = null
+	await process_frame
+	await process_frame
+	if not expect(marker_ref.get_ref() == null and node_ref.get_ref() == null,"Removed marker/mesh freed"): return false
+	if not expect(level.markers.size() == count-1,"Other markers retained"): return false
+	return survivors(level,specs,ids,id,resources)
+
+func survivors(level, specs: Array, ids: Dictionary, skip_id: String, resources: Dictionary) -> bool:
 	for spec in specs:
 		if spec.id == skip_id or not ids.has(spec.id): continue
-		var core = check_core(level,spec,sphere)
-		if core != null:
-			expect([core.mesh.get_instance_id(),core.material_override.get_instance_id()] == ids[spec.id],"Other resources: "+spec.id)
+		if not PurposeContract.check_marker(level,spec,expect): return false
+		if not expect(level.markers[spec.id].transform == ids[spec.id].placement and capture_marker(level.markers[spec.id],resources) == ids[spec.id].meshes,"Other native resources/root/local transforms unchanged: "+spec.id): return false
+	return true
+
+func cleanup() -> void:
+	if is_instance_valid(owner):
+		if is_instance_valid(owner.level): owner.level.free()
+		owner.level = null
+		owner.free()
+	owner = null
 
 func expect(condition: bool, detail: String) -> bool:
-	if not condition:
-		failures += 1
-		push_error(detail)
+	if not condition: push_error(detail)
 	return condition

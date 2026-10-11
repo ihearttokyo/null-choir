@@ -1,0 +1,92 @@
+{
+  "asset_id": "marker_checkpoint",
+  "source_sha256": "8c9c5e3f9b88f93565d843bfdad0c5730e97e642acda429341f2093f2b72da2c",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Spaced ivory anchoring leg 0",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Leg inner iron piston 0",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Core suspension arm 0",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Spaced ivory anchoring leg 1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Leg inner iron piston 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Core suspension arm 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Spaced ivory anchoring leg 2",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Leg inner iron piston 2",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Core suspension arm 2",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Suspended amber checkpoint core",
+      "vertices": 62,
+      "triangles": 120
+    },
+    {
+      "name": "Core meridian restraint",
+      "vertices": 136,
+      "triangles": 268
+    },
+    {
+      "name": "Core equatorial restraint",
+      "vertices": 136,
+      "triangles": 268
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.343,
+      -0.309,
+      0.0
+    ],
+    "max": [
+      0.343,
+      0.309,
+      1.027
+    ],
+    "size": [
+      0.686,
+      0.618,
+      1.027
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 4,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

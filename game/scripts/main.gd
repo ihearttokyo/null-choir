@@ -414,7 +414,7 @@ func collect_pickup(id: String) -> void:
 				state.armor = mini(200,state.armor+spec.amount)
 		state.removed.append(id)
 		level.remove_marker(id)
-		notify("RECOVERED "+spec.kind.to_upper())
+		notify("RECOVERED "+(Player.WEAPONS[int(spec.weapon)].name if spec.kind == "weapon" else spec.kind.to_upper()))
 		return
 
 func unlock_door(id: String) -> bool:

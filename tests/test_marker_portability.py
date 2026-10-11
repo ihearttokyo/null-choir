@@ -11,7 +11,7 @@ from unittest.mock import patch
 import test_marker_art as marker
 
 P = Path(__file__).resolve().parents[1]
-HELPERS = {rel: marker.sha(P / rel) for rel in ('tools/build_art.py', 'tests/test_art.py')}
+HELPERS = dict(marker.HELPER_SHA)
 
 
 @contextmanager
@@ -23,6 +23,11 @@ def metadata_root(legacy=False):
             path = root / rel
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((P / rel).read_bytes())
+            archive = root / 'source/art/recipe_history' / HELPERS[rel] / (rel + '.txt')
+            original = P / archive.relative_to(root)
+            assert marker.sha(original) == HELPERS[rel], 'exact retained fixture bytes required'
+            archive.parent.mkdir(parents=True, exist_ok=True)
+            archive.write_bytes(original.read_bytes())
         reference = root / marker.REFERENCE
         reference.parent.mkdir(parents=True, exist_ok=True)
         reference.write_bytes(b'unit metadata reference; not image/art evidence')
@@ -44,6 +49,90 @@ def metadata_root(legacy=False):
 
 
 class PortabilityFixtures(unittest.TestCase):
+    def test_current_helper_drift_uses_exact_archived_original(self):
+        with metadata_root() as (root, _, _):
+            self.assertTrue(all(marker.sha(root / rel) != pin for rel, pin in HELPERS.items()))
+            self.assertIsNone(marker.check())
+            # Validation may read history; the unchanged producer may not author with drift.
+            with self.assertRaisesRegex(AssertionError, 'authoring helper drift'):
+                marker.load_inputs()
+
+    def test_exact_live_inputs_keep_historical_authoring_compatible(self):
+        with metadata_root() as (root, _, _):
+            for rel, digest in HELPERS.items():
+                archive = root / 'source/art/recipe_history' / digest / (rel + '.txt')
+                (root / rel).write_bytes(archive.read_bytes())
+                archive.unlink()
+            self.assertIsNone(marker.load_inputs())
+            self.assertIsNone(marker.check())
+
+    def test_missing_family_cannot_pass_main_acceptance(self):
+        with metadata_root(), patch.object(marker, 'IDS', ('marker_ammo', 'marker_exit')):
+            with self.assertRaisesRegex(AssertionError, 'all eight marker outputs required'):
+                marker.validate_main_entries([])
+
+    def test_missing_bad_and_misplaced_archives_are_rejected(self):
+        for rel in HELPERS:
+            for state in ('missing', 'bad', 'misplaced'):
+                with self.subTest(helper=rel, state=state), metadata_root() as (root, _, _):
+                    archive = root / 'source/art/recipe_history' / HELPERS[rel] / (rel + '.txt')
+                    if state == 'bad':
+                        archive.write_bytes(b'wrong historical bytes')
+                    elif state == 'misplaced':
+                        archive.rename(archive.with_name(archive.name + '.other'))
+                    else:
+                        archive.unlink()
+                    with self.assertRaises(AssertionError):
+                        marker.check()
+
+    def test_archive_aliases_and_conflicting_archive_rejected(self):
+        for rel in HELPERS:
+            for state in ('file-link', 'directory-link', 'conflict-with-current'):
+                with self.subTest(helper=rel, state=state), metadata_root() as (root, _, _):
+                    archive = root / 'source/art/recipe_history' / HELPERS[rel] / (rel + '.txt')
+                    target = root / 'alias.txt'
+                    target.write_bytes(archive.read_bytes())
+                    if state == 'file-link':
+                        archive.unlink()
+                        archive.symlink_to(target)
+                    elif state == 'directory-link':
+                        archive.unlink()
+                        archive.parent.rmdir()
+                        archive.parent.symlink_to(root, target_is_directory=True)
+                    else:
+                        (root / rel).write_bytes(archive.read_bytes())
+                        archive.write_bytes(b'conflicting archive, despite exact current bytes')
+                    with self.assertRaises(AssertionError):
+                        marker.check()
+
+    def test_archived_validation_input_is_data_not_executable(self):
+        import test_art as art
+        with self.assertRaises(ValueError):
+            art.resolve_recipe(P, 'tests/test_art.py', HELPERS['tests/test_art.py'])
+        with metadata_root() as (root, _, _), patch('builtins.exec', side_effect=AssertionError('archive executed')):
+            self.assertIsNone(marker.check())
+
+    def test_main_discovery_keeps_original_103_and_eight_markers(self):
+        import test_art as art
+        self.assertTrue(set(marker.IDS) <= art.EXPECTED)
+        self.assertEqual(len(art.EXPECTED - set(marker.IDS)), 103)
+        self.assertEqual(len(art.EXPECTED), 111)
+
+    def test_main_manifest_requires_exact_complete_family_metadata(self):
+        # Parity seam only: mock the actual-file check, never claim synthetic art passes it.
+        entries = [{'id': name, 'source_sha256': 'fixture metadata only'} for name in marker.IDS]
+        with patch.object(marker, 'check') as actual_check, patch.object(marker, 'load_manifest', return_value={'assets': entries}):
+            self.assertIsNone(marker.validate_main_entries(entries + [{'id': 'skin_bell'}]))
+            actual_check.assert_called_once_with()
+            changed = copy.deepcopy(entries)
+            changed[0]['source_sha256'] = 'repinned'
+            for broken in (entries[:-1], entries + [entries[0]], changed):
+                with self.subTest(entries=broken), self.assertRaisesRegex(AssertionError, 'main/marker manifest parity'):
+                    marker.validate_main_entries(broken)
+        with patch.object(marker, 'check', side_effect=AssertionError('actual family rejected')):
+            with self.assertRaisesRegex(AssertionError, 'actual family rejected'):
+                marker.validate_main_entries(entries)
+
     def test_repository_inputs_do_not_need_private_audits(self):
         with metadata_root() as (root, _, _):
             self.assertFalse((root / 'HELPER-SOURCE.json').exists())

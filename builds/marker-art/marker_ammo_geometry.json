@@ -1,0 +1,167 @@
+{
+  "asset_id": "marker_ammo",
+  "source_sha256": "7ead11b21eb3ff1a710395eb59a45c75b4cb9b05035897e038266a9a8271dff6",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Ground-centered iron manifold",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Cartridge pressure shell 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Amber cartridge window 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Cartridge rear support 0",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Iron upper cartridge housing 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Iron window retaining band 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Ivory cartridge crown 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Steel cartridge retaining collar 0",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Cartridge feed elbow 0",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Cartridge pressure shell 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Amber cartridge window 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Cartridge rear support 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Iron upper cartridge housing 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Iron window retaining band 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Ivory cartridge crown 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Steel cartridge retaining collar 1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Cartridge feed elbow 1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Cartridge pressure shell 2",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Amber cartridge window 2",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Cartridge rear support 2",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Iron upper cartridge housing 2",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Iron window retaining band 2",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Ivory cartridge crown 2",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Steel cartridge retaining collar 2",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Cartridge feed elbow 2",
+      "vertices": 18,
+      "triangles": 32
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.366,
+      -0.165,
+      0.0
+    ],
+    "max": [
+      0.366,
+      0.165,
+      1.02
+    ],
+    "size": [
+      0.731,
+      0.33,
+      1.02
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 4,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

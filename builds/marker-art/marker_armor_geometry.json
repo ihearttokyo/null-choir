@@ -1,0 +1,132 @@
+{
+  "asset_id": "marker_armor",
+  "source_sha256": "633111fd55438314de3d0f2c31b8a1b22447942b71d58a383160f3950fee69d8",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Ground-centered iron manifold",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Cobalt crescent carapace -1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Ivory inner crescent rim -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Overlapping cobalt plate -1 0",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge -1 0",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Overlapping cobalt plate -1 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge -1 1",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Overlapping cobalt plate -1 2",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge -1 2",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Cobalt crescent carapace 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Ivory inner crescent rim 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Overlapping cobalt plate 1 0",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge 1 0",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Overlapping cobalt plate 1 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge 1 1",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Overlapping cobalt plate 1 2",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Carapace steel hinge 1 2",
+      "vertices": 26,
+      "triangles": 48
+    },
+    {
+      "name": "Lower split sternum brace",
+      "vertices": 18,
+      "triangles": 32
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.39,
+      -0.16,
+      0.0
+    ],
+    "max": [
+      0.39,
+      0.16,
+      1.02
+    ],
+    "size": [
+      0.78,
+      0.32,
+      1.02
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 4,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

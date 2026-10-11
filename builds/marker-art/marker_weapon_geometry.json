@@ -1,0 +1,92 @@
+{
+  "asset_id": "marker_weapon",
+  "source_sha256": "9efa456e08d67030291c8d8c6094d6cb6fd1b9cce0608abcbb9941b25f5f2443",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Ground-centered iron manifold",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Wide ivory U cradle",
+      "vertices": 56,
+      "triangles": 108
+    },
+    {
+      "name": "Twin barrel receiver",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Hollow iron weapon barrel -1",
+      "vertices": 48,
+      "triangles": 96
+    },
+    {
+      "name": "Steel muzzle collar -1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Amber breech band -1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Hollow iron weapon barrel 1",
+      "vertices": 48,
+      "triangles": 96
+    },
+    {
+      "name": "Steel muzzle collar 1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Amber breech band 1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Weapon support neck",
+      "vertices": 12,
+      "triangles": 20
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.414,
+      -0.242,
+      0.0
+    ],
+    "max": [
+      0.414,
+      0.242,
+      0.701
+    ],
+    "size": [
+      0.828,
+      0.483,
+      0.701
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 4,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

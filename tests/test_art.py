@@ -72,6 +72,8 @@ CATHEDRAL = {'cathedral_vault_6m','cathedral_vault_9m','cathedral_cluster_pier',
 EXPECTED.update(CATHEDRAL)
 EXPECTED.add('hud_kit')
 SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
+MARKERS = {'marker_' + kind for kind in ('ammo', 'health', 'armor', 'key', 'weapon', 'story', 'checkpoint', 'exit')}
+EXPECTED.update(MARKERS)
 
 
 def world_geometry(gltf, binary):
@@ -171,15 +173,19 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED, 'original assets, all56 religious pieces, eight native late combat identities and four atmosphere modules required (intended RED)'
+    assert {a['id'] for a in assets} == EXPECTED, 'eight markers, original assets, all56 religious pieces, eight native late combat identities and four atmosphere modules required (intended RED)'
     assert len(assets) == len(EXPECTED)
+    import test_marker_art as marker
+    marker.validate_main_entries(assets)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
     religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
         skin_bell_v2 = a['id'] == 'skin_bell' and a['provenance']['authoring_script'] == 'tools/build_skin_bell_v2.py'
-        if skin_bell_v2:
+        if a['id'] in MARKERS:
+            marker.validate_lineage(a)
+        elif skin_bell_v2:
             check_skin_bell_v2(a)
         else:
             assert a['provenance']['method'] == ('original primitive Blender geometry and editable procedural material nodes' if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py' else 'Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
@@ -277,6 +283,8 @@ def check():
                     for primitive in mesh['primitives']:
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
+                if a['id'] in MARKERS:
+                    marker.validate_model(*marker.read_model(data), a)
                 if a['id'] in SCENERY:
                     if any(a['id'] in pieces for pieces in RELIGIOUS_SETS.values()):
                         level = a['level_id']
