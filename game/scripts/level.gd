@@ -1,6 +1,7 @@
 extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
+const Routes = preload("res://scripts/navigation_routes.gd")
 var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
@@ -52,7 +53,19 @@ func build(owner_game: Node, index: int) -> bool:
 		marker.add_child(core)
 		markers[spec.id] = marker
 	refresh_machine_lights()
+	_build_navigation()
 	return true
+
+func _build_navigation() -> void:
+	var actor = preload("res://scripts/enemy.gd")
+	var profiles := {}
+	for spec in layout.data.enemies:
+		if actor.LATE.get(spec.kind,{}).get("speed",1.0) == 0: continue
+		profiles[spec.kind] = {"radius":actor.capsule_radius(spec.kind),"height":actor.capsule_height(spec.kind),"hover":1.16 if spec.kind in ["caster","choir_avatar"] else 0.0}
+	var routes = Routes.new()
+	routes.name = "NavigationRoutes"
+	add_child(routes)
+	if not routes.configure(self,profiles): routes.queue_free()
 
 func _material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 	var material = StandardMaterial3D.new()
@@ -241,3 +254,5 @@ func open_door(id: String) -> void:
 	tween.tween_property(door,"position:y",door.position.y+6.0,0.65)
 	tween.finished.connect(door.queue_free)
 	doors.erase(id)
+	var routes = get_node_or_null("NavigationRoutes")
+	if routes != null: routes.invalidate_doors()

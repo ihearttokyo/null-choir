@@ -2,6 +2,7 @@ extends SceneTree
 
 class MarkerOwner extends Node:
 	var state = preload("res://scripts/campaign.gd").new()
+	var level
 
 var failures = 0
 
@@ -18,6 +19,7 @@ func run() -> void:
 		owner.state.new_campaign(1)
 		owner.state.level_index = index
 		var level = load("res://scripts/level.gd").new()
+		owner.level = level
 		owner.add_child(level)
 		if not expect(level.layout.load_level(index),"Authored map must load"):
 			level.free()

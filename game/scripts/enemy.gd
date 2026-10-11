@@ -32,6 +32,7 @@ var hurt_time: float = 0
 var pose_time: float = 0
 var age: float = 0
 var path_time: float = 0
+var _routing: bool = false
 var waypoint: Vector3
 var sprite: Sprite3D
 var speed: float = 4.0
@@ -157,6 +158,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = clampf((floor_hit.position.y+1.0+sin(age*2)*0.16-global_position.y)*5,-3,3) if not floor_hit.is_empty() else -3.0
 	else:
 		velocity.y -= delta*24
+	var arrived_waypoint := false
 	var heading = target.global_position-global_position
 	heading.y = 0
 	velocity.x = 0
@@ -175,24 +177,27 @@ func _physics_process(delta: float) -> void:
 			velocity.z = _rush_direction.z*rush_speed
 		elif not _profile.is_empty(): _finish_charge()
 	elif alerted and stagger_time <= 0:
-		if not sight.is_empty() and speed > 0:
+		if speed > 0:
 			path_time -= delta
 			if path_time <= 0:
 				waypoint = _next_step(target.global_position)
 				path_time = 1.0
-			heading = waypoint-global_position
+			if _routing: heading = waypoint-global_position
 			heading.y = 0
 		var move = heading.normalized()
 		var desired = speed
 		if (kind == "crawler" or not _profile.is_empty()) and recovery_time > 0:
 			desired = 0
-		elif kind in ["worker","caster"] and sight.is_empty():
+		elif kind in ["worker","caster"] and sight.is_empty() and not _routing:
 			var side = move.cross(Vector3.UP)*_strafe_sign
 			if range_to_target < (8.0 if kind == "worker" else 10.0):
 				move = (-move+side*0.5).normalized()
 			elif range_to_target < (18.0 if kind == "worker" else 24.0):
 				move = side
 				desired = 1.8 if kind == "worker" else 1.4
+		if _routing and delta > 0:
+			desired = minf(desired,heading.length()/delta)
+			arrived_waypoint = desired > 0 and heading.length() > .001 and heading.length() <= desired*delta+.00001
 		velocity.x = move.x*desired
 		velocity.z = move.z*desired
 		if kind in WINDUPS and attack_time <= 0 and recovery_time <= 0 and sight.is_empty() and range_to_target < (3.6 if kind == "crawler" else 30.0) and (kind != "summoner" or _summon_budget() > 0):
@@ -202,6 +207,7 @@ func _physics_process(delta: float) -> void:
 		var facing: float = atan2(-heading.x,-heading.z)
 		rotation.y = rotate_toward(rotation.y,facing,delta*1.8) if kind == "guardian" else facing
 	move_and_slide()
+	if arrived_waypoint and Vector2(global_position.x-waypoint.x,global_position.z-waypoint.z).length_squared() < .000001: path_time = 0
 	if _rush_time > 0 and not _rush_hit: _try_melee()
 	if not _profile.is_empty() and hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
 	if kind in ["worker","caster"] and sight.is_empty() and is_on_wall(): _strafe_sign = -_strafe_sign
@@ -444,24 +450,29 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 		_counter_time = 1.4 if _profile.is_empty() else 2.0
 		_event("stagger")
 
+
 func _next_step(destination: Vector3) -> Vector3:
+	_routing = true
+	var routes = game.level.get_node_or_null("NavigationRoutes")
+	if routes == null: return global_position
 	var layout = game.level.layout
-	var size = float(layout.data.cell_size)
-	var start = Vector2i(floor(global_position.x/size),floor(global_position.z/size))
-	var finish = Vector2i(floor(destination.x/size),floor(destination.z/size))
-	var queue = [start]
-	var previous = {start:start}
-	var cursor = 0
-	# ponytail: under 1k authored cells; native navigation if profiled map scale exceeds this.
-	while cursor < queue.size():
-		var cell = queue[cursor]
-		cursor += 1
-		if cell == finish:
-			while previous[cell] != start and cell != start: cell = previous[cell]
-			return layout.world_position([cell.x+0.5,cell.y+0.5])
-		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
-			var next = cell+direction
-			if layout.is_walkable(next) and not previous.has(next):
-				previous[next] = cell
-				queue.append(next)
+	var size: float = layout.data.cell_size
+	var start: Vector3 = layout.world_position([global_position.x/size,global_position.z/size])+Vector3.UP*.03
+	var goal: Vector3 = layout.world_position([destination.x/size,destination.z/size])+Vector3.UP*.03
+	# A player fits wall corners outside the larger actor's eroded navigation mesh.
+	var path: PackedVector3Array = routes.route(start,goal,kind,capsule_radius(kind)*sqrt(2.0)+.4)
+	var line := Vector2(goal.x-start.x,goal.z-start.z)
+	if not path.is_empty() and line.length() > .001 and Vector2(path[-1].x-goal.x,path[-1].z-goal.z).length() <= .15:
+		var straight := true
+		for point in path:
+			if absf(line.cross(Vector2(point.x-start.x,point.z-start.z)))/line.length() > .02:
+				straight = false
+				break
+		if straight:
+			_routing = false
+			return path[-1]
+	for point in path:
+		if Vector2(point.x-global_position.x,point.z-global_position.z).length() <= .15: continue
+		_routing = Vector2(point.x-destination.x,point.z-destination.z).length() > .15
+		return point
 	return global_position
