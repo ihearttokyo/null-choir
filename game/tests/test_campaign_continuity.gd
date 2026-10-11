@@ -65,7 +65,7 @@ func check_map(index: int) -> bool:
 		if not expect(game.state.weapon == 1 and game.state.discoveries == range(index+1),"All earned discoveries and naturally carried pistol enter the shared fight"): return false
 		print("PREFIX_BATTLE_START resources=",inventory()," activated_groups=",activated_groups())
 		actor_samples.clear()
-		if not await battle(index,boss,finale): return false
+		if not await battle(index,boss,finale,true): return false
 		print("PREFIX_BATTLE_END resources=",inventory()," activated_groups=",activated_groups())
 		if not battle_groups_ok(finale.id) or not expect(game.state.discoveries == range(index+1),"Battle preserves every earned discovery"): return false
 		game.set_process(false)
