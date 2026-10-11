@@ -141,6 +141,7 @@ func start_campaign(mode: int) -> void:
 	start_level()
 
 func start_level() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
 	var candidate = Campaign.new()
 	if not candidate.from_dict(state.to_dict()):
@@ -212,6 +213,7 @@ func start_level() -> void:
 			notify("NO SAFE RECOVERY POSITION",8)
 			return
 	menu_scroll.hide()
+	player.cancel_actions()
 	playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if music != null:
@@ -486,6 +488,7 @@ func restart_level() -> void:
 	await start_level()
 
 func pause_game() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending:
 		show_title()
 		notify("RECOVERY HELD: SELECT CONTINUE WHEN READY",5)
@@ -499,6 +502,7 @@ func pause_game() -> void:
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 
 func resume_game() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending or state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
 	playing = true
@@ -522,6 +526,7 @@ func save_and_title() -> void:
 	show_title()
 
 func show_title() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if hud != null: hud.survey.hide()
 	playing = false
 	placement_pending = false

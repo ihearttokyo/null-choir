@@ -69,6 +69,7 @@ func run() -> void:
 	game.state.owned_weapons.assign([0,1,2,3,4,5])
 	var marrow_sprite: Sprite3D
 	var marrow_projectile: Node3D
+	await physics_frame # Real firing queries belong to the native physics domain.
 	for index in range(1,6):
 		game.state.weapon = index
 		game.state.ammo[index] = 2

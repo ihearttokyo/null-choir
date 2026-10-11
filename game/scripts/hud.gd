@@ -203,8 +203,8 @@ func _draw() -> void:
 			var sway = Vector2(sin(player.stride)*3,cos(player.stride*2)*2) if game.settings.head_bob else Vector2.ZERO
 			draw_texture_rect_region(weapon_texture,Rect2(Vector2(180,143)+sway+Vector2(0,player.recoil*8),Vector2(320,200)),Rect2(frame*320,0,320,200))
 			var flash_duration: float = minf(0.12,profile.interval)
-			var elapsed: float = profile.interval-player.cooldown
-			if game.state.weapon > 0 and player.cooldown > 0 and elapsed < flash_duration:
+			var elapsed: float = player.shot_age()
+			if game.state.weapon > 0 and elapsed < flash_duration:
 				var flash_frame = mini(3,int(elapsed/flash_duration*4))
 				draw_texture_rect_region(AMMO_ATLAS,Rect2(Vector2(272,157)+sway,Vector2(96,96)),Rect2(flash_frame*64,0,64,64))
 		_instrument_frame()

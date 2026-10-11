@@ -33,3 +33,18 @@ python3 tools/check_game.py tests/test_surface_normals.gd tests/test_movement_co
 ```
 
 This is source-native geometry acceptance. Matched GPU lighting, startup/frame cost and the exact new packaged app remain unverified. [Godot SurfaceTool](https://docs.godotengine.org/en/4.7/classes/class_surfacetool.html) documents flat groups and normal generation; the runtime fixture checks this game's actual winding.
+
+## NC-02: physics-owned input and accepted-shot age
+
+Fire and interaction press edges are retained for a physics-owned attempt; eligible short taps survive between ticks, while unavailable taps are consumed. Weapon selection is also latched. Pause, title, replacement and activation cancel queued actions and require release of already-held triggers. A real restart regression caught an initial gate being applied only to the old player; the replacement now gates at activation after placement.
+
+Weapon-local countdowns remain, but only uninterrupted held fire retains nominal cadence remainder. Fresh presses/switches preserve recovery, and hitches skip missed slots without a burst. One active-play clock supplies accepted-shot age to viewmodel poses and flashes independently of readiness. Native real-input tests retain118 repeater shots per10 simulated seconds against117.65 configured, with exact ammunition and five/six-tick gaps. Two injected-hitch floating-point boundaries were reproduced and repaired; these are native supplied-step tests, not OS/GPU latency measurements.
+
+```sh
+python3 tools/check_game.py tests/test_fire_intent.gd tests/test_trigger_replacement.gd
+python3 tools/check_game.py tests/test_player.gd tests/test_ammo_input.gd tests/test_weapon_pose.gd tests/test_ammo_visuals.gd
+```
+
+Existing fixtures now enter physics before valid direct fire. Pose-unit fixtures stage timestamps honestly and assert read-only clocks; separate real discharges check first-post-shot age. Pause/Resume tests retain exact recovery before time advances, with an actual reset mutation failing. A pose-clock mutation also fails. Original damage, ammunition, resource, birth-ledger and cancellation assertions remain. Independent correctness/Ponytail findings were repaired before broader checks.
+
+The current focused pending-menu fixture passes all six Settings/Controls/difficulty cases at both wait phases and three following physics frames. This is headless state evidence; physical capture, cursor/focus and full original app-path placement acceptance remain unproved. Full campaign play with human-earned inventory, heard standalone audio, current GPU/readability/performance and an updated packaged app are still pending.
