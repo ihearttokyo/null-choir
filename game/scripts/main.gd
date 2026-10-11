@@ -592,7 +592,7 @@ func show_difficulty() -> void:
 
 func show_settings() -> void:
 	_show_menu("SETTINGS",[])
-	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
+	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["reduced_damage_flashes","Reduced damage flashes"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
 		var button = CheckButton.new()
 		button.text = option[1]
 		button.button_pressed = settings[option[0]]
