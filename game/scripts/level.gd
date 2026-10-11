@@ -9,11 +9,10 @@ var machine_lights: Dictionary = {}
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
 
-func build(owner_game: Node, index: int) -> void:
-	game = owner_game
+func build(owner_game: Node, index: int) -> bool:
 	if not layout.load_level(index):
-		push_error("Level source unavailable: " + str(index))
-		return
+		return false
+	game = owner_game
 	_build_geometry()
 	_build_environment()
 	_build_scenery()
@@ -53,6 +52,7 @@ func build(owner_game: Node, index: int) -> void:
 		marker.add_child(core)
 		markers[spec.id] = marker
 	refresh_machine_lights()
+	return true
 
 func _material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 	var material = StandardMaterial3D.new()

@@ -25,8 +25,10 @@ var checkpoint: Dictionary = {}
 var level_start: Dictionary = {}
 # null is legacy/unknown; [] is an authoritative empty living set.
 var actors: Variant = null
+var level_load_error: String = ""
 
 func new_campaign(mode: int) -> void:
+	level_load_error = ""
 	difficulty = clampi(mode, 0, 2)
 	level_index = 0
 	health = 100
@@ -108,6 +110,7 @@ func to_dict() -> Dictionary:
 	return data
 
 func from_dict(data: Dictionary) -> bool:
+	level_load_error = ""
 	# Validate everything before changing live state. Saves are an untrusted boundary.
 	if not _integer(data.get("version"), VERSION, VERSION) or not _integer(data.get("difficulty"), 0, 2):
 		return false
@@ -132,7 +135,9 @@ func from_dict(data: Dictionary) -> bool:
 		return false
 	var layout = Layout.new()
 	if [data,saved_checkpoint,saved_start].any(func(snapshot): return snapshot.has("actors")):
-		if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)): return false
+		if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)):
+			level_load_error = layout.load_error
+			return false
 		for snapshot in [data,saved_checkpoint,saved_start]:
 			if not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
 	difficulty = int(data.difficulty)
@@ -343,6 +348,7 @@ func save_progress(path: String = SAVE_PATH) -> Error:
 	return DirAccess.rename_absolute(path + ".tmp", path)
 
 func load_progress(path: String = SAVE_PATH) -> bool:
+	level_load_error = ""
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null or file.get_length() > 1048576:
 		return false

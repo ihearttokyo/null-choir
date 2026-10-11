@@ -1,22 +1,42 @@
 extends RefCounted
 
+const Schema = preload("res://scripts/level_schema.gd")
 const FILES = ["01_intake", "02_foundry", "03_processional", "04_reliquary", "05_nursery", "06_ossuary", "07_inversion", "08_heart"]
 var data: Dictionary = {}
 var tiles: Dictionary = {}
+var load_error: String = ""
 
 func load_level(index: int) -> bool:
+	load_error = ""
 	if index < 0 or index >= FILES.size():
+		load_error = "level index "+str(index)+": expected 0.."+str(FILES.size()-1)
 		return false
+	var path: String = "res://data/"+FILES[index]+".json"
+	var file = FileAccess.open(path,FileAccess.READ)
+	if file == null:
+		load_error = path+": cannot open level source ("+error_string(FileAccess.get_open_error())+")"
+		return false
+	var content: String = file.get_as_text()
+	file.close()
 	var parser = JSON.new()
-	if parser.parse(FileAccess.get_file_as_string("res://data/" + FILES[index] + ".json")) != OK:
+	if parser.parse(content) != OK:
+		load_error = path+": JSON line "+str(parser.get_error_line())+": "+parser.get_error_message()
 		return false
-	data = parser.data
-	tiles.clear()
-	for rect in data.rects:
+	var validation: String = Schema.validate(parser.data,_art_exists)
+	if not validation.is_empty():
+		load_error = path+": "+validation
+		return false
+	var expanded: Dictionary = {}
+	for rect in parser.data.rects:
 		for x in range(rect[0], rect[2] + 1):
 			for z in range(rect[1], rect[3] + 1):
-				tiles[Vector2i(x,z)] = true
+				expanded[Vector2i(x,z)] = true
+	data = parser.data
+	tiles = expanded
 	return true
+
+func _art_exists(id: String) -> bool:
+	return ResourceLoader.exists("res://assets/art/world/"+id+".glb")
 
 func height_at(cell: Vector2) -> float:
 	for region in data.elevations:
