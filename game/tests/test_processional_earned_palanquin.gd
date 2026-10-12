@@ -203,14 +203,19 @@ var l_markers: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://processional_earned_palanquin_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not await walk_to_organ_loop(PalanquinMain.new(),prefix) or not start_palanquin():
-		await finish(1)
-		return
-	if not await palanquin_route(PALANQUIN) or not await organ_fight(L_BRANCH) or not await palanquin_ivory() or not await palanquin_route(PALANQUIN_RETURN) or not await organ_fight(["processional_enemy_10","processional_enemy_11","processional_enemy_12","processional_enemy_21","processional_enemy_22"]) or not await palanquin_result():
+	if not await walk_to_palanquin_loop(PalanquinMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-debug candidate second Palanquin loop/ivory/return only; actual virtual Input and original native actors, debug caster provenance. NOT third gate/exit/full campaign, physical controls, rendered/audio/performance or packed-app attribution.")
 	await finish(0)
+
+func walk_to_palanquin_loop(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not await walk_to_organ_loop(observer,prefix) or not start_palanquin():
+		return false
+	if not await palanquin_route(PALANQUIN) or not await organ_fight(L_BRANCH) or not await palanquin_ivory() or not await palanquin_route(PALANQUIN_RETURN) or not await organ_fight(["processional_enemy_10","processional_enemy_11","processional_enemy_12","processional_enemy_21","processional_enemy_22"]) or not await palanquin_result():
+		return false
+	return true
 
 func start_palanquin() -> bool:
 	var earned: Dictionary = {"health":100,"armor":140,"ammo":[0,174,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}

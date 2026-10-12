@@ -1,5 +1,11 @@
 extends SceneTree
 
+class PlacementGame extends "res://scripts/main.gd":
+	var capture_requests: int = 0
+	func _capture_game_mouse() -> void:
+		capture_requests += 1
+		super._capture_game_mouse()
+
 var game
 var prefix = "user://placement_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
 var forbidden = [Vector3.ZERO]
@@ -9,7 +15,7 @@ func _initialize(): call_deferred("run")
 
 func run():
 	AudioServer.set_bus_mute(0,true)
-	game = load("res://scripts/main.gd").new()
+	game = PlacementGame.new()
 	game.progress_path = prefix+"_campaign.json"
 	game.settings_path = prefix+"_preferences.json"
 	root.add_child(game)
@@ -175,18 +181,19 @@ func run():
 				await finish(1)
 				return
 			game.show_title()
+			var pending_captures: int = game.capture_requests
 			game.continue_campaign()
 			freeze()
 			var old_level_id = game.level.get_instance_id()
 			var old_player_id = game.player.get_instance_id()
 			var pending_document: Dictionary = game.state.to_dict().duplicate(true)
 			if elapsed_frames == 1: await physics_frame
-			if game.playing or not game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+			if game.playing or not game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.capture_requests != pending_captures:
 				push_error("Unverified native placement must remain nonplaying and uncaptured at wait phase="+str(elapsed_frames))
 				await finish(1)
 				return
 			game.resume_game()
-			if game.playing or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+			if game.playing or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.capture_requests != pending_captures:
 				push_error("Resume must not bypass pending placement validation or capture the mouse")
 				await finish(1)
 				return
@@ -237,6 +244,13 @@ func run():
 					actor.configure(witness,specs[spec.id])
 					fresh.actors.append(actor.snapshot())
 				witness.free()
+				# Frozen Intake entry facing, independently authored rather than live capture.
+				if authored.data.spawn_yaw != 0:
+					push_error("Intake entry-facing contract changed; update independent witness")
+					await finish(1)
+					return
+				fresh.yaw = 0.0
+				fresh.pitch = 0.0
 				fresh.mark_checkpoint("entry",authored.world_position(authored.data.spawn))
 				expected_document = fresh.to_dict()
 			for settled_frame in range(4):
@@ -248,12 +262,14 @@ func run():
 				if replacement:
 					var awaiting_restart = cancel == "restart" and settled_frame < 2
 					var expected_mouse = Input.MOUSE_MODE_VISIBLE if awaiting_restart else Input.MOUSE_MODE_CAPTURED
-					if game.playing == awaiting_restart or paused or game.placement_pending != awaiting_restart or not is_instance_valid(game.level) or not is_instance_valid(game.player) or game.level.get_instance_id() != replacement_level_id or game.player.get_instance_id() != replacement_player_id or Input.mouse_mode != expected_mouse or game.music.player.playing == awaiting_restart or game.menu_scroll.visible != awaiting_restart:
+					var expected_captures: int = pending_captures+(0 if awaiting_restart else 1)
+					var native_mode_supported: bool = DisplayServer.get_name() != "headless"
+					if game.playing == awaiting_restart or paused or game.placement_pending != awaiting_restart or not is_instance_valid(game.level) or not is_instance_valid(game.player) or game.level.get_instance_id() != replacement_level_id or game.player.get_instance_id() != replacement_player_id or game.capture_requests != expected_captures or (native_mode_supported and Input.mouse_mode != expected_mouse) or game.music.player.playing == awaiting_restart or game.menu_scroll.visible != awaiting_restart:
 						push_error("Old pending continuation must not prematurely activate/capture or overwrite replacement: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
 						await finish(1)
 						return
 				else:
-					if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.music.player.playing:
+					if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or game.capture_requests != pending_captures or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.music.player.playing:
 						push_error("INTENDED RED: pending startup must not reactivate/capture after cancellation: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
 						await finish(1)
 						return
