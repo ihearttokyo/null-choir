@@ -211,14 +211,19 @@ var x_marker_refs: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://processional_earned_exit_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not await walk_to_palanquin_loop(ExitMain.new(),prefix) or not start_exit_stage():
-		await finish(1)
-		return
-	if not await exit_route(X_ROUTE) or not await gate_input_final() or not await exit_route(X_EXIT) or not await organ_fight(X_FINAL) or not await processional_exit():
+	if not await walk_to_processional_exit(ExitMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-debug candidate earned Intake/Foundry/complete Processional exit and fourth-level menu only; native virtual Input/original actors/private-save evidence. Not physical input, full eight-level campaign, rendering/audio/performance or packed-app acceptance.")
 	await finish(0)
+
+func walk_to_processional_exit(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not await walk_to_palanquin_loop(observer,prefix) or not start_exit_stage():
+		return false
+	if not await exit_route(X_ROUTE) or not await gate_input_final() or not await exit_route(X_EXIT) or not await organ_fight(X_FINAL) or not await processional_exit():
+		return false
+	return true
 
 func start_exit_stage() -> bool:
 	var earned: Dictionary = {"health":100,"armor":200,"ammo":[0,138,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
