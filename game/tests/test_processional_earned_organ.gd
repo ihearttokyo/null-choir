@@ -186,14 +186,19 @@ var o_markers: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://processional_earned_organ_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not await walk_to_processional_entry(OrganMain.new(),prefix) or not await start_organ():
-		await finish(1)
-		return
-	if not await organ_route([[16.5,24.5]]) or not await organ_route(ORGAN) or not await organ_fight(O_BRANCH) or not await organ_blood() or not await organ_route(ORGAN_RETURN) or not await organ_result():
+	if not await walk_to_organ_loop(OrganMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-debug candidate earned first Organ loop/blood/return only. Actual virtual Input, native original actors and exact debug projectile pairing; not physical input, full Processional/campaign, audio/GPU/performance or packed-app attribution.")
 	await finish(0)
+
+func walk_to_organ_loop(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not await walk_to_processional_entry(observer,prefix) or not await start_organ():
+		return false
+	if not await organ_route([[16.5,24.5]]) or not await organ_route(ORGAN) or not await organ_fight(O_BRANCH) or not await organ_blood() or not await organ_route(ORGAN_RETURN) or not await organ_result():
+		return false
+	return true
 
 func start_organ() -> bool:
 	var earned: Dictionary = {"health":86,"armor":80,"ammo":[0,180,13,0,0,0],"owned_weapons":[0,1,2],"weapon":2}
