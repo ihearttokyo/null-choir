@@ -33,6 +33,7 @@ var east_damage: Dictionary = {}
 var east_hp: Dictionary = {}
 var markers_before: Dictionary = {}
 var expected_entry: Dictionary = {}
+var expected_completion: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://intake_complete_walk_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
@@ -271,6 +272,9 @@ func exit_input() -> bool:
 	var before: Dictionary = resource_snapshot()
 	expected_entry = before.duplicate(true)
 	expected_entry.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+	expected_completion = expected_entry.duplicate(true)
+	expected_completion.merge({"version":game.state.VERSION,"difficulty":1,"level_index":1,"discoveries":[],"explored":[],
+		"checkpoint":expected_entry.duplicate(true),"level_start":expected_entry.duplicate(true)})
 	var witness: Array = game.state.removed.duplicate()
 	for node in [route_level,route_player]+game.enemies: retired.append(weakref(node))
 	aim_interaction([14.5,1.5])
@@ -323,11 +327,16 @@ func exit_input() -> bool:
 	clue_save.discoveries = [0]
 	var discovered = game.state.get_script().new()
 	if not expect(discovered.from_dict(clue_save) and not saved_exit_matches(discovered),"Schema-valid unearned saved clue must fail completion oracle"): return false
+	for mismatch in [{"difficulty":0},{"yaw":0.0},{"pitch":0.0},{"explored":[[14,30]]}]:
+		var corrupt: Dictionary = saved.to_dict().duplicate(true)
+		for key in mismatch: corrupt[key] = mismatch[key]
+		var changed = game.state.get_script().new()
+		if not expect(changed.from_dict(corrupt) and not saved_exit_matches(changed),"Schema-valid wrong completion field must fail the independent full save contract: "+str(mismatch)): return false
 	print("INTAKE_COMPLETE_EXIT east_ticks=",east_ticks," actual_east_frames=",east_elapsed()," prefix_and_route_ticks=",walk_ticks," shots=",game.shots," resources=",resource_snapshot()," earned_intake_witness=",witness," east_damage=",east_damage)
 	return true
 
 func saved_exit_matches(saved) -> bool:
-	return saved.level_index == 1 and saved.position == Vector3.ZERO and saved.checkpoint_id == "entry" and saved.ammo == expected_entry.ammo and saved.health == expected_entry.health and saved.armor == expected_entry.armor and saved.weapon == expected_entry.weapon and saved.owned_weapons == expected_entry.owned_weapons and saved.keys == [] and saved.removed == [] and saved.discoveries == [] and saved.checkpoint == expected_entry and saved.level_start == expected_entry
+	return saved.to_dict() == expected_completion
 
 func all_original_defeated(witnesses: Array) -> bool:
 	if witnesses.size() != 23 or actors.size() != 23: return false
