@@ -914,6 +914,29 @@ func _verify_passive_tick() -> void:
 	while not driver.completed: await get_tree().physics_frame
 	driver.free()
 
+class ExportFireTick:
+	extends Node
+	var game
+	var observer
+	var completed: bool = false
+	var fired: bool = false
+	func _physics_process(_delta: float) -> void:
+		if is_instance_valid(game) and is_instance_valid(observer) and observer == game.player:
+			fired = observer.fire()
+		completed = true
+		set_physics_process(false)
+
+func _verify_fire_tick() -> bool:
+	var driver = ExportFireTick.new()
+	driver.game = self
+	driver.observer = player
+	driver.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(driver)
+	while not driver.completed: await get_tree().physics_frame
+	var fired: bool = driver.fired
+	driver.free()
+	return fired
+
 func _export_art_checks() -> Dictionary:
 	var expected_art = {"ribbed_wall":1,"conduit":1}
 	for art in Level.PURPOSE_ART.values()+Level.AMMO_ART+["marker_ivorykey"]: expected_art[art] = 0
@@ -974,7 +997,7 @@ func _verify_export() -> void:
 	checks["live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
 	player.set_physics_process(false)
 	for actor in enemies: actor.set_physics_process(false)
-	checks["fire"] = player.fire() and state.ammo[1] == 89
+	checks["fire"] = await _verify_fire_tick() and state.ammo[1] == 89
 	pause_game()
 	checks["pause"] = get_tree().paused and not playing
 	await restore_checkpoint()
@@ -1033,7 +1056,7 @@ func _verify_export() -> void:
 	await _verify_passive_tick()
 	_process(0)
 	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/scattergun.png")
-	checks["scattergun_fire"] = player.fire() and state.ammo[2] == 15
+	checks["scattergun_fire"] = await _verify_fire_tick() and state.ammo[2] == 15
 	player.position = level.layout.world_position([16.5,16.5])
 	await get_tree().physics_frame
 	await get_tree().physics_frame
@@ -1066,7 +1089,7 @@ func _verify_export() -> void:
 			checks[profile.asset+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
 			before = state.ammo[weapon]
 			player.camera.rotation.x = 0.6
-			checks[profile.asset+"_fire"] = player.fire() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
+			checks[profile.asset+"_fire"] = await _verify_fire_tick() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
 			if weapon == 4:
 				checks["marrow_launcher_projectile"] = level.get_children().filter(func(node): return node.get_script() == Player.Projectile).size() == 1
 			acquired_late_weapons.append(weapon)
