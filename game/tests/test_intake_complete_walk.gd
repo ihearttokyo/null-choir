@@ -32,6 +32,7 @@ var east_last_health: int = 0
 var east_damage: Dictionary = {}
 var east_hp: Dictionary = {}
 var markers_before: Dictionary = {}
+var expected_entry: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://intake_complete_walk_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
@@ -268,6 +269,8 @@ func exit_input() -> bool:
 	if not expect(not all_original_defeated(survivor),"Alive non-required actor must fail pre-exit defeat oracle"): return false
 	if not live_route() or not expect(game.state.keys == ["blood","ivory"] and game.state.removed.count("containment_gate") == 1 and "encounter:intake_siphon_return" in game.state.removed and "encounter:intake_gate_release" in game.state.removed,"Actual earned gate and eastern return encounters precede Intake exit"): return false
 	var before: Dictionary = resource_snapshot()
+	expected_entry = before.duplicate(true)
+	expected_entry.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 	var witness: Array = game.state.removed.duplicate()
 	for node in [route_level,route_player]+game.enemies: retired.append(weakref(node))
 	aim_interaction([14.5,1.5])
@@ -285,6 +288,7 @@ func exit_input() -> bool:
 	for node in game.menu.get_children():
 		if node is Button and not node.is_queued_for_deletion() and node.text == "Descend to The Foundry": descend = true
 	if not expect(descend and FileAccess.file_exists(game.progress_path),"Actual completion must expose Foundry descent and persist isolated progress"): return false
+	if not expect(saved_exit_matches(game.state),"Live Foundry state and both recovery envelopes must match independent earned entry resources with no discoveries"): return false
 	var saved = game.state.get_script().new()
 	if not expect(saved.load_progress(game.progress_path) and saved_exit_matches(saved),"Read actual isolated exit save: next-map progress must preserve finite earned resources"): return false
 	for mismatch in [{"armor":game.state.armor+1},{"weapon":0}]:
@@ -301,11 +305,29 @@ func exit_input() -> bool:
 		corrupt[envelope].ammo[1] += 1
 		var changed = game.state.get_script().new()
 		if not expect(changed.from_dict(corrupt) and not saved_exit_matches(changed),"Valid-but-stale recovery snapshot must fail exit oracle: "+envelope): return false
+	for envelope in ["checkpoint","level_start"]:
+		var original: Dictionary = game.state[envelope].duplicate(true)
+		var stale: Dictionary = saved.to_dict().duplicate(true)
+		stale[envelope].keys = ["blood","ivory"]
+		game.state[envelope].keys = ["blood","ivory"]
+		var changed = game.state.get_script().new()
+		var rejected: bool = changed.from_dict(stale) and not saved_exit_matches(changed)
+		game.state[envelope] = original
+		if not expect(rejected,"Jointly stale live and saved Intake keys must fail independent Foundry recovery baseline: "+envelope): return false
+	var original_clues: Array = game.state.discoveries.duplicate()
+	game.state.discoveries = [0]
+	var live_clue_rejected: bool = not saved_exit_matches(game.state)
+	game.state.discoveries = original_clues
+	if not expect(live_clue_rejected,"Unearned live completion clue must fail the independent exit oracle"): return false
+	var clue_save: Dictionary = saved.to_dict().duplicate(true)
+	clue_save.discoveries = [0]
+	var discovered = game.state.get_script().new()
+	if not expect(discovered.from_dict(clue_save) and not saved_exit_matches(discovered),"Schema-valid unearned saved clue must fail completion oracle"): return false
 	print("INTAKE_COMPLETE_EXIT east_ticks=",east_ticks," actual_east_frames=",east_elapsed()," prefix_and_route_ticks=",walk_ticks," shots=",game.shots," resources=",resource_snapshot()," earned_intake_witness=",witness," east_damage=",east_damage)
 	return true
 
 func saved_exit_matches(saved) -> bool:
-	return saved.level_index == 1 and saved.position == Vector3.ZERO and saved.ammo == game.state.ammo and saved.health == game.state.health and saved.armor == game.state.armor and saved.weapon == game.state.weapon and saved.owned_weapons == game.state.owned_weapons and saved.keys == [] and saved.removed == [] and saved.checkpoint == game.state.checkpoint and saved.level_start == game.state.level_start
+	return saved.level_index == 1 and saved.position == Vector3.ZERO and saved.checkpoint_id == "entry" and saved.ammo == expected_entry.ammo and saved.health == expected_entry.health and saved.armor == expected_entry.armor and saved.weapon == expected_entry.weapon and saved.owned_weapons == expected_entry.owned_weapons and saved.keys == [] and saved.removed == [] and saved.discoveries == [] and saved.checkpoint == expected_entry and saved.level_start == expected_entry
 
 func all_original_defeated(witnesses: Array) -> bool:
 	if witnesses.size() != 23 or actors.size() != 23: return false
