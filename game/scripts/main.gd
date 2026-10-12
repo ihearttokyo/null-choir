@@ -931,7 +931,7 @@ func _export_art_checks() -> Dictionary:
 		if art.begins_with("marker_"):
 			var nodes = [node]+node.find_children("*","",true,false)
 			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
-			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.visible and part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
+			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.is_visible_in_tree() and part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
 				marker_models[node.get_instance_id()] = art
 	var checks = {}
 	var marker_ids = []
@@ -947,7 +947,7 @@ func _export_art_checks() -> Dictionary:
 		var valid = is_instance_valid(marker) and marker is Node3D
 		if valid:
 			valid = marker.get_parent() == level and marker.scene_file_path == "res://assets/art/world/"+art+".glb" and marker_models.get(marker.get_instance_id(),"") == art and not marker.get_instance_id() in marker_ids
-			valid = valid and marker.visible and marker.position.is_equal_approx(level.layout.world_position(spec.cell)+Vector3.UP*0.06) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
+			valid = valid and marker.is_visible_in_tree() and marker.position.is_equal_approx(level.layout.world_position(spec.cell)+Vector3.UP*0.06) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
 			marker_ids.append(marker.get_instance_id())
 		checks["marker_"+spec.id] = valid
 	checks["marker_count"] = level.markers.size() == remaining

@@ -32,6 +32,28 @@ func check_maps() -> bool:
 		var spec: Dictionary = level.layout.data.pickups[0]
 		var marker = level.markers[spec.id]
 		var art: String = PurposeContract.expected_art(spec)
+		var leaf: MeshInstance3D = PurposeContract.mesh_nodes(marker).filter(func(node): return node != marker)[0]
+		var parent: Node = leaf.get_parent()
+		var child_index: int = leaf.get_index()
+		var original_transform: Transform3D = leaf.transform
+		var hidden = Node3D.new()
+		parent.add_child(hidden)
+		leaf.reparent(hidden,true)
+		hidden.visible = false
+		var locally_visible: bool = leaf.visible and marker.visible and not leaf.is_visible_in_tree()
+		var hidden_rejected: bool = not game._export_art_checks()["marker_"+spec.id]
+		var oracle_rejected: bool = not PurposeContract.check_marker(level,spec,func(condition: bool,_detail: String): return condition)
+		leaf.reparent(parent,true)
+		parent.move_child(leaf,child_index)
+		leaf.transform = original_transform
+		hidden.free()
+		if not expect(locally_visible,"Native hidden ancestor preserves leaf/root local visibility while hiding the mesh"): return false
+		if not expect(hidden_rejected,"Export marker checks reject an invisible inherited mesh"): return false
+		if not expect(oracle_rejected,"Independent purpose oracle rejects an invisible inherited mesh"): return false
+		level.visible = false
+		var level_rejected: bool = not game._export_art_checks()["marker_"+spec.id]
+		level.visible = true
+		if not expect(level_rejected and all_pass(game._export_art_checks()),"Hidden scene ancestor fails; restored authored scene passes"): return false
 		level.remove_child(marker)
 		var checks: Dictionary = game._export_art_checks()
 		level.add_child(marker)
