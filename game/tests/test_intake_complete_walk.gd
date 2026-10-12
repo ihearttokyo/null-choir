@@ -17,12 +17,13 @@ class CompleteMain:
 		super.collect_pickup(id)
 		if id == "nave_health":
 			nave_calls += 1
-			nave_reward_ok = nave_reward_ok and before < 100 and state.health == mini(100,before+30) and state.removed.count(id) == 1
+			nave_reward_ok = nave_reward_ok and before < 100 and state.health == mini(100,before+30) and state.removed.count(id) == 1 and state.keys == ["blood"]
 	func shot(weapon: int) -> void:
 		shot_clock_ok = shot_clock_ok and is_instance_valid(player) and player._current_map() and is_zero_approx(player.shot_age(weapon)) and player.active_play_time > 0.0
 		super.shot(weapon)
 
 var east_started: bool = false
+var ivory_input_started: bool = false
 var east_ticks: int = 0
 var east_origin_frame: int = 0
 var east_start_shots: int = 0
@@ -180,6 +181,8 @@ func eastern_fight() -> bool:
 	return expect(worker.hp == 0,"NATIVE RED original eastern worker15 must die within the predeclared 240-frame fight")
 
 func ivory_input() -> bool:
+	if not expect(game.state.keys == ["blood"],"Ivory must remain absent until its real interaction input starts"): return false
+	ivory_input_started = true
 	var worker = game.enemies.filter(func(actor): return actor.id == "intake_enemy_15")[0]
 	if not expect(worker.hp == 0 and game.west_deaths.get(worker.id,0) == 1 and game.west_finishes.get(worker.id,false) and east_damage[worker.id] > 0 and game.state.removed.count(worker.id) == 1 and worker.collision_layer == 0 and worker.collision_mask == 0 and game.shots > east_start_shots and game.feedback_ok,"NATIVE RED worker15 must naturally die once through observed Player fire/aim/LOS and collision retirement"): return false
 	var before: Dictionary = resource_snapshot()
@@ -237,6 +240,7 @@ func east_elapsed() -> int:
 
 func live_route() -> bool:
 	if not east_started: return super.live_route()
+	if not ivory_input_started and not expect(game.state.keys == ["blood"],"Only blood is earned through nave healing and siphon approach"): return false
 	if not expect(east_elapsed() <= EAST_LIMIT,"All native east frames, including process waits, share the frozen budget"): return false
 	if not expect(not paused and game.playing and not game.placement_pending and game.state.level_index == 0 and is_instance_valid(route_level) and is_instance_valid(route_player) and game.level == route_level and game.player == route_player and not route_level.is_queued_for_deletion() and route_player._current_map() and game.is_processing() and game.is_physics_processing() and route_player.is_physics_processing() and game.state.health > 0 and game.state.health <= 100,"East retains the live original automatic Main/Player/map; no recovery or replacement"): return false
 	if not expect(game.enemies.size() == 23 and actors.size() == 23,"East retains all 23 original Intake actors"): return false
@@ -261,7 +265,6 @@ func exit_input() -> bool:
 	if not expect(all_original_defeated(defeats),"Every claimed original enemy must be naturally dead/removed before exit teardown"): return false
 	var survivor: Array = defeats.duplicate(true)
 	survivor[-1].hp = 1
-	survivor[-1].removed = 0
 	if not expect(not all_original_defeated(survivor),"Alive non-required actor must fail pre-exit defeat oracle"): return false
 	if not live_route() or not expect(game.state.keys == ["blood","ivory"] and game.state.removed.count("containment_gate") == 1 and "encounter:intake_siphon_return" in game.state.removed and "encounter:intake_gate_release" in game.state.removed,"Actual earned gate and eastern return encounters precede Intake exit"): return false
 	var before: Dictionary = resource_snapshot()
@@ -276,7 +279,7 @@ func exit_input() -> bool:
 	release_actions()
 	await process_frame
 	await process_frame
-	if not expect(game.state.level_index == 1 and not game.playing and not game.placement_pending and game.level == null and game.player == null and game.state.keys.is_empty() and game.state.removed.is_empty() and game.state.checkpoint_id == "entry" and game.state.ammo == before.ammo and game.state.owned_weapons == before.owned_weapons and game.state.weapon == before.weapon and game.state.armor == before.armor and game.state.health > 0 and game.state.health <= before.health,"Actual production exit advances only one level, preserves finite resources and retires Intake"): return false
+	if not expect(game.state.level_index == 1 and game.state.position == Vector3.ZERO and not game.playing and not game.placement_pending and game.level == null and game.player == null and game.state.keys.is_empty() and game.state.removed.is_empty() and game.state.checkpoint_id == "entry" and game.state.ammo == before.ammo and game.state.owned_weapons == before.owned_weapons and game.state.weapon == before.weapon and game.state.armor == before.armor and game.state.health > 0 and game.state.health <= before.health,"Actual production exit advances only one level, preserves finite resources and retires Intake"): return false
 	if not expect(east_elapsed() <= EAST_LIMIT and retired.all(func(reference): return reference.get_ref() == null) and markers_before.values().all(func(reference): return reference.get_ref() == null),"Actual exit must drain every original Intake level/player/actor and observed marker within the shared deadline"): return false
 	var descend: bool = false
 	for node in game.menu.get_children():
@@ -289,6 +292,10 @@ func exit_input() -> bool:
 		for key in mismatch: corrupt[key] = mismatch[key]
 		var changed = game.state.get_script().new()
 		if not expect(changed.from_dict(corrupt) and not saved_exit_matches(changed),"Valid-but-wrong persisted resource must fail exit oracle: "+str(mismatch)): return false
+	var wrong_entry: Dictionary = saved.to_dict().duplicate(true)
+	wrong_entry.position = [58.0,0.0,8.0]
+	var misplaced = game.state.get_script().new()
+	if not expect(misplaced.from_dict(wrong_entry) and not saved_exit_matches(misplaced),"Schema-valid old Intake exit position must fail the Foundry-entry oracle"): return false
 	for envelope in ["checkpoint","level_start"]:
 		var corrupt: Dictionary = saved.to_dict().duplicate(true)
 		corrupt[envelope].ammo[1] += 1
@@ -298,7 +305,7 @@ func exit_input() -> bool:
 	return true
 
 func saved_exit_matches(saved) -> bool:
-	return saved.level_index == 1 and saved.ammo == game.state.ammo and saved.health == game.state.health and saved.armor == game.state.armor and saved.weapon == game.state.weapon and saved.owned_weapons == game.state.owned_weapons and saved.keys == [] and saved.removed == [] and saved.checkpoint == game.state.checkpoint and saved.level_start == game.state.level_start
+	return saved.level_index == 1 and saved.position == Vector3.ZERO and saved.ammo == game.state.ammo and saved.health == game.state.health and saved.armor == game.state.armor and saved.weapon == game.state.weapon and saved.owned_weapons == game.state.owned_weapons and saved.keys == [] and saved.removed == [] and saved.checkpoint == game.state.checkpoint and saved.level_start == game.state.level_start
 
 func all_original_defeated(witnesses: Array) -> bool:
 	if witnesses.size() != 23 or actors.size() != 23: return false
