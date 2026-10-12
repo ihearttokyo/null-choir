@@ -142,27 +142,28 @@ var f_shots_before: int = 0
 
 func run() -> void:
 	prefix = "user://foundry_earned_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not expect(has_method("walk_to_intake_exit"),"DEPENDENCY: exact non-quitting Intake helper patch must be integrated first"):
-		await finish(1)
-		return
-	if not await call("walk_to_intake_exit",FoundryMain.new(),prefix) or not await descend_foundry():
-		await finish(1)
-		return
-	for block in [ENTRY,FURNACE]:
-		if not await foundry_route(block):
-			await finish(1)
-			return
-	if not await fight_ids(["foundry_enemy_03","foundry_enemy_04","foundry_enemy_05","foundry_enemy_21"]) or not await seal_input("foundry_blood",[4.5,11.5],"blood") or not await foundry_route(WEST_RETURN):
-		await finish(1)
-		return
-	if not expect(route_player.position.distance_to(route_level.layout.world_position([12.5,20.5])+Vector3.UP*0.04) < 0.2,"First authored loop returns to the same junction") or not await foundry_route(CRUCIBLE) or not await fight_ids(["foundry_enemy_11","foundry_enemy_12","foundry_enemy_13","foundry_enemy_14","foundry_enemy_22"]) or not await seal_input("foundry_ivory",[27.5,9.5],"ivory") or not await foundry_route(EAST_RETURN):
-		await finish(1)
-		return
-	if not expect(route_player.position.distance_to(route_level.layout.world_position([16.5,20.5])+Vector3.UP*0.04) < 0.2,"Second authored loop returns to its original junction") or not await foundry_route(GATE_APPROACH) or not await foundry_gate() or not await foundry_route(F_EXIT) or not await fight_ids(f_kind.keys()) or not await foundry_exit():
+	if not await walk_to_foundry_exit(FoundryMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-native candidate earned Intake->Foundry two-loop finite-input traversal and actual exit. Scripted aim/virtual Input; not physical input, full campaign, GPU/audio/performance or packed-app acceptance.")
 	await finish(0)
+
+func walk_to_foundry_exit(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not expect(has_method("walk_to_intake_exit"),"DEPENDENCY: exact non-quitting Intake helper patch must be integrated first"):
+		return false
+	if not await call("walk_to_intake_exit",observer,prefix) or not await descend_foundry():
+		return false
+	for block in [ENTRY,FURNACE]:
+		if not await foundry_route(block):
+			return false
+	if not await fight_ids(["foundry_enemy_03","foundry_enemy_04","foundry_enemy_05","foundry_enemy_21"]) or not await seal_input("foundry_blood",[4.5,11.5],"blood") or not await foundry_route(WEST_RETURN):
+		return false
+	if not expect(route_player.position.distance_to(route_level.layout.world_position([12.5,20.5])+Vector3.UP*0.04) < 0.2,"First authored loop returns to the same junction") or not await foundry_route(CRUCIBLE) or not await fight_ids(["foundry_enemy_11","foundry_enemy_12","foundry_enemy_13","foundry_enemy_14","foundry_enemy_22"]) or not await seal_input("foundry_ivory",[27.5,9.5],"ivory") or not await foundry_route(EAST_RETURN):
+		return false
+	if not expect(route_player.position.distance_to(route_level.layout.world_position([16.5,20.5])+Vector3.UP*0.04) < 0.2,"Second authored loop returns to its original junction") or not await foundry_route(GATE_APPROACH) or not await foundry_gate() or not await foundry_route(F_EXIT) or not await fight_ids(f_kind.keys()) or not await foundry_exit():
+		return false
+	return true
 
 func descend_foundry() -> bool:
 	var carried: Dictionary = resource_snapshot()
