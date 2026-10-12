@@ -71,12 +71,12 @@ static func check_marker(level, spec: Dictionary, check: Callable) -> bool:
 	var path: String = "res://assets/art/world/"+expected_art(spec)+".glb"
 	if not check.call(marker is Node3D and marker.get_parent() == level and marker.scene_file_path == path,"Purpose-specific native scene: "+spec.id+" expected="+path): return false
 	var anchor = level.layout.world_position(spec.cell)+Vector3.UP*0.06
-	if not check.call(marker.visible and marker.position.is_equal_approx(anchor) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180)),"Metre-authored visible marker retains exact anchor/default scale: "+spec.id): return false
+	if not check.call(marker.is_visible_in_tree() and marker.position.is_equal_approx(anchor) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180)),"Metre-authored visible marker retains exact anchor/default scale: "+spec.id): return false
 	if not check.call(collision_nodes(marker).is_empty(),"Visual-only marker has no CollisionObject/CollisionShape/CollisionPolygon: "+spec.id): return false
 	var meshes = mesh_nodes(marker)
 	if not check.call(not meshes.is_empty(),"Purpose scene has native meshes: "+spec.id): return false
 	for node in meshes:
-		if not check.call(node.visible and node.mesh is ArrayMesh and not node.mesh is SphereMesh,"Authored native ArrayMesh, no generic sphere core: "+spec.id): return false
+		if not check.call(node.is_visible_in_tree() and node.mesh is ArrayMesh and not node.mesh is SphereMesh,"Authored native ArrayMesh, no generic sphere core: "+spec.id): return false
 		if not check.call(node.mesh.get_surface_count() > 0,"Native mesh has surfaces: "+spec.id): return false
 		for material in [node.material_override,node.material_overlay]:
 			if material != null and not check.call(material is BaseMaterial3D,"Native override/overlay material: "+spec.id): return false
