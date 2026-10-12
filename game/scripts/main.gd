@@ -226,11 +226,14 @@ func start_level() -> void:
 	menu_scroll.hide()
 	player.cancel_actions()
 	playing = true
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_capture_game_mouse()
 	if music != null:
 		music.set_paused(false)
 		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _capture_game_mouse() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _level_load_failed(detail: String) -> void:
 	show_title()
@@ -589,7 +592,7 @@ func resume_game() -> void:
 	get_tree().paused = false
 	playing = true
 	menu_scroll.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_capture_game_mouse()
 	if music != null: music.set_paused(false)
 	if effects != null: effects.set_paused(false)
 

@@ -154,7 +154,7 @@ func _normalized_resources(data: Dictionary) -> Dictionary:
 	var point = Vector3(data.position[0],data.position[1],data.position[2])
 	result.position = [point.x,point.y,point.z]
 	if result.has("yaw"): result.yaw = Enemy.canonical_yaw(result.yaw)
-	if result.has("pitch"): result.pitch = float(result.pitch)
+	if result.has("pitch"): result.pitch = _native_pitch(float(result.pitch))
 	for field in ["health", "armor", "weapon"]:
 		result[field] = int(result[field])
 	for field in ["ammo", "owned_weapons"]:
@@ -167,6 +167,10 @@ func _normalized_resources(data: Dictionary) -> Dictionary:
 			actor.yaw = Enemy.canonical_yaw(actor.yaw)
 	return result
 
+# Native camera precision also removes JSON parser last-bit drift; validation precedes this.
+func _native_pitch(value: float) -> float:
+	return clampf(Vector3(value,0,0).x,-1.35,1.35)
+
 func _apply_resources(data: Dictionary) -> void:
 	health = int(data.health)
 	armor = int(data.armor)
@@ -178,7 +182,7 @@ func _apply_resources(data: Dictionary) -> void:
 	checkpoint_id = data.checkpoint_id
 	position = Vector3(data.position[0], data.position[1], data.position[2])
 	yaw = Enemy.canonical_yaw(data.yaw) if data.has("yaw") else null
-	pitch = float(data.pitch) if data.has("pitch") else null
+	pitch = _native_pitch(float(data.pitch)) if data.has("pitch") else null
 	actors = _normalized_resources(data).actors if data.has("actors") else null
 
 static func actor_specs(layout) -> Dictionary:
