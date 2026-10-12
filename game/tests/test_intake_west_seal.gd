@@ -89,51 +89,50 @@ func _initialize() -> void:
 
 func run() -> void:
 	prefix = "user://intake_west_seal_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	release_actions()
-	if not expect(Engine.physics_ticks_per_second == 60,"SETUP: requires native 60-Hz physics"):
+	if not await walk_to_west_seal(WestMain.new(),prefix):
 		await finish(1)
 		return
+	print("PASS source-native candidate earned Intake west blood seal only; inherited virtual movement/camera aim/Input fire, production interaction input and automatic original actors. Not human/OS input, east seal, exit, full Intake/campaign, GPU/audio or packed-app acceptance.")
+	await finish(0)
+
+func walk_to_west_seal(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	release_actions()
+	if not expect(Engine.physics_ticks_per_second == 60,"SETUP: requires native 60-Hz physics"):
+		return false
 	seed(1304)
-	game = WestMain.new()
+	game = observer
 	game.settings_path = prefix+"_preferences.json"
 	game.progress_path = prefix+"_campaign.json"
 	root.add_child(game)
 	if not press_menu("New campaign") or not press_menu("Relentless") or not await wait_entry() or not await walk_route():
-		await finish(1)
-		return
+		return false
 	game.victim = game.enemies.filter(func(actor): return actor.id == "intake_enemy_00")[0]
 	var spec: Dictionary = route_level.layout.data.enemies.filter(func(actor): return actor.id == game.victim.id)[0]
 	if not expect(spec.kind == "worker" and Vector2(spec.cell[0],spec.cell[1]) == Vector2(8.5,23.5) and game.victim.encounter_id.is_empty() and game.victim.active and game.victim.hp == 90 and game.shots == 0,"Original full-health early worker follows the earned entry pickup"):
-		await finish(1)
-		return
+		return false
 	if not await approach() or not await combat():
-		await finish(1)
-		return
+		return false
 	prefix_shots = game.shots
 	prefix_hits = game.hits
 	prefix_impacts = game.impacts
 	for id in WEST_IDS:
 		var matches: Array = game.enemies.filter(func(actor): return actor.id == id)
 		if not expect(matches.size() == 1,"Retain the named original west actor: "+id):
-			await finish(1)
-			return
+			return false
 		west_actors[id] = matches[0]
 		west_hp[id] = matches[0].hp
 		west_damage[id] = 0
 	var blocker: Dictionary = route_level.layout.data.enemies.filter(func(spec): return spec.id == "intake_enemy_03")[0]
 	if not expect(blocker.kind == "worker" and blocker.cell == [6.5,13.75] and west_actors[blocker.id].hp == 90 and WeaponPlayer.WEAPONS[1].max_ammo == 180 and 125+45 <= WeaponPlayer.WEAPONS[1].max_ammo and WeaponPlayer.WEAPONS[1].interval == 0.21,"Pin original worker03 and uncapped finite supply/cadence"):
-		await finish(1)
-		return
+		return false
 	if not expect(game.state.keys.is_empty() and not "blood_key" in game.state.removed and route_level.markers.has("blood_key"),"Coverage RED baseline: earned prefix has not collected the west blood seal"):
-		await finish(1)
-		return
+		return false
 	last_health = game.state.health
 	west_started = true
 	if not await west_route() or not await west_seal():
-		await finish(1)
-		return
-	print("PASS source-native candidate earned Intake west blood seal only; inherited virtual movement/camera aim/Input fire, production interaction input and automatic original actors. Not human/OS input, east seal, exit, full Intake/campaign, GPU/audio or packed-app acceptance.")
-	await finish(0)
+		return false
+	return true
 
 func west_route() -> bool:
 	var supplies: Array = route_level.layout.data.pickups.filter(func(spec): return spec.id == "upper_ammo")
