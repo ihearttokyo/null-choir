@@ -149,19 +149,23 @@ func _initialize() -> void:
 
 func run() -> void:
 	prefix = "user://processional_earned_entry_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not await walk_to_foundry_exit(EntryMain.new(),prefix) or not await descend_processional():
-		await finish(1)
-		return
-	for cell in P_ENTRY:
-		var started: int = east_elapsed()
-		if not await east_route([cell]) or not expect(east_elapsed()-started <= HOP_LIMIT,"Processional hop includes its final process wait within 240 frames"):
-			await finish(1)
-			return
-	if not await entry_fight() or not await entry_result():
+	if not await walk_to_processional_entry(EntryMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-native earned Processional ENTRY only: actual Descend, capped rivets, acquired scattergun, capped healing and input-fired original worker00 finish. Virtual Input/scripted aim; not physical input, third-level exit/campaign, rendered quality, audio/performance or packed-app acceptance.")
 	await finish(0)
+
+func walk_to_processional_entry(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not await walk_to_foundry_exit(observer,prefix) or not await descend_processional():
+		return false
+	for cell in P_ENTRY:
+		var started: int = east_elapsed()
+		if not await east_route([cell]) or not expect(east_elapsed()-started <= HOP_LIMIT,"Processional hop includes its final process wait within 240 frames"):
+			return false
+	if not await entry_fight() or not await entry_result():
+		return false
+	return true
 
 func descend_processional() -> bool:
 	var carried: Dictionary = resource_snapshot()
