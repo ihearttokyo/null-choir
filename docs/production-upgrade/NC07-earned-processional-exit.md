@@ -66,3 +66,25 @@ physical control, listening, visual-reference parity, current exported app,
 notarization or performance acceptance follows. Rollback reverts this focused
 PR and restores the prior reader, capture setters and quitting Palanquin wrapper. Retained raw evidence and
 rejected producer experiments remain outside Git.
+
+## Nonquitting Processional exit — 13 October 2026
+
+`walk_to_processional_exit(observer, profile_prefix)` now returns the complete
+earned three-map route to its caller without quitting or removing the private
+profile. The existing standalone wrapper still owns reporting and `finish()`.
+Every assertion, stage order and bound outside the original wrapper is unchanged.
+The new handoff fixture checks the same Main/profile, complete next-level envelope
+and drained old nodes after the actual helper returns.
+
+The missing-method native check fails in0.655 seconds, then passes in0.553.
+Independent correctness and Ponytail reviews are clean. Post-review standalone
+and handoff routes pass in23.016 and22.994 seconds. The ordinary-wall handoff
+passes in314.205 seconds with1077 final physics frames,13 pistol shots, all26
+original deaths and the same100 health,200 armor,125 pistol rounds and32 shells.
+These are source-native virtual-input results, not performance measurements.
+
+This test-only change does not start the fourth map or establish full-campaign,
+physical-input, visual, listening or current packed-app acceptance. Fourth-entry
+observer retirement and a fresh route epoch remain the next slice. Rollback
+reverts only this helper extraction, its two fixtures and this section; production
+save precision and mouse-capture behavior remain unchanged.
