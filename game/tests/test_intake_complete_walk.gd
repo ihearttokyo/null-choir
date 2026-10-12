@@ -255,6 +255,14 @@ func live_route() -> bool:
 	return expect(seen.size() == 23 and game.rate_ok and game.ticks >= walk_ticks-2 and game.shot_ok and game.shot_clock_ok and game.state.ammo == [0,170-game.shots,0,0,0,0] and game.state.ammo[1] >= 0 and game.state.ammo[1] <= WeaponPlayer.WEAPONS[1].max_ammo and game.state.weapon == 1 and game.state.owned_weapons == [0,1] and game.state.armor == 0 and game.state.discoveries.is_empty(),"Original shared native cadence, shot-age, finite earned ammo and unchanged pistol-only ownership remain mandatory")
 
 func exit_input() -> bool:
+	var defeats: Array = []
+	for actor in game.enemies:
+		defeats.append({"id":actor.id,"hp":actor.hp,"removed":game.state.removed.count(actor.id),"layer":actor.collision_layer,"mask":actor.collision_mask})
+	if not expect(all_original_defeated(defeats),"Every claimed original enemy must be naturally dead/removed before exit teardown"): return false
+	var survivor: Array = defeats.duplicate(true)
+	survivor[-1].hp = 1
+	survivor[-1].removed = 0
+	if not expect(not all_original_defeated(survivor),"Alive non-required actor must fail pre-exit defeat oracle"): return false
 	if not live_route() or not expect(game.state.keys == ["blood","ivory"] and game.state.removed.count("containment_gate") == 1 and "encounter:intake_siphon_return" in game.state.removed and "encounter:intake_gate_release" in game.state.removed,"Actual earned gate and eastern return encounters precede Intake exit"): return false
 	var before: Dictionary = resource_snapshot()
 	var witness: Array = game.state.removed.duplicate()
@@ -281,8 +289,21 @@ func exit_input() -> bool:
 		for key in mismatch: corrupt[key] = mismatch[key]
 		var changed = game.state.get_script().new()
 		if not expect(changed.from_dict(corrupt) and not saved_exit_matches(changed),"Valid-but-wrong persisted resource must fail exit oracle: "+str(mismatch)): return false
+	for envelope in ["checkpoint","level_start"]:
+		var corrupt: Dictionary = saved.to_dict().duplicate(true)
+		corrupt[envelope].ammo[1] += 1
+		var changed = game.state.get_script().new()
+		if not expect(changed.from_dict(corrupt) and not saved_exit_matches(changed),"Valid-but-stale recovery snapshot must fail exit oracle: "+envelope): return false
 	print("INTAKE_COMPLETE_EXIT east_ticks=",east_ticks," actual_east_frames=",east_elapsed()," prefix_and_route_ticks=",walk_ticks," shots=",game.shots," resources=",resource_snapshot()," earned_intake_witness=",witness," east_damage=",east_damage)
 	return true
 
 func saved_exit_matches(saved) -> bool:
-	return saved.level_index == 1 and saved.ammo == game.state.ammo and saved.health == game.state.health and saved.armor == game.state.armor and saved.weapon == game.state.weapon and saved.owned_weapons == game.state.owned_weapons and saved.keys == [] and saved.removed == []
+	return saved.level_index == 1 and saved.ammo == game.state.ammo and saved.health == game.state.health and saved.armor == game.state.armor and saved.weapon == game.state.weapon and saved.owned_weapons == game.state.owned_weapons and saved.keys == [] and saved.removed == [] and saved.checkpoint == game.state.checkpoint and saved.level_start == game.state.level_start
+
+func all_original_defeated(witnesses: Array) -> bool:
+	if witnesses.size() != 23 or actors.size() != 23: return false
+	var seen: Dictionary = {}
+	for witness in witnesses:
+		if not actors.has(witness.id) or seen.has(witness.id) or witness.hp != 0 or witness.removed != 1 or witness.layer != 0 or witness.mask != 0: return false
+		seen[witness.id] = true
+	return seen.size() == 23
