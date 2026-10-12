@@ -37,16 +37,21 @@ var expected_completion: Dictionary = {}
 
 func run() -> void:
 	prefix = "user://intake_complete_walk_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
+	if not await walk_to_intake_exit(CompleteMain.new(),prefix):
+		await finish(1)
+		return
+	print("PASS source-native earned Intake candidate through original west prefix, east fight/ramp, ivory, authored gate and actual exit; virtual Input/scripted aim only. Not human/OS input, Foundry/campaign, GPU/audio/performance or packed-app acceptance.")
+	await finish(0)
+
+func walk_to_intake_exit(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
 	# Parent owns the unchanged prefix extraction; never copy it or call its quitting run().
 	if not expect(has_method("walk_to_west_seal"),"DEPENDENCY NOT READY: parent must extract west walk_to_west_seal(observer, profile_prefix) -> bool without changing its assertions"):
-		await finish(1)
-		return
-	if not await call("walk_to_west_seal",CompleteMain.new(),prefix):
-		await finish(1)
-		return
+		return false
+	if not await call("walk_to_west_seal",observer,prefix):
+		return false
 	if not super.live_route() or not pin_east():
-		await finish(1)
-		return
+		return false
 	east_start_shots = game.shots
 	east_last_health = game.state.health
 	east_origin_frame = Engine.get_physics_frames()
@@ -55,19 +60,14 @@ func run() -> void:
 		east_damage[actor.id] = 0
 	east_started = true
 	if not await select_pistol() or not await east_route(BELL_RETURN) or not await gate_input(false) or not await east_route(SOUTH_CROSS):
-		await finish(1)
-		return
+		return false
 	if not expect(game.nave_calls == 1 and game.nave_reward_ok,"Exact once-only capped nave healing must occur at the actual production pickup callback"):
-		await finish(1)
-		return
+		return false
 	if not expect(game.state.removed.count("nave_health") == 1 and not route_level.markers.has("nave_health") and markers_before.nave_health.get_ref() == null,"Earn nave healing through actual once-only proximity and marker drain, not a resource grant") or not await east_route(SIPHON_ASCENT):
-		await finish(1)
-		return
+		return false
 	if not await eastern_fight() or not await ivory_input() or not await east_route(NORTH_RETURN) or not await gate_input(true) or not await east_route(EXIT_APPROACH) or not await exit_input():
-		await finish(1)
-		return
-	print("PASS source-native earned Intake candidate through original west prefix, east fight/ramp, ivory, authored gate and actual exit; virtual Input/scripted aim only. Not human/OS input, Foundry/campaign, GPU/audio/performance or packed-app acceptance.")
-	await finish(0)
+		return false
+	return true
 
 func pin_east() -> bool:
 	var data: Dictionary = route_level.layout.data
