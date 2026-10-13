@@ -15,6 +15,8 @@ Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.
 3. Obtain independent correctness and Ponytail review, repair findings, then run affected broader and native/app paths. Distinguish simulated, source-native and packed-app evidence.
 4. Compare one-variable improvements by correctness, visual/audio fidelity, performance, memory, operability and risk. Promote measured wins; retain failed experiments without lowering acceptance. Land validated changes and continue the next useful iteration.
 
+Before merging, inspect GitHub inline review comments, summaries, issue comments and unresolved threads, including the Codex bot. Wait for launched reviews to finish on the exact head; absent comments or checks do not prove completion. Fix or record a justified dismissal for every applicable finding from all substantive reviewers, including current-head and still-applicable older-head findings. Recheck the head and review state immediately before SHA-bound merge.
+
 Before creating or substantially redesigning assets, generate and inspect GPT Image references, retain them and verify each implementing worker inspected the actual selected images. Then derive editable Blender sources and compact runtime assets. Existing faithful mechanical fixes do not require new art.
 
 Queue up to 30 distinct, disjoint exploration tracks in resource-safe waves. Use wide "wacky" and lateral hypotheses alongside ordinary optimization, but promote only measured wins that preserve the approved game. Stay within actual concurrency and resource limits; serialize heavy experiments.
