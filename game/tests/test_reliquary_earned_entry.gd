@@ -81,7 +81,8 @@ class ReliquaryMain:
 		return state.level_index == 3 and _scene_level_index == 3 and is_instance_valid(level) and not level.is_queued_for_deletion() and is_instance_valid(player) and not player.is_queued_for_deletion() and player.get_parent() == level and level.layout.data.id == "reliquary"
 	func _capture_game_mouse() -> void:
 		# Count real default-setter attempts, including the whole unchanged prefix.
-		r_capture_attempts.append([state.level_index,_scene_level_index,get_instance_id(),level.get_instance_id() if is_instance_valid(level) else 0,player.get_instance_id() if is_instance_valid(player) else 0,Engine.get_physics_frames(),placement_pending,playing])
+		if not prefix_bookkeeping_retired:
+			r_capture_attempts.append([state.level_index,_scene_level_index,get_instance_id(),level.get_instance_id() if is_instance_valid(level) else 0,player.get_instance_id() if is_instance_valid(player) else 0,Engine.get_physics_frames(),placement_pending,playing])
 		super._capture_game_mouse()
 	func scene_roster_matches() -> bool:
 		var actual: Array = level.get_children().filter(func(node): return node is Enemy).map(func(node): return node.get_instance_id())
@@ -99,7 +100,7 @@ class ReliquaryMain:
 			result.append({"id":spec[0],"hp":spec[2],"position":[point.x,point.y,point.z],"yaw":observed_yaw(facing),"alerted":false})
 		return result
 	func _capture_actor_state() -> bool:
-		if fourth_scene():
+		if not prefix_bookkeeping_retired and fourth_scene():
 			r_captures += 1
 			r_ok = r_ok and r_captures == 1 and not playing and not placement_pending and not loaded_positions and state.position == Vector3(78,0,154) and player.position == Vector3(78,0.04,154) and player.rotation.y == 0.0 and player.camera.rotation.x == 0.0 and state.keys.is_empty() and state.removed.is_empty() and state.explored.is_empty() and state.actors == null and get_stack().any(func(frame): return str(frame.get("source","")).ends_with("/main.gd") and frame.get("function","") == "start_level")
 			r_level_id = level.get_instance_id()
@@ -121,11 +122,11 @@ class ReliquaryMain:
 			r_start = R_CARRY.duplicate(true)
 			r_start.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[78.0,0.0,154.0],"actors":expected,"yaw":0.0,"pitch":0.0},true)
 		var result: bool = super._capture_actor_state()
-		if fourth_scene(): r_ok = r_ok and result and state.actors == r_start.actors and state.yaw == 0.0 and state.pitch == 0.0
+		if not prefix_bookkeeping_retired and fourth_scene(): r_ok = r_ok and result and state.actors == r_start.actors and state.yaw == 0.0 and state.pitch == 0.0
 		return result
 	func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
-		if not fourth_scene() or not playing or get_tree().paused: return
+		if prefix_bookkeeping_retired or not fourth_scene() or not playing or get_tree().paused: return
 		r_ticks += 1
 		r_ok = r_ok and absf(delta-1.0/60.0) < 0.000001 and level.get_instance_id() == r_level_id and player.get_instance_id() == r_player_id
 		var cell: Vector2i = Vector2i((Vector2(player.position.x,player.position.z)/4.0).floor())
@@ -156,14 +157,20 @@ var r_pressed: bool = false
 
 func run() -> void:
 	prefix = "user://reliquary_earned_entry_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
-	if not expect(FileAccess.get_sha256("res://tests/test_processional_earned_exit.gd") == R_PREFIX_SHA and FileAccess.get_sha256("res://data/04_reliquary.json") == R_MAP_SHA,"Pinned accepted helper and authored fourth map before unchanged continuous prefix"):
-		await finish(1)
-		return
-	if not await walk_to_processional_exit(ReliquaryMain.new(),prefix) or not freeze_reliquary_boundary() or not await descend_reliquary():
+	if not await walk_to_reliquary_entry(ReliquaryMain.new(),prefix):
 		await finish(1)
 		return
 	print("PASS source-debug continuous earned three-map prefix to actual Reliquary ENTRY: same Main/Campaign/profile, original31 actors, exact phase envelopes and native floor/capsule. Default capture setter attempts only; virtual Input/scripted aim, not physical input, fourth combat/exit, cancellation, rendering/audio/performance, packed-app or full-eight acceptance.")
 	await finish(0)
+
+func walk_to_reliquary_entry(observer, profile_prefix: String) -> bool:
+	prefix = profile_prefix
+	if not expect(FileAccess.get_sha256("res://tests/test_processional_earned_exit.gd") == R_PREFIX_SHA and FileAccess.get_sha256("res://data/04_reliquary.json") == R_MAP_SHA,"Pinned accepted helper and authored fourth map before unchanged continuous prefix"):
+		# The supplied fresh fixture observer is owned until the prefix adopts it.
+		if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+		return false
+	if not await walk_to_processional_exit(observer,prefix) or not freeze_reliquary_boundary() or not await descend_reliquary(): return false
+	return true
 
 func observer_witness(fields: Array) -> Dictionary:
 	var result: Dictionary = {}
