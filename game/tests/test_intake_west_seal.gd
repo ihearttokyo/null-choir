@@ -6,6 +6,7 @@ const HOP_LIMIT = 240
 const WEST_ROUTE = [[7.5,23.5],[6.5,23.5],[6.5,20.5],[5.5,20.5],[6.5,20.5],[6.5,18.5],[6.0,17.5],[6.0,13.5],[4.0,13.5]]
 class WestMain:
 	extends "res://scripts/main.gd"
+	var prefix_bookkeeping_retired: bool = false
 	var ticks: int = 0
 	var rate_ok: bool = true
 	var shots: int = 0
@@ -28,35 +29,41 @@ class WestMain:
 		# shortcut: 240+900 firing ticks cannot exhaust 125 rounds; widen the oracle only for a longer fixture.
 		return preload("res://tests/test_intake_combat.gd").CombatMain.accepted_shot_slot(tick,last_tick,slot,interval_ticks,count,ammo-earned,weapon,held)
 	func _physics_process(delta: float) -> void:
-		if playing and not get_tree().paused:
+		if not prefix_bookkeeping_retired and playing and not get_tree().paused:
 			ticks += 1
 			rate_ok = rate_ok and absf(delta-1.0/60.0) < 0.000001
 			if not Input.is_action_pressed("fire"): shot_slot = -1.0
 	func shot(weapon: int) -> void:
-		shots += 1
-		var earned: int = 45 if state.removed.count("upper_ammo") == 1 else 0
-		shot_slot = earned_shot_slot(ticks,last_shot,shot_slot,Player.WEAPONS[1].interval*60.0,shots,state.ammo[1],earned,weapon,Input.is_action_pressed("fire"))
-		shot_ok = shot_ok and Engine.is_in_physics_frame() and playing and is_instance_valid(player) and player._current_map() and state.weapon == weapon and state.owned_weapons == [0,1] and state.removed.count("upper_ammo") <= 1 and shot_slot >= 0.0
-		last_shot = ticks
+		if not prefix_bookkeeping_retired:
+			shots += 1
+			var earned: int = 45 if state.removed.count("upper_ammo") == 1 else 0
+			shot_slot = earned_shot_slot(ticks,last_shot,shot_slot,Player.WEAPONS[1].interval*60.0,shots,state.ammo[1],earned,weapon,Input.is_action_pressed("fire"))
+			shot_ok = shot_ok and Engine.is_in_physics_frame() and playing and is_instance_valid(player) and player._current_map() and state.weapon == weapon and state.owned_weapons == [0,1] and state.removed.count("upper_ammo") <= 1 and shot_slot >= 0.0
+			last_shot = ticks
 		super.shot(weapon)
-		var visuals = level.get_node_or_null("AmmoVisuals")
-		feedback_ok = feedback_ok and visuals != null and visuals.slots.any(func(slot): return slot.row == 1 and slot.sprite.visible)
+		if not prefix_bookkeeping_retired:
+			var visuals = level.get_node_or_null("AmmoVisuals")
+			feedback_ok = feedback_ok and visuals != null and visuals.slots.any(func(slot): return slot.row == 1 and slot.sprite.visible)
 	func hit_feedback() -> void:
-		hits += 1
+		if not prefix_bookkeeping_retired:
+			hits += 1
 		super.hit_feedback()
-		feedback_ok = feedback_ok and hit_flash > 0
+		if not prefix_bookkeeping_retired:
+			feedback_ok = feedback_ok and hit_flash > 0
 	func impact(point: Vector3) -> void:
-		impacts += 1
+		if not prefix_bookkeeping_retired:
+			impacts += 1
 		super.impact(point)
-		var visuals = level.get_node_or_null("AmmoVisuals")
-		feedback_ok = feedback_ok and visuals != null and visuals.slots.any(func(slot): return slot.row == 3 and slot.sprite.visible)
+		if not prefix_bookkeeping_retired:
+			var visuals = level.get_node_or_null("AmmoVisuals")
+			feedback_ok = feedback_ok and visuals != null and visuals.slots.any(func(slot): return slot.row == 3 and slot.sprite.visible)
 	func enemy_event(actor, event: String) -> void:
-		if actor == victim and playing and actor._current_map() and actor.active:
+		if not prefix_bookkeeping_retired and actor == victim and playing and actor._current_map() and actor.active:
 			if event == "attack" and actor._committed_target == player: attacks += 1
 			if event == "death":
 				deaths += 1
 				player_finish = Input.is_action_pressed("fire") and last_shot == ticks and actor.target == player
-		if event == "death" and actor != victim and playing and actor._current_map() and actor.active:
+		if not prefix_bookkeeping_retired and event == "death" and actor != victim and playing and actor._current_map() and actor.active:
 			west_deaths[actor.id] = west_deaths.get(actor.id,0)+1
 			west_finishes[actor.id] = actor.id == west_firing_id and Input.is_action_pressed("fire") and last_shot == ticks and actor.target == player and aim_observation.get("actor_id","") == actor.id and aim_observation.get("tick",-1) == Engine.get_physics_frames() and aim_observation.get("level") == level and aim_observation.get("player") == player
 		super.enemy_event(actor,event)

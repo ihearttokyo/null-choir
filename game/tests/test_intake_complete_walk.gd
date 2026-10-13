@@ -19,7 +19,8 @@ class CompleteMain:
 			nave_calls += 1
 			nave_reward_ok = nave_reward_ok and before < 100 and state.health == mini(100,before+30) and state.removed.count(id) == 1 and state.keys == ["blood"]
 	func shot(weapon: int) -> void:
-		shot_clock_ok = shot_clock_ok and is_instance_valid(player) and player._current_map() and is_zero_approx(player.shot_age(weapon)) and player.active_play_time > 0.0
+		if not prefix_bookkeeping_retired:
+			shot_clock_ok = shot_clock_ok and is_instance_valid(player) and player._current_map() and is_zero_approx(player.shot_age(weapon)) and player.active_play_time > 0.0
 		super.shot(weapon)
 
 var east_started: bool = false
