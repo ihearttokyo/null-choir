@@ -209,6 +209,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if arrived_waypoint and Vector2(global_position.x-waypoint.x,global_position.z-waypoint.z).length_squared() < .000001: path_time = 0
 	if _rush_time > 0 and not _rush_hit: _try_melee()
+	if not is_instance_valid(self): return
 	if not _profile.is_empty() and hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
 	if kind in ["worker","caster"] and sight.is_empty() and is_on_wall(): _strafe_sign = -_strafe_sign
 
@@ -237,7 +238,7 @@ func combat_visual_state() -> Dictionary:
 		"facing":sprite.frame%8,"hurt":hurt_time > 0,"boss_phase":phase}
 
 func _current_map() -> bool:
-	return is_instance_valid(game) and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and not is_queued_for_deletion()
+	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and not is_queued_for_deletion()
 
 func _valid_target(candidate) -> bool:
 	if not is_instance_valid(candidate) or candidate.is_queued_for_deletion(): return false
@@ -394,6 +395,12 @@ func _try_melee() -> void:
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
 	if not hit.is_empty() and (hit.collider == game.player or hit.collider.has_method("take_damage")):
 		_rush_hit = true
+		if kind == "crawler" and OS.is_debug_build() and game.has_method("enemy_event"):
+			var original_map: Node = game.level
+			var original_player: Node = game.player
+			var original_victim: Node = hit.collider
+			_event("melee_contact")
+			if not is_instance_valid(self) or not _current_map() or not game.playing or game.level != original_map or game.player != original_player or not is_instance_valid(original_player) or original_player.is_queued_for_deletion() or original_player.get_parent() != original_map or not is_instance_valid(original_victim) or original_victim.is_queued_for_deletion() or original_victim.get_parent() != original_map: return
 		_attack(hit.collider,24 if kind == "brute" else 32 if kind == "nursery_warden" else 12,{"attack_kind":"melee","origin":query.from,"incoming_direction":(query.to-query.from).normalized(),"hit_position":hit.position})
 
 func _attack(victim: Node, amount: int, context: Dictionary = {}) -> void:
