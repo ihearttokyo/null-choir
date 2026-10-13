@@ -9,3 +9,7 @@ The final fixed-60-FPS CoreAudio replay passes: 751 third-map physics frames, th
 Frozen limits are 1,800 physics frames/40 wall seconds for entry, 240 per hop and 360 for the final fight. Both preceding map budgets remain unchanged. Independent current-source Astra correctness and Sol Ponytail reviews are clean. The unaccelerated post-review replay passes in 201.896 wall seconds with the same 751-frame entry, three shells, two third-map deaths and final resources; the preceding Foundry leg uses 6,285 frames. This is actual native physics pacing, not a rendering-performance measurement.
 
 This is source-native virtual Input and scripted aim. Third-level loops/seals/exit, the remaining campaign, alternate seal order/difficulties, physical input, packed-app attribution, rendered quality, listening and performance are not established here. Runtime scripts, maps, assets, scores and the existing private app release are unchanged.
+
+Run the unaccelerated entry fixture from the project root with `python3 tools/check_game.py --timeout 240 tests/test_processional_earned_entry.gd`; its preceding two-map route exceeds the runner's default 30-second deadline. Use an isolated test HOME to preserve player data.
+
+The final entry boundary requires exactly one native scattergun finish for each original worker00 and crawler01. A retained earned-boundary crawler-survival counterfactual passed the older oracle; this assertion rejects it without changing combat, route or timing limits. Downstream helper pins must match the reviewed corrected source before continuation.

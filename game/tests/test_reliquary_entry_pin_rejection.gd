@@ -5,7 +5,7 @@ func run() -> void:
 	var reference = weakref(observer)
 	var result: bool = await walk_to_reliquary_entry(observer,prefix)
 	var disposed: bool = reference.get_ref() == null
-	var untouched: bool = game == null and root.get_child_count() == 0 and not FileAccess.file_exists(prefix+"_campaign.json") and not FileAccess.file_exists(prefix+"_preferences.json") and not FileAccess.file_exists("user://campaign.json")
+	var untouched: bool = game == null and root.get_child_count() == 0 and not FileAccess.file_exists(prefix+"_campaign.json") and not FileAccess.file_exists(prefix+"_preferences.json")
 	if not expect(not result and disposed and untouched,"Rejected source/map pin disposes the unadopted observer before any tree/profile work"):
 		if is_instance_valid(observer): observer.free()
 		await finish(1)

@@ -1,6 +1,6 @@
 extends "res://tests/test_processional_earned_exit.gd"
 
-const R_PREFIX_SHA = "8480accc79846203218f0aec896a904e14ac8c47d878349e29f3c491d706cc83"
+const R_PREFIX_SHA = "c512f7e5d526eb792373e9602f5d46e7baa6e33db1ba851c0b243094aee36854"
 const R_MAP_SHA = "939a0c10a73463a7c693fdf682362864758e2b9c21211a06a3ae99afccf43d92"
 const R_LIMIT = 120
 const R_SECONDS = 10
