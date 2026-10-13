@@ -305,42 +305,42 @@ var h_ages: Dictionary = {}
 var h_marker_refs: Dictionary = {}
 
 func run() -> void:
+	if not await walk_through_halo(FourthMain.new()):
+		await finish(1)
+		return
+	print("PASS source-native virtual-input earned fourth HALO feasibility only: original mixed8 natural deaths, native role attacks/caster birth/player sweep contact, finite ammo and damage, frozen prefix witnesses; not physical controls, visual/audio/performance, packed-app, fourth seals/checkpoint/exit or full-eight acceptance")
+	await finish(0)
+
+func walk_through_halo(observer: FourthMain, profile_prefix: String = "") -> bool:
 	if not expect(H_LIMIT == H_APPROACH.size()*240+H_FIGHT_LIMIT+30,"Declared4830 bound matches actual18 hops and480 fight ticks"):
-		await finish(1)
-		return
-	prefix = "user://reliquary_halo_feasibility_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
+		if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+		return false
+	prefix = profile_prefix if not profile_prefix.is_empty() else "user://reliquary_halo_feasibility_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
 	if not expect(FileAccess.get_sha256("res://tests/test_reliquary_earned_entry.gd") == H_ENTRY_SHA,"Reviewed candidate entry helper pin; parent must reconcile dependency drift before integration"):
-		await finish(1)
-		return
-	var observer = FourthMain.new()
+		if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+		return false
 	if not await walk_to_reliquary_entry(observer,prefix) or not start_halo():
-		await finish(1)
-		return
+		return false
 	# Same acceptance guard in both fixture modes; RED omits only fourth approach/activation.
 	if not "--halo-no-approach" in OS.get_cmdline_user_args():
 		for cell in H_APPROACH:
 			var began: int = east_elapsed()
 			if not await east_route([cell]) or not expect(east_elapsed()-began <= 240,"Bounded native halo hop including settling/process: "+str(cell)):
-				await finish(1)
-				return
+				return false
 			print("RELIQUARY_HALO_HOP cell=",cell," frames=",east_elapsed()," position=",route_player.position," resources=",game.h_resources()," shots=",game.h_shots.size()," activated=",game.h_activated.size())
 	if not expect(game.h_activation == 1 and game.h_activated.size() == 8 and H_IDS.all(func(id): return game.h_activated.has(id)),"NATIVE RED first-fourth feasibility requires legitimate native approach and automatic original mixed-role halo activation after accepted entry"):
-		await finish(1)
-		return
+		return false
 	for frame in range(H_FIGHT_LIMIT):
 		if game.h_deaths.size() == 8 and not game.h_contacts.is_empty() and game.h_pending.is_empty(): break
 		release_actions()
 		east_fire()
 		if not await route_tick():
-			await finish(1)
-			return
+			return false
 	release_actions()
 	await process_frame
 	if not halo_result():
-		await finish(1)
-		return
-	print("PASS source-native virtual-input earned fourth HALO feasibility only: original mixed8 natural deaths, native role attacks/caster birth/player sweep contact, finite ammo and damage, frozen prefix witnesses; not physical controls, visual/audio/performance, packed-app, fourth seals/checkpoint/exit or full-eight acceptance")
-	await finish(0)
+		return false
+	return true
 
 func start_halo() -> bool:
 	if not expect(game is FourthMain and not game.prefix_bookkeeping_retired and not game.h_enabled and observers_retired() and game.r_ok and game.rate_ok and observer_witness(R_INHERITED_FIELDS) == r_inherited and game.feedback_ok and game.shot_clock_ok and game.budget() == R_CARRY,"Accepted alive entry preserves the exact inherited boundary safeguards before retirement; no resets"): return false
