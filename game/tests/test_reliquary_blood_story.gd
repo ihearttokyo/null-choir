@@ -129,30 +129,32 @@ var b_time: float = 0.0
 var b_actors_image: Variant
 
 func run() -> void:
-	for path in B_NATIVE_PINS:
-		if not expect(FileAccess.get_sha256(path) == B_NATIVE_PINS[path],"Pinned native source preserves actual Input/Player/Main/Campaign earning and AI: "+path):
-			await finish(1)
-			return
-	if not expect(FileAccess.get_sha256("res://tests/test_reliquary_halo_feasibility.gd") == B_HALO_SHA,"Exact reviewed nonquitting Halo helper; reconcile parent adoption before running"):
-		await finish(1)
-		return
-	if not await walk_through_halo(BloodMain.new(),"user://reliquary_blood_story_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())) or not start_blood_story():
-		await finish(1)
-		return
-	if not await blood_story_route(B_BLOOD_ROUTE) or not await blood_story_input(B_BLOOD,"--omit-blood-interact") or not await blood_story_route(B_STORY_ROUTE) or not await blood_story_input(B_STORY,"--omit-story-interact"):
-		await finish(1)
-		return
-	release_actions()
-	for idle in range(B_IDLE):
-		if not await route_tick():
-			await finish(1)
-			return
-	await process_frame
-	if not blood_story_result():
+	if not await walk_through_blood_story(BloodMain.new()):
 		await finish(1)
 		return
 	print("PASS source-native virtual-input earned Reliquary Blood/story only; no full-fourth/campaign, physical controls, visual/audio/performance or standalone acceptance")
 	await finish(0)
+
+func walk_through_blood_story(observer: BloodMain, profile_prefix: String = "") -> bool:
+	for path in B_NATIVE_PINS:
+		if not expect(FileAccess.get_sha256(path) == B_NATIVE_PINS[path],"Pinned native source preserves actual Input/Player/Main/Campaign earning and AI: "+path):
+			if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+			return false
+	if not expect(FileAccess.get_sha256("res://tests/test_reliquary_halo_feasibility.gd") == B_HALO_SHA,"Exact reviewed nonquitting Halo helper; reconcile parent adoption before running"):
+		if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+		return false
+	if not await walk_through_halo(observer,profile_prefix if not profile_prefix.is_empty() else "user://reliquary_blood_story_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())) or not start_blood_story():
+		return false
+	if not await blood_story_route(B_BLOOD_ROUTE) or not await blood_story_input(B_BLOOD,"--omit-blood-interact") or not await blood_story_route(B_STORY_ROUTE) or not await blood_story_input(B_STORY,"--omit-story-interact"):
+		return false
+	release_actions()
+	for idle in range(B_IDLE):
+		if not await route_tick():
+			return false
+	await process_frame
+	if not blood_story_result():
+		return false
+	return true
 
 func start_blood_story() -> bool:
 	if not expect(game is BloodMain and game.h_enabled and game.h_ok and game.h_shots.size() == 32 and H_IDS.all(func(id): return game.h_deaths.get(id,0) == 1 and game.h_finishes.get(id) == "player") and game.budget() == B_CARRY and game.state.keys.is_empty() and game.state.discoveries.is_empty() and game.state.removed == game.h_removed,"Exact accepted actual Halo boundary:32 pistol shots/8 Player kills,76HP190armor148pistol32shells; no grant"): return false
