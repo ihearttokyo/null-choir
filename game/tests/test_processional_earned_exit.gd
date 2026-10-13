@@ -2,7 +2,7 @@ extends "res://tests/test_processional_earned_palanquin.gd"
 
 const X_LIMIT = 2500
 const X_SECONDS = 60
-const X_PALANQUIN_SHA = "8f988148d2d2b67571ba160d99f6516467e7aa24bab2983ca792dd50bcfe53ac"
+const X_PALANQUIN_SHA = "50f5541614bb32479f440afb75583c99a336f304e359490cdc12a198291cde5f"
 const X_ROUTE = [[16.5,21.0],[16.5,17.5],[16.5,14.5],[16.5,11.5],[16.5,8.5],[15.5,8.5],[16.0,6.75],[16.0,5.7]]
 const X_EXIT = [[16.0,3.5],[15.5,2.5],[15.5,1.5]]
 const X_FINAL = ["processional_enemy_23","processional_enemy_24","processional_enemy_25"]

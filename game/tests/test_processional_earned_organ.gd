@@ -4,7 +4,7 @@ const O_LIMIT = 4000
 const O_SECONDS = 90
 const O_FIGHT_LIMIT = 360
 const O_ENTRY_SHA = "8f693113f83d7871c2962da17e79133d798029c106293be8b66e4e0b6fc821df"
-const O_PROJECTILE_SHA = "ba3bf1ea4b6a8a87ae2f6d1e48aa8c1fe1a3190ac7b1f6f0a696481a84d14184"
+const O_PROJECTILE_SHA = "bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873"
 const ORGAN = [[13.5,24.5],[10.5,24.5],[7.5,24.5],[4.5,24.5],[3.5,24.5],[3.5,23.0],[3.5,21.5],[3.5,20.5],[3.5,18.5],[3.5,17.5],[2.7,17.5],[3.5,17.5],[6.5,17.5],[9.5,17.5],[9.5,18.5],[9.5,17.5],[6.5,17.5],[3.5,17.5],[3.5,14.5],[3.5,11.5],[4.0,10.5]]
 const ORGAN_RETURN = [[7.0,10.5],[9.5,10.5],[12.5,11.5],[12.5,8.5],[16.5,8.5],[14.75,8.5],[14.75,11.5],[14.75,14.5],[16.5,14.5],[16.5,17.5],[16.5,21.0],[16.5,24.5]]
 const O_SUPPLIES = ["processional_organ_shells","processional_organ_armor","processional_organ_health","processional_organ_rivets","processional_north_shells","processional_gate_shells"]
@@ -108,6 +108,7 @@ class OrganMain:
 		super.enemy_event(actor,event)
 	func _debug_projectile_event(projectile: Node3D, event: String, data: Dictionary) -> void:
 		if not organ_enabled: return
+		if event == "queued_enemy_contact": return
 		var common: bool = OS.is_debug_build() and Engine.is_in_physics_frame() and playing and state.level_index == 2 and not get_tree().paused and projectile.get_script() == preload("res://scripts/projectile.gd") and projectile.game == self and projectile._current_map() and projectile.is_physics_processing() and data.get("projectile") == projectile and data.get("map") == level and data.get("player") == player and is_instance_valid(player) and player._current_map() and data.get("tick",-1) == Engine.get_physics_frames() and data.get("source") == projectile.shooter and is_instance_valid(projectile.shooter) and projectile.shooter.get_script() == Enemy
 		if not common:
 			o_ok = false

@@ -65,7 +65,11 @@ func _physics_process(delta: float) -> void:
 			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and game.playing):
 				game.hurt_player(int(DAMAGE*[0.7,1.0,1.4][game.state.difficulty]))
 		elif hit.collider.has_method("take_damage"):
-			hit.collider.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null,{"attack_kind":"projectile","incoming_direction":velocity.normalized(),"hit_position":hit.position})
+			var original_victim: Node = hit.collider
+			var observed: bool = _observe_debug("queued_enemy_contact",{"ray_start":ray_start,"ray_end":end,"hit":hit})
+			if not is_instance_valid(self): return
+			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and is_instance_valid(original_victim) and not original_victim.is_queued_for_deletion() and original_victim.get_parent() == original_map and game.playing):
+				original_victim.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null,{"attack_kind":"projectile","incoming_direction":velocity.normalized(),"hit_position":hit.position})
 		if _current_map() and game.playing and game.has_method("impact"):
 			game.impact(hit.position)
 		return
