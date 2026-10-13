@@ -293,6 +293,8 @@ func entry_result() -> bool:
 	release_actions()
 	await process_frame
 	if not live_route(): return false
+	if not expect(game.p_deaths.get("processional_enemy_00",0) == 1 and game.p_finishes.get("processional_enemy_00",false) and game.p_deaths.get("processional_enemy_01",0) == 1 and game.p_finishes.get("processional_enemy_01",false),"Both original entry worker00 and crawler01 require one native scattergun finish"):
+		return false
 	for id in P_SUPPLIES:
 		if not expect(game.p_consumed.get(id,0) == 1 and game.state.removed.count(id) == 1 and not route_level.markers.has(id) and p_markers[id].get_ref() == null,"Earned original entry supply drains once: "+id): return false
 	var rivets: Dictionary = game.p_pickups.processional_entry_rivets

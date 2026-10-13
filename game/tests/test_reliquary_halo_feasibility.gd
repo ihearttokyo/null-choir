@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_earned_entry.gd"
 
-const H_ENTRY_SHA = "6be06a8b9747f21e49dc066363a4a8e0c91113e4fdd5a3fe5ac270223cd4b069"
+const H_ENTRY_SHA = "6ed92c140d451aa20f5c10ed26025e9b2210e88c02e573f17c06121753328c21"
 const H_ENTRY_FIELDS = ["r_ok","r_main_origin","r_campaign_origin","r_profile_origin","r_settings_origin","r_captures","r_capture_attempts","r_bindings","r_level_id","r_player_id","r_start","r_ticks","r_explored","r_last_cell"]
 const H_FLAGS = ["foundry_enabled","entry_enabled","organ_enabled","palanquin_enabled","exit_enabled"]
 const H_APPROACH = [[18.5,38.5],[18.5,37.5],[18.5,38.5],[19.5,38.5],[20.5,38.5],[20.5,37.5],[20.5,38.5],[19.5,38.5],[19.5,35.5],[19.5,32.5],[19.5,28.5],[15.5,28.5],[12.5,28.5],[10.5,28.5],[10.5,25.5],[9.5,25.5],[10.5,25.5],[10.5,22.4]]
