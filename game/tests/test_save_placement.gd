@@ -21,7 +21,7 @@ func run():
 	root.add_child(game)
 	game.set_process(false)
 	game.hud.survey.set_physics_process(false)
-	game.music.player.changed_tempo.connect(func(_tempo):
+	game.music.playback_started.connect(func():
 		if game.playing and game.state.position.is_equal_approx(forbidden[0]): unsafe_starts[0] += 1)
 	for index in range(8):
 		game.start_campaign(1)

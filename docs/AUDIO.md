@@ -1,3 +1,13 @@
+# Current campaign playback
+
+`game/audio/music.gd` uses one native AudioStreamPlayer and lazily loads the selected MP3 for each level. It routes to Music without changing user bus gain or mute, repeats the recording, freezes playback on pause, restarts on level restart and releases its stream on title. Combat pressure smoothly lifts the complete stereo mix from -3 to 0 dB; separate MIDI stem expression no longer applies. `playback_started` provides the synchronous placement/recovery regression observation point after native playback starts.
+
+Original downloads, selected song IDs, hashes and conversion provenance are in [the Suno manifest](../source/music/suno/manifest.json). FFmpeg is needed only for authoring; Godot decodes the packaged recordings without host tools. Full listening and standalone-app acceptance remain separate.
+
+## Preserved MIDI implementation
+
+The remaining documentation describes the retained synth and `game/audio/midi_music.gd`, exercised by legacy MIDI tests rather than campaign playback.
+
 # Live MIDI runtime
 
 `game/audio/music.gd` is a persistent Node. Add it once after the audio bus layout is loaded. It creates the Music bus only when absent, loads the packaged bank once, and retains that bank across track changes. The game owns Music volume and mute settings.

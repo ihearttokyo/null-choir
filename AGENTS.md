@@ -8,7 +8,7 @@ This release applies to NULL CHOIR. Preserve unrelated work, original assets and
 
 ## Hill-climbing
 
-Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.md for measured evidence. Keep the complete eight-level, original-art and live-MIDI brief intact.
+Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.md for measured evidence. Keep the complete eight-level, original-art and current soundtrack brief intact; DESIGN.md records the authorized Suno replacement and preservation of MIDI sources.
 
 1. Reconcile the current source and retained effects; preserve a rollback commit and freeze the regression or measurement contract.
 2. Reproduce deterministic defects with the narrowest real failing check. Change the shared cause, retain assertions and prove GREEN.
@@ -29,4 +29,4 @@ Use named native Codex CLI children with explicit gpt-6.1-sol/xhigh and priority
 
 Never spawn a subagent using Max reasoning effort. Default all subagents to xhigh and explicitly set xhigh.
 
-The full goal is complete only when the eight-level campaign, original editable assets, eight live MIDI songs and current standalone Apple Silicon app are verified and delivered. A source milestone is not app, performance or campaign acceptance. Continue until that outcome or a concrete remaining blocker; checkpoint the exact resume step.
+The full goal is complete only when the eight-level campaign, original editable assets, eight selected Suno recordings with preserved MIDI sources and current standalone Apple Silicon app are verified and delivered. A source milestone is not app, performance or campaign acceptance. Continue until that outcome or a concrete remaining blocker; checkpoint the exact resume step.

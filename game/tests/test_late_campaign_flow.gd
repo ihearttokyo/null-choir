@@ -122,7 +122,7 @@ func check_map(index: int) -> bool:
 	game.player.camera.rotation.x = 1.1
 	if not expect(weapon > 0 and ammunition > 0 and game.player.fire() and game.state.ammo[weapon] == ammunition-1,"Real selected late weapon discharge spends exactly one unit"): return false
 	game.hurt_player(game.state.health+game.state.armor+1)
-	if not expect(game.state.health == 0 and not game.playing and paused and game.music.player.playback_paused,"Actual lethal damage enters paused recovery without regeneration"): return false
+	if not expect(game.state.health == 0 and not game.playing and paused and game.music.player.stream_paused,"Actual lethal damage enters paused recovery without regeneration"): return false
 	if not press_button("Restore checkpoint"): return false
 	freeze()
 	await settle()
@@ -133,7 +133,7 @@ func check_map(index: int) -> bool:
 	var saved: Dictionary = game.state.to_dict().duplicate(true)
 	game.pause_game()
 	if not press_button("Save and return to title"): return false
-	if not expect(not game.playing and game.level == null and not game.music.player.playing and game.music.player.get_now_playing_polyphony() == 0,"Save/title stops the actual map and native score voices"): return false
+	if not expect(not game.playing and game.level == null and not game.music.player.playing and game.music.player.stream == null,"Save/title stops the actual map and native score voices"): return false
 	if not press_button("Continue"): return false
 	freeze()
 	await settle()
@@ -173,7 +173,7 @@ func check_map(index: int) -> bool:
 	if not expect(not is_instance_valid(old_level) and game.playing and game.level.layout.data.id == next_layout.data.id and game.state.position.is_equal_approx(game.level.layout.world_position(next_layout.data.spawn)),"Native Descend frees the old map and enters the next map's own floor checkpoint"): return false
 	for field in ["health","armor","ammo","owned_weapons","weapon"]:
 		if not expect(game.state._resources()[field] == carried[field],"Descend carries actual campaign resource: "+field): return false
-	return expect(game.state.discoveries == discovered and game.music.player.file == game.music.level_tracks[index+1] and game.music.player.playing,"Descend retains discoveries and starts the next actual MIDI file")
+	return expect(game.state.discoveries == discovered and game.music.player.stream.resource_path == game.music.level_tracks[index+1] and game.music.player.playing,"Descend retains discoveries and starts the next actual Suno recording")
 
 func check_late_pickup(index: int) -> bool:
 	var weapon: int = mini(5,index-1)
@@ -333,10 +333,10 @@ func warm_lights(ids: Array) -> bool:
 	return not ids.is_empty() and colors.size() == ids.size() and colors.all(func(color): return color.is_equal_approx(Color(1.0,0.76,0.44)))
 
 func check_music(index: int) -> bool:
-	if not expect(game.music.player.bank != null and game.music.player.playing and not game.music.player.playback_paused and game.music.player.file == game.music.level_tracks[index],"Map entry/Continue runs its actual packaged live MIDI score"): return false
+	if not expect(game.music.player.stream is AudioStreamMP3 and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream.resource_path == game.music.level_tracks[index],"Map entry/Continue runs its actual packaged Suno recording"): return false
 	capture.clear_buffer()
 	var discarded: int = capture.get_discarded_frames()
-	var start: float = game.music.player.position
+	var start: float = game.music.player.get_playback_position()
 	var frames: int = 0
 	var energy: float = 0.0
 	for _interval in range(40):
@@ -346,7 +346,7 @@ func check_music(index: int) -> bool:
 		for sample in pcm: energy += sample.length_squared()
 		if frames >= 256 and energy > 0.000001: break
 	print("MEASURE late MIDI map=",MAPS[index-4]," frames=",frames," energy=",energy)
-	return expect(frames >= 256 and energy > 0.000001 and game.music.player.position > start and capture.get_discarded_frames() == discarded,"CoreAudio muted output contains real score PCM and an advancing MIDI clock, without dropped frames during this capture window")
+	return expect(frames >= 256 and energy > 0.000001 and game.music.player.get_playback_position() > start and capture.get_discarded_frames() == discarded,"CoreAudio muted output contains real score PCM and an advancing recorded transport, without dropped frames during this capture window")
 
 func expect(condition: bool, detail: String) -> bool:
 	if not condition: push_error(detail)

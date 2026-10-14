@@ -4,7 +4,7 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var music := preload("res://audio/music.gd").new()
+	var music := preload("res://audio/midi_music.gd").new()
 	music.level_tracks = PackedStringArray(["res://audio/gate.mid"])
 	var objects_before := Performance.get_monitor(Performance.OBJECT_COUNT)
 	var before := Time.get_ticks_msec()

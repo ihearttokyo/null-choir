@@ -1,7 +1,7 @@
 extends "res://tests/test_reliquary_halo_feasibility.gd"
 
 const B_HALO_SHA = "f82d38ddbf283a3daf6440e31d3381e8160af230e4b78a923d03af1181b6afd7"
-const B_NATIVE_PINS = {"res://scripts/main.gd":"9cae27c174c1bef643e78d685d39afea289355aaaff83b68ecaeea6ae097f459","res://scripts/player.gd":"ebb1b4dba137a736db5450024723b2ff25ac942b0f100c0856a4ac6c87fc2bb4","res://scripts/campaign.gd":"34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f","res://scripts/enemy.gd":"704327020410ec93786ffca26e3d52cc1c03186853b0be3a981d5c47753a5a95"}
+const B_NATIVE_PINS = {"res://scripts/main.gd":"084232810615632da3640c01210d00a85c49ca10feb1ad5f5d29f5fbc20d9d32","res://scripts/player.gd":"ebb1b4dba137a736db5450024723b2ff25ac942b0f100c0856a4ac6c87fc2bb4","res://scripts/campaign.gd":"34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f","res://scripts/enemy.gd":"704327020410ec93786ffca26e3d52cc1c03186853b0be3a981d5c47753a5a95"}
 const B_CARRY = {"health":76,"armor":190,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const B_BLOOD = {"id":"reliquary_blood","kind":"key","key":"blood","cell":[11.5,17.5],"text":"FACE REGISTER BLOOD SEAL RECOVERED"}
 const B_STORY = {"id":"reliquary_story","kind":"story","cell":[0.75,16.5],"text":"The mission voice is indexed here as a command channel, not a recording. Your replies open the drawers."}

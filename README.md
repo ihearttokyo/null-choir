@@ -1,10 +1,10 @@
 # NULL CHOIR
 
-Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Blender-built pixel sprites in a 3D containment cathedral; MIDI is synthesized live from a packaged SoundFont, without host audio tools or rendered music playback.
+Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Blender-built pixel sprites in a 3D containment cathedral; eight selected Suno instrumentals play offline through the native Music bus. Original MIDI compositions and their synth remain preserved.
 
 ## Development status
 
-The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. Eight original MIDI scores are synthesized live. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
+The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. The current soundtrack maps one selected Suno take to each level; the original eight MIDI scores remain preserved. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
 
 The private 0.2.1 development preview is delivered; final campaign acceptance remains unfinished. Inversion now has recessed cosmic cavities, fractured violet incisions and visible sparse stars. Two existing examination spotlights reveal the Nursery organism and the Heart's tooth-lined throat. Independent focused pixel reviews and correctness/Ponytail reviews pass. Strict inventory covers 92 editable art assets and 93 exports. Both changed maps pass source and boundary checks; all 24 native late-map difficulty/seal-order cases pass.
 
@@ -38,11 +38,11 @@ Shader baking requires a native macOS GPU export; headless export cannot bake th
 
 Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 
-`tests/test_macos.py` runs the exported binary's `--verify-export` path with a temporary isolated HOME. It checks all eight packed scenes, art, live MIDI and retained soundbank, late weapons/actors/bosses, native Metal cache files, macOS 14 target metadata and the original start/fire/pause/checkpoint assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
+`tests/test_macos.py` runs the exported binary's `--verify-export` path with a temporary isolated HOME. It checks all eight packed scenes, art, selected recorded audio and retained MIDI sources/soundbank, late weapons/actors/bosses, native Metal cache files, macOS 14 target metadata and the original start/fire/pause/checkpoint assertions. It does not prove GUI usability, audio timbre, frame rate or campaign completion.
 
 ## Source and checks
 
-[ARCHITECTURE.md](ARCHITECTURE.md) describes module ownership. [Blender pipeline](docs/ART.md) covers regeneration and editable scenes; [live MIDI](docs/AUDIO.md) records dependency pins, patches, licenses and runtime API.
+[ARCHITECTURE.md](ARCHITECTURE.md) describes module ownership. [Blender pipeline](docs/ART.md) covers regeneration and editable scenes; [audio playback](docs/AUDIO.md) records dependency pins, patches, licenses and runtime API.
 
 ```sh
 python3 tools/check_game.py tests/test_scenery.gd tests/test_campaign.gd tests/test_level.gd tests/test_foundry.gd tests/test_processional.gd tests/test_processional_flow.gd tests/test_combat_expansion.gd tests/test_level_transition.gd tests/test_player.gd tests/test_gameplay.gd tests/test_enemy.gd tests/test_interaction.gd tests/test_autoaim.gd tests/test_completion.gd tests/test_sprite_direction.gd tests/test_save_failure.gd tests/test_music_game.gd tests/test_preferences.gd tests/test_controls.gd

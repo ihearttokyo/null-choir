@@ -993,11 +993,10 @@ func _verify_export() -> void:
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
 		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
 	start_campaign(1)
-	checks["start"] = playing and enemies.size() == 23 and music.player.bank != null
-	checks["campaign_midis"] = music.level_tracks.size() == 8
-	for track in music.level_tracks: checks["campaign_midis"] = checks["campaign_midis"] and FileAccess.file_exists(track)
-	music.player._process(0.2)
-	checks["live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+	checks["start"] = playing and enemies.size() == 23 and music.player.stream is AudioStreamMP3
+	checks["campaign_recordings"] = music.level_tracks.size() == 8
+	for track in music.level_tracks: checks["campaign_recordings"] = checks["campaign_recordings"] and ResourceLoader.exists(track)
+	checks["recorded_playback"] = music.player.playing and music.player.has_stream_playback()
 	player.set_physics_process(false)
 	for actor in enemies: actor.set_physics_process(false)
 	checks["fire"] = await _verify_fire_tick() and state.ammo[1] == 89
@@ -1005,7 +1004,7 @@ func _verify_export() -> void:
 	checks["pause"] = get_tree().paused and not playing
 	await restore_checkpoint()
 	checks["checkpoint"] = playing and state.ammo[1] == 90
-	var retained_bank = music.player.bank
+	var retained_music_player = music.player
 	var map_ids = ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"]
 	var verified_maps = []
 	var loaded_roles = []
@@ -1014,9 +1013,8 @@ func _verify_export() -> void:
 		var id: String = map_ids[state.level_index]
 		checks[id+"_scene"] = playing and level.layout.data.id == id and state.position == level.layout.world_position(level.layout.data.spawn) and enemies.size() == level.layout.data.enemies.size()
 		verified_maps.append(level.layout.data.id)
-		checks[id+"_track"] = music.player.file == "res://audio/"+id+".mid" and retained_bank != null and music.player.bank == retained_bank
-		music.player._process(0.2)
-		checks[id+"_synthesis"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+		checks[id+"_track"] = music.player.stream.resource_path == "res://audio/suno/"+id+".mp3" and music.player == retained_music_player
+		checks[id+"_playback"] = music.player.playing and music.player.has_stream_playback()
 		var art_checks = _export_art_checks()
 		for check in art_checks: checks[id+"_"+check] = art_checks[check]
 		player.set_physics_process(false)
@@ -1029,7 +1027,7 @@ func _verify_export() -> void:
 	state.complete_level()
 	start_level()
 	checks["foundry"] = playing and level.layout.data.id == "foundry" and state.position == level.layout.world_position(level.layout.data.spawn)
-	checks["foundry_midi"] = music.player.file == "res://audio/foundry.mid" and music.player.bank == retained_bank
+	checks["foundry_recording"] = music.player.stream.resource_path == "res://audio/suno/foundry.mp3" and music.player == retained_music_player
 	var foundry_heroes = []
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
@@ -1038,9 +1036,8 @@ func _verify_export() -> void:
 	state.complete_level()
 	start_level()
 	checks["processional"] = playing and level.layout.data.id == "processional" and state.position == level.layout.world_position(level.layout.data.spawn)
-	checks["processional_midi"] = music.player.file == "res://audio/processional.mid" and music.player.bank == retained_bank
-	music.player._process(0.2)
-	checks["processional_live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+	checks["processional_recording"] = music.player.stream.resource_path == "res://audio/suno/processional.mp3" and music.player == retained_music_player
+	checks["processional_playback"] = music.player.playing and music.player.has_stream_playback()
 	var processional_heroes = []
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["walking_bone_organ","ossified_palanquin"]: processional_heroes.append(node.scene_file_path)

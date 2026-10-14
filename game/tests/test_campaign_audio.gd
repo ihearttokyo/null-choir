@@ -5,7 +5,7 @@ func _initialize() -> void:
 
 func run() -> void:
 	if not expect(AudioServer.get_driver_name() == "CoreAudio","This live check requires --audio-driver CoreAudio"): return
-	var music = load("res://audio/music.gd").new()
+	var music = load("res://audio/midi_music.gd").new()
 	root.add_child(music)
 	var bank = music.player.bank
 	var capture = AudioEffectCapture.new()
