@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_halo_return.gd"
 
-const W_RETURN_SHA = "5a02e5e1190f9a964125b294c584901b38e7bed05bf0f9d8dee2e5a0c2508d4c"
+const W_RETURN_SHA = "4e25cf0b8e72a6be54ecc0dab1aa834c9d30179c0d10339ea7ee6dd3747a0a61"
 const W_IDS = ["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"]
 const W_GROUP = {"id":"reliquary_wheel_commit","region":[26.0,8.0,36.9,21.25],"enemy_ids":["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"],"requires":[],"cue":{"text":"THE MEMORY DRUM ANSWERS OUT OF ORDER","light_ids":["reliquary_wheel_feed","reliquary_wheel_core"],"sound":"seal_release"}}
 const W_PICKUPS = {"reliquary_wheel_approach_rivets":{"id":"reliquary_wheel_approach_rivets","kind":"ammo","cell":[29.5,25.5],"amount":45.0,"weapon":1.0}}

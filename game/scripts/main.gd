@@ -6,6 +6,7 @@ const Player = preload("res://scripts/player.gd")
 const Enemy = preload("res://scripts/enemy.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Music = preload("res://audio/music.gd")
+const ExportAudio = preload("res://audio/export_audio_check.gd")
 const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 const AmmoVisuals = preload("res://scripts/ammo_visuals.gd")
@@ -991,12 +992,12 @@ func _verify_export() -> void:
 	var checks = {
 		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
-		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
+		"midi_sources": ExportAudio.retained_sources_present()}
 	start_campaign(1)
 	checks["start"] = playing and enemies.size() == 23 and music.player.stream is AudioStreamMP3
 	checks["campaign_recordings"] = music.level_tracks.size() == 8
 	for track in music.level_tracks: checks["campaign_recordings"] = checks["campaign_recordings"] and ResourceLoader.exists(track)
-	checks["recorded_playback"] = music.player.playing and music.player.has_stream_playback()
+	checks["recorded_transport"] = music.player.playing and music.player.has_stream_playback()
 	player.set_physics_process(false)
 	for actor in enemies: actor.set_physics_process(false)
 	checks["fire"] = await _verify_fire_tick() and state.ammo[1] == 89
@@ -1023,7 +1024,8 @@ func _verify_export() -> void:
 			var cell = 256 if actor.kind in ["nursery_warden","choir_avatar"] else 128
 			checks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5
 			if not actor.kind in loaded_roles: loaded_roles.append(actor.kind)
-	verify_level.call()
+		checks[id+"_decoded_pcm"] = await ExportAudio.decoded_pcm(get_tree(), music.player)
+	await verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["foundry"] = playing and level.layout.data.id == "foundry" and state.position == level.layout.world_position(level.layout.data.spawn)
@@ -1032,7 +1034,7 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
 	checks["foundry_art"] = foundry_heroes.size() == 2
-	verify_level.call()
+	await verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["processional"] = playing and level.layout.data.id == "processional" and state.position == level.layout.world_position(level.layout.data.spawn)
@@ -1042,7 +1044,7 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["walking_bone_organ","ossified_palanquin"]: processional_heroes.append(node.scene_file_path)
 	checks["processional_art"] = processional_heroes.size() == 2
-	verify_level.call()
+	await verify_level.call()
 	player.set_physics_process(false)
 	var caster
 	var caster_count = 0
@@ -1075,7 +1077,7 @@ func _verify_export() -> void:
 	for _index in range(3,8):
 		state.complete_level()
 		start_level()
-		verify_level.call()
+		await verify_level.call()
 		await get_tree().physics_frame
 		await get_tree().physics_frame
 		for spec in level.layout.data.pickups:
@@ -1114,8 +1116,9 @@ func _verify_export() -> void:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
-	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices")
-	print("PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
+	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices")
+	print("PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
+	print("PASS packaged retained MIDI sources: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar")
 	print("PASS packaged native Metal shader caches")
 	print("PASS packaged isolated userdata")

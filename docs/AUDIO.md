@@ -10,7 +10,7 @@ The remaining documentation describes the retained synth and `game/audio/midi_mu
 
 # Live MIDI runtime
 
-`game/audio/music.gd` is a persistent Node. Add it once after the audio bus layout is loaded. It creates the Music bus only when absent, loads the packaged bank once, and retains that bank across track changes. The game owns Music volume and mute settings.
+`game/audio/midi_music.gd` is a persistent Node. Add it once after the audio bus layout is loaded. It creates the Music bus only when absent, loads the packaged bank once, and retains that bank across track changes. The game owns Music volume and mute settings.
 
 ## API
 
