@@ -29,7 +29,6 @@ var _fire_pressed: bool = false
 var _weapon_intent: int = -1
 var _fire_release_required: bool = false
 var _interact_release_required: bool = false
-var _interact_pressed: bool = false
 
 func configure(owner_game: Node) -> void:
 	game = owner_game
@@ -55,7 +54,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		look(event.screen_relative * game.settings.sensitivity * 0.002)
 	if event.is_action_released("interact"): _interact_release_required = false
-	if event.is_action_pressed("interact") and not event.is_echo() and not _interact_release_required: _interact_pressed = true
+	if event.is_action_pressed("interact") and not event.is_echo() and not _interact_release_required and game.has_method("_queue_interaction_input"):
+		game._queue_interaction_input(self)
 	if event.is_action_released("fire"):
 		_end_repeat()
 		_fire_release_required = false
@@ -101,8 +101,7 @@ func _physics_process(delta: float) -> void:
 	camera.position.y = 1.55 + (sin(stride*1.8)*0.035 if game.settings.head_bob else 0.0)
 	if game.settings.camera_shake: camera.position.x = sin(shot_flash*200)*shot_flash*0.1
 	else: camera.position.x = 0
-	var interaction := _interact_pressed or (Input.is_action_just_pressed("interact") and not _interact_release_required)
-	_interact_pressed = false
+	var interaction: bool = game._consume_interaction_input(self,not _interact_release_required) if game.has_method("_consume_interaction_input") else false
 	if interaction: game.interact()
 	if not _current_map() or not game.playing: return # Interaction may retire this player/map.
 	var selection := _weapon_intent
@@ -157,7 +156,7 @@ func cancel_actions() -> void:
 	_end_repeat()
 	_fire_pressed = false
 	_weapon_intent = -1
-	_interact_pressed = false
+	if game != null and game.has_method("_cancel_interaction_input"): game._cancel_interaction_input(self)
 	_fire_release_required = Input.is_action_pressed("fire")
 	_interact_release_required = Input.is_action_pressed("interact")
 

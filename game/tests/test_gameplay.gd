@@ -1,5 +1,6 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
 
 func _initialize():
@@ -56,8 +57,12 @@ func run():
 	game.pause_game()
 	if FileAccess.file_exists(game.progress_path): DirAccess.remove_absolute(game.progress_path)
 	paused = false
-	print("PASS native first-level scene: campaign entry, key gate, one-shot pickup, death restoration and pause/resume")
 	game.queue_free()
+	await process_frame
+	await process_frame
+	await WallClock.seconds(self, 0.15)
+	if not expect(not is_instance_valid(game)): return
+	print("PASS native first-level scene: campaign entry, key gate, one-shot pickup, death restoration and pause/resume")
 	quit()
 
 func expect(condition: bool) -> bool:

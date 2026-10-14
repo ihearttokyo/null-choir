@@ -38,6 +38,56 @@ var _scene_level_index: int = -1
 var aim_observation: Dictionary = {}
 var interaction_observation: Dictionary = {}
 var _passive_scan_tick: int = -1
+var _interaction_edges: Array = []
+var _interaction_incoming_eligible: bool = false
+var _interaction_pending_player: int = 0
+var _interaction_axis_held: Dictionary = {}
+
+func _enter_tree() -> void:
+	get_window().window_input.connect(_record_interaction_input)
+	Input.joy_connection_changed.connect(_interaction_device_changed)
+
+func _record_interaction_input(event: InputEvent) -> void:
+	_interaction_incoming_eligible = false
+	if event is InputEventJoypadMotion:
+		var held_key := Vector2i(event.device,event.axis)
+		if _interaction_axis_held.has(held_key) and (int(signf(event.axis_value)) != _interaction_axis_held[held_key] or absf(event.axis_value) < InputMap.action_get_deadzone("interact")):
+			_interaction_axis_held.erase(held_key)
+	if event is InputEventJoypadMotion and event.is_action("interact"):
+		var key := Vector2i(event.device,event.axis)
+		if event.is_action_pressed("interact"):
+			var direction: int = int(signf(event.axis_value))
+			_interaction_incoming_eligible = _interaction_axis_held.get(key,0) != direction
+			_interaction_axis_held[key] = direction
+		else: _interaction_axis_held.erase(key)
+	else:
+		_interaction_incoming_eligible = event.is_action_pressed("interact") and not event.is_echo()
+	if not event.is_action_pressed("interact") or event.is_echo(): return
+	var tick: int = Engine.get_physics_frames()
+	_interaction_edges = _interaction_edges.filter(func(row): return row[1] >= tick)
+	# Raw identity survives localization, pause and Player replacement; polls expire next tick.
+	_interaction_edges.append([event,tick+1])
+
+func _interaction_device_changed(device: int, connected: bool) -> void:
+	if connected: return
+	for key in _interaction_axis_held.keys():
+		if key.x == device: _interaction_axis_held.erase(key)
+
+func _queue_interaction_input(observer: CharacterBody3D) -> void:
+	if observer == player and observer._current_map() and playing and _interaction_incoming_eligible:
+		_interaction_pending_player = observer.get_instance_id()
+
+func _consume_interaction_input(observer: CharacterBody3D, allow_virtual: bool) -> bool:
+	if not Engine.is_in_physics_frame() or observer != player or not observer._current_map() or not playing: return false
+	var eligible: bool = _interaction_pending_player == observer.get_instance_id()
+	_interaction_pending_player = 0
+	var tick: int = Engine.get_physics_frames()
+	_interaction_edges = _interaction_edges.filter(func(row): return row[1] >= tick)
+	var native_poll: bool = _interaction_edges.any(func(row): return Input.is_action_just_pressed_by_event("interact",row[0]))
+	return eligible or (allow_virtual and not native_poll and Input.is_action_just_pressed("interact"))
+
+func _cancel_interaction_input(observer: CharacterBody3D) -> void:
+	if _interaction_pending_player == observer.get_instance_id(): _interaction_pending_player = 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
