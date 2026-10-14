@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_earned_exit.gd"
 
-const N_EXIT_SHA = "4d032ee03dc6226bb29f957ed7f77b7beff799b5bb4037c84b24b979811676a7"
+const N_EXIT_SHA = "9b0f0579f131dd3670c495c09f7081f2dbd38cab86e2197dc575bf20d6fc9a73"
 const N_MAP_SHA = "8e04f3d5f704ac4f5b3ee698b3442ff27670843c244baca8b2ffdcd426bfa257"
 const N_LIMIT = 30
 const N_SECONDS = 10

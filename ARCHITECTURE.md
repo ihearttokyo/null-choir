@@ -2,7 +2,7 @@
 
 [DESIGN.md](DESIGN.md) owns requirements. This file owns implementation boundaries.
 
-- `game/`: Godot runtime project, imported sprites, world models, MIDI, and the pinned synthesizer dependency. No Blender invocation or host audio library is required during play.
+- `game/`: Godot runtime project, imported sprites, world models, compressed Suno recordings, preserved MIDI, and the pinned legacy synthesizer dependency. No Blender invocation or host audio library is required during play.
 - `source/art/`: editable Blender scenes and art manifest. The recipes documented in [ART.md](docs/ART.md) generate runtime assets before export.
 - `source/music/`: editable composition data. `tools/compose_music.py` produces the eight runtime MIDI files.
 - `game/tests/` and `tests/`: direct Godot and Python assertions using the real gameplay, asset, and music paths.
@@ -12,9 +12,9 @@ Use native Godot nodes, resource loading, collision, audio buses, and input acti
 
 Imported campaign placement is checked against the actual native floor and player capsule before gameplay or mouse capture. Healthy saved locations are preferred to the authored entry, without refunding current resources or rewriting recovery snapshots. Loaded continuation, checkpoint restoration and level restart can wait for native physics registration; callers must await completion before assuming gameplay is active. Pause, title, replacement and focus loss cancel pending continuation. A map with no safe candidate returns to title instead of permitting Resume at a rejected location.
 
-The first gate is offline live MIDI in a self-contained Mac export. Audio work owns `game/audio/`, `game/addons/midi/`, its MIDI tests and composition sources. The parent owns project configuration, gameplay, integration, and publishing. Asset work receives separate ownership before it starts. Workers must preserve one another's edits.
+The current soundtrack uses eight offline Suno recordings; the original MIDI runtime is preserved as `game/audio/midi_music.gd` for synthesis regression coverage only. Audio work owns `game/audio/`, `game/addons/midi/`, its MIDI tests and composition sources. The parent owns project configuration, gameplay, integration, and publishing. Asset work receives separate ownership before it starts. Workers must preserve one another's edits.
 
-Public music boundary: a Node at `game/audio/music.gd` with `play_level(index)`, `set_paused(paused)`, and `stop()`. It routes synthesized voices to the Music bus; the game owns user volume settings. MIDI timing, repeat boundaries, voice cleanup, and pause behavior belong to this module.
+Public music boundary: a Node at `game/audio/music.gd` with `play_level(index)`, `set_paused(paused)`, and `stop()`. It lazily loads one compressed recording into one native AudioStreamPlayer on the Music bus; the game owns user volume settings. Repeat boundaries, release on title, pause behavior and a smoothed -3 to 0 dB combat lift belong to this module. Host conversion tools are authoring-only.
 
 `game/scripts/preferences.gd` owns primitive JSON options and per-action desktop/gamepad bindings. The game loads it before applying native InputMap and audio-bus gains. Native scroll containers expose settings and rebind capture; the HUD reads binding text from this same source. Changes save atomically to `user://preferences.json`, separate from campaign progress.
 

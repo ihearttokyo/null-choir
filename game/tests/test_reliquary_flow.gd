@@ -41,7 +41,7 @@ func run() -> void:
 	descend.pressed.emit()
 	freeze()
 	if not expect(game.playing and game.level.layout.data.id == "reliquary" and game.state.position == game.level.layout.world_position([19.5,38.5]),"Descent loads Reliquary at its own safe entry checkpoint"): return
-	if not expect(game.music.player.file == "res://audio/reliquary.mid" and game.state.ammo[1] == 111 and game.state.discoveries == [2],"Fourth live MIDI and carried campaign resources/story persist"): return
+	if not expect(game.music.player.stream.resource_path == "res://audio/suno/reliquary.mp3" and game.state.ammo[1] == 111 and game.state.discoveries == [2],"Fourth Suno recording and carried campaign resources/story persist"): return
 	game.player.cycle_weapon(1)
 	game.player.position = game.level.layout.world_position([19.5,32.5])
 	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return

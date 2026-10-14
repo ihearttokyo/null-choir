@@ -1,5 +1,6 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
 
 func _initialize() -> void: call_deferred("run")
@@ -67,6 +68,7 @@ func run() -> void:
 	paused = false
 	await process_frame
 	await process_frame
+	await WallClock.seconds(self, 0.15)
 	if FileAccess.file_exists(test_path): DirAccess.remove_absolute(test_path)
 	print("PASS native Intake-to-Foundry intermission, resources/story persistence, checkpoint death, save Continue and level restart")
 	quit()

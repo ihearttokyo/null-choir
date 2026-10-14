@@ -69,9 +69,9 @@ func run() -> void:
 	DirAccess.remove_absolute(blocker)
 	game.progress_path = "user://dead_continue_"+str(Time.get_ticks_usec())+".json"
 	var dead_startups = [0]
-	var observe_start = func(_tempo):
+	var observe_start = func():
 		if game.state.health <= 0 and (game.playing or Input.mouse_mode == Input.MOUSE_MODE_CAPTURED): dead_startups[0] += 1
-	game.music.player.changed_tempo.connect(observe_start)
+	game.music.playback_started.connect(observe_start)
 	for usable_recovery in [true,false]:
 		game.state.health = 0
 		game.state.checkpoint.health = 100 if usable_recovery else 0
@@ -110,8 +110,8 @@ func run() -> void:
 				quit(1)
 				return
 			game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
-			if game.playing or not paused or not game.music.player.playback_paused:
-				push_error("Native focus-loss notification pauses live combat and MIDI")
+			if game.playing or not paused or not game.music.player.stream_paused:
+				push_error("Native focus-loss notification pauses live combat and recorded music")
 				quit(1)
 				return
 			game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_IN)
@@ -139,7 +139,7 @@ func run() -> void:
 				quit(1)
 				return
 	DirAccess.remove_absolute(game.progress_path)
-	game.music.player.changed_tempo.disconnect(observe_start)
+	game.music.playback_started.disconnect(observe_start)
 	game.show_title()
 	game.queue_free()
 	paused = false
