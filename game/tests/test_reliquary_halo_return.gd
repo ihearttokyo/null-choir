@@ -241,42 +241,42 @@ var q_closed: bool = false
 var q_fighting: bool = false
 
 func run() -> void:
+	if not await walk_through_halo_return(ReturnMain.new()):
+		await finish(1)
+		return
+	print("PASS source-native virtual-input original west Halo return from earned Blood/story; not full-fourth/eight, physical controls, rendered/audio/performance or standalone acceptance")
+	await finish(0)
+
+func walk_through_halo_return(observer: ReturnMain, profile_prefix: String = "") -> bool:
 	if not expect(FileAccess.get_sha256("res://tests/test_reliquary_blood_story.gd") == Q_BLOOD_SHA,"Exact next-slice Blood extraction; reconcile parent adoption and source pins"):
-		await finish(1)
-		return
-	if not await walk_through_blood_story(ReturnMain.new(),"user://reliquary_halo_return_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())) or not start_return():
-		await finish(1)
-		return
+		if is_instance_valid(observer) and observer != game and not observer.is_inside_tree(): observer.free()
+		return false
+	if not await walk_through_blood_story(observer,profile_prefix if not profile_prefix.is_empty() else "user://reliquary_halo_return_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())) or not start_return():
+		return false
 	if not "--omit-return-approach" in OS.get_cmdline_user_args():
 		if not await blood_story_route(Q_APPROACH):
-			await finish(1)
-			return
+			return false
 	q_fighting = true
 	for frame in range(Q_FIGHT_LIMIT):
 		if game.q_deaths.size() == 3 or game.state.health <= 24: break
 		release_actions()
 		east_fire()
 		if not await route_tick():
-			await finish(1)
-			return
+			return false
 	q_fighting = false
 	release_actions()
 	# Omitted inputs reach the same final guard, never a blocked closure/setup surrogate.
 	if game.q_activation == 1 and game.q_deaths.size() == 3:
 		if not await blood_story_route(Q_CLOSE):
-			await finish(1)
-			return
+			return false
 		q_closed = true
 	for idle in range(Q_IDLE):
 		if not await route_tick():
-			await finish(1)
-			return
+			return false
 	await process_frame
 	if not return_result():
-		await finish(1)
-		return
-	print("PASS source-native virtual-input original west Halo return from earned Blood/story; not full-fourth/eight, physical controls, rendered/audio/performance or standalone acceptance")
-	await finish(0)
+		return false
+	return true
 
 func start_return() -> bool:
 	if not expect(game is ReturnMain and game.b_enabled and game.b_ok and blood_story_result() and game.budget() == Q_CARRY and route_player.position.distance_to(route_level.layout.world_position(B_STORY.cell)) < 0.2,"Accepted actual Blood/story boundary at original story location, not respawn/cloned state"): return false
