@@ -109,8 +109,9 @@ python3 tools/check_game.py tests/test_ossuary_preparation_history.gd
 
 ## Remaining acceptance
 
-This segment stops before the finale encounter. Five-actor combat, saved exit,
-Inversion entry and the rest of the full campaign remain unfinished. Current
+This segment stops before the finale encounter. Subsequent five-actor combat
+coverage is recorded in [the finale battle receipt](NC07-earned-ossuary-finale-battle.md).
+Saved exit, Inversion entry and the rest of the full campaign remain unfinished. Current
 standalone export, physical keyboard/mouse/gamepad play, visual fidelity,
 GPU/performance and listening acceptance are separate requirements. Source
 replay results do not certify them. The retained original MIDI sources and the
