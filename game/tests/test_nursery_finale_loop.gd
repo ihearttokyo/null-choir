@@ -4,6 +4,8 @@ extends "res://tests/test_nursery_seed_loop.gd"
 const NF_SEED_SHA = "a6501dc2dbc61f44c57757abe073721d85b86514cda253ef38608a7a47a044c0"
 const NF_OSSUARY_SHA = "781a86ab846db76d7189f108281f009b300812a5c2136faa754b9a74000bc74c"
 const NF_ANCESTOR_SAVE_SHA = "1da02250064a304d13212f4f8fe1c4ab2dda32e20ce152b2246d4e05d3e348d0"
+const NF_RESULT_SAVE_SHA = "15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce"
+const NF_RESULT_RESOURCES = {"health":93,"armor":197,"ammo":[0,99,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
 const NF_CARRY = {"health":78,"armor":194,"ammo":[0,163,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
 # New phase only: finite route plus81 ideal pistol hits for1660 original finale HP.
 const NF_LIMIT = 9000
@@ -480,6 +482,9 @@ func run() -> void:
 	if ok: print("PASS SAME earned Nursery finale and nonquitting Ossuary handoff; synthetic native input only when executed, not app/campaign/performance/listening acceptance.")
 	await finish(0 if ok else 1)
 
+static func finale_outcome_matches(attacks: Array, shot_count: int, resources: Dictionary, actual_save_sha: String) -> bool:
+	return [[0,0],[1,0],[0,1],[1,1]].all(func(pair): return attacks.any(func(attack): return attack[1] == pair[0] and attack[2] == pair[1])) and shot_count == 81 and resources == NF_RESULT_RESOURCES and actual_save_sha == NF_RESULT_SAVE_SHA
+
 func finale_pins_match() -> bool:
 	return FileAccess.get_sha256("res://tests/test_nursery_seed_loop.gd") == NF_SEED_SHA and FileAccess.get_sha256("res://tests/test_nursery_earned_campaign.gd") == NS_CAMPAIGN_SHA and FileAccess.get_sha256("res://tests/test_nursery_earned_entry.gd") == NC_ENTRY_SHA and FileAccess.get_sha256("res://data/05_nursery.json") == N_MAP_SHA and FileAccess.get_sha256("res://data/06_ossuary.json") == NF_OSSUARY_SHA and NC_CORE_PINS.keys().all(func(path): return FileAccess.get_sha256(path) == NC_CORE_PINS[path])
 
@@ -746,6 +751,7 @@ func nursery_finale_ossuary() -> bool:
 
 func nursery_ossuary_result() -> bool:
 	if not expect(game.oss_ok and game.oss_current() and game.oss_start_calls == 1 and game.oss_captures == 1 and game.oss_mouse_attempts.size() == 1 and game.oss_ticks >= 1 and Engine.get_physics_frames()-nf_entry_epoch <= NF_ENTRY_LIMIT and Time.get_ticks_usec()-nf_entry_wall <= NF_ENTRY_SECONDS*1000000 and finale_prior_frozen() and not game.nf_enabled and observer_witness(nf_entry_fields) == nf_entry_frozen and game.get_instance_id() == r_main_id and game.state.get_instance_id() == r_campaign_id and game.progress_path == r_profile and game.settings_path == game.r_settings_origin,"Nonquitting same earned Main/Campaign/profile; every completed finale/prior observer frozen;30-frame/10s fresh entry cap"): return false
+	if not expect(finale_outcome_matches(game.nf_boss_attacks,game.nf_shots.size(),game.budget(),FileAccess.get_sha256(r_profile)),"NATIVE RED exact retained finale variant/phase,81shots,93/197resources and finalsave identity"): return false
 	var scene = game.level
 	var player = game.player
 	var data: Dictionary = scene.layout.data

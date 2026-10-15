@@ -61,7 +61,7 @@ class Probe:
             setup = ray(melee,melee.global_position+Vector3.UP*0.6,game.player.global_position+Vector3.UP*0.7,game.player) and setup
         report = {"case":["A_charge_projectile","B_worker_warden","C_crawler_worker"][mode],"setup":setup,"tick":tick,"before":before,"rays":rays,"bindings":game.nf_bindings.duplicate(true)}
         if not setup: return
-        if "--forged-melee-source" in OS.get_cmdline_user_args():
+        if ("--forged-melee-source" in OS.get_cmdline_user_args() or "--forged-rush-hit" in OS.get_cmdline_user_args()):
             release(warden,worker)
             warden._rush_hit = "--forged-rush-hit" in OS.get_cmdline_user_args()
             # Deliberate negative: event plus direct damage is not native melee provenance.
@@ -121,7 +121,7 @@ func run() -> void:
     print("WARDEN_CONTACT_SOURCE ",FileAccess.get_sha256("res://tests/test_nursery_finale_loop.gd")," enemy=",FileAccess.get_sha256("res://scripts/enemy.gd")," projectile=",FileAccess.get_sha256("res://scripts/projectile.gd"))
     var results: Array = []
     var retired: Array = []
-    var forged: bool = "--forged-melee-source" in OS.get_cmdline_user_args()
+    var forged: bool = ("--forged-melee-source" in OS.get_cmdline_user_args() or "--forged-rush-hit" in OS.get_cmdline_user_args())
     for mode in range(1 if forged else 3):
         var game = Finale.NurseryFinaleMain.new()
         var prefix: String = "user://warden_contact_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())+"_"+str(mode)

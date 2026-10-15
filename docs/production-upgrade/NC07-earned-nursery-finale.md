@@ -10,7 +10,7 @@ The earned path grants no inventory, teleports no actors, assigns no damage and 
 
 ## Native evidence
 
-The earned runs use Standard difficulty (index 1).
+The retained baseline runs use Standard difficulty (index 1) and source SHA256 70d30c476ecfd7a265ddf7382991ff801e94323484cff6dfc6c6a68210365dac. They precede the stronger outcome oracle and remain historical observations, not current-head reruns.
 
 Both runs pass with the same 81 new-phase pistol shots, 93 HP, 197 armor, ammo [0,99,32,120,0,0], owned weapons [0,1,2,3] and selected weapon 1. Their persisted handoff SHA256 is 15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce.
 
@@ -20,6 +20,8 @@ Both runs pass with the same 81 new-phase pistol shots, 93 HP, 197 armor, ammo [
 | Unmodified public runner, normal clock | 643.128 s | 3,761 | 6 |
 
 These timings are test execution costs, not game performance measurements. Frame and pose timing vary; the earned budget and persisted save match.
+
+The regression now requires all four variant/phase pairs, exactly 81 shots, the explicit resource vector and the fixed final save digest. A focused predicate test rejects missing pairs and changed outcomes; either named forged-source flag selects its negative path when used alone.
 
 Both runs observe Warden variants 0 and 1 in each of its two phases and 884 actual projectile steps. Neither records a charge hit. Separate controlled tests cover charge contact; the earned route does not claim that coverage.
 
