@@ -28,13 +28,14 @@ The full positive uses the strict public runner:
 python3 tools/check_game.py --timeout 1800 tests/test_ossuary_second_loop.gd
 ```
 
-Run the mixed positive/negative controls directly:
+Run the mixed positive/negative controls through their strict wrapper:
 
 ```sh
-godot --headless --audio-driver CoreAudio --path game --script res://tests/test_ossuary_second_guards.gd
+python3 tools/check_ossuary_guards.py
+python3 tests/test_ossuary_guard_runner.py
 ```
 
-The latter requires exit0, 22 valid case rows and its final PASS, with exactly 18 intentional rejection errors and no other script/leak diagnostics. The strict public runner deliberately rejects such mixed-error output.
+The wrapper isolates user data and waits for process exit before checking the complete output. It requires the exact final receipt and exact multiplicities of all 18 intentional rejection labels, then rejects every other error, warning or leak diagnostic. The ordinary public runner deliberately rejects mixed-error output.
 
 ## Limits
 

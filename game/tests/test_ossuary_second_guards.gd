@@ -261,6 +261,6 @@ func run() -> void:
         await process_frame
         await WallClock.seconds(self,0.1)
     var valid: bool = results.size() == CASES.size() and results.all(func(row): return row.get("setup",false) and row.get("valid",false)) and retired.all(func(ref): return ref.get_ref() == null)
-    if valid: print("PASS22 controlled guardian geometry/callback/identity/lifetime cases; not earned campaign")
+    if valid: print("PASS 22 controlled guardian geometry/callback/identity/lifetime cases; not earned campaign")
     else: push_error("NATIVE RED extended guardian controls require exact rejection/preserved evidence/production damage/drain")
     quit(0 if valid else 1)
