@@ -31,11 +31,14 @@ var settings_sha: String = ""
 static func stored_image(value):
 	if value is Array:
 		var result: Array = []
-		for item in value: result.append(stored_image(item))
+		for item in value:
+			result.append(stored_image(item) if item is Array or item is Dictionary or typeof(item) == TYPE_OBJECT else item)
 		return result
 	if value is Dictionary:
 		var result: Dictionary = {}
-		for key in value: result[key] = stored_image(value[key])
+		for key in value:
+			var item: Variant = value[key]
+			result[key] = stored_image(item) if item is Array or item is Dictionary or typeof(item) == TYPE_OBJECT else item
 		return result
 	if typeof(value) == TYPE_OBJECT:
 		return {"object_id":value.get_instance_id() if is_instance_valid(value) else 0}
@@ -53,8 +56,19 @@ static func script_fields(object) -> Array:
 	result.sort()
 	return result
 
+# Reuse frozen containers only inside this synchronous, local comparison.
+static func fields_match(object, fields: Array, frozen: Dictionary) -> bool:
+	var actual: Dictionary = {}
+	for name in fields:
+		var value: Variant = object.get(name)
+		if frozen.has(name) and typeof(value) != TYPE_OBJECT and typeof(value) == typeof(frozen[name]) and value == frozen[name]:
+			actual[name] = frozen[name]
+		else:
+			actual[name] = stored_image(value)
+	return actual == frozen
+
 func prior_frozen() -> bool:
-	return fields_image(game,main_fields) == main_frozen and fields_image(fixture,fixture_fields) == fixture_frozen and fields_image(previous,script_fields(previous)) == previous_frozen and main_fields.all(func(name): return not name.ends_with("_enabled") or not game.get(name)) and game.prefix_bookkeeping_retired
+	return fields_match(game,main_fields,main_frozen) and fields_match(fixture,fixture_fields,fixture_frozen) and fields_match(previous,script_fields(previous),previous_frozen) and main_fields.all(func(name): return not name.ends_with("_enabled") or not game.get(name)) and game.prefix_bookkeeping_retired
 
 func adopt_after(tree, first) -> bool:
 	fixture = tree
