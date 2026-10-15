@@ -1,6 +1,6 @@
 extends "res://tests/test_nursery_earned_campaign.gd"
 
-const NS_CAMPAIGN_SHA = "0a881045c76a70404ddba6472319264bca5e73e0a07633e4942673c1829f06d0"
+const NS_CAMPAIGN_SHA = "f76192f5cb7084e79792e1a19b4addd5fbbbb7f75507b086be2e93126860637a"
 const NS_CARRY = {"health":62,"armor":184,"ammo":[0,128,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
 # New phase only: 203.481m XZ at 9m/s, 23 legs with 12 settling ticks, two bounded fights.
 const NS_LIMIT = 12000
