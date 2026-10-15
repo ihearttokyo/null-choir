@@ -2,7 +2,7 @@ extends "res://tests/test_ossuary_transport_loop.gd"
 
 # Functions/constants only: no new Main/SceneTree fields enter the first-loop freeze.
 const Second = preload("res://tests/ossuary_second_loop_witness.gd")
-const SECOND_WITNESS_SHA = "44e874c502ebfe27435c080e736f0c3423940955a3fd525dd90ea4144f8d6693"
+const SECOND_WITNESS_SHA = "6924ba8bc72588d497ab22625798ff7d1f09ed3de713c1ba3fbea19a181d2bfb"
 const FIRST_ADAPTER_SHA = "f1411d2daf397bf22592aaf5b7988e2abe0e743df72de5bd9a591a04b5ef2955"
 const FIRST_GUARDS_SHA = "f0565c786674df1475c88de08e5e98ee471e058cdfce5ba2f978f89abdbea17a"
 
@@ -21,7 +21,10 @@ func run() -> void:
 	await finish(0 if result else 1)
 
 func walk_through_ossuary_second_loop(profile_prefix: String = "") -> bool:
-	if not expect(second_pins_match(),"exact second-witness/ancestor/core/map pins BEFORE any adoption"): return false
+	return (await accepted_ossuary_second_loop(profile_prefix)) != null
+
+func accepted_ossuary_second_loop(profile_prefix: String = "") -> Second:
+	if not expect(second_pins_match(),"exact second-witness/ancestor/core/map pins BEFORE any adoption"): return null
 	# The whole accepted prefix still earns every state change through production.
 	var result: bool = await walk_through_ossuary_transport(TransportMain.new(),profile_prefix)
 	var segment = Second.new()
@@ -33,7 +36,7 @@ func walk_through_ossuary_second_loop(profile_prefix: String = "") -> bool:
 	if is_instance_valid(game):
 		if segment.key_events.size() == 1 and segment.key_events[0][0]: segment.physical_key(false)
 		game.transport_witness = null
-	return result
+	return segment if result else null
 
 func second_controls() -> bool:
 	# Detached controls only. This branch cannot enter the earned replay.
