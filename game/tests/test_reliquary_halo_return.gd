@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_blood_story.gd"
 
-const Q_BLOOD_SHA = "f989f19690ad7fce4ddd720b744786696f66f99f21b3f206f8347bef07e5bf64"
+const Q_BLOOD_SHA = "3f603a56a7263eaf23c5a78cce5016a0031706b998bae621ee5ae28ba4ab5a4c"
 const Q_IDS = ["reliquary_enemy_16","reliquary_enemy_17","reliquary_enemy_18"]
 const Q_GROUP = {"id":"reliquary_halo_return","region":[16.5,10.0,18.5,13.0],"enemy_ids":Q_IDS,"requires":["blood"],"cue":{"text":"THE INDEX SENDS YOUR FACE AHEAD","light_ids":["reliquary_halo_return"],"sound":"seal_release"}}
 const Q_PICKUPS = {"reliquary_halo_return_rivets":{"id":"reliquary_halo_return_rivets","kind":"ammo","cell":[15.5,11.5],"amount":45.0,"weapon":1.0},"reliquary_halo_return_shells":{"id":"reliquary_halo_return_shells","kind":"ammo","cell":[14.5,11.5],"amount":8.0,"weapon":2.0}}

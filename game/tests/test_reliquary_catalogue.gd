@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_wheel_return.gd"
 
-const C_RETURN_SHA = "3202fd8526908cda4d40bfe57fb09ff087165331e0ae3c529384c39ca9a4b89f"
+const C_RETURN_SHA = "4b5bfcead30fdd9892449fa858bfcf1ac65a9e87ea23c3d8811e1658ee28d669"
 const C_IDS = ["reliquary_enemy_22","reliquary_enemy_23","reliquary_enemy_24","reliquary_enemy_25","reliquary_enemy_26"]
 const C_GROUP = {"id":"reliquary_catalogue","region":[17.0,9.0,21.9,9.5],"enemy_ids":C_IDS,"requires":["blood","ivory"],"cue":{"text":"THE COMMAND CHANNEL RECOGNIZES BOTH REGISTERS","light_ids":["reliquary_catalogue_feed"],"sound":"seal_release"}}
 const C_CARRY = {"health":100,"armor":184,"ammo":[0,167,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}

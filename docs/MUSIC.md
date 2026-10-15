@@ -4,6 +4,14 @@ Current playback uses the eight Suno recordings listed in [the selection manifes
 
 Native transport checks cover the full files, near-end repeats, pause/resume/restart and stop. Heard quality and musical loop seams remain unverified. The following sections describe the preserved MIDI compositions and legacy regression coverage, not the active soundtrack.
 
+## Recorded audio shutdown
+
+After stopping playback, Main waits at least 100 ms of monotonic wall time before quitting. Frame timers can count time from before their creation: a controlled long-frame test observed only 23.059 ms of the intended drain. The corrected source waited 111.140 ms normally and 100.774 ms with fixed-FPS execution.
+
+`tests/test_shutdown_drain_clock.gd` starts the real Suno player, introduces a long frame and checks stopped playback, idempotent quit and actual elapsed time. Run it through `tools/check_game.py`; engine exit zero alone does not establish a pass. The controlled brute-interception fixture also lets the native mixer drain after freeing its players.
+
+These source-native checks do not establish packed-app shutdown or heard quality, nor prove that the timing defect caused an earlier intermittent playback-resource leak. GPU/app validation remains separate.
+
 ## Preserved original MIDI scores
 
 [DESIGN.md](../DESIGN.md) owns the musical requirements; [AUDIO.md](AUDIO.md) owns live synthesis, bank provenance and playback limits. These eight original scores use that approved palette. These preserved MIDI scores do not contain rendered recordings.
