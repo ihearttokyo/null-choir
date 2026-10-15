@@ -931,8 +931,10 @@ func _finish_quit() -> void:
 	quitting = true
 	show_title()
 	menu_scroll.hide()
-	# Native audio playback references release on the next mixer pass.
-	await get_tree().create_timer(0.1).timeout
+	# Mixer release uses wall time, not the caller's accumulated frame delta.
+	var drain_until: int = Time.get_ticks_usec()+100000
+	while Time.get_ticks_usec() < drain_until:
+		await get_tree().process_frame
 	get_tree().quit()
 
 func _has_metal_shader_cache(root: String) -> bool:

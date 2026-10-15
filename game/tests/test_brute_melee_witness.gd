@@ -1,4 +1,5 @@
 extends SceneTree
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 const NC = preload("res://tests/test_nursery_earned_campaign.gd")
 var game
 class Probe:
@@ -72,6 +73,7 @@ func run():
         probe.free()
         await process_frame
         await process_frame
+    await WallClock.seconds(self,0.1)
     print("BRUTE_INTERCEPTION_WITNESS ",results)
     var valid=results[0].ok and results[0].hp==0 and results[0].mode=="infighting" and results[0].contacts==1 and results[1].ok and results[1].hp==76 and results[1].contacts==1
     if not valid:push_error("NATIVE RED brute actual first-collider enemy/player interceptions must have proven melee contact")

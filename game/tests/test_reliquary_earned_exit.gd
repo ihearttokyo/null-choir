@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_catalogue.gd"
 
-const E_CATALOGUE_SHA = "73077fc96e43b7be6d27c25ce4dc1c56c2bb854a0feed408cf052f74647d2049"
+const E_CATALOGUE_SHA = "c73c8a474c5ff21bdd835aec4b9fda7bd64f7b607505d6343e911e3391fe1cbd"
 const E_IDS = ["reliquary_enemy_27","reliquary_enemy_28","reliquary_enemy_29","reliquary_enemy_30"]
 const E_GROUP = {"id":"reliquary_exit","region":[18.0,2.7,20.9,6.5],"enemy_ids":E_IDS,"requires":["blood","ivory"],"cue":{"text":"THE ARCHIVE HAS FILED YOUR ARRIVAL","light_ids":["reliquary_exit_feed"],"sound":"seal_release"}}
 const E_DOOR = {"id":"reliquary_index_gate","cell":[19.5,7.7],"size":[12.2,5.0,0.6],"requires":["blood","ivory"],"yaw":0.0}
