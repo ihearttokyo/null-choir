@@ -1,6 +1,7 @@
 extends "res://tests/test_nursery_finale_loop.gd"
 
 const Witness = preload("res://tests/ossuary_transport_witness.gd")
+const Finale = preload("res://tests/ossuary_finale_witness.gd")
 # Exact dependency and production-field inventories are appended before delivery.
 const OT_ENTRY = [[35.5,23.5],[34.5,23.5],[34.5,24.5],[35.5,25.5],[34.5,25.5],[34.5,24.5]]
 const OT_APPROACH = [[30.5,24.5],[24.0,24.0],[13.5,24.5],[12.5,24.5],[6.5,24.5],[6.5,22.5]]
@@ -48,30 +49,60 @@ class TransportMain:
 		if transport_witness != null: transport_witness.before_key(id)
 		super.collect_key(id)
 		if transport_witness != null: transport_witness.after_key(id)
+	func _finale_lifecycle() -> bool:
+		return transport_witness != null and transport_witness.get_script() == Finale and transport_witness.game == self
 	func unlock_door(id: String) -> bool:
-		if transport_witness != null: transport_witness.forbidden("gate")
+		if transport_witness != null:
+			if not _finale_lifecycle():
+				transport_witness.forbidden("gate")
+				return false
+			var observer = transport_witness
+			if not observer.before_gate(id): return false
+			var result: bool = super.unlock_door(id)
+			observer.after_gate(result)
+			return result
 		return super.unlock_door(id)
 	func _capture_actor_state() -> bool:
 		if transport_witness != null:
-			transport_witness.forbidden("capture")
-			return false
+			if not _finale_lifecycle():
+				transport_witness.forbidden("capture")
+				return false
+			var observer = transport_witness
+			if not observer.before_capture(): return false
+			var result: bool = super._capture_actor_state()
+			observer.after_capture(result)
+			return result
 		return super._capture_actor_state()
 	func _capture_game_mouse() -> void:
-		if transport_witness != null: transport_witness.forbidden("mouse")
+		if transport_witness != null:
+			transport_witness.forbidden("mouse")
+			return
 		super._capture_game_mouse()
 	func _save() -> Error:
 		if transport_witness != null:
-			transport_witness.forbidden("save")
-			return ERR_INVALID_DATA
+			if not _finale_lifecycle():
+				transport_witness.forbidden("save")
+				return ERR_INVALID_DATA
+			var observer = transport_witness
+			if not observer.before_save(): return ERR_INVALID_DATA
+			var result: Error = super._save()
+			observer.after_save(result)
+			return result
 		return super._save()
 	func start_level() -> void:
-		if transport_witness != null: transport_witness.forbidden("start")
+		if transport_witness != null:
+			transport_witness.forbidden("start")
+			return
 		await super.start_level()
 	func restart_level() -> void:
-		if transport_witness != null: transport_witness.forbidden("restart")
+		if transport_witness != null:
+			transport_witness.forbidden("restart")
+			return
 		await super.restart_level()
 	func restore_checkpoint() -> void:
-		if transport_witness != null: transport_witness.forbidden("restart")
+		if transport_witness != null:
+			transport_witness.forbidden("restart")
+			return
 		await super.restore_checkpoint()
 
 var ot_started: bool = false
