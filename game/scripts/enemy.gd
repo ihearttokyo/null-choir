@@ -395,7 +395,7 @@ func _try_melee() -> void:
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
 	if not hit.is_empty() and (hit.collider == game.player or hit.collider.has_method("take_damage")):
 		_rush_hit = true
-		if kind in ["crawler","brute"] and OS.is_debug_build() and game.has_method("enemy_event"):
+		if kind in ["crawler","brute","nursery_warden"] and OS.is_debug_build() and game.has_method("enemy_event"):
 			var original_map: Node = game.level
 			var original_player: Node = game.player
 			var original_victim: Node = hit.collider

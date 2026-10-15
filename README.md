@@ -12,7 +12,7 @@ The exact uploaded Apple Silicon ZIP was downloaded and passed all eight native 
 
 The published 0.2.1 app missed the initial three-second title-frame target. Current source builds bake native Metal libraries into the development app; controlled launch comparisons show an improvement, with measurement limits recorded in [CHECKPOINT.md](CHECKPOINT.md). This does not certify reboot-cold or normal input-ready launch. Held physical controls, heard musical quality and full played pacing remain open. [DESIGN.md](DESIGN.md) owns requirements.
 
-Live-enemy save recovery remains a known development defect: surviving actors are rebuilt rather than retaining their damage and summoned companions. Corrected packed-app validation, full-campaign combat, listening and physical controls remain unfinished.
+Source-native checks preserve captured actor damage and summoned companions through Continue and checkpoint recovery on all three difficulties; entry restart restores the original entry actor state. Corrected packed-app validation, full-campaign combat, listening and physical controls remain unfinished.
 
 ## Run and build
 
