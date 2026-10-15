@@ -2,7 +2,7 @@ extends "res://tests/test_ossuary_second_loop.gd"
 
 # Functions/constants only: the accepted fixture's stored fields remain unchanged.
 const Story = preload("res://tests/ossuary_story_witness.gd")
-const STORY_BOUNDARY_SHA = "7b167e6c759a6e8da32dd2a5f57cac5dab387e7e4eac7147a1b784a933818120"
+const STORY_BOUNDARY_SHA = "af2af6c0d7495c4794b34179d47ada3b522b9f595ca295e16acf66eb512757f1"
 const STORY_WITNESS_SHA = "23e66c6342a391e6af4d98d0afff5c41a2a88f8cbd037b1f7bbae0a870aa49e9"
 
 class QuietStory:
@@ -30,9 +30,17 @@ func run() -> void:
 	await finish(0 if result else 1)
 
 func walk_through_ossuary_story(profile_prefix: String = "") -> bool:
-	if not expect(story_pins_match(),"exact Story/returned-Second/ancestor/core/map pins BEFORE allocation/input/profile adoption"): return false
+	return (await _completed_ossuary_story(profile_prefix)) != null
+
+func accepted_ossuary_story(profile_prefix: String = "") -> Story:
+	# Control/omission success is not an accepted earned Story publication.
+	if ["--ossuary-story-controls","--ossuary-story-live-controls","--ossuary-story-pin-rejection","--omit-ossuary-story-interact"].any(func(flag): return flag in OS.get_cmdline_user_args()): return null
+	return await _completed_ossuary_story(profile_prefix)
+
+func _completed_ossuary_story(profile_prefix: String = "") -> Story:
+	if not expect(story_pins_match(),"exact Story/returned-Second/ancestor/core/map pins BEFORE allocation/input/profile adoption"): return null
 	var accepted = await accepted_ossuary_second_loop(profile_prefix)
-	if accepted == null: return false
+	if accepted == null: return null
 	var controls: bool = "--ossuary-story-live-controls" in OS.get_cmdline_user_args()
 	var segment = QuietStory.new() if controls else Story.new()
 	var result: bool = segment.adopt_after(self,accepted)
@@ -43,7 +51,7 @@ func walk_through_ossuary_story(profile_prefix: String = "") -> bool:
 		else: result = await segment.run_route()
 	var released: bool = segment.release_story_input()
 	if is_instance_valid(game): game.transport_witness = null
-	return expect(released,"Story releases its physical E and pending interaction before inherited cleanup") and result
+	return segment if expect(released,"Story releases its physical E and pending interaction before inherited cleanup") and result else null
 
 func story_live_controls(segment) -> bool:
 	if not expect(segment.current() and segment.prior_frozen(),"live controls start at real accepted Second handoff"): return false
