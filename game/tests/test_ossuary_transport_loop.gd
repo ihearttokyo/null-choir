@@ -2,6 +2,7 @@ extends "res://tests/test_nursery_finale_loop.gd"
 
 const Witness = preload("res://tests/ossuary_transport_witness.gd")
 const Finale = preload("res://tests/ossuary_finale_witness.gd")
+const Exit = preload("res://tests/ossuary_finale_exit_witness.gd")
 # Exact dependency and production-field inventories are appended before delivery.
 const OT_ENTRY = [[35.5,23.5],[34.5,23.5],[34.5,24.5],[35.5,25.5],[34.5,25.5],[34.5,24.5]]
 const OT_APPROACH = [[30.5,24.5],[24.0,24.0],[13.5,24.5],[12.5,24.5],[6.5,24.5],[6.5,22.5]]
@@ -43,8 +44,19 @@ class TransportMain:
 		if transport_witness != null: transport_witness.after_aim(origin,max_range,melee,result)
 		return result
 	func interact() -> void:
+		if transport_witness is Exit:
+			if not _exit_lifecycle():
+				transport_witness.forbidden("exit")
+				return
+			var observer = transport_witness
+			if not observer.before_exit(): return
+			super.interact()
+			observer.after_exit()
+			return
 		if transport_witness != null: transport_witness.before_interact()
 		super.interact()
+	func _exit_lifecycle() -> bool:
+		return transport_witness != null and transport_witness.get_script() == Exit and transport_witness.game == self
 	func collect_key(id: String) -> void:
 		if transport_witness != null: transport_witness.before_key(id)
 		super.collect_key(id)
@@ -64,7 +76,7 @@ class TransportMain:
 		return super.unlock_door(id)
 	func _capture_actor_state() -> bool:
 		if transport_witness != null:
-			if not _finale_lifecycle():
+			if not (_finale_lifecycle() or _exit_lifecycle()):
 				transport_witness.forbidden("capture")
 				return false
 			var observer = transport_witness
@@ -80,7 +92,7 @@ class TransportMain:
 		super._capture_game_mouse()
 	func _save() -> Error:
 		if transport_witness != null:
-			if not _finale_lifecycle():
+			if not (_finale_lifecycle() or _exit_lifecycle()):
 				transport_witness.forbidden("save")
 				return ERR_INVALID_DATA
 			var observer = transport_witness
