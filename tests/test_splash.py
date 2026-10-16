@@ -13,10 +13,11 @@ text=page.read_text(); dom=Page(); dom.feed(text)
 assert ('html',{'lang':'en'}) in dom.tags
 assert any(t=='meta' and a.get('name')=='viewport' for t,a in dom.tags)
 links=[a for t,a in dom.tags if t=='a']
-assert any(a.get('class')=='download' and a.get('href')=='https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-suno.1' for a in links)
+assert any(a.get('class')=='download' and a.get('href')=='https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-suno.2' for a in links)
 assert any(a.get('class')=='skip' and a.get('href')=='#main' for a in links)
 assert not any(t in ['script','iframe','video','audio'] for t,a in dom.tags)
-assert 'not Apple Developer ID-signed or notarized' in text
+assert 'Developer ID-signed and Apple-notarized' in text
+assert 'not Apple Developer ID-signed or notarized' not in text
 assert 'Illustrated key art' in text and 'not a gameplay screenshot' in text
 assert 'five minutes' in text and 'six weapon slots' in text
 assert '/Users/' not in text and 'whatsapp.net' not in text

@@ -45,7 +45,7 @@ def main():
         assert not any(message in output.lower() for message in ['error:', 'leaked', 'resources still in use', 'orphan']), output
         assert info['CFBundleShortVersionString'] == '0.2.2' and info['CFBundleVersion'] == '0.2.2', 'Current development app version required'
         print(output.strip())
-    print('PASS exported ARM64 ZIP, strict ad-hoc signature, system-only dependencies and offline native title startup')
+    print('PASS exported ARM64 ZIP, strict code signature, system-only dependencies and offline native title startup')
 
 
 if __name__ == '__main__':
