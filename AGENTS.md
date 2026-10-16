@@ -2,9 +2,11 @@
 
 ## Current authority
 
-Jared released the project launch hold and previous project-specific execution restrictions on 2026-10-06 and authorized continued autonomous hill-climbing. Proceed with Godot/native and isolated app testing, background Blender authoring, independent reviews, implementation, builds and the authorized private GitHub delivery. Historical launch/crash, GUI, review-accounting and adoption/promotion holds are superseded; their failure evidence remains relevant regression coverage. Routine project work needs no repeated approval. Propagate this authority and this file to every worker.
+Jared released the project launch hold and previous project-specific execution restrictions on 2026-10-06 and authorized continued autonomous hill-climbing. Proceed with Godot/native and isolated app testing, background Blender authoring, independent reviews, implementation, builds and the authorized GitHub delivery. Historical launch/crash, GUI, review-accounting and adoption/promotion holds are superseded; their failure evidence remains relevant regression coverage. Routine project work needs no repeated approval. Propagate this authority and this file to every worker.
 
 This release applies to NULL CHOIR. Preserve unrelated work, original assets and user saves; use isolated test profiles. Platform permissions, security controls, credential privacy and honest validation still apply. Prefer background work and task-window-only interaction/capture; keep screenshots local. Preserve unrelated sync/transfer pauses.
+
+On 2026-10-16 Jared authorized a public Suno-equipped playtest and its link to Angus. Keep the project proprietary under LICENSE, preserve third-party rights, inspect history and public-facing artifacts for private data before changing visibility, and retain the original songs and asset sources. Automatic development-window approval applies only to this project; preserve unrelated windows and saves.
 
 ## Hill-climbing
 
