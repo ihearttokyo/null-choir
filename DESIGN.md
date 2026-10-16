@@ -4,7 +4,7 @@ Status: Jared approved this brief and implementation start on 2026-09-30. The ei
 
 ## Outcome and value
 
-Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in a new private repository at `ihearttokyo/null-choir`, with private downloadable releases.
+Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in the existing `ihearttokyo/null-choir` repository. Jared authorized public repository visibility and downloadable noncommercial freeware playtests on 2026-10-16; LICENSE reserves the original code, art and soundtrack rights.
 
 The value hypothesis is that fast, readable combat, distinct level architecture, memorable live MIDI compositions, and discoverable environmental storytelling make a replayable eight-level game. Acceptance requires the full campaign, its original assets and music, actual Mac playability, and measured load-speed evidence—not merely a working first level.
 
@@ -60,7 +60,7 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 4. Deliver a finished first level with original art and music, then the full playable campaign, then the final art/music pass and optimized release. Continue autonomously after brief approval; report milestones and ask only for material decisions or blockers.
 5. Accepted performance targets on the verified M4 Mac: 60 FPS during normal combat at the chosen internal resolution, a usable main menu within three seconds of cold application launch, and ordinary level transitions within two seconds. Measure and profile before claiming these pass or changing the targets.
 6. Exercise all eight levels, combat roles, both bosses, all story discoveries, alternate revelation, difficulty choices, checkpoint/death/restart, persisted continuation, keyboard/mouse, and gamepad. Validate primary/secondary GUI paths, an edge state, and post-action feedback when nondisruptive computer use is feasible. Label skipped checks and their limits.
-7. Before release, verify the actual standalone Apple Silicon application, asset/music completeness, dependencies, signing, and private repository/release state. Apple notarization authentication and any upload authorization remain release-boundary gates; an existing signing identity alone does not establish them.
+7. Before release, verify the actual standalone Apple Silicon application, asset/music completeness, dependencies, signing, current repository visibility and release state. Apple notarization authentication and any upload authorization remain release-boundary gates; an existing signing identity alone does not establish them.
 
 ## Authority, ownership, and rollback
 

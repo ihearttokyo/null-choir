@@ -2,11 +2,21 @@
 
 Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Blender-built pixel sprites in a 3D containment cathedral; eight selected Suno instrumentals play offline through the native Music bus. Original MIDI compositions and their synth remain preserved.
 
+## Playtest download
+
+[Enter the NULL CHOIR splash page](https://ihearttokyo.github.io/null-choir/).
+
+[![Illustrated NULL CHOIR key art](docs/site-assets/arch.jpg)](https://ihearttokyo.github.io/null-choir/)
+
+[Download the Apple Silicon Mac playtest](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-suno.1). Requires macOS 14 or newer. This development build uses a local ad-hoc signature, without Apple Developer ID signing or notarization. Full campaign pacing, physical gamepad coverage and musical quality remain playtest questions.
+
+[LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
+
 ## Development status
 
 The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. The current soundtrack maps one selected Suno take to each level; the original eight MIDI scores remain preserved. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
 
-The private 0.2.1 development preview is delivered; final campaign acceptance remains unfinished. Inversion now has recessed cosmic cavities, fractured violet incisions and visible sparse stars. Two existing examination spotlights reveal the Nursery organism and the Heart's tooth-lined throat. Independent focused pixel reviews and correctness/Ponytail reviews pass. Strict inventory covers 92 editable art assets and 93 exports. Both changed maps pass source and boundary checks; all 24 native late-map difficulty/seal-order cases pass.
+Earlier development previews remain available; final campaign acceptance remains unfinished. Inversion now has recessed cosmic cavities, fractured violet incisions and visible sparse stars. Two existing examination spotlights reveal the Nursery organism and the Heart's tooth-lined throat. Independent focused pixel reviews and correctness/Ponytail reviews pass. Strict inventory covers 92 editable art assets and 93 exports. Both changed maps pass source and boundary checks; all 24 native late-map difficulty/seal-order cases pass.
 
 The exact uploaded Apple Silicon ZIP was downloaded and passed all eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing, system-only dependencies and isolated user data. Actual standalone title/Continue, stock Escape pause, live Heart world, staged death/checkpoint restoration, save/title and normal Quit pass. Thirty M4/Metal source-candidate stress samples measure 105.81–120.77 FPS with warm scene construction at most 417.10 ms. These are source diagnostics, not a release-binary matrix or full playthrough.
 
@@ -16,7 +26,7 @@ Source-native checks preserve captured actor damage and summoned companions thro
 
 ## Run and build
 
-[Private Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
+[Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
@@ -57,4 +67,4 @@ godot --headless --audio-driver CoreAudio --fixed-fps 60 --path game --quit-afte
 
 These use actual native gameplay/assets; headless input is simulated. A PASS marker and clean exit are required. The runner enforces a finite wall-clock deadline. The full late-role fixture needs about three minutes on the measured M4 host. MIDI assertions and native CoreAudio capture are separate from listening and GUI review.
 
-Original code, compositions and art remain project-owned. Third-party notices are retained in `licenses/audio/`, packaged audio/add-on notices and `game/licenses/Godot-Third-Party.txt`. GeneralUser GS permits software redistribution but qualifies historical sample origins; that qualification is retained for this private development build. No copied Doom maps, sprites or songs are included.
+Original code, compositions and art remain project-owned. Third-party notices are retained in `licenses/audio/`, packaged audio/add-on notices and `game/licenses/Godot-Third-Party.txt`. GeneralUser GS permits software redistribution but qualifies historical sample origins; that qualification is retained with the redistributed bank. No copied Doom maps, sprites or songs are included.
