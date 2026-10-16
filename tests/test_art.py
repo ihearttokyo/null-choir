@@ -171,6 +171,56 @@ def check_skin_bell_v2(a):
     assert len(data) == output['bytes'] and hashlib.sha256(data).hexdigest() == output['sha256']
 
 
+
+def check_nursery_v2(a, blob):
+    assert a['id'] == 'nursery_gestation_engine'
+    assert all(type(a[key]) is int for key in ['source_mesh_count', 'source_hierarchy_groups', 'triangles', 'runtime_mesh_nodes', 'material_count'])
+    script = 'tools/build_nursery_gestation_v2.py'
+    validate_recipe(ROOT, a, script, ['tools/build_art.py', 'tools/art_recipe.py'])
+    recipe = runpy.run_path(str(resolve_recipe(ROOT, script, a['recipe_sha256'])))
+    assert a['recipe_dependencies'] == {key: recipe['PINS'][key] for key in ['tools/build_art.py', 'tools/art_recipe.py']}
+    for logical, digest in recipe['PINS'].items():
+        assert hashlib.sha256((ROOT / logical).read_bytes()).hexdigest() == digest
+    assert a['source'] == 'source/art/nursery_gestation_engine_v2.blend'
+    assert a['provenance']['image_derived'] is True
+    original = {'path': 'source/art/nursery_gestation_engine.blend',
+                'sha256': recipe['PINS']['source/art/nursery_gestation_engine.blend']}
+    assert a['provenance']['original_source'] == original
+    refs = [
+        {'path': 'source/art/references/nursery-transparent-v2.png', 'sha256': recipe['REFERENCE_SHA']},
+        {'path': 'source/art/references/nursery-membrane-wrap-v1.png', 'sha256': 'bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0'},
+        {'path': 'source/art/references/nursery-material-atlas-v2.png', 'sha256': recipe['MATERIAL_SHA']}]
+    assert a['provenance']['references'] == refs
+    assert a['provenance']['geometry_reference_sha256'] == refs[1]['sha256']
+    assert a['provenance']['material_reference_sha256'] == refs[2]['sha256']
+    for ref in refs:
+        assert hashlib.sha256((ROOT / ref['path']).read_bytes()).hexdigest() == ref['sha256']
+    geometry = recipe['geometry_report'](recipe['build_parts']())
+    assert a['source_mesh_count'] == geometry['editable_meshes'] == 227
+    assert a['source_hierarchy_groups'] == 4
+    assert a['assembly_names'] == ['Editable architecture', 'Editable vessel', 'Editable anatomy', 'Editable controls']
+    assert len(a['outputs']) == 1 and a['outputs'][0]['path'] == 'game/assets/art/world/nursery_gestation_engine.glb'
+    output = a['outputs'][0]
+    assert len(blob) == output['bytes'] < 1813732 and hashlib.sha256(blob).hexdigest() == output['sha256']
+    low, high = geometry['bounds']
+    for key, expected in [('min', low), ('max', high), ('size', [high[i]-low[i] for i in range(3)])]:
+        declared = a['physical_bounds_m'][key]
+        assert type(declared) is list and len(declared) == 3
+        assert all(type(v) in (int, float) and abs(v-w) <= .002 for v, w in zip(declared, expected))
+    y_up = [[low[0], low[2], -high[1]], [high[0], high[2], -low[1]]]
+    report = recipe['inspect_glb'](blob, y_up)
+    assert report['triangles'] == a['triangles'] == geometry['triangles'] <= 20000
+    assert report['groups'] == a['runtime_mesh_nodes'] == a['material_count'] == 5
+    assert a['texture_dependencies'] == {}, 'runtime atlas is embedded, not duplicated'
+    doc, binary = recipe['unpack_glb'](blob)
+    view = doc['bufferViews'][doc['images'][0]['bufferView']]
+    offset = view.get('byteOffset', 0)
+    atlas = binary[offset:offset + view['byteLength']]
+    assert a['atlas']['embedded'] is True
+    assert a['atlas'] == {'embedded': True, 'size': [512, 512],
+                          'sha256': hashlib.sha256(atlas).hexdigest(), 'sampling': 'nearest/no-mip'}
+
+
 def check():
     path = ROOT / 'source/art/manifest.json'
     assert path.is_file(), 'required art manifest absent (intended RED)'
@@ -188,6 +238,7 @@ def check():
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
     religious_bytes = dict.fromkeys(RELIGIOUS_SETS, 0)
     for a in assets:
+        nursery_v2 = a['id'] == 'nursery_gestation_engine' and a['provenance']['authoring_script'] == 'tools/build_nursery_gestation_v2.py'
         skin_bell_v2 = a['id'] == 'skin_bell' and a['provenance']['authoring_script'] == 'tools/build_skin_bell_v2.py'
         if a['id'] in MARKERS:
             marker.validate_lineage(a)
@@ -305,12 +356,16 @@ def check():
                         recipe = {'intake': 'tools/build_religious_art.py', 'foundry': 'tools/build_religious_foundry_art.py',
                                   'processional': 'tools/build_religious_processional_art.py',
                                   **dict.fromkeys(('reliquary', 'nursery', 'ossuary', 'inversion', 'heart'), 'tools/build_religious_late_art.py')}[level]
+                        if nursery_v2:
+                            check_nursery_v2(a, data)
+                            recipe = 'tools/build_nursery_gestation_v2.py'
                         assert a['provenance']['authoring_script'] == recipe
                         helpers = ['tools/build_art.py', 'tools/build_foundry_art.py']
                         if level != 'intake':
                             helpers.append('tools/build_religious_art.py')
                         if level not in ('intake', 'foundry'):
                             helpers.extend(['tools/build_processional_art.py', 'tools/build_religious_foundry_art.py'])
+                        if nursery_v2: helpers = ['tools/build_art.py', 'tools/art_recipe.py']
                         assert set(a['recipe_dependencies']) == set(helpers)
                         assert a['tradition_aesthetic'] == traditions[a['id']] and a['level_id'] == level
                         assert a['loop_id'] == {'reliquary_face_halo': 'reliquary_loop_halo',
