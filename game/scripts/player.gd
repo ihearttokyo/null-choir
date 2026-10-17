@@ -214,19 +214,25 @@ func fire() -> bool:
 	if index == 5:
 		query.to = origin+direction*weapon.range
 		query.hit_from_inside = true
+		var endpoint: Vector3 = query.to
 		for actor_hit in range(weapon.pellets):
 			if not _current_map() or not game.playing: break
 			var hit = space.intersect_ray(query)
 			if hit.is_empty(): break
 			if (hit.collider.collision_layer & 1) != 0 or not hit.collider.has_method("take_damage"):
+				endpoint = hit.position
 				if game.has_method("impact"): game.impact(hit.position)
 				break
+			if actor_hit == weapon.pellets-1: endpoint = hit.position
 			# Keep the same finite ray, excluding each real capsule once; walls remain queryable.
 			query.exclude = query.exclude+[hit.collider.get_rid()]
 			hit.collider.take_damage(weapon.damage,self,{"attack_kind":"piercing","weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position})
 			if not _current_map() or not game.playing: break
 			if game.has_method("hit_feedback"): game.hit_feedback()
 			if _current_map() and game.playing and game.has_method("impact"): game.impact(hit.position)
+		if _current_map() and game.playing and game.has_method("ammo_visuals"):
+			var visuals = game.ammo_visuals()
+			if visuals != null: visuals.trace(index,origin,endpoint)
 		return true
 	var right = direction.cross(camera.global_basis.y).normalized()
 	var up = right.cross(direction).normalized()
@@ -239,6 +245,9 @@ func fire() -> bool:
 		var ray_direction = (direction+right*spread.x+up*spread.y).normalized()
 		query.to = origin+ray_direction*weapon.range
 		var hit = space.intersect_ray(query)
+		if index > 0 and game.has_method("ammo_visuals"):
+			var visuals = game.ammo_visuals()
+			if visuals != null: visuals.trace(index,origin,hit.position if not hit.is_empty() else query.to)
 		if not hit.is_empty():
 			if hit.collider.has_method("take_damage"):
 				var damage: int = weapon.damage

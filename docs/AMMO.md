@@ -6,9 +6,13 @@ The selected GPT image reference is `source/art/references/ammo-vfx-reference-01
 
 Runtime uses one shared 256x256 nearest-filtered atlas. The level lazily owns one driver and at most32 pooled Sprite3D nodes, including inactive slots. Casings and impacts may be recycled under saturation; live projectile-bound sprites cannot be evicted. Weak projectile references disappear on deletion. There are no cosmetic colliders, damage calls, random draws, lights, timers or custom shaders. Pause and current-level checks fence the single process callback.
 
+Pistol, scattergun and repeater shots now reuse the amber streak frames for cosmetic travel along each actual resolved ray. The disruptor uses one pressure-ring route, ending at its third struck actor, an earlier wall or its finite range. Damage still resolves immediately; cosmetic arrival adds no hit or impact. Admitted routes remain protected from recycling until expiry, and reused slots restore normal casing/impact behavior. The presentation starts at the authoritative camera origin, without a muzzle-offset ray that could cross nearby cover. This mechanical reuse is not acceptance of final shot designs or rendered readability.
+
 The HUD derives idle/fire/recovery from the selected weapon's existing cooldown and interval; camera shake no longer animates an unfired switched weapon. Muzzle frames use that same clock. Shot timing, ammunition, damage, auto-aim, projectile swept collision and blast rules are unchanged.
 
 Checks: `game/tests/test_weapon_pose.gd`, `game/tests/test_ammo_visuals.gd` and `python3 -B tests/test_ammo_art.py`. Native headless checks exercise actual hooks, physics ownership and pause scheduling; explicit manual deltas are simulation, not real held-fire timing. The art check reads actual Blender/reference/PNG bytes and manifest pins. Headless checks cannot establish rendered placement, visual readability, GPU cost or human playability. Those require the nondisruptive graphics/app validation route.
+
+`game/tests/test_shot_transport.gd` checks real physics discharges, finite misses and wall contacts, piercing termination/damage, pause, clamped arrival, mixed protected-pool saturation and expired-route reuse. Its manually advanced cosmetic clock does not prove rendered motion or sustained performance.
 
 ## Conduit integration followthrough
 
