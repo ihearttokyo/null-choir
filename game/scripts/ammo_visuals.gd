@@ -9,8 +9,8 @@ var next_slot: int = 0
 func _current_map() -> bool:
 	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and get_parent() == game.level and not game.level.is_queued_for_deletion()
 
-func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3.ZERO, target: Node3D = null) -> void:
-	if not _current_map() or not game.playing: return
+func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3.ZERO, target: Node3D = null) -> Dictionary:
+	if not _current_map() or not game.playing: return {}
 	var slot: Dictionary = {}
 	for candidate in slots:
 		if not candidate.sprite.visible:
@@ -36,19 +36,32 @@ func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3
 				next_slot = (next_slot+1)%CAPACITY
 				var target_ref = candidate.target.get_ref() if candidate.target != null else null
 				if is_instance_valid(target_ref) and not target_ref.is_queued_for_deletion(): continue
+				if candidate.route: continue
 				slot = candidate
 				break
-			if slot.is_empty(): return
+			if slot.is_empty(): return {}
 	slot.age = 0.0
 	slot.duration = duration
 	slot.row = row
 	slot.motion = motion
 	slot.target = weakref(target) if target != null else null
+	slot.route = false
 	slot.sprite.frame = row*4
 	slot.sprite.pixel_size = 0.0012 if row == 1 else 0.012
 	slot.sprite.rotation.z = 0
 	slot.sprite.global_position = point
 	slot.sprite.visible = true
+	return slot
+
+func trace(weapon: int, origin: Vector3, endpoint: Vector3) -> void:
+	if not origin.is_finite() or not endpoint.is_finite(): return
+	var slot = _spawn(3 if weapon == 5 else 0,origin,clampf(origin.distance_to(endpoint)/180.0,0.07,0.24))
+	if slot.is_empty(): return
+	# Damage already resolved; the captured ray is cosmetic, including its arrival.
+	slot.route = true
+	slot.start = origin
+	slot.end = endpoint
+	slot.sprite.pixel_size = 0.004 if weapon == 5 else 0.0018
 
 func impact(point: Vector3) -> void:
 	_spawn(3,point,0.28)
@@ -66,7 +79,9 @@ func _process(delta: float) -> void:
 		var sprite: Sprite3D = slot.sprite
 		if not sprite.visible: continue
 		slot.age += delta
-		if slot.target != null:
+		if slot.route:
+			sprite.global_position = slot.start.lerp(slot.end,minf(slot.age/slot.duration,1.0))
+		elif slot.target != null:
 			var target = slot.target.get_ref()
 			if not is_instance_valid(target) or target.is_queued_for_deletion() or target.get_parent() != get_parent():
 				sprite.visible = false
