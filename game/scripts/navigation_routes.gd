@@ -19,6 +19,7 @@ var _group: StringName
 var _roles: Dictionary = {}
 var _source: NavigationMeshSourceGeometryData3D
 var _pending: Array[String] = []
+var _baking: Dictionary = {}
 var _dirty := false
 var _query_tick := -1
 var _queries := 0
@@ -85,18 +86,22 @@ func _process(_delta: float) -> void:
 	if not _current_owner():
 		teardown()
 		return
-	if _dirty:
-		_parse_geometry()
+	if _baking.is_empty():
+		if _dirty:
+			_parse_geometry()
+			return
+		if _pending.is_empty(): return
+		var next_role: String = _pending.pop_front()
+		# One role/source job at a time; publication always requires a later tick.
+		_baking = {"role":next_role,"revision":revision,"mesh":_mesh_for(_roles[next_role].profile),"source":_source}
+		NavigationServer3D.bake_from_source_geometry_data_async(_baking.mesh,_baking.source)
 		return
-	# One role bake per process tick; one parsed engine resource per rebuild.
-	if _pending.is_empty(): return
-	var role: String = _pending.pop_front()
-	var entry: Dictionary = _roles[role]
-	var mesh := _mesh_for(entry.profile)
-	NavigationServer3D.bake_from_source_geometry_data(mesh,_source)
-	if not _current_owner():
-		teardown()
-		return
+	if NavigationServer3D.is_baking_navigation_mesh(_baking.mesh): return
+	var completed: Dictionary = _baking
+	_baking = {}
+	if _dirty or completed.revision != revision: return
+	var entry: Dictionary = _roles[completed.role]
+	var mesh: NavigationMesh = completed.mesh
 	entry.mesh = mesh
 	entry.version = NavigationServer3D.map_get_iteration_id(entry.map)
 	entry.sync_started_us = Time.get_ticks_usec()
@@ -200,6 +205,7 @@ func teardown() -> void:
 	set_physics_process(false)
 	_dirty = false
 	_pending.clear()
+	_baking.clear()
 	for entry in _roles.values():
 		NavigationServer3D.region_set_map(entry.region,RID())
 		NavigationServer3D.free_rid(entry.region)

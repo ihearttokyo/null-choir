@@ -1,5 +1,7 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -43,7 +45,7 @@ func run() -> void:
 	Input.flush_buffered_events()
 	game._unhandled_input(axis)
 	if not expect(game.playing and not paused,"Release then press resumes once"): return
-	game.show_title()
+	if not expect(await RecordedAudioRelease.stop(game),"Controls fixture must release its native recorded-audio playback before exit"): return
 	game.free()
 	paused = false
 	print("PASS native mapped stick axis pauses once per press, not once per motion event")

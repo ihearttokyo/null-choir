@@ -102,7 +102,7 @@ func publish(role: String) -> bool:
 		routes.invalidate_doors()
 	# Wait for the actual bake first, then allow two real seconds for publication.
 	var deadline := Time.get_ticks_usec()+2000000
-	while routes._roles.has(role) and (routes._dirty or not routes._pending.is_empty() or routes._roles[role].mesh == null) and Time.get_ticks_usec() < deadline:
+	while routes._roles.has(role) and (routes._dirty or not routes._pending.is_empty() or not routes._baking.is_empty() or routes._roles[role].mesh == null) and Time.get_ticks_usec() < deadline:
 		OS.delay_msec(2)
 		await process_frame
 		await physics_frame
