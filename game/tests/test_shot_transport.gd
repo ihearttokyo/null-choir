@@ -29,27 +29,33 @@ func run() -> void:
 			if not expect(game.player.fire(),"Actual physics shot fires"): return
 			var driver = game.ammo_visuals()
 			driver.set_process(false)
-			var row = 3 if weapon == 5 else 0
+			var row: int = {1:0,2:1,3:2,5:3}[weapon]
 			var routes = driver.slots.filter(func(slot): return slot.sprite.visible and slot.row == row and slot.get("route",false))
 			if not expect(routes.size()==(7 if weapon == 2 else 1),"Real shot must emit each travelling route (intended RED)"): return
 			if not expect(game.state.ammo[weapon]==9,"Presentation preserves one-round discharge"): return
 			for slot in routes:
+				if not expect(slot.sprite.texture.resource_path=="res://assets/art/effects/shot_travel.png","Actual shot must use its dedicated authored travel atlas (intended RED)"): return
 				if not expect(slot.start.is_finite() and slot.end.is_finite(),"Route endpoints are finite"): return
 				if wall:
 					if not expect(game.impacts.any(func(point): return point.distance_to(slot.end)<0.001),"Each tracer ends at its real wall contact"): return
 				else:
 					if not expect(absf(slot.start.distance_to(slot.end)-game.player.WEAPONS[weapon].range)<0.001,"Miss uses the actual finite range"): return
-				if not expect(slot.sprite.global_position==slot.start,"Route begins at its captured firing origin"): return
+				if not expect(slot.sprite.global_position==slot.start and slot.sprite.frame==row*4,"Route begins at its captured firing origin and first authored frame"): return
 			var state: Dictionary = game.state.to_dict().duplicate(true)
 			var impact_count = game.impacts.size()
 			var end: Vector3 = routes[0].end
-			driver._process(routes[0].duration*0.5)
+			driver._process(routes[0].duration*0.25)
+			if not expect(routes[0].sprite.frame==row*4+1,"Travelling families reach their second authored frame"): return
+			driver._process(routes[0].duration*0.25)
+			if not expect(routes[0].sprite.frame==row*4+2,"Travelling families advance through their own four-frame lifetime"): return
 			if not expect(routes[0].sprite.global_position.is_equal_approx(routes[0].start.lerp(end,0.5)),"Cosmetic follows finite segment"): return
 			game.playing = false
 			var point: Vector3 = routes[0].sprite.global_position
 			driver._process(0.1)
 			if not expect(routes[0].sprite.global_position==point,"Paused route freezes"): return
 			game.playing = true
+			driver._process(routes[0].duration*0.25)
+			if not expect(routes[0].sprite.frame==row*4+3,"Travelling families reach their fourth authored frame before expiry"): return
 			driver._process(10.0)
 			if not expect(routes[0].sprite.global_position.is_equal_approx(end) and not routes[0].sprite.visible,"Oversized delta clamps at the endpoint and retires"): return
 			if not expect(game.state.to_dict()==state and game.impacts.size()==impact_count,"Cosmetic arrival never adds damage, ammo or impact"): return
@@ -120,13 +126,13 @@ func saturation() -> bool:
 	if not expect(driver.slots[0].sprite.visible and not driver.slots[1].sprite.visible,"Expired routes release while live marrow remains"): return false
 	var slot: Dictionary = driver.slots[1]
 	driver.impact(origin)
-	if not expect(slot.sprite.visible and not slot.route and slot.row==3,"Impact reuse clears expired route behavior"): return false
+	if not expect(slot.sprite.visible and not slot.route and slot.row==3 and slot.sprite.texture==driver.ATLAS,"Impact reuse clears expired route behavior and texture"): return false
 	slot.sprite.visible = false
 	driver.casing(game.player)
 	var point: Vector3 = slot.sprite.global_position
 	var motion: Vector3 = slot.motion
 	driver._process(0.1)
-	if not expect(not slot.route and slot.row==1 and slot.sprite.global_position.is_equal_approx(point+motion*0.1),"Casing reuse follows casing motion, not stale route"): return false
+	if not expect(not slot.route and slot.row==1 and slot.sprite.texture==driver.ATLAS and slot.sprite.global_position.is_equal_approx(point+motion*0.1),"Casing reuse follows casing motion and texture, not stale route"): return false
 	projectile.queue_free()
 	driver._process(0.01)
 	return expect(not driver.slots[0].sprite.visible,"Queued marrow releases protected slot")

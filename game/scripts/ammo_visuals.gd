@@ -1,6 +1,7 @@
 extends Node3D
 
 const ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
+const SHOT_ATLAS = preload("res://assets/art/effects/shot_travel.png")
 const CAPACITY = 32
 var game: Node
 var slots: Array[Dictionary] = []
@@ -46,6 +47,7 @@ func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3
 	slot.motion = motion
 	slot.target = weakref(target) if target != null else null
 	slot.route = false
+	slot.sprite.texture = ATLAS
 	slot.sprite.frame = row*4
 	slot.sprite.pixel_size = 0.0012 if row == 1 else 0.012
 	slot.sprite.rotation.z = 0
@@ -54,13 +56,15 @@ func _spawn(row: int, point: Vector3, duration: float, motion: Vector3 = Vector3
 	return slot
 
 func trace(weapon: int, origin: Vector3, endpoint: Vector3) -> void:
-	if not origin.is_finite() or not endpoint.is_finite(): return
-	var slot = _spawn(3 if weapon == 5 else 0,origin,clampf(origin.distance_to(endpoint)/180.0,0.07,0.24))
+	var row: int = {1:0,2:1,3:2,5:3}.get(weapon,-1)
+	if row < 0 or not origin.is_finite() or not endpoint.is_finite(): return
+	var slot = _spawn(row,origin,clampf(origin.distance_to(endpoint)/180.0,0.07,0.24))
 	if slot.is_empty(): return
 	# Damage already resolved; the captured ray is cosmetic, including its arrival.
 	slot.route = true
 	slot.start = origin
 	slot.end = endpoint
+	slot.sprite.texture = SHOT_ATLAS
 	slot.sprite.pixel_size = 0.004 if weapon == 5 else 0.0018
 
 func impact(point: Vector3) -> void:
@@ -95,4 +99,4 @@ func _process(delta: float) -> void:
 		if slot.target == null and slot.age >= slot.duration:
 			sprite.visible = false
 		else:
-			sprite.frame = slot.row*4+mini(3,int(slot.age/(0.09 if slot.row == 2 else slot.duration/4.0))%4)
+			sprite.frame = slot.row*4+mini(3,int(slot.age/(0.09 if slot.row == 2 and not slot.route else slot.duration/4.0))%4)

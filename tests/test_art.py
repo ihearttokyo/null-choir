@@ -65,7 +65,7 @@ LATE_COMBAT = LATE_WEAPONS | LATE_ROLES | LATE_BOSSES
 EXPECTED.update(LATE_COMBAT)
 ATMOSPHERE = {'nursery_growth_vault', 'ossuary_sorting_vault', 'inversion_cosmic_membrane', 'heart_arterial_vault'}
 EXPECTED.update(ATMOSPHERE)
-EXPECTED.add('ammo_vfx')
+EXPECTED.update(('ammo_vfx','shot_travel'))
 CATHEDRAL = {'cathedral_vault_6m','cathedral_vault_9m','cathedral_cluster_pier',
              'cathedral_lancet_bay','cathedral_corner_rib','cathedral_skeletal_dado',
              'cathedral_brass_lamp','cathedral_inlay_tile','cathedral_kit_atlas'}
