@@ -1,5 +1,7 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+
 const PurposeContract = preload("res://tests/test_marker_purposes.gd")
 
 var game
@@ -104,6 +106,7 @@ func run() -> void:
 			continue
 		if not expect(not game.level.get_world_3d().direct_space_state.intersect_ray(query).is_empty(),"Landmark base requires collision: "+hero.id): return
 	var level_id = game.level.layout.data.id
+	if not expect(await RecordedAudioRelease.stop(game),"Scenery fixture must release its native recorded-audio playback before exit"): return
 	cleanup()
 	await process_frame
 	await process_frame

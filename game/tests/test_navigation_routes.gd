@@ -184,7 +184,7 @@ func run() -> void:
 	for frame in range(90):
 		await process_frame
 		await physics_frame
-		if routes._pending.is_empty(): break
+		if routes._pending.is_empty() and routes._baking.is_empty(): break
 	expect(not routes.route(START,GOAL,"crawler").is_empty(),"Crawler retains access below two-meter visual roof")
 	expect(not routes.is_ready("worker") and not routes.is_ready("hover"),"Tall and hovering envelopes cannot navigate beneath low roof")
 	expect(routes._roles.worker.mesh.get_polygon_count() == 0 and routes._roles.hover.mesh.get_polygon_count() == 0,"Baked polygons prove low-roof exclusion rather than pending synchronization")
@@ -196,7 +196,7 @@ func run() -> void:
 	for frame in range(90):
 		await process_frame
 		await physics_frame
-		if routes._pending.is_empty(): break
+		if routes._pending.is_empty() and routes._baking.is_empty(): break
 	expect(not routes.route(level.to_global(START),level.to_global(GOAL),"crawler").is_empty(),"Translated/yaw-rotated roof preserves crawler path")
 	expect(routes._roles.worker.mesh.get_polygon_count() == 0,"Translated/yaw-rotated roof excludes tall actor in native bake")
 	level.position = Vector3.ZERO

@@ -41,7 +41,7 @@ func run() -> void:
 			await physics_frame
 			var syncing := false
 			for entry in routes._roles.values(): syncing = syncing or entry.sync
-			if not routes._dirty and routes._pending.is_empty() and not syncing: break
+			if not routes._dirty and routes._pending.is_empty() and routes._baking.is_empty() and not syncing: break
 		var cold_us := Time.get_ticks_usec()-started
 		var role_report := {}
 		for role in profiles:
@@ -77,7 +77,7 @@ func run() -> void:
 			await physics_frame
 			var syncing := false
 			for entry in routes._roles.values(): syncing = syncing or entry.sync
-			if not routes._dirty and routes._pending.is_empty() and not syncing: break
+			if not routes._dirty and routes._pending.is_empty() and routes._baking.is_empty() and not syncing: break
 		for role in profiles:
 			var reached := 0
 			var attempted := 0

@@ -1,5 +1,7 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
 
 func _initialize() -> void: call_deferred("run")
@@ -71,12 +73,12 @@ func run() -> void:
 	await game.restart_level()
 	if not expect(game.state.checkpoint_id == "entry" and game.state.owned_weapons == [0,1] and game.state.ammo[1] == 111,"Restart restores third-map entry resources before scattergun acquisition"): return
 	var progress = game.progress_path
-	game.show_title()
+	if FileAccess.file_exists(progress): DirAccess.remove_absolute(progress)
+	if not expect(await RecordedAudioRelease.stop(game),"Processional fixture must release its native recorded-audio playback before exit"): return
 	game.queue_free()
 	paused = false
 	await process_frame
 	await process_frame
-	if FileAccess.file_exists(progress): DirAccess.remove_absolute(progress)
 	print("PASS actual Foundry exit input, third-map descent/entry, one-shot scattergun, optional clue, seals, checkpoint/death/save Continue/restart")
 	quit()
 
