@@ -285,7 +285,11 @@ func start_level() -> void:
 		music.play_level(state.level_index)
 
 func _capture_game_mouse() -> void:
+	if _verify_stall_requested(OS.get_cmdline_user_args()): return
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+static func _verify_stall_requested(args: PackedStringArray) -> bool:
+	return "--verify-export" in args and "--verify-stall" in args
 
 func _level_load_failed(detail: String) -> void:
 	show_title()
@@ -1071,6 +1075,10 @@ func _verify_export() -> void:
 		get_tree().quit(1)
 		return
 	progress_path = "user://export_validation.json"
+	if _verify_stall_requested(OS.get_cmdline_user_args()):
+		var trace = load("res://scripts/app_frame_trace.gd").new()
+		await trace.run(self)
+		return
 	var checks = {
 		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
