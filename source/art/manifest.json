@@ -4561,8 +4561,8 @@
     {
       "id": "nursery_gestation_engine",
       "source": "source/art/nursery_gestation_engine_v2.blend",
-      "source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
-      "recipe_sha256": "d11b7be8bba493e442dfc9b4859160609303b4c8d32b97032bb34488ec87add9",
+      "source_sha256": "83225ec33f7f9581123c0af72f5b8c3ad107c936ea7308dace9b64bc4a0be536",
+      "recipe_sha256": "21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883",
       "outputs": [
         {
           "path": "game/assets/art/world/nursery_gestation_engine.glb",
@@ -4596,6 +4596,11 @@
         "original_source": {
           "path": "source/art/nursery_gestation_engine.blend",
           "sha256": "e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0"
+        },
+        "source_metadata_repair": {
+          "from_source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
+          "method": "Blender RNA path-field sanitization; geometry, UVs, material assignments, transforms and packed image bytes verified unchanged after reopen",
+          "geometry_uv_material_matrix_sha256": "0e370b89af5efa01849cce4b0c3cd08c3b17b7c340e32cb52c19c73efa0c9e05"
         }
       },
       "physical_bounds_m": {

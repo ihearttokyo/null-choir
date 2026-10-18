@@ -17,6 +17,50 @@ sys.modules[spec.name] = art
 spec.loader.exec_module(art)
 
 
+def geometry_fingerprint(fields):
+    # Nine-decimal test vertices ignore libm ULPs; metadata and face indices stay exact.
+    rounded=[(*field[:-2],[tuple(round(float(x),9) or 0.0 for x in v) for v in field[-2]],field[-1]) for field in fields]
+    return hashlib.sha256(json.dumps(rounded,separators=(',',':')).encode()).hexdigest()
+
+
+class Fingerprints(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.fields=[(p.name,p.material,p.assembly,p.vertices,p.faces) for p in art.build_parts()]
+
+    def test_actual_design_ulp_changes_are_stable(self):
+        row,vertex,axis=next((row,i,k) for row,field in enumerate(self.fields)
+            for i,v in enumerate(field[-2]) for k,x in enumerate(v)
+            if type(x) is float and abs(x)>.01 and x!=round(x,5))
+        for direction in (-math.inf,math.inf):
+            fields=copy.deepcopy(self.fields);point=list(fields[row][-2][vertex])
+            point[axis]=math.nextafter(point[axis],direction);fields[row][-2][vertex]=tuple(point)
+            with self.subTest(direction=direction):
+                self.assertEqual(geometry_fingerprint(fields),geometry_fingerprint(self.fields))
+
+    def test_actual_design_signed_zero_is_stable(self):
+        fields=[(*field[:-2],[tuple(-0.0 if x==0 else x for x in v) for v in field[-2]],field[-1]) for field in self.fields]
+        self.assertTrue(any(x==0 for field in self.fields for v in field[-2] for x in v))
+        self.assertEqual(geometry_fingerprint(fields),geometry_fingerprint(self.fields))
+
+    def test_vertex_topology_and_metadata_changes_still_fail(self):
+        for case in ('vertex','topology','name','material','assembly'):
+            fields=[list(field) for field in copy.deepcopy(self.fields)]
+            if case=='vertex':
+                x,y,z=fields[0][-2][0];fields[0][-2][0]=(x+.001,y,z)
+            elif case=='topology':fields[0][-1][0]=tuple(reversed(fields[0][-1][0]))
+            else:fields[0][{'name':0,'material':1,'assembly':2}[case]]+=' changed'
+            with self.subTest(case=case):
+                self.assertNotEqual(geometry_fingerprint(fields),geometry_fingerprint(self.fields))
+
+    def test_temporary_fixtures_use_platform_directory(self):
+        tree=ast.parse(Path(__file__).read_text())
+        calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute)
+               and isinstance(n.func.value,ast.Name) and n.func.value.id=='tempfile' and n.func.attr=='TemporaryDirectory']
+        self.assertEqual(len(calls),4)
+        self.assertTrue(all(not n.args and not n.keywords for n in calls))
+
+
 def fixture():
     data = bytearray()
     views, accessors = [], []
@@ -328,8 +372,8 @@ class Tissue(unittest.TestCase):
     def test_lobes_taper_and_wrap_without_changing_other_parts_or_crossing(self):
         parts=art.build_parts();lobes=[p for p in parts if 'fenestrated lobe' in p.name]
         kept=[(p.name,p.material,p.assembly,p.vertices,p.faces) for p in parts if p not in lobes]
-        self.assertEqual(hashlib.sha256(json.dumps(kept,separators=(',',':')).encode()).hexdigest(),
-                         '25d246e6a6c6678747948b91e26953e9f405455b37d9932442fc4c9192884a97')
+        self.assertEqual(geometry_fingerprint(kept),
+                         '98b4c4182b7e11eb5aba2628ccb550b837850ae441c58d802adcf83d5fb22fef')
         self.assertEqual(len(lobes),2)
         self.assertEqual(sum(len(list(art.triangles(p))) for p in parts),17574)
         def orient(a,b,c):return (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])
@@ -360,12 +404,12 @@ class Tissue(unittest.TestCase):
         self.assertEqual(len(web),4,'coherent tissue topology absent')
         original=[p for p in parts if p not in web]
         fields=[(p.name,p.assembly,p.vertices,p.faces) for p in original]
-        self.assertEqual(hashlib.sha256(json.dumps(fields,separators=(',',':')).encode()).hexdigest(),
-                         '6683d9ceba51764fb68b427264ec8aeaaf6e9ae0c3edc3dc523e425538ab6a38')
+        self.assertEqual(geometry_fingerprint(fields),
+                         '125785ada9aa5b48cd0bb79878753420d89e25a7c6d2840bb9c8063119bfe8b6')
         self.assertEqual(len(original),227)
         full=[(p.name,p.material,p.assembly,p.vertices,p.faces) for p in original]
-        self.assertEqual(hashlib.sha256(json.dumps(full,separators=(',',':')).encode()).hexdigest(),
-                         '2f8e0e9361eeeedba5668d836ca2e81345b32769efc41f3c3f969a22aa5209cc')
+        self.assertEqual(geometry_fingerprint(full),
+                         '8599f32f1f5ff970db1447d748c4f855f5c9f16ff24c57d200f7393896dfbc9c')
         self.assertTrue(all(p.material=='bone' for p in original if p.name.startswith(('open costal branch','clavicular wishbone','iliac growing wing'))))
         lookup={p.name:p for p in parts};stem=lookup['pleural web axial stem']
         lobes=[lookup['pleural web superior fenestrated lobe'],lookup['pleural web inferior fenestrated lobe']]
@@ -420,13 +464,13 @@ class Paths(unittest.TestCase):
         self.assertEqual(copies[0].right.value,'source/art/nursery-material-atlas-v2.png')
         self.assertIn('material_input=pinned(args.material_reference,MATERIAL_SHA)',source)
         self.assertIn("reference_full.name='Pinned full 1254 Nursery material atlas v2'",source)
-        with tempfile.TemporaryDirectory(dir='/private/tmp') as t:
-            p=Path(t)/'mismatched.png';p.write_bytes(b'unapproved material input')
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t).resolve()/'mismatched.png';p.write_bytes(b'unapproved material input')
             with self.assertRaises(ValueError):art.pinned(p,art.MATERIAL_SHA)
 
     def test_output_fresh_and_alias_symlink_escape_rejected(self):
-        with tempfile.TemporaryDirectory(dir='/private/tmp') as t:
-            root=Path(t); inp=root/'input';inp.mkdir()
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t).resolve(); inp=root/'input';inp.mkdir()
             self.assertEqual(art.output_path(root/'fresh',[inp]),root/'fresh')
             for bad in [inp,inp/'child',root/'..'/'escape']:
                 with self.subTest(bad=bad),self.assertRaises(ValueError):art.output_path(bad,[inp])
@@ -438,17 +482,17 @@ class Paths(unittest.TestCase):
         self.assertNotIn('source/art/manifest.json',art.PINS)
 
     def test_pin_and_png_contract(self):
-        with tempfile.TemporaryDirectory(dir='/private/tmp') as t:
-            p=Path(t)/'a.png';p.write_bytes(b'wrong')
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t).resolve()/'a.png';p.write_bytes(b'wrong')
             with self.assertRaises(ValueError):art.pinned(p,'0'*64)
             self.assertEqual(art.pinned(p,hashlib.sha256(b'wrong').hexdigest()),p)
             with self.assertRaises(ValueError):art.png_size(p.read_bytes())
 
     def test_hardlink_input_alias_rejected(self):
         import os
-        with tempfile.TemporaryDirectory(dir='/private/tmp') as t:
-            p=Path(t)/'source';p.write_bytes(b'original');q=Path(t)/'alias';os.link(p,q)
-            with self.assertRaises(ValueError):art.pinned(q,hashlib.sha256(b'original').hexdigest())
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t).resolve()/'source';p.write_bytes(b'original');q=p.parent/'alias';os.link(p,q)
+            with self.assertRaisesRegex(ValueError,'Missing, aliased or modified pinned input'):art.pinned(q,hashlib.sha256(b'original').hexdigest())
 
 
 class GLB(unittest.TestCase):

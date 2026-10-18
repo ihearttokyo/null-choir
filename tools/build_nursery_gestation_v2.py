@@ -19,9 +19,10 @@ PINS = {
     'source/art/nursery_gestation_engine.blend': 'e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0',
     'game/data/05_nursery.json': '8e04f3d5f704ac4f5b3ee698b3442ff27670843c244baca8b2ffdcd426bfa257',
 }
+ROLLBACK_COMMIT = '84d27115f178a25c38dab0c6c98bafdd7ed918b8'
 ROLLBACK_PINS = {
     'game/assets/art/world/nursery_gestation_engine.glb': '5d7921f949b3898d4293ec9c019f08dcd9df21a22bcb7e8977cc4c9c1a42502f',
-    'source/art/manifest.json': 'ef2390035861e7fd2d739596dc013d46d0aab574eb6243976c72d07d770b4c18',
+    'source/art/manifest.json': 'e33eef0912d9b4b3aeb41996dbe475b8b2537468c62d3970328a4c5c225b1556',
 }
 MATERIALS = {
     'brass': dict(color=(1,1,1,1),metallic=.68,roughness=.54,alpha='OPAQUE',tile=0),
@@ -507,6 +508,31 @@ def load_module(path,name):
     sys.modules[name]=module;spec.loader.exec_module(module);return module
 
 
+def _portable_path(owner, name, value):
+    # RNA fixed-size strings retain bytes after NUL; overwrite the full field first.
+    limit = owner.bl_rna.properties[name].length_max
+    if limit > 1:
+        setattr(owner, name, (b'/' if isinstance(value, bytes) else '/') * (limit - 1))
+    setattr(owner, name, value)
+
+
+def sanitize_source_paths(bpy):
+    for image in bpy.data.images:
+        if not image.packed_file:
+            continue
+        relative = '//' + bpy.path.basename(image.filepath)
+        _portable_path(image, 'filepath_raw', relative)
+        for packed in image.packed_files:
+            _portable_path(packed, 'filepath', relative)
+    for scene in bpy.data.scenes:
+        _portable_path(scene.render, 'filepath', '//')
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            for space in area.spaces:
+                if space.type == 'FILE_BROWSER' and space.params:
+                    _portable_path(space.params, 'directory', b'//')
+
+
 def main(argv=None):
     sys.dont_write_bytecode=True
     parser=argparse.ArgumentParser(description=__doc__)
@@ -594,15 +620,7 @@ def main(argv=None):
     scene['production_reference_sha256']=REFERENCE_SHA;scene['material_reference_sha256']=MATERIAL_SHA
     scene['geometry_report']=json.dumps(report);scene['placement_contract']='cell5.5/10.5 yaw0 BOX3.85/.55/3.15 blood nursery_loop_gestation'
     blend=output/'source/art/nursery_gestation_engine_v2.blend'
-    for image in bpy.data.images:
-        for packed in image.packed_files:
-            if packed.filepath:
-                packed.filepath=bpy.path.relpath(packed.filepath,start=str(blend.parent))
-    for screen in bpy.data.screens:
-        for area in screen.areas:
-            for space in area.spaces:
-                if space.type=='FILE_BROWSER' and space.params:
-                    space.params.directory=b'//'
+    sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=False)
     if blend.read_bytes()[:7]!=b'BLENDER':raise ValueError('Editable source must be raw BLENDER, not compressed')
     for label,loc in [('front',(0,-17,5)),('hero',(9,-14,8)),('rear',(-8,14,7))]:
@@ -643,7 +661,7 @@ def main(argv=None):
     receipt=dict(id=ID,source=report,runtime=runtime_report,level_seven_piece_bytes=others+len(blob),nursery_seven_ids=nursery_ids,
                  reference_sha256=REFERENCE_SHA,material_sha256=MATERIAL_SHA,recipe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                  recipe_dependencies={k:PINS[k] for k in ('tools/build_art.py','tools/art_recipe.py')},
-                 original_pins=PINS,rollback_baseline_pins=ROLLBACK_PINS,files={str(p.relative_to(output)):dict(bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in output.rglob('*') if p.is_file()},
+                 original_pins=PINS,rollback_baseline_commit=ROLLBACK_COMMIT,rollback_baseline_pins=ROLLBACK_PINS,files={str(p.relative_to(output)):dict(bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in output.rglob('*') if p.is_file()},
                  native_quality_accepted=False,game_alpha_sorting_accepted=False)
     (output/'candidate.receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
     (output/'manifest.patch.json').write_text(json.dumps({'id':ID,'proposal_only':True,'source':'source/art/nursery_gestation_engine_v2.blend','runtime':'game/assets/art/world/nursery_gestation_engine.glb','receipt':receipt},indent=2)+'\n')
