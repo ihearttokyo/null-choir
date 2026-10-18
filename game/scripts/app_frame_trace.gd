@@ -1,5 +1,18 @@
 extends RefCounted
 
+class PhysicalInputGuard extends Node:
+	signal observed(event: InputEvent)
+	func _input(event: InputEvent) -> void: observed.emit(event)
+
+func on_physical_input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouse or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		invalidate("physical_input_detected")
+
+static func has_active_input() -> bool:
+	for action in InputMap.get_actions():
+		if Input.get_action_raw_strength(action) > 0: return true
+	return false
+
 const DURATION_US = 24000000
 const CLOSING_WAIT_US = 2000000
 const MAX_RENDER_ROWS = 65536
@@ -21,6 +34,7 @@ var game: Node
 var window: Window
 var level_id: int = 0
 var player_id: int = 0
+var input_guard: PhysicalInputGuard
 
 static func phase_at(usec: int) -> int:
 	return int(usec/4000000.0) if usec >= 0 and usec < DURATION_US else -1
@@ -175,6 +189,13 @@ func run(owner: Node) -> void:
 		else: focused_since = 0
 		await tree.process_frame
 	if reason.is_empty() and (focused_since == 0 or Time.get_ticks_usec()-focused_since < 200000): invalidate("focus_not_stable")
+	if reason.is_empty():
+		input_guard = PhysicalInputGuard.new()
+		input_guard.process_mode = Node.PROCESS_MODE_ALWAYS
+		input_guard.observed.connect(on_physical_input)
+		game.add_child(input_guard)
+		if has_active_input(): invalidate("physical_input_held")
+	report.input_guard = "Physical keyboard/mouse/controller events and initially active mapped actions invalidate collection; event contents are not recorded."
 	var initial: Dictionary = {}
 	var phases: Array = []
 	var counters: Array = []
@@ -272,6 +293,11 @@ func run(owner: Node) -> void:
 
 func cleanup(tree: SceneTree) -> void:
 	release_actions()
+	if is_instance_valid(input_guard):
+		input_guard.set_process_input(false)
+		input_guard.observed.disconnect(on_physical_input)
+		input_guard.queue_free()
+		input_guard = null
 	game.show_title()
 	tree.paused = false
 	var drain_until: int = Time.get_ticks_usec()+100000

@@ -6,6 +6,7 @@ func _initialize() -> void:
 func run() -> void:
 	var trace_script = load("res://scripts/app_frame_trace.gd")
 	if not expect(trace_script != null,"INTENDED RED: app-owned bounded trace helper must exist"): return
+	preload("res://scripts/preferences.gd").new().apply_bindings()
 	var fixed_metrics_existed: bool = FileAccess.file_exists(trace_script.METRICS_PATH)
 	var fixed_metrics_sha: String = FileAccess.get_sha256(trace_script.METRICS_PATH) if fixed_metrics_existed else ""
 	var main_script = load("res://scripts/main.gd")
@@ -25,6 +26,54 @@ func run() -> void:
 	var fast: Dictionary = trace_script.summarize([8000,16000,24000,32000])
 	if not expect(trace_script.target_passed(fast,true) and not trace_script.target_passed(fast,false) and not trace_script.target_passed(trace_script.summarize([200000,208000,216000]),true),"Collection validity and first-gap hitch guard remain independent from fast steady rate"): return
 	var repairs_ok: bool = true
+	for action in trace_script.ACTIONS:
+		if not InputMap.has_action(action): InputMap.add_action(action)
+	for event in [InputEventKey.new(),InputEventMouseButton.new(),InputEventMouseMotion.new(),InputEventJoypadButton.new(),InputEventJoypadMotion.new()]:
+		var input_trace = trace_script.new()
+		var guard = trace_script.PhysicalInputGuard.new()
+		guard.observed.connect(input_trace.on_physical_input)
+		guard._input(event)
+		repairs_ok = expect(input_trace.reason == "physical_input_detected","INTENDED RED: physical keyboard/mouse/controller events invalidate synthetic collection") and repairs_ok
+		guard.free()
+	for axis_code in [JOY_AXIS_RIGHT_X,JOY_AXIS_RIGHT_Y]:
+		var axis_event = InputEventJoypadMotion.new()
+		axis_event.axis = axis_code
+		axis_event.axis_value = .15
+		Input.parse_input_event(axis_event)
+		Input.flush_buffered_events()
+	var held_look: Vector2 = Input.get_vector("look_left","look_right","look_up","look_down")
+	repairs_ok = expect(Input.get_action_strength("look_right") == 0 and Input.get_action_strength("look_down") == 0 and held_look.length() > 0,"Native diagonal input below individual deadzones still changes production circular look") and repairs_ok
+	repairs_ok = expect(trace_script.has_active_input(),"INTENDED RED: initial raw diagonal controller input cannot bypass the fence") and repairs_ok
+	for axis_code in [JOY_AXIS_RIGHT_X,JOY_AXIS_RIGHT_Y]:
+		var neutral_event = InputEventJoypadMotion.new()
+		neutral_event.axis = axis_code
+		neutral_event.axis_value = 0
+		Input.parse_input_event(neutral_event)
+		Input.flush_buffered_events()
+	repairs_ok = expect(not trace_script.has_active_input() and Input.get_vector("look_left","look_right","look_up","look_down") == Vector2.ZERO,"Neutralized controller input clears raw and circular state") and repairs_ok
+	var action_trace = trace_script.new()
+	var action_guard = trace_script.PhysicalInputGuard.new()
+	action_guard.observed.connect(action_trace.on_physical_input)
+	root.add_child(action_guard)
+	Input.action_press("move_back")
+	await process_frame
+	repairs_ok = expect(action_trace.reason.is_empty(),"Owned synthetic action calls do not generate physical input events") and repairs_ok
+	repairs_ok = expect(trace_script.has_active_input(),"INTENDED RED: already-held mapped input is detected before synthetic actions begin") and repairs_ok
+	Input.action_release("move_back")
+	repairs_ok = expect(not trace_script.has_active_input(),"Released input passes the initial input fence") and repairs_ok
+	var key_event = InputEventKey.new()
+	key_event.keycode = KEY_W
+	key_event.physical_keycode = KEY_W
+	key_event.pressed = true
+	Input.parse_input_event(key_event)
+	Input.flush_buffered_events()
+	repairs_ok = expect(action_trace.reason == "physical_input_detected","INTENDED RED: native input delivery reaches the verifier-only event guard") and repairs_ok
+	key_event = key_event.duplicate()
+	key_event.pressed = false
+	Input.parse_input_event(key_event)
+	Input.flush_buffered_events()
+	repairs_ok = expect(not Input.is_physical_key_pressed(KEY_W) and not Input.is_key_pressed(KEY_W) and not Input.is_action_pressed("move_forward"),"Duplicated key release clears raw and mapped key state") and repairs_ok
+	action_guard.free()
 	var terminal_times: Array = []
 	for usec in range(8000,23896001,8000): terminal_times.append(usec)
 	var terminal_summary: Dictionary = trace_script.summarize(terminal_times,30000000)
@@ -42,7 +91,6 @@ func run() -> void:
 	var rounding_summary: Dictionary = trace_script.summarize([8000,16331,24331,32331,40331,48331,56331,64331,72331,80331,88331])
 	repairs_ok = expect(rounding_summary.steady.p95_us == 8331 and rounding_summary.steady_fps >= 120 and not trace_script.target_passed(rounding_summary,true),"INTENDED RED: 8331us p95 exceeds the predeclared 8.33ms limit") and repairs_ok
 	for action in trace_script.ACTIONS:
-		if not InputMap.has_action(action): InputMap.add_action(action)
 		Input.action_press(action)
 	var trace = trace_script.new()
 	for index in range(trace_script.MAX_RENDER_ROWS): trace.record_draw(index+1,index,index)
@@ -75,7 +123,10 @@ func run() -> void:
 	var metrics = FileAccess.open(fixture_path,FileAccess.WRITE)
 	metrics.store_string("preserve-existing-metrics")
 	metrics.close()
-	if not expect(trace_script.early_failure(args,home,home+"/userdata","user://export_validation.json",FileAccess.file_exists(fixture_path)) == "metrics_already_exist" and FileAccess.get_file_as_string(fixture_path) == "preserve-existing-metrics","Actual preexisting isolated metrics are refused without overwriting"): return
+	var fixture_preserved: bool = trace_script.early_failure(args,home,home+"/userdata","user://export_validation.json",FileAccess.file_exists(fixture_path)) == "metrics_already_exist" and FileAccess.get_file_as_string(fixture_path) == "preserve-existing-metrics"
+	var fixture_removed: bool = DirAccess.remove_absolute(ProjectSettings.globalize_path(fixture_path)) == OK
+	if not expect(fixture_preserved,"Actual preexisting isolated metrics are refused without overwriting"): return
+	if not expect(fixture_removed and not FileAccess.file_exists(fixture_path),"INTENDED RED: the unique metrics fixture is removed after its preservation check"): return
 	var source: String = FileAccess.get_file_as_string("res://scripts/main.gd")
 	var main_markers: Array = ['var validation_home = OS.get_environment("HOME")','if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):','push_error("Export validation requires isolated HOME/userdata")','get_tree().quit(1)','progress_path = "user://export_validation.json"','_verify_stall_requested(OS.get_cmdline_user_args())','load("res://scripts/app_frame_trace.gd").new()','await trace.run(self)','start_campaign(1)']
 	if not expect(guard_order_valid(source,"func _verify_export()",main_markers),"Existing isolated HOME guard precedes lazy trace routing and gameplay"): return
