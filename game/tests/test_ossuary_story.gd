@@ -2,7 +2,7 @@ extends "res://tests/test_ossuary_second_loop.gd"
 
 # Functions/constants only: the accepted fixture's stored fields remain unchanged.
 const Story = preload("res://tests/ossuary_story_witness.gd")
-const STORY_BOUNDARY_SHA = "774be3b21e35ab54f4cee23e6c6bcd2c96b4a5cc3f4027cf89c4c6cb84134924"
+const STORY_BOUNDARY_SHA = "6bb177f5e1e3bc2109c1ec17e78c7277c6316046a8bbcbdd613b68435aebbd19"
 const STORY_WITNESS_SHA = "23e66c6342a391e6af4d98d0afff5c41a2a88f8cbd037b1f7bbae0a870aa49e9"
 
 class QuietStory:

@@ -1,7 +1,7 @@
 extends "res://tests/test_nursery_seed_loop.gd"
 
 # Provisional seed dependency: parent rebinds ONLY this pin after accepted seed review.
-const NF_SEED_SHA = "52a7777e4c9eceb997446437e6db63f3613155650f5fc80327b4fbf3f508ec97"
+const NF_SEED_SHA = "0f2ff7346002ac97bb01b11db3536cb032a200b9c136f16cfe81d73a059b0044"
 const NF_OSSUARY_SHA = "781a86ab846db76d7189f108281f009b300812a5c2136faa754b9a74000bc74c"
 const NF_ANCESTOR_SAVE_SHA = "1da02250064a304d13212f4f8fe1c4ab2dda32e20ce152b2246d4e05d3e348d0"
 const NF_RESULT_SAVE_SHA = "15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce"
