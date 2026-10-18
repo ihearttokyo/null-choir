@@ -1,0 +1,15 @@
+# Earned Processional entry
+
+`game/tests/test_processional_earned_entry.gd` retains the complete earned Intake and Foundry input route, then uses the actual Descend menu to enter Processional with the same Main/profile and independently verified inventory. A reversible non-quitting Foundry helper preserves its original wrapper, assertions and budgets.
+
+The entry test observes all 26 original actors, but covers only the central nave. It collects the actual 35-rivet supply with the 180-round cap, acquires the 16-shell scattergun through its normal pickup/autoselection, observes capped healing and defeats the original crawler01 and worker00 through native scattergun input. Per-weapon cadence, shot age, ammunition, ownership, pickup retirement, damage, actor identity/death and actual HUD fields remain checked. Workers intentionally strafe at 8–18 metres and retreat closer in; the input route pursues the worker into the scattergun’s useful range rather than changing enemy behavior.
+
+The final fixed-60-FPS CoreAudio replay passes: 751 third-map physics frames, three shells, two natural deaths, 86 health, 80 armor, 180 pistol rounds and 13 shells. Both entry recovery envelopes are checked against independently earned prior-exit resources before becoming frozen snapshots. A retained actual negative demonstrated the earlier harness silently accepted jointly stale recovery health; the corrected guard rejects that case. Native partial-state tests and peer reviews do not establish saved gameplay beyond this entry.
+
+Frozen limits are 1,800 physics frames/40 wall seconds for entry, 240 per hop and 360 for the final fight. Both preceding map budgets remain unchanged. Independent current-source Astra correctness and Sol Ponytail reviews are clean. The unaccelerated post-review replay passes in 201.896 wall seconds with the same 751-frame entry, three shells, two third-map deaths and final resources; the preceding Foundry leg uses 6,285 frames. This is actual native physics pacing, not a rendering-performance measurement.
+
+This is source-native virtual Input and scripted aim. Third-level loops/seals/exit, the remaining campaign, alternate seal order/difficulties, physical input, packed-app attribution, rendered quality, listening and performance are not established here. Runtime scripts, maps, assets, scores and the existing private app release are unchanged.
+
+Run the unaccelerated entry fixture from the project root with `python3 tools/check_game.py --timeout 240 tests/test_processional_earned_entry.gd`; its preceding two-map route exceeds the runner's default 30-second deadline. Use an isolated test HOME to preserve player data.
+
+The final entry boundary requires exactly one native scattergun finish for each original worker00 and crawler01. A retained earned-boundary crawler-survival counterfactual passed the older oracle; this assertion rejects it without changing combat, route or timing limits. Downstream helper pins must match the reviewed corrected source before continuation.

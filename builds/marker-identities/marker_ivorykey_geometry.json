@@ -1,0 +1,127 @@
+{
+  "id": "marker_ivorykey",
+  "source": "source/art/marker_ivorykey.blend",
+  "source_sha256": "cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487",
+  "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+  "outputs": [
+    {
+      "path": "game/assets/art/world/marker_ivorykey.glb",
+      "sha256": "c46f7d4ee5c4c90f5ed68fcfe9f39e85cb127b744757f7dcd1432acc8998ef62",
+      "bytes": 29740
+    }
+  ],
+  "provenance": {
+    "method": "image-derived original Blender geometry",
+    "authoring_script": "tools/build_marker_identities.py",
+    "imports": [],
+    "license": "Original NULL CHOIR project art"
+  },
+  "physical_bounds_m": {
+    "min": [
+      -0.3827739655971527,
+      -0.053999997675418854,
+      0.0
+    ],
+    "max": [
+      0.3827739655971527,
+      0.053999997675418854,
+      1.1252371072769165
+    ],
+    "size": [
+      0.7655479311943054,
+      0.10799999535083771,
+      1.1252371072769165
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+  "triangles": 520,
+  "runtime_mesh_nodes": 3,
+  "material_count": 3,
+  "loop_id": null,
+  "recipe_dependencies": {
+    "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+  },
+  "reference_images": [
+    {
+      "path": "source/art/references/marker-identities-v2.png",
+      "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+    }
+  ],
+  "facing": "front Blender -Y; exported Godot +Z",
+  "collision": "none; marker visuals only",
+  "preview": {
+    "path": "builds/marker-identities/marker_ivorykey_preview.png",
+    "sha256": "c0505af96976869a7a1a2d1315b9092498b3c13a77a6ef9cfcfa18de7b3eb5ef",
+    "bytes": 3037,
+    "dimensions": [
+      128,
+      128
+    ]
+  },
+  "source_meshes": [
+    {
+      "name": "Slit handle half -1",
+      "vertices": 54,
+      "triangles": 104
+    },
+    {
+      "name": "Ivory lateral antler -1",
+      "vertices": 32,
+      "triangles": 60
+    },
+    {
+      "name": "Lock shoulder sleeve -1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Slit handle half 1",
+      "vertices": 54,
+      "triangles": 104
+    },
+    {
+      "name": "Ivory lateral antler 1",
+      "vertices": 32,
+      "triangles": 60
+    },
+    {
+      "name": "Lock shoulder sleeve 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Open ivory diamond bezel",
+      "vertices": 24,
+      "triangles": 48
+    },
+    {
+      "name": "Central ivory antler",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Short lock neck",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Handle hinge pin -1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Handle hinge pin 1",
+      "vertices": 12,
+      "triangles": 20
+    }
+  ],
+  "native_source_saved_before_runtime_merge": true,
+  "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

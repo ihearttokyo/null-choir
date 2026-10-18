@@ -1,6 +1,20 @@
-# Campaign scores
+# Campaign soundtrack
 
-[DESIGN.md](../DESIGN.md) owns the musical requirements; [AUDIO.md](AUDIO.md) owns live synthesis, bank provenance and playback limits. These eight original scores use that approved palette. No existing song or rendered recording is used.
+Current playback uses the eight Suno recordings listed in [the selection manifest](../source/music/suno/manifest.json), one first-listed take per campaign idea. Original Opus-in-M4A downloads are retained in `source/music/suno/`; native MP3 runtime copies are in `game/audio/suno/`. FFmpeg 9.0.2 with `libmp3lame -q:a 0` performed the format conversion without structural edits or normalization. The four bonus ideas remain in Jared's Downloads and are not substituted for campaign cues.
+
+Native transport checks cover the full files, near-end repeats, pause/resume/restart and stop. Heard quality and musical loop seams remain unverified. The following sections describe the preserved MIDI compositions and legacy regression coverage, not the active soundtrack.
+
+## Recorded audio shutdown
+
+After stopping playback, Main waits at least 100 ms of monotonic wall time before quitting. Frame timers can count time from before their creation: a controlled long-frame test observed only 23.059 ms of the intended drain. The corrected source waited 111.140 ms normally and 100.774 ms with fixed-FPS execution.
+
+`tests/test_shutdown_drain_clock.gd` starts the real Suno player, introduces a long frame and checks stopped playback, idempotent quit and actual elapsed time. Run it through `tools/check_game.py`; engine exit zero alone does not establish a pass. The controlled brute-interception fixture also lets the native mixer drain after freeing its players.
+
+These source-native checks do not establish packed-app shutdown or heard quality, nor prove that the timing defect caused an earlier intermittent playback-resource leak. GPU/app validation remains separate.
+
+## Preserved original MIDI scores
+
+[DESIGN.md](../DESIGN.md) owns the musical requirements; [AUDIO.md](AUDIO.md) owns live synthesis, bank provenance and playback limits. These eight original scores use that approved palette. These preserved MIDI scores do not contain rendered recordings.
 
 | Level / file | Song | Tempo, BPM | Meter | Loop, seconds | Authored material |
 |---|---|---|---|---:|---|
@@ -50,4 +64,4 @@ acceptance.
 
 Python assertions check deterministic source/output parity, the frozen gate hash, encoder guards, 60–120 second duration, release sections, phrase use and arrangement variation. Normalized main riffs and drum patterns differ across all eight scores; this is a structural check, not a claim of heard quality. Godot assertions use the shipped SMF reader to check actual track events, note balance, programs/channels/controllers, tempo/meter/section parity, end-of-track and release duration. They also load the actual bank and require every authored pitch/velocity to have a matching zone. Bank release envelopes and percussion auto-release/finite-PCM bounds must finish before the loop, including a 100 ms dispatch/buffer allowance. This deterministic bound does not replace listening or cover arbitrary frame stalls.
 
-`game/audio/music.gd` selects these files in table order and reuses the packaged bank. Before this overhaul, a full native CoreAudio run completed one repeat of every baseline score, pause/resume and stop/switch checks, with non-silent output, zero clipped frames and zero dropped capture frames. That evidence does not validate the revised songs or pressure mix. The two-second capture buffer preserves PCM across the previously observed 1.259-second source-file preparation stall; the zero-drop assertion remains unchanged. Re-run native bank/tail assertions and CoreAudio capture, then listen to complete revised arcs, repeats and representative gameplay at quiet/intermediate/full pressure. Listening quality, attack-cue audibility, perceived loop seams and the complete campaign remain acceptance gates; no static or mixer-capture test approves unheard music.
+`game/audio/midi_music.gd` retains this legacy playback path; current campaign playback uses the Suno recordings. Before this overhaul, a full native CoreAudio run completed one repeat of every baseline score, pause/resume and stop/switch checks, with non-silent output, zero clipped frames and zero dropped capture frames. That evidence does not validate the revised songs or pressure mix. The two-second capture buffer preserves PCM across the previously observed 1.259-second source-file preparation stall; the zero-drop assertion remains unchanged. Re-run native bank/tail assertions and CoreAudio capture, then listen to complete revised arcs, repeats and representative gameplay at quiet/intermediate/full pressure. Listening quality, attack-cue audibility, perceived loop seams and the complete campaign remain acceptance gates; no static or mixer-capture test approves unheard music.

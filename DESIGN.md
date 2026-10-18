@@ -4,7 +4,7 @@ Status: Jared approved this brief and implementation start on 2026-09-30. The ei
 
 ## Outcome and value
 
-Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in a new private repository at `ihearttokyo/null-choir`, with private downloadable releases.
+Build an original, offline, single-player Doom-inspired campaign in Godot, with pixel-art sprites in 3D environments and Blender-authored character and world assets. Deliver the editable project and an Apple Silicon Mac application in the existing `ihearttokyo/null-choir` repository. Jared authorized public repository visibility and downloadable noncommercial freeware playtests on 2026-10-16; LICENSE reserves the original code, art and soundtrack rights.
 
 The value hypothesis is that fast, readable combat, distinct level architecture, memorable live MIDI compositions, and discoverable environmental storytelling make a replayable eight-level game. Acceptance requires the full campaign, its original assets and music, actual Mac playability, and measured load-speed evidence—not merely a working first level.
 
@@ -48,7 +48,7 @@ Target roughly 8–12 minutes per level and 75–100 minutes for a first playthr
 
 Use 640×360 internal rendering with crisp scaling, directional sprites, atmospheric lighting, and restrained post-processing. Preserve readable silhouettes during combat. Character, weapon, and hero-piece models must be original Blender work with editable `.blend` sources. Redistribution-compatible supporting textures and instrument banks are permitted with provenance recorded.
 
-Create eight original `.mid` compositions, one per level. Synthesize them live in the application, offline; rendered recordings are not an acceptable replacement. Use distinct MIDI-metal riffs, bass/drums, organ and synth passages, explicit loop lengths, and appropriate musical variation. Audition the actual instruments and repeated transitions rather than approving music from MIDI files alone.
+Jared's 2026-10-15 instruction supersedes the original live-MIDI playback requirement: use one previously generated Suno take for each of the eight levels. Preserve the original MIDI compositions and editable sources. Play the selected recordings offline through the Music bus, with repeat, pause/resume, restart and level-switch behavior. Retain one take per bonus idea separately. Audition actual recordings and transitions; generation prompts and technical playback checks cannot approve unheard music.
 
 Keep authoring sources outside the Godot runtime project. Generate sprite atlases and world GLB/textures before shipping; include only needed runtime assets in the application. Load one level at a time and reuse native Godot resource/import facilities, without a speculative custom cache. See [technical research](RESEARCH.md) for evidence and the provisional synth choice.
 
@@ -56,11 +56,11 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 
 1. Prove the intended failing assertion before deterministic logic changes, then implement the smallest passing change. Keep relevant unit/integration checks and representative end-to-end campaign coverage.
 2. After the first passing nontrivial code change, run correctness and Ponytail reviews before broader validation. Fix findings and rerun affected checks.
-3. First evaluate one self-contained offline Mac export playing representative live MIDI. Exercise dense notes, tempo changes, pitch bend, percussion, repeat boundaries, volume/mute, pause/resume, and level switching. Reject audible seams, stuck notes, or dependence on host-installed audio libraries.
+3. Verify self-contained offline recorded playback in the Mac export: all eight selected tracks, repeat boundaries, volume/mute, pause/resume and level switching. Preserve the retained MIDI regression checks as legacy synthesis coverage. Reject audible seams or a runtime dependency on host conversion tools.
 4. Deliver a finished first level with original art and music, then the full playable campaign, then the final art/music pass and optimized release. Continue autonomously after brief approval; report milestones and ask only for material decisions or blockers.
 5. Accepted performance targets on the verified M4 Mac: 60 FPS during normal combat at the chosen internal resolution, a usable main menu within three seconds of cold application launch, and ordinary level transitions within two seconds. Measure and profile before claiming these pass or changing the targets.
 6. Exercise all eight levels, combat roles, both bosses, all story discoveries, alternate revelation, difficulty choices, checkpoint/death/restart, persisted continuation, keyboard/mouse, and gamepad. Validate primary/secondary GUI paths, an edge state, and post-action feedback when nondisruptive computer use is feasible. Label skipped checks and their limits.
-7. Before release, verify the actual standalone Apple Silicon application, asset/music completeness, dependencies, signing, and private repository/release state. Apple notarization authentication and any upload authorization remain release-boundary gates; an existing signing identity alone does not establish them.
+7. Before release, verify the actual standalone Apple Silicon application, asset/music completeness, dependencies, signing, current repository visibility and release state. Apple notarization authentication and any upload authorization remain release-boundary gates; an existing signing identity alone does not establish them.
 
 ## Authority, ownership, and rollback
 

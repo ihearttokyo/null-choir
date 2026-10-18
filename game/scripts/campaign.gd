@@ -18,12 +18,17 @@ var removed: Array = []
 var explored: Array = []
 var checkpoint_id: String = "entry"
 var position: Vector3 = Vector3.ZERO
+# Missing legacy components use authored yaw / level camera pitch on reconstruction.
+var yaw: Variant = null
+var pitch: Variant = null
 var checkpoint: Dictionary = {}
 var level_start: Dictionary = {}
 # null is legacy/unknown; [] is an authoritative empty living set.
 var actors: Variant = null
+var level_load_error: String = ""
 
 func new_campaign(mode: int) -> void:
+	level_load_error = ""
 	difficulty = clampi(mode, 0, 2)
 	level_index = 0
 	health = 100
@@ -36,6 +41,8 @@ func new_campaign(mode: int) -> void:
 	removed = []
 	explored = []
 	actors = null
+	yaw = null
+	pitch = null
 	mark_checkpoint("entry", Vector3.ZERO)
 
 func damage(amount: int) -> void:
@@ -58,7 +65,7 @@ func mark_checkpoint(id: String, location: Vector3) -> void:
 func restore_checkpoint() -> void:
 	if not checkpoint.is_empty():
 		var document = to_dict()
-		document.erase("actors")
+		for field in ["actors","yaw","pitch"]: document.erase(field)
 		document.merge(checkpoint,true)
 		var candidate = get_script().new()
 		if not candidate.from_dict(document): return
@@ -67,7 +74,7 @@ func restore_checkpoint() -> void:
 func restore_level_start() -> void:
 	if not level_start.is_empty():
 		var document = to_dict()
-		document.erase("actors")
+		for field in ["actors","yaw","pitch"]: document.erase(field)
 		document.merge(level_start,true)
 		document.checkpoint = level_start.duplicate(true)
 		var candidate = get_script().new()
@@ -81,6 +88,8 @@ func complete_level() -> void:
 	removed = []
 	explored = []
 	actors = null
+	yaw = null
+	pitch = null
 	mark_checkpoint("entry", Vector3.ZERO)
 
 func _resources() -> Dictionary:
@@ -89,6 +98,8 @@ func _resources() -> Dictionary:
 		"keys": keys.duplicate(), "removed": removed.duplicate(),
 		"checkpoint_id": checkpoint_id, "position": [position.x, position.y, position.z]}
 	if actors != null: data["actors"] = actors.duplicate(true)
+	if yaw != null: data["yaw"] = yaw
+	if pitch != null: data["pitch"] = pitch
 	return data
 
 func to_dict() -> Dictionary:
@@ -99,6 +110,7 @@ func to_dict() -> Dictionary:
 	return data
 
 func from_dict(data: Dictionary) -> bool:
+	level_load_error = ""
 	# Validate everything before changing live state. Saves are an untrusted boundary.
 	if not _integer(data.get("version"), VERSION, VERSION) or not _integer(data.get("difficulty"), 0, 2):
 		return false
@@ -123,7 +135,9 @@ func from_dict(data: Dictionary) -> bool:
 		return false
 	var layout = Layout.new()
 	if [data,saved_checkpoint,saved_start].any(func(snapshot): return snapshot.has("actors")):
-		if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)): return false
+		if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)):
+			level_load_error = layout.load_error
+			return false
 		for snapshot in [data,saved_checkpoint,saved_start]:
 			if not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
 	difficulty = int(data.difficulty)
@@ -139,6 +153,8 @@ func _normalized_resources(data: Dictionary) -> Dictionary:
 	var result = data.duplicate(true)
 	var point = Vector3(data.position[0],data.position[1],data.position[2])
 	result.position = [point.x,point.y,point.z]
+	if result.has("yaw"): result.yaw = Enemy.canonical_yaw(result.yaw)
+	if result.has("pitch"): result.pitch = _native_pitch(float(result.pitch))
 	for field in ["health", "armor", "weapon"]:
 		result[field] = int(result[field])
 	for field in ["ammo", "owned_weapons"]:
@@ -151,6 +167,10 @@ func _normalized_resources(data: Dictionary) -> Dictionary:
 			actor.yaw = Enemy.canonical_yaw(actor.yaw)
 	return result
 
+# Native camera precision also removes JSON parser last-bit drift; validation precedes this.
+func _native_pitch(value: float) -> float:
+	return clampf(Vector3(value,0,0).x,-1.35,1.35)
+
 func _apply_resources(data: Dictionary) -> void:
 	health = int(data.health)
 	armor = int(data.armor)
@@ -161,6 +181,8 @@ func _apply_resources(data: Dictionary) -> void:
 	removed = data.removed.duplicate()
 	checkpoint_id = data.checkpoint_id
 	position = Vector3(data.position[0], data.position[1], data.position[2])
+	yaw = Enemy.canonical_yaw(data.yaw) if data.has("yaw") else null
+	pitch = _native_pitch(float(data.pitch)) if data.has("pitch") else null
 	actors = _normalized_resources(data).actors if data.has("actors") else null
 
 static func actor_specs(layout) -> Dictionary:
@@ -281,6 +303,11 @@ func _valid_resources(data: Dictionary) -> bool:
 	for component in pos:
 		if not (component is float or component is int) or not is_finite(float(component)) or absf(component) > 100000:
 			return false
+	for field in ["yaw","pitch"]:
+		if not data.has(field): continue
+		var value = data[field]
+		if not (value is int or value is float) or not is_finite(float(value)): return false
+		if field == "pitch" and absf(value) > 1.35: return false
 	return true
 
 func _integer(value: Variant, low: int, high: int) -> bool:
@@ -325,6 +352,7 @@ func save_progress(path: String = SAVE_PATH) -> Error:
 	return DirAccess.rename_absolute(path + ".tmp", path)
 
 func load_progress(path: String = SAVE_PATH) -> bool:
+	level_load_error = ""
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null or file.get_length() > 1048576:
 		return false

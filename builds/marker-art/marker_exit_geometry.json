@@ -1,0 +1,102 @@
+{
+  "asset_id": "marker_exit",
+  "source_sha256": "92589c029cdd5f72ffa0ca34f262681800224c5c9bec1ef53d62673dd607f9df",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Exit ground mounting ring",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Ivory exit coil support -1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Ivory exit coil support 1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Descending ivory coil 0",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Muted violet inner coil 0",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "name": "Descending ivory coil 1",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Muted violet inner coil 1",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "name": "Descending ivory coil 2",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Muted violet inner coil 2",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "name": "Descending ivory coil 3",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Muted violet inner coil 3",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "name": "Descending ivory coil 4",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Muted violet inner coil 4",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "name": "Exit recessed iron axial pin",
+      "vertices": 12,
+      "triangles": 20
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.363,
+      -0.363,
+      -0.0
+    ],
+    "max": [
+      0.363,
+      0.363,
+      0.895
+    ],
+    "size": [
+      0.725,
+      0.726,
+      0.895
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 3,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

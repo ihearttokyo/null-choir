@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 const ROUTES = {
 	4: [[25.5,4.75],[35.5,4.75],[35.5,14.0],[25.5,14.0]],
 	7: [[41.0,15.5],[41.0,4.5],[27.5,4.5],[27.5,15.5]]}
@@ -89,12 +91,14 @@ func fight(index: int) -> bool:
 		var pod: Dictionary = data.pickups.filter(func(spec): return spec.id == data.id+"_finale_"+kind)[0]
 		if not stage(pod.cell): return false
 		var before: int = game.state.ammo[1] if kind == "rivets" else game.state.armor
-		game._process(0) # Production proximity collection, only while setup physics is held.
+		if not await PassivePhysicsStep.scan(game): return false
+		game._process(0) # Render semantics only; staged player/actor physics stays held.
 		var after: int = game.state.ammo[1] if kind == "rivets" else game.state.armor
 		var capacity: int = game.player.WEAPONS[1].max_ammo if kind == "rivets" else 200
 		if not expect(after == mini(capacity,before+int(pod.amount)) and game.state.removed.count(pod.id) == 1 and not game.level.markers.has(pod.id),"Finite authored finale pickup uses production cap/removal: "+pod.id): return false
 	var checkpoint: Dictionary = data.interactions.filter(func(spec): return spec.kind == "checkpoint")[0]
 	if not stage(checkpoint.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.checkpoint_id == checkpoint.id and FileAccess.file_exists(game.progress_path) and dormant_except(""),"Synthetic pose captures actual pre-finale checkpoint with dormant actors"): return false
 	var saved = load("res://scripts/campaign.gd").new()
@@ -107,7 +111,7 @@ func fight(index: int) -> bool:
 	if not expect(game.state.health == 100 and game.state.ammo[1] == (150 if index == 4 else 170) and game.state.armor == (60 if index == 4 else 40),"Staged resources are exactly default plus finite finale supplies"): return false
 	return await battle(index,boss,finale)
 
-func battle(index: int, boss, finale: Dictionary) -> bool:
+func battle(index: int, boss, finale: Dictionary, carried_inventory: bool = false) -> bool:
 	game.attacks = [0,0]
 	game.deaths = 0
 	game.player_finish = false
@@ -115,6 +119,7 @@ func battle(index: int, boss, finale: Dictionary) -> bool:
 	game.rate_ok = true
 	var rounds: int = game.state.ammo[1]
 	var shots: int = 0
+	var spent := [0,0,0,0,0,0]
 	var corner: int = 0
 	var travelled: float = 0
 	var previous: Vector3 = game.player.position
@@ -153,11 +158,21 @@ func battle(index: int, boss, finale: Dictionary) -> bool:
 		for action_strength in [["move_right",local.x],["move_left",-local.x],["move_back",local.z],["move_forward",-local.z]]:
 			if action_strength[1] > 0: Input.action_press(action_strength[0],action_strength[1])
 		var before: int = game.state.ammo[1]
+		var ammo_before: Array = game.state.ammo.duplicate()
+		var weapon_before: int = game.state.weapon
 		game.firing = true
 		var accepted: bool = game.player.fire() # One call per native combat tick; no fire action/double stepping.
 		game.firing = false
-		if accepted: shots += 1
-		if not expect(game.state.weapon == 1 and game.state.ammo[1] == before-(1 if accepted else 0) and game.state.ammo[1] == rounds-shots,"Each accepted pistol shot spends one round; rejected calls spend zero"): return false
+		if accepted:
+			shots += 1
+			if weapon_before > 0: spent[weapon_before] += 1
+		if not carried_inventory:
+			if not expect(game.state.weapon == 1 and game.state.ammo[1] == before-(1 if accepted else 0) and game.state.ammo[1] == rounds-shots,"Each accepted pistol shot spends one round; rejected calls spend zero"): return false
+		else:
+			if not expect(weapon_before in game.state.owned_weapons,"Finite campaign fight uses only carried weapon ownership"): return false
+			for slot in range(6):
+				var cost: int = 1 if accepted and slot > 0 and slot == weapon_before else 0
+				if not expect(game.state.ammo[slot] == ammo_before[slot]-cost and game.state.ammo[slot] >= 0,"Every accepted carried-weapon shot spends exactly its own round; rejected calls spend zero"): return false
 		if not battle_groups_ok(finale.id): return false
 		if tick%300 == 0: print("FIGHT index=",index," tick=",tick," hp=",game.state.health," boss_hp=",boss.hp," phase=",boss.phase," rounds=",game.state.ammo[1]," position=",game.player.position," attacks=",game.attacks)
 	release_actions()
@@ -166,7 +181,7 @@ func battle(index: int, boss, finale: Dictionary) -> bool:
 	for tick in range(15): await physics_frame
 	if not expect(game.playing and not paused and game.state.health > 0 and game.deaths == 1 and game.state.removed.count(boss.id) == 1 and boss.collision_layer == 0 and boss.collision_mask == 0,"Surviving player and once-only boss death/removal remain stable"): return false
 	if not expect(game.rate_ok and game.ticks > 15 and travelled > 9.0,"Actual automatic 60-Hz physics and nonstationary player movement are observed"): return false
-	print("ACTIVE_FIGHT index=",index," ticks=",game.ticks," shots=",shots," hp=",game.state.health," armor=",game.state.armor," travelled=",travelled," attacks=",game.attacks," deaths=",game.deaths," projectile_steps=",projectile_steps)
+	print("ACTIVE_FIGHT index=",index," ticks=",game.ticks," shots=",shots," hp=",game.state.health," armor=",game.state.armor," travelled=",travelled," attacks=",game.attacks," deaths=",game.deaths," projectile_steps=",projectile_steps," carried_inventory=",carried_inventory," spent=",spent)
 	return true
 
 func battle_groups_ok(finale: String) -> bool:

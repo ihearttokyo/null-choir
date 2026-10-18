@@ -35,6 +35,8 @@ func run() -> void:
 	game.state.ammo[2] = 32
 	game.collect_pickup("full_new_weapon")
 	if not expect(2 in game.state.owned_weapons and game.state.weapon == 2 and game.state.ammo[2] == 32 and "full_new_weapon" in game.state.removed,"New weapon ownership is useful even when its stored ammunition is already full"): return
+	game.hud._process(0)
+	if not expect(game.hud.message_label.text == "RECOVERED SCATTERGUN","Weapon acquisition names the exact recovered weapon"): return
 	game.level.layout.data.pickups.append({"id":"full_owned_weapon","kind":"weapon","weapon":2.0,"amount":16.0})
 	game.collect_pickup("full_owned_weapon")
 	if not expect(not "full_owned_weapon" in game.state.removed and game.state.ammo[2] == 32,"Owned full weapon packs remain available just like ammunition"): return

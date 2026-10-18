@@ -30,7 +30,7 @@ MAX_DISTINCT_SELECTIONS = 4096
 MAX_LOGICAL_REQUESTS = 100000
 # These identities bind the selection semantics to the inspected implementation.
 SOURCE_HASHES = {
-    'game/audio/music.gd': 'b17967bb7e83a510b10007f334bc18b3ff008a4701b07aea6c8207fc47c3f1f6',
+    'game/audio/midi_music.gd': 'b17967bb7e83a510b10007f334bc18b3ff008a4701b07aea6c8207fc47c3f1f6',
     'game/addons/midi/Bank.gd': 'e2ae134bb684b3ba35cdf034c26dc94e3172f221c58ff728d3be0fdc270f1db8',
     'game/addons/midi/MidiPlayer.gd': '3fc16a2b020c199218e7999adb396cefe7cd2960d8813658e29a2cca911068f9',
     'game/addons/midi/ADSR.gd': 'f6e6fe75ecf1a468d7d2fd587089abda434f0e28f9d0e198c11a31645e272327',

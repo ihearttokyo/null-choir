@@ -62,6 +62,8 @@ func run() -> void:
 	game.shot(1)
 	if not expect(not stale.alerted,"Firing cannot alert a wrong-map actor"): return
 	stale.position = game.player.position+Vector3(0,0,-2)
+	await physics_frame
+	await physics_frame
 	var origin = game.player.camera.global_position
 	var aim = (stale.global_position+Vector3.UP*0.85-origin).normalized()
 	if not expect(game.autoaim_target(origin,aim,35) != stale,"Aim assistance cannot select a wrong-map actor"): return
@@ -117,7 +119,7 @@ func run() -> void:
 	game.enemy_event(actor,"death")
 	if not expect(game.effects.players.values().all(func(voice): return not voice.playing),"Queued-map callback cannot leak effect voices"): return
 	game.show_title()
-	if not expect(game.music.pressure_target == 0 and game.music.player.get_now_playing_polyphony() == 0,"Title clears threat target and transport"): return
+	if not expect(game.music.pressure_target == 0 and game.music.player.stream == null,"Title clears threat target and transport"): return
 	stale.free()
 	stale = null
 	game.free()

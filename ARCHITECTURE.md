@@ -2,7 +2,7 @@
 
 [DESIGN.md](DESIGN.md) owns requirements. This file owns implementation boundaries.
 
-- `game/`: Godot runtime project, imported sprites, world models, MIDI, and the pinned synthesizer dependency. No Blender invocation or host audio library is required during play.
+- `game/`: Godot runtime project, imported sprites, world models, compressed Suno recordings, preserved MIDI, and the pinned legacy synthesizer dependency. No Blender invocation or host audio library is required during play.
 - `source/art/`: editable Blender scenes and art manifest. The recipes documented in [ART.md](docs/ART.md) generate runtime assets before export.
 - `source/music/`: editable composition data. `tools/compose_music.py` produces the eight runtime MIDI files.
 - `game/tests/` and `tests/`: direct Godot and Python assertions using the real gameplay, asset, and music paths.
@@ -12,13 +12,15 @@ Use native Godot nodes, resource loading, collision, audio buses, and input acti
 
 Imported campaign placement is checked against the actual native floor and player capsule before gameplay or mouse capture. Healthy saved locations are preferred to the authored entry, without refunding current resources or rewriting recovery snapshots. Loaded continuation, checkpoint restoration and level restart can wait for native physics registration; callers must await completion before assuming gameplay is active. Pause, title, replacement and focus loss cancel pending continuation. A map with no safe candidate returns to title instead of permitting Resume at a rejected location.
 
-The first gate is offline live MIDI in a self-contained Mac export. Audio work owns `game/audio/`, `game/addons/midi/`, its MIDI tests and composition sources. The parent owns project configuration, gameplay, integration, and publishing. Asset work receives separate ownership before it starts. Workers must preserve one another's edits.
+The current soundtrack uses eight offline Suno recordings; the original MIDI runtime is preserved as `game/audio/midi_music.gd` for synthesis regression coverage only. Audio work owns `game/audio/`, `game/addons/midi/`, its MIDI tests and composition sources. The parent owns project configuration, gameplay, integration, and publishing. Asset work receives separate ownership before it starts. Workers must preserve one another's edits.
 
-Public music boundary: a Node at `game/audio/music.gd` with `play_level(index)`, `set_paused(paused)`, and `stop()`. It routes synthesized voices to the Music bus; the game owns user volume settings. MIDI timing, repeat boundaries, voice cleanup, and pause behavior belong to this module.
+Public music boundary: a Node at `game/audio/music.gd` with `play_level(index)`, `set_paused(paused)`, and `stop()`. It lazily loads one compressed recording into one native AudioStreamPlayer on the Music bus; the game owns user volume settings. Repeat boundaries, release on title, pause behavior and a smoothed -3 to 0 dB combat lift belong to this module. Host conversion tools are authoring-only.
 
 `game/scripts/preferences.gd` owns primitive JSON options and per-action desktop/gamepad bindings. The game loads it before applying native InputMap and audio-bus gains. Native scroll containers expose settings and rebind capture; the HUD reads binding text from this same source. Changes save atomically to `user://preferences.json`, separate from campaign progress.
 
 Level JSON owns authored scenery transforms and light positions. `level.gd` instantiates Blender models, dresses boundary walls with shared kit, and builds local floor/ceiling meshes so the Mobile renderer's per-mesh light limit does not apply to a single whole-map floor. Four shadowed landmark spotlights and native depth fog supply the chamber lighting; ordinary supporting lamps have no shadows. Renderer constraints are documented by [Godot](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html).
+
+Level-owned navigation parses static collision on the main thread, then bakes one role at a time through the native asynchronous API. Later process ticks poll completion; published geometry still waits for the native map witness before queries become available. Door invalidation rejects retired generations, and teardown releases local jobs without callbacks retaining the Level. [NAVIGATION.md](docs/NAVIGATION.md) records the regression and timing evidence.
 
 Each level retains one native PackedScene per used world-art ID. The native resource probe showed that scene instances kept meshes alive while their temporary PackedScene left the resource cache, causing repeated scene loading during construction. Level-owned scene references preserve the existing instance transforms, meshes and materials; level destruction releases those references. This is per-level resource ownership, without a global cache or rendering rewrite.
 
@@ -32,4 +34,4 @@ Static boundary walls alone own inset native BoxOccluder3D instances. Project-le
 
 The Apple Silicon runtime now selects Godot Mobile with the native macOS Metal driver. Matched M4 tests established higher throughput without reducing art, actors, lights or shadows; actual comparison images preserve the authored look. `game/tests/test_rendering.gd` checks the actual driver/method and unchanged 640x360 target on a real GPU. Headless physics checks cannot establish the graphics backend. [CHECKPOINT.md](CHECKPOINT.md) owns current app and performance evidence.
 
-Ammo presentation is level-owned in `ammo_visuals.gd`: a shared nearest atlas, at most32 pooled sprites, protected live-projectile slots and explicit pause/current-map fences. The HUD uses the selected combat cooldown, not a separate animation clock. [AMMO.md](docs/AMMO.md) owns asset provenance, regeneration and evidence limits.
+Ammo presentation is level-owned in `ammo_visuals.gd`: two shared nearest atlases, at most32 pooled sprites, protected live-projectile/active-route slots and explicit pause/current-map fences. Reused slots restore the correct texture family. The HUD uses the selected combat cooldown, not a separate animation clock. [AMMO.md](docs/AMMO.md) owns asset provenance, regeneration and evidence limits.

@@ -1,6 +1,10 @@
 extends SceneTree
 
 # Synthetic inventory/ground; production Player, Main callbacks and native scheduling.
+class QuietHud extends Node2D:
+	var survey := Control.new()
+	func _ready() -> void: add_child(survey)
+
 class NativeGame extends "res://scripts/main.gd":
 	var shots: Array = []
 	var dry_events: Array = []
@@ -41,6 +45,16 @@ func check_input() -> bool:
 	game = NativeGame.new()
 	root.add_child(game)
 	game.preferences.apply_bindings()
+	game.canvas = CanvasLayer.new()
+	game.canvas.process_mode = Node.PROCESS_MODE_ALWAYS
+	game.add_child(game.canvas)
+	game.hud = QuietHud.new()
+	game.canvas.add_child(game.hud)
+	game.menu = VBoxContainer.new()
+	game.menu_scroll = ScrollContainer.new()
+	game.menu_scroll.add_child(game.menu)
+	game.canvas.add_child(game.menu_scroll)
+	game.menu_scroll.hide()
 	Input.action_release("fire")
 	Input.action_release("weapon_4")
 	game.state.new_campaign(1)
@@ -72,21 +86,28 @@ func check_input() -> bool:
 	var interval_ticks: int = int(ceil(game.Player.WEAPONS[1].interval*60.0))
 	for index in range(1,pistol_ticks.size()):
 		var elapsed: int = pistol_ticks[index]-pistol_ticks[index-1]
-		if not expect(elapsed >= interval_ticks and elapsed <= interval_ticks+1,"Every held pistol shot honors original recovery without a scheduling stall"): return false
+		if not expect(elapsed in [floori(game.Player.WEAPONS[1].interval*60.0),interval_ticks],"Held pistol preserves its nominal phase with only adjacent quantized gaps"): return false
 	var frozen_ammo: Array = game.state.ammo.duplicate()
-	var frozen_cooldowns: Array = game.player.weapon_cooldowns.duplicate()
+	var pre_pause_cooldowns: Array = game.player.weapon_cooldowns.duplicate()
 	var pause_tick: int = Engine.get_physics_frames()
-	game.playing = false
-	paused = true
+	game.pause_game()
+	var frozen_cooldowns: Array = game.player.weapon_cooldowns.duplicate()
+	for index in range(frozen_cooldowns.size()):
+		if not expect(frozen_cooldowns[index] >= pre_pause_cooldowns[index],"Ending held repeat for pause never shortens recovery"): return false
 	if not expect(not game.player.can_process() and frozen_cooldowns[1] > 0,"Actual SceneTree pause suspends the cooling production Player"): return false
 	for tick in range(24): await physics_frame
 	if not expect(game.shots.size() == 5 and game.state.ammo == frozen_ammo and game.player.weapon_cooldowns == frozen_cooldowns,"Held fire cannot spend ammo or advance any cooldown while paused"): return false
 	var paused_ticks: int = Engine.get_physics_frames()-pause_tick
-	paused = false
-	game.playing = true
-	if not await wait_shots(6,16): return false
+	game.resume_game()
+	if not expect(game.player.weapon_cooldowns == frozen_cooldowns,"Resume preserves every retained recovery deadline"): return false
+	for tick in range(20): await physics_frame
+	if not expect(game.shots.size() == 5 and game.state.ammo == frozen_ammo,"Production Resume rejects still-held fire without spending ammunition"): return false
+	Input.action_release("fire")
+	await physics_frame
+	Input.action_press("fire")
+	if not await wait_shots(6,4): return false
 	var active_gap: int = game.shots[5].tick-game.shots[4].tick-paused_ticks
-	if not expect(game.shots.size() == 6 and game.shots[5].weapon == 1 and active_gap >= interval_ticks and active_gap <= interval_ticks+1 and game.state.ammo == [0,85,0,0,0,0],"Resume retains original recovery and spends exactly one next pistol round"): return false
+	if not expect(game.shots.size() == 6 and game.shots[5].weapon == 1 and active_gap >= interval_ticks and game.state.ammo == [0,85,0,0,0,0],"Release/re-arm after Resume respects retained recovery and spends exactly one pistol round"): return false
 	Input.action_release("fire")
 	for tick in range(interval_ticks+2): await physics_frame
 	var retired = game.player
@@ -113,6 +134,8 @@ func arena():
 	var level = game.Level.new()
 	level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game.add_child(level)
+	var metadata_loaded: bool = level.layout.load_level(0)
+	assert(metadata_loaded,"SETUP native observation needs actual authored interaction metadata")
 	level._box(Vector3(40,1,40),Vector3(0,-0.5,0),null,true)
 	return level
 

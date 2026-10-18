@@ -135,16 +135,19 @@ def ossified_socket(name,center,width,height,depth,phase):
 
 
 def cranial_vault():
-    outer=egg('suspended elongated alien cranium vault','bone','anatomy',(0,.035,6.5),(.32,.27,.78),16,10)
-    outer.vertices=[(x*(.7 if z<6.12 else 1)+.018*math.sin(5*z),y+.075*(z-6.4),z) for x,y,z in outer.vertices]
+    outer=egg('suspended elongated alien cranium vault','bone','anatomy',(0,.055,6.48),(.41,.365,.77),32,16)
+    # A full posterior vault narrows continuously into the hanging face, not a flat mask.
+    outer.vertices=[(x*(.68+.32*min(1,max(0,(z-5.88)/.57)))+.015*math.sin(4*z),
+                     y+.09*(z-6.48),z) for x,y,z in outer.vertices]
     faces=[]
     for f in outer.faces:
         x,y,z=[sum(outer.vertices[i][k] for i in f)/len(f) for k in range(3)]
-        # Excavate unequal front facial regions, retaining the dome and posterior brain case.
-        if y<.025 and ((x<0 and 6.02<z<6.54) or (x>=0 and 6.17<z<6.59)):continue
+        # Two slanted orbital apertures retain the central bridge and curved cheek walls.
+        if y<-.04 and all(abs(outer.vertices[i][0])>.035 for i in f) and any(((x-cx+.16*(z-cz))/.14)**2+((z-cz)/.225)**2<1
+                         for cx,cz in [(-.18,6.28),(.18,6.37)]):continue
         faces.append(f)
     n=len(outer.vertices)
-    inner=[(x*.78,.035+(y-.035)*.78,6.5+(z-6.5)*.78) for x,y,z in outer.vertices]
+    inner=[(x*.82,.055+(y-.055)*.78,6.48+(z-6.48)*.87) for x,y,z in outer.vertices]
     edges={}
     for f in faces:
         for a,b in zip(f,f[1:]+f[:1]):edges.setdefault((min(a,b),max(a,b)),[]).append((a,b))
@@ -217,11 +220,20 @@ def build_parts():
                     parts.append(tube(f'blackened mechanical vertebral brace {tag} {i}','brass','architecture',[(px-side*.17,py+fore*.09,z-.13),(px-side*.24,py+fore*.04,z+.08),(px-side*.18,py,z+.3)],[.053,.04,.026],6))
             parts.append(tube('gothic upper pointed finial '+tag,'brass','controls',[(side*1.12,fore*.8,6.6),(side*1.04,fore*.66,7.55),(side*.95,fore*.58,8.28)],[.09,.06,.01],8))
     parts.append(cranial_vault())
-    parts.append(egg('cranium deep orbital tissue backing','tissue','anatomy',(0,.085,6.3),(.23,.085,.31),12,8))
-    parts.append(tube('cranial facial keel','bone','anatomy',[(.025,-.19,6.52),(-.018,-.26,6.24),(.01,-.2,5.99)],[.045,.029,.02],6))
-    parts.append(tube('cranial pointed mandible','tissue','anatomy',[(0,-.09,6.1),(.035,-.2,5.85),(-.04,-.09,5.65)],[.12,.081,.023]))
+    parts.append(egg('cranium deep orbital tissue backing','tissue','anatomy',(0,.08,6.27),(.28,.17,.40),16,10))
+    parts.append(tube('cranial facial keel','bone','anatomy',[(.018,-.285,6.58),(-.018,-.345,6.32),(.01,-.295,6.08),(-.02,-.20,5.91)],[.047,.038,.027,.018],8))
+    parts.append(tube('cranial pointed mandible','tissue','anatomy',[(0,-.10,6.08),(.035,-.24,5.91),(-.025,-.17,5.76),(-.04,-.09,5.65)],[.12,.095,.057,.023]))
     for side in (-1,1):
-        parts.append(tube('cranial fractured zygomatic ridge '+str(side),'bone','anatomy',[(side*.22,-.14,6.5),(side*.29,-.21,6.19),(side*.19,-.17,5.98),(side*.06,-.2,5.87)],[.058,.049,.034,.014],7))
+        lift=.055 if side==1 else -.035
+        parts.append(tube('cranial fractured zygomatic ridge '+str(side),'bone','anatomy',
+            [(side*.34,-.115,6.48+lift),(side*.355,-.205,6.28+lift),(side*.27,-.255,6.08+lift),(side*.14,-.25,5.92),(side*.025,-.205,5.83)],
+            [.068,.065,.049,.033,.017],8))
+        parts.append(tube('cranium supraorbital arch '+str(side),'bone','anatomy',
+            [(side*.035,-.29,6.53+lift),(side*.12,-.29,6.60+lift),(side*.24,-.255,6.61+lift),(side*.33,-.17,6.51+lift)],
+            [.038,.049,.058,.052],8))
+        parts.append(tube('cranium cheek to cervical tendon '+str(side),'tissue','anatomy',
+            [(side*.27,-.255,6.08+lift),(side*.20,-.10,5.90),(side*.11,.015,5.68),(side*.06,.04,5.48)],
+            [.052,.049,.043,.031],7))
         parts.append(tube('cranial bifurcate restraint '+str(side),'tissue','anatomy',[(side*.12,.02,6.04),(side*.43,.12,5.72),(side*.74,.12,5.65)],[.07,.043,.027]))
         parts.append(tube('clavicular wishbone '+str(side),'bone','anatomy',
             [(0,.07,5.52),(side*.30,.02,5.78),(side*.61,.08,5.58),(side*.74,.12,5.65)],[.07,.085,.06,.04],8))
@@ -238,7 +250,14 @@ def build_parts():
         if i>=2:
             for side in (-1,1):
                 spread=.43+.18*math.sin(math.pi*(i-2)/9)+.025*math.sin(i*1.7+side);dz=.06*math.sin(i*1.4+side)
-                parts.append(tube(f'open costal branch {side} {i}','bone','anatomy',[(sx+side*.06,.08,z),(side*spread,.07,z+.12+dz),(side*(spread+.12),-.12,z+.28+dz),(side*(spread-.06),-.25,z+.41+dz)],[.044+.009*math.sin(i),.061,.035,.013],7))
+                if i>=9:
+                    dz+=side*.055*math.sin(i*.8)
+                    parts.append(tube(f'open costal branch {side} {i}','bone','anatomy',
+                        [(sx+side*.06,.08,z),(side*spread*.63,.13,z+.045+dz),(side*(spread+.04),.015,z+.17+dz),
+                         (side*(spread+.12),-.15,z+.27+dz),(side*(spread-.02),-.30,z+.31+dz),(side*(spread-.21),-.26,z+.23+dz)],
+                        [.044+.009*math.sin(i),.055,.060,.043,.028,.012],7))
+                else:
+                    parts.append(tube(f'open costal branch {side} {i}','bone','anatomy',[(sx+side*.06,.08,z),(side*spread,.07,z+.12+dz),(side*(spread+.12),-.12,z+.28+dz),(side*(spread-.06),-.25,z+.41+dz)],[.044+.009*math.sin(i),.061,.035,.013],7))
     parts.append(tube('suspended living axial cord','tissue','anatomy',[(0,.08,2.06),(0,.07,3.2),(0,.03,4.5),(0,.04,5.74)],[.065,.07,.09,.11]))
     for side in (-1,1):
         parts.append(tube('living lateral suspensory tendon '+str(side),'tissue','anatomy',[(side*.07,.14,2.7),(side*.28,-.12,3.45),(side*.22,-.18,4.28),(side*.37,-.03,5.06),(side*.12,.02,5.73)],[.04,.035,.033,.031,.025],7))
@@ -575,6 +594,15 @@ def main(argv=None):
     scene['production_reference_sha256']=REFERENCE_SHA;scene['material_reference_sha256']=MATERIAL_SHA
     scene['geometry_report']=json.dumps(report);scene['placement_contract']='cell5.5/10.5 yaw0 BOX3.85/.55/3.15 blood nursery_loop_gestation'
     blend=output/'source/art/nursery_gestation_engine_v2.blend'
+    for image in bpy.data.images:
+        for packed in image.packed_files:
+            if packed.filepath:
+                packed.filepath=bpy.path.relpath(packed.filepath,start=str(blend.parent))
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            for space in area.spaces:
+                if space.type=='FILE_BROWSER' and space.params:
+                    space.params.directory=b'//'
     bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=False)
     if blend.read_bytes()[:7]!=b'BLENDER':raise ValueError('Editable source must be raw BLENDER, not compressed')
     for label,loc in [('front',(0,-17,5)),('hero',(9,-14,8)),('rear',(-8,14,7))]:

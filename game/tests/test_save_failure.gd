@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -20,12 +22,39 @@ func run() -> void:
 		if spec.kind != "checkpoint": continue
 		game.state.keys = spec.get("requires",[]).duplicate()
 		game.player.position = game.level.layout.world_position(spec.cell)
+		if not await PassivePhysicsStep.scan(game):
+			quit(1)
+			return
 		game._process(0)
 		if game.state.checkpoint_id != spec.id or not game.message.begins_with("RECOVERY MEMORY ONLY: SAVE FAILED"):
 			push_error("Actual automatic checkpoint disk failure must never display stored-success feedback")
 			quit(1)
 			return
 		break
+	# Encounter presentation still activates, but cannot hide an active disk failure.
+	var authored_encounters: Array = game.level.layout.data.encounters.duplicate(true)
+	var authored_removed: Array = game.state.removed.duplicate()
+	var recovery_message: String = game.message
+	var cue: Dictionary = game.level.layout.data.encounters[0].duplicate(true)
+	cue.id = "fixture_after_checkpoint_failure"
+	game.level.layout.data.encounters.append(cue)
+	game.activate_encounter(cue.id)
+	if game.message != recovery_message or not "encounter:"+cue.id in game.state.removed:
+		push_error("Encounter activation must retain active checkpoint disk-failure feedback")
+		quit(1)
+		return
+	game.message_time = 0
+	cue = cue.duplicate(true)
+	cue.id = "fixture_after_failure_expiry"
+	game.level.layout.data.encounters.append(cue.duplicate(true))
+	game.activate_encounter(cue.id)
+	if game.message != cue.cue.text or game.message_time != 5:
+		push_error("Expired recovery failure must not suppress subsequent encounter text")
+		quit(1)
+		return
+	# Retire only this transient fixture data before canonical save validation.
+	game.level.layout.data.encounters = authored_encounters
+	game.state.removed = authored_removed
 	game.pause_game()
 	var current = game.level
 	game.save_and_title()
@@ -40,9 +69,9 @@ func run() -> void:
 	DirAccess.remove_absolute(blocker)
 	game.progress_path = "user://dead_continue_"+str(Time.get_ticks_usec())+".json"
 	var dead_startups = [0]
-	var observe_start = func(_tempo):
+	var observe_start = func():
 		if game.state.health <= 0 and (game.playing or Input.mouse_mode == Input.MOUSE_MODE_CAPTURED): dead_startups[0] += 1
-	game.music.player.changed_tempo.connect(observe_start)
+	game.music.playback_started.connect(observe_start)
 	for usable_recovery in [true,false]:
 		game.state.health = 0
 		game.state.checkpoint.health = 100 if usable_recovery else 0
@@ -81,8 +110,8 @@ func run() -> void:
 				quit(1)
 				return
 			game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
-			if game.playing or not paused or not game.music.player.playback_paused:
-				push_error("Native focus-loss notification pauses live combat and MIDI")
+			if game.playing or not paused or not game.music.player.stream_paused:
+				push_error("Native focus-loss notification pauses live combat and recorded music")
 				quit(1)
 				return
 			game._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_IN)
@@ -110,7 +139,7 @@ func run() -> void:
 				quit(1)
 				return
 	DirAccess.remove_absolute(game.progress_path)
-	game.music.player.changed_tempo.disconnect(observe_start)
+	game.music.playback_started.disconnect(observe_start)
 	game.show_title()
 	game.queue_free()
 	paused = false

@@ -228,16 +228,17 @@ input. The editable replacement is `source/art/nursery_gestation_engine_v2.blend
 its selected construction, membrane and material references and prompts remain
 under `source/art/references/`.
 
-Editable source contains227 meshes,15,650 triangles and five runtime material
-groups. Its GLB is1,523,484 bytes; the seven-piece Nursery set is8,098,360 bytes,
+Editable source contains231 meshes,17,574 triangles and five runtime material
+groups. Its GLB is1,588,276 bytes; the seven-piece Nursery set is8,163,152 bytes,
 below the unchanged eight-MiB limit. Compared with the original481,504-byte,
 5,664-triangle, seven-group asset, it spends more geometry and file space on
 anatomy while reducing material groups. No GPU, memory or loading gain is claimed.
 Matched background Blender renders and reopen/edit-restore checks support
 editability and material readability. Native headless staging, scenery and ramp
 checks pass; actual game lighting, transparent sorting,640-resolution readability
-and reference-quality parity remain unverified. The skull and regular ribs still
-fall short of the selected reference. This is source integration, not final art
+and reference-quality parity remain unverified. The rounded cranium, separate recessed orbits, cheek and cervical attachments,
+and three asymmetric upper rib pairs improve the earlier flat skull. Full
+reference-quality parity remains open. This is source integration, not final art
 or application promotion.
 
 Rebuild into a fresh directory whose parent exists, outside this project:
@@ -256,5 +257,5 @@ python3 tests/test_art.py
 
 Its runtime GLB embeds the atlas; no unused standalone runtime PNG is installed.
 The identity-specific manifest validator reuses the recipe's typed BIN, material,
-UV-gutter, nearest/no-mip and20,000-triangle checks. All other102 asset records,
+UV-gutter, nearest/no-mip and20,000-triangle checks. All other117 asset records,
 level transforms and original source files remain unchanged.

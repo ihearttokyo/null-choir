@@ -12,18 +12,33 @@ class CombatMain:
 	var impacts: int = 0
 	var attacks: int = 0
 	var deaths: int = 0
-	var last_shot: int = -13
+	var last_shot: int = -1
+	var shot_slot: float = -1.0
 	var shot_ok: bool = true
 	var feedback_ok: bool = true
 	var player_finish: bool = false
 	var victim
+	static func accepted_shot_slot(tick: int, last_tick: int, slot: float, interval_ticks: float, count: int, ammo: int, weapon: int, held: bool) -> float:
+		if weapon != 1 or not held or count < 1 or ammo < 0 or ammo != 125-count: return -1.0
+		if last_tick >= 0:
+			var earliest: float = slot if slot >= 0.0 else float(last_tick)+interval_ticks
+			if tick <= last_tick or float(tick)+0.000001 < earliest: return -1.0
+		var next_slot: float = float(tick)+interval_ticks
+		if slot >= 0.0:
+			next_slot = slot+interval_ticks
+			# Missed nominal slots are discarded, never converted into accepted shots.
+			if next_slot <= float(tick)+0.000001:
+				next_slot += (floorf((float(tick)+0.000001-next_slot)/interval_ticks)+1.0)*interval_ticks
+		return next_slot
 	func _physics_process(delta: float) -> void:
 		if playing and not get_tree().paused:
 			ticks += 1
 			rate_ok = rate_ok and absf(delta-1.0/60.0) < 0.000001
+			if not Input.is_action_pressed("fire"): shot_slot = -1.0
 	func shot(weapon: int) -> void:
 		shots += 1
-		shot_ok = shot_ok and weapon == 1 and Input.is_action_pressed("fire") and ticks-last_shot >= 13 and state.ammo[1] == 125-shots
+		shot_slot = accepted_shot_slot(ticks,last_shot,shot_slot,Player.WEAPONS[1].interval*60.0,shots,state.ammo[1],weapon,Input.is_action_pressed("fire"))
+		shot_ok = shot_ok and Engine.is_in_physics_frame() and shot_slot >= 0.0
 		last_shot = ticks
 		super.shot(weapon)
 		var visuals = level.get_node_or_null("AmmoVisuals")

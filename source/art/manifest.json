@@ -4561,13 +4561,13 @@
     {
       "id": "nursery_gestation_engine",
       "source": "source/art/nursery_gestation_engine_v2.blend",
-      "source_sha256": "1311ee02d69ee6d13ce40f0737d7c539ebebbd2c260c079693cd8f70454e7522",
-      "recipe_sha256": "22bd2d6c56fd70c3fe73f764e9a3c81a4dc57121e0c6f5449d7ed5f3e799434d",
+      "source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
+      "recipe_sha256": "d11b7be8bba493e442dfc9b4859160609303b4c8d32b97032bb34488ec87add9",
       "outputs": [
         {
           "path": "game/assets/art/world/nursery_gestation_engine.glb",
-          "bytes": 1523484,
-          "sha256": "0b1cab71fdce1dcedb61b49df337a6e428888935cbc449377238bc9e8c298513"
+          "bytes": 1588276,
+          "sha256": "53088d099b14f1e3c7e43212993c5fbaa34699229170a44e60d66ba44bb3c258"
         }
       ],
       "provenance": {
@@ -4617,11 +4617,11 @@
         "axes": "Blender XYZ, Z up; GLB/Godot Y up"
       },
       "origin": "ground-centered at Blender (0,0,0); GLB Y up",
-      "triangles": 15650,
+      "triangles": 17574,
       "runtime_mesh_nodes": 5,
       "material_count": 5,
       "loop_id": "nursery_loop_gestation",
-      "source_mesh_count": 227,
+      "source_mesh_count": 231,
       "source_hierarchy_groups": 4,
       "assembly_names": [
         "Editable architecture",
@@ -7177,6 +7177,1380 @@
         "threads": 2,
         "samples": 24
       }
+    },
+    {
+      "id": "marker_ammo",
+      "source": "source/art/marker_ammo.blend",
+      "source_sha256": "7ead11b21eb3ff1a710395eb59a45c75b4cb9b05035897e038266a9a8271dff6",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo.glb",
+          "sha256": "67d4b3cb37715551e9a126bd3680c1132002d4b3481ab48ea00273ecb9ef342f",
+          "bytes": 81172
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.366,
+          -0.165,
+          0.0
+        ],
+        "max": [
+          0.366,
+          0.165,
+          1.02
+        ],
+        "size": [
+          0.731,
+          0.33,
+          1.02
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1320,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_ammo_preview.png",
+        "sha256": "a16d35bc478b307aa19c0286dcea04e60c89c7b9afbd19f192c47ac4aeb62e73",
+        "bytes": 6092,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_ammo_geometry.json"
+    },
+    {
+      "id": "marker_health",
+      "source": "source/art/marker_health.blend",
+      "source_sha256": "7c873d5502260a5e88ba5e073c43b490d13cff5531d0d89ca260bc2652378cbd",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_health.glb",
+          "sha256": "0cf41b8e217852c36eefa2cbb39ec6f7e76f8d8ae6516f45258435c231f86fb0",
+          "bytes": 49316
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.374,
+          -0.315,
+          -0.0
+        ],
+        "max": [
+          0.374,
+          0.315,
+          0.919
+        ],
+        "size": [
+          0.749,
+          0.63,
+          0.919
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 762,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_health_preview.png",
+        "sha256": "ae1d720a4a3c02ebeee8a0ad56a6f5f9cc83e98b79f3150affb34e5606cf979f",
+        "bytes": 5909,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_health_geometry.json"
+    },
+    {
+      "id": "marker_armor",
+      "source": "source/art/marker_armor.blend",
+      "source_sha256": "633111fd55438314de3d0f2c31b8a1b22447942b71d58a383160f3950fee69d8",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_armor.glb",
+          "sha256": "a0544bcba64a32e13585da78fff08b4892ae6c37d58841e7ce404100ce7ca4c2",
+          "bytes": 51264
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.39,
+          -0.16,
+          0.0
+        ],
+        "max": [
+          0.39,
+          0.16,
+          1.02
+        ],
+        "size": [
+          0.78,
+          0.32,
+          1.02
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 652,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_armor_preview.png",
+        "sha256": "e0a49ab37628b73c2b6086586be7ad785d29936797c7620c87fe324597a273aa",
+        "bytes": 6134,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_armor_geometry.json"
+    },
+    {
+      "id": "marker_key",
+      "source": "source/art/marker_key.blend",
+      "source_sha256": "ba40d0824742951ddbb34cced2fe2a37992b72cc32c239e20010592f465bf005",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_key.glb",
+          "sha256": "ae5966d692afd0badd02a93a4e8b547544256cd0a2ec9b8558fbba26ea357e16",
+          "bytes": 49268
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.135,
+          -0.105,
+          0.0
+        ],
+        "max": [
+          0.135,
+          0.105,
+          1.11
+        ],
+        "size": [
+          0.27,
+          0.21,
+          1.11
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 712,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_key_preview.png",
+        "sha256": "96fb8680cedaa799f3e8c20207efda6a239547017d9f8341f52ec7f5716162f8",
+        "bytes": 2818,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_key_geometry.json"
+    },
+    {
+      "id": "marker_weapon",
+      "source": "source/art/marker_weapon.blend",
+      "source_sha256": "9efa456e08d67030291c8d8c6094d6cb6fd1b9cce0608abcbb9941b25f5f2443",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_weapon.glb",
+          "sha256": "0206b0782f9cbfbea1d593ec6ebbcd422b6a0c7a82d6fb6489bbddd8598102b4",
+          "bytes": 79404
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.414,
+          -0.242,
+          0.0
+        ],
+        "max": [
+          0.414,
+          0.242,
+          0.701
+        ],
+        "size": [
+          0.828,
+          0.483,
+          0.701
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1312,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_weapon_preview.png",
+        "sha256": "b526a1a4a8543ed7607b612fd1e11fa060574579983a0652e9a85e762d7abdbd",
+        "bytes": 7534,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_weapon_geometry.json"
+    },
+    {
+      "id": "marker_story",
+      "source": "source/art/marker_story.blend",
+      "source_sha256": "69d18f7668369dbc644ae0ba9d9add9ced54204c2633a3454203fe9cbf09eaf9",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_story.glb",
+          "sha256": "420c49d230fa0d307cd9c81e3f1ddea18fda6df748fe51394ad96f54dbe00160",
+          "bytes": 33236
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.419,
+          -0.15,
+          0.0
+        ],
+        "max": [
+          0.419,
+          0.15,
+          0.964
+        ],
+        "size": [
+          0.837,
+          0.3,
+          0.964
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 472,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_story_preview.png",
+        "sha256": "09167e6e27e2ae0d863508cb3419bea124abd8324cd1f241370f8fc368698ade",
+        "bytes": 7229,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_story_geometry.json"
+    },
+    {
+      "id": "marker_checkpoint",
+      "source": "source/art/marker_checkpoint.blend",
+      "source_sha256": "8c9c5e3f9b88f93565d843bfdad0c5730e97e642acda429341f2093f2b72da2c",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_checkpoint.glb",
+          "sha256": "ee4731f42ad44bce933682bce9d0feeb058faf63f53c05d49e04b08c1c873d6f",
+          "bytes": 52548
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.343,
+          -0.309,
+          0.0
+        ],
+        "max": [
+          0.343,
+          0.309,
+          1.027
+        ],
+        "size": [
+          0.686,
+          0.618,
+          1.027
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 872,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_checkpoint_preview.png",
+        "sha256": "45e1e5fedd9c38227ca062ee184c58f4c1b22ecc5873edfcb985756674123d1d",
+        "bytes": 3834,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_checkpoint_geometry.json"
+    },
+    {
+      "id": "marker_exit",
+      "source": "source/art/marker_exit.blend",
+      "source_sha256": "92589c029cdd5f72ffa0ca34f262681800224c5c9bec1ef53d62673dd607f9df",
+      "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_exit.glb",
+          "sha256": "44b7214f50343c697ece1cbae00147a32123cbaab0cafef7ae259b5054e5f111",
+          "bytes": 109052
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_art.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.363,
+          -0.363,
+          -0.0
+        ],
+        "max": [
+          0.363,
+          0.363,
+          0.895
+        ],
+        "size": [
+          0.725,
+          0.726,
+          0.895
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 2008,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-system-01.png",
+          "sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-art/marker_exit_preview.png",
+        "sha256": "47cbf834d31ee2d0879706f0669e14f6f9fa4a867e029c8a5b0ceb32c7183d8b",
+        "bytes": 6708,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "geometry_receipt": "builds/marker-art/marker_exit_geometry.json"
+    },
+    {
+      "id": "marker_glyphs",
+      "source": "source/art/marker_glyphs.blend",
+      "source_sha256": "883f5a349badb2beafd5fc54d73c9a62bdbd2ad9bcec4bbd2a75e91349f0f8cc",
+      "outputs": [
+        {
+          "path": "game/assets/art/hud/marker_glyphs.png",
+          "sha256": "f414a3748493a9a21f03882cacff1f7f98a3d379e5185f8f1174682090936eb2",
+          "bytes": 2782,
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "game/assets/art/hud/marker_glyphs.json",
+          "sha256": "d378bfb81d506beba384ac8d8366080a3bfe11068d0a080648cf151eb10e71c4",
+          "bytes": 5881
+        }
+      ],
+      "provenance": {
+        "method": "original editable Blender glyph geometry, native CPU orthographic render",
+        "authoring_script": "tools/build_marker_glyphs.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "35164708fe093264bfdc244e2a3fc9d84ed9351955aa58f75cfc3a082061a82b",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_hud_art.py": "c224381a98b316b7d41d5c77d0f95f9f3bbea061a99eaa3d56d6bdce6ad25a26"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 4,
+      "filter": "nearest",
+      "clear_border": 4,
+      "pose_collections": [
+        "ammo",
+        "health",
+        "armor",
+        "key",
+        "weapon",
+        "story",
+        "checkpoint",
+        "exit",
+        "seal_blood",
+        "seal_ivory",
+        "impact_tool",
+        "rivet_pistol",
+        "scattergun",
+        "sawtooth_repeater",
+        "marrow_launcher",
+        "choir_disruptor"
+      ],
+      "triangles": 2228,
+      "build": {
+        "blender_version": "5.2.2 LTS",
+        "render_engine": "CYCLES",
+        "device": "CPU",
+        "threads": 4,
+        "samples": 8
+      }
+    },
+    {
+      "id": "marker_ivorykey",
+      "source": "source/art/marker_ivorykey.blend",
+      "source_sha256": "cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487",
+      "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ivorykey.glb",
+          "sha256": "c46f7d4ee5c4c90f5ed68fcfe9f39e85cb127b744757f7dcd1432acc8998ef62",
+          "bytes": 29740
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_identities.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.3827739655971527,
+          -0.053999997675418854,
+          0.0
+        ],
+        "max": [
+          0.3827739655971527,
+          0.053999997675418854,
+          1.1252371072769165
+        ],
+        "size": [
+          0.7655479311943054,
+          0.10799999535083771,
+          1.1252371072769165
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 520,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-identities/marker_ivorykey_preview.png",
+        "sha256": "c0505af96976869a7a1a2d1315b9092498b3c13a77a6ef9cfcfa18de7b3eb5ef",
+        "bytes": 3037,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "source_meshes": [
+        {
+          "name": "Slit handle half -1",
+          "vertices": 54,
+          "triangles": 104
+        },
+        {
+          "name": "Ivory lateral antler -1",
+          "vertices": 32,
+          "triangles": 60
+        },
+        {
+          "name": "Lock shoulder sleeve -1",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Slit handle half 1",
+          "vertices": 54,
+          "triangles": 104
+        },
+        {
+          "name": "Ivory lateral antler 1",
+          "vertices": 32,
+          "triangles": 60
+        },
+        {
+          "name": "Lock shoulder sleeve 1",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Open ivory diamond bezel",
+          "vertices": 24,
+          "triangles": 48
+        },
+        {
+          "name": "Central ivory antler",
+          "vertices": 24,
+          "triangles": 44
+        },
+        {
+          "name": "Short lock neck",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Handle hinge pin -1",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Handle hinge pin 1",
+          "vertices": 12,
+          "triangles": 20
+        }
+      ],
+      "native_source_saved_before_runtime_merge": true,
+      "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+      "blender_version": "5.2.2 LTS",
+      "render_engine": "CYCLES",
+      "device": "CPU",
+      "threads": 4,
+      "samples": 16
+    },
+    {
+      "id": "marker_ammo_shells",
+      "source": "source/art/marker_ammo_shells.blend",
+      "source_sha256": "14ea5b849ddafde95d4336928b9631d9c3d1a8e65768d1cdacf170dabc76bef8",
+      "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo_shells.glb",
+          "sha256": "865745333429cd7d5242b96459cb5a94e8a6411a663e3461da7ec94b427b0ba8",
+          "bytes": 55804
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_identities.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.32075637578964233,
+          -0.14800000190734863,
+          0.0
+        ],
+        "max": [
+          0.32075637578964233,
+          0.14800000190734863,
+          0.9209999442100525
+        ],
+        "size": [
+          0.6415127515792847,
+          0.29600000381469727,
+          0.9209999442100525
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 1004,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-identities/marker_ammo_shells_preview.png",
+        "sha256": "6bb7e495b412d399550c3f7efce43b7d626fc510190d9fc5fe7b0231a57c5131",
+        "bytes": 6161,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "source_meshes": [
+        {
+          "name": "Broad shell body 0",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Pressed shell casing 0",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Shell flanged heel 0",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Shell brass shoulder 0",
+          "vertices": 80,
+          "triangles": 160
+        },
+        {
+          "name": "Crimped shell crown 0",
+          "vertices": 80,
+          "triangles": 160
+        },
+        {
+          "name": "Shell crimp seam 0 0",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 0 1",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 0 2",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 0 3",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Broad shell body 1",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Pressed shell casing 1",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Shell flanged heel 1",
+          "vertices": 20,
+          "triangles": 36
+        },
+        {
+          "name": "Shell brass shoulder 1",
+          "vertices": 80,
+          "triangles": 160
+        },
+        {
+          "name": "Crimped shell crown 1",
+          "vertices": 80,
+          "triangles": 160
+        },
+        {
+          "name": "Shell crimp seam 1 0",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 1 1",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 1 2",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Shell crimp seam 1 3",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Low shell feed link",
+          "vertices": 12,
+          "triangles": 20
+        }
+      ],
+      "native_source_saved_before_runtime_merge": true,
+      "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+      "blender_version": "5.2.2 LTS",
+      "render_engine": "CYCLES",
+      "device": "CPU",
+      "threads": 4,
+      "samples": 16
+    },
+    {
+      "id": "marker_ammo_sawtooth",
+      "source": "source/art/marker_ammo_sawtooth.blend",
+      "source_sha256": "57fb1d60064b7fb9e87a3ae312037fae59021f1477847b9906532486e868f7dc",
+      "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo_sawtooth.glb",
+          "sha256": "85c4925e1b989a1f5ef7e7ea97b48413db521ee28fbc0987f2d8593738d58f9e",
+          "bytes": 24896
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_identities.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.34700000286102295,
+          -0.057500001043081284,
+          0.0
+        ],
+        "max": [
+          0.34700000286102295,
+          0.057500001043081284,
+          0.9950000047683716
+        ],
+        "size": [
+          0.6940000057220459,
+          0.11500000208616257,
+          0.9950000047683716
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 428,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-identities/marker_ammo_sawtooth_preview.png",
+        "sha256": "d178cc1e5250c71f0d8e2d10c29507386dc755ac4fc5fc8bfe4f2504cb182dda",
+        "bytes": 5482,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "source_meshes": [
+        {
+          "name": "Cartridge spine 0",
+          "vertices": 18,
+          "triangles": 32
+        },
+        {
+          "name": "Spine ivory collar 0",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Spine foot 0",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Cartridge spine 1",
+          "vertices": 18,
+          "triangles": 32
+        },
+        {
+          "name": "Spine ivory collar 1",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Spine foot 1",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Cartridge spine 2",
+          "vertices": 18,
+          "triangles": 32
+        },
+        {
+          "name": "Spine ivory collar 2",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Spine foot 2",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Cartridge spine 3",
+          "vertices": 18,
+          "triangles": 32
+        },
+        {
+          "name": "Spine ivory collar 3",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Spine foot 3",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Cartridge spine 4",
+          "vertices": 18,
+          "triangles": 32
+        },
+        {
+          "name": "Spine ivory collar 4",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Spine foot 4",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Narrow segmented feed web",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "Saw tooth 0",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 1",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 2",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 3",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 4",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 5",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Saw tooth 6",
+          "vertices": 6,
+          "triangles": 8
+        }
+      ],
+      "native_source_saved_before_runtime_merge": true,
+      "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+      "blender_version": "5.2.2 LTS",
+      "render_engine": "CYCLES",
+      "device": "CPU",
+      "threads": 4,
+      "samples": 16
+    },
+    {
+      "id": "marker_ammo_marrow",
+      "source": "source/art/marker_ammo_marrow.blend",
+      "source_sha256": "374a70deb50866ef974bf2adaaaef8008618c0a26d43f00123f6a553b9e04581",
+      "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo_marrow.glb",
+          "sha256": "a041e1ecca0321e0391716774437aabdaa1ed91e1cb496e3818f62a82ab9ab5a",
+          "bytes": 18564
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_identities.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.25,
+          -0.0978824570775032,
+          0.0
+        ],
+        "max": [
+          0.25,
+          0.0978824570775032,
+          1.0850000381469727
+        ],
+        "size": [
+          0.5,
+          0.1957649141550064,
+          1.0850000381469727
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 300,
+      "runtime_mesh_nodes": 3,
+      "material_count": 3,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-identities/marker_ammo_marrow_preview.png",
+        "sha256": "8fc00a46f0d493f1895fb73e911a55e641f4857c1e2663b0f3e472dba6b0d532",
+        "bytes": 3068,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "source_meshes": [
+        {
+          "name": "Hollow marrow spear side -1",
+          "vertices": 14,
+          "triangles": 24
+        },
+        {
+          "name": "Splayed marrow fin -1",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "Marrow side suture -1",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Hollow marrow spear side 1",
+          "vertices": 14,
+          "triangles": 24
+        },
+        {
+          "name": "Splayed marrow fin 1",
+          "vertices": 8,
+          "triangles": 12
+        },
+        {
+          "name": "Marrow side suture 1",
+          "vertices": 10,
+          "triangles": 16
+        },
+        {
+          "name": "Marrow lance tip",
+          "vertices": 6,
+          "triangles": 8
+        },
+        {
+          "name": "Marrow basal socket",
+          "vertices": 16,
+          "triangles": 28
+        },
+        {
+          "name": "Marrow socket collar",
+          "vertices": 80,
+          "triangles": 160
+        }
+      ],
+      "native_source_saved_before_runtime_merge": true,
+      "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+      "blender_version": "5.2.2 LTS",
+      "render_engine": "CYCLES",
+      "device": "CPU",
+      "threads": 4,
+      "samples": 16
+    },
+    {
+      "id": "marker_ammo_choir",
+      "source": "source/art/marker_ammo_choir.blend",
+      "source_sha256": "12eca21630f90ef8ff5a7af65f5f8571de2ed656718db3b6b4f504aa50a5c3db",
+      "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
+      "outputs": [
+        {
+          "path": "game/assets/art/world/marker_ammo_choir.glb",
+          "sha256": "e4fb459837c383857298374db83745993eb0aa018f5eb23766de3f00c319018f",
+          "bytes": 24324
+        }
+      ],
+      "provenance": {
+        "method": "image-derived original Blender geometry",
+        "authoring_script": "tools/build_marker_identities.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "physical_bounds_m": {
+        "min": [
+          -0.2694273591041565,
+          -0.07192562520503998,
+          0.0
+        ],
+        "max": [
+          0.2694273591041565,
+          0.07192562520503998,
+          1.0950000286102295
+        ],
+        "size": [
+          0.538854718208313,
+          0.14385125041007996,
+          1.0950000286102295
+        ],
+        "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+      },
+      "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+      "triangles": 396,
+      "runtime_mesh_nodes": 4,
+      "material_count": 4,
+      "loop_id": null,
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_marker_art.py": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/marker-identities-v2.png",
+          "sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0"
+        }
+      ],
+      "facing": "front Blender -Y; exported Godot +Z",
+      "collision": "none; marker visuals only",
+      "preview": {
+        "path": "builds/marker-identities/marker_ammo_choir_preview.png",
+        "sha256": "1fb1e9eefe646be4106ad0aa7ffe2d2d0394ec715763bd8309045a54b3486bd2",
+        "bytes": 3213,
+        "dimensions": [
+          128,
+          128
+        ]
+      },
+      "source_meshes": [
+        {
+          "name": "Resonant tine -1",
+          "vertices": 14,
+          "triangles": 24
+        },
+        {
+          "name": "Teal inner resonance rail -1",
+          "vertices": 15,
+          "triangles": 26
+        },
+        {
+          "name": "Splayed choir brace -1",
+          "vertices": 24,
+          "triangles": 44
+        },
+        {
+          "name": "Resonant tine 1",
+          "vertices": 14,
+          "triangles": 24
+        },
+        {
+          "name": "Teal inner resonance rail 1",
+          "vertices": 15,
+          "triangles": 26
+        },
+        {
+          "name": "Splayed choir brace 1",
+          "vertices": 24,
+          "triangles": 44
+        },
+        {
+          "name": "Choir tuning stem",
+          "vertices": 16,
+          "triangles": 28
+        },
+        {
+          "name": "Choir transverse root",
+          "vertices": 12,
+          "triangles": 20
+        },
+        {
+          "name": "Choir lower vertebral cuff",
+          "vertices": 80,
+          "triangles": 160
+        }
+      ],
+      "native_source_saved_before_runtime_merge": true,
+      "reference_sha256": "061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0",
+      "blender_version": "5.2.2 LTS",
+      "render_engine": "CYCLES",
+      "device": "CPU",
+      "threads": 4,
+      "samples": 16
+    },
+    {
+      "id": "shot_travel",
+      "source": "source/art/shot_travel.blend",
+      "source_sha256": "81dcde63c1853384caf84f7fc71574669279296cb230d4424c70deaf8412f8c7",
+      "outputs": [
+        {
+          "path": "game/assets/art/effects/shot_travel.png",
+          "sha256": "0f386803d9b8c852b3cfabe270493b7d00039b3a5a3e84649fac5ce691480746",
+          "bytes": 12211,
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_shot_travel.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "38d64a2f322c929fa95c139b8ab5daa071af5748843eda0965f1e8ed38056df2",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_ammo_vfx.py": "4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d",
+        "tools/shot_atlas.py": "f1c10eeac809d18e8eb6a8e4d5a96ec8d7b996286b8631a9779df4f377fe06e0"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/shot-transport-construction-20261018.png",
+          "sha256": "c48eefc9b364b169c2b7c7fa65ba0a55804a362ab42430c432aaf73d7221b15f"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 4,
+      "families": [
+        "rivet_square_amber",
+        "flechette_single_bone",
+        "needle_serrated_red",
+        "choir_hollow_pressure"
+      ],
+      "pose_collections": [
+        "rivet_square_amber_travel_00",
+        "rivet_square_amber_travel_01",
+        "rivet_square_amber_travel_02",
+        "rivet_square_amber_travel_03",
+        "flechette_single_bone_travel_00",
+        "flechette_single_bone_travel_01",
+        "flechette_single_bone_travel_02",
+        "flechette_single_bone_travel_03",
+        "needle_serrated_red_travel_00",
+        "needle_serrated_red_travel_01",
+        "needle_serrated_red_travel_02",
+        "needle_serrated_red_travel_03",
+        "choir_hollow_pressure_travel_00",
+        "choir_hollow_pressure_travel_01",
+        "choir_hollow_pressure_travel_02",
+        "choir_hollow_pressure_travel_03"
+      ],
+      "triangles": 6952,
+      "filter": "nearest",
+      "clear_border": 4,
+      "frame_alpha_pixels": [
+        559,
+        569,
+        563,
+        584,
+        246,
+        250,
+        249,
+        253,
+        261,
+        272,
+        260,
+        269,
+        281,
+        280,
+        318,
+        295
+      ]
     }
   ],
   "build": {

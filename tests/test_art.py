@@ -65,13 +65,18 @@ LATE_COMBAT = LATE_WEAPONS | LATE_ROLES | LATE_BOSSES
 EXPECTED.update(LATE_COMBAT)
 ATMOSPHERE = {'nursery_growth_vault', 'ossuary_sorting_vault', 'inversion_cosmic_membrane', 'heart_arterial_vault'}
 EXPECTED.update(ATMOSPHERE)
-EXPECTED.add('ammo_vfx')
+EXPECTED.update(('ammo_vfx','shot_travel'))
 CATHEDRAL = {'cathedral_vault_6m','cathedral_vault_9m','cathedral_cluster_pier',
              'cathedral_lancet_bay','cathedral_corner_rib','cathedral_skeletal_dado',
              'cathedral_brass_lamp','cathedral_inlay_tile','cathedral_kit_atlas'}
 EXPECTED.update(CATHEDRAL)
 EXPECTED.add('hud_kit')
 SCENERY.update(dict.fromkeys(ATMOSPHERE, (12, 12, 4.2)))
+MARKERS = {'marker_' + kind for kind in ('ammo', 'health', 'armor', 'key', 'weapon', 'story', 'checkpoint', 'exit')}
+EXPECTED.update(MARKERS)
+EXPECTED.add('marker_glyphs')
+MARKER_IDENTITIES = {'marker_ivorykey', 'marker_ammo_shells', 'marker_ammo_sawtooth', 'marker_ammo_marrow', 'marker_ammo_choir'}
+EXPECTED.update(MARKER_IDENTITIES)
 
 
 def world_geometry(gltf, binary):
@@ -116,6 +121,7 @@ def png(path):
             compressed.extend(payload)
         pos += 12 + length
         if kind == b'IEND':
+            assert length == 0 and pos == len(data), 'PNG closure'
             break
     assert size, path
     w, h = size
@@ -190,7 +196,7 @@ def check_nursery_v2(a, blob):
     for ref in refs:
         assert hashlib.sha256((ROOT / ref['path']).read_bytes()).hexdigest() == ref['sha256']
     geometry = recipe['geometry_report'](recipe['build_parts']())
-    assert a['source_mesh_count'] == geometry['editable_meshes'] == 227
+    assert a['source_mesh_count'] == geometry['editable_meshes'] == 231
     assert a['source_hierarchy_groups'] == 4
     assert a['assembly_names'] == ['Editable architecture', 'Editable vessel', 'Editable anatomy', 'Editable controls']
     assert len(a['outputs']) == 1 and a['outputs'][0]['path'] == 'game/assets/art/world/nursery_gestation_engine.glb'
@@ -221,8 +227,12 @@ def check():
     manifest = json.loads(path.read_text())
     assert manifest['schema_version'] == 1
     assets = manifest['assets']
-    assert {a['id'] for a in assets} == EXPECTED, 'original assets, all56 religious pieces, eight native late combat identities and four atmosphere modules required (intended RED)'
+    assert {a['id'] for a in assets} == EXPECTED, 'eight markers, original assets, all56 religious pieces, eight native late combat identities and four atmosphere modules required (intended RED)'
     assert len(assets) == len(EXPECTED)
+    import test_marker_art as marker
+    marker.validate_main_entries(assets)
+    import test_marker_identity_artifact as identities
+    identities.check(ROOT)
     assert len(manifest['palette']) >= 4
     owned_outputs = set()
     scenery_bytes = foundry_bytes = processional_bytes = atmosphere_bytes = 0
@@ -230,7 +240,14 @@ def check():
     for a in assets:
         nursery_v2 = a['id'] == 'nursery_gestation_engine' and a['provenance']['authoring_script'] == 'tools/build_nursery_gestation_v2.py'
         skin_bell_v2 = a['id'] == 'skin_bell' and a['provenance']['authoring_script'] == 'tools/build_skin_bell_v2.py'
-        if skin_bell_v2:
+        if a['id'] in MARKERS:
+            marker.validate_lineage(a)
+        elif a['id'] in MARKER_IDENTITIES:
+            pass  # The complete identity family was checked above.
+        elif a['id'] == 'marker_glyphs':
+            from test_marker_glyph_artifact import validate_entry
+            validate_entry(a, ROOT, ROOT)
+        elif skin_bell_v2:
             check_skin_bell_v2(a)
         else:
             assert a['provenance']['method'] == ('original primitive Blender geometry and editable procedural material nodes' if a['id']=='rivet_pistol' and a['provenance']['authoring_script']=='tools/build_rivet_pistol_v2.py' else 'Original modeled geometry and deterministic authored texture atlas' if a['id'] in CATHEDRAL else 'original sculpted Blender geometry, native CPU orthographic render' if a['id']=='hud_kit' else 'original editable Blender geometry and packed authored PBR textures' if a['id']=='conduit' else 'original Blender geometry and authored pixel textures')
@@ -328,6 +345,8 @@ def check():
                     for primitive in mesh['primitives']:
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
+                if a['id'] in MARKERS | MARKER_IDENTITIES:
+                    marker.validate_model(*marker.read_model(data), a)
                 if a['id'] in SCENERY:
                     if any(a['id'] in pieces for pieces in RELIGIOUS_SETS.values()):
                         level = a['level_id']
@@ -450,7 +469,7 @@ def check():
         if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun') or a['id'] in LATE_WEAPONS:
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
-    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb')}
+    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'

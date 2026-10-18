@@ -1,5 +1,7 @@
 extends SceneTree
 
+const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+
 var game
 var prefix = "user://reliquary_flow_"+str(OS.get_process_id())
 
@@ -39,11 +41,13 @@ func run() -> void:
 	descend.pressed.emit()
 	freeze()
 	if not expect(game.playing and game.level.layout.data.id == "reliquary" and game.state.position == game.level.layout.world_position([19.5,38.5]),"Descent loads Reliquary at its own safe entry checkpoint"): return
-	if not expect(game.music.player.file == "res://audio/reliquary.mid" and game.state.ammo[1] == 111 and game.state.discoveries == [2],"Fourth live MIDI and carried campaign resources/story persist"): return
+	if not expect(game.music.player.stream.resource_path == "res://audio/suno/reliquary.mp3" and game.state.ammo[1] == 111 and game.state.discoveries == [2],"Fourth Suno recording and carried campaign resources/story persist"): return
 	game.player.cycle_weapon(1)
 	game.player.position = game.level.layout.world_position([19.5,32.5])
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.owned_weapons == [0,1,2] and game.state.weapon == 2 and game.state.ammo[2] == 19,"Actual fourth-map pickup retains selected existing scattergun and adds sixteen shells"): return
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.ammo[2] == 19,"Collected entry weapon cannot duplicate ammunition"): return
 	game.player.position = game.level.layout.world_position([1.35,16.5])
@@ -53,12 +57,15 @@ func run() -> void:
 	game.interact()
 	if not expect(game.state.discoveries == [2,3] and "reliquary_story" in game.state.removed,"Actual optional command-channel clue is interactable and persists once"): return
 	game.player.position = game.level.layout.world_position([19.5,10.5])
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "entry" and not game.unlock_door("reliquary_index_gate"),"Neither checkpoint nor exit gate bypasses earned seals"): return
 	game.collect_key("reliquary_blood")
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "entry" and not game.unlock_door("reliquary_index_gate"),"One seal cannot release the gate or commit recovery"): return
 	game.collect_key("reliquary_ivory")
+	if not expect(await PassivePhysicsStep.scan(game),"Actual passive physics step completes with the staged player/map"): return
 	game._process(0)
 	if not expect(game.state.checkpoint_id == "reliquary_checkpoint" and not "encounter:reliquary_catalogue" in game.state.removed and game.unlock_door("reliquary_index_gate"),"Both seals store checkpoint before catalogue commitment and release actual gate"): return
 	game.player.position = game.level.layout.world_position([19.5,9.25])

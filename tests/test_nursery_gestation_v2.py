@@ -329,9 +329,9 @@ class Tissue(unittest.TestCase):
         parts=art.build_parts();lobes=[p for p in parts if 'fenestrated lobe' in p.name]
         kept=[(p.name,p.material,p.assembly,p.vertices,p.faces) for p in parts if p not in lobes]
         self.assertEqual(hashlib.sha256(json.dumps(kept,separators=(',',':')).encode()).hexdigest(),
-                         '82b9e48b6f5b5663180c6fd6249b8c48aa5ad19fda6d162b3cfb3b3e7e38ed72')
+                         '25d246e6a6c6678747948b91e26953e9f405455b37d9932442fc4c9192884a97')
         self.assertEqual(len(lobes),2)
-        self.assertEqual(sum(len(list(art.triangles(p))) for p in parts),15650)
+        self.assertEqual(sum(len(list(art.triangles(p))) for p in parts),17574)
         def orient(a,b,c):return (b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])
         def crossing(a,b,c,d):
             return orient(a,b,c)*orient(a,b,d)<-1e-12 and orient(c,d,a)*orient(c,d,b)<-1e-12
@@ -361,11 +361,11 @@ class Tissue(unittest.TestCase):
         original=[p for p in parts if p not in web]
         fields=[(p.name,p.assembly,p.vertices,p.faces) for p in original]
         self.assertEqual(hashlib.sha256(json.dumps(fields,separators=(',',':')).encode()).hexdigest(),
-                         '97db7283b9d703face7b8c7c012d9dc575e85d54bd346fc8c3f2dcec712baf55')
-        self.assertEqual(len(original),223)
+                         '6683d9ceba51764fb68b427264ec8aeaaf6e9ae0c3edc3dc523e425538ab6a38')
+        self.assertEqual(len(original),227)
         full=[(p.name,p.material,p.assembly,p.vertices,p.faces) for p in original]
         self.assertEqual(hashlib.sha256(json.dumps(full,separators=(',',':')).encode()).hexdigest(),
-                         '19be78f02b12633358593d69413ebba99ad95736cc5defd459acbfda3bfbd910')
+                         '2f8e0e9361eeeedba5668d836ca2e81345b32769efc41f3c3f969a22aa5209cc')
         self.assertTrue(all(p.material=='bone' for p in original if p.name.startswith(('open costal branch','clavicular wishbone','iliac growing wing'))))
         lookup={p.name:p for p in parts};stem=lookup['pleural web axial stem']
         lobes=[lookup['pleural web superior fenestrated lobe'],lookup['pleural web inferior fenestrated lobe']]

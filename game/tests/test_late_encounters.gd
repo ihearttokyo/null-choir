@@ -58,18 +58,22 @@ func check_heart_launcher(difficulty: int) -> bool:
 		game.state.weapon = 1
 		if not expect(game.playing and not game.placement_pending and flags().is_empty() and membership_matches() and game.level.markers.has(spec.id),"Staged Heart case begins live with its real pod and dormant encounters"): return false
 		if not move_to(spec.cell): return false
-		game._process(0) # Actual player proximity invokes Main's existing collector.
+		if not await PassivePhysicsStep.scan(game): return false
+		game._process(0) # Render semantics follow the actual passive physics callback.
 		if mode == "full":
 			var full: Dictionary = game.state._resources().duplicate(true)
 			if not expect(game.state.ammo[4] == capacity and game.state.weapon == 1 and game.state.owned_weapons == [0,1,2,4] and not spec.id in game.state.removed and game.level.markers.has(spec.id),"Full owned launcher leaves its actual pod unconsumed without switching weapons"): return false
+			if not await PassivePhysicsStep.scan(game): return false
 			game._process(0)
 			if not expect(game.state._resources() == full and game.level.markers.has(spec.id),"Repeated full-capacity proximity still preserves the pod"): return false
 			game.state.ammo[4] = capacity-3 # Explicitly staged space, not a claimed fight.
+			if not await PassivePhysicsStep.scan(game): return false
 			game._process(0)
 		var expected_ammo: int = 8 if mode == "missing" else capacity
 		var expected_weapon: int = 4 if mode == "missing" else 1
 		if not expect(game.state.owned_weapons == [0,1,2,4] and game.state.weapon == expected_weapon and game.state.ammo == [0,0,0,0,expected_ammo,0] and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id),"Real proximity grants a missed launcher/eight rounds or caps owned ammo without a spurious switch"): return false
 		var collected: Dictionary = game.state._resources().duplicate(true)
+		if not await PassivePhysicsStep.scan(game): return false
 		game._process(0)
 		if not expect(game.state._resources() == collected and game.state.removed.count(spec.id) == 1,"Consumed actual launcher pod cannot grant ownership or ammo twice"): return false
 		# Earn the real seals and automatic checkpoint; only poses are staged.
@@ -77,6 +81,7 @@ func check_heart_launcher(difficulty: int) -> bool:
 			if not await interact_at(key): return false
 		var checkpoint: Dictionary = interaction("checkpoint")
 		if not move_to(checkpoint.cell): return false
+		if not await PassivePhysicsStep.scan(game): return false
 		game._process(0)
 		var finale: Dictionary = group_named("heart_finale")
 		if not expect(game.state.checkpoint_id == checkpoint.id and checkpoint.id in game.state.removed and game.state.removed.count(spec.id) == 1 and group_dormant(finale) and membership_matches() and game._valid_saved_position(game.state.position),"Actual safe pre-final checkpoint captures the consumed launcher and dormant finale"): return false
@@ -91,10 +96,12 @@ func check_heart_launcher(difficulty: int) -> bool:
 		await settle()
 		if not expect(game.playing and not game.placement_pending and game.state.level_index == 7 and game.state.difficulty == difficulty and game.state.to_dict() == saved and game._valid_saved_position(game.state.position) and game.player.position.is_equal_approx(game.state.position+Vector3.UP*0.04) and not game.level.markers.has(spec.id) and group_dormant(finale) and membership_matches(),"Actual safe Continue preserves exact launcher ownership/ammo/removal and checkpoint resources"): return false
 		if not move_to(spec.cell): return false
+		if not await PassivePhysicsStep.scan(game): return false
 		game._process(0)
 		if not expect(game.state._resources() == recovery and game.state.removed.count(spec.id) == 1 and not game.level.markers.has(spec.id),"Revisiting the consumed launcher after Continue cannot recollect it"): return false
 		await tap_key(KEY_5)
 		game.player.camera.rotation.x = 1.1
+		await physics_frame # Discharge through the native physics-owned boundary.
 		var ammunition: int = game.state.ammo[4]
 		if not expect(game.state.weapon == 4 and game.player.fire() and game.state.ammo[4] == ammunition-1,"Real launcher selection/discharge spends one recovered round; not a boss fight"): return false
 		game.hurt_player(game.state.health+game.state.armor+1)
@@ -159,14 +166,14 @@ func check_integration(index: int, difficulty: int, order: Array) -> bool:
 	game.music.stop()
 	await settle()
 	if not expect(flags().is_empty() and membership_matches(),"Entry restoration rewinds the hit and all activation state"): return false
-	if not recover_pools(data.id+"_entry_"): return false
+	if not await recover_pools(data.id+"_entry_"): return false
 	var finale: Dictionary = group_named(data.id+"_finale")
 	if not enter_region(finale): return false
 	game._process(0)
 	if not expect(not "encounter:"+finale.id in game.state.removed and membership_matches(),"Final threshold with no seals cannot wake its guards or manifestation"): return false
 	for branch in order:
 		var commit: Dictionary = group_named(data.id+"_"+branch+"_commit")
-		if not recover_pools(data.id+"_"+branch+"_approach_"): return false
+		if not await recover_pools(data.id+"_"+branch+"_approach_"): return false
 		if not await activate_by_region(commit): return false
 		var required = "blood" if branch == "first" else "ivory"
 		var key: Dictionary = data.interactions.filter(func(spec): return spec.kind == "key" and spec.key == required)[0]
@@ -177,15 +184,16 @@ func check_integration(index: int, difficulty: int, order: Array) -> bool:
 		if not expect(flags() == before and membership_matches(),"Seal-conditioned return cannot activate before its actual key"): return false
 		if not await interact_at(key): return false
 		if not expect(required in game.state.keys,"Production E input actually earns the return seal"): return false
-		if not recover_pools(data.id+"_"+branch+"_return_"): return false
+		if not await recover_pools(data.id+"_"+branch+"_return_"): return false
 		if not await activate_by_region(return_group): return false
 		if game.state.keys.size() == 1:
 			if not enter_region(finale): return false
 			game._process(0)
 			if not expect(not "encounter:"+finale.id in game.state.removed and membership_matches(),"One seal still cannot wake final guards or the boss"): return false
 	var checkpoint: Dictionary = interaction("checkpoint")
-	if not recover_pools(data.id+"_finale_"): return false
+	if not await recover_pools(data.id+"_finale_"): return false
 	if not move_to(checkpoint.cell): return false
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.checkpoint_id == checkpoint.id and not "encounter:"+finale.id in game.state.removed and membership_matches(),"Both branch orders store actual recovery before final commitment"): return false
 	var recovery: Dictionary = game.state.to_dict().duplicate(true)
@@ -247,9 +255,11 @@ func recover(spec: Dictionary) -> bool:
 	var weapon: int = int(spec.weapon)
 	var before: int = game.state.ammo[weapon]
 	var capacity: int = game.player.WEAPONS[weapon].max_ammo
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	if not expect(game.state.ammo[weapon] == mini(capacity,before+int(spec.amount)) and (spec.id in game.state.removed if before < capacity else not spec.id in game.state.removed),"Production pickup respects finite capacity and leaves a full recovery pod available"): return false
 	var after: int = game.state.ammo[weapon]
+	if not await PassivePhysicsStep.scan(game): return false
 	game._process(0)
 	return expect(game.state.ammo[weapon] == after,"Finite actual pickup cannot duplicate ammunition")
 
@@ -258,7 +268,7 @@ func recover_pools(id_prefix: String) -> bool:
 	# reachable combat route, late weapon ownership, or a completion budget.
 	for spec in game.level.layout.data.pickups:
 		if spec.kind == "ammo" and spec.id.begins_with(id_prefix):
-			if not recover(spec): return false
+			if not await recover(spec): return false
 	return true
 
 func capsule_clear(actor) -> bool:
@@ -302,6 +312,7 @@ func check_creation_budget(recovery: Dictionary, finale: Dictionary) -> bool:
 		if not capsule_clear(add): return false
 		add.take_damage(10000,game.player) # Actual mortality/removed strings, not a scripted battle claim.
 	game.player.camera.rotation.x = 1.1
+	await physics_frame # Capture follows an actual physics-owned resource spend.
 	var ammunition: int = game.state.ammo[1]
 	if not expect(game.state.weapon == 1 and game.player.fire() and game.state.ammo[1] == ammunition-1,"Real pistol discharge spends an actual resource before the save/recovery boundary"): return false
 	if not expect(game._capture_actor_state(),"SETUP: actual shared save capture precedes the exact observed campaign boundary"): return false

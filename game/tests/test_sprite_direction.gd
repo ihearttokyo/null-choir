@@ -1,5 +1,7 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -21,8 +23,13 @@ func run() -> void:
 				push_error("Wrong atlas direction: yaw "+str(facing)+" expected "+str(view[1])+" got "+str(actor.sprite.frame%8))
 				quit(1)
 				return
-	game.pause_game()
+	if not await RecordedAudioRelease.stop(game):
+		push_error("Direction fixture must release its native recorded-audio playback before exit")
+		quit(1)
+		return
 	game.queue_free()
 	paused = false
+	await process_frame
+	await process_frame
 	print("PASS all 32 actor-rotation/front/right/back/left atlas selections")
 	quit()

@@ -26,7 +26,7 @@ class Target extends StaticBody3D:
 	var game
 	var hits = 0
 	var stop_on_damage = false
-	func take_damage(_damage, _source):
+	func take_damage(_damage, _source, _context: Dictionary = {}):
 		hits += 1
 		if stop_on_damage: game.playing = false
 
@@ -34,6 +34,7 @@ func _initialize():
 	call_deferred("run")
 
 func run():
+	preload("res://scripts/preferences.gd").new().apply_bindings()
 	var game = TestGame.new()
 	root.add_child(game)
 	game.state.new_campaign(1)
@@ -64,7 +65,6 @@ func run():
 	game.state.ammo[1] = 10
 	if not expect(not player.fire() and game.state.ammo[1] == 10): return
 	game.playing = true
-	preload("res://scripts/preferences.gd").new().apply_bindings()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	var motion = InputEventMouseMotion.new()
 	motion.relative = Vector2(5,0)
@@ -76,6 +76,8 @@ func run():
 	player._unhandled_input(tap)
 	tap.pressed = false
 	player._unhandled_input(tap)
+	if not expect(game.state.ammo[1] == 10 and game.shots == 2): return
+	player._physics_process(0) # This continuation is inside the awaited native physics frame.
 	if not expect(game.state.ammo[1] == 9 and game.shots == 3): return
 	game.state.owned_weapons = [0,1,2]
 	game.state.ammo = [0,90,32,0,0,0]

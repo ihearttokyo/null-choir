@@ -1,6 +1,14 @@
 extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
+const Routes = preload("res://scripts/navigation_routes.gd")
+const PURPOSE_ART = {
+	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
+	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
+	"checkpoint":"marker_checkpoint", "exit":"marker_exit"
+}
+const AMMO_ART = ["marker_ammo","marker_ammo","marker_ammo_shells","marker_ammo_sawtooth","marker_ammo_marrow","marker_ammo_choir"]
+var _marker_glyphs: Texture2D
 var layout = Layout.new()
 var game: Node
 var doors: Dictionary = {}
@@ -9,11 +17,10 @@ var machine_lights: Dictionary = {}
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
 
-func build(owner_game: Node, index: int) -> void:
-	game = owner_game
+func build(owner_game: Node, index: int) -> bool:
 	if not layout.load_level(index):
-		push_error("Level source unavailable: " + str(index))
-		return
+		return false
+	game = owner_game
 	_build_geometry()
 	_build_environment()
 	_build_scenery()
@@ -34,25 +41,47 @@ func build(owner_game: Node, index: int) -> void:
 		var door = _box(Vector3(spec.size[0],spec.size[1],spec.size[2]), layout.world_position(spec.cell) + Vector3(0,spec.size[1]/2,0), _material(Color(0.14,0.08,0.09)), true)
 		door.rotation.y = deg_to_rad(spec.yaw)
 		doors[spec.id] = door
-	var marker_mesh = SphereMesh.new()
-	marker_mesh.radius = 0.8
-	marker_mesh.height = 1.6
 	for spec in layout.data.pickups + layout.data.interactions:
 		if spec.id in game.state.removed:
 			continue
-		var color = Color(0.85,0.59,0.22)
-		if spec.kind == "health": color = Color(0.4,0.7,0.65)
-		if spec.kind == "armor": color = Color(0.34,0.5,0.86)
-		if spec.kind == "key" and spec.key == "blood": color = Color(0.7,0.12,0.11)
-		var marker = _place_model("containment_capsule",layout.world_position(spec.cell)+Vector3.UP*0.06,0,[0.25,0.17,0.25])
-		# Reuse the Blender cage at collectible scale; its fluid core keeps the original color cue.
-		var core = MeshInstance3D.new()
-		core.mesh = marker_mesh
-		core.material_override = _material(color,0.7)
-		core.position.y = 2.2
-		marker.add_child(core)
-		markers[spec.id] = marker
+		markers[spec.id] = _place_marker(spec)
 	refresh_machine_lights()
+	_build_navigation()
+	return true
+
+func _place_marker(spec: Dictionary) -> Node3D:
+	var art: String = PURPOSE_ART[spec.kind]
+	if spec.kind == "key" and spec.key == "ivory": art = "marker_ivorykey"
+	elif spec.kind == "ammo": art = AMMO_ART[int(spec.weapon)]
+	var marker = _place_model(art,layout.world_position(spec.cell)+Vector3.UP*0.06,180)
+	if spec.kind == "weapon":
+		if _marker_glyphs == null: _marker_glyphs = load("res://assets/art/hud/marker_glyphs.png")
+		var emblem = Sprite3D.new()
+		emblem.name = "WeaponIdentity"
+		emblem.texture = _marker_glyphs
+		emblem.hframes = 4
+		emblem.vframes = 4
+		emblem.frame = 10+int(spec.weapon)
+		emblem.position = Vector3(0,1.04,0)
+		emblem.pixel_size = 0.008
+		emblem.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		emblem.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		emblem.shaded = false
+		emblem.double_sided = true
+		emblem.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		marker.add_child(emblem)
+	return marker
+
+func _build_navigation() -> void:
+	var actor = preload("res://scripts/enemy.gd")
+	var profiles := {}
+	for spec in layout.data.enemies:
+		if actor.LATE.get(spec.kind,{}).get("speed",1.0) == 0: continue
+		profiles[spec.kind] = {"radius":actor.capsule_radius(spec.kind),"height":actor.capsule_height(spec.kind),"hover":1.16 if spec.kind in ["caster","choir_avatar"] else 0.0}
+	var routes = Routes.new()
+	routes.name = "NavigationRoutes"
+	add_child(routes)
+	if not routes.configure(self,profiles): routes.queue_free()
 
 func _material(color: Color, emission: float = 0.0) -> StandardMaterial3D:
 	var material = StandardMaterial3D.new()
@@ -101,17 +130,17 @@ func _build_geometry() -> void:
 		var chunk = Vector2i(floori(cell.x/4.0),floori(cell.y/4.0))
 		if not chunks.has(chunk):
 			chunks[chunk] = [SurfaceTool.new(),SurfaceTool.new()]
-			for tool in chunks[chunk]: tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for tool in chunks[chunk]:
+				tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+				tool.set_smooth_group(-1)
 		var corners: Array[Vector3] = []
 		for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.ONE,Vector2.DOWN]:
 			var point = Vector2(cell)+offset
 			corners.append(Vector3(point.x*size,layout.height_at(point),point.y*size))
 		for i in [0,1,2,0,2,3]:
-			chunks[chunk][0].set_normal(Vector3.UP)
 			chunks[chunk][0].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
 			chunks[chunk][0].add_vertex(corners[i])
 		for i in [0,2,1,0,3,2]:
-			chunks[chunk][1].set_normal(Vector3.DOWN)
 			chunks[chunk][1].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
 			chunks[chunk][1].add_vertex(corners[i]+Vector3.UP*_roof_height(cell))
 		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
@@ -134,6 +163,7 @@ func _build_geometry() -> void:
 		for i in range(2):
 			var mesh = MeshInstance3D.new()
 			mesh.name = ("Floor" if i == 0 else "Ceiling")+str(chunk.x)+"_"+str(chunk.y)
+			chunks[chunk][i].generate_normals()
 			mesh.mesh = chunks[chunk][i].commit()
 			mesh.material_override = floor_material if i == 0 else roof_material
 			add_child(mesh)
@@ -240,3 +270,5 @@ func open_door(id: String) -> void:
 	tween.tween_property(door,"position:y",door.position.y+6.0,0.65)
 	tween.finished.connect(door.queue_free)
 	doors.erase(id)
+	var routes = get_node_or_null("NavigationRoutes")
+	if routes != null: routes.invalidate_doors()

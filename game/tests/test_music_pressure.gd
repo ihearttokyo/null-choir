@@ -6,7 +6,7 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var music: Node = load("res://audio/music.gd").new()
+	var music: Node = load("res://audio/midi_music.gd").new()
 	if not expect(music.has_method("set_pressure"), "Music must expose set_pressure(value: float)"):
 		music.free()
 		return

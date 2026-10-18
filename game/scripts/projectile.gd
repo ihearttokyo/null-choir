@@ -20,24 +20,25 @@ func configure(owner_game: Node, source: CollisionObject3D, origin: Vector3, des
 		if game.has_method("ammo_visuals"):
 			var visuals = game.ammo_visuals()
 			if visuals != null: visuals.marrow(self)
-		return
-	var mesh = MeshInstance3D.new()
-	mesh.mesh = SphereMesh.new()
-	mesh.mesh.radius = 0.18
-	mesh.mesh.height = 0.36
-	var material = StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.albedo_color = Color(1.0,0.3,0.12)
-	material.emission_enabled = true
-	material.emission = material.albedo_color
-	material.emission_energy_multiplier = 3.0
-	mesh.material_override = material
-	add_child(mesh)
-	var light = OmniLight3D.new()
-	light.light_color = material.albedo_color
-	light.light_energy = 2.0
-	light.omni_range = 3.0
-	add_child(light)
+	else:
+		var mesh = MeshInstance3D.new()
+		mesh.mesh = SphereMesh.new()
+		mesh.mesh.radius = 0.18
+		mesh.mesh.height = 0.36
+		var material = StandardMaterial3D.new()
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		material.albedo_color = Color(1.0,0.3,0.12)
+		material.emission_enabled = true
+		material.emission = material.albedo_color
+		material.emission_energy_multiplier = 3.0
+		mesh.material_override = material
+		add_child(mesh)
+		var light = OmniLight3D.new()
+		light.light_color = material.albedo_color
+		light.light_energy = 2.0
+		light.omni_range = 3.0
+		add_child(light)
+	_observe_debug("configured_birth",{"origin":origin,"destination":destination})
 
 func _physics_process(delta: float) -> void:
 	if is_queued_for_deletion(): return
@@ -45,8 +46,11 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		return
 	if not game.playing: return
-	var end = global_position+velocity*minf(delta,lifetime)
-	var query = PhysicsRayQueryParameters3D.create(global_position,end,1|2|4)
+	var original_map: Node = game.level
+	var original_player: Node = game.player
+	var ray_start: Vector3 = global_position
+	var end = ray_start+velocity*minf(delta,lifetime)
+	var query = PhysicsRayQueryParameters3D.create(ray_start,end,1|2|4)
 	query.exclude = [shooter.get_rid()] if is_instance_valid(shooter) else []
 	query.hit_from_inside = true
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
@@ -56,16 +60,28 @@ func _physics_process(delta: float) -> void:
 		if blast_damage > 0:
 			# Offset toward the exposed side, never through thin cover to the hidden victims.
 			_blast(hit.position+hit.normal*0.05,hit.collider)
-		elif hit.collider == game.player:
-			game.hurt_player(int(DAMAGE*[0.7,1.0,1.4][game.state.difficulty]))
+		elif hit.collider == original_player:
+			var observed: bool = _observe_debug("queued_player_contact",{"ray_start":ray_start,"ray_end":end,"hit":hit})
+			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and game.playing):
+				game.hurt_player(int(DAMAGE*[0.7,1.0,1.4][game.state.difficulty]))
 		elif hit.collider.has_method("take_damage"):
-			hit.collider.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null)
+			var original_victim: Node = hit.collider
+			var observed: bool = _observe_debug("queued_enemy_contact",{"ray_start":ray_start,"ray_end":end,"hit":hit})
+			if not is_instance_valid(self): return
+			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and is_instance_valid(original_victim) and not original_victim.is_queued_for_deletion() and original_victim.get_parent() == original_map and game.playing):
+				original_victim.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null,{"attack_kind":"projectile","incoming_direction":velocity.normalized(),"hit_position":hit.position})
 		if _current_map() and game.playing and game.has_method("impact"):
 			game.impact(hit.position)
 		return
 	global_position = end
 	lifetime = maxf(0,lifetime-delta)
 	if lifetime <= 0: queue_free()
+
+func _observe_debug(event: String, data: Dictionary) -> bool:
+	if not OS.is_debug_build() or not is_instance_valid(game) or game.is_queued_for_deletion() or not game.has_method("_debug_projectile_event"): return false
+	data.merge({"projectile":self,"source":shooter,"map":get_parent(),"player":game.player,"tick":Engine.get_physics_frames(),"position":global_position,"velocity":velocity,"lifetime":lifetime,"blast_damage":blast_damage})
+	game.call("_debug_projectile_event",self,event,data.duplicate(true))
+	return true
 
 func _current_map() -> bool:
 	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion()
@@ -89,5 +105,5 @@ func _blast(origin: Vector3, direct_hit: Node) -> void:
 		if is_player:
 			game.hurt_player(int(amount*[0.7,1.0,1.4][game.state.difficulty]))
 		else:
-			victim.take_damage(amount,shooter if is_instance_valid(shooter) else null)
+			victim.take_damage(amount,shooter if is_instance_valid(shooter) else null,{"attack_kind":"blast","origin":origin})
 			if _current_map() and game.playing and game.has_method("hit_feedback"): game.hit_feedback()

@@ -1,6 +1,16 @@
+# Current campaign playback
+
+`game/audio/music.gd` uses one native AudioStreamPlayer and lazily loads the selected MP3 for each level. It routes to Music without changing user bus gain or mute, repeats the recording, freezes playback on pause, restarts on level restart and releases its stream on title. Combat pressure smoothly lifts the complete stereo mix from -3 to 0 dB; separate MIDI stem expression no longer applies. `playback_started` provides the synchronous placement/recovery regression observation point after native playback starts.
+
+Original downloads, selected song IDs, hashes and conversion provenance are in [the Suno manifest](../source/music/suno/manifest.json). FFmpeg is needed only for authoring; Godot decodes the packaged recordings without host tools. Full listening and standalone-app acceptance remain separate.
+
+## Preserved MIDI implementation
+
+The remaining documentation describes the retained synth and `game/audio/midi_music.gd`, exercised by legacy MIDI tests rather than campaign playback.
+
 # Live MIDI runtime
 
-`game/audio/music.gd` is a persistent Node. Add it once after the audio bus layout is loaded. It creates the Music bus only when absent, loads the packaged bank once, and retains that bank across track changes. The game owns Music volume and mute settings.
+`game/audio/midi_music.gd` is a persistent Node. Add it once after the audio bus layout is loaded. It creates the Music bus only when absent, loads the packaged bank once, and retains that bank across track changes. The game owns Music volume and mute settings.
 
 ## API
 
@@ -26,7 +36,7 @@ The synth is pure GDScript, using native Godot audio streams and effects. No Flu
 - [arlez80/godot-midi-player-g4](https://github.com/arlez80/godot-midi-player-g4), revision `252157b64e9a94686b363b3cce53f195cb828aa2`; prepared archive SHA-256 `ac12e4ffae838caa83bba5a278a1ab63ad87aab3b6a82a121564c83c0249ddbd`. MIT license: `licenses/audio/godot-midi-player-MIT.txt`, packaged copy `game/addons/midi/LICENSE.txt`.
 - [mrbumpy409/GeneralUser-GS](https://github.com/mrbumpy409/GeneralUser-GS), revision `684543d5e5efaef08d02be50dcda8d552478fa60`; bank SHA-256 `9575028c7a1f589f5770fccc8cff2734566af40cd26ed836944e9a5152688cfe`. License: `licenses/audio/GeneralUser-GS-license.txt`, packaged copy `game/audio/LICENSE-GeneralUser-GS.txt`.
 
-GeneralUser GS permits music creation and software packaging, but its author explicitly cannot establish every historical sample origin. This bank is provisional for private project playback. These permissions are not a claim of independently verified sample clearance or authorization to publish the game externally.
+GeneralUser GS permits music creation and software packaging, but its author explicitly cannot establish every historical sample origin. The bank is redistributed under its upstream license with that qualification intact; historical sample clearance has not been independently verified. Jared authorized public project and playtest distribution on 2026-10-16. The original project and selected Suno recordings remain subject to the project LICENSE.
 
 Local patches are owned by these files:
 

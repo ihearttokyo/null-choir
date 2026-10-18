@@ -85,6 +85,8 @@ func run() -> void:
 	await dispatch(game,rebound)
 	var prefs = game.Preferences.new()
 	var old_prefs = prefs.to_dict()
+	old_prefs.version = 1
+	old_prefs.values.erase("reduced_damage_flashes")
 	old_prefs.bindings.erase("survey")
 	if not expect(prefs.from_dict(old_prefs) and prefs.binding_text("survey").contains("M"),"Legacy preferences acquire only the new default action"): return
 	game.state.complete_level()

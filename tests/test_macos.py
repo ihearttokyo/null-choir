@@ -8,6 +8,12 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def require_recorded_audio_receipts(output):
+    for receipt in ('PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices', 'PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart', 'PASS packaged retained MIDI sources: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart'):
+        if receipt not in output:
+            raise AssertionError("Packed audio receipt missing: " + receipt)
+
+
 def main():
     ZIP = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'builds/macos/NULL CHOIR-arm64.zip'
 
@@ -32,15 +38,14 @@ def main():
         assert result.returncode == 0 and 'PASS packaged' in output and 'ERROR:' not in output, output
         assert 'Foundry' in output, 'Packaged second-level load/MIDI/art acceptance missing'
         assert 'Processional' in output, 'Packaged third-level/caster/scattergun acceptance missing (intended RED)'
-        assert 'PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices' in output, 'Legacy packed workflow acceptance missing'
-        assert 'PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart' in output, 'Full-eight packed scenes/art/live MIDI acceptance missing (intended RED)'
+        require_recorded_audio_receipts(output)
         assert 'PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar' in output, 'Actual packed late weapon/actor/boss acceptance missing'
         assert 'PASS packaged native Metal shader caches' in output, 'Actual packed native Metal cache acceptance missing'
         assert 'PASS packaged isolated userdata' in output, 'Validation must not use real campaign/preferences userdata'
         assert not any(message in output.lower() for message in ['error:', 'leaked', 'resources still in use', 'orphan']), output
         assert info['CFBundleShortVersionString'] == '0.2.2' and info['CFBundleVersion'] == '0.2.2', 'Current development app version required'
         print(output.strip())
-    print('PASS exported ARM64 ZIP, strict ad-hoc signature, system-only dependencies and offline native title startup')
+    print('PASS exported ARM64 ZIP, strict code signature, system-only dependencies and offline native title startup')
 
 
 if __name__ == '__main__':

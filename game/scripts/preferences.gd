@@ -1,7 +1,7 @@
 extends RefCounted
 
 const SAVE_PATH = "user://preferences.json"
-const DEFAULTS = {"sensitivity":1.0,"invert_y":false,"head_bob":true,"camera_shake":true,"auto_aim":false,"music_volume":0.65,"effects_volume":0.8}
+const DEFAULTS = {"sensitivity":1.0,"invert_y":false,"head_bob":true,"camera_shake":true,"reduced_damage_flashes":false,"auto_aim":false,"music_volume":0.65,"effects_volume":0.8}
 const ACTIONS = ["move_forward","move_back","move_left","move_right","interact","pause","fire","weapon_previous","weapon_next","look_left","look_right","look_up","look_down","weapon_1","weapon_2","weapon_3","weapon_4","weapon_5","weapon_6","survey"]
 var values: Dictionary = DEFAULTS.duplicate()
 var bindings: Dictionary = default_bindings()
@@ -87,17 +87,22 @@ func _event(binding: Dictionary) -> InputEvent:
 	return event
 
 func to_dict() -> Dictionary:
-	return {"version":1,"values":values.duplicate(),"bindings":bindings.duplicate(true)}
+	return {"version":2,"values":values.duplicate(),"bindings":bindings.duplicate(true)}
 
 func from_dict(data: Dictionary) -> bool:
-	if data.size() != 3 or not _integer(data.get("version"),1,1): return false
+	if data.size() != 3 or not _integer(data.get("version"),1,2): return false
 	var options = data.get("values")
 	var controls = data.get("bindings")
+	if not options is Dictionary: return false
+	if data.version == 1:
+		if options.size() != DEFAULTS.size()-1 or options.has("reduced_damage_flashes"): return false
+		options = options.duplicate()
+		options.reduced_damage_flashes = DEFAULTS.reduced_damage_flashes
 	# One additive action; retain all existing v1 user bindings.
-	if controls is Dictionary and controls.size() == ACTIONS.size()-1 and not controls.has("survey"):
+	if data.version == 1 and controls is Dictionary and controls.size() == ACTIONS.size()-1 and not controls.has("survey"):
 		controls = controls.duplicate(true)
 		controls.survey = default_bindings().survey
-	if not options is Dictionary or options.size() != DEFAULTS.size(): return false
+	if options.size() != DEFAULTS.size(): return false
 	for key in DEFAULTS:
 		var value = options.get(key)
 		if DEFAULTS[key] is bool:

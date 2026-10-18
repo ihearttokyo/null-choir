@@ -6,6 +6,7 @@ const Player = preload("res://scripts/player.gd")
 const Enemy = preload("res://scripts/enemy.gd")
 const Hud = preload("res://scripts/hud.gd")
 const Music = preload("res://audio/music.gd")
+const ExportAudio = preload("res://audio/export_audio_check.gd")
 const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 const AmmoVisuals = preload("res://scripts/ammo_visuals.gd")
@@ -34,6 +35,59 @@ var damage_flash: float = 0
 var hit_flash: float = 0
 var quitting: bool = false
 var _scene_level_index: int = -1
+var aim_observation: Dictionary = {}
+var interaction_observation: Dictionary = {}
+var _passive_scan_tick: int = -1
+var _interaction_edges: Array = []
+var _interaction_incoming_eligible: bool = false
+var _interaction_pending_player: int = 0
+var _interaction_axis_held: Dictionary = {}
+
+func _enter_tree() -> void:
+	get_window().window_input.connect(_record_interaction_input)
+	Input.joy_connection_changed.connect(_interaction_device_changed)
+
+func _record_interaction_input(event: InputEvent) -> void:
+	_interaction_incoming_eligible = false
+	if event is InputEventJoypadMotion:
+		var held_key := Vector2i(event.device,event.axis)
+		if _interaction_axis_held.has(held_key) and (int(signf(event.axis_value)) != _interaction_axis_held[held_key] or absf(event.axis_value) < InputMap.action_get_deadzone("interact")):
+			_interaction_axis_held.erase(held_key)
+	if event is InputEventJoypadMotion and event.is_action("interact"):
+		var key := Vector2i(event.device,event.axis)
+		if event.is_action_pressed("interact"):
+			var direction: int = int(signf(event.axis_value))
+			_interaction_incoming_eligible = _interaction_axis_held.get(key,0) != direction
+			_interaction_axis_held[key] = direction
+		else: _interaction_axis_held.erase(key)
+	else:
+		_interaction_incoming_eligible = event.is_action_pressed("interact") and not event.is_echo()
+	if not event.is_action_pressed("interact") or event.is_echo(): return
+	var tick: int = Engine.get_physics_frames()
+	_interaction_edges = _interaction_edges.filter(func(row): return row[1] >= tick)
+	# Raw identity survives localization, pause and Player replacement; polls expire next tick.
+	_interaction_edges.append([event,tick+1])
+
+func _interaction_device_changed(device: int, connected: bool) -> void:
+	if connected: return
+	for key in _interaction_axis_held.keys():
+		if key.x == device: _interaction_axis_held.erase(key)
+
+func _queue_interaction_input(observer: CharacterBody3D) -> void:
+	if observer == player and observer._current_map() and playing and _interaction_incoming_eligible:
+		_interaction_pending_player = observer.get_instance_id()
+
+func _consume_interaction_input(observer: CharacterBody3D, allow_virtual: bool) -> bool:
+	if not Engine.is_in_physics_frame() or observer != player or not observer._current_map() or not playing: return false
+	var eligible: bool = _interaction_pending_player == observer.get_instance_id()
+	_interaction_pending_player = 0
+	var tick: int = Engine.get_physics_frames()
+	_interaction_edges = _interaction_edges.filter(func(row): return row[1] >= tick)
+	var native_poll: bool = _interaction_edges.any(func(row): return Input.is_action_just_pressed_by_event("interact",row[0]))
+	return eligible or (allow_virtual and not native_poll and Input.is_action_just_pressed("interact"))
+
+func _cancel_interaction_input(observer: CharacterBody3D) -> void:
+	if _interaction_pending_player == observer.get_instance_id(): _interaction_pending_player = 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -141,9 +195,13 @@ func start_campaign(mode: int) -> void:
 	start_level()
 
 func start_level() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
 	var candidate = Campaign.new()
 	if not candidate.from_dict(state.to_dict()):
+		if not candidate.level_load_error.is_empty():
+			_level_load_failed(candidate.level_load_error)
+			return
 		show_title()
 		notify("NO VALID RECOVERY IMAGE",8)
 		return
@@ -160,7 +218,9 @@ func start_level() -> void:
 	level = Level.new()
 	level.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(level)
-	level.build(self,state.level_index)
+	if not level.build(self,state.level_index):
+		_level_load_failed(level.layout.load_error)
+		return
 	_scene_level_index = state.level_index
 	player = Player.new()
 	level.add_child(player)
@@ -168,7 +228,10 @@ func start_level() -> void:
 	var fresh_entry: bool = state.position == Vector3.ZERO and not loaded_positions
 	if fresh_entry: state.position = level.layout.world_position(level.layout.data.spawn)
 	player.position = state.position + Vector3(0,0.04,0)
-	player.rotation.y = deg_to_rad(level.layout.data.spawn_yaw)
+	player.rotation.y = state.yaw if state.yaw != null and not fresh_entry else deg_to_rad(level.layout.data.spawn_yaw)
+	player.camera.rotation.x = state.pitch if state.pitch != null and not fresh_entry else 0.0
+	state.yaw = Enemy.canonical_yaw(player.rotation.y)
+	state.pitch = clampf(player.camera.rotation.x,-1.35,1.35)
 	var specs: Dictionary = Campaign.actor_specs(level.layout)
 	var records: Array = state.actors if state.actors != null else level.layout.data.enemies
 	for record in records:
@@ -212,12 +275,20 @@ func start_level() -> void:
 			notify("NO SAFE RECOVERY POSITION",8)
 			return
 	menu_scroll.hide()
+	player.cancel_actions()
 	playing = true
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_capture_game_mouse()
 	if music != null:
 		music.set_paused(false)
 		music.set_pressure(0)
 		music.play_level(state.level_index)
+
+func _capture_game_mouse() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _level_load_failed(detail: String) -> void:
+	show_title()
+	notify("LEVEL LOAD FAILED: "+detail+"\nRestore the level file and retry.",8)
 
 func _valid_restored_actors() -> bool:
 	var layout = level.layout
@@ -242,6 +313,11 @@ func _valid_restored_actors() -> bool:
 func _capture_actor_state() -> bool:
 	# Paused scenes are valid; missing, pending and retired scenes are not captures.
 	if placement_pending or not is_instance_valid(level) or level.is_queued_for_deletion() or not is_instance_valid(player) or player.is_queued_for_deletion() or player.get_parent() != level or _scene_level_index != state.level_index: return true
+	var captured_yaw: float = Enemy.canonical_yaw(player.rotation.y)
+	var raw_pitch: float = player.camera.rotation.x
+	if not is_finite(raw_pitch) or absf(raw_pitch) > Vector3(1.35,0,0).x: return false
+	var captured_pitch: float = clampf(raw_pitch,-1.35,1.35)
+	if not is_finite(captured_yaw) or not is_finite(captured_pitch): return false
 	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"actors":[]}
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0:
@@ -249,8 +325,11 @@ func _capture_actor_state() -> bool:
 	if not state._valid_actor_resources(snapshot,level.layout,state.difficulty):
 		# Legacy Continue may have lost born-not-dead nodes before this feature existed.
 		# Keep that envelope unknown; never invent deaths, HP or replacement births.
-		return state.actors == null and state._valid_actor_resources(snapshot,level.layout,state.difficulty,true)
-	state.actors = snapshot.actors
+		if not (state.actors == null and state._valid_actor_resources(snapshot,level.layout,state.difficulty,true)): return false
+	else:
+		state.actors = snapshot.actors
+	state.yaw = captured_yaw
+	state.pitch = captured_pitch
 	return true
 
 func _valid_saved_position(point: Vector3) -> bool:
@@ -299,21 +378,75 @@ func _process(delta: float) -> void:
 			# World positions are float32; preserve inclusive authored edges after cell conversion.
 			if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
 				activate_encounter(group.id)
-		for spec in level.layout.data.pickups:
-			if not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4:
-				collect_pickup(spec.id)
-		for spec in level.layout.data.interactions:
-			if spec.kind == "checkpoint" and not spec.id in state.removed and player.position.distance_to(level.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])):
-				state.removed.append(spec.id)
-				if not _capture_actor_state():
-					state.removed.erase(spec.id)
-					notify("RECOVERY ACTOR CAPTURE FAILED",8)
-					continue
-				state.mark_checkpoint(spec.id,player.position)
-				if _save() == OK: notify(spec.text)
-				else: notify("RECOVERY MEMORY ONLY: "+message,8)
 		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
+
+func _passive_scan_current(observer: CharacterBody3D, scene: Node3D) -> bool:
+	if not Engine.is_in_physics_frame() or not is_inside_tree() or not playing or get_tree().paused or placement_pending or state.health <= 0 or _scene_level_index != state.level_index: return false
+	if not is_instance_valid(scene) or level != scene or scene.is_queued_for_deletion() or scene.get_parent() != self or not scene.is_inside_tree(): return false
+	return is_instance_valid(observer) and player == observer and observer._current_map() and observer.global_position.is_finite()
+
+func update_passive_triggers(observer: CharacterBody3D) -> void:
+	var scene = level
+	if not _passive_scan_current(observer,scene) or _passive_scan_tick == Engine.get_physics_frames(): return
+	# Latch before mutations: callbacks may reenter or retire this player/map.
+	_passive_scan_tick = Engine.get_physics_frames()
+	for spec in scene.layout.data.pickups:
+		if not _passive_scan_current(observer,scene): return
+		if not spec.id in state.removed and observer.position.distance_to(scene.layout.world_position(spec.cell)) < 1.4 and _passive_trigger_visible(spec):
+			if not _passive_scan_current(observer,scene): return
+			collect_pickup(spec.id)
+	if not _passive_scan_current(observer,scene): return
+	for spec in scene.layout.data.interactions:
+		if not _passive_scan_current(observer,scene): return
+		if spec.kind == "checkpoint" and not spec.id in state.removed and observer.position.distance_to(scene.layout.world_position(spec.cell)) < 3.2 and _has_keys(spec.get("requires",[])) and _passive_trigger_visible(spec):
+			if not _passive_scan_current(observer,scene): return
+			state.removed.append(spec.id)
+			var captured: bool = _capture_actor_state()
+			if not _passive_scan_current(observer,scene): return
+			if not captured:
+				state.removed.erase(spec.id)
+				notify("RECOVERY ACTOR CAPTURE FAILED",8)
+				continue
+			state.mark_checkpoint(spec.id,observer.position)
+			var saved: Error = _save()
+			if not _passive_scan_current(observer,scene): return
+			if saved == OK: notify(spec.text)
+			else: notify("RECOVERY MEMORY ONLY: "+message,8)
+
+func _passive_trigger_visible(spec: Dictionary) -> bool:
+	if not Engine.is_in_physics_frame() or not _passive_scan_current(player,level): return false
+	var marker = level.markers.get(spec.id)
+	if not is_instance_valid(marker) or marker.is_queued_for_deletion() or marker.get_parent() != level: return false
+	var collider: CollisionShape3D = player.get_child(0)
+	if collider == null or not collider.shape is CapsuleShape3D: return false
+	var capsule: CapsuleShape3D = collider.shape
+	var usable: float = capsule.height/2-capsule.radius
+	var bounds = AABB()
+	var first = true
+	for child in marker.find_children("*","MeshInstance3D",true,false):
+		var box: AABB = marker.global_transform.affine_inverse()*child.global_transform*child.mesh.get_aabb()
+		bounds = box if first else bounds.merge(box)
+		first = false
+	if first or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x <= 0 or bounds.size.z <= 0: return false
+	# Use the actual compact marker envelope, not the trigger radius or its decorative center.
+	var near: Vector3 = marker.to_local(player.global_position)
+	near.x = clampf(near.x,bounds.position.x,bounds.end.x)
+	near.z = clampf(near.z,bounds.position.z,bounds.end.z)
+	near.y = 0
+	var endpoint: Vector3 = marker.to_global(near)
+	var floor_point: Vector3 = level.to_global(level.layout.world_position(spec.cell))
+	if not endpoint.is_finite() or not floor_point.is_finite(): return false
+	var space = level.get_world_3d().direct_space_state
+	# shortcut: two floor-body heights within a tight XZ envelope, add mesh samples if authored cases require them.
+	for origin in [collider.to_global(Vector3.DOWN*usable),collider.to_global(Vector3.UP*usable)]:
+		if not origin.is_finite(): return false
+		for height in [0.08,0.35]:
+			endpoint.y = floor_point.y+height
+			var ray = PhysicsRayQueryParameters3D.create(origin,endpoint,1)
+			ray.hit_from_inside = true
+			if space.intersect_ray(ray).is_empty(): return true
+	return false
 
 func _combat_pressure() -> float:
 	var threats = 0
@@ -333,7 +466,9 @@ func activate_encounter(id: String) -> void:
 				actor.active = true
 				actor.alerted = true
 		level.apply_encounter_cue(group,false)
-		notify(group.cue.text,5)
+		# Physics checkpoint failures must survive a later render encounter cue.
+		if message_time <= 0 or not message.begins_with("RECOVERY MEMORY ONLY: SAVE FAILED"):
+			notify(group.cue.text,5)
 		if effects != null: effects.play(group.cue.sound,-6)
 		return
 
@@ -390,7 +525,7 @@ func collect_pickup(id: String) -> void:
 				state.armor = mini(200,state.armor+spec.amount)
 		state.removed.append(id)
 		level.remove_marker(id)
-		notify("RECOVERED "+spec.kind.to_upper())
+		notify("RECOVERED "+(Player.WEAPONS[int(spec.weapon)].name if spec.kind == "weapon" else spec.kind.to_upper()))
 		return
 
 func unlock_door(id: String) -> bool:
@@ -405,7 +540,7 @@ func unlock_door(id: String) -> bool:
 	return false
 
 func nearest_interaction() -> Dictionary:
-	if player == null: return {}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map(): return {}
 	var nearest: Dictionary = {}
 	var distance = 4.5
 	for spec in level.layout.data.interactions + level.layout.data.doors:
@@ -459,6 +594,9 @@ func interact() -> void:
 			var actions = [["Return to title",show_title]]
 			if next_layout.load_level(state.level_index):
 				actions.push_front(["Descend to "+next_layout.data.title.capitalize(),start_level])
+			else:
+				_level_load_failed(next_layout.load_error)
+				return
 			_show_menu(completed_title,actions)
 
 func hurt_player(amount: int) -> void:
@@ -486,6 +624,7 @@ func restart_level() -> void:
 	await start_level()
 
 func pause_game() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending:
 		show_title()
 		notify("RECOVERY HELD: SELECT CONTINUE WHEN READY",5)
@@ -499,11 +638,12 @@ func pause_game() -> void:
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 
 func resume_game() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending or state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
 	playing = true
 	menu_scroll.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	_capture_game_mouse()
 	if music != null: music.set_paused(false)
 	if effects != null: effects.set_paused(false)
 
@@ -522,6 +662,7 @@ func save_and_title() -> void:
 	show_title()
 
 func show_title() -> void:
+	if is_instance_valid(player): player.cancel_actions()
 	if hud != null: hud.survey.hide()
 	playing = false
 	placement_pending = false
@@ -541,6 +682,9 @@ func show_title() -> void:
 
 func continue_campaign() -> void:
 	if not state.load_progress(progress_path):
+		if not state.level_load_error.is_empty():
+			_level_load_failed(state.level_load_error)
+			return
 		notify("NO VALID RECOVERY IMAGE",5)
 		return
 	if state.level_index == 8:
@@ -559,7 +703,7 @@ func show_difficulty() -> void:
 
 func show_settings() -> void:
 	_show_menu("SETTINGS",[])
-	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
+	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["reduced_damage_flashes","Reduced damage flashes"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
 		var button = CheckButton.new()
 		button.text = option[1]
 		button.button_pressed = settings[option[0]]
@@ -680,19 +824,98 @@ func impact(point: Vector3) -> void:
 func dry_fire(_weapon: int) -> void:
 	if effects != null: effects.play("dry")
 
-func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
-	var best: Node3D
-	var distance = max_range
+func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: bool = false) -> Dictionary:
+	var result := {"level":level,"player":player,"tick":Engine.get_physics_frames(),"weapon":state.weapon,"origin":origin,"manual_direction":direction,"direction":direction,"range":max_range,"contact":{},"actor_id":"","assisted":false}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0 or not origin.is_finite() or not direction.is_finite() or not is_finite(max_range) or max_range <= 0 or not is_equal_approx(direction.length_squared(),1.0): return result
+	var space := level.get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(origin,origin+direction*max_range,1|4)
+	query.exclude = [player.get_rid()]
+	var manual := space.intersect_ray(query)
+	result.contact = manual
+	if not manual.is_empty() and manual.collider.has_method("take_damage"):
+		if manual.collider.has_method("_current_map") and manual.collider._current_map() and manual.collider.hp > 0:
+			result.actor_id = str(manual.collider.id)
+		return result
+	if not settings.auto_aim: return result
+	var best_angle := -1.0
+	var best_distance := INF
+	var best_id := ""
+	var manual_flat := Vector2(direction.x,direction.z).normalized()
 	for actor in enemies:
-		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0: continue
-		var offset = actor.global_position+Vector3(0,0.85,0)-origin
-		var range_to_target = offset.length()
-		if range_to_target < distance and direction.dot(offset.normalized()) > 0.975:
-			var sight = PhysicsRayQueryParameters3D.create(origin,origin+offset,1)
-			if not get_world_3d().direct_space_state.intersect_ray(sight).is_empty(): continue
-			best = actor
-			distance = range_to_target
-	return best
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0 or not actor.active: continue
+		var shape_node: CollisionShape3D
+		for child in actor.get_children():
+			if child is CollisionShape3D and child.shape is CapsuleShape3D:
+				shape_node = child
+				break
+		if shape_node == null: continue
+		var capsule: CapsuleShape3D = shape_node.shape
+		var center := shape_node.global_position
+		var half_line := maxf(0,capsule.height*.5-capsule.radius)
+		var toward_camera := shape_node.global_basis.inverse()*(origin-center)
+		var points: Array[Vector3] = []
+		for height in [clampf(toward_camera.y,-half_line,half_line),0.0,half_line]:
+			points.append(shape_node.to_global(Vector3(0,height,0)))
+		for point in points:
+			var offset := point-origin
+			if offset.length_squared() < .000001: continue
+			var resolved := offset.normalized()
+			var angular := direction.dot(resolved)
+			if melee:
+				angular = manual_flat.dot(Vector2(offset.x,offset.z).normalized())
+				# Classic correction is bounded; the final native contact still uses finite 3D reach.
+				if absf(direction.y-resolved.y) > .8: continue
+			if angular <= .975: continue
+			query.to = origin+resolved*max_range
+			var hit := space.intersect_ray(query)
+			if hit.is_empty() or hit.collider != actor: continue
+			var distance := origin.distance_to(hit.position)
+			if distance > max_range+.00001: continue
+			var better: bool = angular > best_angle or (angular == best_angle and (distance < best_distance or (distance == best_distance and str(actor.id) < best_id)))
+			if not better: continue
+			best_angle = angular
+			best_distance = distance
+			best_id = str(actor.id)
+			result.direction = resolved
+			result.contact = hit
+			result.actor_id = best_id
+			result.assisted = true
+	return result
+
+func clear_observations() -> void:
+	aim_observation = {}
+	interaction_observation = {}
+
+func observe_player() -> void:
+	clear_observations()
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0: return
+	var profile: Dictionary = Player.WEAPONS[state.weapon]
+	aim_observation = resolve_aim(player.camera.global_position,-player.camera.global_basis.z,profile.range,state.weapon == 0)
+	observe_interaction()
+
+func observe_interaction() -> void:
+	interaction_observation = {}
+	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0: return
+	interaction_observation = {"level":level,"player":player,"tick":Engine.get_physics_frames(),"origin":player.camera.global_position,"direction":-player.camera.global_basis.z,"spec":nearest_interaction()}
+
+func _observation_current(observation: Dictionary) -> bool:
+	return not observation.is_empty() and playing and state.health > 0 and is_instance_valid(player) and player._current_map() and observation.level == level and observation.player == player and Engine.get_physics_frames()-int(observation.tick) <= 1 and observation.origin == player.camera.global_position and observation.get("manual_direction",observation.get("direction")) == -player.camera.global_basis.z
+
+func aim_display() -> Dictionary:
+	if not _observation_current(aim_observation) or aim_observation.weapon != state.weapon: return {}
+	if not aim_observation.actor_id.is_empty():
+		var actor = aim_observation.contact.get("collider")
+		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0 or str(actor.id) != aim_observation.actor_id: return {}
+	return aim_observation
+
+func interaction_display() -> Dictionary:
+	if not _observation_current(interaction_observation): return {}
+	var spec: Dictionary = interaction_observation.spec
+	return {} if spec.get("id","") in state.removed else spec
+
+func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> Node3D:
+	var solution := resolve_aim(origin,direction,max_range,max_range <= Player.WEAPONS[0].range)
+	return solution.contact.get("collider") if not solution.actor_id.is_empty() else null
 
 func quit_game() -> bool:
 	if quitting: return true
@@ -708,8 +931,10 @@ func _finish_quit() -> void:
 	quitting = true
 	show_title()
 	menu_scroll.hide()
-	# Native audio playback references release on the next mixer pass.
-	await get_tree().create_timer(0.1).timeout
+	# Mixer release uses wall time, not the caller's accumulated frame delta.
+	var drain_until: int = Time.get_ticks_usec()+100000
+	while Time.get_ticks_usec() < drain_until:
+		await get_tree().process_frame
 	get_tree().quit()
 
 func _has_metal_shader_cache(root: String) -> bool:
@@ -726,6 +951,89 @@ func _contains_metal_cache(root: String) -> bool:
 
 # Fixed headless workflow for the release binary, which cannot execute external scripts.
 # Controlled packed-resource workflow; not played difficulty, art/audio quality or FPS acceptance.
+class ExportPassiveTick:
+	extends Node
+	var game
+	var observer
+	var completed: bool = false
+	func _physics_process(_delta: float) -> void:
+		if is_instance_valid(game) and is_instance_valid(observer): game.update_passive_triggers(observer)
+		completed = true
+		set_physics_process(false)
+
+func _verify_passive_tick() -> void:
+	var driver = ExportPassiveTick.new()
+	driver.game = self
+	driver.observer = player
+	driver.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(driver)
+	while not driver.completed: await get_tree().physics_frame
+	driver.free()
+
+class ExportFireTick:
+	extends Node
+	var game
+	var observer
+	var completed: bool = false
+	var fired: bool = false
+	func _physics_process(_delta: float) -> void:
+		if is_instance_valid(game) and is_instance_valid(observer) and observer == game.player:
+			fired = observer.fire()
+		completed = true
+		set_physics_process(false)
+
+func _verify_fire_tick() -> bool:
+	var driver = ExportFireTick.new()
+	driver.game = self
+	driver.observer = player
+	driver.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(driver)
+	while not driver.completed: await get_tree().physics_frame
+	var fired: bool = driver.fired
+	driver.free()
+	return fired
+
+func _export_art_checks() -> Dictionary:
+	var expected_art = {"ribbed_wall":1,"conduit":1}
+	for art in Level.PURPOSE_ART.values()+Level.AMMO_ART+["marker_ivorykey"]: expected_art[art] = 0
+	for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
+	for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
+	var models = {}
+	var marker_models = {}
+	for node in level.get_children():
+		if node.scene_file_path.get_extension() != "glb": continue
+		var art = node.scene_file_path.get_file().get_basename()
+		var parts = [node]+node.find_children("*","MeshInstance3D",true,false)
+		var meshes = parts.filter(func(part): return part is MeshInstance3D)
+		if meshes.any(func(part): return part.mesh != null and part.mesh.get_surface_count() > 0):
+			models[art] = models.get(art,0)+1
+		if art.begins_with("marker_"):
+			var nodes = [node]+node.find_children("*","",true,false)
+			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
+			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.is_visible_in_tree() and part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
+				marker_models[node.get_instance_id()] = art
+	var checks = {}
+	var marker_ids = []
+	var remaining = 0
+	for spec in level.layout.data.pickups+level.layout.data.interactions:
+		if spec.id in state.removed: continue
+		remaining += 1
+		var art: String = Level.PURPOSE_ART[spec.kind]
+		if spec.kind == "key" and spec.key == "ivory": art = "marker_ivorykey"
+		elif spec.kind == "ammo": art = Level.AMMO_ART[int(spec.weapon)]
+		expected_art[art] = expected_art.get(art,0)+1
+		var marker = level.markers.get(spec.id)
+		var valid = is_instance_valid(marker) and marker is Node3D
+		if valid:
+			valid = marker.get_parent() == level and marker.scene_file_path == "res://assets/art/world/"+art+".glb" and marker_models.get(marker.get_instance_id(),"") == art and not marker.get_instance_id() in marker_ids
+			valid = valid and marker.is_visible_in_tree() and marker.position.is_equal_approx(level.layout.world_position(spec.cell)+Vector3.UP*0.06) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
+			marker_ids.append(marker.get_instance_id())
+		checks["marker_"+spec.id] = valid
+	checks["marker_count"] = level.markers.size() == remaining
+	for art in expected_art:
+		checks["art_"+art] = models.get(art,0) == expected_art[art] if art.begins_with("marker_") else models.get(art,0) >= expected_art[art]
+	return checks
+
 func _verify_export() -> void:
 	var validation_home = OS.get_environment("HOME")
 	if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):
@@ -736,21 +1044,20 @@ func _verify_export() -> void:
 	var checks = {
 		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
-		"midi_sources": FileAccess.file_exists("res://audio/gate.mid") and FileAccess.file_exists("res://audio/GeneralUser-GS.sf2")}
+		"midi_sources": ExportAudio.retained_sources_present()}
 	start_campaign(1)
-	checks["start"] = playing and enemies.size() == 23 and music.player.bank != null
-	checks["campaign_midis"] = music.level_tracks.size() == 8
-	for track in music.level_tracks: checks["campaign_midis"] = checks["campaign_midis"] and FileAccess.file_exists(track)
-	music.player._process(0.2)
-	checks["live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+	checks["start"] = playing and enemies.size() == 23 and music.player.stream is AudioStreamMP3
+	checks["campaign_recordings"] = music.level_tracks.size() == 8
+	for track in music.level_tracks: checks["campaign_recordings"] = checks["campaign_recordings"] and ResourceLoader.exists(track)
+	checks["recorded_transport"] = music.player.playing and music.player.has_stream_playback()
 	player.set_physics_process(false)
 	for actor in enemies: actor.set_physics_process(false)
-	checks["fire"] = player.fire() and state.ammo[1] == 89
+	checks["fire"] = await _verify_fire_tick() and state.ammo[1] == 89
 	pause_game()
 	checks["pause"] = get_tree().paused and not playing
 	await restore_checkpoint()
 	checks["checkpoint"] = playing and state.ammo[1] == 90
-	var retained_bank = music.player.bank
+	var retained_music_player = music.player
 	var map_ids = ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"]
 	var verified_maps = []
 	var loaded_roles = []
@@ -759,47 +1066,37 @@ func _verify_export() -> void:
 		var id: String = map_ids[state.level_index]
 		checks[id+"_scene"] = playing and level.layout.data.id == id and state.position == level.layout.world_position(level.layout.data.spawn) and enemies.size() == level.layout.data.enemies.size()
 		verified_maps.append(level.layout.data.id)
-		checks[id+"_track"] = music.player.file == "res://audio/"+id+".mid" and retained_bank != null and music.player.bank == retained_bank
-		music.player._process(0.2)
-		checks[id+"_synthesis"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
-		var models = {}
-		for node in level.get_children():
-			if node.scene_file_path.get_extension() != "glb": continue
-			var art = node.scene_file_path.get_file().get_basename()
-			var meshes = [node]+node.find_children("*","MeshInstance3D",true,false)
-			if meshes.any(func(part): return part is MeshInstance3D and part.mesh != null and part.mesh.get_surface_count() > 0):
-				models[art] = models.get(art,0)+1
-		var expected_art = {"ribbed_wall":1,"conduit":1,"containment_capsule":1}
-		for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
-		for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
-		for art in expected_art: checks[id+"_art_"+art] = models.get(art,0) >= expected_art[art]
+		checks[id+"_track"] = music.player.stream.resource_path == "res://audio/suno/"+id+".mp3" and music.player == retained_music_player
+		checks[id+"_playback"] = music.player.playing and music.player.has_stream_playback()
+		var art_checks = _export_art_checks()
+		for check in art_checks: checks[id+"_"+check] = art_checks[check]
 		player.set_physics_process(false)
 		for actor in enemies:
 			actor.set_physics_process(false)
 			var cell = 256 if actor.kind in ["nursery_warden","choir_avatar"] else 128
 			checks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5
 			if not actor.kind in loaded_roles: loaded_roles.append(actor.kind)
-	verify_level.call()
+		checks[id+"_decoded_pcm"] = await ExportAudio.decoded_pcm(get_tree(), music.player)
+	await verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["foundry"] = playing and level.layout.data.id == "foundry" and state.position == level.layout.world_position(level.layout.data.spawn)
-	checks["foundry_midi"] = music.player.file == "res://audio/foundry.mid" and music.player.bank == retained_bank
+	checks["foundry_recording"] = music.player.stream.resource_path == "res://audio/suno/foundry.mp3" and music.player == retained_music_player
 	var foundry_heroes = []
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["vertebral_furnace","marrow_crucible"]: foundry_heroes.append(node.scene_file_path)
 	checks["foundry_art"] = foundry_heroes.size() == 2
-	verify_level.call()
+	await verify_level.call()
 	state.complete_level()
 	start_level()
 	checks["processional"] = playing and level.layout.data.id == "processional" and state.position == level.layout.world_position(level.layout.data.spawn)
-	checks["processional_midi"] = music.player.file == "res://audio/processional.mid" and music.player.bank == retained_bank
-	music.player._process(0.2)
-	checks["processional_live_midi"] = music.player.position > 0 and music.player.get_now_playing_polyphony() > 0
+	checks["processional_recording"] = music.player.stream.resource_path == "res://audio/suno/processional.mp3" and music.player == retained_music_player
+	checks["processional_playback"] = music.player.playing and music.player.has_stream_playback()
 	var processional_heroes = []
 	for node in level.get_children():
 		if node.scene_file_path.get_file().get_basename() in ["walking_bone_organ","ossified_palanquin"]: processional_heroes.append(node.scene_file_path)
 	checks["processional_art"] = processional_heroes.size() == 2
-	verify_level.call()
+	await verify_level.call()
 	player.set_physics_process(false)
 	var caster
 	var caster_count = 0
@@ -810,9 +1107,10 @@ func _verify_export() -> void:
 			if actor.id == "processional_enemy_11": caster = actor
 	checks["caster_art"] = caster_count == 4
 	player.position = level.layout.world_position([20.5,25.5])
+	await _verify_passive_tick()
 	_process(0)
 	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/scattergun.png")
-	checks["scattergun_fire"] = player.fire() and state.ammo[2] == 15
+	checks["scattergun_fire"] = await _verify_fire_tick() and state.ammo[2] == 15
 	player.position = level.layout.world_position([16.5,16.5])
 	await get_tree().physics_frame
 	await get_tree().physics_frame
@@ -831,7 +1129,7 @@ func _verify_export() -> void:
 	for _index in range(3,8):
 		state.complete_level()
 		start_level()
-		verify_level.call()
+		await verify_level.call()
 		await get_tree().physics_frame
 		await get_tree().physics_frame
 		for spec in level.layout.data.pickups:
@@ -840,11 +1138,12 @@ func _verify_export() -> void:
 			var profile = Player.WEAPONS[weapon]
 			var before = state.ammo[weapon]
 			player.position = level.layout.world_position(spec.cell)
+			await _verify_passive_tick()
 			_process(0)
 			checks[profile.asset+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
 			before = state.ammo[weapon]
 			player.camera.rotation.x = 0.6
-			checks[profile.asset+"_fire"] = player.fire() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
+			checks[profile.asset+"_fire"] = await _verify_fire_tick() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
 			if weapon == 4:
 				checks["marrow_launcher_projectile"] = level.get_children().filter(func(node): return node.get_script() == Player.Projectile).size() == 1
 			acquired_late_weapons.append(weapon)
@@ -869,8 +1168,9 @@ func _verify_export() -> void:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
-	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/live MIDI, scattergun/caster flight, MIDI source and notices")
-	print("PASS packaged full8 scenes/art/retained-bank/live MIDI: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
+	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices")
+	print("PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
+	print("PASS packaged retained MIDI sources: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar")
 	print("PASS packaged native Metal shader caches")
 	print("PASS packaged isolated userdata")

@@ -11,7 +11,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 
-from test_art import png, world_geometry
+from test_art import png, world_geometry, resolve_recipe
 
 ROOT = Path(__file__).resolve().parents[1]
 IDS = tuple('marker_' + kind for kind in
@@ -27,7 +27,8 @@ HELPER_SHA = {'tools/build_art.py': '25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d
               'tests/test_art.py': '8822098e8dc522536c594ed96784be6ef1b2ed5a3936aa2f727ab79b001c2d2f'}
 # Closed family scope, including partial outputs/raw frames and the parent's per-asset logs.
 # Parent/coordinator resource guards still own transient peak, stdout, free space and deadlines.
-FAMILY_FILES = (RECIPE, 'tests/test_marker_art.py', 'tests/test_marker_portability.py', *HELPER_SHA, REFERENCE, INPUTS, MANIFEST) + tuple(
+HELPER_ARCHIVES = tuple(f'source/art/recipe_history/{digest}/{rel}.txt' for rel, digest in HELPER_SHA.items())
+FAMILY_FILES = (*HELPER_ARCHIVES, RECIPE, 'tests/test_marker_art.py', 'tests/test_marker_portability.py', *HELPER_SHA, REFERENCE, INPUTS, MANIFEST) + tuple(
     relative for name in IDS for relative in
     (f'source/art/{name}.blend', f'game/assets/art/world/{name}.glb',
      f'builds/marker-art/{name}_preview.png', f'builds/marker-art/{name}_geometry.json',
@@ -170,14 +171,36 @@ def read_json(path):
         raise AssertionError('malformed marker JSON') from error
 
 
-def load_inputs():
+def resolve_helper(relative, digest):
+    """Resolve only the two pinned marker inputs; archived validator bytes are data."""
+    assert relative in HELPER_SHA and digest == HELPER_SHA[relative], 'helper provenance pins'
+    current = owned_path(relative, relative)
+    logical_archive = f'source/art/recipe_history/{digest}/{relative}.txt'
+    archive = owned_path(logical_archive, logical_archive)
+    if archive.exists():
+        assert archive.is_file() and sha(archive) == digest, 'mismatched helper archive'
+    if relative == 'tools/build_art.py':
+        try:
+            return resolve_recipe(ROOT, relative, digest)
+        except ValueError as error:
+            raise AssertionError('missing historical helper bytes') from error
+    if current.is_file() and sha(current) == digest:
+        return current
+    assert archive.is_file(), 'missing historical validator bytes'
+    return archive
+
+
+def load_inputs(authoring=True):
     """Repository-owned pins/actual-pixel attestation, not a private task-audit bundle."""
     inputs = read_json(owned_file(INPUTS, INPUTS))
     assert isinstance(inputs, dict) and set(inputs) == {'schema_version', 'helper_sha256', 'reference'}, 'marker input schema'
     assert type(inputs['schema_version']) is int and inputs['schema_version'] == 1, 'marker input version'
     helpers = inputs['helper_sha256']
     assert helpers == HELPER_SHA, 'helper provenance pins'
-    assert all(sha(owned_file(rel, rel)) == digest for rel, digest in helpers.items()), 'immutable helper drift'
+    for relative, digest in helpers.items():
+        resolve_helper(relative, digest)
+        if authoring:
+            assert sha(owned_file(relative, relative)) == digest, 'authoring helper drift; use the isolated historical producer'
     reference = inputs['reference']
     assert isinstance(reference, dict) and set(reference) == {'path', 'sha256', 'inspection'}, 'reference provenance schema'
     assert reference['path'] == REFERENCE and reference['sha256'] == REFERENCE_SHA, 'reference provenance pins'
@@ -244,7 +267,7 @@ def check(asset=None):
     assets = manifest['assets']
     ids = [a['id'] for a in assets]
     assert asset in ids if asset else set(ids) == set(IDS), 'all eight marker outputs required'
-    load_inputs()
+    load_inputs(authoring=False)
     total = 0
     for entry in assets:
         name = entry['id']
@@ -278,6 +301,14 @@ def check(asset=None):
         assert receipt['material_groups'] == entry['material_count']
         assert receipt['reference_sha256'] == REFERENCE_SHA
     family_totals()
+
+def validate_main_entries(assets):
+    """The complete family remains authoritative; the main inventory may only adopt it."""
+    check()
+    family = {entry['id']: entry for entry in load_manifest()['assets']}
+    adopted = [entry for entry in assets if entry['id'] in IDS]
+    assert len(adopted) == len(family) and {entry['id']: entry for entry in adopted} == family, 'main/marker manifest parity'
+
 
 def fixture():
     """Synthetic triangle data, never written as production art."""

@@ -2,6 +2,7 @@ extends SceneTree
 # Native/manual-clock checks are not real held-fire or pixels.
 var game
 const GROUP = "ammo_visuals"
+const ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
 
 func _initialize() -> void:
 	AudioServer.set_bus_mute(0,true)
@@ -69,24 +70,27 @@ func run() -> void:
 	game.state.owned_weapons.assign([0,1,2,3,4,5])
 	var marrow_sprite: Sprite3D
 	var marrow_projectile: Node3D
+	await physics_frame # Real firing queries belong to the native physics domain.
 	for index in range(1,6):
 		game.state.weapon = index
 		game.state.ammo[index] = 2
 		player.cooldown = 0
-		var casings_before: int = visuals().filter(func(node): return node.frame in range(4,8)).size()
+		var casings_before: int = visuals().filter(func(node): return node.texture==ATLAS and node.frame in range(4,8)).size()
 		if index == 4: player.camera.rotation.x = 0.5
 		if not expect(player.fire() and game.state.ammo[index]==1,"Each successful real firearm shot spends exactly one round"): return
 		if index in [1,2,3]:
-			if not expect(visuals().filter(func(node): return node.frame in range(4,8)).size()==casings_before+1,"Each real mechanical firearm emits a new authored casing"): return
+			if not expect(visuals().filter(func(node): return node.texture==ATLAS and node.frame in range(4,8)).size()==casings_before+1,"Each real mechanical firearm emits a new authored casing"): return
 		if index == 4:
 			var projectile = game.level.get_children().filter(func(node): return node.get_script()==player.Projectile)[0]
 			projectile.set_physics_process(false)
-			var flight = visuals().filter(func(node): return node.frame in range(8,12))
+			var flight = visuals().filter(func(node): return node.texture==ATLAS and node.frame in range(8,12))
 			if not expect(flight.size()==1,"Real launcher owns an authored travelling marrow sprite"): return
 			marrow_sprite = flight[0]
 			marrow_projectile = projectile
 			projectile._physics_process(0.01)
 			driver.call("_process",0.01)
+			driver.call("_process",0.085)
+			if not expect(marrow_sprite.frame==9,"Live marrow retains its separate0.09-second frame clock"): return
 			if not projectile.is_queued_for_deletion():
 				if not expect(flight[0].global_position.is_equal_approx(projectile.global_position),"Actual marrow step moves its cosmetic without owning collision"): return
 		for node in visuals(false):

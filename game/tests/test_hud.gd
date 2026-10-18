@@ -9,6 +9,8 @@ func run() -> void:
 	# This workflow never saves options or progress; do not read the player's preferences.
 	game.settings_path = "user://hud_contract_unused_"+str(Time.get_ticks_usec())+".json"
 	root.add_child(game)
+	# Frozen-player presentation fixtures still publish on the native physics clock.
+	physics_frame.connect(game.observe_player)
 	game.start_campaign(1)
 	game.set_process(false)
 	game.player.set_physics_process(false)
@@ -121,6 +123,7 @@ func run() -> void:
 	quit()
 
 func redraw(game: Node) -> void:
+	await physics_frame
 	game.hud.queue_redraw()
 	await process_frame
 	await process_frame

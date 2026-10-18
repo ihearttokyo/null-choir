@@ -1,0 +1,127 @@
+{
+  "asset_id": "marker_story",
+  "source_sha256": "69d18f7668369dbc644ae0ba9d9add9ced54204c2633a3454203fe9cbf09eaf9",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Ground-centered iron manifold",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Pale outward-flared codex leaf -1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Codex outer iron binding -1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Iron codex binding clamp -1 0",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Steel codex hinge pivot -1 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Iron codex binding clamp -1 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Steel codex hinge pivot -1 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Split pale memory spine -1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Codex leaf incised rail -1",
+      "vertices": 15,
+      "triangles": 26
+    },
+    {
+      "name": "Pale outward-flared codex leaf 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Codex outer iron binding 1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Iron codex binding clamp 1 0",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Steel codex hinge pivot 1 0",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Iron codex binding clamp 1 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Steel codex hinge pivot 1 1",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "name": "Split pale memory spine 1",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Codex leaf incised rail 1",
+      "vertices": 15,
+      "triangles": 26
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.419,
+      -0.15,
+      0.0
+    ],
+    "max": [
+      0.419,
+      0.15,
+      0.964
+    ],
+    "size": [
+      0.837,
+      0.3,
+      0.964
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 4,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}

@@ -32,6 +32,7 @@ var hurt_time: float = 0
 var pose_time: float = 0
 var age: float = 0
 var path_time: float = 0
+var _routing: bool = false
 var waypoint: Vector3
 var sprite: Sprite3D
 var speed: float = 4.0
@@ -39,6 +40,10 @@ var max_hp: int
 var phase: int = 0
 var _profile: Dictionary = {}
 var _attack_variant: int = 0
+var _committed_variant: int = -1
+var _released: bool = false
+var _rush_duration: float = 0
+var _recovery_duration: float = 0
 var _summoned_total: int = 0
 var _summon_owner_id: String = ""
 
@@ -115,6 +120,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing or not is_instance_valid(game.player) or game.player.is_queued_for_deletion(): return
+	_released = false
 	age += delta
 	hurt_time = maxf(0,hurt_time-delta)
 	attack_time = maxf(0,attack_time-delta)
@@ -139,6 +145,8 @@ func _physics_process(delta: float) -> void:
 		telegraph_time = 0
 		_rush_time = 0
 		pose_time = 0
+		_committed_variant = -1
+		_released = false
 	var aim = target.global_position+Vector3(0,1.0,0)
 	var query = PhysicsRayQueryParameters3D.create(global_position+Vector3(0,1,0),aim,1)
 	var sight = get_world_3d().direct_space_state.intersect_ray(query)
@@ -150,6 +158,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = clampf((floor_hit.position.y+1.0+sin(age*2)*0.16-global_position.y)*5,-3,3) if not floor_hit.is_empty() else -3.0
 	else:
 		velocity.y -= delta*24
+	var arrived_waypoint := false
 	var heading = target.global_position-global_position
 	heading.y = 0
 	velocity.x = 0
@@ -168,24 +177,27 @@ func _physics_process(delta: float) -> void:
 			velocity.z = _rush_direction.z*rush_speed
 		elif not _profile.is_empty(): _finish_charge()
 	elif alerted and stagger_time <= 0:
-		if not sight.is_empty() and speed > 0:
+		if speed > 0:
 			path_time -= delta
 			if path_time <= 0:
 				waypoint = _next_step(target.global_position)
 				path_time = 1.0
-			heading = waypoint-global_position
+			if _routing: heading = waypoint-global_position
 			heading.y = 0
 		var move = heading.normalized()
 		var desired = speed
 		if (kind == "crawler" or not _profile.is_empty()) and recovery_time > 0:
 			desired = 0
-		elif kind in ["worker","caster"] and sight.is_empty():
+		elif kind in ["worker","caster"] and sight.is_empty() and not _routing:
 			var side = move.cross(Vector3.UP)*_strafe_sign
 			if range_to_target < (8.0 if kind == "worker" else 10.0):
 				move = (-move+side*0.5).normalized()
 			elif range_to_target < (18.0 if kind == "worker" else 24.0):
 				move = side
 				desired = 1.8 if kind == "worker" else 1.4
+		if _routing and delta > 0:
+			desired = minf(desired,heading.length()/delta)
+			arrived_waypoint = desired > 0 and heading.length() > .001 and heading.length() <= desired*delta+.00001
 		velocity.x = move.x*desired
 		velocity.z = move.z*desired
 		if kind in WINDUPS and attack_time <= 0 and recovery_time <= 0 and sight.is_empty() and range_to_target < (3.6 if kind == "crawler" else 30.0) and (kind != "summoner" or _summon_budget() > 0):
@@ -195,12 +207,38 @@ func _physics_process(delta: float) -> void:
 		var facing: float = atan2(-heading.x,-heading.z)
 		rotation.y = rotate_toward(rotation.y,facing,delta*1.8) if kind == "guardian" else facing
 	move_and_slide()
+	if arrived_waypoint and Vector2(global_position.x-waypoint.x,global_position.z-waypoint.z).length_squared() < .000001: path_time = 0
 	if _rush_time > 0 and not _rush_hit: _try_melee()
+	if not is_instance_valid(self): return
 	if not _profile.is_empty() and hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
 	if kind in ["worker","caster"] and sight.is_empty() and is_on_wall(): _strafe_sign = -_strafe_sign
 
+func combat_visual_state() -> Dictionary:
+	if not _current_map(): return {}
+	var stage := "idle"
+	var progress := 0.0
+	if hp <= 0:
+		stage = "dead"
+		progress = 1.0
+	elif not active: stage = "dormant"
+	elif stagger_time > 0:
+		stage = "stagger"
+		progress = 1.0-stagger_time/.25
+	elif telegraph_time > 0:
+		stage = "windup"
+		progress = 1.0-telegraph_time/float(WINDUPS[kind])
+	elif _rush_time > 0 or _released:
+		stage = "release"
+		progress = 1.0-_rush_time/_rush_duration if _rush_duration > 0 and _rush_time > 0 else 1.0
+	elif recovery_time > 0 or pose_time > 0:
+		stage = "recovery"
+		progress = 1.0-maxf(recovery_time,pose_time)/_recovery_duration if _recovery_duration > 0 else 0.0
+	elif alerted and Vector2(velocity.x,velocity.z).length_squared() > .001: stage = "move"
+	return {"phase":stage,"progress":clampf(progress,0,1),"variant":_committed_variant if stage in ["windup","release","recovery"] else -1,
+		"facing":sprite.frame%8,"hurt":hurt_time > 0,"boss_phase":phase}
+
 func _current_map() -> bool:
-	return is_instance_valid(game) and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and not is_queued_for_deletion()
+	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and not is_queued_for_deletion()
 
 func _valid_target(candidate) -> bool:
 	if not is_instance_valid(candidate) or candidate.is_queued_for_deletion(): return false
@@ -213,6 +251,8 @@ func _event(event: String) -> void:
 
 func _begin_attack(aim: Vector3) -> void:
 	_committed_target = target
+	_committed_variant = _attack_variant
+	_released = false
 	_committed_aim = aim
 	telegraph_time = WINDUPS[kind]
 	velocity.x = 0
@@ -221,8 +261,10 @@ func _begin_attack(aim: Vector3) -> void:
 
 func _release_attack() -> void:
 	if not _valid_target(_committed_target): return
+	_released = true
 	attack_time = _profile.get("cooldown",0.8 if kind == "crawler" else 1.7 if kind == "worker" else 2.2)*(0.8 if phase > 0 else 1.0)
 	recovery_time = _profile.get("recovery",0.45 if kind == "crawler" else 0.65 if kind == "worker" else 0.9)
+	_recovery_duration = recovery_time
 	pose_time = (0.4 if kind == "caster" else 0.22) if _profile.is_empty() else recovery_time
 	_event("attack")
 	if not _current_map() or not game.playing: return
@@ -235,6 +277,7 @@ func _release_attack() -> void:
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
 		_rush_time = 0.18
+		_rush_duration = _rush_time
 		_rush_hit = false
 		velocity.x = _rush_direction.x*9.0
 		velocity.z = _rush_direction.z*9.0
@@ -243,7 +286,7 @@ func _release_attack() -> void:
 		shot.exclude = [get_rid()]
 		shot.hit_from_inside = true
 		var hit = get_world_3d().direct_space_state.intersect_ray(shot)
-		if not hit.is_empty(): _attack(hit.collider,10)
+		if not hit.is_empty(): _attack(hit.collider,10,{"attack_kind":"hitscan","origin":origin,"incoming_direction":(shot.to-shot.from).normalized(),"hit_position":hit.position})
 	elif kind == "caster":
 		var projectile = Projectile.new()
 		game.level.add_child(projectile)
@@ -256,6 +299,7 @@ func _release_late_attack() -> void:
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
 		_rush_time = 0.9 if kind == "brute" else 0.7
+		_rush_duration = _rush_time
 		_rush_hit = false
 		recovery_time = 0
 		pose_time = _rush_time
@@ -277,6 +321,7 @@ func _finish_charge() -> void:
 	velocity.z = 0
 	recovery_time = maxf(recovery_time,_profile.recovery)
 	pose_time = maxf(pose_time,recovery_time)
+	_recovery_duration = maxf(recovery_time,pose_time)
 
 func _fire_pattern(count: int, radial: bool = false) -> void:
 	var origin = global_position+Vector3.UP*(1.65 if kind == "guardian" else 2.8)
@@ -350,22 +395,35 @@ func _try_melee() -> void:
 	var hit = get_world_3d().direct_space_state.intersect_ray(query)
 	if not hit.is_empty() and (hit.collider == game.player or hit.collider.has_method("take_damage")):
 		_rush_hit = true
-		_attack(hit.collider,24 if kind == "brute" else 32 if kind == "nursery_warden" else 12)
+		if kind in ["crawler","brute","nursery_warden"] and OS.is_debug_build() and game.has_method("enemy_event"):
+			var original_map: Node = game.level
+			var original_player: Node = game.player
+			var original_victim: Node = hit.collider
+			_event("melee_contact")
+			if not is_instance_valid(self) or not _current_map() or not game.playing or game.level != original_map or game.player != original_player or not is_instance_valid(original_player) or original_player.is_queued_for_deletion() or original_player.get_parent() != original_map or not is_instance_valid(original_victim) or original_victim.is_queued_for_deletion() or original_victim.get_parent() != original_map: return
+		_attack(hit.collider,24 if kind == "brute" else 32 if kind == "nursery_warden" else 12,{"attack_kind":"melee","origin":query.from,"incoming_direction":(query.to-query.from).normalized(),"hit_position":hit.position})
 
-func _attack(victim: Node, amount: int) -> void:
+func _attack(victim: Node, amount: int, context: Dictionary = {}) -> void:
 	if not _current_map() or not game.playing or hp <= 0 or not active or not is_instance_valid(victim) or victim.is_queued_for_deletion(): return
 	pose_time = 0.22
 	if victim == game.player:
 		game.hurt_player(int(amount*[0.7,1.0,1.4][game.state.difficulty]))
 	elif victim.has_method("take_damage"):
-		victim.take_damage(amount,self)
+		victim.take_damage(amount,self,context)
 
-func take_damage(amount: int, source: Node3D) -> void:
+func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 	if hp <= 0 or amount <= 0 or not _current_map() or not game.playing: return
-	if kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0 and is_instance_valid(source):
-		var incoming = source.global_position-global_position
-		incoming.y = 0
-		if incoming.length_squared() > 0.0001 and (-global_basis.z).dot(incoming.normalized()) > 0.5: amount = maxi(1,int(amount*0.35))
+	if kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0:
+		var incoming := Vector3.ZERO
+		if context.is_empty():
+			if is_instance_valid(source): incoming = source.global_position-global_position
+		elif context.get("incoming_direction") is Vector3:
+			incoming = -context.incoming_direction
+		elif context.get("origin") is Vector3:
+			incoming = context.origin-global_position
+		# Explicit invalid or vertical geometry has no front bearing; never use a moved shooter.
+		if incoming.is_finite(): incoming.y = 0
+		if incoming.is_finite() and incoming.length_squared() > 0.0001 and (-global_basis.z).dot(incoming.normalized()) > 0.5: amount = maxi(1,int(amount*0.35))
 	hp = maxi(0,hp-amount)
 	hurt_time = 0.12
 	alerted = true
@@ -373,8 +431,10 @@ func take_damage(amount: int, source: Node3D) -> void:
 		active = true
 		if not encounter_id.is_empty() and game.has_method("activate_encounter"): game.activate_encounter(encounter_id)
 	if not _current_map(): return
-	if source != self: target = source
+	if source != self and _valid_target(source) and source.get_parent() == game.level: target = source
 	if hp == 0:
+		_committed_variant = -1
+		_released = false
 		telegraph_time = 0
 		stagger_time = 0
 		recovery_time = 0
@@ -385,33 +445,41 @@ func take_damage(amount: int, source: Node3D) -> void:
 		if not id in game.state.removed: game.state.removed.append(id)
 		_event("death")
 	elif telegraph_time > 0 and _counter_time <= 0:
+		_committed_variant = -1
+		_released = false
 		telegraph_time = 0
 		pose_time = 0
 		stagger_time = 0.25
 		recovery_time = 0.35
+		_recovery_duration = recovery_time
 		attack_time = maxf(attack_time,0.45)
 		# The lock exceeds retry + the longest windup; further hits cannot refresh it.
 		_counter_time = 1.4 if _profile.is_empty() else 2.0
 		_event("stagger")
 
+
 func _next_step(destination: Vector3) -> Vector3:
+	_routing = true
+	var routes = game.level.get_node_or_null("NavigationRoutes")
+	if routes == null: return global_position
 	var layout = game.level.layout
-	var size = float(layout.data.cell_size)
-	var start = Vector2i(floor(global_position.x/size),floor(global_position.z/size))
-	var finish = Vector2i(floor(destination.x/size),floor(destination.z/size))
-	var queue = [start]
-	var previous = {start:start}
-	var cursor = 0
-	# ponytail: under 1k authored cells; native navigation if profiled map scale exceeds this.
-	while cursor < queue.size():
-		var cell = queue[cursor]
-		cursor += 1
-		if cell == finish:
-			while previous[cell] != start and cell != start: cell = previous[cell]
-			return layout.world_position([cell.x+0.5,cell.y+0.5])
-		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
-			var next = cell+direction
-			if layout.is_walkable(next) and not previous.has(next):
-				previous[next] = cell
-				queue.append(next)
+	var size: float = layout.data.cell_size
+	var start: Vector3 = layout.world_position([global_position.x/size,global_position.z/size])+Vector3.UP*.03
+	var goal: Vector3 = layout.world_position([destination.x/size,destination.z/size])+Vector3.UP*.03
+	# A player fits wall corners outside the larger actor's eroded navigation mesh.
+	var path: PackedVector3Array = routes.route(start,goal,kind,capsule_radius(kind)*sqrt(2.0)+.4)
+	var line := Vector2(goal.x-start.x,goal.z-start.z)
+	if not path.is_empty() and line.length() > .001 and Vector2(path[-1].x-goal.x,path[-1].z-goal.z).length() <= .15:
+		var straight := true
+		for point in path:
+			if absf(line.cross(Vector2(point.x-start.x,point.z-start.z)))/line.length() > .02:
+				straight = false
+				break
+		if straight:
+			_routing = false
+			return path[-1]
+	for point in path:
+		if Vector2(point.x-global_position.x,point.z-global_position.z).length() <= .15: continue
+		_routing = Vector2(point.x-destination.x,point.z-destination.z).length() > .15
+		return point
 	return global_position

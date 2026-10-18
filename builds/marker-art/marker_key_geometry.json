@@ -1,0 +1,82 @@
+{
+  "asset_id": "marker_key",
+  "source_sha256": "ba40d0824742951ddbb34cced2fe2a37992b72cc32c239e20010592f465bf005",
+  "recipe_sha256": "9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c",
+  "reference_sha256": "59c2b0db1374acfc9ab75b6978ad14df2d965c3eedd86fe8d8227db4e0895a42",
+  "source_meshes": [
+    {
+      "name": "Ground-centered iron manifold",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot -1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Ivory mounting foot 1",
+      "vertices": 24,
+      "triangles": 44
+    },
+    {
+      "name": "Slender iron lock stem",
+      "vertices": 12,
+      "triangles": 20
+    },
+    {
+      "name": "Ivory circular lock bezel",
+      "vertices": 136,
+      "triangles": 268
+    },
+    {
+      "name": "Blood inner lock seal",
+      "vertices": 104,
+      "triangles": 204
+    },
+    {
+      "name": "Blood fork tine -1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Ivory fork root -1",
+      "vertices": 18,
+      "triangles": 32
+    },
+    {
+      "name": "Blood fork tine 1",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "name": "Ivory fork root 1",
+      "vertices": 18,
+      "triangles": 32
+    }
+  ],
+  "physical_bounds_m": {
+    "min": [
+      -0.135,
+      -0.105,
+      0.0
+    ],
+    "max": [
+      0.135,
+      0.105,
+      1.11
+    ],
+    "size": [
+      0.27,
+      0.21,
+      1.11
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "material_groups": 3,
+  "blender_version": "5.2.2 LTS",
+  "render_engine": "CYCLES",
+  "device": "CPU",
+  "threads": 4,
+  "samples": 16
+}
