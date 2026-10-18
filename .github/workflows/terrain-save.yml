@@ -56,3 +56,8 @@ jobs:
           timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_terrain_scale_migration.gd 2>&1 | tee "$RUNNER_TEMP/terrain-scale.log"
           if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-scale.log"; then exit 1; fi
           grep -F "PASS terrain scale migration native codec and floor collision;" "$RUNNER_TEMP/terrain-scale.log"
+          for index in 0 1 2 3 4 5 6 7; do
+            timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_floor_wall_contacts.gd -- --level="$index" 2>&1 | tee "$RUNNER_TEMP/terrain-wall-$index.log"
+            if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-wall-$index.log"; then exit 1; fi
+            grep -F "PASS native floor-to-roof wall contacts;" "$RUNNER_TEMP/terrain-wall-$index.log"
+          done
