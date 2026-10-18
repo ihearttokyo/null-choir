@@ -33,3 +33,9 @@ transition, save-failure, world and conduit fixtures pass with CoreAudio and mut
 fixture buses. A Dummy-driver pose run retained a 15-object WAV/playback shutdown
 leak; an otherwise identical CoreAudio run had none. These checks do not prove
 physical mouse capture, rendered pixels, held-fire timing, GPU cost or a packed app.
+
+## Repeater balance
+
+The source balance pass raises repeater damage from15 to16; scattergun pellets remain15. A naturally configured76-HP Merciful worker now dies after five hits rather than six. Cadence, spread, random draws, ammunition costs, native collision queries and other weapon damage stay unchanged.
+
+The real-physics regression is `game/tests/test_repeater_damage.gd`. An earned Nursery first-loop witness also fired15 repeater rounds, killed two original actors with them and retained45 rounds, with the prior campaign history and recovery data preserved. That witness uses engine-simulated input and mixed weapons; its survival result does not isolate the benefit of damage16. Full campaign balance, physical controls and packed-app acceptance remain separate gates. This source change does not update an existing downloadable app.
