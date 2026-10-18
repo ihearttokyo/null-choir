@@ -8430,6 +8430,90 @@
       "device": "CPU",
       "threads": 4,
       "samples": 16
+    },
+    {
+      "id": "shot_travel",
+      "source": "source/art/shot_travel.blend",
+      "source_sha256": "81dcde63c1853384caf84f7fc71574669279296cb230d4424c70deaf8412f8c7",
+      "outputs": [
+        {
+          "path": "game/assets/art/effects/shot_travel.png",
+          "sha256": "0f386803d9b8c852b3cfabe270493b7d00039b3a5a3e84649fac5ce691480746",
+          "bytes": 12211,
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "provenance": {
+        "method": "original Blender geometry and authored pixel textures",
+        "authoring_script": "tools/build_shot_travel.py",
+        "imports": [],
+        "license": "Original NULL CHOIR project art"
+      },
+      "recipe_sha256": "38d64a2f322c929fa95c139b8ab5daa071af5748843eda0965f1e8ed38056df2",
+      "recipe_dependencies": {
+        "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+        "tools/build_ammo_vfx.py": "4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d",
+        "tools/shot_atlas.py": "f1c10eeac809d18e8eb6a8e4d5a96ec8d7b996286b8631a9779df4f377fe06e0"
+      },
+      "reference_images": [
+        {
+          "path": "source/art/references/shot-transport-construction-20261018.png",
+          "sha256": "c48eefc9b364b169c2b7c7fa65ba0a55804a362ab42430c432aaf73d7221b15f"
+        }
+      ],
+      "cell_size": [
+        64,
+        64
+      ],
+      "columns": 4,
+      "families": [
+        "rivet_square_amber",
+        "flechette_single_bone",
+        "needle_serrated_red",
+        "choir_hollow_pressure"
+      ],
+      "pose_collections": [
+        "rivet_square_amber_travel_00",
+        "rivet_square_amber_travel_01",
+        "rivet_square_amber_travel_02",
+        "rivet_square_amber_travel_03",
+        "flechette_single_bone_travel_00",
+        "flechette_single_bone_travel_01",
+        "flechette_single_bone_travel_02",
+        "flechette_single_bone_travel_03",
+        "needle_serrated_red_travel_00",
+        "needle_serrated_red_travel_01",
+        "needle_serrated_red_travel_02",
+        "needle_serrated_red_travel_03",
+        "choir_hollow_pressure_travel_00",
+        "choir_hollow_pressure_travel_01",
+        "choir_hollow_pressure_travel_02",
+        "choir_hollow_pressure_travel_03"
+      ],
+      "triangles": 6952,
+      "filter": "nearest",
+      "clear_border": 4,
+      "frame_alpha_pixels": [
+        559,
+        569,
+        563,
+        584,
+        246,
+        250,
+        249,
+        253,
+        261,
+        272,
+        260,
+        269,
+        281,
+        280,
+        318,
+        295
+      ]
     }
   ],
   "build": {
