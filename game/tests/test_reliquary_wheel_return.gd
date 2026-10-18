@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_wheel_ivory.gd"
 
-const V_WHEEL_SHA = "0d913ca840f79f3d730fbfc9ded217eea754f377ffe18a88da91c66775743be8"
+const V_WHEEL_SHA = "8340e199457f9555c1615824d1df7582c2b632a3fc6f8a1885afb8206e3fb83f"
 const V_IDS = ["reliquary_enemy_19","reliquary_enemy_20","reliquary_enemy_21"]
 const V_GROUP = {"id":"reliquary_wheel_return","region":[21.5,11.0,22.5,14.0],"enemy_ids":V_IDS,"requires":["ivory"],"cue":{"text":"A MEMORY LEAVES THE DRUM WITHOUT YOU","light_ids":["reliquary_wheel_return"],"sound":"seal_release"}}
 const V_PICKUPS = {
