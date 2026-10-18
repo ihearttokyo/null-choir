@@ -217,3 +217,45 @@ Validate each asset's logical authoring recipe and helper dependencies against i
 For historical regeneration, copy the recorded recipe and dependencies unchanged into an isolated project's original logical `tools/` layout, alongside the required pinned inputs. Run the existing Blender command there, never the `.py.txt` archive in place: original recipes derive their project root from their location. Check actual generated sources/exports and retain native editability evidence before adopting any result. The archive proves source availability, not that a new native regeneration ran.
 
 The accepted conduit generation uses `tools/build_conduit_art.py` and helper `tools/build_art.py` at `285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581` (integration commit `b776052d31036282615b25c1ab095fab95f1b324`). Its added helper dependency records the existing generation; it does not regenerate or relabel the source, references, recipe or exports.
+
+
+## Nursery gestation v2 candidate
+
+This image-derived Nursery candidate uses tapered, fenestrated fascia, a hollow
+Gothic restraint and a packed512 material atlas. The original
+`source/art/nursery_gestation_engine.blend` remains unchanged as a protected recipe
+input. The editable replacement is `source/art/nursery_gestation_engine_v2.blend`;
+its selected construction, membrane and material references and prompts remain
+under `source/art/references/`.
+
+Editable source contains231 meshes,17,574 triangles and five runtime material
+groups. Its GLB is1,588,276 bytes; the seven-piece Nursery set is8,163,152 bytes,
+below the unchanged eight-MiB limit. Compared with the original481,504-byte,
+5,664-triangle, seven-group asset, it spends more geometry and file space on
+anatomy while reducing material groups. No GPU, memory or loading gain is claimed.
+Matched background Blender renders and reopen/edit-restore checks support
+editability and material readability. Native headless staging, scenery and ramp
+checks pass; actual game lighting, transparent sorting,640-resolution readability
+and reference-quality parity remain unverified. The rounded cranium, separate recessed orbits, cheek and cervical attachments,
+and three asymmetric upper rib pairs improve the earlier flat skull. Full
+reference-quality parity remains open. This is source integration, not final art
+or application promotion.
+
+Rebuild into a fresh directory whose parent exists, outside this project:
+
+```sh
+blender --factory-startup --disable-autoexec -b -t 2 --python-exit-code 1 \
+  --python tools/build_nursery_gestation_v2.py -- \
+  --source-root "$PWD" \
+  --reference source/art/references/nursery-transparent-v2.png \
+  --material-reference source/art/references/nursery-material-atlas-v2.png \
+  --output /absolute/fresh/nursery-v2
+python3 tests/test_nursery_gestation_v2.py
+python3 tests/test_nursery_manifest_v2.py
+python3 tests/test_art.py
+```
+
+Its runtime GLB embeds the atlas; no unused standalone runtime PNG is installed.
+The identity-specific manifest validator reuses the recipe's typed BIN, material,
+UV-gutter, nearest/no-mip and20,000-triangle checks. All other117 asset records,
+level transforms and original source files remain unchanged.
