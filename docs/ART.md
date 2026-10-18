@@ -259,3 +259,33 @@ Its runtime GLB embeds the atlas; no unused standalone runtime PNG is installed.
 The identity-specific manifest validator reuses the recipe's typed BIN, material,
 UV-gutter, nearest/no-mip and20,000-triangle checks. All other117 asset records,
 level transforms and original source files remain unchanged.
+
+## Decorative living ossuary buttress
+
+`ossuary_living_buttress` is an editable catalog asset, not an additional religious
+structure or gameplay placement. Its three retained GPT Image references are listed
+in the manifest. The shipped source is the repository recipe's native rebuild, checked against the
+inspected source for geometry, UVs, material assignments, packed image and all 61 Pulse
+samples. The GLB and adjacent 256px atlas remain byte-exact to the inspected native
+candidate. Private production receipts remain outside the repository.
+
+`tools/build_ossuary_buttress.py` rebuilds the same 33-part, 1,656-triangle anatomy
+into a fresh isolated candidate, with four material groups, nearest filtering and
+64 texels/m mapping (the reviewed nonplanar face distortion allowance is ±2%).
+The source/GLB/atlas budget is 2 MiB; the GLB ceiling is 512 KiB. For example:
+
+```sh
+blender --background --factory-startup --python tools/build_ossuary_buttress.py -- \
+  --source-root "$PWD" --output /absolute/existing-parent/fresh-buttress-candidate
+```
+
+A second invocation with the same arguments plus `--proof` performs the retained
+edit/save/reopen/revert check without overwriting its source or prior proof files.
+The producer writes `candidate.receipt.json` and `proof.json`; external command
+receipts must use different names. Run `python3 -B tests/test_ossuary_buttress.py`
+for source, shipped-byte, UV, 61-sample animation and rejection controls.
+
+`Pulse` lasts 2.4 seconds and swells muscle depth only, around a fixed pivot.
+The GLB does not configure production Godot autoplay or looping. Repetition and
+pause/resume were checked with explicit test-scene configuration, not gameplay
+placement. Source tests do not approve in-game appearance or performance.

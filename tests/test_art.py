@@ -1,6 +1,7 @@
 """Direct, stdlib-only authored art contract: python3 tests/test_art.py."""
 import hashlib
 import json
+import math
 import runpy
 from pathlib import Path
 import struct
@@ -77,17 +78,31 @@ EXPECTED.update(MARKERS)
 EXPECTED.add('marker_glyphs')
 MARKER_IDENTITIES = {'marker_ivorykey', 'marker_ammo_shells', 'marker_ammo_sawtooth', 'marker_ammo_marrow', 'marker_ammo_choir'}
 EXPECTED.update(MARKER_IDENTITIES)
+EXPECTED.add('ossuary_living_buttress')
 
 
 def world_geometry(gltf, binary):
     """Read the real exported vertices, not just the manifest's claimed bounds."""
     points, triangles, materials = [], 0, []
-    for node in gltf['nodes']:
-        if 'mesh' not in node:
-            continue
-        assert not node.get('children') and 'matrix' not in node
+    seen = set()
+
+    def walk(index, parent_scale, parent_offset):
+        nonlocal triangles
+        assert type(index) is int and 0 <= index < len(gltf['nodes']) and index not in seen
+        seen.add(index)
+        node = gltf['nodes'][index]
+        assert 'matrix' not in node
         assert node.get('rotation', [0, 0, 0, 1]) == [0, 0, 0, 1]
         scale, offset = node.get('scale', [1] * 3), node.get('translation', [0] * 3)
+        assert len(scale) == len(offset) == 3
+        assert all(type(v) in (int, float) and math.isfinite(v) for v in (*scale, *offset))
+        offset = [parent_offset[i] + parent_scale[i] * offset[i] for i in range(3)]
+        scale = [parent_scale[i] * scale[i] for i in range(3)]
+        for child in node.get('children', []):
+            walk(child, scale, offset)
+        if 'mesh' not in node:
+            return
+        assert not node.get('children')
         primitives = gltf['meshes'][node['mesh']]['primitives']
         assert len(primitives) == 1, 'runtime mesh must be merged by material'
         for primitive in primitives:
@@ -100,6 +115,9 @@ def world_geometry(gltf, binary):
                 points.append(tuple(p[j] * scale[j] + offset[j] for j in range(3)))
             triangles += gltf['accessors'][primitive['indices']]['count'] // 3
             materials.append(primitive['material'])
+    for index in gltf['scenes'][gltf.get('scene', 0)].get('nodes', []):
+        walk(index, [1] * 3, [0] * 3)
+    assert seen == set(range(len(gltf['nodes']))), 'inactive exported nodes'
     assert len(materials) == len(set(materials)), 'one runtime mesh per material'
     return points, triangles
 
@@ -345,6 +363,11 @@ def check():
                     for primitive in mesh['primitives']:
                         assert 'POSITION' in primitive['attributes']
                 assert a['triangles'] < 50000 and a['physical_bounds_m']['size'][2] > 0, a['id']
+                if a['id'] == 'ossuary_living_buttress':
+                    import sys
+                    sys.path.insert(0, str(ROOT))
+                    from tools.ossuary_buttress_contract import validate_entry
+                    validate_entry(ROOT, a)
                 if a['id'] in MARKERS | MARKER_IDENTITIES:
                     marker.validate_model(*marker.read_model(data), a)
                 if a['id'] in SCENERY:
