@@ -85,69 +85,54 @@
   "elevations": [
     {
       "rect": [
-        10,
-        10,
-        14,
-        13
-      ],
-      "axis": 0,
-      "start": 14,
-      "end": 10,
-      "height": 1.5
-    },
-    {
-      "rect": [
-        2,
-        18,
-        5,
-        23
-      ],
-      "axis": 1,
-      "start": 23,
-      "end": 18,
-      "height": 1.5
-    },
-    {
-      "rect": [
+        -10,
         0,
-        10,
-        10,
-        18
-      ],
-      "height": 1.5
-    },
-    {
-      "rect": [
-        19,
-        7,
-        24,
+        60,
         10
       ],
-      "axis": 0,
-      "start": 19,
-      "end": 23,
-      "height": 2
+      "height": 5
     },
     {
       "rect": [
-        28,
-        16,
-        31,
+        -10,
+        10,
+        60,
+        13
+      ],
+      "axis": 1,
+      "start": 16.0,
+      "end": 10,
+      "height": 5
+    },
+    {
+      "rect": [
+        -10,
+        13,
+        60,
+        19
+      ],
+      "height": 2.5
+    },
+    {
+      "rect": [
+        -10,
+        19,
+        60,
         23
       ],
       "axis": 1,
-      "start": 23,
-      "end": 16,
-      "height": 2
+      "start": 23.0,
+      "end": 19,
+      "height": 2.5
     },
     {
       "rect": [
+        -10,
         23,
-        8,
-        32,
-        16
+        60,
+        50
       ],
-      "height": 2
+      "height": 0
     }
   ],
   "ceilings": [
@@ -2113,5 +2098,6 @@
         "sound": "seal_release"
       }
     }
-  ]
+  ],
+  "floor_revision": 1
 }

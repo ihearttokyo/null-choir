@@ -30,6 +30,19 @@ Static boundary walls alone own inset native BoxOccluder3D instances. Project-le
 
 `level_data.gd` reads each authored map's elevation regions and ceiling heights. Floor corners, native capsule positions and landmark lighting share those values. Hero specifications own their low collision-base dimensions; each level keeps its unique machine geometry. Intake's original floor corners and roof heights remain covered by an exact native regression. Campaign saves retain all three resource envelopes against their per-level floor revision. Legacy actor poses are validated on immutable original floors before a private copy shifts their Y coordinates by the triangulated floor delta; failed validation leaves live state and saved files unchanged.
 
+The revision1 terrain keeps every map footprint, loop, placement, light and art
+reference while replacing small isolated rises with connected terraces. Intake
+spans0–3m; Foundry0–4m; Processional0–5m; Reliquary−3–4m;
+Nursery−3.5–4.5m; Ossuary−4–5m; Inversion−5–5.5m; Heart−6–6m.
+The last five maps increase from four to six major flat elevation bands. Both
+loops traverse multiple bands. Actual native floor/roof/capsule, actor-placement,
+wall-contact and navigation checks cover these maps; the repaired Nursery ramp
+avoids the reproduced native navigation-edge warnings. Synthetic traversal and
+packed save restoration do not establish earned combat, physical-input play,
+visual quality or the sustained GPU target. The original Intake, Foundry and
+Processional floor assertions use immutable legacy layouts, separately from the
+current terrain checks.
+
 `projectile.gd` owns one finite swept-collision projectile attached to the current level. Native pause and scene ownership govern its lifetime; it checks stale-map/shooter references before applying existing difficulty and infighting damage. Weapon pickups normalize JSON indices in the existing collection path; the player/HUD/campaign implementations remain shared.
 
 The Apple Silicon runtime now selects Godot Mobile with the native macOS Metal driver. Matched M4 tests established higher throughput without reducing art, actors, lights or shadows; actual comparison images preserve the authored look. `game/tests/test_rendering.gd` checks the actual driver/method and unchanged 640x360 target on a real GPU. Headless physics checks cannot establish the graphics backend. [CHECKPOINT.md](CHECKPOINT.md) owns current app and performance evidence.

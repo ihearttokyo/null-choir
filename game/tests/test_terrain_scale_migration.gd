@@ -9,12 +9,16 @@ func run() -> void:
         return
     AudioServer.set_bus_mute(0,true)
     var path = "res://data/01_intake.json"
-    var original = FileAccess.get_file_as_string(path)
+    var source_text = FileAccess.get_file_as_string(path)
     var old_layout = Layout.new()
     if not old_layout.load_level(0):
         push_error(old_layout.load_error)
         quit(2)
         return
+    old_layout = old_layout.original_floor(0)
+    old_layout.data.erase("floor_revision")
+    var original = JSON.stringify(old_layout.data)
+    write_map(path,original)
     var documents: Array = []
     for mode in range(3):
         var document = fresh_document(0,mode)
@@ -84,7 +88,7 @@ func run() -> void:
             expect(a.actors[0].id==b.actors[0].id and a.actors[0].hp==b.actors[0].hp and a.actors[0].yaw==b.actors[0].yaw and a.actors[0].alerted==b.actors[0].alerted,"Rescale preserves original actor identity/state")
         var again = Campaign.new()
         expect(again.from_dict(migrated) and again.to_dict()==migrated,"Rescaled load is exactly idempotent")
-    write_map(path,original)
+    write_map(path,source_text)
     level.free()
     await physics_frame
     print("TERRAIN_SCALE_RESULT ",JSON.stringify({"difficulties":3,"envelopes_each":3,"native_floor_rays":rays,"old_cell_size":4,"new_cell_size":3,"failures":failures}))

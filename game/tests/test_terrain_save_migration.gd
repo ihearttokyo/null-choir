@@ -7,6 +7,27 @@ func run() -> void:
 		print("REFUSED TERRAIN FIXTURE: explicit disposable project and private HOME required")
 		quit(2)
 		return
+	var source_bytes: Dictionary = {}
+	var baseline_text: Dictionary = {}
+	for index in range(8):
+		var layout = Layout.new()
+		if not layout.load_level(index):
+			push_error(layout.load_error)
+			quit(2)
+			return
+		var path = "res://data/"+Layout.FILES[index]+".json"
+		source_bytes[path] = FileAccess.get_file_as_string(path)
+		var baseline = layout.original_floor(index).data
+		baseline.erase("floor_revision")
+		baseline_text[path] = JSON.stringify(baseline)
+	for path in baseline_text:
+		var file = FileAccess.open(path,FileAccess.WRITE)
+		if file==null:
+			push_error("Cannot stage disposable original floor: "+path)
+			quit(2)
+			return
+		file.store_string(baseline_text[path])
+		file.close()
 	for index in range(8):
 		var path = "res://data/"+Layout.FILES[index]+".json"
 		var original = FileAccess.get_file_as_string(path)
@@ -127,6 +148,14 @@ func run() -> void:
 		await mesh_witness(layout)
 		file = FileAccess.open(path,FileAccess.WRITE); file.store_string(original); file.close()
 		print("TERRAIN_SAVE_CASE map=",index," difficulties=3 counterfactual_height_fixture=true")
+	for path in source_bytes:
+		var file = FileAccess.open(path,FileAccess.WRITE)
+		if file==null:
+			push_error("Cannot restore disposable authored floor: "+path)
+			quit(2)
+			return
+		file.store_string(source_bytes[path])
+		file.close()
 	if failures == 0: print("PASS terrain save migration narrow production codec fixture; not traversal/GPU/packed acceptance")
 	quit(0 if failures == 0 else 1)
 

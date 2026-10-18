@@ -109,69 +109,105 @@
   "elevations": [
     {
       "rect": [
-        9,
-        23,
-        13,
-        26
-      ],
-      "axis": 0,
-      "start": 13,
-      "end": 9,
-      "height": 1.5
-    },
-    {
-      "rect": [
-        11,
-        12,
-        15,
-        15
-      ],
-      "axis": 0,
-      "start": 15,
-      "end": 11,
-      "height": 1.5
-    },
-    {
-      "rect": [
-        26,
-        17,
-        29,
-        22
-      ],
-      "axis": 1,
-      "start": 22,
-      "end": 17,
-      "height": -1.5
-    },
-    {
-      "rect": [
         20,
-        10,
-        24,
-        13
+        28,
+        25,
+        31
+      ],
+      "height": -1.0
+    },
+    {
+      "rect": [
+        0,
+        -10,
+        8,
+        60
+      ],
+      "height": 5
+    },
+    {
+      "rect": [
+        8,
+        -10,
+        11,
+        60
       ],
       "axis": 0,
-      "start": 20,
-      "end": 24,
-      "height": -1.5
+      "start": 14.0,
+      "end": 8,
+      "height": 5
     },
     {
       "rect": [
-        1,
-        10,
         11,
-        26
+        -10,
+        15,
+        60
       ],
-      "height": 1.5
+      "height": 2.5
     },
     {
       "rect": [
-        24,
-        4,
-        35,
-        17
+        15,
+        -10,
+        18,
+        60
       ],
-      "height": -1.5
+      "axis": 0,
+      "start": 18.0,
+      "end": 15,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        18,
+        -10,
+        22,
+        60
+      ],
+      "height": 0
+    },
+    {
+      "rect": [
+        22,
+        -10,
+        25,
+        60
+      ],
+      "axis": 0,
+      "start": 22.0,
+      "end": 25,
+      "height": -2
+    },
+    {
+      "rect": [
+        25,
+        -10,
+        28,
+        60
+      ],
+      "height": -2
+    },
+    {
+      "rect": [
+        28,
+        -10,
+        31,
+        60
+      ],
+      "axis": 0,
+      "start": 25.0,
+      "end": 31,
+      "height": -4
+    },
+    {
+      "rect": [
+        31,
+        -10,
+        50,
+        60
+      ],
+      "height": -4
     }
   ],
   "ceilings": [
@@ -2105,5 +2141,6 @@
       "range": 22
     }
   ],
-  "mission": "UNLOCK BOTH CARRIERS / RETURN TO THE TRANSFER GALLERY"
+  "mission": "UNLOCK BOTH CARRIERS / RETURN TO THE TRANSFER GALLERY",
+  "floor_revision": 1
 }

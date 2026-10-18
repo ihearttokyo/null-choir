@@ -61,3 +61,6 @@ jobs:
             if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-wall-$index.log"; then exit 1; fi
             grep -F "PASS native floor-to-roof wall contacts;" "$RUNNER_TEMP/terrain-wall-$index.log"
           done
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_floor_door_contacts.gd 2>&1 | tee "$RUNNER_TEMP/terrain-door.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-door.log"; then exit 1; fi
+          grep -F "PASS native closed-door floor contacts;" "$RUNNER_TEMP/terrain-door.log"

@@ -3,6 +3,7 @@ extends SceneTree
 func _initialize() -> void:
 	var layout = load("res://scripts/level_data.gd").new()
 	if not expect(layout.load_level(2),"Processional must be an authored loadable third level"): return
+	var legacy = layout.original_floor(2)
 	if not expect(layout.data.id == "processional" and layout.data.loops.size() == 2,"Two Processional loops required"): return
 	var heroes = []
 	for loop in layout.data.loops:
@@ -11,9 +12,11 @@ func _initialize() -> void:
 		for i in range(loop.route.size()-1):
 			if not expect(load("res://tests/test_level.gd").reachable(layout,Vector2i(loop.route[i][0],loop.route[i][1]),Vector2i(loop.route[i+1][0],loop.route[i+1][1])),"Disconnected Processional loop"): return
 	if not expect(heroes == ["walking_bone_organ","ossified_palanquin"],"Original Processional landmark identities"): return
-	if not expect(is_equal_approx(layout.height_at(Vector2(12,11)),0.75),"Organ approach ramp midpoint"): return
-	if not expect(is_equal_approx(layout.height_at(Vector2(21,8)),1.0),"Palanquin approach ramp midpoint"): return
-	if not expect(is_equal_approx(layout.height_at(Vector2(7,14)),1.5) and is_equal_approx(layout.height_at(Vector2(27,12)),2.0),"Distinct raised chambers"): return
+	if not expect(is_equal_approx(legacy.height_at(Vector2(12,11)),0.75),"Organ approach ramp midpoint"): return
+	if not expect(is_equal_approx(legacy.height_at(Vector2(21,8)),1.0),"Palanquin approach ramp midpoint"): return
+	if not expect(is_equal_approx(legacy.height_at(Vector2(7,14)),1.5) and is_equal_approx(legacy.height_at(Vector2(27,12)),2.0),"Distinct raised chambers"): return
+	if not expect(is_equal_approx(layout.height_at(Vector2(7,14)),2.5) and is_equal_approx(layout.height_at(Vector2(21,8)),5.0),"Revision1 distinct raised chambers"): return
+	if not expect(is_equal_approx(layout.height_at(Vector2(12,11)),25.0/6.0) and is_equal_approx(layout.height_at(Vector2(27,12)),10.0/3.0),"Revision1 organ and palanquin approach ramps"): return
 	var stories = 0
 	var scatterguns = 0
 	var casters = 0
