@@ -145,17 +145,23 @@ func _build_geometry() -> void:
 			chunks[chunk][1].add_vertex(corners[i]+Vector3.UP*_roof_height(cell))
 		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
 			var point = Vector2(cell)+Vector2(0.5,0.5)+Vector2(direction)*0.5
-			var h = layout.height_at(point)
 			var tall = _roof_height(cell)
 			if not layout.is_walkable(cell+direction):
-				var dimensions = Vector3(0.28,tall,size+0.28) if direction.x else Vector3(size+0.28,tall,0.28)
-				var wall = _box(dimensions,Vector3(point.x*size,h+tall/2,point.y*size),wall_material,true)
+				var tangent = Vector2(-direction.y,direction.x)*0.5
+				var a = layout.height_at(point-tangent)
+				var b = layout.height_at(point+tangent)
+				# Cover the whole sloped edge with the same opaque mesh, collider and occluder.
+				var bottom = minf(a,b)
+				var height = tall+absf(a-b)
+				var dimensions = Vector3(0.28,height,size+0.28) if direction.x else Vector3(size+0.28,height,0.28)
+				var wall = _box(dimensions,Vector3(point.x*size,bottom+height/2,point.y*size),wall_material,true)
 				var occluder = OccluderInstance3D.new()
 				occluder.occluder = BoxOccluder3D.new()
 				# Only opaque static walls occlude. Insets keep openings and scenery edges visible.
 				occluder.occluder.size = dimensions-Vector3.ONE*0.04
 				wall.add_child(occluder)
 			elif tall > _roof_height(cell+direction):
+				var h = layout.height_at(point)
 				var drop = tall-_roof_height(cell+direction)
 				var dimensions = Vector3(0.28,drop,size) if direction.x else Vector3(size,drop,0.28)
 				_box(dimensions,Vector3(point.x*size,h+tall-drop/2,point.y*size),wall_material,false)
