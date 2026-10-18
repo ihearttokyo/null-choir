@@ -1,6 +1,7 @@
 extends Node3D
 
 const Campaign = preload("res://scripts/campaign.gd")
+const Narrative = preload("res://scripts/narrative.gd")
 const Level = preload("res://scripts/level.gd")
 const Player = preload("res://scripts/player.gd")
 const Enemy = preload("res://scripts/enemy.gd")
@@ -251,7 +252,7 @@ func start_level() -> void:
 		if "encounter:"+group.id in state.removed: level.apply_encounter_cue(group,true)
 	damage_flash = 0
 	hit_flash = 0
-	message = level.layout.data.mission
+	message = ("ELLIS MARR / RECOVERY TECHNICIAN\n" if state.level_index == 0 else "")+level.layout.data.mission
 	message_time = 7
 	if state.health <= 0:
 		show_recovery()
@@ -636,6 +637,7 @@ func pause_game() -> void:
 	if music != null: music.set_paused(true)
 	if effects != null: effects.set_paused(true)
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
+	_button("Recovered records",func(): show_records(pause_game))
 
 func resume_game() -> void:
 	if is_instance_valid(player): player.cancel_actions()
@@ -697,6 +699,34 @@ func show_ending() -> void:
 	show_title()
 	var revelation = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if state.discoveries.size() == 8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
 	_show_menu(revelation,[["New campaign",show_difficulty],["Return to title",show_title]])
+	_button("Recovered records",func(): show_records(show_ending))
+	_record_body(Narrative.ENDINGS["complete" if state.discoveries.size() == 8 else "normal"].body)
+
+func show_records(back: Callable) -> void:
+	if playing or placement_pending: return
+	_show_menu("Recovered records",[["Back",back]])
+	for index in state.discoveries:
+		_button(Narrative.RECORDS[index].title,func(): show_record(index,back))
+	if state.discoveries.is_empty():
+		_record_body("No records recovered. Examine optional discoveries in the cathedral to preserve their accounts here.")
+
+func show_record(index: int, back: Callable) -> void:
+	if playing or placement_pending or not index in state.discoveries: return
+	_show_menu(Narrative.RECORDS[index].title,[["Back to records",func(): show_records(back)]])
+	menu.get_child(0).add_theme_font_size_override("font_size",24)
+	_record_body(Narrative.RECORDS[index].body)
+
+func _record_body(text: String) -> void:
+	var body = RichTextLabel.new()
+	body.text = text
+	body.bbcode_enabled = false
+	body.custom_minimum_size.y = 180
+	body.focus_mode = Control.FOCUS_ALL
+	body.add_theme_font_size_override("normal_font_size",14)
+	body.add_theme_stylebox_override("normal",menu_scroll.theme.get_stylebox("normal","Button"))
+	body.add_theme_stylebox_override("focus",menu_scroll.theme.get_stylebox("focus","Button"))
+	body.add_theme_color_override("default_color",menu_scroll.theme.get_color("font_color","Label"))
+	menu.add_child(body)
 
 func show_difficulty() -> void:
 	_show_menu("RECOVERY PROTOCOL",[["Merciful",func(): start_campaign(0)],["Relentless",func(): start_campaign(1)],["Terminal",func(): start_campaign(2)],["Back",show_title]])
