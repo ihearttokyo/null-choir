@@ -12,6 +12,7 @@ static func validate(content: Variant, art_exists: Callable) -> String:
 	if not content is Dictionary: return "level: expected a JSON object"
 	var error = _primitive(content,"level")
 	if not error.is_empty(): return error
+	if content.has("floor_revision") and (not _integer(content.floor_revision) or content.floor_revision < 0 or content.floor_revision > 1): return "floor_revision: expected known revision 0 or 1"
 	if not art_exists.is_valid(): return "art_exists: supply an art-ID existence boundary"
 	# shortcut: no visual-profile consumer/schema exists yet; define both before accepting profiles.
 	if content.has("visual_profile"): return "visual_profile: unsupported until its consuming boundary defines known fields and bounds"

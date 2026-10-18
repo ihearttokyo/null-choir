@@ -198,10 +198,9 @@ func start_campaign(mode: int) -> void:
 func start_level() -> void:
 	if is_instance_valid(player): player.cancel_actions()
 	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
-	var candidate = Campaign.new()
-	if not candidate.from_dict(state.to_dict()):
-		if not candidate.level_load_error.is_empty():
-			_level_load_failed(candidate.level_load_error)
+	if not state.from_dict(state.to_dict()):
+		if not state.level_load_error.is_empty():
+			_level_load_failed(state.level_load_error)
 			return
 		show_title()
 		notify("NO VALID RECOVERY IMAGE",8)

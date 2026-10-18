@@ -1,0 +1,58 @@
+name: Terrain save compatibility
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/terrain-save.yml'
+      - 'game/**'
+
+permissions:
+  contents: read
+
+jobs:
+  native-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.12'
+      - name: Install pinned Godot 4.7.2
+        run: |
+          curl --fail --location --connect-timeout 15 --max-time 90 --retry 2 \
+            https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip \
+            --output "$RUNNER_TEMP/godot.zip"
+          echo "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4  $RUNNER_TEMP/godot.zip" | sha256sum --check
+          unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
+          chmod u+x "$RUNNER_TEMP/godot/Godot_v4.7.2-stable_linux.x86_64"
+          echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
+      - name: Prepare disposable source and profile
+        run: |
+          python - <<'PYTHON'
+          from pathlib import Path
+          import os, shutil
+          fixture = Path(os.environ['RUNNER_TEMP']) / 'terrain-fixture'
+          (fixture / 'home').mkdir(parents=True)
+          shutil.copytree('game', fixture / 'project/game', ignore=shutil.ignore_patterns('.godot'))
+          PYTHON
+      - name: Native source migration fixture (Dummy audio, not Mac playback)
+        env:
+          HOME: ${{ runner.temp }}/terrain-fixture/home
+          XDG_DATA_HOME: ${{ runner.temp }}/terrain-fixture/home/.local/share
+          XDG_CONFIG_HOME: ${{ runner.temp }}/terrain-fixture/home/.config
+          XDG_CACHE_HOME: ${{ runner.temp }}/terrain-fixture/home/.cache
+          NULL_CHOIR_TERRAIN_FIXTURE_ROOT: ${{ runner.temp }}/terrain-fixture/project/game
+        run: |
+          set -euo pipefail
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --editor --import 2>&1 | tee "$RUNNER_TEMP/terrain-import.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-import.log"; then exit 1; fi
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_terrain_save_migration.gd 2>&1 | tee "$RUNNER_TEMP/terrain-native.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-native.log"; then exit 1; fi
+          grep -F "PASS terrain save migration narrow production codec fixture;" "$RUNNER_TEMP/terrain-native.log"
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_terrain_scale_migration.gd 2>&1 | tee "$RUNNER_TEMP/terrain-scale.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-scale.log"; then exit 1; fi
+          grep -F "PASS terrain scale migration native codec and floor collision;" "$RUNNER_TEMP/terrain-scale.log"
