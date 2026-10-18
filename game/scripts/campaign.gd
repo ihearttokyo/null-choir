@@ -1,10 +1,12 @@
 extends RefCounted
 
 const VERSION = 1
+const TERRAIN_VERSION = 2
 const SAVE_PATH = "user://campaign.json"
 const Layout = preload("res://scripts/level_data.gd")
 const Enemy = preload("res://scripts/enemy.gd")
 
+var floor_revision: int = 0
 var difficulty: int = 1
 var level_index: int = 0
 var health: int = 100
@@ -31,6 +33,7 @@ func new_campaign(mode: int) -> void:
 	level_load_error = ""
 	difficulty = clampi(mode, 0, 2)
 	level_index = 0
+	_label_floor()
 	health = 100
 	armor = 0
 	ammo = [0, 90, 0, 0, 0, 0]
@@ -84,6 +87,7 @@ func restore_level_start() -> void:
 
 func complete_level() -> void:
 	level_index = mini(8, level_index + 1)
+	_label_floor()
 	keys = []
 	removed = []
 	explored = []
@@ -92,11 +96,18 @@ func complete_level() -> void:
 	pitch = null
 	mark_checkpoint("entry", Vector3.ZERO)
 
+func _label_floor() -> void:
+	floor_revision = 0
+	if level_index < 8:
+		var layout = Layout.new()
+		if layout.load_level(level_index): floor_revision = layout.floor_revision()
+
 func _resources() -> Dictionary:
 	var data = {"health": health, "armor": armor, "ammo": ammo.duplicate(),
 		"owned_weapons": owned_weapons.duplicate(), "weapon": weapon,
 		"keys": keys.duplicate(), "removed": removed.duplicate(),
 		"checkpoint_id": checkpoint_id, "position": [position.x, position.y, position.z]}
+	if floor_revision > 0: data["floor_revision"] = floor_revision
 	if actors != null: data["actors"] = actors.duplicate(true)
 	if yaw != null: data["yaw"] = yaw
 	if pitch != null: data["pitch"] = pitch
@@ -104,7 +115,7 @@ func _resources() -> Dictionary:
 
 func to_dict() -> Dictionary:
 	var data = _resources()
-	data.merge({"version": VERSION, "difficulty": difficulty, "level_index": level_index,
+	data.merge({"version": TERRAIN_VERSION if floor_revision > 0 else VERSION, "difficulty": difficulty, "level_index": level_index,
 		"discoveries": discoveries.duplicate(), "explored": explored.duplicate(true), "checkpoint": checkpoint.duplicate(true),
 		"level_start": level_start.duplicate(true)})
 	return data
@@ -112,7 +123,7 @@ func to_dict() -> Dictionary:
 func from_dict(data: Dictionary) -> bool:
 	level_load_error = ""
 	# Validate everything before changing live state. Saves are an untrusted boundary.
-	if not _integer(data.get("version"), VERSION, VERSION) or not _integer(data.get("difficulty"), 0, 2):
+	if not _integer(data.get("version"), VERSION, TERRAIN_VERSION) or not _integer(data.get("difficulty"), 0, 2):
 		return false
 	if not _integer(data.get("level_index"), 0, 8) or not _valid_resources(data):
 		return false
@@ -133,13 +144,36 @@ func from_dict(data: Dictionary) -> bool:
 	var saved_start = data.get("level_start")
 	if not saved_start is Dictionary or not _valid_resources(saved_start):
 		return false
+	var snapshots = [data,saved_checkpoint,saved_start]
+	var revision: int = 0
+	if int(data.version) == VERSION:
+		if snapshots.any(func(snapshot): return snapshot.has("floor_revision")): return false
+	else:
+		for snapshot in snapshots:
+			if not _integer(snapshot.get("floor_revision"),1,1): return false
+		revision = int(data.floor_revision)
+		if snapshots.any(func(snapshot): return int(snapshot.floor_revision) != revision): return false
 	var layout = Layout.new()
-	if [data,saved_checkpoint,saved_start].any(func(snapshot): return snapshot.has("actors")):
-		if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)):
-			level_load_error = layout.load_error
-			return false
-		for snapshot in [data,saved_checkpoint,saved_start]:
-			if not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
+	if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)):
+		level_load_error = layout.load_error
+		return false
+	var current_revision: int = layout.floor_revision()
+	if revision > current_revision: return false
+	var old_layout = layout.original_floor(int(data.level_index)) if revision < current_revision else layout
+	for snapshot in snapshots:
+		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
+	if revision < current_revision:
+		data = data.duplicate(true)
+		for snapshot in [data,data.checkpoint,data.level_start]:
+			snapshot.position = _shift_floor(snapshot.position,old_layout,layout,true)
+			if snapshot.has("actors"):
+				for actor in snapshot.actors:
+					actor.position = _shift_floor(actor.position,old_layout,layout,false)
+			snapshot["floor_revision"] = current_revision
+			if not _valid_resources(snapshot) or not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
+		saved_checkpoint = data.checkpoint
+		saved_start = data.level_start
+	floor_revision = current_revision
 	difficulty = int(data.difficulty)
 	level_index = int(data.level_index)
 	discoveries = clues.map(func(value): return int(value))
@@ -149,8 +183,18 @@ func from_dict(data: Dictionary) -> bool:
 	_apply_resources(data)
 	return true
 
+func _shift_floor(values: Array, old_layout, layout, player: bool) -> Array:
+	var point = Vector3(values[0],values[1],values[2])
+	if player and point == Vector3.ZERO: return values.duplicate()
+	var cell = Vector2(point.x,point.z)/float(old_layout.data.cell_size)
+	# Preserve invalid/outside player poses for Main's existing native recovery path.
+	if player and not old_layout.is_walkable(Vector2i(cell.floor())): return values.duplicate()
+	point.y += layout.world_position([cell.x,cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	return [point.x,point.y,point.z]
+
 func _normalized_resources(data: Dictionary) -> Dictionary:
 	var result = data.duplicate(true)
+	if result.has("floor_revision"): result.floor_revision = int(result.floor_revision)
 	var point = Vector3(data.position[0],data.position[1],data.position[2])
 	result.position = [point.x,point.y,point.z]
 	if result.has("yaw"): result.yaw = Enemy.canonical_yaw(result.yaw)

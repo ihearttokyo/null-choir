@@ -1,5 +1,6 @@
 extends RefCounted
 
+const OriginalFloors = preload("res://scripts/floors_v0.gd")
 const Schema = preload("res://scripts/level_schema.gd")
 const FILES = ["01_intake", "02_foundry", "03_processional", "04_reliquary", "05_nursery", "06_ossuary", "07_inversion", "08_heart"]
 var data: Dictionary = {}
@@ -67,3 +68,16 @@ func world_position(cell: Array) -> Vector3:
 	# Match the two actual floor triangles, including elevation-boundary cells.
 	var height = a+(b-a)*uv.x+(c-b)*uv.y if uv.y <= uv.x else a+(c-d)*uv.x+(d-a)*uv.y
 	return Vector3(point.x*data.cell_size,height,point.y*data.cell_size)
+
+func floor_revision() -> int:
+	return int(data.get("floor_revision",0))
+
+func original_floor(index: int):
+	var original = get_script().new()
+	original.data = data.duplicate(true)
+	original.data.merge(OriginalFloors.LEVELS[index].duplicate(true),true)
+	for rect in original.data.rects:
+		for x in range(rect[0],rect[2]+1):
+			for z in range(rect[1],rect[3]+1):
+				original.tiles[Vector2i(x,z)] = true
+	return original
