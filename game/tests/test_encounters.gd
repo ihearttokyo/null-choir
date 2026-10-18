@@ -1,5 +1,6 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
 const STEP = 1.0/60.0
 const HERO_IDS = [["skin_bell","siphon_heart"],["vertebral_furnace","marrow_crucible"],["walking_bone_organ","ossified_palanquin"],["reliquary_face_halo","reliquary_memory_wheel"]]
 const SPAWNS = [[14.5,28.5],[14.5,30.5],[21.5,29.5],[19.5,38.5]]
@@ -44,6 +45,8 @@ func run() -> void:
 	AudioServer.set_bus_mute(0,true)
 	for check in [check_entry,check_regions,check_hit_activation,check_persistence,check_machine_seals,check_cover]:
 		if not await check.call(): return
+	if game.music.player.stream != null:
+		if not expect(await RecordedAudioRelease.stop(game),"Recording must drain before successful test teardown"): return
 	cleanup()
 	print("PASS native authored encounters level=",level_index," membership, regions/seals, firing isolation, hit activation, one-shot cues, restoration, machine lights, cover/flank and entry safeguards")
 	quit()
@@ -277,7 +280,7 @@ func check_persistence() -> bool:
 	freeze()
 	await settle()
 	if not expect(restored_group(group,dead_id) and game.state.health == health and game.state.ammo == ammo and game.state.to_dict().version == 1,"Continue preserves activated survivors, dead IDs and valid older over-cap ammo without a save migration"): return false
-	if not expect(game.message == game.level.layout.data.mission and light_state(group.cue.light_ids) == lights,"Continue restores lighting silently rather than replaying the encounter cue"): return false
+	if not expect(game.message == ("ELLIS MARR / RECOVERY TECHNICIAN\n" if game.state.level_index == 0 else "")+game.level.layout.data.mission and light_state(group.cue.light_ids) == lights,"Continue restores lighting silently rather than replaying the encounter cue"): return false
 	await game.restart_level()
 	freeze()
 	await settle()

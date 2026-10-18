@@ -1,5 +1,7 @@
 extends SceneTree
 
+const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+
 const INTAKE_PIECES = {
 	"Christian":"intake_throat_frame", "Buddhist":"intake_wheel_reservoir",
 	"Shinto":"intake_bound_gate", "Islamic":"intake_pressure_screen",
@@ -70,7 +72,7 @@ func run() -> void:
 	game.state.new_campaign(0)
 	game.state.level_index = index
 	game.start_level()
-	if not expect(game.playing and game.message == layout.data.mission,"Actual map entry must finish gameplay, mission and live MIDI startup"): return
+	if not expect(game.playing and game.message == ("ELLIS MARR / RECOVERY TECHNICIAN\n" if index == 0 else "")+layout.data.mission,"Actual map entry must finish gameplay, mission and live MIDI startup"): return
 	game.pause_game()
 	await physics_frame
 	if not expect(game.enemies.size() == layout.data.enemies.size() and game.enemies.all(func(actor): return actor.sprite != null and actor.get_children().any(func(node): return node is CollisionShape3D)),"All real authored actors must configure their sprite and capsule before scenery acceptance (intended RED)"): return
@@ -121,6 +123,7 @@ func run() -> void:
 		game.level.apply_encounter_cue(layout.data.encounters[0],true)
 		for id in ["ossuary_bridge_feed","ossuary_bridge_core"]:
 			if not expect(game.level.machine_lights[id].light_color.is_equal_approx(Color(1,.76,.44)),"Bridge seal lighting restores warm through the existing hero/cue path"): return
+	if not expect(await RecordedAudioRelease.stop(game),"Recording must drain before successful scenery-test teardown"): return
 	game.show_title()
 	paused = false
 	await create_timer(.1).timeout
