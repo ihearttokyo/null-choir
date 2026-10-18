@@ -189,7 +189,8 @@ func _shift_floor(values: Array, old_layout, layout, player: bool) -> Array:
 	var cell = Vector2(point.x,point.z)/float(old_layout.data.cell_size)
 	# Preserve invalid/outside player poses for Main's existing native recovery path.
 	if player and not old_layout.is_walkable(Vector2i(cell.floor())): return values.duplicate()
-	point.y += layout.world_position([cell.x,cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	var current_cell = Vector2(point.x,point.z)/float(layout.data.cell_size)
+	point.y += layout.world_position([current_cell.x,current_cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
 	return [point.x,point.y,point.z]
 
 func _normalized_resources(data: Dictionary) -> Dictionary:
