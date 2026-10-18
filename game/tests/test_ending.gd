@@ -25,7 +25,7 @@ func run() -> void:
 		var label: Label = game.menu.get_child(0)
 		if not expect(label.get_visible_line_count() == label.get_line_count() and label.size.x <= game.menu_scroll.size.x,"Native ending title wraps fully within the existing readable menu"): return
 		var buttons = game.menu.get_children().filter(func(node): return node is Button)
-		if not expect(buttons.size() == 2 and buttons[0].text == "New campaign" and buttons[1].text == "Return to title" and buttons[0].has_focus(),"Ending retains native keyboard focus and restart/title actions"): return
+		if not expect(buttons.size() == 3 and buttons[2].text == "Recovered records" and buttons[0].text == "New campaign" and buttons[1].text == "Return to title" and buttons[0].has_focus(),"Ending retains native keyboard focus and restart/title actions"): return
 		buttons[1].pressed.emit()
 		if not expect(game.menu.get_child(0).text == "NULL CHOIR" and game.state.level_index == 8,"Return to title preserves the completed save"): return
 		await game.continue_campaign()

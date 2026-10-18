@@ -1,7 +1,7 @@
 extends "res://tests/test_nursery_earned_entry.gd"
 
-const NC_CORE_PINS = {"res://scripts/main.gd":"934c797718eb8b8b55b11248cad87476791db37be13be842e96f64a7efdf0915","res://scripts/player.gd":"ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe","res://scripts/projectile.gd":"bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873","res://scripts/campaign.gd":"34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f","res://scripts/level.gd":"bfd64a31f8d9df56e5e9dfbd5a4e16ce5df5ec738423a4e75436750318bee053","res://scripts/level_data.gd":"40b6946232de22af2cd60c6f98db3852a6ebac9eb6cd42b8994ef4345a777674","res://scripts/preferences.gd":"e225e74aabaafdd3f3e25a31b22264a5ba365e4ba7d0f6e3709f67b10f327139"}
-const NC_ENTRY_SHA = "5d004adb23e6fa957c7a58c3e812c6525a83ea7ffd566fa363f9d4f49942df6e"
+const NC_CORE_PINS = {"res://scripts/main.gd":"766662e560282354a72e8fd05e3eec3429cfdbf5524288aaaa509cb3ba97fbb8","res://scripts/player.gd":"ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe","res://scripts/projectile.gd":"bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873","res://scripts/campaign.gd":"34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f","res://scripts/level.gd":"bfd64a31f8d9df56e5e9dfbd5a4e16ce5df5ec738423a4e75436750318bee053","res://scripts/level_data.gd":"40b6946232de22af2cd60c6f98db3852a6ebac9eb6cd42b8994ef4345a777674","res://scripts/preferences.gd":"e225e74aabaafdd3f3e25a31b22264a5ba365e4ba7d0f6e3709f67b10f327139"}
+const NC_ENTRY_SHA = "73604938a68a39a1bf5d5eb66cd48f67cbc486c4a0654afd86e797826bfcf414"
 # Entry corridor + gestation loop is 350.89m at 9m/s; combat/clearance has separate finite caps.
 const NC_LIMIT = 12000
 const NC_SECONDS = 600
