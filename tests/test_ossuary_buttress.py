@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
 import runpy
 import struct
@@ -13,11 +14,51 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 ID = 'ossuary_living_buttress'
 BASELINE = 'b72a28cd995917905db1f94ebaf543ed17dd7787498dacde5d0511d36019f278'
-GEOMETRY = '36ce1d987af3f80e16d77e8235157e3256958f25ea1b97390ede12f2fe65ea08'
+GEOMETRY = 'd1b6bcfe7ac4c2cb759ccfdd917a55d9c764b697abd6f85616c657c8d59d042a'
 
 
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def geometry_digest(parts):
+    # libm differs by ULPs across platforms; pin vertices at 1 micrometre precision.
+    canonical = copy.deepcopy(parts)
+    for part in canonical:
+        assert all(math.isfinite(v) for point in part['vertices'] for v in point)
+        part['vertices'] = [tuple(round(v, 6) + 0.0 for v in point)
+                            for point in part['vertices']]
+    return digest(canonical)
+
+
+def check_geometry_portability():
+    from tools.build_ossuary_buttress import design
+    original = design()
+    for direction in (math.inf, -math.inf):
+        rounded = copy.deepcopy(original)
+        for part in rounded:
+            part['vertices'] = [tuple(math.nextafter(float(v), direction) for v in point)
+                                for point in part['vertices']]
+        assert geometry_digest(original) == geometry_digest(rounded), 'libm ULP changes must not alter geometry pin'
+    for field in ('vertices', 'faces', 'material'):
+        altered = copy.deepcopy(original)
+        if field == 'vertices':
+            x, y, z = altered[0]['vertices'][0]
+            altered[0]['vertices'][0] = (x + .000001, y, z)
+        elif field == 'faces':
+            altered[0]['faces'][0] = tuple(reversed(altered[0]['faces'][0]))
+        else:
+            altered[0]['material'] = 'different'
+        assert geometry_digest(altered) != geometry_digest(original), field + ' drift accepted'
+    for value in (math.nan, math.inf, -math.inf):
+        altered = copy.deepcopy(original)
+        altered[0]['vertices'][0] = (value, 0, 0)
+        try:
+            geometry_digest(altered)
+        except AssertionError:
+            pass
+        else:
+            raise AssertionError('non-finite geometry fingerprint accepted')
 
 
 def check_catalog():
@@ -32,7 +73,7 @@ def check_catalog():
     entry = entries[0]
     assert 'level_id' not in entry and 'tradition_aesthetic' not in entry
     preflight(ROOT)
-    assert digest(design()) == GEOMETRY, 'reviewed geometry changed during layout port'
+    assert geometry_digest(design()) == GEOMETRY, 'reviewed geometry changed during layout port'
     validate_entry(ROOT, entry)
     for field in ('source', 'outputs', 'provenance'):
         altered = copy.deepcopy(entry)
@@ -175,6 +216,7 @@ def check_validator_generation():
 
 
 def check():
+    check_geometry_portability()
     check_output_alias()
     check_proof_inventory()
     check_validator_generation()
