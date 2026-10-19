@@ -144,6 +144,10 @@ func draw_state() -> Dictionary:
 		"ammo_status":"EMPTY" if empty else "LOW" if low else "CYCLING" if game.player.cooldown > 0 else "READY",
 		"prompt":prompt,"binding":game.preferences.binding_text("interact") if not prompt.is_empty() else ""}
 
+func _font_color(label: Label, color: Color) -> void:
+	if label.get_theme_color("font_color") != color:
+		label.add_theme_color_override("font_color",color)
+
 func _process(_delta: float) -> void:
 	view = draw_state()
 	var active: bool = not view.is_empty() and game.playing
@@ -159,22 +163,22 @@ func _process(_delta: float) -> void:
 		labels.BossTitle.text = view.boss.get("name","")
 		labels.BossHealth.text = "%d / %d" % [view.boss.hp,view.boss.max_hp] if not view.boss.is_empty() else ""
 		labels.BossPhase.text = "RUPTURE" if view.boss.get("phase",0) > 0 else "MANIFEST"
-		labels.BossPhase.add_theme_color_override("font_color",DANGER if view.boss.get("phase",0) > 0 else IVORY)
+		_font_color(labels.BossPhase,DANGER if view.boss.get("phase",0) > 0 else IVORY)
 		labels.VitalValue.text = str(view.health)
-		labels.VitalValue.add_theme_color_override("font_color",DANGER if view.health <= 25 else IVORY)
+		_font_color(labels.VitalValue,DANGER if view.health <= 25 else IVORY)
 		labels.ArmorValue.text = str(view.armor)
 		labels.WeaponName.text = view.weapon_name
 		labels.AmmoValue.text = view.ammo
 		labels.AmmoCapacity.text = view.capacity
 		labels.AmmoStatus.text = view.ammo_status
 		var ammo_color = DANGER if view.ammo_status == "EMPTY" else AMBER if view.ammo_status == "LOW" else IVORY
-		labels.AmmoValue.add_theme_color_override("font_color",ammo_color)
-		labels.AmmoStatus.add_theme_color_override("font_color",ammo_color)
+		_font_color(labels.AmmoValue,ammo_color)
+		_font_color(labels.AmmoStatus,ammo_color)
 		for index in view.arsenal.size():
 			var slot: Dictionary = view.arsenal[index]
 			var label: Label = labels["ArsenalSlot"+str(index+1)]
 			label.text = str(index+1)+("-" if not slot.owned else "!" if slot.empty else "")
-			label.add_theme_color_override("font_color",DANGER if slot.empty else AMBER if slot.selected or slot.low else IVORY if slot.owned else COPPER)
+			_font_color(label,DANGER if slot.empty else AMBER if slot.selected or slot.low else IVORY if slot.owned else COPPER)
 		labels.InteractionPrompt.text = view.prompt
 		labels.InteractionBinding.text = view.binding
 	labels.InteractionPrompt.visible = active and not view.get("prompt","").is_empty()

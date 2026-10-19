@@ -1,5 +1,7 @@
 extends SceneTree
 
+var theme_changes: int = 0
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -19,6 +21,9 @@ func run() -> void:
 	game.settings.camera_shake = false
 	game.message_time = 0
 	await redraw(game)
+	for label in game.hud.labels.values(): label.theme_changed.connect(func(): theme_changes += 1)
+	for index in 20: game.hud._process(0.0)
+	if not expect(theme_changes == 0,"Unchanged HUD refresh must not invalidate native label themes"): return
 	var name_label = game.hud.find_child("WeaponName",true,false)
 	if not expect(name_label is Label and name_label.text == game.player.WEAPONS[1].name,"Selected weapon name must be visible in the live HUD"): return
 	if not expect(game.hud.has_method("draw_state"),"Rendering must derive its presentation from the live-state helper"): return
