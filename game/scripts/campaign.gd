@@ -164,11 +164,12 @@ func from_dict(data: Dictionary) -> bool:
 		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
 	if revision < current_revision:
 		data = data.duplicate(true)
+		var specs = actor_specs(layout)
 		for snapshot in [data,data.checkpoint,data.level_start]:
 			snapshot.position = _shift_floor(snapshot.position,old_layout,layout,true)
 			if snapshot.has("actors"):
 				for actor in snapshot.actors:
-					actor.position = _shift_floor(actor.position,old_layout,layout,false)
+					actor.position = _shift_floor(actor.position,old_layout,layout,false,Enemy.capsule_radius(specs[actor.id].kind))
 			snapshot["floor_revision"] = current_revision
 			if not _valid_resources(snapshot) or not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
 		saved_checkpoint = data.checkpoint
@@ -183,14 +184,19 @@ func from_dict(data: Dictionary) -> bool:
 	_apply_resources(data)
 	return true
 
-func _shift_floor(values: Array, old_layout, layout, player: bool) -> Array:
+func _shift_floor(values: Array, old_layout, layout, player: bool, radius: float = 0.0) -> Array:
 	var point = Vector3(values[0],values[1],values[2])
 	if player and point == Vector3.ZERO: return values.duplicate()
 	var cell = Vector2(point.x,point.z)/float(old_layout.data.cell_size)
 	# Preserve invalid/outside player poses for Main's existing native recovery path.
 	if player and not old_layout.is_walkable(Vector2i(cell.floor())): return values.duplicate()
 	var current_cell = Vector2(point.x,point.z)/float(layout.data.cell_size)
-	point.y += layout.world_position([current_cell.x,current_cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	if player:
+		point.y += layout.world_position([current_cell.x,current_cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	else:
+		# Preserve signed clearance, including existing penetration; never repair invalid actors.
+		var center = Vector2(point.x,point.z)
+		point.y += layout.capsule_floor_support(center,radius)-old_layout.capsule_floor_support(center,radius)
 	return [point.x,point.y,point.z]
 
 func _normalized_resources(data: Dictionary) -> Dictionary:

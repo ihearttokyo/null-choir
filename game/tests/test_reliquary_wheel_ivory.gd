@@ -1,11 +1,11 @@
 extends "res://tests/test_reliquary_halo_return.gd"
 
-const W_RETURN_SHA = "f3dcfd8bb1771207c9d9b44a516982e1e17467a8d66eb48eb4fd73d4dc233e22"
+const W_RETURN_SHA = "aeae68d5e56de9312057f666750a8070ba3c9e0bff80464c0ede587f396bad3b"
 const W_IDS = ["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"]
 const W_GROUP = {"id":"reliquary_wheel_commit","region":[26.0,8.0,36.9,21.25],"enemy_ids":["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"],"requires":[],"cue":{"text":"THE MEMORY DRUM ANSWERS OUT OF ORDER","light_ids":["reliquary_wheel_feed","reliquary_wheel_core"],"sound":"seal_release"}}
 const W_PICKUPS = {"reliquary_wheel_approach_rivets":{"id":"reliquary_wheel_approach_rivets","kind":"ammo","cell":[29.5,25.5],"amount":45.0,"weapon":1.0}}
 const W_IVORY = {"id":"reliquary_ivory","kind":"key","key":"ivory","cell":[35.5,17.5],"text":"MEMORY DRUM IVORY SEAL RECOVERED"}
-const W_CARRY = {"health":100,"armor":190,"ammo":[0,167,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const W_CARRY = {"health":92,"armor":189,"ammo":[0,167,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const W_RETURN_FIELDS = ["q_ok","q_ticks","q_activation","q_activated","q_removed","q_shots","q_last","q_slot","q_last_time","q_shot_start_age","q_shot_start_time","q_rivets","q_consumed","q_rejected","q_health_loss","q_absorbed","q_hurts","q_attacks","q_roles","q_deaths","q_finishes","q_release","q_melee_pending","q_damage_attacks"]
 const W_APPROACH = [[19,14],[19,17],[19,20],[19,23],[19,26],[19,28.5],[21.5,28.5],[24.5,28.5],[27,28.5],[29.5,28.5],[29.5,25.5],[29.5,23],[29.5,21]]
 const W_CLOSE = [[31,20.75],[32.5,20.5],[35.5,20.5],[35.5,17.5]]
@@ -381,7 +381,7 @@ func walk_through_wheel_ivory(observer: WheelMain, profile_prefix: String = "") 
 	return wheel_result()
 
 func start_wheel() -> bool:
-	if not expect(game is WheelMain and game.q_enabled and game.q_ok and return_result() and game.budget() == W_CARRY and route_player.position.distance_to(route_level.layout.world_position([19,11])) < 0.2,"Exact actual reviewed Return boundary100HP190armor167pistol32shells at original central endpoint; not a save surrogate"): return false
+	if not expect(game is WheelMain and game.q_enabled and game.q_ok and return_result() and game.budget() == W_CARRY and route_player.position.distance_to(route_level.layout.world_position([19,11])) < 0.2,"Exact actual reviewed Return boundary92HP189armor167pistol32shells at original central endpoint; not a save surrogate"): return false
 	if not expect(W_LIMIT == (W_APPROACH.size()+W_CLOSE.size())*HOP_LIMIT+480+240+240+W_DRAIN+W_INPUT,"Fresh17 split hops plus fixed combat/drain/input budgets"): return false
 	if not expect(route_level.layout.data.encounters.filter(func(item): return item.id == W_GROUP.id) == [W_GROUP] and route_level.layout.data.interactions.filter(func(item): return item.id == W_IVORY.id) == [W_IVORY],"Exact original Wheel group/cue and explicit Ivory"): return false
 	for id in W_PICKUPS:
@@ -528,4 +528,4 @@ func live_route() -> bool:
 		elif not expect(route_level.markers.has(id) and w_markers[id].get_ref() == route_level.markers[id] and not route_level.markers[id].is_queued_for_deletion() and not id in game.state.removed,"Every other original marker owner preserved: "+id): return false
 	if not expect(route_level.markers.size() == w_markers.size()-game.w_consumed.size()-game.w_ivory_calls,"No extra/replacement markers"): return false
 	if not expect(game.w_pending.is_empty() and game.w_enemy_pending.is_empty() and game.w_melee_pending.is_empty(),"All native contact witnesses consumed synchronously"): return false
-	return expect(game.budget() == game.w_resources() and game.state.health > 0 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 190 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == (["blood","ivory"] if game.w_ivory_calls == 1 else ["blood"]) and game.state.discoveries == [3] and game.state.removed == game.w_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == w_actor_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.w_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-w_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Actual ammo/pickup/hurt ledger and earned Blood/story; original actor image/start/checkpoint/disk exact")
+	return expect(game.budget() == game.w_resources() and game.state.health > 0 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 189 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == (["blood","ivory"] if game.w_ivory_calls == 1 else ["blood"]) and game.state.discoveries == [3] and game.state.removed == game.w_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == w_actor_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.w_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-w_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Actual ammo/pickup/hurt ledger and earned Blood/story; original actor image/start/checkpoint/disk exact")

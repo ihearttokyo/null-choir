@@ -139,90 +139,117 @@
   "elevations": [
     {
       "rect": [
-        11,
-        15,
-        15,
-        18
+        -10,
+        0,
+        60,
+        10
       ],
-      "axis": 0,
-      "start": 15,
-      "end": 11,
-      "height": -2
+      "height": -6
     },
     {
       "rect": [
-        5,
-        8,
-        8,
-        12
+        -10,
+        10,
+        60,
+        13
       ],
       "axis": 1,
-      "start": 8,
-      "end": 12,
-      "height": -2
+      "start": 16.0,
+      "end": 10,
+      "height": -6
     },
     {
       "rect": [
+        -10,
+        13,
+        60,
+        19
+      ],
+      "height": -3
+    },
+    {
+      "rect": [
+        -10,
+        19,
+        60,
+        22
+      ],
+      "axis": 1,
+      "start": 22.0,
+      "end": 19,
+      "height": -3
+    },
+    {
+      "rect": [
+        -10,
         22,
-        23,
-        25,
-        27
+        60,
+        24
+      ],
+      "height": 0
+    },
+    {
+      "rect": [
+        -10,
+        24,
+        60,
+        26
       ],
       "axis": 1,
-      "start": 23,
-      "end": 27,
+      "start": 24.0,
+      "end": 26,
       "height": 2
     },
     {
       "rect": [
-        12,
-        23,
-        15,
-        27
+        -10,
+        26,
+        60,
+        28
       ],
-      "axis": 1,
-      "start": 23,
-      "end": 27,
-      "height": 1
-    },
-    {
-      "rect": [
-        12,
-        31,
-        15,
-        34
-      ],
-      "axis": 0,
-      "start": 12,
-      "end": 15,
       "height": 2
     },
     {
       "rect": [
-        12,
-        27,
-        15,
+        -10,
+        28,
+        60,
         31
       ],
-      "height": 1
+      "axis": 1,
+      "start": 25.0,
+      "end": 31,
+      "height": 4
     },
     {
       "rect": [
-        2,
-        12,
-        12,
-        27
+        -10,
+        31,
+        60,
+        35
       ],
-      "height": -2
+      "height": 4
     },
     {
       "rect": [
-        15,
-        27,
-        26,
-        39
+        -10,
+        35,
+        60,
+        37
       ],
-      "height": 2
+      "axis": 1,
+      "start": 31.0,
+      "end": 37,
+      "height": 6
+    },
+    {
+      "rect": [
+        -10,
+        37,
+        60,
+        50
+      ],
+      "height": 6
     }
   ],
   "ceilings": [
@@ -2356,5 +2383,6 @@
       "range": 22
     }
   ],
-  "mission": "RECOVER BOTH PULSE SEALS / ENTER THE CENTRAL RESTRAINT"
+  "mission": "RECOVER BOTH PULSE SEALS / ENTER THE CENTRAL RESTRAINT",
+  "floor_revision": 1
 }

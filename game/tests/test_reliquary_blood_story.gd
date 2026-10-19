@@ -1,8 +1,8 @@
 extends "res://tests/test_reliquary_halo_feasibility.gd"
 
-const B_HALO_SHA = "f82d38ddbf283a3daf6440e31d3381e8160af230e4b78a923d03af1181b6afd7"
-const B_NATIVE_PINS = {"res://scripts/main.gd":"763d98bee99686ace80bc3ac0d355ddc1e8fdbd3053efb1f5459cb141836ff61","res://scripts/player.gd":"ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9","res://scripts/campaign.gd":"34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe"}
-const B_CARRY = {"health":76,"armor":190,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const B_HALO_SHA = "3de581747ff2c1d0ebabd14620a0485360f53748dbf89ca5ffbbd033ed53a4fd"
+const B_NATIVE_PINS = {"res://scripts/main.gd":"0081049f7d45715be879f552675d4f17c9248f1f36dbc5d21004eb205128805c","res://scripts/player.gd":"ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9","res://scripts/campaign.gd":"628534c4b2446fb0d9a6be8e2f4429d370bf9fae5f9e30a2a41be528d9f3bbb8","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe"}
+const B_CARRY = {"health":83,"armor":193,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const B_BLOOD = {"id":"reliquary_blood","kind":"key","key":"blood","cell":[11.5,17.5],"text":"FACE REGISTER BLOOD SEAL RECOVERED"}
 const B_STORY = {"id":"reliquary_story","kind":"story","cell":[0.75,16.5],"text":"The mission voice is indexed here as a command channel, not a recording. Your replies open the drawers."}
 const B_HEALTH = {"id":"reliquary_halo_recess_health","kind":"health","cell":[2.75,18.5],"amount":25.0}
@@ -92,7 +92,7 @@ class BloodMain:
 		b_health_calls += 1
 		b_health_gain += mini(25,100-B_CARRY.health)
 		b_removed.append(id)
-		b_ok = b_ok and b_health_calls == 1 and b_health_gain == 24 and budget() == b_resources() and state.removed == b_removed and state.removed.count(id) == 1 and not level.markers.has(id)
+		b_ok = b_ok and b_health_calls == 1 and b_health_gain == 17 and budget() == b_resources() and state.removed == b_removed and state.removed.count(id) == 1 and not level.markers.has(id)
 	func activate_encounter(id: String) -> void:
 		if b_enabled: b_ok = b_ok and id == "reliquary_halo_commit" and "encounter:"+id in state.removed
 		super.activate_encounter(id)
@@ -157,7 +157,7 @@ func walk_through_blood_story(observer: BloodMain, profile_prefix: String = "") 
 	return true
 
 func start_blood_story() -> bool:
-	if not expect(game is BloodMain and game.h_enabled and game.h_ok and game.h_shots.size() == 32 and H_IDS.all(func(id): return game.h_deaths.get(id,0) == 1 and game.h_finishes.get(id) == "player") and game.budget() == B_CARRY and game.state.keys.is_empty() and game.state.discoveries.is_empty() and game.state.removed == game.h_removed,"Exact accepted actual Halo boundary:32 pistol shots/8 Player kills,76HP190armor148pistol32shells; no grant"): return false
+	if not expect(game is BloodMain and game.h_enabled and game.h_ok and game.h_shots.size() == 32 and H_IDS.all(func(id): return game.h_deaths.get(id,0) == 1 and game.h_finishes.get(id) == "player") and game.budget() == B_CARRY and game.state.keys.is_empty() and game.state.discoveries.is_empty() and game.state.removed == game.h_removed,"Exact accepted actual Halo boundary:32 pistol shots/8 Player kills,83HP193armor148pistol32shells; no grant"): return false
 	if not live_route(): return false
 	if not expect(B_LIMIT == (B_BLOOD_ROUTE.size()+B_STORY_ROUTE.size())*HOP_LIMIT+2*B_INPUT_LIMIT+B_IDLE,"Fresh bound derives only from13 fixed240-frame hops, two6-tick input windows and6 idle ticks"): return false
 	for spec in [B_BLOOD,B_STORY]:
@@ -198,13 +198,13 @@ func east_fire() -> bool:
 
 func clear_point(cell: Array):
 	if not b_started: return super.clear_point(cell)
-	# Halo's approach-only floor guard cannot describe the original -2m Blood/story floor.
+	# Retain the historical Blood/story scope against revision zero; native checks use current floor.
 	if cell[0] < 0.0 or cell[0] >= 13.0 or cell[1] < 14.0 or cell[1] > 22.5: return null
 	var layout = route_level.layout
 	if not layout.is_walkable(Vector2i(floori(cell[0]),floori(cell[1]))): return null
 	var point: Vector3 = layout.world_position(cell)
 	var floor_y: float = (float(cell[1])-26.0)*0.5 if cell[0] >= 8.0 and cell[0] <= 11.0 and cell[1] >= 22.0 else -2.0
-	if absf(point.y-floor_y) > 0.08: return null
+	if absf(layout.original_floor(3).world_position(cell).y-floor_y) > 0.08: return null
 	var space = route_level.get_world_3d().direct_space_state
 	var hit: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(point+Vector3.UP*2.0,point-Vector3.UP*0.5,1))
 	if hit.is_empty() or absf(hit.position.y-point.y) > 0.08 or hit.normal.y < 0.7: return null
@@ -261,8 +261,8 @@ func live_route() -> bool:
 			if not expect(not route_level.markers.has(id) and game.state.removed.count(id) == 1,"Allowed original marker removed once: "+id): return false
 		elif not expect(route_level.markers.has(id) and b_markers[id].get_ref() == route_level.markers[id] and not route_level.markers[id].is_queued_for_deletion() and not id in game.state.removed,"Every other original marker and owner preserved: "+id): return false
 	if not expect(route_level.markers.size() == b_markers.size()-consumed.size(),"No extra or replacement marker ownership"): return false
-	return expect(game.budget() == game.b_resources() and game.state.keys == (["blood"] if game.b_blood_calls == 1 else []) and game.state.discoveries == ([3] if game.b_story_calls == 1 else []) and game.state.removed == game.b_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == b_actors_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.b_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-b_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Frozen earned carry plus only observed24-health/key/story deltas; old recovery/actor-image/disk envelopes exact")
+	return expect(game.budget() == game.b_resources() and game.state.keys == (["blood"] if game.b_blood_calls == 1 else []) and game.state.discoveries == ([3] if game.b_story_calls == 1 else []) and game.state.removed == game.b_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == b_actors_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.b_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-b_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Frozen earned carry plus only observed17-health/key/story deltas; old recovery/actor-image/disk envelopes exact")
 
 func blood_story_result() -> bool:
 	print("RELIQUARY_BLOOD_STORY_LIMIT frames=",east_elapsed()," wall_us=",Time.get_ticks_usec()-b_wall," resources=",game.b_resources()," inputs=",game.b_inputs," removed=",game.b_removed," halo_shots=",game.h_shots.size())
-	return live_route() and expect(game.b_blood_calls == 1 and game.b_story_calls == 1 and game.b_health_calls == 1 and game.b_health_gain == 24 and game.b_inputs.size() == 2 and game.b_inputs[0][0] == B_BLOOD.id and game.b_inputs[1][0] == B_STORY.id and game.b_removed == game.h_removed+[B_BLOOD.id,B_HEALTH.id,B_STORY.id] and game.budget() == {"health":100,"armor":190,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1} and [B_BLOOD.id,B_STORY.id,B_HEALTH.id].all(func(id): return b_markers[id].get_ref() == null),"Earned Blood/story and automatic finite25-health supply complete exactly once, final100HP190armor148pistol32shells; no extra progress")
+	return live_route() and expect(game.b_blood_calls == 1 and game.b_story_calls == 1 and game.b_health_calls == 1 and game.b_health_gain == 17 and game.b_inputs.size() == 2 and game.b_inputs[0][0] == B_BLOOD.id and game.b_inputs[1][0] == B_STORY.id and game.b_removed == game.h_removed+[B_BLOOD.id,B_HEALTH.id,B_STORY.id] and game.budget() == {"health":100,"armor":193,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1} and [B_BLOOD.id,B_STORY.id,B_HEALTH.id].all(func(id): return b_markers[id].get_ref() == null),"Earned Blood/story and automatic finite25-health supply complete exactly once, final100HP193armor148pistol32shells; no extra progress")
