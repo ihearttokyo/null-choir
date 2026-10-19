@@ -3,6 +3,50 @@
 Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
+## Alpha 1 checkpoint — 19 October 2026
+
+**Unfinished alpha. Expect bugs, hitches and balance changes.**
+The full campaign, physical gamepad coverage, musical quality and sustained
+120 FPS target remain unverified. This checkpoint does not close the production
+upgrade.
+
+[Download the Apple Silicon Mac alpha](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.1/NULL-CHOIR-0.2.3-alpha.1-Apple-Silicon.zip)
+requires macOS 14 or newer. See the
+[Alpha 1 release notes](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.1)
+for the archive checksum and installation details.
+
+Archive SHA-256: `c49a64a434b10422947e894f1335d0479dc442be1c0f6ff3985d61ba03d67331`.
+
+### Included
+
+This build retains the eight-level campaign, current artwork, six weapons,
+HUD inventory and seal indicators, expanded story records and eight recorded
+level scores with their editable MIDI sources. Terrain descends from Intake's
+0–3 m range to Heart's −6–6 m range; later maps gain more elevation bands.
+Landmark aprons cover their full rotated bases. Save migration now preserves
+capsule clearance on slopes, and standing-floor recovery accepts only bounded
+contacts with the level's own floors.
+
+App source: [`a5cd327773e53ef0707fe097ea88720bb0ec82be`](https://github.com/ihearttokyo/null-choir/commit/a5cd327773e53ef0707fe097ea88720bb0ec82be),
+from the development branch in [PR95](https://github.com/ihearttokyo/null-choir/pull/95).
+PR95 remains unmerged while the remaining campaign regressions are completed.
+The prior public release and source history remain available for rollback.
+
+### Evidence and limits
+
+| Status | Evidence |
+| --- | --- |
+| PASS — source/native | Independent correctness and Ponytail reviews; all 79 source pins; immutable legacy-floor checks; capsule geometry and trust cases; 255 landmark floor contacts; all eight navigation maps with 64 closed/open role-state routes; 24 actor restoration cases. |
+| PASS — scripted input | Normal-time Intake, Foundry and Processional route checks, plus targeted Reliquary checks. The accelerated four-map earned route also passes; it is not physical gameplay or FPS evidence. |
+| PASS — candidate CI | Native terrain/save compatibility and both Python art-contract jobs at the exact app source commit. |
+| PASS — actual standalone archive | ARM64-only app, system-only dependencies, native Metal shader caches, all eight scene/art/recorded-PCM and MIDI checks, late weapons/boss imports, title/start/fire/pause/checkpoint checks and isolated userdata. Developer ID signature, Apple notarization, staple validation and Gatekeeper pass on the extracted final ZIP. |
+| BLOCKED — longer normal-time replay | Two attempts stopped under the host swap-growth safeguard. Neither establishes campaign completion. Later saved-outcome regression guards remain fail-closed pending new earned outcomes. |
+| NOT RUN — full acceptance | Full physical-input campaign, both seal orders across all difficulties, final listening, sustained 120 FPS, input-ready cold menu ≤3 s, ordinary transitions ≤2 s, final GPU/memory/scaling and rendered 8K level-intro acceptance. |
+
+The unreleased level-intro art and title-music experiments are excluded from
+this archive. Keep system security protections enabled and save progress
+through the pause menu.
+
 ## Current recovery and hill-climb — 2026-10-06
 
 Jared released the NULL CHOIR launch, native, GUI and project promotion holds.

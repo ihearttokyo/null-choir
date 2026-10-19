@@ -8,7 +8,7 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 [![Illustrated NULL CHOIR key art](docs/site-assets/arch.jpg)](https://ihearttokyo.github.io/null-choir/)
 
-[Download the Apple Silicon Mac playtest](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.2-suno.2). Requires macOS 14 or newer. This download is Developer ID-signed and Apple-notarized, with its verification ticket included. If macOS blocked the earlier download, extract and open this new copy; keep system security protections enabled. Full campaign pacing, physical gamepad coverage and musical quality remain playtest questions.
+[Download the Apple Silicon Mac alpha](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.1/NULL-CHOIR-0.2.3-alpha.1-Apple-Silicon.zip). **Alpha 1 — unfinished checkpoint, not a final release.** Requires macOS 14 or newer. This download is Developer ID-signed and Apple-notarized, with its verification ticket included. Expect bugs, hitches and balance changes; full campaign and 120 FPS performance are not yet verified. Keep system security protections enabled. [Changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.1).
 
 [LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
 
