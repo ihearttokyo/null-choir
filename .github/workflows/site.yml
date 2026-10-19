@@ -5,6 +5,8 @@ on:
     paths:
       - 'docs/**'
       - 'README.md'
+      - 'AGENTS.md'
+      - 'CHECKPOINT.md'
       - 'LICENSE'
       - 'game/licenses/NULL-CHOIR.txt'
       - 'tests/test_splash.py'
