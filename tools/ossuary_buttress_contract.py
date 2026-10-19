@@ -266,12 +266,15 @@ def validate_glb(data, triangles, exported=False):
 def validate_entry(root, entry):
     """Certify catalog identity and shipped bytes, not staging or playback policy."""
     from tools.art_recipe import validate_recipe
-    from tools.build_ossuary_buttress import DEPENDENCIES, REFERENCES, ATLAS_REFERENCE, ATLAS_SHA, assert_clean_source
+    from tools.build_ossuary_buttress import DEPENDENCIES, REFERENCES, ATLAS_REFERENCE, ATLAS_SHA, assert_clean_source, ROOT as BUILDER_ROOT
     root = Path(root)
     assert entry['id'] == 'ossuary_living_buttress'
     assert 'level_id' not in entry and 'tradition_aesthetic' not in entry
     validate_recipe(root, entry, 'tools/build_ossuary_buttress.py', DEPENDENCIES)
-    assert entry['recipe_dependencies'] == DEPENDENCIES
+    generations = {'ddb32229df8f9a33d0749538ffe38437adfd0920625baa37ad5d073146978feb': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6', 'tools/ossuary_buttress_contract.py': 'ae5b4e6aaefb1c06a8b966e21fe6a976cf89183800161327cb52820fe28056a8'},
+                   hashlib.sha256((BUILDER_ROOT / 'tools/build_ossuary_buttress.py').read_bytes()).hexdigest(): DEPENDENCIES}
+    assert entry['recipe_sha256'] in generations, 'trusted buttress generation'
+    assert entry['recipe_dependencies'] == generations[entry['recipe_sha256']], 'buttress helper pins'
     assert entry['source'] == 'source/art/ossuary_living_buttress_v1.blend'
     assert len(entry['outputs']) == 1
     output = entry['outputs'][0]

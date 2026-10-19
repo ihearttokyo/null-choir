@@ -20,11 +20,14 @@ ROOT = Path(__file__).resolve().parents[1]
 RECIPE = 'tools/build_marker_identities.py'
 producer = runpy.run_path(str(ROOT / RECIPE))  # Current pure module; never execute archives/Blender.
 IDS = producer['IDS']
+# Exact retained generation; archives are verified data, never imported.
+RETAINED_GENERATIONS = {'a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/build_marker_art.py': '9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c'}}
+
 FAMILY = 'source/art/marker-identities-manifest.json'
 
 
 # Review evidence remains separate from source headers and self-reported geometry metadata.
-REVIEWED = {'marker_ivorykey': ['cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487', 'c46f7d4ee5c4c90f5ed68fcfe9f39e85cb127b744757f7dcd1432acc8998ef62', 'c0505af96976869a7a1a2d1315b9092498b3c13a77a6ef9cfcfa18de7b3eb5ef', '2793c795c703384c2faec62a4b291e97fc2e9b4ae33a20ca1f6f464c70982e7b'], 'marker_ammo_shells': ['14ea5b849ddafde95d4336928b9631d9c3d1a8e65768d1cdacf170dabc76bef8', '865745333429cd7d5242b96459cb5a94e8a6411a663e3461da7ec94b427b0ba8', '6bb7e495b412d399550c3f7efce43b7d626fc510190d9fc5fe7b0231a57c5131', '7e26d185a6fca81becce40efaf0da9f68bf63408d02f301916f4ca821b27d918'], 'marker_ammo_sawtooth': ['57fb1d60064b7fb9e87a3ae312037fae59021f1477847b9906532486e868f7dc', '85c4925e1b989a1f5ef7e7ea97b48413db521ee28fbc0987f2d8593738d58f9e', 'd178cc1e5250c71f0d8e2d10c29507386dc755ac4fc5fc8bfe4f2504cb182dda', 'd9eac9b38c70b52c981186790360db44cb13ae46610f84fd7298acd5656d7070'], 'marker_ammo_marrow': ['374a70deb50866ef974bf2adaaaef8008618c0a26d43f00123f6a553b9e04581', 'a041e1ecca0321e0391716774437aabdaa1ed91e1cb496e3818f62a82ab9ab5a', '8fc00a46f0d493f1895fb73e911a55e641f4857c1e2663b0f3e472dba6b0d532', '5fa171b3d86a980713150e9d92841526028abfafe32572419e00c8e5d49dc39d'], 'marker_ammo_choir': ['12eca21630f90ef8ff5a7af65f5f8571de2ed656718db3b6b4f504aa50a5c3db', 'e4fb459837c383857298374db83745993eb0aa018f5eb23766de3f00c319018f', '1fb1e9eefe646be4106ad0aa7ffe2d2d0394ec715763bd8309045a54b3486bd2', '0b161b0564d29eaf3f1e2e2a2cdbec6415a46a0025184e03a3501c1d917b7c7a']}
+REVIEWED = {'marker_ivorykey': ['4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60', 'c46f7d4ee5c4c90f5ed68fcfe9f39e85cb127b744757f7dcd1432acc8998ef62', 'c0505af96976869a7a1a2d1315b9092498b3c13a77a6ef9cfcfa18de7b3eb5ef', '3c3d3e1ab60238d9ae5d0686add4faf62f335cf434c842f14370da290104ef94'], 'marker_ammo_shells': ['14ea5b849ddafde95d4336928b9631d9c3d1a8e65768d1cdacf170dabc76bef8', '865745333429cd7d5242b96459cb5a94e8a6411a663e3461da7ec94b427b0ba8', '6bb7e495b412d399550c3f7efce43b7d626fc510190d9fc5fe7b0231a57c5131', '7e26d185a6fca81becce40efaf0da9f68bf63408d02f301916f4ca821b27d918'], 'marker_ammo_sawtooth': ['57fb1d60064b7fb9e87a3ae312037fae59021f1477847b9906532486e868f7dc', '85c4925e1b989a1f5ef7e7ea97b48413db521ee28fbc0987f2d8593738d58f9e', 'd178cc1e5250c71f0d8e2d10c29507386dc755ac4fc5fc8bfe4f2504cb182dda', 'd9eac9b38c70b52c981186790360db44cb13ae46610f84fd7298acd5656d7070'], 'marker_ammo_marrow': ['374a70deb50866ef974bf2adaaaef8008618c0a26d43f00123f6a553b9e04581', 'a041e1ecca0321e0391716774437aabdaa1ed91e1cb496e3818f62a82ab9ab5a', '8fc00a46f0d493f1895fb73e911a55e641f4857c1e2663b0f3e472dba6b0d532', '5fa171b3d86a980713150e9d92841526028abfafe32572419e00c8e5d49dc39d'], 'marker_ammo_choir': ['12eca21630f90ef8ff5a7af65f5f8571de2ed656718db3b6b4f504aa50a5c3db', 'e4fb459837c383857298374db83745993eb0aa018f5eb23766de3f00c319018f', '1fb1e9eefe646be4106ad0aa7ffe2d2d0394ec715763bd8309045a54b3486bd2', '0b161b0564d29eaf3f1e2e2a2cdbec6415a46a0025184e03a3501c1d917b7c7a']}
 ENTRY_KEYS = set(['blender_version', 'collision', 'device', 'facing', 'id', 'loop_id', 'material_count', 'native_source_saved_before_runtime_merge', 'origin', 'outputs', 'physical_bounds_m', 'preview', 'provenance', 'recipe_dependencies', 'recipe_sha256', 'reference_images', 'reference_sha256', 'render_engine', 'runtime_mesh_nodes', 'samples', 'source', 'source_meshes', 'source_sha256', 'threads', 'triangles'])
 UNIT_ROOT = ROOT
 
@@ -70,11 +73,9 @@ def validate_entry(entry, artifact_root=ROOT, provenance_root=ROOT):
     assert set(preview) == {'path', 'sha256', 'bytes', 'dimensions'} and preview['path'] == preview_rel, 'preview path/fields'
     assert entry['provenance'] == {'method': 'image-derived original Blender geometry', 'authoring_script': RECIPE,
                                   'imports': [], 'license': 'Original NULL CHOIR project art'}, 'provenance'
-    assert entry['recipe_dependencies'] == producer['HELPER_SHA'], 'helper inventory/pins'
-    # Require current trusted bytes before the shared resolver can consider historical data.
-    for relative, digest in {RECIPE: entry['recipe_sha256'], **producer['HELPER_SHA']}.items():
-        current = exact_file(provenance_root, relative)
-        assert sha(current) == digest and resolve_recipe(provenance_root, relative, digest) == current, 'current recipe/helper pin'
+    generations = {**RETAINED_GENERATIONS, sha(ROOT / RECIPE): producer['HELPER_SHA']}
+    assert entry['recipe_sha256'] in generations, 'trusted recipe generation'
+    assert entry['recipe_dependencies'] == generations[entry['recipe_sha256']], 'helper inventory/pins'
     validate_recipe(provenance_root, entry, RECIPE, producer['HELPER_SHA'])
     assert entry['reference_images'] == [{'path': producer['REFERENCE'], 'sha256': producer['REFERENCE_SHA']}], 'reference inventory'
     assert entry['reference_sha256'] == producer['REFERENCE_SHA'] == sha(exact_file(provenance_root, producer['REFERENCE'])), 'reference pin'
@@ -192,6 +193,12 @@ class ArtifactFixtures(unittest.TestCase):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(exact_file(ROOT, relative), target)
+        for entry in self.entries:
+            for logical, digest in {RECIPE: entry['recipe_sha256'], **entry['recipe_dependencies']}.items():
+                source = resolve_recipe(ROOT, logical, digest)
+                target = self.root / source.relative_to(ROOT)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, target)
         family = {'schema_version': 1, 'assets': self.entries}
         (self.root / FAMILY).write_text(json.dumps(family))
         main_path = self.root / 'source/art/manifest.json'

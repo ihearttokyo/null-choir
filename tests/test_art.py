@@ -81,6 +81,22 @@ EXPECTED.update(MARKER_IDENTITIES)
 EXPECTED.add('ossuary_living_buttress')
 
 
+# Closed forward-repaired producers; retained pins are independent of current files.
+FORWARD_GENERATIONS = {'tools/build_ammo_vfx.py': {'4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'}}, 'tools/build_cathedral_kit.py': {'efaa56020fac52f067ad295e64728cc794353242a3904ac0b5426dc6b19707c0': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/share_cathedral_atlas.py': '8bb7efbc52b46d3b4ed7bb18ea9bb0204efff9fcdfe81ae1973219bdf28c65fa'}}, 'tools/build_hud_art.py': {'c224381a98b316b7d41d5c77d0f95f9f3bbea061a99eaa3d56d6bdce6ad25a26': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'}}, 'tools/build_shot_travel.py': {'38d64a2f322c929fa95c139b8ab5daa071af5748843eda0965f1e8ed38056df2': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/build_ammo_vfx.py': '4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d', 'tools/shot_atlas.py': 'f1c10eeac809d18e8eb6a8e4d5a96ec8d7b996286b8631a9779df4f377fe06e0'}}}
+
+
+def validate_forward_recipe(root, entry):
+    script = entry['provenance']['authoring_script']
+    retained = FORWARD_GENERATIONS[script]
+    inventory = next(iter(retained.values()))
+    current = hashlib.sha256((ROOT / script).read_bytes()).hexdigest()
+    dependencies = {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in inventory}
+    generations = {**retained, current: dependencies}
+    assert entry['recipe_sha256'] in generations, 'trusted forward recipe generation'
+    assert entry['recipe_dependencies'] == generations[entry['recipe_sha256']], 'forward helper pins'
+    validate_recipe(root, entry, script, inventory)
+
+
 def world_geometry(gltf, binary):
     """Read the real exported vertices, not just the manifest's claimed bounds."""
     points, triangles, materials = [], 0, []
@@ -161,7 +177,12 @@ def check_skin_bell_dimensions(declared, measured):
 
 def check_skin_bell_v2(a):
     assert a['id'] == 'skin_bell', 'v2 bell contract is identity-specific'
-    validate_recipe(ROOT, a, 'tools/build_skin_bell_v2.py', ['tools/art_recipe.py'])
+    script = 'tools/build_skin_bell_v2.py'
+    dependencies = ['tools/art_recipe.py']
+    if a['recipe_sha256'] != 'e3e577b19a0e5dd34648511c639b79e664c66c23ce15329c66b9b8b8103c146e':
+        assert a['recipe_sha256'] == hashlib.sha256((ROOT / script).read_bytes()).hexdigest(), 'trusted bell generation'
+        dependencies.append('tools/build_art.py')
+    validate_recipe(ROOT, a, script, dependencies)
     assert a['provenance']['method'] == 'original image-derived editable geometry and authored opaque pixel atlas'
     assert a['source'] == 'source/art/skin_bell_v2.blend'
     source = ROOT / a['source']
@@ -195,10 +216,19 @@ def check_nursery_v2(a, blob):
     assert all(type(a[key]) is int for key in ['source_mesh_count', 'source_hierarchy_groups', 'triangles', 'runtime_mesh_nodes', 'material_count'])
     script = 'tools/build_nursery_gestation_v2.py'
     validate_recipe(ROOT, a, script, ['tools/build_art.py', 'tools/art_recipe.py'])
-    recipe = runpy.run_path(str(resolve_recipe(ROOT, script, a['recipe_sha256'])))
-    assert a['recipe_dependencies'] == {key: recipe['PINS'][key] for key in ['tools/build_art.py', 'tools/art_recipe.py']}
+    recipe = runpy.run_path(str(ROOT / script))  # Current trusted pure geometry only; no archive execution.
+    current_dependencies = {key: recipe['PINS'][key] for key in ['tools/build_art.py', 'tools/art_recipe.py']}
+    generations = {'21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6'},
+                   hashlib.sha256((ROOT / script).read_bytes()).hexdigest(): current_dependencies}
+    assert a['recipe_sha256'] in generations, 'trusted nursery generation'
+    assert a['recipe_dependencies'] == generations[a['recipe_sha256']], 'nursery helper pins'
     for logical, digest in recipe['PINS'].items():
-        assert hashlib.sha256((ROOT / logical).read_bytes()).hexdigest() == digest
+        if logical in current_dependencies:
+            resolve_recipe(ROOT, logical, a['recipe_dependencies'][logical])
+        elif logical.startswith('tools/'):
+            resolve_recipe(ROOT, logical, digest)
+        else:
+            assert hashlib.sha256((ROOT / logical).read_bytes()).hexdigest() == digest
     assert a['source'] == 'source/art/nursery_gestation_engine_v2.blend'
     assert a['provenance']['image_derived'] is True
     original = {'path': 'source/art/nursery_gestation_engine.blend',

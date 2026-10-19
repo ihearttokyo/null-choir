@@ -13,7 +13,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = ROOT/'source/art/references/hud-reference-v1.png'
 REFERENCE_SHA = '16045d1e30d36fe544f4939d871a4f67b34b409eb7e39b8ec63213d6d7ee7f8e'
-HELPER_SHA = '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'
+HELPER_SHA = '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a'
 PALETTE = {'basalt':'#17191d', 'shadow':'#08090c', 'ivory':'#d8c7a4',
            'brass':'#a8793e', 'wear':'#e1bd7d', 'oxblood':'#762b30',
            'flesh':'#aa544c', 'amber':'#eab15d', 'core':'#ffe2a6'}
@@ -334,6 +334,7 @@ def main():
     blend = art.target(art.ART/'hud_kit.blend')
     atlas = art.target(art.OUT/'hud/hud_kit.png')
     scene.render.filepath = str(art.target(art.SCRATCH/'frames/hud-native-atlas.png'))
+    art.sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=False)
     pixels = art.pixels_render(scene,'hud-native-atlas',512,192)
     art.png(atlas,512,192,pixels)

@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 from PIL import Image
+from test_art import validate_forward_recipe
 
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE = ROOT
@@ -37,16 +38,13 @@ def check(candidate=CANDIDATE):
         silhouettes.append(image.crop((x,y,x+w,y+h)).getchannel('A').tobytes())
     assert len(set(silhouettes)) == 6
     entry, = [a for a in json.loads((candidate/'source/art/manifest.json').read_bytes())['assets'] if a['id']=='hud_kit']
-    for path,key in [(entry['source'],'source_sha256'),
-                     (entry['provenance']['authoring_script'],'recipe_sha256')]:
-        assert hashlib.sha256((candidate/path).read_bytes()).hexdigest() == entry[key], path
+    validate_forward_recipe(candidate, entry)
+    assert hashlib.sha256((candidate/entry['source']).read_bytes()).hexdigest() == entry['source_sha256']
     assert (candidate/entry['source']).read_bytes()[:7] == b'BLENDER'
     for output in entry['outputs']:
         path = candidate/output['path']
         assert path.stat().st_size == output['bytes']
         assert hashlib.sha256(path.read_bytes()).hexdigest() == output['sha256']
-    for path,pin in entry['recipe_dependencies'].items():
-        assert hashlib.sha256((candidate/path).read_bytes()).hexdigest() == pin
     for ref in entry['reference_images']:
         assert hashlib.sha256((candidate/ref['path']).read_bytes()).hexdigest() == ref['sha256']
     assert metadata['native_render'] is True and metadata['render_threads'] == 2

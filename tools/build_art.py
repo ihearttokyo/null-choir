@@ -271,8 +271,34 @@ def atlas(name, cells, columns, rows, width, height):
     return path
 
 
+def _portable_path(owner, name, value):
+    # RNA fixed-size strings retain bytes after NUL; overwrite the full field first.
+    limit = owner.bl_rna.properties[name].length_max
+    if limit > 1:
+        setattr(owner, name, (b'/' if isinstance(value, bytes) else '/') * (limit - 1))
+    setattr(owner, name, value)
+
+
+def sanitize_source_paths(bpy):
+    for image in bpy.data.images:
+        if not image.packed_file:
+            continue
+        relative = '//' + bpy.path.basename(image.filepath)
+        _portable_path(image, 'filepath_raw', relative)
+        for packed in image.packed_files:
+            _portable_path(packed, 'filepath', relative)
+    for scene in bpy.data.scenes:
+        _portable_path(scene.render, 'filepath', '//')
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            for space in area.spaces:
+                if space.type == 'FILE_BROWSER' and space.params:
+                    _portable_path(space.params, 'directory', b'//')
+
+
 def save(name):
     path = target(ART / f'{name}.blend')
+    sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(path), compress=False, check_existing=False)
     return path
 

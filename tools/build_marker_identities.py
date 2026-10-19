@@ -12,7 +12,7 @@ IDS = ('marker_ivorykey', 'marker_ammo_shells', 'marker_ammo_sawtooth',
 REFERENCE = 'source/art/references/marker-identities-v2.png'
 REFERENCE_SHA = '061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0'
 RECIPE = 'tools/build_marker_identities.py'
-HELPER_SHA = {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581',
+HELPER_SHA = {'tools/build_art.py': '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a',
               'tools/build_marker_art.py': '9151707aced076b1c0040b0417499c6a32a1eab6e88f273562488a2759c67c9c'}
 DIMENSION_CAP = (.9, .9, 1.2)
 TRIANGLE_CAP, MATERIAL_CAP, GLB_CAP = 2500, 8, 150000

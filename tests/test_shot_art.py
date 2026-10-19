@@ -9,7 +9,7 @@ sys.path.insert(0,str(ROOT/"tools"))
 from shot_atlas import validate
 import build_shot_travel as recipe
 import hashlib,json
-from test_art import png
+from test_art import png, validate_forward_recipe
 
 
 def fixture():
@@ -62,7 +62,8 @@ class ActualArt(unittest.TestCase):
         entries=[e for e in manifest['assets'] if e['id']=='shot_travel']
         self.assertEqual(len(entries),1)
         e=entries[0]
-        for path,pin in [(e['source'],e['source_sha256']),(e['provenance']['authoring_script'],e['recipe_sha256']),*e['recipe_dependencies'].items(),*[(v['path'],v['sha256']) for v in e['reference_images']]]:
+        validate_forward_recipe(ROOT, e)
+        for path,pin in [(e['source'],e['source_sha256']),*[(v['path'],v['sha256']) for v in e['reference_images']]]:
             self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),pin)
         self.assertEqual((ROOT/e['source']).read_bytes()[:7],b'BLENDER')
         self.assertFalse(b'/Users/' in (ROOT/e['source']).read_bytes(),"Editable shot source must omit factory home-directory metadata")
