@@ -32,6 +32,8 @@ assert ':focus-visible' in css and 'max-width:760px' in css
 assert (ROOT/'docs/site-assets/arch.jpg').is_file()
 assert (ROOT/'docs/site-assets/arch.jpg').stat().st_size<1_500_000
 assert (ROOT/'LICENSE').read_bytes()==(ROOT/'game/licenses/NULL-CHOIR.txt').read_bytes()
+workflow=(ROOT/'.github/workflows/site.yml').read_text()
+assert "      - 'LICENSE'" in workflow and "      - 'game/licenses/NULL-CHOIR.txt'" in workflow, 'License-only changes must run parity checks'
 assert '@media(max-width:480px)' in css and 'repeat(2,minmax(0,1fr))' in css, "Narrow mobile chapter grid requires two columns"
 assert '.skip:hover{color:var(--ink)}' in css, "Hovered skip link contrast must remain readable"
 print('PASS static splash entry, links, responsive/focus rules, asset budget, privacy and license parity')
