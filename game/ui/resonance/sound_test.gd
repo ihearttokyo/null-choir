@@ -43,11 +43,12 @@ func bind_music(music: Node) -> void:
 		var properties := PackedStringArray()
 		for property in music.get_property_list():
 			properties.append(property.name)
-		if "player" in properties and "level_tracks" in properties and music.has_signal("playback_started") and music.has_method("play_level") and music.has_method("set_paused") and music.has_method("stop"):
+		if "player" in properties and "level_tracks" in properties and "title_track" in properties and music.has_method("play_title") and music.has_signal("playback_started") and music.has_method("play_level") and music.has_method("set_paused") and music.has_method("stop"):
 			var catalog: Variant = music.get("level_tracks")
 			if catalog is PackedStringArray:
 				_music_ref = weakref(music)
 				_tracks = catalog.duplicate()
+				_tracks.append(music.get("title_track"))
 				music.connect("playback_started", _on_playback_started)
 	if is_node_ready():
 		_rebuild_tracks()
@@ -91,7 +92,10 @@ func play_track(index: int) -> bool:
 		return false
 	_start_confirmed = false
 	_starting_preview = true
-	music.call("play_level", index)
+	if index == _tracks.size() - 1:
+		music.call("play_title")
+	else:
+		music.call("play_level", index)
 	_starting_preview = false
 	if not _start_confirmed or player.stream == null or player.stream.resource_path != _tracks[index]:
 		_feedback("Recording could not start: " + _track_name(index))
@@ -233,7 +237,7 @@ func _clock(seconds: float) -> String:
 	return "%d:%02d" % [whole / 60, whole % 60]
 
 func _track_name(index: int) -> String:
-	return _tracks[index].get_file().get_basename().capitalize()
+	return ("Title — " if index == _tracks.size() - 1 else "") + _tracks[index].get_file().get_basename().capitalize()
 
 func _feedback(text: String) -> void:
 	if is_instance_valid(_message):

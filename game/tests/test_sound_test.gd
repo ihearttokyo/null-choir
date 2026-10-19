@@ -21,7 +21,8 @@ func run() -> void:
 	root.add_child(screen)
 	screen.set_process(false)
 	assert(player.stream == null, "Opening must not start or replace music")
-	assert(screen._tracks.size() == 8)
+	assert(music.level_tracks.size() == 8)
+	assert(screen._tracks.size() == 9)
 	for i in 8:
 		assert(screen._track_buttons[i].text == "%d  %s" % [i + 1, music.level_tracks[i].get_file().get_basename().capitalize()])
 		assert(screen._track_buttons[i].focus_mode == Control.FOCUS_ALL)
@@ -39,9 +40,22 @@ func run() -> void:
 	screen.toggle_playback()
 	assert(not player.stream_paused)
 	screen.step_track(1)
+	assert(screen._selected == 8)
+	assert(screen._track_buttons[8].text == "9  Title — The Restraint Turns")
+	assert(player.stream is AudioStreamOggVorbis and player.stream.resource_path == music.title_track)
+	assert(player.playing and player.stream.loop and player.stream.loop_offset == 0.0)
+	assert(music.player == player and AudioServer.get_bus_count() == bus_count)
+	assert(AudioServer.get_bus_volume_db(bus) == -12.0 and AudioServer.is_bus_mute(bus))
+	var title_stream: AudioStream = player.stream
+	assert(screen.play_track(8) and player.stream == title_stream, "Already-playing title must confirm preview ownership")
+	screen.toggle_playback()
+	assert(player.stream_paused)
+	assert(screen.play_track(8) and player.stream == title_stream and not player.stream_paused)
+	screen.step_track(1)
 	assert(screen._selected == 0)
 	screen.step_track(-1)
-	assert(screen._selected == 7)
+	assert(screen._selected == 8)
+	title_stream = null
 	var stream: AudioStream = player.stream
 	assert(not screen.play_track(-1) and player.stream == stream)
 	var real_track: String = screen._tracks[0]
@@ -59,6 +73,18 @@ func run() -> void:
 	assert(screen._message.text.contains("could not start"))
 	screen._tracks[0] = real_track
 	music.level_tracks[0] = real_track
+	var real_title: String = music.title_track
+	screen._tracks[8] = "res://missing-sound-test-title.ogg"
+	assert(not screen.play_track(8) and player.stream == stream)
+	screen._tracks[8] = incompatible
+	music.title_track = incompatible
+	print("EXPECTED_NEGATIVE: Music rejects one existing non-Ogg title")
+	assert(not screen.play_track(8))
+	assert(player.stream == null and not player.playing and screen._selected == selected_before)
+	assert(screen._message.text.contains("could not start") and screen._preview_stream == null)
+	screen._tracks[8] = real_title
+	music.title_track = real_title
+	assert(screen.play_track(8))
 	stream = null
 	screen.set_reduced_motion(true)
 	screen._process(1.0)
@@ -79,6 +105,11 @@ func run() -> void:
 	screen.close()
 	assert(player.stream != null and player.playing, "External same-track start relinquishes preview ownership")
 	assert(screen._music_ref == null and screen._preview_stream == null)
+	screen.bind_music(music)
+	assert(screen.play_track(8))
+	music.play_title()
+	screen.close()
+	assert(player.stream is AudioStreamOggVorbis and player.playing, "External same-title request relinquishes preview ownership")
 	screen.close()
 	screen.free()
 	music.stop()
@@ -91,13 +122,13 @@ func run() -> void:
 	assert(not unavailable.play_track(0), "Existing owner without a ready player is unavailable")
 	not_ready.free()
 	unavailable.bind_music(music)
-	assert(unavailable.play_track(0))
+	assert(unavailable.play_track(8))
 	var returns: Array[int] = [0]
 	unavailable.back_requested.connect(func(): returns[0] += 1)
 	unavailable.request_back()
 	assert(returns[0] == 1 and player.stream == null)
 	unavailable.bind_music(music)
-	assert(unavailable.play_track(0))
+	assert(unavailable.play_track(8))
 	unavailable.free()
 	assert(player.stream == null, "Freeing a preview screen stops its owned recording")
 	unavailable = SoundTest.new()

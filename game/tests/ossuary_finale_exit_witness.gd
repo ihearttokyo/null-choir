@@ -288,7 +288,7 @@ func cx_menu(drained: bool) -> bool:
 	var returns: Array = game.menu.get_children().filter(func(node): return node is Button and node.text == "Return to title")
 	if game.menu.get_children().filter(func(node): return node is Button).size() != 2 or returns.size() != 1 or returns[0].disabled or not returns[0].pressed.is_connected(Callable(game,"show_title")): return false
 	if cx_button != null and buttons[0] != cx_button: return false
-	if game.music.player.playing or game.music.player.stream != null or game.effects.players.values().any(func(node): return node.playing): return false
+	if not game.music.player.playing or game.music.player.stream_paused or not game.music.player.stream is AudioStreamOggVorbis or game.music.player.stream.resource_path != game.music.title_track or game.effects.players.values().any(func(node): return node.playing): return false
 	if game.state.to_dict() != cx_expected or FileAccess.get_file_as_bytes(profile) != cx_expected_bytes or FileAccess.get_sha256(profile) != cx_expected_sha: return false
 	if drained and (cx_world_ref.get_ref() != null or cx_player_ref.get_ref() != null or cx_actor_refs.values().any(func(ref): return ref.get_ref() != null) or markers.values().any(func(ref): return ref.get_ref() != null)): return false
 	return true

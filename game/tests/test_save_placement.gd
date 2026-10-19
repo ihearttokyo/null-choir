@@ -269,7 +269,7 @@ func run():
 						await finish(1)
 						return
 				else:
-					if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or game.capture_requests != pending_captures or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.music.player.playing:
+					if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or game.capture_requests != pending_captures or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or not game.music.player.playing or game.music.player.stream_paused or not game.music.player.stream is AudioStreamOggVorbis or game.music.player.stream.resource_path != game.music.title_track:
 						push_error("INTENDED RED: pending startup must not reactivate/capture after cancellation: "+cancel+" phase="+str(elapsed_frames)+" settled="+str(settled_frame))
 						await finish(1)
 						return
@@ -299,6 +299,7 @@ func freeze():
 
 func finish(status: int):
 	game.show_title()
+	game.music.stop()
 	paused = false
 	var until = Time.get_ticks_usec()+150000
 	while Time.get_ticks_usec() < until: await process_frame

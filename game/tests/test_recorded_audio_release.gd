@@ -11,7 +11,7 @@ func run() -> void:
 	game.settings_path = prefix+"_preferences.json"
 	game.progress_path = prefix+"_campaign.json"
 	root.add_child(game)
-	if not expect(not await RecordedAudioRelease.stop(game),"Missing recording must fail closed"): return
+	if not expect(not await RecordedAudioRelease.stop(game),"Title-only playback must not count as a retained campaign recording"): return
 	game.state.new_campaign(1)
 	await game.start_level()
 	var held: AudioStreamMP3 = game.music.player.stream
@@ -24,6 +24,8 @@ func run() -> void:
 	await game.start_level()
 	var recording: WeakRef = weakref(game.music.player.stream)
 	if not expect(await RecordedAudioRelease.stop(game) and recording.get_ref() == null,"Unretained native recording must release"): return
+	game.music.stop()
+	await load("res://tests/wall_clock_wait.gd").seconds(self,0.15)
 	game.free()
 	paused = false
 	await process_frame

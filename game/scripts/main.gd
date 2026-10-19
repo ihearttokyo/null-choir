@@ -683,7 +683,8 @@ func show_title() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if music != null:
 		music.set_pressure(0)
-		music.stop()
+		if quitting: music.stop()
+		else: music.play_title()
 	if effects != null: effects.stop()
 	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Sound test",show_sound_test],["Quit",quit_game]])
 
@@ -1220,6 +1221,7 @@ func _verify_export() -> void:
 		var texture = load("res://assets/art/weapons/"+weapon.asset+".png")
 		checks["weapon_art_"+weapon.asset] = texture is Texture2D and texture.get_width() == 960 and texture.get_height() == 200
 	show_title()
+	music.stop()
 	get_tree().paused = false
 	# Existing native fixture grace: stopped effects release on the next audio mix.
 	await get_tree().create_timer(0.1).timeout

@@ -94,7 +94,7 @@ func cancelled(title: String, expected_document: Dictionary, context: String) ->
 	if game.state.to_dict() != expected_document:
 		push_error("Pending continuation must preserve resources/story/routes/recovery snapshots: "+context)
 		return false
-	if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or game.music.player.playing:
+	if game.playing or not paused or game.level != null or game.player != null or game.placement_pending or Input.mouse_mode != Input.MOUSE_MODE_VISIBLE or not game.music.player.playing or game.music.player.stream_paused or not game.music.player.stream is AudioStreamOggVorbis or game.music.player.stream.resource_path != game.music.title_track:
 		push_error("Pending continuation must not reactivate after menu cancellation: "+context)
 		return false
 	if not game.menu_scroll.visible or not game.menu.visible or game.menu.get_child_count() == 0 or game.menu.get_child(0).text != title:
@@ -108,6 +108,7 @@ func freeze():
 
 func finish(status: int):
 	game.show_title()
+	game.music.stop()
 	paused = false
 	var until = Time.get_ticks_usec()+150000
 	while Time.get_ticks_usec() < until: await process_frame
