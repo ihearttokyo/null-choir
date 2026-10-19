@@ -24,6 +24,7 @@ var player: CharacterBody3D
 var music: Node
 var effects: Node
 var enemies: Array = []
+var sound_test: Control
 var menu: VBoxContainer
 var menu_scroll: ScrollContainer
 var pending_action: String = ""
@@ -196,6 +197,7 @@ func start_campaign(mode: int) -> void:
 	start_level()
 
 func start_level() -> void:
+	_close_sound_test()
 	if is_instance_valid(player): player.cancel_actions()
 	# Reuse the atomic Campaign boundary for all three selected resource envelopes.
 	if not state.from_dict(state.to_dict()):
@@ -683,7 +685,28 @@ func show_title() -> void:
 		music.set_pressure(0)
 		music.stop()
 	if effects != null: effects.stop()
-	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Quit",quit_game]])
+	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Sound test",show_sound_test],["Quit",quit_game]])
+
+func show_sound_test() -> void:
+	if playing or placement_pending or is_instance_valid(level): return
+	_close_sound_test()
+	menu_scroll.hide()
+	sound_test = load("res://ui/resonance/sound_test.gd").new()
+	sound_test.bind_music(music)
+	sound_test.back_requested.connect(show_title)
+	sound_test.music_volume_changed.connect(_sound_test_volume_changed)
+	canvas.add_child(sound_test)
+
+func _close_sound_test() -> void:
+	if is_instance_valid(sound_test):
+		sound_test.close()
+		sound_test.queue_free()
+	sound_test = null
+
+func _sound_test_volume_changed(value: float) -> void:
+	settings.music_volume = value
+	_apply_volumes()
+	_save_settings()
 
 func continue_campaign() -> void:
 	if not state.load_progress(progress_path):
@@ -796,6 +819,7 @@ func show_controls() -> void:
 	menu.get_child(2).grab_focus()
 
 func _show_menu(title: String, actions: Array) -> void:
+	_close_sound_test()
 	if placement_pending: show_title()
 	pending_action = ""
 	pending_button = null
@@ -823,6 +847,7 @@ func _button(text: String, action: Callable) -> void:
 	if menu.get_child_count() == 2: button.grab_focus()
 
 func notify(text: String, duration: float = 3) -> void:
+	if is_instance_valid(sound_test): sound_test._feedback(text)
 	message = text
 	message_time = duration
 

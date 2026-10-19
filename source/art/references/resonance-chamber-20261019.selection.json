@@ -1,0 +1,12 @@
+{
+  "reference": "resonance-chamber-20261019.png",
+  "sha256": "98e97f51b00e6b6f32bd418ae625c000997d4b07725fcb3b5a956240b909a0b7",
+  "source": "GPT Image generated composition reference",
+  "selection": "Brass/bone recursive rosewindow, ember cavities and violet/cyan nave; native code artwork follows selected composition and palette. Invented reference track titles are not used.",
+  "inspection": "Actual image inspected by the implementing art/code agent before execution; generated reference and native UI preview inspected during integration.",
+  "editable_runtime": [
+    "game/ui/resonance/sound_test.gd",
+    "game/ui/resonance/resonance.gdshader"
+  ],
+  "master_claim": "Reference, not a Blender render or an8Klevel-intro master."
+}
