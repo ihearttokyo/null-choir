@@ -23,6 +23,8 @@ Before creating or substantially redesigning assets, generate and inspect GPT Im
 
 Queue up to 30 distinct, disjoint exploration tracks in resource-safe waves. Use wide "wacky" and lateral hypotheses alongside ordinary optimization, but promote only measured wins that preserve the approved game. Stay within actual concurrency and resource limits; serialize heavy experiments.
 
+After significant feature merges, prepare a matching tested standalone build as part of delivery. Verify the exact source, resources, Apple Silicon package, signature/notarization and download before updating the GitHub Pages link and release notes. Keep the current verified download available while replacement checks run; never present an unverified build or a source-only milestone as a delivered update. Label alphas and their known limits clearly, retain rollback releases, and use ihearttokyo as the public copyright owner.
+
 For sparse Git worktrees created without checkout, materialize the base index before staging. Verify the staged and committed path sets match the intended change before any push; a partial index must never publish deletions of untouched files.
 
 ## Workers and completion
