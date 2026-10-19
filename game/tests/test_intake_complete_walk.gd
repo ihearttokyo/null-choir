@@ -82,7 +82,7 @@ func pin_east() -> bool:
 	for id in ["ivory_key","nave_health","exit"]:
 		if not expect(route_level.markers.has(id) and is_instance_valid(route_level.markers[id]) and route_level.markers[id].get_parent() == route_level and not id in game.state.removed,"Retain tangible original marker before east traversal: "+id): return false
 		markers_before[id] = weakref(route_level.markers[id])
-	return expect(game.state.keys == ["blood"] and game.state.discoveries.is_empty() and route_level.doors.has("containment_gate") and route_level.layout.world_position([22.5,12.5]).y == 2.0 and game.enemies.size() == 23,"Earned west prefix precedes uncollected upper ivory and closed physical gate")
+	return expect(game.state.keys == ["blood"] and game.state.discoveries.is_empty() and route_level.doors.has("containment_gate") and route_level.layout.world_position([22.5,12.5]).y == 3.0 and route_level.layout.original_floor(0).world_position([22.5,12.5]).y == 2.0 and game.enemies.size() == 23,"Earned west prefix precedes uncollected upper ivory and closed physical gate")
 
 func select_pistol() -> bool:
 	var before: Dictionary = resource_snapshot()
@@ -272,9 +272,9 @@ func exit_input() -> bool:
 	if not live_route() or not expect(game.state.keys == ["blood","ivory"] and game.state.removed.count("containment_gate") == 1 and "encounter:intake_siphon_return" in game.state.removed and "encounter:intake_gate_release" in game.state.removed,"Actual earned gate and eastern return encounters precede Intake exit"): return false
 	var before: Dictionary = resource_snapshot()
 	expected_entry = before.duplicate(true)
-	expected_entry.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+	expected_entry.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 	expected_completion = expected_entry.duplicate(true)
-	expected_completion.merge({"version":game.state.VERSION,"difficulty":1,"level_index":1,"discoveries":[],"explored":[],
+	expected_completion.merge({"version":2,"difficulty":1,"level_index":1,"discoveries":[],"explored":[],
 		"checkpoint":expected_entry.duplicate(true),"level_start":expected_entry.duplicate(true)})
 	var witness: Array = game.state.removed.duplicate()
 	for node in [route_level,route_player]+game.enemies: retired.append(weakref(node))

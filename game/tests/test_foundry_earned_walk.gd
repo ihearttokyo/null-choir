@@ -3,7 +3,7 @@ extends "res://tests/test_intake_complete_walk.gd"
 const F_LIMIT = 7200
 const F_SECONDS = 150
 const F_FIGHT_LIMIT = 360
-const F_MAP_SHA = "7bc795cf87006634cee70205ed44b47388a7567b799102fb6ccaa478587ee4f7"
+const F_MAP_SHA = "0b2a19a04ecc5d1b7d1b0631393657fdc3f306a6dfc947b43933556e82ccb738"
 const ENTRY = [[15.0,29.0],[16.5,29.0],[16.5,26.5],[16.5,24.5],[12.5,24.5],[12.5,21.0],[10.5,20.5]]
 const FURNACE = [[8.5,20.5],[6.5,19.5],[8.5,18.5],[6.5,18.5],[4.5,18.5],[4.5,17.5],[4.5,15.5],[4.5,13.5],[5.5,13.5],[5.5,11.5],[5.0,11.5]]
 const WEST_RETURN = [[8.5,11.5],[9.0,11.5],[9.0,9.5],[9.0,8.5],[9.0,7.0],[12.0,7.0],[16.5,7.0],[16.5,10.0],[16.5,13.0],[16.5,16.0],[16.5,20.0],[12.5,20.5]]
@@ -167,7 +167,7 @@ func walk_to_foundry_exit(observer, profile_prefix: String) -> bool:
 
 func descend_foundry() -> bool:
 	var carried: Dictionary = resource_snapshot()
-	if not expect(carried == {"health":70,"armor":0,"ammo":[0,80,0,0,0,0],"owned_weapons":[0,1],"weapon":1,"keys":[]} and saved_exit_matches(game.state) and retired.all(func(reference): return reference.get_ref() == null),"Exact independently verified Intake exit precedes all Foundry observer changes"): return false
+	if not expect(carried == {"health":70,"armor":0,"ammo":[0,81,0,0,0,0],"owned_weapons":[0,1],"weapon":1,"keys":[]} and game.shots == 89 and carried.ammo[1] == 125+45-game.shots and saved_exit_matches(game.state) and retired.all(func(reference): return reference.get_ref() == null),"Exact independently verified Intake exit precedes all Foundry observer changes"): return false
 	var main_id: int = game.get_instance_id()
 	var profile: String = game.progress_path
 	release_actions()
@@ -289,9 +289,9 @@ func foundry_exit() -> bool:
 	for group in route_level.layout.data.encounters:
 		if not expect(game.state.removed.count("encounter:"+group.id) == 1,"Every authored encounter is naturally activated once: "+group.id): return false
 	var resources: Dictionary = game.f_ledger.duplicate(true)
-	resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]})
+	resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]})
 	var expected: Dictionary = resources.duplicate(true)
-	expected.merge({"version":game.state.VERSION,"difficulty":1,"level_index":2,"discoveries":[],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)})
+	expected.merge({"version":2,"difficulty":1,"level_index":2,"discoveries":[],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)})
 	for node in [route_level,route_player]+game.enemies: retired.append(weakref(node))
 	aim_interaction([12.5,1.5])
 	interaction_input(true)

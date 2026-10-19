@@ -74,12 +74,18 @@ func run() -> void:
                 if field in ["version","position","actors","checkpoint","level_start"]: continue
                 expect(a[field]==b[field],"Rescale preserves original resource "+envelope+" "+field)
             expect(b.floor_revision==1,"Rescale labels every migrated envelope")
-            for pair in [[a.position,b.position],[a.actors[0].position,b.actors[0].position]]:
+            for pair_index in range(2):
+                var pair = [a.position,b.position] if pair_index==0 else [a.actors[0].position,b.actors[0].position]
                 var old_cell = [pair[0][0]/old_layout.data.cell_size,pair[0][2]/old_layout.data.cell_size]
                 var new_cell = [pair[0][0]/layout.data.cell_size,pair[0][2]/layout.data.cell_size]
                 var old_floor = old_layout.world_position(old_cell).y
                 var new_floor = layout.world_position(new_cell).y
-                expect(pair[0][0]==pair[1][0] and pair[0][2]==pair[1][2] and absf(pair[1][1]-pair[0][1]-(new_floor-old_floor))<.00002,"Actual world XZ preserved with independently scaled native floor delta")
+                var delta = new_floor-old_floor
+                if pair_index==1:
+                    var center = Vector2(pair[0][0],pair[0][2])
+                    var radius = Enemy.capsule_radius(Campaign.actor_specs(old_layout)[a.actors[0].id].kind)
+                    delta = layout.capsule_floor_support(center,radius)-old_layout.capsule_floor_support(center,radius)
+                expect(pair[0][0]==pair[1][0] and pair[0][2]==pair[1][2] and absf(pair[1][1]-pair[0][1]-delta)<.00002,"Actual world XZ preserved with independently scaled player floor / actor capsule support delta")
                 expect(absf(new_floor-layout.world_position(old_cell).y)>1.0,"Counterexample distinguishes old/new cell coordinates")
                 var p = Vector3(pair[1][0],new_floor,pair[1][2])
                 var hit = level.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(p+Vector3.UP*.1,p-Vector3.UP*.1,1))

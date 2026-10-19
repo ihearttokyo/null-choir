@@ -1,7 +1,7 @@
 extends "res://tests/test_ossuary_finale_battle.gd"
 
-const EXIT_WITNESS_SHA = "9cc439eb9fe323ca40ea8765199f29662b78f767f654df08a80dbd2a00890d10"
-const EXIT_BATTLE_SHA = "ad689190eca87197b8ebe4e28131c6e57c7bcee9916fcaa353551622bffe9edb"
+const EXIT_WITNESS_SHA = "01f312ff02d1e34531394aa51782a3ce5f75698e7d499fa163f66785e1d12c8d"
+const EXIT_BATTLE_SHA = "e74d2da260eff823464f524eb69a2178b81138137225b6a5f4c8553ee93e7f79"
 const EXIT_NONPUBLISHING = ["--ossuary-exit-controls","--ossuary-exit-live-controls","--ossuary-exit-pin-rejection","--omit-ossuary-exit"]
 
 func exit_pins_match() -> bool:

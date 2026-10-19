@@ -78,9 +78,10 @@ func run() -> void:
 				for number in range(old.actors.size()):
 					var a: Dictionary = old.actors[number]
 					var b: Dictionary = new.actors[number]
-					var cell = [a.position[0]/old_layout.data.cell_size,a.position[2]/old_layout.data.cell_size]
-					var expected_actor_y = a.position[1]+layout.world_position(cell).y-old_layout.world_position(cell).y
-					expect(absf(b.position[1]-expected_actor_y) < 0.00001,"Actual triangulated delta retains actor hover/fall offset")
+					var center = Vector2(a.position[0],a.position[2])
+					var radius = Enemy.capsule_radius(Campaign.actor_specs(old_layout)[a.id].kind)
+					var expected_actor_y = a.position[1]+layout.capsule_floor_support(center,radius)-old_layout.capsule_floor_support(center,radius)
+					expect(absf(b.position[1]-expected_actor_y) < 0.00001,"Triangulated capsule support retains signed actor hover/fall clearance")
 					expect(a.id == b.id and a.hp == b.hp and a.yaw == b.yaw and a.alerted == b.alerted and a.position[0] == b.position[0] and a.position[2] == b.position[2],"Full actor identity/resources/XZ preserved")
 			var again = Campaign.new()
 			expect(again.from_dict(migrated) and again.to_dict() == migrated,"Version2 reload is exactly idempotent")

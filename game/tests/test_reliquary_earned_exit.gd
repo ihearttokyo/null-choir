@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_catalogue.gd"
 
-const E_CATALOGUE_SHA = "8a7ef41015a8dcbfa95bcbddc1644352fab9618b0a4a0a6a524b57ee6de6aba1"
+const E_CATALOGUE_SHA = "f624c54affb32ce7c251720c8aa41919a70d6f1ea53b9da3eec8c5503255007a"
 const E_IDS = ["reliquary_enemy_27","reliquary_enemy_28","reliquary_enemy_29","reliquary_enemy_30"]
 const E_GROUP = {"id":"reliquary_exit","region":[18.0,2.7,20.9,6.5],"enemy_ids":E_IDS,"requires":["blood","ivory"],"cue":{"text":"THE ARCHIVE HAS FILED YOUR ARRIVAL","light_ids":["reliquary_exit_feed"],"sound":"seal_release"}}
 const E_DOOR = {"id":"reliquary_index_gate","cell":[19.5,7.7],"size":[12.2,5.0,0.6],"requires":["blood","ivory"],"yaw":0.0}
@@ -9,7 +9,7 @@ const E_DESCENT = {"id":"reliquary_descent","kind":"exit","cell":[19.5,3.5],"req
 const E_PICKUPS = {
 	"reliquary_exit_health":{"id":"reliquary_exit_health","kind":"health","cell":[18.5,11.5],"amount":30.0},
 	"reliquary_exit_rivets":{"id":"reliquary_exit_rivets","kind":"ammo","cell":[19.5,10.5],"amount":40.0,"weapon":1.0}}
-const E_CARRY = {"health":86,"armor":178,"ammo":[0,147,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const E_CARRY = {"health":81,"armor":173,"ammo":[0,147,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const E_ROUTE_A = [[19.5,10.5],[19.5,8.6]]
 const E_ROUTE_B = [[18.5,11.5],[19.5,10.5],[19.5,8.6]]
 const E_APPROACH = [[19.5,6.25]]
@@ -147,10 +147,10 @@ class ReliquaryExitMain:
 		e_pickup_calls.append([id,Engine.get_physics_frames(),before.duplicate(true),gain])
 		e_ok = e_ok and e_current() and Engine.is_in_physics_frame() and budget() == before and gain > 0 and not e_consumed.has(id) and e_activation == 0 and e_shots.is_empty() and e_hurts.is_empty() and is_instance_valid(marker) and marker.get_parent() == level and not marker.is_queued_for_deletion() and level.layout.data.pickups.filter(func(item): return item.id == id) == [spec] and player.position.distance_to(level.layout.world_position(spec.cell)) < 1.4 and _passive_trigger_visible(spec) and h_stack("/main.gd","update_passive_triggers") and h_stack("/player.gd","_physics_process")
 		if health:
-			e_ok = e_ok and e_route_b and gain == 14 and e_consumed.is_empty()
+			e_ok = e_ok and e_route_b and gain == 19 and e_consumed.is_empty()
 			e_health_gain += gain
 		else:
-			e_ok = e_ok and gain == 33 and e_health_gain == (14 if e_route_b else 0)
+			e_ok = e_ok and gain == 33 and e_health_gain == (19 if e_route_b else 0)
 			e_rivets += gain
 		super.collect_pickup(id)
 		e_consumed[id] = 1
@@ -367,13 +367,13 @@ class ReliquaryExitMain:
 		return result
 	func e_checkpoint_resources() -> Dictionary:
 		var resources: Dictionary = e_resources().duplicate(true)
-		resources.merge({"keys":["blood","ivory"],"removed":e_removed.duplicate(),"checkpoint_id":E_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":e_capture(),"yaw":e_yaw(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
+		resources.merge({"keys":["blood","ivory"],"removed":e_removed.duplicate(),"floor_revision":1,"checkpoint_id":E_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":e_capture(),"yaw":e_yaw(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
 		return resources
 	func e_handoff() -> Dictionary:
 		var resources: Dictionary = e_resources().duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 		var document: Dictionary = resources.duplicate(true)
-		document.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+		document.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 		return document
 	func _save() -> Error:
 		if not e_enabled: return super._save()
@@ -383,7 +383,7 @@ class ReliquaryExitMain:
 			e_ok = e_ok and e_checkpoint_saves == 0 and e_current() and Engine.is_in_physics_frame() and h_stack("/main.gd","update_passive_triggers") and h_stack("/player.gd","_physics_process") and state.checkpoint_id == E_CHECKPOINT.id
 			e_checkpoint = e_checkpoint_resources()
 			expected = e_checkpoint.duplicate(true)
-			expected.merge({"version":1,"difficulty":1,"level_index":3,"discoveries":[3],"explored":e_explored.duplicate(true),"checkpoint":e_checkpoint.duplicate(true),"level_start":e_start.duplicate(true)},true)
+			expected.merge({"version":2,"difficulty":1,"level_index":3,"discoveries":[3],"explored":e_explored.duplicate(true),"checkpoint":e_checkpoint.duplicate(true),"level_start":e_start.duplicate(true)},true)
 		else:
 			e_ok = e_ok and state.level_index == 4 and e_exit_saves == 0 and e_exit_intent and Engine.is_in_physics_frame() and Input.is_action_pressed("interact") and h_stack("/main.gd","interact")
 			expected = e_handoff()
@@ -471,7 +471,7 @@ func walk_through_reliquary_exit(observer: ReliquaryExitMain, profile_prefix: St
 		return false
 	if not await walk_through_catalogue(observer,fixture_prefix) or not start_reliquary_exit(): return false
 	if not await blood_story_route(E_ROUTE_B if game.e_route_b else E_ROUTE_A): return false
-	if not expect(game.e_checkpoint_saves == 1 and game.state.checkpoint == game.e_checkpoint and game.state.level_start == game.e_start and game.e_rivets == 33 and game.e_health_gain == (14 if game.e_route_b else 0),"Automatic physics-owned checkpoint with its actual permitted pickup ordering; independently derived native actor image/facing/resources/save"): return false
+	if not expect(game.e_checkpoint_saves == 1 and game.state.checkpoint == game.e_checkpoint and game.state.level_start == game.e_start and game.e_rivets == 33 and game.e_health_gain == (19 if game.e_route_b else 0),"Automatic physics-owned checkpoint with its actual permitted pickup ordering; independently derived native actor image/facing/resources/save"): return false
 	if not await reliquary_gate_input(): return false
 	if not "--omit-reliquary-exit-approach" in OS.get_cmdline_user_args():
 		if not await blood_story_route(E_APPROACH): return false
@@ -495,7 +495,7 @@ func walk_through_reliquary_exit(observer: ReliquaryExitMain, profile_prefix: St
 	return await reliquary_completion_input()
 
 func start_reliquary_exit() -> bool:
-	if not expect(game is ReliquaryExitMain and game.c_enabled and game.c_ok and catalogue_result() and game.budget() == E_CARRY and route_player.position.distance_to(route_level.layout.world_position([17.5,9.25])) < 0.2,"Exact current same-observer Catalogue boundary86HP178armor147pistol32shells and untouched checkpoint/start/profile"): return false
+	if not expect(game is ReliquaryExitMain and game.c_enabled and game.c_ok and catalogue_result() and game.budget() == E_CARRY and route_player.position.distance_to(route_level.layout.world_position([17.5,9.25])) < 0.2,"Exact current same-observer Catalogue boundary81HP173armor147pistol32shells and untouched checkpoint/start/profile"): return false
 	if not expect(route_level.layout.data.doors == [E_DOOR] and route_level.layout.data.interactions.filter(func(spec): return spec.id == E_CHECKPOINT.id) == [E_CHECKPOINT] and route_level.layout.data.interactions.filter(func(spec): return spec.id == E_DESCENT.id) == [E_DESCENT] and route_level.layout.data.encounters.filter(func(spec): return spec.id == E_GROUP.id) == [E_GROUP],"Exact original float-variant JSON gate/checkpoint/descent and Exit4 group; descent has no defeated-ID contract"): return false
 	for id in E_PICKUPS:
 		if not expect(route_level.layout.data.pickups.filter(func(spec): return spec.id == id) == [E_PICKUPS[id]] and route_level.markers.has(id),"Exact finite permitted exit pickup: "+id): return false
@@ -571,9 +571,9 @@ func reliquary_completion_input() -> bool:
 	for group in route_level.layout.data.encounters:
 		if not expect(game.state.removed.count("encounter:"+group.id) == 1,"Every original group activated exactly once: "+group.id): return false
 	var resources: Dictionary = game.e_resources().duplicate(true)
-	resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+	resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 	game.e_exit_expected = resources.duplicate(true)
-	game.e_exit_expected.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+	game.e_exit_expected.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 	for node in [route_level,route_player]+game.enemies: e_retired.append(weakref(node))
 	aim_interaction(E_DESCENT.cell)
 	game.e_exit_intent = true
@@ -675,4 +675,4 @@ func live_route() -> bool:
 			var id: int = node.get_instance_id()
 			if not expect(game.e_births.has(id) and game.e_births[id].reference.get_ref() == node and node.shooter == game.e_births[id].source and node.get_parent() == route_level and node._current_map() and node.is_physics_processing(),"Every actual current-level projectile has its original native birth/shooter; no orphan or replacement"): return false
 	var checkpoint_saved: bool = game.e_checkpoint_saves == 1
-	return expect(game.budget() == game.e_resources() and game.state.health > 24 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 178 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == ["blood","ivory"] and game.state.discoveries == [3] and game.state.removed == game.e_removed and game.state.explored == game.e_explored and game.state.checkpoint_id == (E_CHECKPOINT.id if checkpoint_saved else "entry") and game.state.checkpoint == (game.e_checkpoint if checkpoint_saved else game.e_start) and game.state.level_start == game.e_start and game.state.actors == game.e_actor_image and FileAccess.get_sha256(r_profile) == (game.e_checkpoint_sha if checkpoint_saved else r_saved_sha) and game.e_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-e_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Independent fresh shot/pickup/damage/survey ledger and permitted checkpoint actor image/facing/disk; original level_start preserved")
+	return expect(game.budget() == game.e_resources() and game.state.health > 24 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 173 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == ["blood","ivory"] and game.state.discoveries == [3] and game.state.removed == game.e_removed and game.state.explored == game.e_explored and game.state.checkpoint_id == (E_CHECKPOINT.id if checkpoint_saved else "entry") and game.state.checkpoint == (game.e_checkpoint if checkpoint_saved else game.e_start) and game.state.level_start == game.e_start and game.state.actors == game.e_actor_image and FileAccess.get_sha256(r_profile) == (game.e_checkpoint_sha if checkpoint_saved else r_saved_sha) and game.e_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-e_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Independent fresh shot/pickup/damage/survey ledger and permitted checkpoint actor image/facing/disk; original level_start preserved")

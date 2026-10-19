@@ -306,7 +306,21 @@ func _valid_restored_actors() -> bool:
 		# Player clearance is repaired against these survivors below, not vice versa.
 		query.collision_mask = 1|4
 		query.exclude = [actor.get_rid()]
-		if not space.intersect_shape(query,1).is_empty(): return false
+		var contacts = space.intersect_shape(query,1)
+		if not contacts.is_empty():
+			# Native movement may retain submillimetre floor contact, never other overlap.
+			var allowance: float = minf(actor.safe_margin,0.001)
+			var floor_y: float = layout.capsule_floor_support(Vector2(actor.position.x,actor.position.z),collider.shape.radius)
+			if not is_finite(floor_y) or actor.position.y < floor_y-allowance: return false
+			while not contacts.is_empty():
+				var body = contacts[0].collider
+				if not body is StaticBody3D or not body in level.floor_bodies or body.get_parent().get_parent() != level: return false
+				query.exclude = query.exclude+[contacts[0].rid]
+				contacts = space.intersect_shape(query,1)
+			# This query alone cannot waive walls/actors: the unchanged pose was checked above.
+			query.exclude = [actor.get_rid()]
+			query.transform.origin.y += allowance
+			if not space.intersect_shape(query,1).is_empty(): return false
 		var cell = Vector2(actor.position.x,actor.position.z)/float(layout.data.cell_size)
 		var floor_point: Vector3 = layout.world_position([cell.x,cell.y])
 		var support = PhysicsRayQueryParameters3D.create(floor_point+Vector3.UP*0.5,floor_point-Vector3.UP,1)

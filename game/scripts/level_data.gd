@@ -69,6 +69,62 @@ func world_position(cell: Array) -> Vector3:
 	var height = a+(b-a)*uv.x+(c-b)*uv.y if uv.y <= uv.x else a+(c-d)*uv.x+(d-a)*uv.y
 	return Vector3(point.x*data.cell_size,height,point.y*data.cell_size)
 
+# Minimum actor foot Y supported by the lower capsule sphere over actual floor triangles.
+func capsule_floor_support(center: Vector2, radius: float) -> float:
+	var support: float = -INF
+	var size: float = data.cell_size
+	var low = (center-Vector2.ONE*radius)/size
+	var high = (center+Vector2.ONE*radius)/size
+	# Scan bounded authored tiles, not an unbounded range if a map uses tiny cells.
+	for tile in tiles:
+		if tile.x+1 < low.x or tile.x > high.x or tile.y+1 < low.y or tile.y > high.y: continue
+		var corners: Array[Vector3] = []
+		for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.ONE,Vector2.DOWN]:
+			var cell = Vector2(tile)+offset
+			corners.append(Vector3(cell.x*size-center.x,height_at(cell),cell.y*size-center.y))
+		# Same diagonal and corners as Level._build_geometry; no floor outside walkable tiles.
+		for indices in [[0,1,2],[0,2,3]]:
+			support = maxf(support,_capsule_triangle_support(radius,corners[indices[0]],corners[indices[1]],corners[indices[2]]))
+	return support
+
+func _capsule_triangle_support(radius: float, a: Vector3, b: Vector3, c: Vector3) -> float:
+	var normal = (b-a).cross(c-a)
+	var gradient = Vector2(-normal.x,-normal.z)/normal.y
+	var optimum = radius*gradient/sqrt(1.0+gradient.length_squared())
+	var vertices = [a,b,c]
+	var positive: bool = false
+	var negative: bool = false
+	for i in range(3):
+		var start = Vector2(vertices[i].x,vertices[i].z)
+		var end = Vector2(vertices[(i+1)%3].x,vertices[(i+1)%3].z)
+		var side = (end-start).cross(optimum-start)
+		positive = positive or side > 0.0
+		negative = negative or side < -0.0
+	var support: float = -INF
+	if not (positive and negative):
+		support = a.y+gradient.dot(optimum-Vector2(a.x,a.z))-radius+sqrt(maxf(0.0,radius*radius-optimum.length_squared()))
+	for i in range(3):
+		var start: Vector3 = vertices[i]
+		var end: Vector3 = vertices[(i+1)%3]
+		var offset = Vector2(start.x,start.z)
+		var edge = Vector2(end.x-start.x,end.z-start.z)
+		var length = edge.length()
+		var direction = edge/length
+		var along = -offset.dot(direction)
+		var perpendicular = offset.cross(direction)
+		var perpendicular_sq = perpendicular*perpendicular
+		if perpendicular_sq > radius*radius: continue
+		var reach = sqrt(maxf(0.0,radius*radius-perpendicular_sq))
+		var low = maxf(-reach,-along)
+		var high = minf(reach,length-along)
+		if low > high: continue
+		var slope = (end.y-start.y)/length
+		var u = clampf(reach*slope/sqrt(1.0+slope*slope),low,high)
+		var point = offset+direction*(along+u)
+		var height = start.y+slope*(along+u)-radius+sqrt(maxf(0.0,radius*radius-point.length_squared()))
+		support = maxf(support,height)
+	return support
+
 func floor_revision() -> int:
 	return int(data.get("floor_revision",0))
 

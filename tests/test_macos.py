@@ -43,7 +43,7 @@ def main():
         assert 'PASS packaged native Metal shader caches' in output, 'Actual packed native Metal cache acceptance missing'
         assert 'PASS packaged isolated userdata' in output, 'Validation must not use real campaign/preferences userdata'
         assert not any(message in output.lower() for message in ['error:', 'leaked', 'resources still in use', 'orphan']), output
-        assert info['CFBundleShortVersionString'] == '0.2.2' and info['CFBundleVersion'] == '0.2.2', 'Current development app version required'
+        assert info['CFBundleShortVersionString'] == '0.2.3' and info['CFBundleVersion'] == '0.2.3', 'Current development app version required'
         print(output.strip())
     print('PASS exported ARM64 ZIP, strict code signature, system-only dependencies and offline native title startup')
 

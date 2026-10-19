@@ -14,6 +14,7 @@ var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
 var machine_lights: Dictionary = {}
+var floor_bodies: Array[StaticBody3D] = []
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
 
@@ -175,6 +176,7 @@ func _build_geometry() -> void:
 			add_child(mesh)
 			if i == 0:
 				mesh.create_trimesh_collision()
+				floor_bodies.append(mesh.get_child(0))
 				mesh.get_child(0).get_child(0).shape.backface_collision = true
 
 # Blender -Y fronts export as Godot +Z; these are Godot-space yaw angles.

@@ -1,7 +1,7 @@
 extends "res://tests/test_reliquary_earned_exit.gd"
 
-const N_EXIT_SHA = "a53139b852cb1f0fdcf3ef46515fb4f178a22edfbd23ec99f5dbc8d2c221061a"
-const N_MAP_SHA = "8e04f3d5f704ac4f5b3ee698b3442ff27670843c244baca8b2ffdcd426bfa257"
+const N_EXIT_SHA = "077180d44d67dc76cc62a292e8c56376cee4e4b64a1b51489fdce3ef22abcaed"
+const N_MAP_SHA = "41b6ae57321ea422d329027b5f4fe458af847e0cbeedf4baeae0a71e8f1c350f"
 const N_LIMIT = 30
 const N_SECONDS = 10
 const N_ENTRY_GUARD = "NATIVE RED Nursery ENTRY requires actual unique connected Descend signal, same earned owner/profile and original fresh fifth scene within30 frames/10 seconds"
@@ -40,6 +40,8 @@ const N_ACTORS = [
 	["nursery_enemy_26","worker",31.5,5.5,0.0,150.2551,4],
 	["nursery_enemy_27","caster",30.5,12.5,0.0,124.992,4],
 	["nursery_warden","nursery_warden",30.5,9.5,0.0,180.0,4]]
+# Independent revision-one floor heights, in authored actor order; legacy rows stay immutable.
+const N_CURRENT_FLOORS = [3.25,2.416666666666666,4.5,4.5,4.083333333333333,4.5,4.083333333333333,4.5,-3.0625,-3.5,-3.5,-3.5,-2.1875,-1.3125,-3.5,-2.1875,2.416666666666666,2.0,1.75,-3.0625,-1.3125,-0.4375,4.5,4.5,4.5,2.416666666666666,4.5,3.25,4.5]
 
 class NurseryEntryMain:
 	extends "res://tests/test_reliquary_earned_exit.gd".ReliquaryExitMain
@@ -57,25 +59,26 @@ class NurseryEntryMain:
 	var n_last_cell: Vector2i = Vector2i(-1,-1)
 	func n_handoff() -> Dictionary:
 		var resources: Dictionary = N_CARRY.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 		var document: Dictionary = resources.duplicate(true)
-		document.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+		document.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 		return document
 	func n_originals() -> Array:
 		var result: Array = []
-		for spec in N_ACTORS:
-			var point: Vector3 = Vector3(spec[2]*4.0,spec[4],spec[3]*4.0)+Vector3(0,0.03,0)
+		for index in range(N_ACTORS.size()):
+			var spec: Array = N_ACTORS[index]
+			var point: Vector3 = Vector3(spec[2]*4.0,N_CURRENT_FLOORS[index],spec[3]*4.0)+Vector3(0,0.03,0)
 			if spec[1] == "caster": point.y += 1.0
 			var native_yaw: float = Vector3(0,deg_to_rad(spec[5]),0).y
 			result.append({"id":spec[0],"hp":N_ROLES[spec[1]][0],"position":[point.x,point.y,point.z],"yaw":e_yaw(native_yaw),"alerted":false})
 		return result
 	func n_start() -> Dictionary:
 		var result: Dictionary = N_CARRY.duplicate(true)
-		result.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[18.0,0.0,134.0],"actors":n_originals(),"yaw":0.0,"pitch":0.0},true)
+		result.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[18.0,0.0,134.0],"actors":n_originals(),"yaw":0.0,"pitch":0.0},true)
 		return result
 	func n_entry_document() -> Dictionary:
 		var result: Dictionary = n_start()
-		result.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":n_start(),"level_start":n_start()},true)
+		result.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":n_start(),"level_start":n_start()},true)
 		return result
 	func n_current() -> bool:
 		return n_enabled and playing and not get_tree().paused and not placement_pending and not loaded_positions and state.level_index == 4 and _scene_level_index == 4 and is_instance_valid(level) and not level.is_queued_for_deletion() and level.get_instance_id() == n_level_id and is_instance_valid(player) and not player.is_queued_for_deletion() and player.get_parent() == level and player.get_instance_id() == n_player_id
@@ -239,8 +242,10 @@ func nursery_entry_result() -> bool:
 	for group_index in range(N_GROUPS.size()):
 		if not expect(data.encounters[group_index].enemy_ids == N_ACTORS.filter(func(spec): return spec[6] == group_index).map(func(spec): return spec[0]),"Original exact inactive encounter membership: "+N_GROUPS[group_index]): return false
 	var records: Array = game.n_originals()
+	var original_layout = scene.layout.original_floor(4)
 	for index in range(N_ACTORS.size()):
 		var spec: Array = N_ACTORS[index]
+		if not expect(scene.layout.floor_revision() == 1 and absf(original_layout.world_position([spec[2],spec[3]]).y-spec[4]) < 0.000001 and absf(scene.layout.world_position([spec[2],spec[3]]).y-N_CURRENT_FLOORS[index]) < 0.000001,"Independent immutable original and revision-one floor tables: "+spec[0]): return false
 		var actor = game.enemies[index]
 		var record: Dictionary = records[index]
 		var capsule: CollisionShape3D = actor.get_child(0)

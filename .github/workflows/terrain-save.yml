@@ -64,3 +64,15 @@ jobs:
           timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_floor_door_contacts.gd 2>&1 | tee "$RUNNER_TEMP/terrain-door.log"
           if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-door.log"; then exit 1; fi
           grep -F "PASS native closed-door floor contacts;" "$RUNNER_TEMP/terrain-door.log"
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_capsule_floor_migration.gd 2>&1 | tee "$RUNNER_TEMP/terrain-capsule.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-capsule.log"; then exit 1; fi
+          grep -F "PASS native capsule floor migration signed clearance/analytic geometry/trust/three envelopes;" "$RUNNER_TEMP/terrain-capsule.log"
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_hero_floor_contacts.gd 2>&1 | tee "$RUNNER_TEMP/terrain-hero.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-hero.log"; then exit 1; fi
+          grep -F "PASS native15 hero base shapes/yaw/255 floor contacts;" "$RUNNER_TEMP/terrain-hero.log"
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_standing_floor_recovery.gd 2>&1 | tee "$RUNNER_TEMP/terrain-standing.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:' "$RUNNER_TEMP/terrain-standing.log"; then exit 1; fi
+          grep -F "PASS native standing floor recovery owned contact/bounds/nonfloor/codec/recovery;" "$RUNNER_TEMP/terrain-standing.log"
+          timeout 120s Godot_v4.7.2-stable_linux.x86_64 --headless --audio-driver Dummy --path "$NULL_CHOIR_TERRAIN_FIXTURE_ROOT" --script res://tests/test_navigation_campaign_geometry.gd 2>&1 | tee "$RUNNER_TEMP/terrain-navigation.log"
+          if grep -E '(^|[[:space:]])(SCRIPT )?ERROR:|Navigation region synchronization had|Navigation synchronization timed out' "$RUNNER_TEMP/terrain-navigation.log"; then exit 1; fi
+          grep -F "PASS eight-map native geometry ownership/varied route diagnostics;" "$RUNNER_TEMP/terrain-navigation.log"

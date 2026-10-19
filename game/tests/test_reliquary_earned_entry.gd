@@ -1,7 +1,7 @@
 extends "res://tests/test_processional_earned_exit.gd"
 
-const R_PREFIX_SHA = "c512f7e5d526eb792373e9602f5d46e7baa6e33db1ba851c0b243094aee36854"
-const R_MAP_SHA = "939a0c10a73463a7c693fdf682362864758e2b9c21211a06a3ae99afccf43d92"
+const R_PREFIX_SHA = "9706b27c6f3df5bd93769971e9aa31e409d15229942a3bfa4ed8f90c8fc070ee"
+const R_MAP_SHA = "e6aff2b07c2a51cb0331f9ebe431ef4f735bfda3a8248b5c068e02d3e763f2fd"
 const R_LIMIT = 120
 const R_SECONDS = 10
 const R_CARRY = {"health":100,"armor":200,"ammo":[0,125,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
@@ -38,6 +38,8 @@ const R_ACTORS = [
 	["reliquary_enemy_28","worker",90,18.5,4.5,0.0,-158.199],
 	["reliquary_enemy_29","worker",90,20.5,5.5,0.0,146.31],
 	["reliquary_enemy_30","caster",90,19.5,2.5,0.0,-180.0]]
+# Independent revision-one floor heights, in authored actor order; legacy rows stay immutable.
+const R_CURRENT_FLOORS = [-3.0,-1.875,-3.0,-2.625,-1.125,-3.0,-0.75,-3.0,3.0,4.0,2.333333333333333,4.0,4.0,3.0,4.0,4.0,0.0,0.0,0.0,1.6666666666666665,0.3333333333333333,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 const R_THIRD_FIELDS = [
 	"p_ok","p_ticks","p_shots","p_last","p_slots","p_selected",
 	"p_ledger","p_originals","p_consumed","p_pickups","p_deaths","p_finishes",
@@ -92,8 +94,9 @@ class ReliquaryMain:
 		return actual.size() == 31 and actual == bound
 	func expected_originals() -> Array:
 		var result: Array = []
-		for spec in R_ACTORS:
-			var point: Vector3 = Vector3(spec[3]*4.0,spec[5],spec[4]*4.0)+Vector3(0,0.03,0)
+		for index in range(R_ACTORS.size()):
+			var spec: Array = R_ACTORS[index]
+			var point: Vector3 = Vector3(spec[3]*4.0,R_CURRENT_FLOORS[index],spec[4]*4.0)+Vector3(0,0.03,0)
 			if spec[1] == "caster": point.y += 1.0
 			# Preserve authored -180 before native precision crosses the periodic boundary.
 			var facing: float = deg_to_rad(spec[6])
@@ -120,7 +123,7 @@ class ReliquaryMain:
 				r_bindings[actor.id] = actor.get_instance_id()
 			r_ok = r_ok and scene_roster_matches()
 			r_start = R_CARRY.duplicate(true)
-			r_start.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[78.0,0.0,154.0],"actors":expected,"yaw":0.0,"pitch":0.0},true)
+			r_start.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[78.0,0.0,154.0],"actors":expected,"yaw":0.0,"pitch":0.0},true)
 		var result: bool = super._capture_actor_state()
 		if not prefix_bookkeeping_retired and fourth_scene(): r_ok = r_ok and result and state.actors == r_start.actors and state.yaw == 0.0 and state.pitch == 0.0
 		return result
@@ -184,9 +187,9 @@ func observers_retired() -> bool:
 
 func freeze_reliquary_boundary() -> bool:
 	var zero_entry: Dictionary = R_CARRY.duplicate(true)
-	zero_entry.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+	zero_entry.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 	r_saved_expected = zero_entry.duplicate(true)
-	r_saved_expected.merge({"version":1,"difficulty":1,"level_index":3,"discoveries":[],"explored":[],"checkpoint":zero_entry.duplicate(true),"level_start":zero_entry.duplicate(true)},true)
+	r_saved_expected.merge({"version":2,"difficulty":1,"level_index":3,"discoveries":[],"explored":[],"checkpoint":zero_entry.duplicate(true),"level_start":zero_entry.duplicate(true)},true)
 	if not expect(game.state.to_dict() == r_saved_expected and game.x_exit_expected == r_saved_expected and game.x_deaths.size() == 26 and game.x_exit_saves == 1 and game.x_ok and game.r_captures == 0 and game.r_bindings.is_empty() and game.r_start.is_empty() and game.level == null and game.player == null and retired.all(func(reference): return reference.get_ref() == null) and x_marker_refs.values().all(func(reference): return reference.get_ref() == null),"Completed helper returns unchanged earned three-map state, provenance and drain witnesses before fourth observation"): return false
 	r_main_id = game.get_instance_id()
 	r_campaign_id = game.state.get_instance_id()
@@ -225,8 +228,10 @@ func reliquary_entry_result() -> bool:
 	route_player = game.player
 	var data: Dictionary = route_level.layout.data
 	if not expect(data.id == "reliquary" and data.spawn == [19.5,38.5] and data.spawn_yaw == 0 and data.cell_size == 4 and data.enemies.size() == 31 and game.enemies.size() == 31 and route_level.get_script() == game.Level and route_player.get_script() == game.Player and route_level.get_instance_id() == game.r_level_id and route_player.get_instance_id() == game.r_player_id and route_player._current_map() and route_player.is_physics_processing() and game.is_processing() and game.is_physics_processing() and not game.menu_scroll.visible,"Native original fourth Level/Player and authored entry, not stale third references"): return false
+	var original_layout = route_level.layout.original_floor(3)
 	for index in range(R_ACTORS.size()):
 		var spec: Array = R_ACTORS[index]
+		if not expect(route_level.layout.floor_revision() == 1 and absf(original_layout.world_position([spec[3],spec[4]]).y-spec[5]) < 0.000001 and absf(route_level.layout.world_position([spec[3],spec[4]]).y-R_CURRENT_FLOORS[index]) < 0.000001,"Independent immutable original and revision-one floor tables: "+spec[0]): return false
 		var authored: Dictionary = {"id":spec[0],"kind":spec[1],"cell":[spec[3],spec[4]],"yaw":spec[6]}
 		var actor = game.enemies[index]
 		var record: Dictionary = game.r_start.actors[index]
@@ -246,7 +251,7 @@ func reliquary_entry_result() -> bool:
 	var expected: Dictionary = game.r_start.duplicate(true)
 	# Current position is read from the independently bounded, native-clear Player, not Campaign.
 	expected.position = [route_player.position.x,route_player.position.y,route_player.position.z]
-	expected.merge({"version":1,"difficulty":1,"level_index":3,"discoveries":[],"explored":game.r_explored.duplicate(true),"checkpoint":game.r_start.duplicate(true),"level_start":game.r_start.duplicate(true)},true)
+	expected.merge({"version":2,"difficulty":1,"level_index":3,"discoveries":[],"explored":game.r_explored.duplicate(true),"checkpoint":game.r_start.duplicate(true),"level_start":game.r_start.duplicate(true)},true)
 	var saved = game.state.get_script().new()
 	if not expect(game.r_ok and game.r_captures == 1 and game.r_bindings.size() == 31 and game.r_start.actors == game.expected_originals() and game.r_ticks >= 1 and not game.r_explored.is_empty() and game.state.to_dict() == expected and game.budget() == R_CARRY and saved.load_progress(r_profile) and saved.to_dict() == r_saved_expected and FileAccess.get_sha256(r_profile) == r_saved_sha,"Exact independent fourth current/fresh checkpoint/level_start versus unchanged zero-position on-disk next-entry envelope and legitimate Survey"): return false
 	if not expect(observer_witness(R_INHERITED_FIELDS) == r_inherited and game.ticks-r_tick_baseline == game.r_ticks and game.shot_slot == -1.0,"Inherited callback counters/flags remain unchanged; only the actual fourth physics clock advances"): return false

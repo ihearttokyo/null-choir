@@ -3,7 +3,7 @@ extends "res://tests/test_foundry_earned_walk.gd"
 const P_LIMIT = 1800
 const P_SECONDS = 40
 const P_FIGHT_LIMIT = 360
-const P_MAP_SHA = "6fb899edee2cecd05bce408fdaf6976819ed19246e59de56b2f00fa318b234c4"
+const P_MAP_SHA = "83dd490722aecb4878c3eab8ea81dd29438e7ba84ceb2e079ed6293eaa32e94f"
 const P_ENTRY = [[22.5,30.5],[21.5,29.5],[21.0,27.0],[20.5,25.5],[18.5,24.5],[16.5,24.5],[15.5,24.5],[16.5,24.5]]
 const P_SUPPLIES = ["processional_entry_rivets","processional_scattergun","processional_nave_health"]
 
