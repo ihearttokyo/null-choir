@@ -32,6 +32,11 @@ assert ':focus-visible' in css and 'max-width:760px' in css
 assert (ROOT/'docs/site-assets/arch.jpg').is_file()
 assert (ROOT/'docs/site-assets/arch.jpg').stat().st_size<1_500_000
 assert (ROOT/'LICENSE').read_bytes()==(ROOT/'game/licenses/NULL-CHOIR.txt').read_bytes()
+license_text=(ROOT/"LICENSE").read_text()
+assert "Copyright (c) 2026 ihearttokyo. All rights reserved." in license_text
+assert "© 2026 ihearttokyo" in text
+assert "Jared" not in license_text and "Bland" not in license_text and "Jared" not in text and "Bland" not in text
+assert "Third-party components remain governed by their own notices and licenses." in license_text
 workflow=(ROOT/'.github/workflows/site.yml').read_text()
 assert "      - 'LICENSE'" in workflow and "      - 'game/licenses/NULL-CHOIR.txt'" in workflow, 'License-only changes must run parity checks'
 assert '@media(max-width:480px)' in css and 'repeat(2,minmax(0,1fr))' in css, "Narrow mobile chapter grid requires two columns"
