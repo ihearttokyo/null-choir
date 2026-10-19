@@ -9,12 +9,16 @@ func run() -> void:
         return
     AudioServer.set_bus_mute(0,true)
     var path = "res://data/01_intake.json"
-    var original = FileAccess.get_file_as_string(path)
+    var source_text = FileAccess.get_file_as_string(path)
     var old_layout = Layout.new()
     if not old_layout.load_level(0):
         push_error(old_layout.load_error)
         quit(2)
         return
+    old_layout = old_layout.original_floor(0)
+    old_layout.data.erase("floor_revision")
+    var original = JSON.stringify(old_layout.data)
+    write_map(path,original)
     var documents: Array = []
     for mode in range(3):
         var document = fresh_document(0,mode)
@@ -70,12 +74,18 @@ func run() -> void:
                 if field in ["version","position","actors","checkpoint","level_start"]: continue
                 expect(a[field]==b[field],"Rescale preserves original resource "+envelope+" "+field)
             expect(b.floor_revision==1,"Rescale labels every migrated envelope")
-            for pair in [[a.position,b.position],[a.actors[0].position,b.actors[0].position]]:
+            for pair_index in range(2):
+                var pair = [a.position,b.position] if pair_index==0 else [a.actors[0].position,b.actors[0].position]
                 var old_cell = [pair[0][0]/old_layout.data.cell_size,pair[0][2]/old_layout.data.cell_size]
                 var new_cell = [pair[0][0]/layout.data.cell_size,pair[0][2]/layout.data.cell_size]
                 var old_floor = old_layout.world_position(old_cell).y
                 var new_floor = layout.world_position(new_cell).y
-                expect(pair[0][0]==pair[1][0] and pair[0][2]==pair[1][2] and absf(pair[1][1]-pair[0][1]-(new_floor-old_floor))<.00002,"Actual world XZ preserved with independently scaled native floor delta")
+                var delta = new_floor-old_floor
+                if pair_index==1:
+                    var center = Vector2(pair[0][0],pair[0][2])
+                    var radius = Enemy.capsule_radius(Campaign.actor_specs(old_layout)[a.actors[0].id].kind)
+                    delta = layout.capsule_floor_support(center,radius)-old_layout.capsule_floor_support(center,radius)
+                expect(pair[0][0]==pair[1][0] and pair[0][2]==pair[1][2] and absf(pair[1][1]-pair[0][1]-delta)<.00002,"Actual world XZ preserved with independently scaled player floor / actor capsule support delta")
                 expect(absf(new_floor-layout.world_position(old_cell).y)>1.0,"Counterexample distinguishes old/new cell coordinates")
                 var p = Vector3(pair[1][0],new_floor,pair[1][2])
                 var hit = level.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(p+Vector3.UP*.1,p-Vector3.UP*.1,1))
@@ -84,7 +94,7 @@ func run() -> void:
             expect(a.actors[0].id==b.actors[0].id and a.actors[0].hp==b.actors[0].hp and a.actors[0].yaw==b.actors[0].yaw and a.actors[0].alerted==b.actors[0].alerted,"Rescale preserves original actor identity/state")
         var again = Campaign.new()
         expect(again.from_dict(migrated) and again.to_dict()==migrated,"Rescaled load is exactly idempotent")
-    write_map(path,original)
+    write_map(path,source_text)
     level.free()
     await physics_frame
     print("TERRAIN_SCALE_RESULT ",JSON.stringify({"difficulties":3,"envelopes_each":3,"native_floor_rays":rays,"old_cell_size":4,"new_cell_size":3,"failures":failures}))

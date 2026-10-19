@@ -1,10 +1,10 @@
 extends "res://tests/test_reliquary_blood_story.gd"
 
-const Q_BLOOD_SHA = "2fcc1e8fe326d4b5347f10162ddfedc866e6f58a6fb43b64c0f6ff6c0098149a"
+const Q_BLOOD_SHA = "38e2d367e7db0f3655efd73ed88944a0aaaf76596a6c0de4940044554eaf1279"
 const Q_IDS = ["reliquary_enemy_16","reliquary_enemy_17","reliquary_enemy_18"]
 const Q_GROUP = {"id":"reliquary_halo_return","region":[16.5,10.0,18.5,13.0],"enemy_ids":Q_IDS,"requires":["blood"],"cue":{"text":"THE INDEX SENDS YOUR FACE AHEAD","light_ids":["reliquary_halo_return"],"sound":"seal_release"}}
 const Q_PICKUPS = {"reliquary_halo_return_rivets":{"id":"reliquary_halo_return_rivets","kind":"ammo","cell":[15.5,11.5],"amount":45.0,"weapon":1.0},"reliquary_halo_return_shells":{"id":"reliquary_halo_return_shells","kind":"ammo","cell":[14.5,11.5],"amount":8.0,"weapon":2.0}}
-const Q_CARRY = {"health":100,"armor":190,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const Q_CARRY = {"health":100,"armor":193,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const Q_APPROACH = [[1.5,17.5],[2.5,17.5],[4.5,17.5],[4.5,15.5],[4.5,13.5],[4.5,12.5],[7.5,12.5],[10.5,12.5],[12.5,12.5],[14.5,11.5],[15.5,11.5],[16.75,11.5]]
 const Q_CLOSE = [[18.5,11.0],[19.0,11.0]]
 # Three perfect pistol kills need13 hits/12*12.6=151.2 ticks; allow480 for real pursuit/role releases/misses, not guaranteed hits.
@@ -83,7 +83,7 @@ class ReturnMain:
 			if q_melee_pending.victim_hp <= 0 or q_melee_pending.victim_hp > 12: return false
 		return true
 	func q_resources() -> Dictionary:
-		return {"health":100-q_health_loss,"armor":190-q_absorbed,"ammo":[0,148+q_rivets-q_shots.size(),32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+		return {"health":100-q_health_loss,"armor":193-q_absorbed,"ammo":[0,148+q_rivets-q_shots.size(),32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 	func _physics_process(delta: float) -> void:
 		super._physics_process(delta)
 		if not q_enabled: return
@@ -203,7 +203,7 @@ class ReturnMain:
 			source_id = q_melee_pending.source.id
 			q_damage_attacks[source_id+":"+str(q_melee_pending.release_tick)] = true
 			q_melee_pending.clear()
-		var absorbed: int = mini(190-q_absorbed,int(amount/3))
+		var absorbed: int = mini(193-q_absorbed,int(amount/3))
 		q_absorbed += absorbed
 		q_health_loss += amount-absorbed
 		q_hurts.append([Engine.get_physics_frames(),source_id,amount,absorbed])
@@ -377,7 +377,7 @@ func live_route() -> bool:
 			if not expect(not route_level.markers.has(id) and game.state.removed.count(id) == 1,"Allowed original supply removed once"): return false
 		elif not expect(route_level.markers.has(id) and q_markers[id].get_ref() == route_level.markers[id] and not route_level.markers[id].is_queued_for_deletion() and not id in game.state.removed,"Every other original marker owner preserved: "+id): return false
 	if not expect(route_level.markers.size() == q_markers.size()-game.q_consumed.size(),"No extra/replacement markers"): return false
-	return expect(game.budget() == game.q_resources() and game.state.health > 0 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 190 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == ["blood"] and game.state.discoveries == [3] and game.state.removed == game.q_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == q_actor_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.q_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-q_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Actual ammo/pickup/hurt ledger and earned Blood/story; original actor image/start/checkpoint/disk exact")
+	return expect(game.budget() == game.q_resources() and game.state.health > 0 and game.state.health <= 100 and game.state.armor >= 0 and game.state.armor <= 193 and game.state.ammo[1] >= 0 and game.state.ammo[1] <= 180 and game.state.keys == ["blood"] and game.state.discoveries == [3] and game.state.removed == game.q_removed and game.state.checkpoint_id == "entry" and game.state.checkpoint == h_frozen.r_start and game.state.level_start == h_frozen.r_start and game.state.actors == q_actor_image and FileAccess.get_sha256(r_profile) == r_saved_sha and game.q_ticks >= east_elapsed()-2 and absf(route_player.active_play_time-q_time-float(east_elapsed())/60.0) <= 2.0/60.0,"Actual ammo/pickup/hurt ledger and earned Blood/story; original actor image/start/checkpoint/disk exact")
 
 func return_result() -> bool:
 	print("RELIQUARY_HALO_RETURN_LIMIT frames=",east_elapsed()," wall_us=",Time.get_ticks_usec()-q_wall," position=",route_player.position," resources=",game.q_resources()," shots=",game.q_shots," consumed=",game.q_consumed," rejected=",game.q_rejected," roles=",game.q_roles," hurts=",game.q_hurts," deaths=",game.q_deaths," provenance=",game.q_finishes)

@@ -13,7 +13,7 @@ from types import SimpleNamespace
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 ID = 'ossuary_living_buttress'
-BASELINE = 'b72a28cd995917905db1f94ebaf543ed17dd7787498dacde5d0511d36019f278'
+BASELINE = '34b8a727013fd478f5c0983e759438bc8dbe5ff175cbef078c72da0bc39eb67a'
 GEOMETRY = 'd1b6bcfe7ac4c2cb759ccfdd917a55d9c764b697abd6f85616c657c8d59d042a'
 
 

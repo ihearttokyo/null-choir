@@ -1,9 +1,9 @@
 extends "res://tests/test_reliquary_earned_entry.gd"
 
-const H_ENTRY_SHA = "6ed92c140d451aa20f5c10ed26025e9b2210e88c02e573f17c06121753328c21"
+const H_ENTRY_SHA = "74bbbce7a6a35693350da63e8b1008af10963bae952a5828c2c5120f338cbe0c"
 const H_ENTRY_FIELDS = ["r_ok","r_main_origin","r_campaign_origin","r_profile_origin","r_settings_origin","r_captures","r_capture_attempts","r_bindings","r_level_id","r_player_id","r_start","r_ticks","r_explored","r_last_cell"]
 const H_FLAGS = ["foundry_enabled","entry_enabled","organ_enabled","palanquin_enabled","exit_enabled"]
-const H_APPROACH = [[18.5,38.5],[18.5,37.5],[18.5,38.5],[19.5,38.5],[20.5,38.5],[20.5,37.5],[20.5,38.5],[19.5,38.5],[19.5,35.5],[19.5,32.5],[19.5,28.5],[15.5,28.5],[12.5,28.5],[10.5,28.5],[10.5,25.5],[9.5,25.5],[10.5,25.5],[10.5,22.4]]
+const H_APPROACH = [[18.5,38.5],[18.5,37.5],[18.5,38.5],[19.5,38.5],[20.5,38.5],[20.5,37.5],[20.5,38.5],[19.5,38.5],[19.5,35.5],[19.5,32.5],[19.5,28.5],[15.5,28.5],[12.5,28.5],[10.5,28.5],[10.5,25.5],[9.5,25.5],[10.5,25.5],[9.5,22.1]]
 const H_IDS = ["reliquary_enemy_00","reliquary_enemy_01","reliquary_enemy_02","reliquary_enemy_03","reliquary_enemy_04","reliquary_enemy_05","reliquary_enemy_06","reliquary_enemy_07"]
 # 32 perfect pistol hits need 31*12.6=390.6 inter-shot ticks; 360 cannot certify this group.
 const H_FIGHT_LIMIT = 480
@@ -406,9 +406,9 @@ func clear_point(cell: Array):
 	if not h_started: return super.clear_point(cell)
 	var point = super.clear_point(cell)
 	if point == null: return null
-	# Scoped approach uses only the authored flat aisle and interior west ramp.
+	# Historical approach maths belongs to revision zero; super checks current native floor/capsule.
 	var floor_y: float = (float(cell[1])-26.0)*0.5 if cell[0] >= 8.0 and cell[0] <= 11.0 and cell[1] >= 22.0 and cell[1] <= 26.0 else 0.0
-	return point if absf(point.y-0.04-floor_y) <= 0.08 else null
+	return point if absf(route_level.layout.original_floor(3).world_position(cell).y-floor_y) <= 0.08 else null
 
 func live_route() -> bool:
 	if not h_started: return super.live_route()

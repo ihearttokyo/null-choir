@@ -124,7 +124,7 @@ func capture_context() -> bool:
 
 func checkpoint_resources() -> Dictionary:
 	var expected: Dictionary = ledger.duplicate(true)
-	expected.merge({"keys":keys.duplicate(),"removed":removed.duplicate(),"checkpoint_id":CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":expected_actors.duplicate(true),"yaw":canonical(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
+	expected.merge({"keys":keys.duplicate(),"removed":removed.duplicate(),"floor_revision":1,"checkpoint_id":CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":expected_actors.duplicate(true),"yaw":canonical(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
 	return expected
 
 func before_capture() -> bool:
@@ -139,7 +139,7 @@ func before_capture() -> bool:
 		removed.append(CHECKPOINT.id)
 		checkpoint = checkpoint_resources()
 		expected_document = checkpoint.duplicate(true)
-		expected_document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4,5],"explored":explored.duplicate(true),"checkpoint":checkpoint.duplicate(true),"level_start":start.duplicate(true)},true)
+		expected_document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4,5],"explored":explored.duplicate(true),"checkpoint":checkpoint.duplicate(true),"level_start":start.duplicate(true)},true)
 		expected_bytes = JSON.stringify(expected_document,"",true,true).to_utf8_buffer()
 		if not require(not expected_bytes.is_empty() and expected_bytes.size() <= 1048576,"bounded independently constructed canonical checkpoint bytes"): return false
 		saved_sha = digest(expected_bytes)

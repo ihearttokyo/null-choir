@@ -241,6 +241,21 @@ and three asymmetric upper rib pairs improve the earlier flat skull. Full
 reference-quality parity remains open. This is source integration, not final art
 or application promotion.
 
+The level JSON is not a modeling input. The current recipe no longer pins it:
+terrain revisions can change independently of this asset. The four retained
+recipe/source pins and both generated-image input hashes remain enforced.
+A fresh Blender5.2.2 LTS build after this dependency correction reproduces the
+runtime GLB and atlas byte-for-byte. Fresh source reopens match geometry, UVs,
+material assignments, transforms, shader parameters and packed image bytes;
+all four assemblies passed edited-save/reopen/revert checks. This does not close
+the game-lighting, transparency or reference-quality gates above.
+
+The preceding recipe is retained byte-exact under
+`source/art/recipe_history/21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883/`.
+The manifest records the regenerated source, its recipe and the previous source
+metadata repair as history, rather than claiming the new file is the old repair.
+Original editable sources and prior committed versions remain unchanged in history.
+
 Rebuild into a fresh directory whose parent exists, outside this project:
 
 ```sh

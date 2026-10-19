@@ -1,8 +1,8 @@
 extends "res://tests/test_nursery_seed_loop.gd"
 
 # Provisional seed dependency: parent rebinds ONLY this pin after accepted seed review.
-const NF_SEED_SHA = "0f2ff7346002ac97bb01b11db3536cb032a200b9c136f16cfe81d73a059b0044"
-const NF_OSSUARY_SHA = "781a86ab846db76d7189f108281f009b300812a5c2136faa754b9a74000bc74c"
+const NF_SEED_SHA = "3d334306e7beedd4b4fb7de6be1acb3359abaaf63b18f19ad51c13f03183de16"
+const NF_OSSUARY_SHA = "73c64534bfc52f6ba0af603062962a980e99364628aeb934e54efebfb5b5e97d"
 const NF_ANCESTOR_SAVE_SHA = "1da02250064a304d13212f4f8fe1c4ab2dda32e20ce152b2246d4e05d3e348d0"
 const NF_RESULT_SAVE_SHA = "15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce"
 const NF_RESULT_RESOURCES = {"health":93,"armor":197,"ammo":[0,99,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
@@ -33,6 +33,8 @@ const NF_DESCENT = {"id":"nursery_descent","kind":"exit","cell":[35.5,5.5],"requ
 const NF_IDS = ["nursery_enemy_22","nursery_enemy_23","nursery_enemy_24","nursery_enemy_25","nursery_enemy_26","nursery_enemy_27","nursery_warden"]
 const NF_NS_FIELDS = ["ns_ok","ns_ticks","ns_ledger","ns_removed","ns_keys","ns_pickups","ns_consumed","ns_shots","ns_last_time","ns_last_tick","ns_slot","ns_activated","ns_events","ns_deaths","ns_finishes","ns_hurts","ns_births","ns_contacts","ns_projectile_pending","ns_worker","ns_melee","ns_summons","ns_summon_attacks","ns_explored","ns_last_cell","ns_inputs","ns_capture_calls","ns_mouse_attempts","ns_save_calls","ns_start","ns_bindings","ns_markers","ns_select","ns_selections","ns_actor_image","ns_checkpoint","ns_saved_sha","ns_hp","ns_damage_events"]
 const NF_O_ACTORS = [["ossuary_enemy_00","brute",4.5,21.5,1.5,225,"ossuary_first_commit"],["ossuary_enemy_01","crawler",8.5,21.5,1.5,135,"ossuary_first_commit"],["ossuary_enemy_02","worker",4.5,17.5,1.5,243,"ossuary_first_commit"],["ossuary_enemy_03","crawler",8.5,18.5,1.5,90,"ossuary_first_commit"],["ossuary_enemy_04","worker",9.5,16.5,1.5,124,"ossuary_first_commit"],["ossuary_enemy_05","caster",9.5,12.5,1.5,153,"ossuary_first_commit"],["ossuary_enemy_06","crawler",5.5,14.5,1.5,194,"ossuary_first_commit"],["ossuary_enemy_07","worker",3.5,12.5,1.5,207,"ossuary_first_commit"],["ossuary_enemy_08","guardian",26.5,15.5,-1.5,207,"ossuary_second_commit"],["ossuary_enemy_09","crawler",31.5,15.5,-1.5,117,"ossuary_second_commit"],["ossuary_enemy_10","worker",33.5,11.5,-1.5,149,"ossuary_second_commit"],["ossuary_enemy_11","crawler",27.5,9.5,-1.5,180,"ossuary_second_commit"],["ossuary_enemy_12","worker",32.5,8.5,-1.5,149,"ossuary_second_commit"],["ossuary_enemy_13","caster",29.5,7.5,-1.5,180,"ossuary_second_commit"],["ossuary_enemy_14","crawler",24.5,12.5,-1.5,217,"ossuary_second_commit"],["ossuary_enemy_15","worker",25.5,8.5,-1.5,202,"ossuary_second_commit"],["ossuary_enemy_16","summoner",18.5,13.5,0.0,90,"ossuary_first_return"],["ossuary_enemy_17","crawler",19.5,16.5,0.0,0,"ossuary_first_return"],["ossuary_enemy_18","worker",18.5,20.5,0.0,346,"ossuary_first_return"],["ossuary_enemy_19","crawler",19.5,10.5,0.0,243,"ossuary_second_return"],["ossuary_enemy_20","worker",20.5,11.5,-0.1875,270,"ossuary_second_return"],["ossuary_enemy_21","crawler",20.5,22.5,0.0,14,"ossuary_second_return"],["ossuary_enemy_22","worker",19.5,32.5,0.0,288,"ossuary_finale"],["ossuary_enemy_23","crawler",25.5,33.5,0.0,56,"ossuary_finale"],["ossuary_enemy_24","caster",26.5,36.5,0.0,53,"ossuary_finale"],["ossuary_enemy_25","worker",18.5,37.5,0.0,315,"ossuary_finale"],["ossuary_enemy_26","crawler",23.5,36.5,0.0,18,"ossuary_finale"]]
+# Independent revision-one floor heights, in authored actor order; legacy rows stay immutable.
+const NF_O_CURRENT_FLOORS = [5.0,4.583333333333334,5.0,4.583333333333334,3.75,3.75,5.0,5.0,-2.0,-4.0,-4.0,-2.0,-4.0,-3.0,-1.6666666666666665,-2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-2.0,-2.0,0.0,-1.0]
 
 class NurseryFinaleMain:
 	extends "res://tests/test_nursery_seed_loop.gd".NurserySeedMain
@@ -329,9 +331,9 @@ class NurseryFinaleMain:
 		if checkpoint_save:
 			nf_ok = nf_ok and nf_current() and nf_checkpoint_saves == 0 and h_stack("/main.gd","update_passive_triggers") and state.checkpoint_id == NF_CHECKPOINT.id
 			nf_checkpoint = nf_ledger.duplicate(true)
-			nf_checkpoint.merge({"keys":nf_keys.duplicate(),"removed":nf_removed.duplicate(),"checkpoint_id":NF_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":nf_records(),"yaw":state.yaw,"pitch":state.pitch},true)
+			nf_checkpoint.merge({"keys":nf_keys.duplicate(),"removed":nf_removed.duplicate(),"floor_revision":1,"checkpoint_id":NF_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":nf_records(),"yaw":state.yaw,"pitch":state.pitch},true)
 			expected = nf_checkpoint.duplicate(true)
-			expected.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3,4],"explored":nf_explored.duplicate(true),"checkpoint":nf_checkpoint.duplicate(true),"level_start":nf_start.duplicate(true)},true)
+			expected.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3,4],"explored":nf_explored.duplicate(true),"checkpoint":nf_checkpoint.duplicate(true),"level_start":nf_start.duplicate(true)},true)
 		else:
 			nf_ok = nf_ok and state.level_index == 5 and nf_exit_saves == 0 and nf_intent == NF_DESCENT.id and Engine.is_in_physics_frame() and Input.is_action_pressed("interact") and h_stack("/main.gd","interact")
 			expected = nf_handoff()
@@ -378,9 +380,9 @@ class NurseryFinaleMain:
 		return enemies.size() == 29 and enemies.all(func(actor): return nf_actor(actor) and actor.hp == 0 and actor.collision_layer == 0 and actor.collision_mask == 0 and state.removed.count(actor.id) == 1) and NF_IDS.all(func(id): return nf_deaths.get(id,0) == 1 and nf_finishes.get(id,"") in ["player","infighting"]) and nf_deaths.size() == 7 and nf_activated.keys() == ["nursery_finale"]
 	func nf_handoff() -> Dictionary:
 		var resources: Dictionary = nf_ledger.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 		var document: Dictionary = resources.duplicate(true)
-		document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+		document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 		return document
 	func unlock_door(id: String) -> bool:
 		if not nf_enabled: return super.unlock_door(id)
@@ -406,18 +408,19 @@ class NurseryFinaleMain:
 		return oss_enabled and playing and not get_tree().paused and not placement_pending and not loaded_positions and state.level_index == 5 and _scene_level_index == 5 and is_instance_valid(level) and not level.is_queued_for_deletion() and level.get_instance_id() == oss_level_id and is_instance_valid(player) and not player.is_queued_for_deletion() and player.get_parent() == level and player.get_instance_id() == oss_player_id
 	func oss_originals() -> Array:
 		var records: Array = []
-		for spec in NF_O_ACTORS:
-			var point: Vector3 = Vector3(spec[2]*4.0,spec[4],spec[3]*4.0)+Vector3.UP*0.03
+		for index in range(NF_O_ACTORS.size()):
+			var spec: Array = NF_O_ACTORS[index]
+			var point: Vector3 = Vector3(spec[2]*4.0,NF_O_CURRENT_FLOORS[index],spec[3]*4.0)+Vector3.UP*0.03
 			if spec[1] == "caster": point.y += 1.0
 			records.append({"id":spec[0],"hp":N_ROLES[spec[1]][0],"position":[point.x,point.y,point.z],"yaw":e_yaw(Vector3(0,deg_to_rad(spec[5]),0).y),"alerted":false})
 		return records
 	func oss_start() -> Dictionary:
 		var resources: Dictionary = nf_ledger.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[142.0,0.0,98.0],"actors":oss_originals(),"yaw":Vector3(0,deg_to_rad(90),0).y,"pitch":0.0},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[142.0,0.0,98.0],"actors":oss_originals(),"yaw":Vector3(0,deg_to_rad(90),0).y,"pitch":0.0},true)
 		return resources
 	func oss_document() -> Dictionary:
 		var document: Dictionary = oss_start()
-		document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":oss_start(),"level_start":oss_start()},true)
+		document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":oss_start(),"level_start":oss_start()},true)
 		return document
 	func start_level() -> void:
 		if not oss_enabled:
@@ -757,8 +760,10 @@ func nursery_ossuary_result() -> bool:
 	var data: Dictionary = scene.layout.data
 	if not expect(scene.get_script() == game.Level and player.get_script() == game.Player and scene.get_instance_id() != game.n_level_id and player.get_instance_id() != game.n_player_id and scene.get_instance_id() == game.oss_level_id and player.get_instance_id() == game.oss_player_id and data.id == "ossuary" and data.spawn == [35.5,24.5] and data.spawn_yaw == 90 and data.enemies.size() == 27 and game.enemies.size() == 27 and game.oss_bindings.size() == 27 and scene.get_children().filter(func(node): return node.get_script() == game.Enemy).size() == 27 and game.is_processing() and game.is_physics_processing() and player.is_physics_processing() and player._current_map() and not game.menu_scroll.visible and not game.quitting,"Fresh original sixth Level/Player/27 native actors, live processing and exact original spawn"): return false
 	var records: Array = game.oss_originals()
+	var original_layout = scene.layout.original_floor(5)
 	for index in range(NF_O_ACTORS.size()):
 		var spec: Array = NF_O_ACTORS[index]
+		if not expect(scene.layout.floor_revision() == 1 and absf(original_layout.world_position([spec[2],spec[3]]).y-spec[4]) < 0.000001 and absf(scene.layout.world_position([spec[2],spec[3]]).y-NF_O_CURRENT_FLOORS[index]) < 0.000001,"Independent immutable original and revision-one floor tables: "+spec[0]): return false
 		var record: Dictionary = records[index]
 		var actor = game.enemies[index]
 		var capsule: CollisionShape3D = actor.get_child(0)
