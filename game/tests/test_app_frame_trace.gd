@@ -7,6 +7,18 @@ func run() -> void:
 	var trace_script = load("res://scripts/app_frame_trace.gd")
 	if not expect(trace_script != null,"INTENDED RED: app-owned bounded trace helper must exist"): return
 	preload("res://scripts/preferences.gd").new().apply_bindings()
+	var expected_columns: Array = ["elapsed_us","phase","frames_drawn","physics_tick","pipeline_compilations_canvas","pipeline_compilations_mesh","pipeline_compilations_surface","pipeline_compilations_draw","pipeline_compilations_specialization"]
+	var counter_trace = trace_script.new()
+	counter_trace.record_draw(8000,7,11)
+	if not expect(counter_trace.render_rows.size() == 1 and counter_trace.render_rows[0].size() == 9 and trace_script.get_script_constant_map().get("RENDER_COLUMNS",[]) == expected_columns,"INTENDED RED: actual draw row appends five pipeline counts and declares the matching nine-column schema"): return
+	if not expect(counter_trace.render_rows[0].slice(0,4) == [8000,0,7,11],"Original four draw columns keep their names, order and values"): return
+	var pipeline_names: Array = ["CANVAS","MESH","SURFACE","DRAW","SPECIALIZATION"]
+	for index in range(pipeline_names.size()):
+		var enum_name: String = "RENDERING_INFO_PIPELINE_COMPILATIONS_"+pipeline_names[index]
+		if not expect(ClassDB.class_has_integer_constant("RenderingServer",enum_name),"Required actual engine enum must exist: "+enum_name): return
+		var enum_value: int = ClassDB.class_get_integer_constant("RenderingServer",enum_name)
+		if not expect(counter_trace.render_rows[0][index+4] == RenderingServer.get_rendering_info(enum_value),"Actual native engine count aligns with column "+expected_columns[index+4]+"; headless equality is not GPU observability or hitch causality"): return
+	print("PASS pipeline row/schema/native API alignment; headless Dummy counts=",counter_trace.render_rows[0].slice(4),"; no GPU observability or timing claim")
 	var fixed_metrics_existed: bool = FileAccess.file_exists(trace_script.METRICS_PATH)
 	var fixed_metrics_sha: String = FileAccess.get_sha256(trace_script.METRICS_PATH) if fixed_metrics_existed else ""
 	var main_script = load("res://scripts/main.gd")
@@ -103,14 +115,18 @@ func run() -> void:
 	trace.record_physics(trace_script.MAX_PHYSICS_ROWS+1,0)
 	if not expect(trace.physics_rows.size() == trace_script.MAX_PHYSICS_ROWS and trace.reason == "physics_sample_cap","Physics rows have a finite independent cap"): return
 	trace = trace_script.new()
+	trace.record_draw(-1,0,0)
+	if not expect(trace.reason == "nonmonotonic_render_timestamp" and trace.render_rows.is_empty(),"Negative draw timestamp invalidates without retaining a counter row"): return
+	trace = trace_script.new()
 	trace.record_draw(2,1,1)
 	trace.record_draw(2,2,2)
 	if not expect(trace.reason == "nonmonotonic_render_timestamp" and trace.render_rows.size() == 1,"Repeated draw timestamp invalidates the prefix"): return
 	trace = trace_script.new()
 	trace.record_draw(23896000,1,1)
+	var valid_prefix: Array = trace.render_rows.duplicate(true)
 	for action in trace_script.ACTIONS: Input.action_press(action)
 	trace.record_draw(26000001,2,2)
-	if not expect(trace.reason == "terminal_draw_timeout" and trace.render_rows == [[23896000,5,1,1]],"A closing draw outside the two-second bound invalidates without inventing or extending the valid draw prefix"): return
+	if not expect(trace.reason == "terminal_draw_timeout" and trace.render_rows == valid_prefix and trace.render_rows[0].slice(0,4) == [23896000,5,1,1],"A closing draw outside the two-second bound invalidates without inventing or extending the valid draw prefix"): return
 	for action in trace_script.ACTIONS:
 		if not expect(not Input.is_action_pressed(action),"Closing timeout releases all five owned actions"): return
 	trace = trace_script.new()
@@ -131,6 +147,7 @@ func run() -> void:
 	var main_markers: Array = ['var validation_home = OS.get_environment("HOME")','if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):','push_error("Export validation requires isolated HOME/userdata")','get_tree().quit(1)','progress_path = "user://export_validation.json"','_verify_stall_requested(OS.get_cmdline_user_args())','load("res://scripts/app_frame_trace.gd").new()','await trace.run(self)','start_campaign(1)']
 	if not expect(guard_order_valid(source,"func _verify_export()",main_markers),"Existing isolated HOME guard precedes lazy trace routing and gameplay"): return
 	var helper: String = FileAccess.get_file_as_string("res://scripts/app_frame_trace.gd")
+	if not expect(helper.contains('"render_columns":RENDER_COLUMNS') and helper.contains('"pipeline_compilation_units":"cumulative_count"'),"Serialized report uses the same actual row schema and explicit cumulative count units"): return
 	var helper_markers: Array = ['reason = early_failure(','FileAccess.file_exists(METRICS_PATH)','if not reason.is_empty():','await cleanup(tree)','tree.quit(1)','game.start_campaign(1)']
 	if not expect(guard_order_valid(helper,"func run(",helper_markers),"Runtime applies real output refusal before production startup"): return
 	if not expect(guard_order_valid(helper,"func run(",['if elapsed_us >= DURATION_US:','if collection_complete(','invalidate("terminal_draw_timeout")','continue','var phase: int = phase_at(elapsed_us)']),"Deadline branch requires a real closing draw or bounded timeout, never phase -1 input"): return

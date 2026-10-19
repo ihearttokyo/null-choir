@@ -19,6 +19,7 @@ const MAX_RENDER_ROWS = 65536
 const MAX_PHYSICS_ROWS = 16384
 const MAX_REPORT_BYTES = 16*1024*1024
 const METRICS_PATH = "user://export_stall_metrics.json"
+const RENDER_COLUMNS = ["elapsed_us","phase","frames_drawn","physics_tick","pipeline_compilations_canvas","pipeline_compilations_mesh","pipeline_compilations_surface","pipeline_compilations_draw","pipeline_compilations_specialization"]
 const ACTIONS = ["move_forward","move_left","move_back","move_right","fire"]
 const PHASE_ACTIONS = ["move_forward","move_left","move_back","move_right","move_forward","move_back"]
 
@@ -92,7 +93,12 @@ func record_draw(elapsed: int, drawn: int, physics_tick: int) -> void:
 	if elapsed < 0 or (not render_rows.is_empty() and elapsed <= render_rows.back()[0]):
 		invalidate("nonmonotonic_render_timestamp")
 		return
-	render_rows.append([elapsed,phase_at(elapsed),drawn,physics_tick])
+	render_rows.append([elapsed,phase_at(elapsed),drawn,physics_tick,
+		RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_PIPELINE_COMPILATIONS_CANVAS),
+		RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_PIPELINE_COMPILATIONS_MESH),
+		RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_PIPELINE_COMPILATIONS_SURFACE),
+		RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_PIPELINE_COMPILATIONS_DRAW),
+		RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_PIPELINE_COMPILATIONS_SPECIALIZATION)])
 
 func record_physics(elapsed: int, tick: int) -> void:
 	if not reason.is_empty(): return
@@ -268,7 +274,7 @@ func run(owner: Node) -> void:
 	for row in render_rows: times.append(row[0])
 	var summary: Dictionary = summarize(times,elapsed_us)
 	var collection_passed: bool = reason.is_empty() and collection_complete(render_rows.back()[0] if not render_rows.is_empty() else 0,elapsed_us)
-	report.merge({"collection_passed":collection_passed,"collection_status":"PASS" if collection_passed else "INCOMPLETE","target_passed":target_passed(summary,collection_passed),"performance_status":"PASS" if target_passed(summary,collection_passed) else ("FAIL" if collection_passed else "UNSCORED"),"reason":reason,"stop_elapsed_us":stop_elapsed_us,"elapsed_us":elapsed_us,"valid_prefix_us":render_rows.back()[0] if not render_rows.is_empty() else 0,"construction_us":construction_us,"initial":initial,"final":resources(),"phases":phases,"fire_started_us":fire_started_us,"focus_events":focus_events,"backend":RenderingServer.get_current_rendering_driver_name(),"method":RenderingServer.get_current_rendering_method(),"window":[window.size.x,window.size.y],"target_size":[window.get_texture().get_size().x,window.get_texture().get_size().y],"logical_size":[window.content_scale_size.x,window.content_scale_size.y],"refresh_hz":DisplayServer.screen_get_refresh_rate(window.current_screen),"max_fps":Engine.max_fps,"vsync":DisplayServer.window_get_vsync_mode(window.get_window_id()),"time_scale":Engine.time_scale,"physics_ticks_per_second":Engine.physics_ticks_per_second,"render_columns":["elapsed_us","phase","frames_drawn","physics_tick"],"render_rows":render_rows,"physics_columns":["elapsed_us","physics_tick"],"physics_rows":physics_rows,"counter_columns":["elapsed_us","engine_time_process_s","engine_time_physics_s","draw_calls","objects","resources","collision_pairs","static_bytes"],"counters":counters,"render_summary":summary})
+	report.merge({"collection_passed":collection_passed,"collection_status":"PASS" if collection_passed else "INCOMPLETE","target_passed":target_passed(summary,collection_passed),"performance_status":"PASS" if target_passed(summary,collection_passed) else ("FAIL" if collection_passed else "UNSCORED"),"reason":reason,"stop_elapsed_us":stop_elapsed_us,"elapsed_us":elapsed_us,"valid_prefix_us":render_rows.back()[0] if not render_rows.is_empty() else 0,"construction_us":construction_us,"initial":initial,"final":resources(),"phases":phases,"fire_started_us":fire_started_us,"focus_events":focus_events,"backend":RenderingServer.get_current_rendering_driver_name(),"method":RenderingServer.get_current_rendering_method(),"window":[window.size.x,window.size.y],"target_size":[window.get_texture().get_size().x,window.get_texture().get_size().y],"logical_size":[window.content_scale_size.x,window.content_scale_size.y],"refresh_hz":DisplayServer.screen_get_refresh_rate(window.current_screen),"max_fps":Engine.max_fps,"vsync":DisplayServer.window_get_vsync_mode(window.get_window_id()),"time_scale":Engine.time_scale,"physics_ticks_per_second":Engine.physics_ticks_per_second,"render_columns":RENDER_COLUMNS,"pipeline_compilation_units":"cumulative_count","pipeline_compilation_observation":"RenderingServer engine totals, not reset at capture start; sampled sequentially at frame_post_draw, not atomic. Requires the five PIPELINE_COMPILATIONS enums (missing enums fail script loading). Headless/Dummy or unsupported renderers may return zero; zero may also mean no compilations. Counts are not CPU durations or GPU timestamps; flat counts do not prove a free GPU or establish hitch causality.","render_rows":render_rows,"physics_columns":["elapsed_us","physics_tick"],"physics_rows":physics_rows,"counter_columns":["elapsed_us","engine_time_process_s","engine_time_physics_s","draw_calls","objects","resources","collision_pairs","static_bytes"],"counters":counters,"render_summary":summary})
 	await cleanup(tree)
 	var payload: String = JSON.stringify(report)
 	if payload.to_utf8_buffer().size() > MAX_REPORT_BYTES or FileAccess.file_exists(METRICS_PATH):
