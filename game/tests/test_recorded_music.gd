@@ -12,7 +12,7 @@ func run():
 	root.add_child(music)
 	music.set_process(false)
 	if not expect(music.player is AudioStreamPlayer, "INTENDED RED: campaign must use recorded audio rather than MIDI synthesis"): return
-	if not expect(music.player.stream == null, "Title startup must not load a score or soundbank"): return
+	if not expect(music.player.stream == null, "Music node startup stays lazy until title or campaign is requested"): return
 	var bus = AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_mute(bus, true)
 	AudioServer.set_bus_volume_db(bus, -12.0)
@@ -27,7 +27,7 @@ func run():
 		if not expect(player.playing and player.get_playback_position() > 0, "Native recorded transport must advance"): return
 		music.set_paused(true)
 		# The audio thread can finish its already mixed block before observing pause.
-		await WallClock.seconds(self, 0.05)
+		await WallClock.seconds(self, 0.15)
 		var position = player.get_playback_position()
 		await WallClock.seconds(self, 0.12)
 		if not expect(player.stream_paused and is_equal_approx(player.get_playback_position(), position), "Pause must freeze the actual recorded transport"): return
@@ -53,9 +53,11 @@ func run():
 		music._process(8.0)
 		if not expect(is_equal_approx(player.volume_db, -3.0), "Non-finite or negative pressure must settle safely"): return
 	music.stop()
-	if not expect(not player.playing and player.stream == null, "Title/stop must release the recording and playback"): return
+	if not expect(not player.playing and player.stream == null, "Explicit stop must release the recording and playback"): return
 	music.free()
-	await process_frame
+	music = null
+	player = null
+	await WallClock.seconds(self, 0.15)
 	print("PASS Suno eight-level recordings, native transport/repeat, pause/resume/restart/stop, one lazy player and independent Music bus")
 	quit()
 

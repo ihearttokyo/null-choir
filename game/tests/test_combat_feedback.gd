@@ -119,7 +119,7 @@ func run() -> void:
 	game.enemy_event(actor,"death")
 	if not expect(game.effects.players.values().all(func(voice): return not voice.playing),"Queued-map callback cannot leak effect voices"): return
 	game.show_title()
-	if not expect(game.music.pressure_target == 0 and game.music.player.stream == null,"Title clears threat target and transport"): return
+	if not expect(game.music.pressure == 0 and game.music.pressure_target == 0 and game.music.player.stream is AudioStreamOggVorbis and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream.resource_path == game.music.title_track,"Title clears combat pressure and replaces campaign transport"): return
 	stale.free()
 	stale = null
 	game.free()

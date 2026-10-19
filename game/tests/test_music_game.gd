@@ -11,7 +11,7 @@ func run() -> void:
 	game.progress_path = prefix + "_campaign.json"
 	game.settings_path = prefix + "_preferences.json"
 	root.add_child(game)
-	if not expect(game.music != null and game.music.player is AudioStreamPlayer and game.music.player.stream == null, "Game must own one persistent lazy recorded-music node"): return
+	if not expect(game.music != null and game.music.player is AudioStreamPlayer and game.music.player.stream is AudioStreamOggVorbis and game.music.player.stream.resource_path == game.music.title_track and game.music.player.playing and not game.music.player.stream_paused, "Game must own one persistent title-playing recorded-music node"): return
 	var music = game.music
 	game.start_campaign(1)
 	game.set_process(false)
@@ -31,7 +31,7 @@ func run() -> void:
 	await game.restart_level()
 	if not expect(game.music == music and music.player.stream == first and music.player.get_playback_position() < 0.15, "Level restart must reuse the music node and restart the recording"): return
 	game.show_title()
-	if not expect(not music.player.playing and music.player.stream == null, "Title must stop and release the recording"): return
+	if not expect(music.player.playing and not music.player.stream_paused and music.player.stream is AudioStreamOggVorbis and music.player.stream.resource_path == music.title_track, "Title must replace the campaign recording with the title cue"): return
 	game.free()
 	first = null
 	paused = false

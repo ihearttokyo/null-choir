@@ -3,6 +3,7 @@ extends Node
 signal playback_started
 
 @export var level_tracks: PackedStringArray = ["res://audio/suno/intake.mp3", "res://audio/suno/foundry.mp3", "res://audio/suno/processional.mp3", "res://audio/suno/reliquary.mp3", "res://audio/suno/nursery.mp3", "res://audio/suno/ossuary.mp3", "res://audio/suno/inversion.mp3", "res://audio/suno/heart.mp3"]
+@export var title_track := "res://audio/title/the-restraint-turns.ogg"
 var player: AudioStreamPlayer
 var pressure := 0.0
 var pressure_target := 0.0
@@ -31,6 +32,30 @@ func play_level(index: int) -> void:
 	player.play()
 	playback_started.emit()
 
+func play_title() -> void:
+	pressure = 0.0
+	pressure_target = 0.0
+	player.volume_db = -3.0
+	if (player.playing or player.stream_paused) and player.stream is AudioStreamOggVorbis and player.stream.resource_path == title_track:
+		player.stream_paused = false
+		# A same-stream request transfers preview ownership without restarting.
+		playback_started.emit()
+		return
+	stop()
+	if not ResourceLoader.exists(title_track):
+		push_error("Title recording is unavailable: " + title_track)
+		return
+	var recording := load(title_track) as AudioStreamOggVorbis
+	if recording == null or recording.packet_sequence == null or not is_finite(recording.get_length()) or recording.get_length() <= 0:
+		push_error("Title recording failed to load: " + title_track)
+		return
+	# Audible loop approval is pending; play the title cue once.
+	recording.loop = false
+	recording.loop_offset = 0.0
+	player.stream = recording
+	player.play()
+	playback_started.emit()
+
 func set_pressure(value: float) -> void:
 	pressure_target = clampf(value, 0.0, 1.0) if is_finite(value) else 0.0
 
@@ -48,3 +73,7 @@ func set_paused(paused: bool) -> void:
 func stop() -> void:
 	player.stop()
 	player.stream = null
+	player.stream_paused = false
+	pressure = 0.0
+	pressure_target = 0.0
+	player.volume_db = -3.0

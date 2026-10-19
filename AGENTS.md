@@ -27,8 +27,8 @@ For sparse Git worktrees created without checkout, materialize the base index be
 
 ## Workers and completion
 
-Use named native Codex CLI children with explicit gpt-6.1-sol/xhigh and priority requested; actual telemetry governs profile claims. Partition file ownership, pass current source/evidence and authority, and tell workers they are not alone. Parent owns integration, tests and PR hygiene. Serialize heavy/native jobs until headroom is measured. Jared removed the fixed 8 GB reserve on 2026-10-08. Size-preflight the next operation against actual free space; clear only verified disposable, inactive development caches, preserving originals, saves, releases, Git work and validation evidence.
+Use named native Codex CLI children with explicit gpt-6.1-sol/high and standard requested; actual telemetry governs profile claims. Partition file ownership, pass current source/evidence and authority, and tell workers they are not alone. Parent owns integration, tests and PR hygiene. Serialize heavy/native jobs until headroom is measured. Jared removed the fixed 8 GB reserve on 2026-10-08. Size-preflight the next operation against actual free space; clear only verified disposable, inactive development caches, preserving originals, saves, releases, Git work and validation evidence.
 
-Never spawn a subagent using Max reasoning effort. Default all subagents to xhigh and explicitly set xhigh.
+Never spawn a subagent using Max reasoning effort. Use fresh contexts for new separable components; resume existing components without discarding their IDs, pending work or evidence.
 
 The full goal is complete only when the eight-level campaign, original editable assets, eight selected Suno recordings with preserved MIDI sources and current standalone Apple Silicon app are verified and delivered. A source milestone is not app, performance or campaign acceptance. Continue until that outcome or a concrete remaining blocker; checkpoint the exact resume step.

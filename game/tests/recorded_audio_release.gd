@@ -1,7 +1,7 @@
 extends RefCounted
 
 static func stop(game) -> bool:
-	if game.music.player.stream == null: return false
+	if not game.music.player.stream is AudioStreamMP3: return false
 	var recording: WeakRef = weakref(game.music.player.stream)
 	var tree: SceneTree = game.get_tree()
 	game.show_title()
