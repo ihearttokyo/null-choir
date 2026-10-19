@@ -299,6 +299,7 @@ func cleanup(tree: SceneTree) -> void:
 		input_guard.queue_free()
 		input_guard = null
 	game.show_title()
+	game.music.stop()
 	tree.paused = false
 	var drain_until: int = Time.get_ticks_usec()+100000
 	while Time.get_ticks_usec() < drain_until: await tree.process_frame

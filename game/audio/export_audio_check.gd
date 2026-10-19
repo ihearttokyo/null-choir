@@ -11,7 +11,7 @@ static func retained_sources_present(root: String = "res://audio") -> bool:
 	return true
 
 static func decoded_pcm(tree: SceneTree, player: AudioStreamPlayer) -> bool:
-	if not is_instance_valid(player) or not player.stream is AudioStreamMP3 or player.stream_paused or not player.playing:
+	if not is_instance_valid(player) or not (player.stream is AudioStreamMP3 or player.stream is AudioStreamOggVorbis) or player.stream_paused or not player.playing:
 		return false
 	var recording = player.stream
 	var duration = recording.get_length()

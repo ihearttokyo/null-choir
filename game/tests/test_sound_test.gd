@@ -43,7 +43,7 @@ func run() -> void:
 	assert(screen._selected == 8)
 	assert(screen._track_buttons[8].text == "9  Title — The Restraint Turns")
 	assert(player.stream is AudioStreamOggVorbis and player.stream.resource_path == music.title_track)
-	assert(player.playing and player.stream.loop and player.stream.loop_offset == 0.0)
+	assert(player.playing and not player.stream.loop and player.stream.loop_offset == 0.0)
 	assert(music.player == player and AudioServer.get_bus_count() == bus_count)
 	assert(AudioServer.get_bus_volume_db(bus) == -12.0 and AudioServer.is_bus_mute(bus))
 	var title_stream: AudioStream = player.stream

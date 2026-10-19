@@ -49,7 +49,8 @@ func play_title() -> void:
 	if recording == null or recording.packet_sequence == null or not is_finite(recording.get_length()) or recording.get_length() <= 0:
 		push_error("Title recording failed to load: " + title_track)
 		return
-	recording.loop = true
+	# Audible loop approval is pending; play the title cue once.
+	recording.loop = false
 	recording.loop_offset = 0.0
 	player.stream = recording
 	player.play()

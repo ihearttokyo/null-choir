@@ -21,7 +21,7 @@ func run() -> void:
 	paused = true
 	music.play_title()
 	var title = player.stream
-	if not expect(title is AudioStreamOggVorbis and title.resource_path == music.title_track and title.loop and title.loop_offset == 0.0 and absf(title.get_length() - 78.669333) < 0.01, "Actual title Ogg decoder must expose its full length and zero-offset loop"): return
+	if not expect(title is AudioStreamOggVorbis and title.resource_path == music.title_track and not title.loop and title.loop_offset == 0.0 and absf(title.get_length() - 78.669333) < 0.01, "Actual title Ogg decoder must expose its full length without enabling an unaudited infinite loop"): return
 	if not expect(player.process_mode == Node.PROCESS_MODE_INHERIT and music.process_mode == Node.PROCESS_MODE_ALWAYS and player.can_process(), "Title transport must retain frame ownership in paused menus"): return
 	await WallClock.seconds(self, 0.15)
 	if not expect(player.playing and player.has_stream_playback() and player.get_playback_position() > 0, "Native Dummy title transport advances while the menu tree is paused"): return
@@ -36,7 +36,7 @@ func run() -> void:
 	if not expect(player.get_playback_position() > position, "Repeated title resumes actual transport"): return
 	player.seek(title.get_length() - 0.08)
 	await WallClock.seconds(self, 0.25)
-	if not expect(player.playing and player.get_playback_position() < 1, "Actual title Vorbis playback wraps at its end"): return
+	if not expect(not player.playing, "Unaudited title Vorbis playback stops naturally at its end"): return
 	for index in [0, 7]:
 		music.play_level(index)
 		if not expect(player.stream is AudioStreamMP3 and player.stream.resource_path == music.level_tracks[index] and player.playing and not player.stream_paused, "Title must never suppress first/last campaign MP3 playback"): return
@@ -86,7 +86,7 @@ func run() -> void:
 	player = null
 	paused = false
 	await WallClock.seconds(self, 0.15)
-	print("PASS TITLE_AUDIO native Dummy Ogg length/loop/paused-tree/transport/repeat/switch/recovery/stop/settings; expected 6 invalid-input errors; NOT listening or Main scene")
+	print("PASS TITLE_AUDIO native Dummy Ogg length/nonlooping-end/paused-tree/transport/repeat/switch/recovery/stop/settings; expected 6 invalid-input errors; NOT listening or Main scene")
 	quit()
 
 func expect(ok: bool, detail: String) -> bool:

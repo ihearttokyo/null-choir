@@ -1093,6 +1093,13 @@ func _export_art_checks() -> Dictionary:
 		checks["art_"+art] = models.get(art,0) == expected_art[art] if art.begins_with("marker_") else models.get(art,0) >= expected_art[art]
 	return checks
 
+func _export_title_audio_checks() -> Dictionary:
+	var checks = {
+		"title_recording": ResourceLoader.exists(music.title_track) and music.player.stream is AudioStreamOggVorbis and music.player.stream.resource_path == music.title_track and music.player.stream.get_length() > 0,
+		"title_transport": music.player.playing and music.player.has_stream_playback() and not music.player.stream_paused}
+	checks["title_decoded_pcm"] = await ExportAudio.decoded_pcm(get_tree(), music.player)
+	return checks
+
 func _verify_export() -> void:
 	var validation_home = OS.get_environment("HOME")
 	if validation_home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(validation_home+"/"):
@@ -1108,6 +1115,7 @@ func _verify_export() -> void:
 		"native_metal_caches": _has_metal_shader_cache("res://.godot/shader_cache"),
 		"notices": FileAccess.get_file_as_string("res://licenses/Godot-Third-Party.txt").contains(Engine.get_license_text()),
 		"midi_sources": ExportAudio.retained_sources_present()}
+	checks.merge(await _export_title_audio_checks())
 	start_campaign(1)
 	checks["start"] = playing and enemies.size() == 23 and music.player.stream is AudioStreamMP3
 	checks["campaign_recordings"] = music.level_tracks.size() == 8
@@ -1232,6 +1240,7 @@ func _verify_export() -> void:
 			push_error("Export workflow failed: "+check)
 			get_tree().quit(1)
 			return
+	print("PASS packaged title Ogg resource/transport/decoded PCM; audible-loop approval pending")
 	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices")
 	print("PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged retained MIDI sources: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
