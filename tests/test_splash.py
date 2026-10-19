@@ -62,4 +62,5 @@ assert "      - 'CHECKPOINT.md'" in workflow, 'Release-evidence-only edits must 
 checkpoint=(ROOT/'CHECKPOINT.md').read_text().split('## Historical Alpha 1 checkpoint',1)[0]
 for evidence in [download,'1a07030cf86deca39709ee87743ad9fe83500697','4a015443733ec78eb158dd429a9d7ec7602fb9f465058f22b73ac5af42e3fed9','7579f58312deeafc0fdaa4cbe4e2b53c9c9e14dad7954ad3dbc48b3a72771626','182147397','716a8141-cc1c-4ed9-be88-faa4eb7a31c2']:
     assert evidence in checkpoint, 'Current alpha checkpoint lacks exact release evidence: '+evidence
+assert any(t=='link' and a.get('rel')=='stylesheet' and a.get('href')=='site-assets/splash.css?v=0.2.3-alpha.2' for t,a in dom.tags), 'Returning players must request the current stylesheet instead of a cached previous release'
 print('PASS static splash entry, links, responsive/focus rules, asset budget, privacy and license parity')
