@@ -18,11 +18,9 @@ def check():
     total = (ROOT/'game/assets/art/textures/cathedral_kit_atlas.png').stat().st_size
     for name in IDS:
         asset = assets[name]
-        for rel, pin in asset['recipe_dependencies'].items():
-            assert hashlib.sha256((ROOT/rel).read_bytes()).hexdigest() == pin
-        assert (ROOT/asset['source']).read_bytes()[:7] == b'BLENDER', 'Editable source must retain the existing native Blender header contract'
+        test_art.validate_forward_recipe(ROOT, asset)
         assert hashlib.sha256((ROOT/asset['source']).read_bytes()).hexdigest() == asset['source_sha256']
-        assert hashlib.sha256((ROOT/asset['provenance']['authoring_script']).read_bytes()).hexdigest() == asset['recipe_sha256']
+        assert (ROOT/asset['source']).read_bytes().startswith(b'BLENDER'), 'Blender source header'
         assert asset['reference_images'] == [{'path':'source/art/references/cathedral-kit-reference-v1.png',
             'sha256':'67f9ecf5ee5dd1d7b54f05acc211a53beafa1eae5ca86b6acb2f014ae9fd9fb3'}]
         ref = asset['reference_images'][0]

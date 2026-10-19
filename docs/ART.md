@@ -212,7 +212,7 @@ integration, not rendered appearance or packed-app acceptance.
 
 ## Recorded recipe generations
 
-Validate each asset's logical authoring recipe and helper dependencies against its recorded SHA-256. `tools/art_recipe.py` resolves exact current bytes first, then exact archived bytes under `source/art/recipe_history/<sha256>/<logical-path>.txt`; missing, modified or symlinked inputs fail closed. The two `tools/build_art.py.txt` snapshots are immutable authoring sources, not runtime assets or a cache. Keep the current helper equal to `manifest.build.script_sha256`; do not rewrite old pins when that helper changes.
+Validate each asset's logical authoring recipe and helper dependencies against its recorded SHA-256. `tools/art_recipe.py` resolves exact current bytes first, then exact archived bytes under `source/art/recipe_history/<sha256>/<logical-path>.txt`; missing, modified or symlinked inputs fail closed. The recorded `tools/build_art.py.txt` snapshots are immutable authoring sources, not runtime assets or a cache. Keep the current helper equal to `manifest.build.script_sha256`; do not rewrite old pins when that helper changes.
 
 For historical regeneration, copy the recorded recipe and dependencies unchanged into an isolated project's original logical `tools/` layout, alongside the required pinned inputs. Run the existing Blender command there, never the `.py.txt` archive in place: original recipes derive their project root from their location. Check actual generated sources/exports and retain native editability evidence before adopting any result. The archive proves source availability, not that a new native regeneration ran.
 
@@ -289,3 +289,20 @@ for source, shipped-byte, UV, 61-sample animation and rejection controls.
 The GLB does not configure production Godot autoplay or looping. Repetition and
 pause/resume were checked with explicit test-scene configuration, not gameplay
 placement. Source tests do not approve in-game appearance or performance.
+
+
+## Metadata-only source normalization
+
+The Ivory key source has a metadata-only normalized copy. Its original authoring
+recipe and helper pins remain unchanged; they identify the geometry generation,
+not a new build. The current save helper clears stored build-path fields in future
+sources. Historical recipe snapshots remain immutable.
+
+| Source | Original SHA-256 | Normalized SHA-256 |
+| --- | --- | --- |
+| `marker_ivorykey.blend` | `cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487` | `4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60` |
+
+Native byte-locality and edit/save/reopen/revert checks cover this one copy. Its
+runtime GLB and preview are byte-exact to the original. Original source bytes are
+retained privately and in existing Git history. This is not a full-source privacy
+audit or a new rendered-art acceptance.

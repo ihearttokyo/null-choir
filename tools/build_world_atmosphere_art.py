@@ -412,7 +412,7 @@ def build_scene(name):
     scene['asset_id'], scene['authoring_recipe'], scene['recipe_sha256'] = name, RECIPE, sha(__file__)
     scene['reference_images'] = json.dumps(REFERENCES[name])
     scene['machine_purpose'] = PURPOSES[name]
-    scene['source_root'], scene['project_root'] = str(SOURCE_ROOT), str(current_project)
+    scene['source_root'], scene['project_root'] = 'authoring repository root', 'dependency snapshot root'
     scene['recipe_dependencies'] = json.dumps({path: sha(current_project / path) for path in DEPENDENCIES}, sort_keys=True)
 
 

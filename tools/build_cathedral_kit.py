@@ -397,6 +397,7 @@ def main():
     bpy.context.view_layer.update()
     art.camera(scene,(18,-32,23),(0,-3,3.0),25,1280,800)
     scene.render.film_transparent=False
+    art.sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(source),compress=False,check_existing=False)
     for record in records: record['source_sha256']=sha(source); record['recipe_sha256']=sha(__file__)
     total=sum(r['outputs'][0]['bytes'] for r in records)+texpath.stat().st_size

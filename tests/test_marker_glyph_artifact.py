@@ -21,6 +21,9 @@ METADATA = 'game/assets/art/hud/marker_glyphs.json'
 METHOD = 'original editable Blender glyph geometry, native CPU orthographic render'
 producer = runpy.run_path(str(ROOT / RECIPE))  # Current trusted source only; archives remain data.
 NAMES = producer['NAMES']
+# Exact retained generation; archives are verified data, never imported.
+RETAINED_GENERATIONS = {'35164708fe093264bfdc244e2a3fc9d84ed9351955aa58f75cfc3a082061a82b': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/build_hud_art.py': 'c224381a98b316b7d41d5c77d0f95f9f3bbea061a99eaa3d56d6bdce6ad25a26'}}
+
 COUNTS = {name: sum(4*len(polygon)-4 for _, polygon in producer['geometry'](name)) for name in NAMES}
 
 
@@ -42,8 +45,10 @@ def validate_entry(entry, artifact_root=ROOT, provenance_root=ROOT):
     assert entry['id'] == 'marker_glyphs' and entry['source'] == SOURCE, 'glyph identity/source path'
     assert entry['provenance'] == {'method': METHOD, 'authoring_script': RECIPE,
                                     'imports': [], 'license': 'Original NULL CHOIR project art'}, 'glyph provenance'
+    generations = {**RETAINED_GENERATIONS, sha(ROOT / RECIPE): producer['HELPER_SHA']}
+    assert entry['recipe_sha256'] in generations, 'trusted recipe generation'
+    assert entry['recipe_dependencies'] == generations[entry['recipe_sha256']], 'helper inventory/pins'
     validate_recipe(provenance_root, entry, RECIPE, producer['HELPER_SHA'])
-    assert entry['recipe_dependencies'] == producer['HELPER_SHA'], 'glyph helper pins'
     references = [{'path': producer['REFERENCE'], 'sha256': producer['REFERENCE_SHA']}]
     assert entry['reference_images'] == references, 'glyph reference inventory'
     for reference in references:
@@ -79,6 +84,7 @@ def validate_entry(entry, artifact_root=ROOT, provenance_root=ROOT):
     meta = json.loads(exact_file(artifact_root, METADATA).read_bytes())
     expected = producer['metadata'](pixels, COUNTS, entry['recipe_sha256'])
     expected['blender_version'] = build['blender_version']
+    expected['recipe_dependencies'] = entry['recipe_dependencies']
     assert meta == expected, 'glyph exact pixel/metadata/contract parity'
     masks = []
     for index in range(len(NAMES)):
@@ -168,10 +174,10 @@ class ArtifactFixtures(unittest.TestCase):
         self.assertEqual(self.validate()['glyphs'],16)
         import test_art
         self.assertIn('marker_glyphs',test_art.EXPECTED)
-        self.assertEqual(len(test_art.EXPECTED),117)
+        self.assertEqual(len(test_art.EXPECTED),119)
         original = {a['id'] for a in json.loads((ROOT/'source/art/manifest.json').read_bytes())['assets']
                     if a['id'] != 'marker_glyphs' and a['id'] not in test_art.MARKER_IDENTITIES}
-        self.assertEqual(len(original),111)
+        self.assertEqual(len(original),113)
         self.assertEqual(test_art.EXPECTED-{'marker_glyphs'}-test_art.MARKER_IDENTITIES,original)
 
     def test_missing_and_corrupt_artifacts(self):

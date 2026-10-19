@@ -12,7 +12,7 @@ sys.dont_write_bytecode = True
 FRAMES = ('idle', 'fire', 'recover')
 ROLL = (0.0, 1.6, -0.65)
 MUZZLE = (140.0, 62.0, 22.0)
-HELPER_SHA = '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'
+HELPER_SHA = '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a'
 REFERENCE_SHA = '246d6f6b39d252115465feac28832664285686567f1612db9df9301cfeff8e15'
 PALETTE = {
     'bone': ('#b6a078', 0.05, .66), 'bone_edge': ('#dac7a0', 0.05, .58),

@@ -13,8 +13,8 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
 ID = 'ossuary_living_buttress'
 sys.path.insert(0, str(ROOT))
-HELPER_SHA = '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'
-DEPENDENCIES = {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6', 'tools/ossuary_buttress_contract.py': 'ae5b4e6aaefb1c06a8b966e21fe6a976cf89183800161327cb52820fe28056a8'}
+HELPER_SHA = '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a'
+DEPENDENCIES = {'tools/build_art.py': '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6', 'tools/ossuary_buttress_contract.py': '24c887287c67c1839c8ab91b3c086ea1390a87c0b1b6ef43c09760d24290ba9f'}
 REFERENCES = {
     'source/art/references/ossuary-living-breach-v1.png': '73b49c857cdc51578be8985a7a2d66fa29d7ebec397dbb777ca5d811a430d5ae',
     'source/art/references/ossuary-restraint-reference-v1.png': '992117a8008c631dd461ee8b63e28975488a2592e29620e2b9a24eff18ca8962',
