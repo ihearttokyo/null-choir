@@ -664,6 +664,7 @@ func pause_game() -> void:
 	if effects != null: effects.set_paused(true)
 	_show_menu("PAUSED",[["Resume",resume_game],["Settings",show_settings],["Restart level",restart_level],["Save and return to title",save_and_title]])
 	_button("Recovered records",func(): show_records(pause_game))
+	_button("Descent map",func(): show_descent_map(pause_game))
 
 func resume_game() -> void:
 	if is_instance_valid(player): player.cancel_actions()
@@ -748,7 +749,37 @@ func show_ending() -> void:
 	var revelation = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if state.discoveries.size() == 8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
 	_show_menu(revelation,[["New campaign",show_difficulty],["Return to title",show_title]])
 	_button("Recovered records",func(): show_records(show_ending))
+	_button("Descent map",func(): show_descent_map(show_ending))
 	_record_body(Narrative.ENDINGS["complete" if state.discoveries.size() == 8 else "normal"].body)
+
+func _descent_available() -> bool:
+	if not is_inside_tree(): return false
+	return not playing and not placement_pending and get_tree().paused and (state.level_index == 8 or (is_instance_valid(level) and not level.is_queued_for_deletion()))
+
+func show_descent_map(back: Callable) -> void:
+	if not _descent_available() or not back.is_valid(): return
+	var view: Dictionary = preload("res://scripts/descent_map.gd").overview(state)
+	_show_menu("DESCENT MAP",[["Back",back]])
+	var summary = Label.new()
+	summary.text = "%d / 8 descents cleared · %d / 8 records recovered\n\n%s" % [view.cleared, view.records, view.objective]
+	summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	summary.add_theme_font_size_override("font_size",14)
+	menu.add_child(summary)
+	var entries: PackedStringArray = []
+	for row in view.rows:
+		entries.append("%02d  %s — %s\n%s" % [row.index+1, row.name, row.status, "Record recovered" if row.record_found else "Record not recovered"])
+	# Reuse the keyboard-scrollable, focus-outlined archive panel, not inert labels.
+	_record_body("\n\n".join(entries))
+	for row in view.rows:
+		if row.record_found:
+			var index: int = row.index
+			_button("Read: "+Narrative.RECORDS[index].title,func(): show_descent_record(index,back))
+
+func show_descent_record(index: int, back: Callable) -> void:
+	if not _descent_available() or not back.is_valid() or index < 0 or index >= Narrative.RECORDS.size() or not index in state.discoveries: return
+	_show_menu(Narrative.RECORDS[index].title,[["Back to descent map",func(): show_descent_map(back)]])
+	menu.get_child(0).add_theme_font_size_override("font_size",24)
+	_record_body(Narrative.RECORDS[index].body)
 
 func show_records(back: Callable) -> void:
 	if playing or placement_pending: return
