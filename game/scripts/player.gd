@@ -123,6 +123,8 @@ func _physics_process(delta: float) -> void:
 	elif fired and game.has_method("observe_interaction"): game.observe_interaction()
 	if game.has_method("update_passive_triggers"): game.update_passive_triggers(self)
 	if not _current_map() or not game.playing: return
+	if game.has_method("update_encounter_triggers"): game.update_encounter_triggers(self)
+	if not _current_map() or not game.playing: return
 	game.state.position = position
 	game.state.yaw = preload("res://scripts/enemy.gd").canonical_yaw(rotation.y)
 	# Native float32 Euler limits can round beyond the serialized +/-1.35 bound.

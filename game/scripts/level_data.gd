@@ -62,9 +62,9 @@ func world_position(cell: Array) -> Vector3:
 	var tile = point.floor()
 	var uv = point-tile
 	var a = height_at(tile)
-	var b = height_at(tile+Vector2.RIGHT)
+	var b = height_at(tile+Vector2.RIGHT) if uv.y <= uv.x else 0.0
 	var c = height_at(tile+Vector2.ONE)
-	var d = height_at(tile+Vector2.DOWN)
+	var d = 0.0 if uv.y <= uv.x else height_at(tile+Vector2.DOWN)
 	# Match the two actual floor triangles, including elevation-boundary cells.
 	var height = a+(b-a)*uv.x+(c-b)*uv.y if uv.y <= uv.x else a+(c-d)*uv.x+(d-a)*uv.y
 	return Vector3(point.x*data.cell_size,height,point.y*data.cell_size)

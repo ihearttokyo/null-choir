@@ -392,14 +392,21 @@ func _process(delta: float) -> void:
 	damage_flash = maxf(0,damage_flash-delta)
 	hit_flash = maxf(0,hit_flash-delta)
 	if playing and player != null:
-		var cell = Vector2(player.position.x,player.position.z)/float(level.layout.data.cell_size)
-		for group in level.layout.data.get("encounters",[]):
-			var r = group.region
-			# World positions are float32; preserve inclusive authored edges after cell conversion.
-			if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
-				activate_encounter(group.id)
+		_update_encounters()
 		if music != null: music.set_pressure(_combat_pressure())
 	hud.queue_redraw()
+
+func _update_encounters() -> void:
+	var cell = Vector2(player.position.x,player.position.z)/float(level.layout.data.cell_size)
+	for group in level.layout.data.get("encounters",[]):
+		var r = group.region
+		# World positions are float32; preserve inclusive authored edges after cell conversion.
+		if cell.is_equal_approx(cell.clamp(Vector2(r[0],r[1]),Vector2(r[2],r[3]))) and _has_keys(group.get("requires",[])):
+			activate_encounter(group.id)
+
+func update_encounter_triggers(observer: CharacterBody3D) -> void:
+	# Native movement/collection must publish encounter activation before rendering.
+	if _passive_scan_current(observer,level): _update_encounters()
 
 func _passive_scan_current(observer: CharacterBody3D, scene: Node3D) -> bool:
 	if not Engine.is_in_physics_frame() or not is_inside_tree() or not playing or get_tree().paused or placement_pending or state.health <= 0 or _scene_level_index != state.level_index: return false
