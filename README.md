@@ -6,33 +6,43 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 [Enter the NULL CHOIR download page](https://null-choir.jaymoney.chatgpt.site).
 
-[![Illustrated NULL CHOIR key art](docs/site-assets/arch.jpg)](https://null-choir.jaymoney.chatgpt.site)
+[![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download Alpha 4 for Apple Silicon Macs](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-Apple-Silicon.zip). **Alpha 4 — unfinished incremental playtest, not completion of the full Alpha 4 scope or a final release.** Requires macOS 14 or newer. This archive is Developer ID-signed, Apple-notarized and stapled; keep system security protections enabled. [Alpha 4 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+[Download the Alpha 4 Major Features Preview 02 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-02-Apple-Silicon.zip). **Playable Alpha 4 preview. The major-feature roadmap remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
 
-### What changed between playtests
+Archive size: **204,654,637 bytes**  
+SHA-256: `8be2311dfe7649de9bd24f573df9cac4e2ba50766761251d17569e1eb83ac2d2`
 
-- **Alpha 2:** title music and the nine-track Resonance Chamber Sound test. The revised topography across all eight campaign maps was already included.
-- **Alpha 3:** physics-step encounter activation and an unnecessary terrain-height lookup removed, with regression coverage. No measured FPS improvement is claimed.
-- **Alpha 4:** Pause/ending descent-progress screen with eight-depth status, Blood/Ivory objectives and earned record access. This is a text/status map, not the planned illustrated, semi-animated descent map.
+[Preview source](https://github.com/ihearttokyo/null-choir/tree/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game) · [Alpha 4 Major Features Preview 02 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
 
-All three retain the same revised eight-map layouts. Alpha 3/4 do not add new levels, weapons or bosses. These releases use separate release-source branches; publishing them did not merge the outstanding gameplay PRs into this default branch.
+### What changed in Major Features Preview 02
 
-**Still unfinished:** the Heart Ivory/Return automated route exceeds its original time budget; full earned campaign completion with both seal orders/all difficulties, sustained performance, physical mouse/gamepad checks, listening acceptance, and the integrated illustrated descent map/intro artwork remain unverified or incomplete. Package checks and notarization do not establish those requirements.
+- **Eight revision-2 spatial routes:** all eight campaign maps add new elevation relationships with service galleries, ramps and bridge crossings. These are a new revision over Alpha 2's earlier terrain pass; they are not eight new levels.
+- **Six new chapter/title illustrations:** the title, Foundry, Processional, Ossuary, Inversion and Heart artwork has been replaced with the new paintings. Intake, Reliquary and Nursery are not among these six image updates.
+- **Full-size chapter interludes:** completed chapters open as paintings with a compact Descend/Descent chart control rail. Switch back to the connected eight-depth route map; future paintings stay locked. The ending now uses the Heart painting.
+- **Soundtrack continuity:** the title screen reuses the Processional recording and the Heart interlude uses the existing Heart recording. They are selections from the same eight offline Suno tracks, not new compositions or extra tracks.
+- **Enemy-spawn correction:** capsule/slope contact no longer produces the prior invalid spawn placement.
+- **Resonance Chamber:** the existing track transport now has three procedural visual styles. The richer cathedral treatment remains in progress and has not cleared the strict visual acceptance bar.
 
-**Optional unfinished preview:** [Download the chapter/title/map preview](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-chapter-preview-Apple-Silicon.zip). Adds the Blender-rendered cathedral title, connected descent-map artwork and eight introductions on existing campaign-choice/intermission screens. No extra mandatory click; briefings remain keyboard-readable. Signed and Apple-notarized; **not full Alpha4 acceptance**. The Heart route and strict combat input-ledger checks remain unresolved. The original Alpha4 download above is unchanged for rollback. Preview SHA256: `f9880daac9b0036f3a106c000f2e6a8038c584ff2a52d8835af36ab86ac38b04`.
+### Still unfinished and known limits
 
-[Alpha 3 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) · [Alpha 2 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2)
+This remains an incremental preview. The full eight-level earned campaign—with both seal orders and all difficulties—has not been accepted as complete. Intake, Reliquary and Nursery still need their targeted chapter-art refinements. Fourteen newly generated enemy/weapon atlases remain **concept-only**, not runtime-ready art. Fuller Resonance Chamber visuals, world-graphics work and campaign polish remain in progress. No full-campaign FPS/performance claim, physical keyboard/mouse/gamepad acceptance, human listening acceptance or full playthrough is claimed here. The established Heart Ivory/Return automated route exceeds its original time budget; the remaining campaign route/input-ledger gaps are not waived by this preview.
+
+**Save compatibility:** a save written after entering a revision-2 floor may not load in earlier Alpha 4 binaries. Keep a separate backup before moving between this preview and an older build; do not overwrite the only save you need for rollback.
+
+### Previous downloads and rollback
+
+The previous Alpha 4 release remains available for rollback: [Alpha 4 release](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4) · [Alpha 4 chapter-preview package](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-chapter-preview-Apple-Silicon.zip) (SHA-256 `f9880daac9b0036f3a106c000f2e6a8038c584ff2a52d8835af36ab86ac38b04`). [Alpha 3](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) and [Alpha 2](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2) remain available as earlier rollback builds. Prior archives are not replaced or deleted.
 
 [LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
 
-## Development status
+## Earlier development history
 
-The current source registers all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. The current soundtrack maps one selected Suno take to each level; the original eight MIDI scores remain preserved. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
+The earlier development baseline registered all eight maps, with two native traversal loops and seven distinct religious-inspired set pieces per level. All 56 pieces have editable Blender sources. Six weapons and eight enemy roles, including two manifested bosses, pass native behavior checks; the boss encounters block descent until their persisted defeat. The HUD now includes a reference-derived restraint instrument with real HP and phase feedback. The current soundtrack maps one selected Suno take to each level; the original eight MIDI scores remain preserved. Four image-derived overhead modules now add growth vessels, bone sorting, cosmic fractures and arterial ribs across the late loop chambers.
 
 Earlier development previews remain available; final campaign acceptance remains unfinished. Inversion now has recessed cosmic cavities, fractured violet incisions and visible sparse stars. Two existing examination spotlights reveal the Nursery organism and the Heart's tooth-lined throat. Independent focused pixel reviews and correctness/Ponytail reviews pass. Strict inventory covers 92 editable art assets and 93 exports. Both changed maps pass source and boundary checks; all 24 native late-map difficulty/seal-order cases pass.
 
-The earlier v0.2.2-suno.1 ZIP passed all eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing, system-only dependencies and isolated user data. The v0.2.2-suno.2 archive preserves that game payload and additionally passes Developer ID, Apple notarization, stapled-ticket, Gatekeeper and packed-app checks. Actual standalone title/Continue, stock Escape pause, live Heart world, staged death/checkpoint restoration, save/title and normal Quit pass. Thirty M4/Metal source-candidate stress samples measure 105.81–120.77 FPS with warm scene construction at most 417.10 ms. These are source diagnostics, not a release-binary matrix or full playthrough.
+The earlier v0.2.2-suno.1 ZIP passed all eight native packed scenes/art/live MIDI/weapons/actors, strict ad-hoc signing, system-only dependencies and isolated user data. The v0.2.2-suno.2 archive preserves that game payload and additionally passes Developer ID, Apple notarization, stapled-ticket, Gatekeeper and packed-app checks. Actual standalone title/Continue, stock Escape pause, live Heart world, staged death/checkpoint restoration, save/title and normal Quit pass. Historical source-candidate measurements are not a performance acceptance result for Major Features Preview 02; no FPS or full-campaign performance claim is made for this build.
 
 The published 0.2.1 app missed the initial three-second title-frame target. Current source builds bake native Metal libraries into the development app; controlled launch comparisons show an improvement, with measurement limits recorded in [CHECKPOINT.md](CHECKPOINT.md). This does not certify reboot-cold or normal input-ready launch. Held physical controls, heard musical quality and full played pacing remain open. [DESIGN.md](DESIGN.md) owns requirements.
 
@@ -40,7 +50,7 @@ Source-native checks preserve captured actor damage and summoned companions thro
 
 ## Run and build
 
-[Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. The current builder produces a native Metal-baked 0.2.2 development app for Apple Silicon Macs running macOS 14 or newer. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
+[Mac development builds](https://github.com/ihearttokyo/null-choir/releases) retain the published 0.2.1, 0.2.0 and 0.1.3 previews as rollback evidence. Major Features Preview 02 is a native Metal-baked 0.2.3 app for Apple Silicon Macs running macOS 14 or newer. Use its [pinned release source](https://github.com/ihearttokyo/null-choir/tree/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game) to reproduce this preview; the default branch has not merged every outstanding gameplay PR. [Source integration](https://github.com/ihearttokyo/null-choir/pull/1) tracks the reviewed eight-level development project; merging source does not certify a corrected standalone app.
 
 Open `game/project.godot` in Godot 4.7.2, or run:
 
