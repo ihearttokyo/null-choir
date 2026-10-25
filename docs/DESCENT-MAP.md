@@ -18,3 +18,10 @@ The pause/ending map now adds eight linked chapter illustrations below its exist
 A gentle current-depth pulse is opt-in through **Animate descent illustration**. Motion is off on every opening; disabling it resets the phase to a still image. All illustrations and processing belong to the disposable menu component, with no retained Main/Campaign reference or preference/save changes.
 
 The eight JPEG derivatives total under 200 KiB, mechanically downsampled from retained native 7680×4320 Blender master candidates. Seven views use the unchanged prototype09 source; the Heart uses its later fang-weight74 source. Masters remain private authoring inputs, outside the runtime. Their existence does not certify final visual quality, complete intro transitions, physical input, or campaign acceptance. Source/UI tests do not certify final rendered appearance.
+
+
+## Chapter introductions (local candidate, not yet in the public preview)
+
+The existing difficulty-choice screen introduces the Intake; the seven existing earned intermissions introduce the next unlocked chapter. Each uses its rendered chapter artwork as the background, a persistent numbered chapter caption, and a focusable themed briefing. No new mandatory click, timer, save format or campaign grant is introduced. Difficulty/Descend controls retain initial focus and their existing callbacks. Tab reaches the briefing and the outer menu follows focus; current control bounds are checked against the actual scrollbar client.
+
+Menu metadata owns only the transient chapter index and is cleared on unrelated menus. Introductions require paused, no-level, non-playing/non-placement screens: either the actual new-campaign difficulty choice or the current earned RESTORED intermission. Future/invalid/stale introduction requests are rejected. HUD owns at most the currently selected compact chapter texture; normal title/settings return to the cathedral background, while gameplay keeps its existing HUD rendering. This is not a timed cinematic, and it does not establish played pacing, cold-load, full campaign, physical input, listening or final art acceptance.

@@ -20,6 +20,8 @@ var game: Node
 var message_label: Label
 var weapon_texture: Texture2D
 var _menu_background: Texture2D
+var _chapter_background: Texture2D
+var _menu_chapter: int = -1
 var weapon_asset: String = ""
 var labels: Dictionary = {}
 var view: Dictionary = {}
@@ -207,6 +209,20 @@ func damage_flash_alpha() -> float:
 	return minf(0.45,game.damage_flash*1.3)*(0.6 if game.settings.reduced_damage_flashes else 1.0)
 
 func menu_backdrop_texture() -> Texture2D:
+	var chapter: int = -1
+	if is_instance_valid(game):
+		var panel = game.get("menu")
+		var scroll = game.get("menu_scroll")
+		if panel is Control and scroll is Control and scroll.visible:
+			var requested = panel.get_meta("chapter_intro",-1)
+			if requested is int and requested >= 0 and requested < 8: chapter = requested
+	if chapter >= 0:
+		if _menu_chapter != chapter or _chapter_background == null:
+			_menu_chapter = chapter
+			_chapter_background = load("res://assets/art/descent/"+preload("res://scripts/descent_chart.gd").VIEWS[chapter]+".jpg")
+		return _chapter_background
+	_chapter_background = null
+	_menu_chapter = -1
 	# Local native resource ownership; no Blender or master-raster load at runtime.
 	if _menu_background == null:
 		_menu_background = load("res://assets/art/title/cathedral.jpg")
@@ -218,6 +234,10 @@ func _draw() -> void:
 		if backdrop != null:
 			draw_texture_rect(backdrop,Rect2(0,0,640,360),false)
 			draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029,0.25))
+			if _menu_chapter >= 0:
+				draw_rect(Rect2(8,330,624,24),Color(INK,0.92))
+				var caption: String = "%02d / 08 — %s" % [_menu_chapter+1,preload("res://scripts/descent_map.gd").LEVEL_NAMES[_menu_chapter]]
+				draw_string(labels["LevelTitle"].get_theme_font("font"),Vector2(16,348),caption,HORIZONTAL_ALIGNMENT_LEFT,608,14,IVORY)
 		else:
 			draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029))
 			for x in range(20,640,40):

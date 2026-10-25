@@ -625,6 +625,7 @@ func interact() -> void:
 				_level_load_failed(next_layout.load_error)
 				return
 			_show_menu(completed_title,actions)
+			_show_chapter_intro(state.level_index)
 
 func hurt_player(amount: int) -> void:
 	if state.health <= 0 or amount <= 0: return
@@ -812,6 +813,20 @@ func _record_body(text: String) -> void:
 
 func show_difficulty() -> void:
 	_show_menu("RECOVERY PROTOCOL",[["Merciful",func(): start_campaign(0)],["Relentless",func(): start_campaign(1)],["Terminal",func(): start_campaign(2)],["Back",show_title]])
+	_show_chapter_intro(0)
+
+func _show_chapter_intro(index: int) -> void:
+	if not is_inside_tree() or playing or placement_pending or is_instance_valid(level) or not get_tree().paused or not menu_scroll.visible: return
+	if index < 0 or index >= 8 or menu.get_child_count() == 0: return
+	var heading: String = menu.get_child(0).text
+	var new_campaign_choice: bool = index == 0 and heading == "RECOVERY PROTOCOL"
+	var earned_transition: bool = index > 0 and index == state.level_index and heading.ends_with(" RESTORED")
+	if not new_campaign_choice and not earned_transition: return
+	if menu.get_meta("chapter_intro",-1) == index: return
+	menu.set_meta("chapter_intro",index)
+	_record_body("%02d / 08 — %s\nFind both seals, then the exit. Explore for optional records.\nChapter illustration, not a floor plan." % [index+1,preload("res://scripts/descent_map.gd").LEVEL_NAMES[index]])
+	menu.get_child(menu.get_child_count()-1).custom_minimum_size.y = 96
+	hud.queue_redraw()
 
 func show_settings() -> void:
 	_show_menu("SETTINGS",[])
@@ -879,6 +894,7 @@ func _show_menu(title: String, actions: Array) -> void:
 	if placement_pending: show_title()
 	pending_action = ""
 	pending_button = null
+	menu.set_meta("chapter_intro",-1)
 	menu_scroll.scroll_vertical = 0
 	menu_scroll.show()
 	for child in menu.get_children():
