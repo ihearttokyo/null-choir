@@ -20,6 +20,8 @@ All three retain the same revised eight-map layouts. Alpha 3/4 do not add new le
 
 **Still unfinished:** the Heart Ivory/Return automated route exceeds its original time budget; full earned campaign completion with both seal orders/all difficulties, sustained performance, physical mouse/gamepad checks, listening acceptance, and the integrated illustrated descent map/intro artwork remain unverified or incomplete. Package checks and notarization do not establish those requirements.
 
+**Optional unfinished preview:** [Download the new illustrated-map/title build](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-illustrated-preview-Apple-Silicon.zip). Adds the Blender-rendered cathedral title background and connected chapter illustrations with earned-only reveals and optional animation. Signed and Apple-notarized; **not full Alpha4 acceptance**. The Heart route and strict combat input-ledger checks remain unresolved. The original Alpha4 download above is unchanged for rollback. Preview SHA256: `7a6634c6cf67da2c46025c60a124e3caa614ab45e43bed9315182759d8db3760`.
+
 [Alpha 3 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) · [Alpha 2 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2)
 
 [LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
