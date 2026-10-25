@@ -131,7 +131,7 @@ func before_encounter(id: String) -> Dictionary:
 	var spec: Dictionary = rows[0]
 	var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
 	var region: Array = spec.region
-	if not require(current() and not activated.has(id) and stack("/main.gd","_process") and not stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in keys),"earned inclusive region/key activation: "+id): return {}
+	if not require(current() and not activated.has(id) and Engine.is_in_physics_frame() and stack("/main.gd","update_encounter_triggers") and stack("/player.gd","_physics_process") and not stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in keys),"earned inclusive region/key activation: "+id): return {}
 	return spec
 
 # Production's shield uses hit geometry, idle state and strict front-bearing >0.5.

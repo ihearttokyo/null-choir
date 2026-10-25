@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize(): call_deferred("run")
 
 func run():
@@ -24,6 +26,8 @@ func run():
 	if not expect("blood" in game.state.keys and "blood_key" in game.state.removed): return
 	game.show_title()
 	await process_frame
+	game.music.stop()
+	await WallClock.seconds(self,0.15)
 	game.free()
 	paused = false
 	await process_frame

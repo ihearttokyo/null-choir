@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize(): call_deferred("run")
 
 func bodies(node: Node, door: Node, out: Array[RID]) -> void:
@@ -52,7 +54,9 @@ func run():
         game.show_title()
         await process_frame
         await physics_frame
+    game.music.stop()
     game.queue_free()
+    await WallClock.seconds(self,0.15)
     await process_frame
     await physics_frame
     print("VERTICAL_DOOR_CONTACT_RESULT ",JSON.stringify({"misses":misses,"samples":rows}))

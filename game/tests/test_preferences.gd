@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -13,6 +15,8 @@ func run() -> void:
 	for child in game.menu.get_children():
 		if child is CheckButton and child.text == "Head bob":
 			child.button_pressed = false
+	game.music.stop()
+	await WallClock.seconds(self,0.15)
 	game.free()
 	paused = false
 	game = load("res://scripts/main.gd").new()
@@ -127,6 +131,8 @@ func run() -> void:
 	DirAccess.remove_absolute(blocker)
 	prefs.reset()
 	if not expect(prefs.values == Prefs.DEFAULTS and prefs.bindings == Prefs.default_bindings(),"Restore native defaults"): return
+	game.music.stop()
+	await WallClock.seconds(self,0.15)
 	game.free()
 	paused = false
 	DirAccess.remove_absolute(path)

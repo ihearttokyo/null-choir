@@ -2,6 +2,7 @@ extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
+const Landmarks = preload("res://scripts/level_landmarks.gd")
 const PURPOSE_ART = {
 	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
 	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
@@ -25,6 +26,7 @@ func build(owner_game: Node, index: int) -> bool:
 	_build_geometry()
 	_build_environment()
 	_build_scenery()
+	Landmarks.build(self,layout)
 	for hero in layout.data.heroes:
 		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
 		if not hero.has("base"): continue

@@ -164,7 +164,7 @@ class FourthMain:
 		h_ok = h_ok and h_current() and id == "reliquary_halo_commit"
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			h_ok = h_ok and cell.x >= 2.0 and cell.x <= 13.9 and cell.y >= 10.0 and cell.y <= 22.5 and h_stack("/main.gd","_process") and state.keys.is_empty()
+			h_ok = h_ok and cell.x >= 2.0 and cell.x <= 13.9 and cell.y >= 10.0 and cell.y <= 22.5 and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and state.keys.is_empty()
 		super.activate_encounter(id)
 		if not prior:
 			h_activation += 1

@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_blood_story.gd"
 
-const Q_BLOOD_SHA = "38e2d367e7db0f3655efd73ed88944a0aaaf76596a6c0de4940044554eaf1279"
+const Q_BLOOD_SHA = "b1cee4c7341a89a7527f9e6954819dff04eaf71b71067b0e7c1bdbf6d99e0ab6"
 const Q_IDS = ["reliquary_enemy_16","reliquary_enemy_17","reliquary_enemy_18"]
 const Q_GROUP = {"id":"reliquary_halo_return","region":[16.5,10.0,18.5,13.0],"enemy_ids":Q_IDS,"requires":["blood"],"cue":{"text":"THE INDEX SENDS YOUR FACE AHEAD","light_ids":["reliquary_halo_return"],"sound":"seal_release"}}
 const Q_PICKUPS = {"reliquary_halo_return_rivets":{"id":"reliquary_halo_return_rivets","kind":"ammo","cell":[15.5,11.5],"amount":45.0,"weapon":1.0},"reliquary_halo_return_shells":{"id":"reliquary_halo_return_shells","kind":"ammo","cell":[14.5,11.5],"amount":8.0,"weapon":2.0}}
@@ -133,7 +133,7 @@ class ReturnMain:
 		q_ok = q_ok and q_current() and id in ["reliquary_halo_commit",Q_GROUP.id]
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			q_ok = q_ok and id == Q_GROUP.id and q_activation == 0 and state.keys == ["blood"] and cell.is_equal_approx(cell.clamp(Vector2(16.5,10),Vector2(18.5,13))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage")
+			q_ok = q_ok and id == Q_GROUP.id and q_activation == 0 and state.keys == ["blood"] and cell.is_equal_approx(cell.clamp(Vector2(16.5,10),Vector2(18.5,13))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage")
 		super.activate_encounter(id)
 		if not prior:
 			q_activation += 1

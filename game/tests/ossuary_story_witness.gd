@@ -15,18 +15,69 @@ var notification_seen: bool = false
 var settings_image: Dictionary = {}
 var preferences_image: Dictionary = {}
 var player_capsule: Array = []
+var entry_carry: Dictionary = {}
+
+# Pistol only: native Second callbacks still prove cadence, contacts and ownership.
+# The old measured169 in STORY_CARRY is not an authority for this component.
+static func verified_pistol_carry(shot_rows: Array, pickup_rows: Array, returned: Dictionary, live: Dictionary) -> Dictionary:
+	if shot_rows.is_empty() or shot_rows.size() > SHOTS or pickup_rows.size() > 512: return {}
+	var last_tick: int = -1
+	var last_time: float = -1.0
+	for row in shot_rows:
+		if not row is Array or row.size() != 4 or not row[0] is int or row[0] <= last_tick or not row[1] is float or not is_finite(row[1]) or row[1] <= last_time or row[2] != 1 or not row[3] is float or not is_finite(row[3]) or row[3] <= 0 or row[3] > 0.210001: return {}
+		last_tick = row[0]
+		last_time = row[1]
+	var pistol: int = Second.FIXED_CARRY.ammo[1]
+	var cursor: int = 0
+	var seen: Array = []
+	var supplies: Dictionary = {}
+	var consumed_pistol: Dictionary = {}
+	last_tick = -1
+	for row in pickup_rows:
+		if not row is Array or row.size() != 5 or not row[0] in Second.SECOND_SUPPLIES or not row[1] is int or row[1] < last_tick or not row[2] is Dictionary or not row[3] is Dictionary or not row[4] is bool: return {}
+		if not row[2].get("ammo") is Array or not row[3].get("ammo") is Array or row[2].ammo.size() != 6 or row[3].ammo.size() != 6 or not row[2].ammo[1] is int or not row[3].ammo[1] is int: return {}
+		var image: Array = [row[0],row[2],row[3]]
+		if image in seen: return {} # Native after_pickup already deduplicates these.
+		seen.append(image)
+		supplies[row[0]] = true
+		last_tick = row[1]
+		# Player fires before its passive scan in the same native physics callback.
+		while cursor < shot_rows.size() and shot_rows[cursor][0] <= row[1]:
+			pistol -= 1
+			cursor += 1
+			if pistol < 0: return {}
+		if row[2].ammo[1] != pistol: return {}
+		var pistol_supply: bool = row[0] in [Second.SECOND_SUPPLIES[0],Second.SECOND_SUPPLIES[2]]
+		var after: int = mini(180,pistol+45) if pistol_supply else pistol
+		if row[3].ammo[1] != after: return {}
+		if pistol_supply:
+			if consumed_pistol.has(row[0]) or row[4] != (after != pistol): return {}
+			if row[4]: consumed_pistol[row[0]] = true
+		pistol = after
+	if not Second.SECOND_SUPPLIES.all(func(id): return supplies.has(id)): return {}
+	pistol -= shot_rows.size()-cursor
+	if pistol < 0 or pistol > 180: return {}
+	var expected: Dictionary = STORY_CARRY.duplicate(true)
+	expected.ammo[1] = pistol
+	return expected if returned == expected and live == expected else {}
 
 func earlier_frozen() -> bool:
 	return is_instance_valid(previous) and is_instance_valid(previous.previous) and fields_match(previous,script_fields(previous),previous_frozen) and fields_match(previous.previous,script_fields(previous.previous),first_frozen)
 
 func prior_frozen() -> bool:
-	return earlier_frozen() and fields_match(game,main_fields,main_frozen) and fields_match(fixture,fixture_fields,fixture_frozen) and main_fields.all(func(name): return not name.ends_with("_enabled") or not game.get(name)) and game.prefix_bookkeeping_retired
+	return earlier_frozen() and not entry_carry.is_empty() and entry_carry == previous_frozen.get("ledger",{}) and fields_match(game,main_fields,main_frozen) and fields_match(fixture,fixture_fields,fixture_frozen) and main_fields.all(func(name): return not name.ends_with("_enabled") or not game.get(name)) and game.prefix_bookkeeping_retired
 
 func adopt_after(tree, accepted) -> bool:
+	var callers: Array = get_stack()
+	if not require(callers.size() > 1 and callers[1].source == "res://tests/test_ossuary_story.gd" and callers[1].function == "_completed_ossuary_story","Story adoption requires admitted immediate caller before bindings"): return false
+	var owner = tree.game
+	if not require(is_instance_valid(accepted) and accepted.get_script() == Second and accepted.ok and accepted.current() and owner.transport_witness == null and accepted.prior_frozen() and accepted.previous == tree.ot_witness and accepted.keys == ["blood","ivory"] and owner.state.discoveries == [3,4] and accepted.deaths.size() == 22 and accepted.summons.is_empty() and accepted.waypoints == Second.APPROACH+Second.INDEX_RETURN+Second.CLOSE,"actual returned accepted Second and exact earned carry before Story adoption"): return false
+	var verified: Dictionary = verified_pistol_carry(accepted.shots,accepted.pickups,accepted.ledger,owner.budget())
+	if not require(not verified.is_empty(),"Story independently reconciles exact returned Second pistol before bindings"): return false
 	fixture = tree
 	previous = accepted
-	game = tree.game
-	if not require(is_instance_valid(accepted) and accepted.get_script() == Second and accepted.ok and accepted.current() and game.transport_witness == null and accepted.prior_frozen() and accepted.previous == tree.ot_witness and accepted.ledger == STORY_CARRY and game.budget() == STORY_CARRY and accepted.keys == ["blood","ivory"] and game.state.discoveries == [3,4] and accepted.deaths.size() == 22 and accepted.summons.is_empty() and accepted.waypoints == Second.APPROACH+Second.INDEX_RETURN+Second.CLOSE,"actual returned accepted Second and exact earned carry before Story adoption"): return false
+	game = owner
+	entry_carry = verified.duplicate(true)
 	scene = game.level
 	player = game.player
 	main_id = game.get_instance_id()
@@ -215,13 +266,13 @@ func run_route() -> bool:
 func story_route() -> bool:
 	if not await route(OUTWARD) or not await story_input() or not await route(HOMEWARD): return false
 	if not validate(): return false
-	var expected: Dictionary = STORY_CARRY.duplicate(true)
+	var expected: Dictionary = entry_carry.duplicate(true)
 	for id in STORY_SUPPLIES:
 		if entry_supplies[id]:
 			if not require(not pickup_attempts.has(id) and not consumed.has(id),"already retired supply stays retired without a Story attempt"): return false
 		else:
 			if not require(pickup_attempts.get(id,0) >= 1 and consumed.get(id,0) == 1 and pickups.filter(func(row): return row[0] == id and row[4]).size() == 1 and markers[id].get_ref() == null,"retained supply actually attempted, granted once and drained"): return false
-			if id == STORY_SUPPLIES[0]: expected.ammo[1] = 180
+			if id == STORY_SUPPLIES[0]: expected.ammo[1] = mini(180,entry_carry.ammo[1]+45)
 			else: expected.health = 100
 	if not require(ledger == expected and waypoints == OUTWARD+HOMEWARD and player.position.distance_to(scene.layout.world_position([24.0,24.0])+Vector3.UP*0.04) < 0.2 and game.state.position == player.position and game.state.yaw == game.Enemy.canonical_yaw(player.rotation.y) and game.state.pitch == clampf(player.camera.rotation.x,-1.35,1.35),"Story spur returns to junction with independently reconciled carry and production current pose"): return false
 	print("OSSUARY_STORY_EARNED frames=",Engine.get_physics_frames()-epoch," discoveries=",discoveries," resources=",ledger," entry_supplies=",entry_supplies," attempts=",pickup_attempts," pickups=",pickups," inputs=",inputs," physical_E=",key_events," saved_sha=",saved_sha," prior_frozen=",prior_frozen())

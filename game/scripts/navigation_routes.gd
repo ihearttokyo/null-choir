@@ -6,6 +6,11 @@ signal readiness_changed(profile: String, revision: int, ready: bool)
 
 const CELL_SIZE := .15
 const CELL_HEIGHT := .05
+# Native detail edges can be only 5 mm apart on authored slope seams. The
+# default 10% raster merges distinct edges (Intake: three keys / six errors).
+# A 1% per-map raster preserves exact shared edges without changing bake,
+# clearance, source collision or route tolerances.
+const MERGE_RASTER_SCALE := .01
 const MAX_PROFILES := 8
 const MAX_TILES := 4096
 const MAX_SOURCE_COORDINATES := 1500000
@@ -46,6 +51,7 @@ func configure(level: Node3D, profiles: Dictionary) -> bool:
 		var map := NavigationServer3D.map_create()
 		NavigationServer3D.map_set_cell_size(map,CELL_SIZE)
 		NavigationServer3D.map_set_cell_height(map,CELL_HEIGHT)
+		NavigationServer3D.map_set_merge_rasterizer_cell_scale(map,MERGE_RASTER_SCALE)
 		NavigationServer3D.map_set_active(map,true)
 		var region := NavigationServer3D.region_create()
 		# Keep initial/replacement geometry publication ordered; map updates stay async.

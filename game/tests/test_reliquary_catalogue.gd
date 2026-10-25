@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_wheel_return.gd"
 
-const C_RETURN_SHA = "214b328f3a286ba32602d8568bb9e22bd0803b34520aa87f5ab72e66d84844a4"
+const C_RETURN_SHA = "1c3f115b79a9718fff9e5e8722144b7b56d01b8799067ab909767dc909121405"
 const C_IDS = ["reliquary_enemy_22","reliquary_enemy_23","reliquary_enemy_24","reliquary_enemy_25","reliquary_enemy_26"]
 const C_GROUP = {"id":"reliquary_catalogue","region":[17.0,9.0,21.9,9.5],"enemy_ids":C_IDS,"requires":["blood","ivory"],"cue":{"text":"THE COMMAND CHANNEL RECOGNIZES BOTH REGISTERS","light_ids":["reliquary_catalogue_feed"],"sound":"seal_release"}}
 const C_CARRY = {"health":95,"armor":179,"ammo":[0,167,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
@@ -129,7 +129,7 @@ class CatalogueMain:
 		c_ok = c_ok and c_current() and id in [V_GROUP.id,C_GROUP.id]
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			c_ok = c_ok and id == C_GROUP.id and c_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(17,9),Vector2(21.9,9.5))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage")
+			c_ok = c_ok and id == C_GROUP.id and c_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(17,9),Vector2(21.9,9.5))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage")
 		super.activate_encounter(id)
 		if not prior:
 			c_activation += 1

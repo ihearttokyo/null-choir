@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_wheel_ivory.gd"
 
-const V_WHEEL_SHA = "7d5a331aff3b61207f2ed4578f4d899ab79015c484fe0a4ea93542fea2db8c25"
+const V_WHEEL_SHA = "a6b8df260aacedc3c14bdcd4fff1c5476eae1a8d23ade40ea43a090524cc241e"
 const V_IDS = ["reliquary_enemy_19","reliquary_enemy_20","reliquary_enemy_21"]
 const V_GROUP = {"id":"reliquary_wheel_return","region":[21.5,11.0,22.5,14.0],"enemy_ids":V_IDS,"requires":["ivory"],"cue":{"text":"A MEMORY LEAVES THE DRUM WITHOUT YOU","light_ids":["reliquary_wheel_return"],"sound":"seal_release"}}
 const V_PICKUPS = {
@@ -150,7 +150,7 @@ class WheelReturnMain:
 		v_ok = v_ok and v_current() and id in [W_GROUP.id,V_GROUP.id]
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			v_ok = v_ok and id == V_GROUP.id and v_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(21.5,11),Vector2(22.5,14))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage")
+			v_ok = v_ok and id == V_GROUP.id and v_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(21.5,11),Vector2(22.5,14))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage")
 		super.activate_encounter(id)
 		if not prior:
 			v_activation += 1

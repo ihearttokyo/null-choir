@@ -19,7 +19,7 @@ func run() -> void:
 	var title_player: AudioStreamPlayer = game.music.player
 	var title_stream: AudioStream = title_player.stream
 	var title_position: float = title_player.get_playback_position()
-	if not check(title_stream is AudioStreamOggVorbis and title_stream.resource_path == game.music.title_track and title_player.playing,"Title owns the intended Ogg before Sound test opens"): return
+	if not check(title_stream is AudioStreamMP3 and title_stream.resource_path == game.music.title_track and title_player.playing,"Title owns the intended Suno MP3 before Sound test opens"): return
 	entry.pressed.emit()
 	var screen = game.sound_test
 	if not check(is_instance_valid(screen) and not game.menu_scroll.visible and not game.playing and game.level == null and paused,"Title opens the native screen without starting gameplay"): return
@@ -27,7 +27,7 @@ func run() -> void:
 	title_stream = null
 	if not check(screen.play_track(0) and game.music.level_tracks.size() == 8 and screen._tracks.size() == 9 and game.music.player.stream is AudioStreamMP3,"Screen preserves eight level tracks and appends the title on the same Music player"): return
 	var recording: WeakRef = weakref(game.music.player.stream)
-	if not check(screen.play_track(8) and game.music.player == title_player and title_player.stream is AudioStreamOggVorbis and title_player.stream.resource_path == game.music.title_track,"Explicit ninth entry previews the title on the same owner"): return
+	if not check(screen.play_track(8) and game.music.player == title_player and title_player.stream is AudioStreamMP3 and title_player.stream.resource_path == game.music.title_track,"Explicit ninth entry previews the title on the same owner"): return
 	screen._change_volume(0.37)
 	var preferences = load("res://scripts/preferences.gd").new()
 	if not check(preferences.load_file(game.settings_path) and is_equal_approx(preferences.values.music_volume,0.37) and is_equal_approx(game.settings.music_volume,0.37),"Explicit slider edit persists through the existing preferences path"): return
@@ -38,7 +38,7 @@ func run() -> void:
 	if not check(screen._message.text.begins_with("SETTINGS SAVE FAILED") and FileAccess.get_file_as_string(valid_settings) == saved_settings,"Failed volume persistence must remain visible above the full-screen panel and preserve saved options"): return
 	game.settings_path = valid_settings
 	screen.request_back()
-	if not check(game.sound_test == null and game.menu_scroll.visible and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamOggVorbis and game.music.player.stream.resource_path == game.music.title_track and game.state.to_dict() == before,"Back retires preview, restores title audio and preserves the complete campaign state"): return
+	if not check(game.sound_test == null and game.menu_scroll.visible and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamMP3 and game.music.player.stream.resource_path == game.music.title_track and game.state.to_dict() == before,"Back retires preview, restores title audio and preserves the complete campaign state"): return
 	await process_frame
 	if not check(not is_instance_valid(screen),"Returned screen is actually freed"): return
 	game.show_sound_test()

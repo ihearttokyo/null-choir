@@ -1,8 +1,8 @@
 extends "res://tests/test_ossuary_story.gd"
 
 const Preparation = preload("res://tests/ossuary_finale_witness.gd")
-const PREPARATION_WITNESS_SHA = "61b9b89773ab5f214d9b9a734b58ba32326723c08f41683605557e0554d69d20"
-const PREPARATION_STORY_SHA = "901e8cf089fef86ca8f779a620bf165cfb24d19a35512f0c6ef6f00b9aee0df3"
+const PREPARATION_WITNESS_SHA = "53003583eef045bb8041ffe25400777a52caadc01962b01bf8d22f2f5385ad18"
+const PREPARATION_STORY_SHA = "b916330757b56403d0c43867e3a9d70caa129a50ecaee48ac5ac3350a511db57"
 
 func preparation_pins_match() -> bool:
 	return story_pins_match() and FileAccess.get_sha256("res://tests/ossuary_finale_witness.gd") == PREPARATION_WITNESS_SHA and FileAccess.get_sha256("res://tests/test_ossuary_story.gd") == PREPARATION_STORY_SHA

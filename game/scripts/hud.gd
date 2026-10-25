@@ -219,13 +219,13 @@ func menu_backdrop_texture() -> Texture2D:
 	if chapter >= 0:
 		if _menu_chapter != chapter or _chapter_background == null:
 			_menu_chapter = chapter
-			_chapter_background = load("res://assets/art/descent/"+preload("res://scripts/descent_chart.gd").VIEWS[chapter]+".jpg")
+			_chapter_background = load(preload("res://scripts/descent_chart.gd").art_path(chapter))
 		return _chapter_background
 	_chapter_background = null
 	_menu_chapter = -1
 	# Local native resource ownership; no Blender or master-raster load at runtime.
 	if _menu_background == null:
-		_menu_background = load("res://assets/art/title/cathedral.jpg")
+		_menu_background = load("res://assets/art/title/pro-series-v2.jpg")
 	return _menu_background
 
 func _draw() -> void:

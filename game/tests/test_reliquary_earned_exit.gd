@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_catalogue.gd"
 
-const E_CATALOGUE_SHA = "f624c54affb32ce7c251720c8aa41919a70d6f1ea53b9da3eec8c5503255007a"
+const E_CATALOGUE_SHA = "bc894525b53498a7d45366d68a2a2930f6c64e8bdb5ba05a795843a1f0b23b20"
 const E_IDS = ["reliquary_enemy_27","reliquary_enemy_28","reliquary_enemy_29","reliquary_enemy_30"]
 const E_GROUP = {"id":"reliquary_exit","region":[18.0,2.7,20.9,6.5],"enemy_ids":E_IDS,"requires":["blood","ivory"],"cue":{"text":"THE ARCHIVE HAS FILED YOUR ARRIVAL","light_ids":["reliquary_exit_feed"],"sound":"seal_release"}}
 const E_DOOR = {"id":"reliquary_index_gate","cell":[19.5,7.7],"size":[12.2,5.0,0.6],"requires":["blood","ivory"],"yaw":0.0}
@@ -164,7 +164,7 @@ class ReliquaryExitMain:
 		e_ok = e_ok and e_current() and (prior or id == E_GROUP.id)
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			e_ok = e_ok and id == E_GROUP.id and e_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(18,2.7),Vector2(20.9,6.5))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage")
+			e_ok = e_ok and id == E_GROUP.id and e_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(18,2.7),Vector2(20.9,6.5))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage")
 		super.activate_encounter(id)
 		if not prior:
 			e_activation += 1

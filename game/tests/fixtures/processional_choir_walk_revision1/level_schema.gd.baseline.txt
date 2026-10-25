@@ -1,0 +1,279 @@
+extends RefCounted
+
+const ACTORS = ["crawler", "worker", "caster", "brute", "guardian", "summoner", "nursery_warden", "choir_avatar"]
+# Current maps expand 412–860 raw cells; bound loader work before any tile loop.
+const MAX_FLOOR_EXPANSION = 16384
+const MAX_PICKUP_AMOUNT = 2147483647
+const MAX_PERSISTED_ID = 128
+const GROUPS = ["heroes", "doors", "interactions", "pickups", "enemies", "scenery", "lights", "loops", "elevations", "ceilings", "encounters"]
+
+# The boundary receives an art ID, not a path; this validator loads nothing.
+static func validate(content: Variant, art_exists: Callable) -> String:
+	if not content is Dictionary: return "level: expected a JSON object"
+	var error = _primitive(content,"level")
+	if not error.is_empty(): return error
+	if content.has("floor_revision") and (not _integer(content.floor_revision) or content.floor_revision < 0 or content.floor_revision > (2 if content.get("id","") in ["intake","foundry"] else 1)): return "floor_revision: expected a known revision for this map"
+	if not art_exists.is_valid(): return "art_exists: supply an art-ID existence boundary"
+	# shortcut: no visual-profile consumer/schema exists yet; define both before accepting profiles.
+	if content.has("visual_profile"): return "visual_profile: unsupported until its consuming boundary defines known fields and bounds"
+	for field in ["id", "title", "subtitle", "mission"]:
+		if not _text(content.get(field)): return field+": expected a nonempty string"
+	if not _positive_native(content.get("cell_size")): return "cell_size: expected a positive finite number"
+	error = _scaled_cell(content.get("spawn"),content.cell_size,"spawn")
+	if not error.is_empty(): return error
+	if not _native_number(content.get("spawn_yaw")): return "spawn_yaw: expected a finite number"
+	for field in ["color", "fog"]:
+		if content.has(field):
+			error = _vector(content[field],3,field)
+			if not error.is_empty(): return error
+	if not content.get("rects") is Array or content.rects.is_empty(): return "rects: expected nonempty floor rectangles"
+	var floor_expansion: int = 0
+	for i in range(content.rects.size()):
+		error = _rect(content.rects[i],"rects["+str(i)+"]",true)
+		if not error.is_empty(): return error
+		var rect: Array = content.rects[i]
+		var path: String = "rects["+str(i)+"]"
+		for coordinate in rect:
+			if coordinate < -2147483647 or coordinate > 2147483646: return path+": floor coordinates need signed-32-bit neighbor headroom"
+			var native := Vector2(coordinate,0)
+			if native.x != coordinate or (native+Vector2(.5,0)).x != coordinate+.5 or (native-Vector2(.5,0)).x != coordinate-.5 or (native+Vector2.RIGHT).x != coordinate+1: return path+": floor coordinates must preserve native unit corners and half-cell centers"
+		var native_min := Vector2(rect[0],rect[1])-Vector2.ONE
+		var native_max := Vector2(rect[2],rect[3])+Vector2.ONE
+		for coordinate in [native_min.x,native_min.y,native_max.x,native_max.y]:
+			if not _native_number(coordinate*content.cell_size): return path+": scaled floor corner exceeds native finite range"
+		var width: int = int(rect[2]-rect[0])+1
+		var depth: int = int(rect[3]-rect[1])+1
+		if width > MAX_FLOOR_EXPANSION or depth > MAX_FLOOR_EXPANSION or width*depth > MAX_FLOOR_EXPANSION-floor_expansion: return path+": raw floor expansion exceeds "+str(MAX_FLOOR_EXPANSION)+" cells"
+		floor_expansion += width*depth
+
+	var domains: Dictionary = {}
+	var removed: Dictionary = {}
+	var keys: Dictionary = {}
+	var elevation_bound: float = 0
+	for group in GROUPS:
+		var records: Variant = content.get(group,[] if group == "encounters" else null)
+		if not records is Array: return group+": expected an array"
+		domains[group] = {}
+		for i in range(records.size()):
+			var record: Variant = records[i]
+			var path = group+"["+str(i)+"]"
+			if not record is Dictionary: return path+": expected an object"
+			if group in ["heroes", "doors", "interactions", "pickups", "enemies", "loops", "encounters"] or record.has("id"):
+				var id: Variant = record.get("id")
+				if not _text(id): return path+".id: expected a nonempty stable ID"
+				if group in ["doors", "interactions", "pickups", "enemies"] and id.length() > MAX_PERSISTED_ID: return path+".id: persisted IDs must fit "+str(MAX_PERSISTED_ID)+" characters"
+				if group == "encounters" and ("encounter:"+id).length() > MAX_PERSISTED_ID: return path+".id: encounter removal ID exceeds "+str(MAX_PERSISTED_ID)+" characters"
+				if group == "enemies" and record.get("kind") == "summoner" and (("summon:"+id+":6").length() > MAX_PERSISTED_ID or (id+"_add_6").length() > MAX_PERSISTED_ID): return path+".id: generated summon IDs exceed "+str(MAX_PERSISTED_ID)+" characters"
+				if domains[group].has(id): return path+".id: duplicate ID "+id
+				domains[group][id] = true
+				if group in ["doors", "interactions", "pickups", "enemies"]:
+					if removed.has(id): return path+".id: duplicate campaign removal ID "+id
+					if id.begins_with("encounter:") or id.begins_with("summon:"): return path+".id: reserved campaign removal prefix"
+					if group == "interactions" and record.get("kind") == "checkpoint" and id == "entry": return path+".id: entry is reserved for level-start recovery"
+					removed[id] = true
+			if group in ["heroes", "doors", "interactions", "pickups", "enemies", "scenery", "lights"]:
+				error = _scaled_cell(record.get("cell"),content.cell_size,path+".cell")
+				if not error.is_empty(): return error
+			for field in ["yaw", "height", "fixture_yaw", "energy", "range"]:
+				if record.has(field) and not _native_number(record[field]): return path+"."+field+": expected a finite number"
+			if group in ["heroes", "doors", "enemies"] and not record.has("yaw"): return path+".yaw: expected a finite number"
+			for field in ["base", "size", "solid", "scale"]:
+				if record.has(field):
+					error = _vector(record[field],3,path+"."+field,true)
+					if not error.is_empty(): return error
+			for field in ["round", "shadow"]:
+				if record.has(field) and not record[field] is bool: return path+"."+field+": expected a boolean"
+			for field in ["tradition", "tradition_aesthetic", "text"]:
+				if record.has(field) and not _text(record[field]): return path+"."+field+": expected a nonempty string"
+			if group == "enemies" and record.get("kind") not in ACTORS: return path+".kind: unknown actor role"
+			if group == "pickups":
+				if record.get("kind") not in ["ammo", "weapon", "health", "armor"]: return path+".kind: unknown pickup kind"
+				if not _integer(record.get("amount")) or record.amount < 0 or record.amount > MAX_PICKUP_AMOUNT or (record.amount == 0 and record.kind != "weapon"): return path+".amount: expected supply 1..2147483647 or weapon grant 0..2147483647"
+				if record.kind in ["ammo", "weapon"] or record.has("weapon"):
+					if not _integer(record.get("weapon")) or record.weapon < 0 or record.weapon > 5: return path+".weapon: expected known weapon index 0..5"
+			if group == "interactions":
+				if record.has("size"): return path+".size: interaction dimensions would dispatch as a door"
+				if record.get("kind") not in ["key", "story", "checkpoint", "exit"]: return path+".kind: unknown interaction kind"
+				if record.kind != "exit" and not _text(record.get("text")): return path+".text: expected a nonempty string"
+				if record.kind == "key":
+					if not _text(record.get("key")) or record.key.length() > MAX_PERSISTED_ID: return path+".key: expected a nonempty seal ID of at most 128 characters"
+					keys[record.key] = true
+			if group in ["heroes", "scenery"]:
+				var art: Variant = record.get("id") if group == "heroes" else record.get("art")
+				var field = ".id" if group == "heroes" else ".art"
+				if not _art_id(art) or not art_exists.call(art): return path+field+": unknown or unsafe art ID "+str(art)
+			if group == "scenery":
+				var scale_values: Array = record.get("scale",[1,1,1])
+				var scale_model = Vector3(scale_values[0],scale_values[1],scale_values[2])
+				var supports: Variant = record.get("supports",[])
+				if not supports is Array: return path+".supports: expected an array"
+				for j in range(supports.size()):
+					var support: Variant = supports[j]
+					var support_path = path+".supports["+str(j)+"]"
+					if not support is Dictionary: return support_path+": expected an object"
+					for field in ["offset", "size"]:
+						error = _vector(support.get(field),3,support_path+"."+field,field == "size")
+						if not error.is_empty(): return error
+					var dimensions = Vector3(support.size[0],support.size[1],support.size[2])*scale_model
+					var offset = Vector3(support.offset[0],support.offset[1],support.offset[2])*scale_model
+					if not dimensions.is_finite() or dimensions.x <= 0 or dimensions.y <= 0 or dimensions.z <= 0: return support_path+".size: scaled dimensions must remain positive and finite"
+					if not offset.is_finite(): return support_path+".offset: scaled offset must remain finite"
+					var rotated = offset.rotated(Vector3.UP,deg_to_rad(record.get("yaw",0)))
+					var placed = Vector3(record.cell[0]*content.cell_size,record.get("height",0),record.cell[1]*content.cell_size)+rotated+Vector3.UP*dimensions.y/2
+					if not rotated.is_finite() or not placed.is_finite(): return support_path+".offset: rotated support placement must remain finite"
+			if group == "doors" and not record.has("size"): return path+".size: expected positive dimensions"
+			if group == "lights":
+				for field in ["height", "energy", "range"]:
+					if not _native_number(record.get(field)): return path+"."+field+": expected a finite number"
+				if record.energy < 0: return path+".energy: expected a nonnegative number"
+				if not _positive_native(record.range): return path+".range: expected a positive number"
+				error = _vector(record.get("color"),3,path+".color")
+				if not error.is_empty(): return error
+				for field in ["target", "target_cell"]:
+					if record.has(field):
+						error = _scaled_cell(record[field],content.cell_size,path+"."+field)
+						if not error.is_empty(): return error
+				if record.has("kind") and record.kind not in ["spot", "omni"]: return path+".kind: unknown light kind"
+			if group in ["elevations", "ceilings"]:
+				error = _rect(record.get("rect"),path+".rect")
+				if not error.is_empty(): return error
+				if not _native_number(record.get("height")): return path+".height: expected a finite number"
+				if group == "elevations": elevation_bound = maxf(elevation_bound,absf(record.height))
+				if group == "ceilings" and not _positive_native(record.height): return path+".height: expected a positive ceiling height"
+				if record.has("axis"):
+					if not _integer(record.axis) or record.axis < 0 or record.axis > 1: return path+".axis: expected axis 0 or 1"
+					for field in ["start", "end"]:
+						if not _native_number(record.get(field)): return path+"."+field+": expected a finite number"
+					if record.start == record.end or not is_finite(record.end-record.start): return path+".end: ramp span must be finite and nonzero"
+
+	for group in ["ceilings", "heroes", "doors", "scenery", "lights"]:
+		for i in range(content[group].size()):
+			var record: Dictionary = content[group][i]
+			var path: String = group+"["+str(i)+"]"
+			var height: float = absf(record.get("height",0))+elevation_bound
+			if not _native_number(height): return path+".height: combined elevation and local height exceed native finite range"
+			for field in ["base", "size", "solid"]:
+				if record.has(field) and not _native_number(height+record[field][1]/2): return path+"."+field+": raised placement exceeds native finite range"
+			if group != "scenery": continue
+			for support in record.get("supports",[]):
+				var scale_values: Array = record.get("scale",[1,1,1])
+				if not _native_number(height+(absf(support.offset[1])+support.size[1]/2)*scale_values[1]): return path+".supports: raised support placement exceeds native finite range"
+
+	var assigned: Dictionary = {}
+	for group in ["doors", "interactions", "heroes", "encounters"]:
+		var records: Array = content.get(group,[])
+		for i in range(records.size()):
+			var record: Dictionary = records[i]
+			var path = group+"["+str(i)+"]"
+			error = _references(record.get("requires",null if group == "doors" else []),keys,path+".requires")
+			if not error.is_empty(): return error
+			error = _references(record.get("requires_defeated",[]),domains.enemies,path+".requires_defeated")
+			if not error.is_empty(): return error
+			if group == "heroes":
+				if record.has("seal") and not keys.has(record.seal): return path+".seal: unknown seal ID"
+				error = _references(record.get("light_ids",[]),domains.lights,path+".light_ids")
+				if not error.is_empty(): return error
+			if group == "encounters":
+				error = _rect(record.get("region"),path+".region")
+				if not error.is_empty(): return error
+				error = _references(record.get("enemy_ids"),domains.enemies,path+".enemy_ids")
+				if not error.is_empty(): return error
+				if record.enemy_ids.is_empty(): return path+".enemy_ids: expected encounter members"
+				for id in record.enemy_ids:
+					if assigned.has(id): return path+".enemy_ids: enemy belongs to more than one encounter: "+id
+					assigned[id] = true
+				if not record.get("cue") is Dictionary: return path+".cue: expected an object"
+				error = _references(record.cue.get("light_ids"),domains.lights,path+".cue.light_ids")
+				if not error.is_empty(): return error
+				for field in ["text", "sound"]:
+					if not _text(record.cue.get(field)): return path+".cue."+field+": expected a nonempty string"
+
+	if content.loops.size() < 2 or content.loops.size() != content.heroes.size(): return "loops: require at least two loops and exactly one unique hero per loop"
+	var loop_heroes: Dictionary = {}
+	for i in range(content.loops.size()):
+		var loop: Dictionary = content.loops[i]
+		var path = "loops["+str(i)+"]"
+		if not _text(loop.get("hero")) or not domains.heroes.has(loop.hero): return path+".hero: unknown hero ID"
+		if loop_heroes.has(loop.hero): return path+".hero: hero already belongs to another loop"
+		loop_heroes[loop.hero] = true
+		if not loop.get("route") is Array or loop.route.size() < 4: return path+".route: expected a closed route with at least three distinct cells"
+		var cells: Dictionary = {}
+		for j in range(loop.route.size()):
+			error = _vector(loop.route[j],2,path+".route["+str(j)+"]")
+			if not error.is_empty(): return error
+			cells[Vector2(loop.route[j][0],loop.route[j][1])] = true
+		if loop.route[0] != loop.route[-1] or cells.size() < 3: return path+".route: expected closure and at least three distinct cells"
+	for enemy in content.enemies:
+		if enemy.kind == "summoner":
+			for number in range(1,7):
+				var id: String = enemy.id+"_add_"+str(number)
+				if removed.has(id): return "enemies: authored ID collides with reserved summoned actor "+id
+	return ""
+
+static func _number(value: Variant) -> bool:
+	return typeof(value) in [TYPE_INT,TYPE_FLOAT] and is_finite(float(value))
+
+static func _native_number(value: Variant) -> bool:
+	return _number(value) and absf(value) <= 3.4028234e38
+
+static func _positive_native(value: Variant) -> bool:
+	return _native_number(value) and Vector3(value,0,0).x > 0
+
+static func _scaled_cell(value: Variant, cell_size: float, path: String) -> String:
+	var error = _vector(value,2,path)
+	if not error.is_empty(): return error
+	var point = Vector2(value[0],value[1])
+	for coordinate in [point.x,point.y]:
+		if not _native_number(coordinate*cell_size): return path+": scaled coordinate exceeds native finite range"
+	return ""
+
+static func _integer(value: Variant) -> bool:
+	return _number(value) and floor(value) == value
+
+static func _text(value: Variant) -> bool:
+	return value is String and not value.strip_edges().is_empty()
+
+static func _art_id(value: Variant) -> bool:
+	return _text(value) and not "/" in value and not "\\" in value and not ":" in value and not "." in value
+
+static func _vector(value: Variant, count: int, path: String, positive: bool = false) -> String:
+	if not value is Array or value.size() != count: return path+": expected "+str(count)+" numeric components"
+	for i in range(count):
+		if not _native_number(value[i]) or (positive and not _positive_native(value[i])): return path+"["+str(i)+"]: expected a "+("positive " if positive else "")+"finite number"
+	return ""
+
+static func _rect(value: Variant, path: String, integer: bool = false) -> String:
+	var error = _vector(value,4,path)
+	if not error.is_empty(): return error
+	for component in value:
+		if integer and not _integer(component): return path+": floor rectangle coordinates must be integers"
+	if value[0] > value[2] or value[1] > value[3]: return path+": rectangle bounds are reversed"
+	return ""
+
+static func _references(value: Variant, domain: Dictionary, path: String) -> String:
+	if not value is Array: return path+": expected an array of IDs"
+	var seen: Dictionary = {}
+	for i in range(value.size()):
+		var id: Variant = value[i]
+		if not _text(id) or not domain.has(id): return path+"["+str(i)+"]: unknown reference "+str(id)
+		if seen.has(id): return path+"["+str(i)+"]: duplicate reference "+id
+		seen[id] = true
+	return ""
+
+static func _primitive(value: Variant, path: String, depth: int = 0) -> String:
+	if depth > 64: return path+": content nesting exceeds 64 levels"
+	match typeof(value):
+		TYPE_NIL, TYPE_BOOL, TYPE_STRING: return ""
+		TYPE_INT, TYPE_FLOAT:
+			return "" if _number(value) else path+": number must be finite"
+		TYPE_ARRAY:
+			for i in range(value.size()):
+				var error = _primitive(value[i],path+"["+str(i)+"]",depth+1)
+				if not error.is_empty(): return error
+		TYPE_DICTIONARY:
+			for key in value:
+				if not key is String: return path+": JSON object keys must be strings"
+				var error = _primitive(value[key],path+"."+key,depth+1)
+				if not error.is_empty(): return error
+		_: return path+": expected JSON primitives, not executable objects or native values"
+	return ""

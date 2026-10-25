@@ -42,6 +42,8 @@ var game
 var routes
 var failures := 0
 var profile_id := ""
+var flat_fixture_floor: StaticBody3D
+var flat_floor_checked := false
 
 func _initialize() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"),true)
@@ -66,8 +68,17 @@ func setup(index: int, native_terrain: bool = false) -> void:
 	game.add_child(game.level)
 	game.level.game = game
 	expect(game.level.layout.load_level(index),"SETUP actual layout loads "+str(index))
+	flat_fixture_floor = null
+	flat_floor_checked = false
 	if native_terrain: game.level._build_geometry()
-	else: game.level._box(Vector3(40,.2,48),Vector3(58,-.1,94),null,true)
+	else:
+		# This branch deliberately tests a flat arranged collider, not Intake
+		# terrain. Revision1 already raised these sample coordinates; retaining
+		# its elevations gave AI/fixture anchors up to1.125m above this plate.
+		# Keep the local layout and physical measurement describing one floor.
+		game.level.layout.data = game.level.layout.data.duplicate(true)
+		game.level.layout.data.elevations = []
+		flat_fixture_floor = game.level._box(Vector3(40,.2,48),Vector3(58,-.1,94),null,true) as StaticBody3D
 	game.player = game.Player.new()
 	game.level.add_child(game.player)
 	game.player.configure(game)
@@ -91,6 +102,17 @@ func actor_at(role: String, point: Vector3):
 	return actor
 
 func publish(role: String) -> bool:
+	if is_instance_valid(flat_fixture_floor) and not flat_floor_checked:
+		# Wait for native collider registration, then independently witness the
+		# actual plate at every previously failing flat-scenario coordinate.
+		await physics_frame
+		await physics_frame
+		for point in [Vector3(58,0,98),Vector3(58,0,84.15),Vector3(56.5,0,85),Vector3(59.5,0,87),Vector3(58,0,82),Vector3(58,0,94),Vector3(58,0,114)]:
+			var anchor := floor_anchor(point)
+			var query := PhysicsRayQueryParameters3D.create(Vector3(point.x,.04,point.z),Vector3(point.x,-.25,point.z),1)
+			var hit: Dictionary = game.level.get_world_3d().direct_space_state.intersect_ray(query)
+			expect(not hit.is_empty() and hit.collider == flat_fixture_floor and is_equal_approx(hit.position.y,0.0) and is_equal_approx(anchor.y,hit.position.y+.03),"SETUP arranged flat layout anchor matches independent native plate ray "+str(point))
+		flat_floor_checked = true
 	if routes == null:
 		routes = Owner.new()
 		routes.name = "NavigationRoutes"

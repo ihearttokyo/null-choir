@@ -1,6 +1,6 @@
 extends "res://tests/test_reliquary_halo_return.gd"
 
-const W_RETURN_SHA = "aeae68d5e56de9312057f666750a8070ba3c9e0bff80464c0ede587f396bad3b"
+const W_RETURN_SHA = "3403edc3daf852ffbcb3def0d4dd244cf55da0f5f4ad7812185a9943f6325626"
 const W_IDS = ["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"]
 const W_GROUP = {"id":"reliquary_wheel_commit","region":[26.0,8.0,36.9,21.25],"enemy_ids":["reliquary_enemy_08","reliquary_enemy_09","reliquary_enemy_10","reliquary_enemy_11","reliquary_enemy_12","reliquary_enemy_13","reliquary_enemy_14","reliquary_enemy_15"],"requires":[],"cue":{"text":"THE MEMORY DRUM ANSWERS OUT OF ORDER","light_ids":["reliquary_wheel_feed","reliquary_wheel_core"],"sound":"seal_release"}}
 const W_PICKUPS = {"reliquary_wheel_approach_rivets":{"id":"reliquary_wheel_approach_rivets","kind":"ammo","cell":[29.5,25.5],"amount":45.0,"weapon":1.0}}
@@ -160,7 +160,7 @@ class WheelMain:
 		w_ok = w_ok and w_current() and id in ["reliquary_halo_return",W_GROUP.id]
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			w_ok = w_ok and id == W_GROUP.id and w_activation == 0 and cell.is_equal_approx(cell.clamp(Vector2(26,8),Vector2(36.9,21.25))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage") and state.keys == ["blood"]
+			w_ok = w_ok and id == W_GROUP.id and w_activation == 0 and cell.is_equal_approx(cell.clamp(Vector2(26,8),Vector2(36.9,21.25))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage") and state.keys == ["blood"]
 		super.activate_encounter(id)
 		if not prior:
 			w_activation += 1

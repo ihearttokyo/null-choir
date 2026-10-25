@@ -150,7 +150,7 @@ func from_dict(data: Dictionary) -> bool:
 		if snapshots.any(func(snapshot): return snapshot.has("floor_revision")): return false
 	else:
 		for snapshot in snapshots:
-			if not _integer(snapshot.get("floor_revision"),1,1): return false
+			if not _integer(snapshot.get("floor_revision"),1,2): return false
 		revision = int(data.floor_revision)
 		if snapshots.any(func(snapshot): return int(snapshot.floor_revision) != revision): return false
 	var layout = Layout.new()
@@ -159,7 +159,8 @@ func from_dict(data: Dictionary) -> bool:
 		return false
 	var current_revision: int = layout.floor_revision()
 	if revision > current_revision: return false
-	var old_layout = layout.original_floor(int(data.level_index)) if revision < current_revision else layout
+	var old_layout = layout.floor_at_revision(int(data.level_index),revision)
+	if old_layout == null: return false
 	for snapshot in snapshots:
 		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
 	if revision < current_revision:

@@ -1,5 +1,6 @@
 extends RefCounted
 
+const RevisionOneFloors = preload("res://scripts/floors_v1.gd")
 const OriginalFloors = preload("res://scripts/floors_v0.gd")
 const Schema = preload("res://scripts/level_schema.gd")
 const FILES = ["01_intake", "02_foundry", "03_processional", "04_reliquary", "05_nursery", "06_ossuary", "07_inversion", "08_heart"]
@@ -137,3 +138,31 @@ func original_floor(index: int):
 			for z in range(rect[1],rect[3]+1):
 				original.tiles[Vector2i(x,z)] = true
 	return original
+
+# Resolve the actual saved terrain, never treat revision one as the v0 floor.
+func floor_at_revision(index: int, revision: int):
+	if revision == floor_revision(): return self
+	if revision == 0: return original_floor(index)
+	if index < 0 or index >= FILES.size() or revision != 1: return null
+	var terrain: Dictionary
+	if index == 0: terrain = RevisionOneFloors.INTAKE
+	elif index == 1: terrain = RevisionOneFloors.FOUNDRY
+	else:
+		# Other authored revision-one baselines are immutable terrain-only JSON.
+		# Load lazily for save migration; never infer v1 from the altered v2 floor.
+		var path: String = "res://data/floors/revision1/"+FILES[index].substr(3)+".json"
+		var file = FileAccess.open(path,FileAccess.READ)
+		if file == null: return null
+		var parsed: Variant = JSON.parse_string(file.get_as_text())
+		file.close()
+		if not parsed is Dictionary or parsed.get("floor_revision") != 1 or parsed.get("cell_size") != data.cell_size: return null
+		for field in ["rects","elevations","ceilings"]:
+			if not parsed.get(field) is Array: return null
+		terrain = parsed
+	var prior = get_script().new()
+	prior.data = data.duplicate(true)
+	prior.data.merge(terrain.duplicate(true),true)
+	for rect in prior.data.rects:
+		for x in range(rect[0],rect[2]+1):
+			for z in range(rect[1],rect[3]+1): prior.tiles[Vector2i(x,z)] = true
+	return prior

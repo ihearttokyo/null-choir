@@ -146,9 +146,48 @@
       29,
       31,
       30
+    ],
+    [
+      12,
+      16,
+      12,
+      17
     ]
   ],
   "elevations": [
+    {
+      "rect": [
+        9,
+        16,
+        11,
+        17
+      ],
+      "axis": 0,
+      "start": 0,
+      "end": 11,
+      "height": 5.5
+    },
+    {
+      "rect": [
+        11,
+        16,
+        13,
+        17
+      ],
+      "height": 5.5
+    },
+    {
+      "rect": [
+        13,
+        16,
+        15,
+        17
+      ],
+      "axis": 0,
+      "start": 16.03448275862069,
+      "end": 13,
+      "height": 5.5
+    },
     {
       "rect": [
         26,
@@ -2276,5 +2315,5 @@
     }
   ],
   "mission": "RELEASE BOTH CLAMPS / RETURN TO THE UPPER RECOVERY BAY",
-  "floor_revision": 1
+  "floor_revision": 2
 }

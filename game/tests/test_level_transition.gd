@@ -34,7 +34,7 @@ func run() -> void:
 	for node in game.menu.get_children():
 		if node is Button and node.text == "Descend to The Foundry": descend = node
 	if not expect(descend != null,"Completed Intake must offer the actual next level"): return
-	if not expect(game.menu.get_meta("chapter_intro",-1) == 1 and descend.has_focus() and game.hud.menu_backdrop_texture().resource_path.ends_with("foundry.jpg"),"Actual exit presents earned Foundry introduction without an extra click or focus loss"): return
+	if not expect(game.menu.get_meta("descent_intermission",false) and descend.has_focus() and game.intermission_route.rows[1].status == "CURRENT" and game.intermission_route.textures.has(0) and not game.intermission_route.textures.has(1),"Actual exit presents connected descent route with cleared Intake art, sealed next depth and no extra click or focus loss"): return
 	descend.pressed.emit()
 	if not expect(game.playing and game.level.layout.data.id == "foundry","Descend must load Foundry"): return
 	if not expect(game.state.discoveries == [0] and game.state.ammo[1] == 123,"Resources and story persist across transition"): return

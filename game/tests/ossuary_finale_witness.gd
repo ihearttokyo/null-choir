@@ -44,10 +44,18 @@ func prior_frozen() -> bool:
 	return not histories.is_empty() and main_fields.all(func(name): return not name.ends_with("_enabled") or not game.get(name)) and game.prefix_bookkeeping_retired
 
 func adopt_after(tree, accepted) -> bool:
+	var callers: Array = get_stack()
+	if not require(callers.size() > 1 and callers[1].source == "res://tests/test_ossuary_finale_preparation.gd" and callers[1].function == "_completed_ossuary_preparation","Preparation adoption requires admitted immediate caller before bindings"): return false
+	var owner = tree.game
+	if not require(is_instance_valid(accepted) and accepted.get_script() == Story and accepted.ok and accepted.current() and accepted.prior_frozen() and owner.transport_witness == null and accepted.waypoints == Story.OUTWARD+Story.HOMEWARD and accepted.notification_seen and accepted.inputs.size() == 1 and accepted.key_events.size() == 2 and accepted.discoveries == [3,4,5] and accepted.deaths.size() == 22 and accepted.summons.is_empty(),"actual returned completed Story, fixed carry and released dispatch"): return false
+	var verified_entry: Dictionary = Story.verified_pistol_carry(accepted.previous.shots,accepted.previous.pickups,accepted.previous.ledger,accepted.previous.ledger)
+	if not require(not verified_entry.is_empty() and accepted.entry_carry == verified_entry and accepted.entry_supplies.size() == Story.STORY_SUPPLIES.size() and Story.STORY_SUPPLIES.all(func(id): return accepted.entry_supplies.has(id) and accepted.entry_supplies[id] is bool),"Preparation rederives frozen Second pistol and detached Story entry"): return false
+	var expected_carry: Dictionary = PREP_CARRY.duplicate(true)
+	expected_carry.ammo[1] = verified_entry.ammo[1] if accepted.entry_supplies[Story.STORY_SUPPLIES[0]] else mini(180,verified_entry.ammo[1]+45)
+	if not require(accepted.ledger == expected_carry and owner.budget() == expected_carry,"Preparation consumes exact proved Story supply result before bindings"): return false
 	fixture = tree
 	previous = accepted
-	game = tree.game
-	if not require(is_instance_valid(accepted) and accepted.get_script() == Story and accepted.ok and accepted.current() and accepted.prior_frozen() and game.transport_witness == null and accepted.ledger == PREP_CARRY and game.budget() == PREP_CARRY and accepted.waypoints == Story.OUTWARD+Story.HOMEWARD and accepted.notification_seen and accepted.inputs.size() == 1 and accepted.key_events.size() == 2 and accepted.discoveries == [3,4,5] and accepted.deaths.size() == 22 and accepted.summons.is_empty(),"actual returned completed Story, fixed carry and released dispatch"): return false
+	game = owner
 	scene = game.level
 	player = game.player
 	main_id = game.get_instance_id()

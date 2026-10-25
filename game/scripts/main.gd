@@ -26,6 +26,7 @@ var effects: Node
 var enemies: Array = []
 var sound_test: Control
 var menu: VBoxContainer
+var intermission_route: Control
 var menu_scroll: ScrollContainer
 var pending_action: String = ""
 var pending_button: Button
@@ -625,7 +626,7 @@ func interact() -> void:
 				_level_load_failed(next_layout.load_error)
 				return
 			_show_menu(completed_title,actions)
-			_show_chapter_intro(state.level_index)
+			_show_descent_intermission()
 
 func hurt_player(amount: int) -> void:
 	if state.health <= 0 or amount <= 0: return
@@ -710,6 +711,12 @@ func show_title() -> void:
 		else: music.play_title()
 	if effects != null: effects.stop()
 	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Sound test",show_sound_test],["Quit",quit_game]])
+	# The title illustration reserves its quiet left third for these controls.
+	# Other screens retain _show_menu's centered layout and default type size.
+	menu_scroll.position = Vector2(18, 45)
+	menu_scroll.size = Vector2(220, 275)
+	menu.get_child(0).add_theme_font_size_override("font_size", 28)
+	menu.get_child(0).autowrap_mode = TextServer.AUTOWRAP_OFF
 
 func show_sound_test() -> void:
 	if playing or placement_pending or is_instance_valid(level): return
@@ -747,11 +754,30 @@ func continue_campaign() -> void:
 
 func show_ending() -> void:
 	show_title()
+	music.play_interlude()
 	var revelation = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if state.discoveries.size() == 8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
 	_show_menu(revelation,[["New campaign",show_difficulty],["Return to title",show_title]])
 	_button("Recovered records",func(): show_records(show_ending))
 	_button("Descent map",func(): show_descent_map(show_ending))
 	_record_body(Narrative.ENDINGS["complete" if state.discoveries.size() == 8 else "normal"].body)
+	# Keep the earned mouth illustration readable beside a compact ending rail.
+	# The existing scroll/focus behavior retains the complete ending body.
+	menu_scroll.position = Vector2(422, 32)
+	menu_scroll.size = Vector2(202, 290)
+	var ending_heading: Label = menu.get_child(0)
+	ending_heading.add_theme_font_size_override("font_size", 16)
+	ending_heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	var ending_ink := StyleBoxFlat.new()
+	ending_ink.bg_color = Color(0.025, 0.022, 0.029, 0.94)
+	ending_ink.set_content_margin_all(8)
+	ending_heading.add_theme_stylebox_override("normal", ending_ink)
+	# Heart's illustration is earned only after the final depth is completed.
+	# An incomplete ending invocation must not reveal the CURRENT final chapter.
+	if state.level_index == 8:
+		var completed: Dictionary = preload("res://scripts/descent_map.gd").overview(state)
+		if completed.rows.size() == 8 and completed.rows[7].status == "CLEARED" and ResourceLoader.exists(preload("res://scripts/descent_chart.gd").art_path(7)):
+			menu.set_meta("chapter_intro", 7)
+			hud.queue_redraw()
 
 func _descent_available() -> bool:
 	if not is_inside_tree(): return false
@@ -814,6 +840,60 @@ func _record_body(text: String) -> void:
 func show_difficulty() -> void:
 	_show_menu("RECOVERY PROTOCOL",[["Merciful",func(): start_campaign(0)],["Relentless",func(): start_campaign(1)],["Terminal",func(): start_campaign(2)],["Back",show_title]])
 	_show_chapter_intro(0)
+
+func _show_descent_intermission() -> void:
+	# Only the just-saved actual completion path calls this presentation boundary.
+	if playing or is_instance_valid(level) or state.level_index < 1 or state.level_index > 7: return
+	if menu.get_child_count() == 0 or not menu.get_child(0).text.ends_with(" RESTORED"): return
+	menu.set_meta("descent_intermission", true)
+	music.play_interlude()
+	menu_scroll.position = Vector2(430, 45)
+	menu_scroll.size = Vector2(198, 275)
+	menu.get_child(0).add_theme_font_size_override("font_size", 22)
+	# Keep the existing first Descend button and its callback/focus untouched.
+	menu.get_child(1).clip_text = false
+	menu.get_child(1).add_theme_font_size_override("font_size", 12)
+	intermission_route = preload("res://scripts/descent_chart.gd").IntermissionRoute.new()
+	intermission_route.position = Vector2.ZERO
+	intermission_route.size = Vector2(640, 360)
+	intermission_route.configure(preload("res://scripts/descent_map.gd").overview(state))
+	menu_scroll.get_parent().add_child(intermission_route)
+	menu_scroll.get_parent().move_child(intermission_route, menu_scroll.get_index())
+	var cleared_index: int = state.level_index - 1
+	if intermission_route.textures.get(cleared_index) is Texture2D:
+		var illustration_toggle := Button.new()
+		illustration_toggle.text = "Chapter illustration"
+		illustration_toggle.accessibility_name = "Show completed chapter illustration"
+		illustration_toggle.tooltip_text = "View the chapter you just completed. Unreached chapter art stays sealed."
+		illustration_toggle.custom_minimum_size.y = 34
+		illustration_toggle.add_theme_font_size_override("font_size", 12)
+		illustration_toggle.pressed.connect(_toggle_restored_illustration.bind(illustration_toggle, cleared_index))
+		menu.add_child(illustration_toggle)
+	_record_body("Depth %02d restored.\nFollow the gold route.\nYOU ARE HERE marks your next descent.\n\nWorld illustration, not a floor plan." % state.level_index)
+	menu.get_child(menu.get_child_count()-1).custom_minimum_size.y = 96
+
+func _toggle_restored_illustration(button: Button, cleared_index: int) -> void:
+	# The next level is CURRENT, not earned: only the last CLEARED row may open.
+	if not is_instance_valid(intermission_route) or not menu.get_meta("descent_intermission", false): return
+	if cleared_index != state.level_index - 1 or cleared_index < 0 or cleared_index >= intermission_route.rows.size(): return
+	if intermission_route.rows[cleared_index].status != "CLEARED" or not intermission_route.textures.get(cleared_index) is Texture2D: return
+	var show_art: bool = menu.get_meta("chapter_intro", -1) != cleared_index
+	if show_art:
+		menu.set_meta("chapter_intro", cleared_index)
+	else:
+		menu.remove_meta("chapter_intro")
+	intermission_route.visible = not show_art
+	# Full chapter paintings share one unobtrusive bottom rail: retain the same
+	# Descend and toggle nodes/callbacks, rather than covering each hero at right.
+	menu_scroll.position = Vector2(8, 245) if show_art else Vector2(430, 45)
+	menu_scroll.size = Vector2(624, 82) if show_art else Vector2(198, 275)
+	for index in [0, 2, menu.get_child_count() - 1]:
+		menu.get_child(index).visible = not show_art
+	menu_scroll.scroll_vertical = 0
+	button.text = "Descent chart" if show_art else "Chapter illustration"
+	button.accessibility_name = "Show connected descent chart" if show_art else "Show completed chapter illustration"
+	hud.queue_redraw()
+
 
 func _show_chapter_intro(index: int) -> void:
 	if not is_inside_tree() or playing or placement_pending or is_instance_valid(level) or not get_tree().paused or not menu_scroll.visible: return
@@ -894,6 +974,13 @@ func _show_menu(title: String, actions: Array) -> void:
 	if placement_pending: show_title()
 	pending_action = ""
 	pending_button = null
+	if is_instance_valid(intermission_route):
+		intermission_route.get_parent().remove_child(intermission_route)
+		intermission_route.queue_free()
+	intermission_route = null
+	menu_scroll.position = Vector2(150,45)
+	menu_scroll.size = Vector2(340,275)
+	menu.set_meta("descent_intermission", false)
 	menu.set_meta("chapter_intro",-1)
 	menu_scroll.scroll_vertical = 0
 	menu_scroll.show()
@@ -1166,7 +1253,7 @@ func _export_art_checks() -> Dictionary:
 
 func _export_title_audio_checks() -> Dictionary:
 	var checks = {
-		"title_recording": ResourceLoader.exists(music.title_track) and music.player.stream is AudioStreamOggVorbis and music.player.stream.resource_path == music.title_track and music.player.stream.get_length() > 0,
+		"title_recording": music.playback_context == "title" and ResourceLoader.exists(music.title_track) and music.player.stream is AudioStreamMP3 and music.player.stream.resource_path == music.title_track and music.player.stream.get_length() > 0,
 		"title_transport": music.player.playing and music.player.has_stream_playback() and not music.player.stream_paused}
 	checks["title_decoded_pcm"] = await ExportAudio.decoded_pcm(get_tree(), music.player)
 	return checks

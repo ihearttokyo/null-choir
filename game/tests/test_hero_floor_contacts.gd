@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize(): call_deferred("run")
 
 func exclude_nonfloor(node: Node, out: Array[RID]) -> void:
@@ -63,7 +65,9 @@ func run():
         game.show_title()
         await process_frame
         await physics_frame
+    game.music.stop()
     game.queue_free()
+    await WallClock.seconds(self,0.15)
     await process_frame
     await physics_frame
     print("HERO_FLOOR_CONTACT_RESULT ",JSON.stringify({"bases":rows,"queries":queries,"failures":failures}))

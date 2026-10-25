@@ -3,7 +3,11 @@ extends Node
 signal playback_started
 
 @export var level_tracks: PackedStringArray = ["res://audio/suno/intake.mp3", "res://audio/suno/foundry.mp3", "res://audio/suno/processional.mp3", "res://audio/suno/reliquary.mp3", "res://audio/suno/nursery.mp3", "res://audio/suno/ossuary.mp3", "res://audio/suno/inversion.mp3", "res://audio/suno/heart.mp3"]
-@export var title_track := "res://audio/title/the-restraint-turns.ogg"
+@export var title_track := "res://audio/title/title-suno.mp3"
+@export var interlude_track := "res://audio/title/interlude-suno.mp3"
+# Role copies retain exact selected source bytes, not additional compositions.
+# Distinct resource paths keep campaign lifetime/loop state separate from menus.
+var playback_context := ""
 var player: AudioStreamPlayer
 var pressure := 0.0
 var pressure_target := 0.0
@@ -30,30 +34,39 @@ func play_level(index: int) -> void:
 	player.stream = recording
 	player.stream_paused = false
 	player.play()
+	playback_context = "campaign"
 	playback_started.emit()
 
 func play_title() -> void:
+	_play_menu_recording(title_track, "title")
+
+func play_interlude() -> void:
+	_play_menu_recording(interlude_track, "interlude")
+
+func _play_menu_recording(path: String, context: String) -> void:
 	pressure = 0.0
 	pressure_target = 0.0
 	player.volume_db = -3.0
-	if (player.playing or player.stream_paused) and player.stream is AudioStreamOggVorbis and player.stream.resource_path == title_track:
+	if playback_context == context and (player.playing or player.stream_paused) and player.stream is AudioStreamMP3 and player.stream.resource_path == path:
 		player.stream_paused = false
-		# A same-stream request transfers preview ownership without restarting.
+		# A same-role request transfers preview ownership without restarting.
 		playback_started.emit()
 		return
 	stop()
-	if not ResourceLoader.exists(title_track):
-		push_error("Title recording is unavailable: " + title_track)
+	if not ResourceLoader.exists(path):
+		push_error("Menu recording is unavailable: " + path)
 		return
-	var recording := load(title_track) as AudioStreamOggVorbis
-	if recording == null or recording.packet_sequence == null or not is_finite(recording.get_length()) or recording.get_length() <= 0:
-		push_error("Title recording failed to load: " + title_track)
+	var recording := load(path) as AudioStreamMP3
+	if recording == null or not is_finite(recording.get_length()) or recording.get_length() <= 0:
+		push_error("Menu recording failed to load: " + path)
 		return
-	# Audible loop approval is pending; play the title cue once.
+	# Reuse the selected offline Suno bytes. Menus play once, without an
+	# unaudited infinite loop; play_level explicitly restores campaign looping.
 	recording.loop = false
 	recording.loop_offset = 0.0
 	player.stream = recording
 	player.play()
+	playback_context = context
 	playback_started.emit()
 
 func set_pressure(value: float) -> void:
@@ -71,6 +84,7 @@ func set_paused(paused: bool) -> void:
 	player.stream_paused = paused
 
 func stop() -> void:
+	playback_context = ""
 	player.stop()
 	player.stream = null
 	player.stream_paused = false

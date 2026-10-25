@@ -1,4 +1,5 @@
 """Source-only floor maths. Not native collision, physics, or campaign evidence."""
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -60,7 +61,7 @@ class EarnedFloorContracts(unittest.TestCase):
                 self.assertIn('original_floor('+str(index)+')', source)
                 self.assertIn(heights+'[index]', source)
 
-    def test_live_chain_envelopes_label_current_terrain(self):
+    def test_legacy_chain_envelopes_keep_revision_one_identity(self):
         sources = {p.name: p.read_text() for p in (GAME/'tests').glob('*.gd')}
         names = {'test_ossuary_finale_exit.gd'}
         while True:
@@ -69,16 +70,67 @@ class EarnedFloorContracts(unittest.TestCase):
             if dependencies == names:
                 break
             names = dependencies
-        for path in (GAME/'data').glob('0*.json'):
-            self.assertEqual(json.loads(path.read_text())['floor_revision'], 1)
+        # This authenticated chain remains historical v1 evidence. Current v2
+        # maps and their immutable v1 migration sources are checked separately.
         self.assertIn('const TERRAIN_VERSION = 2', (GAME/'scripts/campaign.gd').read_text())
         for name in names:
             source = (GAME/'tests'/name).read_text()
             for line in source.splitlines():
                 if '"version":' in line:
-                    self.assertIn('"version":2', line, name+' wrong current save version')
+                    self.assertIn('"version":2', line, name+' wrong historical save-format version')
                 if '"checkpoint_id":' in line:
-                    self.assertIn('"floor_revision":1', line, name+' unlabelled current resource envelope')
+                    self.assertIn('"floor_revision":1', line, name+' changed historical revision-one resource envelope')
+
+    def test_current_revision_two_retains_all_eight_exact_v1_sources(self):
+        fixture_names = [
+            'intake_revision1', 'foundry_revision1',
+            'processional_choir_walk_revision1', 'reliquary_archive_rim_revision1',
+            'nursery_revision1', 'ossuary_revision1',
+            'terminal_crossings_revision1', 'terminal_crossings_revision1',
+        ]
+        maps = sorted((GAME/'data').glob('0*.json'))
+        self.assertEqual(len(maps), 8)
+        constants = (GAME/'scripts/floors_v1.gd').read_text()
+        for index, path in enumerate(maps):
+            with self.subTest(map=path.name):
+                current = json.loads(path.read_text())
+                self.assertEqual(current['floor_revision'], 2)
+                fixture = GAME/'tests/fixtures'/fixture_names[index]
+                frozen_bytes = (fixture/path.name).read_bytes()
+                manifest = dict((name, digest) for digest, name in
+                                (line.split('  ') for line in
+                                 (fixture/'SHA256SUMS.txt').read_text().splitlines()))
+                self.assertEqual(hashlib.sha256(frozen_bytes).hexdigest(), manifest[path.name])
+                frozen = json.loads(frozen_bytes)
+                prior = (literal(constants, 'INTAKE' if index == 0 else 'FOUNDRY')
+                         if index < 2 else json.loads(
+                             (GAME/'data/floors/revision1'/(current['id']+'.json')).read_text()))
+                self.assertEqual(frozen['floor_revision'], 1)
+                for field in ['cell_size', 'rects', 'elevations', 'ceilings', 'floor_revision']:
+                    self.assertEqual(prior[field], frozen[field], path.name+' '+field)
+                # Terrain migration must not alter earned resource/gate identities.
+                for field in ['enemies', 'heroes', 'pickups', 'interactions', 'doors',
+                              'encounters', 'spawn', 'spawn_yaw', 'mission']:
+                    self.assertEqual(current[field], frozen[field], path.name+' '+field)
+
+    def test_earned_map_sha_pins_still_bind_original_revision_one_bytes(self):
+        references = [
+            ('test_foundry_earned_walk.gd', 'F_MAP_SHA', 'foundry_revision1/02_foundry.json'),
+            ('test_processional_earned_entry.gd', 'P_MAP_SHA',
+             'processional_choir_walk_revision1/03_processional.json'),
+            ('test_reliquary_earned_entry.gd', 'R_MAP_SHA',
+             'reliquary_archive_rim_revision1/04_reliquary.json'),
+            ('test_nursery_earned_entry.gd', 'N_MAP_SHA', 'nursery_revision1/05_nursery.json'),
+            ('test_nursery_finale_loop.gd', 'NF_OSSUARY_SHA', 'ossuary_revision1/06_ossuary.json'),
+        ]
+        for file, constant, frozen_path in references:
+            with self.subTest(source=file):
+                old_pin = literal((GAME/'tests'/file).read_text(), constant)
+                self.assertEqual(old_pin, hashlib.sha256(
+                    (GAME/'tests/fixtures'/frozen_path).read_bytes()).hexdigest())
+        pins = literal((GAME/'tests/test_inversion_earned_entry.gd').read_text(), 'INVERSION_PINS')
+        self.assertEqual(pins['res://data/07_inversion.json'], hashlib.sha256(
+            (GAME/'tests/fixtures/terminal_crossings_revision1/07_inversion.json').read_bytes()).hexdigest())
 
     def test_legacy_route_maths_uses_original_floor(self):
         for file in ['test_reliquary_halo_feasibility.gd', 'test_reliquary_blood_story.gd']:

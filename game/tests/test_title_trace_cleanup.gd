@@ -7,7 +7,7 @@ func run() -> void:
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)
 	await process_frame
-	assert(game.music.player.playing and game.music.player.stream is AudioStreamOggVorbis)
+	assert(game.music.player.playing and game.music.player.stream is AudioStreamMP3)
 	var trace = load("res://scripts/app_frame_trace.gd").new()
 	trace.game = game
 	await trace.cleanup(self)

@@ -11,7 +11,7 @@ func run() -> void:
 	game.progress_path = prefix + "_campaign.json"
 	game.settings_path = prefix + "_preferences.json"
 	root.add_child(game)
-	if not expect(game.music != null and game.music.player is AudioStreamPlayer and game.music.player.stream is AudioStreamOggVorbis and game.music.player.stream.resource_path == game.music.title_track and game.music.player.playing and not game.music.player.stream_paused, "Game must own one persistent title-playing recorded-music node"): return
+	if not expect(game.music != null and game.music.player is AudioStreamPlayer and game.music.player.stream is AudioStreamMP3 and game.music.player.stream.resource_path == game.music.title_track and game.music.player.playing and not game.music.player.stream_paused, "Game must own one persistent title-playing recorded-music node"): return
 	var music = game.music
 	game.start_campaign(1)
 	game.set_process(false)
@@ -21,7 +21,8 @@ func run() -> void:
 	await WallClock.seconds(self, 0.2)
 	if not expect(first is AudioStreamMP3 and first.resource_path == music.level_tracks[0] and music.player.get_playback_position() > 0, "Campaign must play the actual Intake Suno recording"): return
 	game.pause_game()
-	await WallClock.seconds(self, 0.05)
+	# Dummy mixes in roughly 93ms blocks; observe after the pause reaches the mixer.
+	await WallClock.seconds(self, 0.15)
 	var position = music.player.get_playback_position()
 	await WallClock.seconds(self, 0.15)
 	if not expect(music.player.get_playback_position() == position and music.player.stream_paused, "Game pause must freeze recorded transport"): return
@@ -31,7 +32,9 @@ func run() -> void:
 	await game.restart_level()
 	if not expect(game.music == music and music.player.stream == first and music.player.get_playback_position() < 0.15, "Level restart must reuse the music node and restart the recording"): return
 	game.show_title()
-	if not expect(music.player.playing and not music.player.stream_paused and music.player.stream is AudioStreamOggVorbis and music.player.stream.resource_path == music.title_track, "Title must replace the campaign recording with the title cue"): return
+	if not expect(music.player.playing and not music.player.stream_paused and music.player.stream is AudioStreamMP3 and music.player.stream.resource_path == music.title_track, "Title must replace the campaign recording with the title cue"): return
+	music.stop()
+	await WallClock.seconds(self, 0.15)
 	game.free()
 	first = null
 	paused = false

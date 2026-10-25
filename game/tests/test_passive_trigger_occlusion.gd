@@ -1,5 +1,6 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 var game
 var retired: Array = []
@@ -307,7 +308,10 @@ func finish(status: int) -> void:
 		for node in [game,game.music,game.effects]: retired.append(weakref(node))
 	paused = false
 	await create_timer(0.1,true).timeout
-	if is_instance_valid(game): game.free()
+	if is_instance_valid(game):
+		game.music.stop()
+		game.free()
+	await WallClock.seconds(self,0.15)
 	await process_frame
 	await process_frame
 	if not expect(retired.all(func(reference): return reference.get_ref() == null),"Native fixture level/player/actors/walls/markers/Main/audio must drain"): status = 1

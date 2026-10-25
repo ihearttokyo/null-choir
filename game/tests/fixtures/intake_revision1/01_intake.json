@@ -1,0 +1,2811 @@
+{
+  "id": "intake",
+  "title": "THE INTAKE",
+  "subtitle": "01 / RECEIVE THE INSTRUCTION",
+  "cell_size": 4,
+  "spawn": [
+    14.5,
+    28.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      11,
+      26,
+      17,
+      30
+    ],
+    [
+      11,
+      20,
+      17,
+      25
+    ],
+    [
+      5,
+      23,
+      11,
+      24
+    ],
+    [
+      5,
+      19,
+      6,
+      23
+    ],
+    [
+      2,
+      12,
+      9,
+      18
+    ],
+    [
+      5,
+      7,
+      6,
+      12
+    ],
+    [
+      4,
+      7,
+      12,
+      9
+    ],
+    [
+      13,
+      7,
+      14,
+      10
+    ],
+    [
+      11,
+      10,
+      17,
+      19
+    ],
+    [
+      17,
+      22,
+      23,
+      23
+    ],
+    [
+      22,
+      18,
+      23,
+      23
+    ],
+    [
+      20,
+      11,
+      26,
+      18
+    ],
+    [
+      23,
+      9,
+      24,
+      11
+    ],
+    [
+      17,
+      7,
+      24,
+      9
+    ],
+    [
+      13,
+      5,
+      14,
+      9
+    ],
+    [
+      10,
+      0,
+      18,
+      4
+    ],
+    [
+      1,
+      15,
+      2,
+      16
+    ]
+  ],
+  "loops": [
+    {
+      "id": "intake_loop_bell",
+      "route": [
+        [
+          14,
+          23
+        ],
+        [
+          6,
+          23
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          23
+        ]
+      ],
+      "hero": "skin_bell"
+    },
+    {
+      "id": "intake_loop_siphon",
+      "route": [
+        [
+          14,
+          23
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          23,
+          14
+        ],
+        [
+          23,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          23
+        ]
+      ],
+      "hero": "siphon_heart"
+    }
+  ],
+  "heroes": [
+    {
+      "id": "skin_bell",
+      "cell": [
+        4.5,
+        15.2
+      ],
+      "yaw": 0,
+      "base": [
+        6.6,
+        0.55,
+        6.6
+      ],
+      "round": true,
+      "seal": "blood",
+      "light_ids": [
+        "bell_feed",
+        "bell_seal"
+      ]
+    },
+    {
+      "id": "siphon_heart",
+      "cell": [
+        25.5,
+        14.5
+      ],
+      "yaw": 0,
+      "base": [
+        5.5,
+        0.55,
+        4.5
+      ],
+      "seal": "ivory",
+      "light_ids": [
+        "siphon_feed",
+        "siphon_seal"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "containment_gate",
+      "cell": [
+        14,
+        5.75
+      ],
+      "size": [
+        8.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "blood_key",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        3.5,
+        13.5
+      ],
+      "text": "BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "ivory_key",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        25,
+        12.5
+      ],
+      "text": "IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "bell_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        13.5,
+        10.5
+      ],
+      "text": "RECOVERY IMAGE STORED",
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    },
+    {
+      "id": "intake_story",
+      "kind": "story",
+      "cell": [
+        1.5,
+        15.5
+      ],
+      "text": "A maintenance plate beneath the skin: DO NOT RESTART. The order is older than the cathedral."
+    },
+    {
+      "id": "exit",
+      "kind": "exit",
+      "cell": [
+        14.5,
+        1.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "CONTAINMENT RESTORED / DESCEND"
+    }
+  ],
+  "pickups": [
+    {
+      "id": "entry_ammo",
+      "kind": "ammo",
+      "amount": 35,
+      "weapon": 1,
+      "cell": [
+        12,
+        27
+      ]
+    },
+    {
+      "id": "west_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        7.5,
+        23.5
+      ]
+    },
+    {
+      "id": "bell_armor",
+      "kind": "armor",
+      "amount": 40,
+      "cell": [
+        8.5,
+        13.5
+      ]
+    },
+    {
+      "id": "upper_ammo",
+      "kind": "ammo",
+      "amount": 45,
+      "weapon": 1,
+      "cell": [
+        5.5,
+        20.5
+      ]
+    },
+    {
+      "id": "nave_health",
+      "kind": "health",
+      "amount": 30,
+      "cell": [
+        12,
+        16
+      ]
+    },
+    {
+      "id": "siphon_ammo",
+      "kind": "ammo",
+      "amount": 40,
+      "weapon": 1,
+      "cell": [
+        23,
+        20.5
+      ]
+    },
+    {
+      "id": "siphon_health",
+      "kind": "health",
+      "amount": 25,
+      "cell": [
+        21,
+        13
+      ]
+    },
+    {
+      "id": "gate_ammo",
+      "kind": "ammo",
+      "amount": 50,
+      "weapon": 1,
+      "cell": [
+        12.5,
+        10.5
+      ]
+    },
+    {
+      "id": "gate_health",
+      "kind": "health",
+      "amount": 40,
+      "cell": [
+        17,
+        3
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "intake_enemy_00",
+      "kind": "worker",
+      "cell": [
+        8.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "intake_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        22.5,
+        22.5
+      ],
+      "yaw": 73
+    },
+    {
+      "id": "intake_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        22
+      ],
+      "yaw": 146
+    },
+    {
+      "id": "intake_enemy_03",
+      "kind": "worker",
+      "cell": [
+        6.5,
+        13.75
+      ],
+      "yaw": 219
+    },
+    {
+      "id": "intake_enemy_04",
+      "kind": "crawler",
+      "cell": [
+        3.5,
+        16.5
+      ],
+      "yaw": 292
+    },
+    {
+      "id": "intake_enemy_05",
+      "kind": "crawler",
+      "cell": [
+        8.75,
+        17.75
+      ],
+      "yaw": 5
+    },
+    {
+      "id": "intake_enemy_06",
+      "kind": "worker",
+      "cell": [
+        8.25,
+        14.85
+      ],
+      "yaw": 78
+    },
+    {
+      "id": "intake_enemy_07",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        9
+      ],
+      "yaw": 151
+    },
+    {
+      "id": "intake_enemy_08",
+      "kind": "worker",
+      "cell": [
+        12,
+        8
+      ],
+      "yaw": 224
+    },
+    {
+      "id": "intake_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        12.5,
+        11.75
+      ],
+      "yaw": 297
+    },
+    {
+      "id": "intake_enemy_10",
+      "kind": "worker",
+      "cell": [
+        16,
+        15
+      ],
+      "yaw": 10
+    },
+    {
+      "id": "intake_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        15.5,
+        13.75
+      ],
+      "yaw": 83
+    },
+    {
+      "id": "intake_enemy_12",
+      "kind": "crawler",
+      "cell": [
+        23,
+        22
+      ],
+      "yaw": 156
+    },
+    {
+      "id": "intake_enemy_13",
+      "kind": "worker",
+      "cell": [
+        21.75,
+        15
+      ],
+      "yaw": 229
+    },
+    {
+      "id": "intake_enemy_14",
+      "kind": "crawler",
+      "cell": [
+        24.25,
+        17
+      ],
+      "yaw": 302
+    },
+    {
+      "id": "intake_enemy_15",
+      "kind": "worker",
+      "cell": [
+        25,
+        11.75
+      ],
+      "yaw": 15
+    },
+    {
+      "id": "intake_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        21.5,
+        12.25
+      ],
+      "yaw": 88
+    },
+    {
+      "id": "intake_enemy_17",
+      "kind": "worker",
+      "cell": [
+        23,
+        9
+      ],
+      "yaw": 161
+    },
+    {
+      "id": "intake_enemy_18",
+      "kind": "crawler",
+      "cell": [
+        19,
+        8
+      ],
+      "yaw": 234
+    },
+    {
+      "id": "intake_enemy_19",
+      "kind": "worker",
+      "cell": [
+        12,
+        2
+      ],
+      "yaw": 307
+    },
+    {
+      "id": "intake_enemy_20",
+      "kind": "worker",
+      "cell": [
+        17,
+        2
+      ],
+      "yaw": 20
+    },
+    {
+      "id": "intake_enemy_21",
+      "kind": "crawler",
+      "cell": [
+        13,
+        3
+      ],
+      "yaw": 93
+    },
+    {
+      "id": "intake_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        16,
+        3
+      ],
+      "yaw": 166
+    }
+  ],
+  "mission": "RECOVERY ORDER 01: restore both intake seals. Do not examine the membrane.",
+  "color": [
+    0.29,
+    0.075,
+    0.08
+  ],
+  "fog": [
+    0.027,
+    0.018,
+    0.026
+  ],
+  "scenery": [
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_9m",
+      "cell": [
+        14.5,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        2.8,
+        2.8,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            6.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        7,
+        23.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        10,
+        23.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        20.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        14
+      ],
+      "yaw": 0,
+      "scale": [
+        4,
+        1.6,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6,
+        17
+      ],
+      "yaw": 0,
+      "scale": [
+        4,
+        1.6,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        9,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        12,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        18,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        21,
+        8.5
+      ],
+      "yaw": 90,
+      "scale": [
+        1.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        20
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        10.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        13
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        23.5,
+        17
+      ],
+      "yaw": 0,
+      "scale": [
+        3.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14,
+        6
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        3
+      ],
+      "yaw": 0,
+      "scale": [
+        4.5,
+        1,
+        1
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.1,
+        14.0
+      ],
+      "yaw": 90,
+      "height": 3.0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        9.9,
+        17
+      ],
+      "yaw": 270,
+      "height": 3.0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        26.9,
+        13.2
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        20.1,
+        16.7
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.1,
+        2.5
+      ],
+      "yaw": 90,
+      "height": 0.6
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        18.9,
+        2.5
+      ],
+      "yaw": 270,
+      "height": 0.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        12.5,
+        29
+      ],
+      "yaw": 20,
+      "height": 2.8
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        16.5,
+        22
+      ],
+      "yaw": -20,
+      "height": 2.8
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        3.2,
+        14
+      ],
+      "yaw": 45,
+      "height": 6.5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        8.4,
+        17
+      ],
+      "yaw": -35,
+      "height": 6.5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        21.2,
+        12.7
+      ],
+      "yaw": 70,
+      "height": 2.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        26,
+        16.8
+      ],
+      "yaw": 180,
+      "height": 2.6
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        16.7,
+        2.5
+      ],
+      "yaw": -45,
+      "height": 2.8
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12,
+        30
+      ],
+      "yaw": 180,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17,
+        28
+      ],
+      "yaw": -90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        12,
+        18
+      ],
+      "yaw": 90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9,
+        13
+      ],
+      "yaw": -90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3,
+        17.7
+      ],
+      "yaw": 120,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        20.7,
+        15.8
+      ],
+      "yaw": 90,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        26,
+        12
+      ],
+      "yaw": -45,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        17.7,
+        3.5
+      ],
+      "yaw": -120,
+      "solid": [
+        2.2,
+        4.8,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16.8,
+        29.5
+      ],
+      "yaw": -110,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16.8,
+        15
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        3.1,
+        12.8
+      ],
+      "yaw": 30,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        8.25,
+        16
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        21,
+        17.8
+      ],
+      "yaw": 125,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        26,
+        17.6
+      ],
+      "yaw": 180,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        10.9,
+        1
+      ],
+      "yaw": 80,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "intake_throat_frame",
+      "tradition": "Christian",
+      "cell": [
+        8.1,
+        14.3
+      ],
+      "yaw": 0,
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "solid": [
+        5.4,
+        0.55,
+        3.48
+      ]
+    },
+    {
+      "art": "intake_wheel_reservoir",
+      "tradition": "Buddhist",
+      "cell": [
+        21.15,
+        13.4
+      ],
+      "yaw": 0,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        3.872,
+        0.55,
+        3.244
+      ]
+    },
+    {
+      "art": "intake_bound_gate",
+      "tradition": "Shinto",
+      "cell": [
+        16.0,
+        21.2
+      ],
+      "yaw": 0,
+      "scale": [
+        0.72,
+        0.72,
+        0.72
+      ],
+      "solid": [
+        4.896,
+        0.55,
+        1.223
+      ]
+    },
+    {
+      "art": "intake_pressure_screen",
+      "tradition": "Islamic",
+      "cell": [
+        16.85,
+        16.3
+      ],
+      "yaw": 270,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        3.15,
+        0.55,
+        1.267
+      ]
+    },
+    {
+      "art": "intake_ascending_engine",
+      "tradition": "Hindu",
+      "cell": [
+        12.0,
+        16.8
+      ],
+      "yaw": 90,
+      "scale": [
+        0.62,
+        0.62,
+        0.62
+      ],
+      "solid": [
+        2.874,
+        0.55,
+        2.799
+      ]
+    },
+    {
+      "art": "intake_seven_lamps",
+      "tradition": "Jewish",
+      "cell": [
+        12.5,
+        27.0
+      ],
+      "yaw": 0,
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ],
+      "solid": [
+        4.46,
+        0.55,
+        1.904
+      ]
+    },
+    {
+      "art": "intake_solar_seal",
+      "tradition": "ancient Egyptian",
+      "cell": [
+        17.3,
+        1.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "solid": [
+        4.69,
+        0.55,
+        2.065
+      ]
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        25.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        25.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        18.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        18.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        11.15,
+        12.5
+      ],
+      "yaw": 90,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        11.15,
+        12.5
+      ],
+      "yaw": 90,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        28.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        28.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_lancet_bay",
+      "cell": [
+        17.85,
+        12.5
+      ],
+      "yaw": 270,
+      "height": 6.4,
+      "scale": [
+        1.2,
+        1.3,
+        1
+      ]
+    },
+    {
+      "art": "cathedral_skeletal_dado",
+      "cell": [
+        17.85,
+        12.5
+      ],
+      "yaw": 270,
+      "height": 0.12
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        12,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        28
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        26
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        24.5
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        20
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        16
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    },
+    {
+      "art": "cathedral_vault_6m",
+      "cell": [
+        17,
+        12
+      ],
+      "yaw": 0,
+      "scale": [
+        1.7,
+        2,
+        1
+      ],
+      "supports": [
+        {
+          "offset": [
+            -1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        },
+        {
+          "offset": [
+            1.83,
+            0,
+            0
+          ],
+          "size": [
+            0.46,
+            3.5,
+            0.72
+          ]
+        }
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        11.15,
+        28.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        17.85,
+        25.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        11.15,
+        22.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        17.85,
+        18.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        11.15,
+        14.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90,
+      "id": "intake_nave_return"
+    },
+    {
+      "cell": [
+        17.85,
+        11.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        7.5,
+        23.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        5.15,
+        21
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        5.15,
+        10.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        9,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0,
+      "id": "bell_return"
+    },
+    {
+      "cell": [
+        12.5,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0
+    },
+    {
+      "cell": [
+        18.5,
+        7.15
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 0,
+      "id": "siphon_return"
+    },
+    {
+      "cell": [
+        22.15,
+        20.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        26.85,
+        17.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270,
+      "id": "siphon_seal"
+    },
+    {
+      "cell": [
+        20.15,
+        12.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        18.85,
+        2.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        10.15,
+        1.5
+      ],
+      "height": 3.1,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 3.4,
+      "range": 14,
+      "fixture_yaw": 90
+    },
+    {
+      "cell": [
+        2.15,
+        13.5
+      ],
+      "height": 4.3,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 4.4,
+      "range": 18,
+      "fixture_yaw": 90,
+      "id": "bell_seal"
+    },
+    {
+      "cell": [
+        9.85,
+        17.5
+      ],
+      "height": 4.3,
+      "color": [
+        1,
+        0.59,
+        0.3
+      ],
+      "energy": 4.4,
+      "range": 18,
+      "fixture_yaw": 270
+    },
+    {
+      "cell": [
+        4.5,
+        16.7
+      ],
+      "height": 8.8,
+      "color": [
+        1,
+        0.48,
+        0.24
+      ],
+      "energy": 5.0,
+      "range": 22,
+      "target": [
+        4.5,
+        15.2
+      ],
+      "shadow": true,
+      "id": "bell_feed"
+    },
+    {
+      "cell": [
+        7.5,
+        16.5
+      ],
+      "height": 8.0,
+      "color": [
+        0.25,
+        0.48,
+        0.72
+      ],
+      "energy": 3.8,
+      "range": 21,
+      "target": [
+        4.5,
+        15.2
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        24,
+        12
+      ],
+      "height": 5.0,
+      "color": [
+        0.35,
+        0.78,
+        0.88
+      ],
+      "energy": 4.5,
+      "range": 20,
+      "target": [
+        25.5,
+        14.5
+      ],
+      "shadow": true
+    },
+    {
+      "cell": [
+        26,
+        17.5
+      ],
+      "height": 5.0,
+      "color": [
+        1,
+        0.25,
+        0.18
+      ],
+      "energy": 3.7,
+      "range": 20,
+      "target": [
+        25.5,
+        14.5
+      ],
+      "shadow": true,
+      "id": "siphon_feed"
+    },
+    {
+      "cell": [
+        17.65,
+        25.5
+      ],
+      "height": 10.5,
+      "color": [
+        0.25,
+        0.44,
+        0.8
+      ],
+      "energy": 4.2,
+      "range": 24
+    },
+    {
+      "cell": [
+        14.5,
+        16
+      ],
+      "height": 10.5,
+      "color": [
+        0.25,
+        0.44,
+        0.8
+      ],
+      "energy": 4.2,
+      "range": 24
+    },
+    {
+      "cell": [
+        14.5,
+        2
+      ],
+      "height": 5.5,
+      "color": [
+        0.5,
+        0.23,
+        0.18
+      ],
+      "energy": 2.5,
+      "range": 18,
+      "id": "intake_gate_feed"
+    },
+    {
+      "cell": [
+        16.0,
+        22.0
+      ],
+      "height": 4.4,
+      "color": [
+        0.22,
+        0.46,
+        0.67
+      ],
+      "energy": 1.8,
+      "range": 10,
+      "target": [
+        16.0,
+        21.2
+      ],
+      "id": "intake_bound_threshold_rim"
+    }
+  ],
+  "elevations": [
+    {
+      "rect": [
+        10,
+        7,
+        17,
+        10
+      ],
+      "axis": 0,
+      "start": 10,
+      "end": 14,
+      "height": 1.5
+    },
+    {
+      "rect": [
+        10,
+        10,
+        14,
+        13
+      ],
+      "axis": 0,
+      "start": 10,
+      "end": 14,
+      "height": 1.5
+    },
+    {
+      "rect": [
+        17,
+        7,
+        30,
+        10
+      ],
+      "axis": 0,
+      "start": 11,
+      "end": 23,
+      "height": 3
+    },
+    {
+      "rect": [
+        20,
+        10,
+        30,
+        18
+      ],
+      "height": 3
+    },
+    {
+      "rect": [
+        20,
+        18,
+        30,
+        31
+      ],
+      "axis": 1,
+      "start": 24,
+      "end": 18,
+      "height": 3
+    },
+    {
+      "rect": [
+        11,
+        19,
+        18,
+        26
+      ],
+      "axis": 1,
+      "start": 25,
+      "end": 19,
+      "height": 1.5
+    },
+    {
+      "rect": [
+        11,
+        10,
+        18,
+        19
+      ],
+      "height": 1.5
+    },
+    {
+      "rect": [
+        13,
+        4,
+        15,
+        7
+      ],
+      "axis": 1,
+      "start": 4,
+      "end": 7,
+      "height": 1.5
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        13,
+        10,
+        15,
+        30
+      ],
+      "height": 26
+    },
+    {
+      "rect": [
+        11,
+        10,
+        17,
+        30
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        0,
+        12,
+        9,
+        18
+      ],
+      "height": 10
+    }
+  ],
+  "encounters": [
+    {
+      "id": "intake_bell_release",
+      "region": [
+        2,
+        12,
+        9.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_03",
+        "intake_enemy_04",
+        "intake_enemy_05",
+        "intake_enemy_06"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE MEMBRANE HAS LOST PRESSURE",
+        "light_ids": [
+          "bell_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_siphon_draw",
+      "region": [
+        20,
+        11,
+        26.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_13",
+        "intake_enemy_14",
+        "intake_enemy_15",
+        "intake_enemy_16"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE SIPHON DRAWS FROM THE UPPER GALLERY",
+        "light_ids": [
+          "siphon_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_nave_response",
+      "region": [
+        11,
+        9.9,
+        17.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_09",
+        "intake_enemy_11"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "BOTH FEEDS ANSWER THROUGH THE NAVE",
+        "light_ids": [
+          "intake_nave_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_bell_return",
+      "region": [
+        4,
+        7,
+        12.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_07",
+        "intake_enemy_08"
+      ],
+      "requires": [
+        "blood"
+      ],
+      "cue": {
+        "text": "THE BELL RETURNS YOUR PULSE",
+        "light_ids": [
+          "bell_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_siphon_return",
+      "region": [
+        17,
+        7,
+        24.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "intake_enemy_17",
+        "intake_enemy_18"
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "cue": {
+        "text": "IVORY PRESSURE REACHES THE NORTH FEED",
+        "light_ids": [
+          "siphon_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "intake_gate_release",
+      "region": [
+        13,
+        5,
+        14.75,
+        7.25
+      ],
+      "enemy_ids": [
+        "intake_enemy_19",
+        "intake_enemy_20",
+        "intake_enemy_21",
+        "intake_enemy_22"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE CONTAINMENT TEETH ARE UNLATCHED",
+        "light_ids": [
+          "intake_gate_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "floor_revision": 1
+}

@@ -1,7 +1,7 @@
 extends "res://tests/test_nursery_earned_entry.gd"
 
-const NC_CORE_PINS = {"res://scripts/main.gd":"0081049f7d45715be879f552675d4f17c9248f1f36dbc5d21004eb205128805c","res://scripts/player.gd":"ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe","res://scripts/projectile.gd":"bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873","res://scripts/campaign.gd":"628534c4b2446fb0d9a6be8e2f4429d370bf9fae5f9e30a2a41be528d9f3bbb8","res://scripts/level.gd":"f439eb75e6e978c3760d974fe8bcfb4e597e07505ac695d6bc5ee857c0551b50","res://scripts/level_data.gd":"70682a10f94eb85e199ac2e264240544d9c4472b5220490fbd54a50d33bbc0df","res://scripts/preferences.gd":"e225e74aabaafdd3f3e25a31b22264a5ba365e4ba7d0f6e3709f67b10f327139"}
-const NC_ENTRY_SHA = "13ba6c2c3693e0c855479ecd6b9d472aabdb74ef51955b5e9b808486b370c099"
+const NC_CORE_PINS = {"res://scripts/main.gd":"52f4024319aebc0e2efb315fb7cfa0ca542ec1253427ea8c8f93c9c32b222880","res://scripts/player.gd":"d34660bc36221801a8bc07c13161f08d0599fd676d2193fc9a4cd6e6fdf69f90","res://scripts/enemy.gd":"a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe","res://scripts/projectile.gd":"bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873","res://scripts/campaign.gd":"628534c4b2446fb0d9a6be8e2f4429d370bf9fae5f9e30a2a41be528d9f3bbb8","res://scripts/level.gd":"f439eb75e6e978c3760d974fe8bcfb4e597e07505ac695d6bc5ee857c0551b50","res://scripts/level_data.gd":"4dd17624ef8cf31f70e9ae57db11bf4db48724db7221285407286446da526c7e","res://scripts/preferences.gd":"e225e74aabaafdd3f3e25a31b22264a5ba365e4ba7d0f6e3709f67b10f327139"}
+const NC_ENTRY_SHA = "52f5300a5e072fcc372f504904fa16f63a2610fc0b3b6590d9f7753fee2e3942"
 # Entry corridor + gestation loop is 350.89m at 9m/s; combat/clearance has separate finite caps.
 const NC_LIMIT = 12000
 const NC_SECONDS = 600
@@ -162,7 +162,7 @@ class NurseryCampaignMain:
 		var spec: Dictionary = rows[0]
 		var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
 		var region: Array = spec.region
-		nc_ok = nc_ok and nc_current() and id in ["nursery_first_commit","nursery_first_return"] and not nc_activated.has(id) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in nc_keys)
+		nc_ok = nc_ok and nc_current() and id in ["nursery_first_commit","nursery_first_return"] and not nc_activated.has(id) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in nc_keys)
 		super.activate_encounter(id)
 		nc_activated[id] = [Engine.get_physics_frames(),cell,state.keys.duplicate()]
 		nc_removed.append("encounter:"+id)
@@ -276,6 +276,7 @@ class NurseryCampaignMain:
 			nc_ok = false
 		return super._save()
 
+var nc_fight_deadline: int = -1
 var nc_started: bool = false
 var nc_epoch: int = 0
 var nc_wall: int = 0
@@ -322,8 +323,8 @@ func walk_through_nursery(observer: NurseryCampaignMain, profile_prefix: String 
 	nc_started = true
 	game.nc_enabled = true
 	if not await nursery_route(NC_APPROACH.slice(0,9)) or not await nursery_select_pistol(): return false
-	if not await nursery_route(NC_APPROACH.slice(9)) or not await nursery_fight("nursery_first_commit"): return false
-	if not await nursery_route(NC_GESTATION) or not await nursery_blood_input(): return false
+	if not await nursery_route(NC_APPROACH.slice(9)) or not await nursery_fight("nursery_first_commit",true): return false
+	if not await nursery_blood_input(): return false
 	if not await nursery_route(NC_RETURN) or not await nursery_fight("nursery_first_return") or not await nursery_route(NC_JUNCTION): return false
 	return nursery_segment_result()
 
@@ -344,6 +345,7 @@ func nursery_campaign_pin_rejection() -> void:
 
 func live_route() -> bool:
 	if not nc_started: return super.live_route()
+	if not expect(nursery_first_fight_in_time(),"Nursery first fight and its one gestation detour share1800 physics frames"): return false
 	if not expect(Engine.get_physics_frames()-nc_epoch <= NC_LIMIT and Time.get_ticks_usec()-nc_wall <= NC_SECONDS*1000000,"Nursery-only finite outer guard; ancestor limits unchanged"): return false
 	if not expect(game.nc_ok and game.nc_current() and game.get_instance_id() == r_main_id and game.state.get_instance_id() == r_campaign_id and game.progress_path == r_profile and game.settings_path == game.r_settings_origin and game.level == route_level and game.player == route_player and game.is_processing() and game.is_physics_processing() and route_player.is_physics_processing() and route_player.position.is_finite() and game.state.health > 0,"Same earned native owner/profile/Player, live production AI/input and positive finite survival"): return false
 	if not expect(observer_witness(nc_frozen_fields) == nc_frozen and not game.n_enabled and not game.e_enabled and observers_retired() and e_retired.all(func(ref): return ref.get_ref() == null) and e_markers.values().all(func(ref): return ref.get_ref() == null) and retired.all(func(ref): return ref.get_ref() == null) and x_marker_refs.values().all(func(ref): return ref.get_ref() == null),"All accepted prefix and N histories frozen separately; retired owners/markers drained"): return false
@@ -474,15 +476,46 @@ func nursery_route(cells: Array) -> bool:
 		print("NURSERY_GESTATION_HOP cell=",cell," frame=",Engine.get_physics_frames()-nc_epoch," resources=",game.nc_ledger)
 	return true
 
-func nursery_fight(group_id: String) -> bool:
-	if not expect(game.nc_activated.has(group_id),"Original group earned through its actual region: "+group_id): return false
+func nursery_first_fight_in_time() -> bool:
+	return nc_fight_deadline < 0 or Engine.get_physics_frames() < nc_fight_deadline
+
+func nursery_first_cover() -> bool:
+	if game.state.weapon != 1 or game.state.ammo[1] <= 0 or game.nc_shots.size() >= NC_SHOTS: return false
+	var living: bool = false
+	for actor in game.enemies:
+		if actor.encounter_id != "nursery_first_commit" or actor.hp <= 0: continue
+		if not game.nc_actor(actor) or not actor.active: return false
+		var aim: Vector3 = actor.global_position+actor.get_child(0).position
+		var distance: float = route_player.camera.global_position.distance_to(aim)
+		if not is_finite(distance) or distance >= game.Player.WEAPONS[1].range: return false
+		var query = PhysicsRayQueryParameters3D.create(route_player.camera.global_position,aim,1|4)
+		query.exclude = [route_player.get_rid()]
+		var hit: Dictionary = route_level.get_world_3d().direct_space_state.intersect_ray(query)
+		var body = hit.get("collider")
+		if not body is StaticBody3D or body.collision_layer != 1 or not route_level.is_ancestor_of(body) or hit.get("rid") != body.get_rid(): return false
+		living = true
+	return living
+
+func nursery_fight(group_id: String, gestation: bool = false) -> bool:
+	if not expect(game.nc_activated.has(group_id) and (not gestation or group_id == "nursery_first_commit"),"Original group earned through its actual region; detour belongs only to first commit: "+group_id): return false
+	var gestation_used: bool = false
+	if gestation: nc_fight_deadline = Engine.get_physics_frames()+NC_FIGHT
 	for frame in range(NC_FIGHT):
 		if not live_route(): return false
 		if game.enemies.all(func(actor): return actor.hp == 0 or actor.encounter_id != group_id and actor._summon_owner_id.is_empty()):
 			release_actions()
+			if gestation and not gestation_used:
+				gestation_used = true
+				if not await nursery_route(NC_GESTATION): return false
+			if gestation: nc_fight_deadline = -1
 			return true
 		release_actions()
-		if not expect(nursery_fire(),"Finite first-loop fight requires visible live native target, not idle waiting"): return false
+		if not nursery_fire():
+			if not expect(gestation and not gestation_used and nursery_first_cover(),"Finite first-loop fight requires visible live native target, not idle waiting"): return false
+			gestation_used = true
+			print("NURSERY_FIRST_COVER_DETOUR frame=",Engine.get_physics_frames()-nc_epoch)
+			if not await nursery_route(NC_GESTATION): return false
+			continue
 		if not await route_tick(): return false
 	release_actions()
 	return expect(false,"Nursery-only1800-frame combat cap: "+group_id)

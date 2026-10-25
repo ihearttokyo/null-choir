@@ -26,7 +26,7 @@ func run() -> void:
 	held = null
 	owner.music.play_level(0)
 	assert(await Release.stop(owner), "Unretained campaign stream must release after native title replacement")
-	assert(owner.music.player.stream is AudioStreamOggVorbis and owner.music.player.playing)
+	assert(owner.music.player.stream is AudioStreamMP3 and owner.music.player.playing)
 	var title = weakref(owner.music.player.stream)
 	owner.music.play_level(7)
 	await WallClock.seconds(self, 0.2)

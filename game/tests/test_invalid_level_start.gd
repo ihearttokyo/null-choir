@@ -78,7 +78,7 @@ func run() -> void:
 	quit(0)
 
 func safe_menu(title: String) -> bool:
-	return not game.playing and paused and not game.placement_pending and game._scene_level_index == -1 and game.level == null and game.player == null and game.enemies.is_empty() and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and game.menu_scroll.visible and game.menu.visible and game.menu.get_child(0).text == title and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamOggVorbis and game.music.player.stream.resource_path == game.music.title_track
+	return not game.playing and paused and not game.placement_pending and game._scene_level_index == -1 and game.level == null and game.player == null and game.enemies.is_empty() and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE and game.menu_scroll.visible and game.menu.visible and game.menu.get_child(0).text == title and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamMP3 and game.music.player.stream.resource_path == game.music.title_track
 
 func expect(ok: bool, detail: String) -> bool:
 	if not ok:

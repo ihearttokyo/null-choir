@@ -89,7 +89,10 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	if kind == "summoner":
 		for number in range(1,7):
 			if "summon:"+id+":"+str(number) in game.state.removed or id+"_add_"+str(number) in game.state.removed: _summoned_total = number
-	position = game.level.layout.world_position(spec.cell) + Vector3(0,0.03,0)
+	position = game.level.layout.world_position(spec.cell)
+	# Fresh capsules need their whole lower sphere supported on sloped triangles.
+	# Main restores saved poses afterwards; never rewrite their signed clearance.
+	position.y = game.level.layout.capsule_floor_support(Vector2(position.x,position.z),capsule_radius(kind)) + 0.03
 	rotation.y = deg_to_rad(spec.yaw)
 	collision_layer = 4
 	collision_mask = 1 | 2 | 4

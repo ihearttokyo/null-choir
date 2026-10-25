@@ -133,7 +133,7 @@ func check_map(index: int) -> bool:
 	var saved: Dictionary = game.state.to_dict().duplicate(true)
 	game.pause_game()
 	if not press_button("Save and return to title"): return false
-	if not expect(not game.playing and game.level == null and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamOggVorbis and game.music.player.stream.resource_path == game.music.title_track,"Save/title stops the actual map and replaces campaign audio with the title cue"): return false
+	if not expect(not game.playing and game.level == null and game.music.player.playing and not game.music.player.stream_paused and game.music.player.stream is AudioStreamMP3 and game.music.player.stream.resource_path == game.music.title_track,"Save/title stops the actual map and replaces campaign audio with the title cue"): return false
 	if not press_button("Continue"): return false
 	freeze()
 	await settle()

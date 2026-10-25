@@ -41,8 +41,8 @@ func run() -> void:
 	assert(not player.stream_paused)
 	screen.step_track(1)
 	assert(screen._selected == 8)
-	assert(screen._track_buttons[8].text == "9  Title — The Restraint Turns")
-	assert(player.stream is AudioStreamOggVorbis and player.stream.resource_path == music.title_track)
+	assert(screen._track_buttons[8].text == "9  Title — Processional")
+	assert(player.stream is AudioStreamMP3 and player.stream.resource_path == music.title_track)
 	assert(player.playing and not player.stream.loop and player.stream.loop_offset == 0.0)
 	assert(music.player == player and AudioServer.get_bus_count() == bus_count)
 	assert(AudioServer.get_bus_volume_db(bus) == -12.0 and AudioServer.is_bus_mute(bus))
@@ -78,7 +78,7 @@ func run() -> void:
 	assert(not screen.play_track(8) and player.stream == stream)
 	screen._tracks[8] = incompatible
 	music.title_track = incompatible
-	print("EXPECTED_NEGATIVE: Music rejects one existing non-Ogg title")
+	print("EXPECTED_NEGATIVE: Music rejects one existing non-MP3 title")
 	assert(not screen.play_track(8))
 	assert(player.stream == null and not player.playing and screen._selected == selected_before)
 	assert(screen._message.text.contains("could not start") and screen._preview_stream == null)
@@ -109,7 +109,7 @@ func run() -> void:
 	assert(screen.play_track(8))
 	music.play_title()
 	screen.close()
-	assert(player.stream is AudioStreamOggVorbis and player.playing, "External same-title request relinquishes preview ownership")
+	assert(player.stream is AudioStreamMP3 and player.playing, "External same-title request relinquishes preview ownership")
 	screen.close()
 	screen.free()
 	music.stop()

@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize() -> void: call_deferred("run")
 
 func run() -> void:
@@ -26,7 +28,9 @@ func run() -> void:
 	game.show_title()
 	paused = false
 	await create_timer(.1).timeout
+	game.music.stop()
 	game.free()
+	await WallClock.seconds(self,0.15)
 	await process_frame
 	await process_frame
 	if good: print("PASS fractional placement matches real native ramp triangles on both diagonal sides")

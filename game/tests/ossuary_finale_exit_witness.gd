@@ -313,7 +313,7 @@ func before_pickup(_id: String) -> Dictionary:
 	return {}
 func before_encounter(id: String) -> Dictionary:
 	# Main polls earned regions each render; only their unchanged no-op is allowed.
-	require(ok and current() and game.transport_witness == self and prior_frozen() and activated.has(id) and removed.count("encounter:"+id) == 1 and game.state.removed == removed and stack("/main.gd","_process") and stack("/test_ossuary_transport_loop.gd","activate_encounter"),"C only repeats already-earned encounter without effects")
+	require(ok and current() and game.transport_witness == self and prior_frozen() and activated.has(id) and removed.count("encounter:"+id) == 1 and game.state.removed == removed and stack("/main.gd","_update_encounters") and (stack("/main.gd","_process") or (Engine.is_in_physics_frame() and stack("/main.gd","update_encounter_triggers") and stack("/player.gd","_physics_process"))) and stack("/test_ossuary_transport_loop.gd","activate_encounter"),"C only repeats already-earned encounter without effects")
 	return {}
 func before_shot(_weapon: int) -> void: forbidden("shot")
 func before_hurt(_amount: int) -> void: forbidden("damage")

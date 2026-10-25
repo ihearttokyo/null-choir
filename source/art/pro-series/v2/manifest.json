@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "source": {
+    "label": "pro-art-series/v2/native-output-20261025",
+    "sha256": "ae9514ef1d381a607cc7861e1f3321f76dfe299d10e65061d2c7d80c9108f364"
+  },
+  "destination": "source/art/pro-series/v2",
+  "records": [
+    {
+      "archive_member": "null_choir_00_title.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_00_title.png",
+      "bytes": 2507463,
+      "sha256": "9879713ecf2032a08711cc42dce70145d36dcc5764caf9e1432534ca93922126",
+      "kind": "painting",
+      "asset_id": "00_title",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_01_the_intake.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_01_the_intake.png",
+      "bytes": 2872342,
+      "sha256": "7f5bf603a6c834fe64a228600d655585d33ca3ac53b888aa1bbef6a408f14929",
+      "kind": "painting",
+      "asset_id": "01_the_intake",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_02_the_foundry.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_02_the_foundry.png",
+      "bytes": 3219686,
+      "sha256": "e2c37e61e9e065bb97fa1d9317fe1cc62f45522b4fcb99a1ef4cc0e71d8e564e",
+      "kind": "painting",
+      "asset_id": "02_the_foundry",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_03_the_processional.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_03_the_processional.png",
+      "bytes": 2805485,
+      "sha256": "5c2aa2c6b6bb96bebc2cab65126e612ea0025abea3168aff93e1622e547f3f1e",
+      "kind": "painting",
+      "asset_id": "03_the_processional",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_04_the_reliquary.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_04_the_reliquary.png",
+      "bytes": 2936413,
+      "sha256": "98971474e505424e0a2117021ce1466336a46dac9d9a045a79136796d402a2dc",
+      "kind": "painting",
+      "asset_id": "04_the_reliquary",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_05_the_nursery.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_05_the_nursery.png",
+      "bytes": 2828119,
+      "sha256": "3623776db29b05b0fc85e8b53bf72e41ba4b85be762d894e813bb7e564eaad21",
+      "kind": "painting",
+      "asset_id": "05_the_nursery",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_06_the_ossuary.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_06_the_ossuary.png",
+      "bytes": 3204309,
+      "sha256": "25dc53e521ae74790c92045d7dec9535e6f72b3286df1f8acfd1b11bddbaf4f4",
+      "kind": "painting",
+      "asset_id": "06_the_ossuary",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_07_the_inversion.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_07_the_inversion.png",
+      "bytes": 2783256,
+      "sha256": "935f347409b8ba271eaddfb6a947a397f23b5af5491b00ab8f185c7d6ecad713",
+      "kind": "painting",
+      "asset_id": "07_the_inversion",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "null_choir_08_the_heart.png",
+      "retained_path": "source/art/pro-series/v2/originals/null_choir_08_the_heart.png",
+      "bytes": 2691795,
+      "sha256": "b695b7cec9f91fbc07416e3b3ea347212650547b0d78bf9e0f422d0a3a03d352",
+      "kind": "painting",
+      "asset_id": "08_the_heart",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "native_8k": false,
+      "status": "TECHNICAL_CANDIDATE",
+      "reasons": []
+    },
+    {
+      "archive_member": "extraction-provenance.txt",
+      "retained_path": "source/art/pro-series/v2/originals/extraction-provenance.txt",
+      "bytes": 312,
+      "sha256": "4ec16c03aa8791d80dadd8a14710517bcfda523130d8398dcd1f73521b738d95",
+      "kind": "unclassified",
+      "asset_id": null,
+      "status": "CONCEPT_ONLY",
+      "reasons": [
+        "Retained supporting file, not validated runtime PNG"
+      ]
+    }
+  ],
+  "missing_atlas_ids": [
+    "brute",
+    "caster",
+    "choir_avatar",
+    "choir_disruptor",
+    "crawler",
+    "guardian",
+    "impact_tool",
+    "marrow_launcher",
+    "nursery_warden",
+    "rivet_pistol",
+    "sawtooth_repeater",
+    "scattergun",
+    "summoner",
+    "worker"
+  ],
+  "missing_painting_ids": [],
+  "visual_9_plus": "NOT_ASSESSED",
+  "integration": "NONE; candidates retained only, no game files overwritten",
+  "limitations": "Technical checks cannot establish anatomy, animation correctness, physics/masks, false painted transparency, coherent views, runtime readability or visual9+ approval."
+}
