@@ -19,6 +19,7 @@ const DANGER = Color(0.91,0.25,0.16)
 var game: Node
 var message_label: Label
 var weapon_texture: Texture2D
+var _menu_background: Texture2D
 var weapon_asset: String = ""
 var labels: Dictionary = {}
 var view: Dictionary = {}
@@ -205,16 +206,27 @@ func aim_cue() -> Dictionary:
 func damage_flash_alpha() -> float:
 	return minf(0.45,game.damage_flash*1.3)*(0.6 if game.settings.reduced_damage_flashes else 1.0)
 
+func menu_backdrop_texture() -> Texture2D:
+	# Local native resource ownership; no Blender or master-raster load at runtime.
+	if _menu_background == null:
+		_menu_background = load("res://assets/art/title/cathedral.jpg")
+	return _menu_background
+
 func _draw() -> void:
 	if view.is_empty() or game.level == null or game.player == null:
-		draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029))
-		for x in range(20,640,40):
-			draw_line(Vector2(x,0),Vector2(x-60,360),Color(0.16,0.075,0.10),1)
-		# Pre-reference menu backdrop retained; parent owns its image comparison.
-		for side in [-1,1]:
-			for rib in 7:
-				var x = 320+side*(192+rib*6)
-				draw_line(Vector2(x,34+rib*4),Vector2(x+side*12,310-rib*3),Color(0.45,0.26,0.19),1)
+		var backdrop: Texture2D = menu_backdrop_texture() if game.level == null else null
+		if backdrop != null:
+			draw_texture_rect(backdrop,Rect2(0,0,640,360),false)
+			draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029,0.25))
+		else:
+			draw_rect(Rect2(0,0,640,360),Color(0.025,0.022,0.029))
+			for x in range(20,640,40):
+				draw_line(Vector2(x,0),Vector2(x-60,360),Color(0.16,0.075,0.10),1)
+			# Pre-reference menu backdrop retained; parent owns its image comparison.
+			for side in [-1,1]:
+				for rib in 7:
+					var x = 320+side*(192+rib*6)
+					draw_line(Vector2(x,34+rib*4),Vector2(x+side*12,310-rib*3),Color(0.45,0.26,0.19),1)
 	else:
 		var player = game.player
 		var profile = player.WEAPONS[game.state.weapon]

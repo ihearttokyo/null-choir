@@ -25,3 +25,10 @@ This checks all master dimensions and SHA256 pins before encoding, then requires
 ## Evidence limits
 
 Native source reopen/edit/revert/privacy checks and isolated Mobile/Metal chart renders validate concrete technical properties only. The map retains accessible text and earned-only reveals. The artwork is a conceptual chapter descent, not a navigation floor plan. This candidate is not part of the already-published Alpha4 archive and does not close campaign, listening, physical-input, performance or final art acceptance.
+
+
+## Authored title background (local candidate)
+
+`render_title.py` renders the existing Heart74 **title** camera and its original visibility policy at1280×720/64samples/CPU2. This is a compact authoring render, not an8Kmaster. Run through background Blender with `-- --output /fresh/title.png`. Original packed source is checked before/after and never saved. `title-native.png` retains the actual resulting raster; `TITLE-PINS.json` binds its source blend, dimensions, render settings and640×360 runtime JPEG. The JPEG uses Pillow12.2.0/LANCZOS, quality90, optimizeTrue, without inherited metadata.
+
+The HUD lazily owns that compact native texture for no-level menus, with a dark readability veil; original line art remains the fallback. Gameplay/HUD rendering and the existing title-music ownership are unchanged. Actual Mobile/Metal title/settings renders and native HUD/menu/title-audio checks cover the candidate; they do not establish final art approval or the cold-launch deadline. This does not add the remaining per-level intro flow or close campaign/performance/physical/listening acceptance.

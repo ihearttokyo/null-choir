@@ -43,6 +43,16 @@ class DescentArt(unittest.TestCase):
         for row in json.loads((SOURCE / "heart74/DEPENDENCIES.json").read_text())["files"]:
             self.assertEqual(sha(SOURCE / "heart74" / row["file"]), row["sha256"])
 
+    def test_title_background_provenance(self):
+        pins = json.loads((SOURCE / "TITLE-PINS.json").read_text())
+        self.assertEqual(sha(SOURCE / "title-native.png"), pins["png_sha256"])
+        self.assertEqual(sha(SOURCE / "heart74/native/build01/descent.blend"), pins["blend_sha256"])
+        image = ROOT / "game/assets/art/title/cathedral.jpg"
+        self.assertEqual(sha(image), pins["runtime_sha256"])
+        with Image.open(image) as runtime:
+            self.assertEqual(runtime.size, (640, 360))
+            self.assertFalse(runtime.getexif())
+
     def test_changed_master_rejected(self):
         spec = importlib.util.spec_from_file_location("descent_builder", ROOT / "tools/build_descent_runtime.py")
         builder = importlib.util.module_from_spec(spec)

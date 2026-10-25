@@ -27,10 +27,18 @@ func run() -> void:
 	await process_frame
 	var control = game.menu.get_child(2)
 	if not expect(control.clip_text and control.has_focus(),"Rebind rows retain focus and bounded text"): return
+	var recording: WeakRef = weakref(game.music.player.stream)
+	game.music.stop()
+	game.effects.stop()
+	var audio_deadline: int = Time.get_ticks_usec() + 2000000
+	while recording.get_ref() != null and Time.get_ticks_usec() < audio_deadline:
+		OS.delay_msec(2)
+		await process_frame
+	if not expect(recording.get_ref() == null,"Owned title recording drains before native fixture teardown"): return
 	game.free()
 	paused = false
 	print("PASS native authored menu focus, heading wrapping, settings width and rebind row feedback")
-	quit()
+	call_deferred("quit", 0)
 
 func expect(condition: bool, text: String) -> bool:
 	if not condition:
