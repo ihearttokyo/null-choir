@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const Projectile = preload("res://scripts/projectile.gd")
+const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
 const WEAPONS = [
 	{"name":"IMPACT TOOL","asset":"impact_tool","damage":28,"interval":0.36,"range":2.7,"pellets":1,"max_ammo":0,"low_ammo":0,"useful_range":2.7},
 	{"name":"RIVET PISTOL","asset":"rivet_pistol","damage":22,"interval":0.21,"range":140.0,"pellets":1,"max_ammo":180,"low_ammo":20,"useful_range":140.0},
@@ -165,12 +166,13 @@ func cancel_actions() -> void:
 func fire() -> bool:
 	if not Engine.is_in_physics_frame(): return false
 	if not _current_map() or not game.playing or game.state.health <= 0: return false
+	var original_map: Node = game.level
 	var index = game.state.weapon
 	if index > 0 and game.state.ammo[index] <= 0:
 		if dry_fire_time <= 0:
 			dry_fire_time = 0.35
 			if game.has_method("dry_fire"): game.dry_fire(index)
-			if not _current_map() or not game.playing: return false
+			if not _shot_current(original_map): return false
 		var inventory = game.state.owned_weapons
 		var selected = inventory.find(index)
 		game.state.weapon = 0
@@ -198,14 +200,16 @@ func fire() -> bool:
 	shot_flash = 0.12
 	recoil = 1
 	game.shot(index)
-	if not _current_map() or not game.playing: return true
+	if not _shot_current(original_map): return true
 	var origin = camera.global_position
 	var direction = -camera.global_basis.z
-	var query = PhysicsRayQueryParameters3D.create(origin,origin+direction*weapon.range,1|4)
-	query.exclude = [get_rid()]
+	var excluded: Array[RID] = [get_rid()]
+	var catalog: Variant = game.get("enemies")
+	var actors: Array = catalog if catalog is Array else []
 	var space = get_world_3d().direct_space_state
 	if game.has_method("resolve_aim"):
 		var solution: Dictionary = game.resolve_aim(origin,direction,weapon.range,index == 0)
+		if not _shot_current(original_map): return true
 		direction = solution.direction
 		game.aim_observation = solution
 	if index == 4:
@@ -214,54 +218,79 @@ func fire() -> bool:
 		projectile.configure(game,self,origin,origin+direction*weapon.range,weapon.damage)
 		return true
 	if index == 5:
-		query.to = origin+direction*weapon.range
-		query.hit_from_inside = true
-		var endpoint: Vector3 = query.to
+		var endpoint: Vector3 = origin+direction*weapon.range
 		for actor_hit in range(weapon.pellets):
-			if not _current_map() or not game.playing: break
-			var hit = space.intersect_ray(query)
+			if not _shot_current(original_map): break
+			var hit = SpriteHitQuery.cast(space, origin, origin+direction*weapon.range, camera, actors, excluded, 1|4)
 			if hit.is_empty(): break
 			if (hit.collider.collision_layer & 1) != 0 or not hit.collider.has_method("take_damage"):
 				endpoint = hit.position
 				if game.has_method("impact"): game.impact(hit.position)
 				break
 			if actor_hit == weapon.pellets-1: endpoint = hit.position
-			# Keep the same finite ray, excluding each real capsule once; walls remain queryable.
-			query.exclude = query.exclude+[hit.collider.get_rid()]
-			hit.collider.take_damage(weapon.damage,self,{"attack_kind":"piercing","weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position})
-			if not _current_map() or not game.playing: break
-			if game.has_method("hit_feedback"): game.hit_feedback()
-			if _current_map() and game.playing and game.has_method("impact"): game.impact(hit.position)
-		if _current_map() and game.playing and game.has_method("ammo_visuals"):
+			# The shared query skips transparent texels before selecting a victim, so
+			# holes never consume the three-victim limit. The finite wall query remains.
+			excluded.append(hit.collider.get_rid())
+			var accepted: bool = _damage_shot_target(hit.collider, weapon.damage, {"attack_kind":"piercing","weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position}, original_map)
+			if not _shot_current(original_map): break
+			if accepted and game.has_method("hit_feedback"): game.hit_feedback()
+			if accepted and _shot_current(original_map) and game.has_method("impact"): game.impact(hit.position)
+		if _shot_current(original_map) and game.has_method("ammo_visuals"):
 			var visuals = game.ammo_visuals()
 			if visuals != null: visuals.trace(index,origin,endpoint)
 		return true
 	var right = direction.cross(camera.global_basis.y).normalized()
 	var up = right.cross(direction).normalized()
 	for pellet in range(weapon.pellets):
-		if not _current_map() or not game.playing: break
+		if not _shot_current(original_map): break
 		var spread = SPREAD[pellet] if weapon.pellets > 1 else Vector2.ZERO
 		if index == 3:
 			spread = Vector2.from_angle(randf()*TAU)*_repeater_spread*sqrt(randf())
 			_repeater_spread = minf(0.07,_repeater_spread+0.004)
 		var ray_direction = (direction+right*spread.x+up*spread.y).normalized()
-		query.to = origin+ray_direction*weapon.range
-		var hit = space.intersect_ray(query)
+		var endpoint: Vector3 = origin+ray_direction*weapon.range
+		var hit = SpriteHitQuery.cast(space, origin, endpoint, camera, actors, excluded, 1|4)
 		if index > 0 and game.has_method("ammo_visuals"):
 			var visuals = game.ammo_visuals()
-			if visuals != null: visuals.trace(index,origin,hit.position if not hit.is_empty() else query.to)
-		if not hit.is_empty():
+			if visuals != null: visuals.trace(index,origin,hit.position if not hit.is_empty() else endpoint)
+		if not _shot_current(original_map): break
+		if not hit.is_empty() and is_instance_valid(hit.get("collider")):
+			var accepted_contact: bool = not hit.collider.has_method("take_damage")
 			if hit.collider.has_method("take_damage"):
 				var damage: int = weapon.damage
 				if index == 2:
 					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
 					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
-				hit.collider.take_damage(damage,self,{"attack_kind":"melee" if index == 0 else "hitscan","weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position})
-				if not _current_map() or not game.playing: break
-				if game.has_method("hit_feedback"): game.hit_feedback()
-			if not _current_map() or not game.playing: break
-			if game.has_method("impact"): game.impact(hit.position)
+				accepted_contact = _damage_shot_target(hit.collider, damage, {"attack_kind":"melee" if index == 0 else "hitscan","weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position}, original_map)
+				if not _shot_current(original_map): break
+				if accepted_contact and game.has_method("hit_feedback"): game.hit_feedback()
+			if not _shot_current(original_map): break
+			if accepted_contact and game.has_method("impact"): game.impact(hit.position)
 	return true
+
+func _shot_current(original_map: Node) -> bool:
+	return _current_map() and game.playing and game.level == original_map
+
+func _damage_shot_target(victim: Node, amount: int, context: Dictionary, original_map: Node) -> bool:
+	if not _shot_current(original_map) or not is_instance_valid(victim) or victim.is_queued_for_deletion() or victim.get_parent() != original_map: return false
+	if victim.has_method("_current_map") and not victim._current_map(): return false
+	var before: Variant = victim.get("hp")
+	var numeric_health: bool = before is int or before is float
+	# Real sprite actors require actual live health. Retain the separate legacy
+	# nonvisual damageable callback contract (e.g. test_player's hit counter).
+	if victim.has_method("visual_hit_sprite") and not numeric_health: return false
+	if numeric_health and before <= 0: return false
+	victim.take_damage(amount, self, context)
+	# Reentrant damage/event callbacks can change maps or retire either object.
+	# Sprite actors need an actual HP decrease on the same live-map target.
+	# Nonvisual callback compatibility is separately identified below.
+	if not _shot_current(original_map) or not is_instance_valid(victim) or victim.is_queued_for_deletion() or victim.get_parent() != original_map: return false
+	if victim.has_method("_current_map") and not victim._current_map(): return false
+	if not numeric_health:
+		# Accepted nonvisual callback on the same current map, NOT HP-decrease proof.
+		return not victim.has_method("visual_hit_sprite")
+	var after: Variant = victim.get("hp")
+	return (after is int or after is float) and after < before
 
 func _current_map() -> bool:
 	return is_instance_valid(game) and not game.is_queued_for_deletion() and is_instance_valid(game.level) and game.level == get_parent() and not game.level.is_queued_for_deletion() and game.player == self and not is_queued_for_deletion()

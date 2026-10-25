@@ -11,6 +11,7 @@ const ExportAudio = preload("res://audio/export_audio_check.gd")
 const Effects = preload("res://audio/effects.gd")
 const Preferences = preload("res://scripts/preferences.gd")
 const AmmoVisuals = preload("res://scripts/ammo_visuals.gd")
+const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
 var state = Campaign.new()
 var playing: bool = false
 var loaded_positions: bool = false
@@ -95,7 +96,17 @@ func _cancel_interaction_input(observer: CharacterBody3D) -> void:
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().auto_accept_quit = false
-	if "--verify-export" in OS.get_cmdline_user_args(): AudioServer.set_bus_mute(0,true)
+	var sprite_export_probe: bool = "--verify-sprite-hit-export" in OS.get_cmdline_user_args()
+	if "--verify-export" in OS.get_cmdline_user_args() or sprite_export_probe: AudioServer.set_bus_mute(0,true)
+	if sprite_export_probe:
+		# Fail before preferences or other user files can be read.
+		var home: String = OS.get_environment("HOME")
+		if home.get_file() != "validation-home" or not OS.get_user_data_dir().begins_with(home+"/"):
+			push_error("Sprite export validation requires isolated HOME/userdata")
+			get_tree().quit(1)
+			return
+		settings_path = "user://sprite_hit_export_preferences.json"
+		progress_path = "user://sprite_hit_export_campaign.json"
 	if FileAccess.file_exists(settings_path) and not preferences.load_file(settings_path): notify("INVALID SETTINGS: USING DEFAULTS",8)
 	settings = preferences.values
 	music = Music.new()
@@ -123,7 +134,8 @@ func _ready() -> void:
 	menu_scroll.add_child(menu)
 	canvas.add_child(menu_scroll)
 	show_title()
-	if "--verify-export" in OS.get_cmdline_user_args(): call_deferred("_verify_export")
+	if sprite_export_probe: call_deferred("_verify_sprite_hit_export")
+	elif "--verify-export" in OS.get_cmdline_user_args(): call_deferred("_verify_export")
 
 func _menu_theme() -> Theme:
 	var theme = Theme.new()
@@ -1045,9 +1057,10 @@ func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: b
 	var result := {"level":level,"player":player,"tick":Engine.get_physics_frames(),"weapon":state.weapon,"origin":origin,"manual_direction":direction,"direction":direction,"range":max_range,"contact":{},"actor_id":"","assisted":false}
 	if not Engine.is_in_physics_frame() or not playing or not is_instance_valid(player) or not player._current_map() or state.health <= 0 or not origin.is_finite() or not direction.is_finite() or not is_finite(max_range) or max_range <= 0 or not is_equal_approx(direction.length_squared(),1.0): return result
 	var space := level.get_world_3d().direct_space_state
-	var query := PhysicsRayQueryParameters3D.create(origin,origin+direction*max_range,1|4)
-	query.exclude = [player.get_rid()]
-	var manual := space.intersect_ray(query)
+	# Aim feedback and actual shots share the rendered-frame silhouette query.
+	# Movement capsules are deliberately not an anatomical hit approximation.
+	var exclusions: Array[RID] = [player.get_rid()]
+	var manual: Dictionary = SpriteHitQuery.cast(space,origin,origin+direction*max_range,player.camera,enemies,exclusions,1|4)
 	result.contact = manual
 	if not manual.is_empty() and manual.collider.has_method("take_damage"):
 		if manual.collider.has_method("_current_map") and manual.collider._current_map() and manual.collider.hp > 0:
@@ -1060,19 +1073,7 @@ func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: b
 	var manual_flat := Vector2(direction.x,direction.z).normalized()
 	for actor in enemies:
 		if not is_instance_valid(actor) or not actor._current_map() or actor.hp <= 0 or not actor.active: continue
-		var shape_node: CollisionShape3D
-		for child in actor.get_children():
-			if child is CollisionShape3D and child.shape is CapsuleShape3D:
-				shape_node = child
-				break
-		if shape_node == null: continue
-		var capsule: CapsuleShape3D = shape_node.shape
-		var center := shape_node.global_position
-		var half_line := maxf(0,capsule.height*.5-capsule.radius)
-		var toward_camera := shape_node.global_basis.inverse()*(origin-center)
-		var points: Array[Vector3] = []
-		for height in [clampf(toward_camera.y,-half_line,half_line),0.0,half_line]:
-			points.append(shape_node.to_global(Vector3(0,height,0)))
+		var points: Array[Vector3] = SpriteHitQuery.candidate_points(actor,player.camera,origin)
 		for point in points:
 			var offset := point-origin
 			if offset.length_squared() < .000001: continue
@@ -1083,8 +1084,7 @@ func resolve_aim(origin: Vector3, direction: Vector3, max_range: float, melee: b
 				# Classic correction is bounded; the final native contact still uses finite 3D reach.
 				if absf(direction.y-resolved.y) > .8: continue
 			if angular <= .975: continue
-			query.to = origin+resolved*max_range
-			var hit := space.intersect_ray(query)
+			var hit: Dictionary = SpriteHitQuery.cast(space,origin,origin+resolved*max_range,player.camera,enemies,exclusions,1|4)
 			if hit.is_empty() or hit.collider != actor: continue
 			var distance := origin.distance_to(hit.position)
 			if distance > max_range+.00001: continue
@@ -1406,3 +1406,150 @@ func _verify_export() -> void:
 	print("PASS packaged native Metal shader caches")
 	print("PASS packaged isolated userdata")
 	get_tree().quit()
+
+# Opt-in shipped-PCK contract only. No external scripts, normal game path unchanged.
+func _sprite_export_check(checks: Dictionary, key: String, passed: bool) -> void:
+	checks[key] = passed
+	if not passed: push_error("Packed sprite-hit contract failed: "+key)
+
+func _sprite_export_actor(id: String, location: Vector3):
+	var actor = Enemy.new()
+	level.add_child(actor)
+	actor.configure(self,{"id":id,"kind":"worker","cell":[.5,.5],"yaw":0})
+	actor.position = location
+	actor.set_physics_process(false) # Explicit arranged hit-geometry arena, NOT combat.
+	actor.active = true
+	enemies.append(actor)
+	return actor
+
+func _sprite_export_fire(checks: Dictionary, key: String, actor, damage: int) -> void:
+	var hp: int = actor.hp
+	var ammo: int = state.ammo[1]
+	player.cooldown = 0 # Independent arranged discharge cases, not rate acceptance.
+	var fired: bool = await _verify_fire_tick()
+	_sprite_export_check(checks,key,fired and actor.hp==hp-damage and state.ammo[1]==ammo-1)
+
+func _verify_sprite_hit_export() -> void:
+	var checks: Dictionary = {}
+	_sprite_export_check(checks,"clock",Engine.physics_ticks_per_second==60 and Engine.time_scale==1.0)
+	_sprite_export_check(checks,"shipped_shared_module",ResourceLoader.exists("res://scripts/sprite_hit_query.gd") and load("res://scripts/sprite_hit_query.gd")==SpriteHitQuery)
+	_sprite_export_check(checks,"no_shipped_tests",not DirAccess.dir_exists_absolute("res://tests") and not ResourceLoader.exists("res://tests/test_aim_resolution.gd") and not FileAccess.file_exists("res://tests/test_autoaim.gd"))
+	var recording: WeakRef = weakref(music.player.stream) if music.player.stream != null else null
+	music.stop()
+	effects.set_paused(true)
+	set_process(false)
+	menu_scroll.hide()
+	hud.hide()
+	get_tree().paused = false
+	state.new_campaign(1)
+	level = Level.new()
+	add_child(level)
+	if not level.layout.load_level(0):
+		_sprite_export_check(checks,"layout",false)
+		await _sprite_export_finish(checks,recording)
+		return
+	_scene_level_index = 0
+	player = Player.new()
+	level.add_child(player)
+	player.configure(self)
+	player.set_physics_process(false)
+	player.position = Vector3(0,.04,0)
+	playing = true
+	settings.auto_aim = false
+	var actor = _sprite_export_actor("packed_analytic",Vector3(0,.04,-8))
+	var image = Image.create(6,3,false,Image.FORMAT_RGBA8)
+	image.fill(Color(0,0,0,0))
+	image.set_pixel(1,1,Color.WHITE)
+	image.set_pixel(2,1,Color.WHITE) # Visible right pixel lies outside movement capsule.
+	actor.sprite.texture = ImageTexture.create_from_image(image)
+	actor.sprite.hframes = 2
+	actor.sprite.vframes = 1
+	actor.sprite.frame = 0
+	actor.sprite.pixel_size = 1.0
+	actor.sprite.position = Vector3(0,1.55,0)
+	actor.sprite.modulate = Color.WHITE
+	actor.sprite.alpha_scissor_threshold = .5
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	var origin: Vector3 = player.camera.global_position
+	var hit: Dictionary = resolve_aim(origin,Vector3.FORWARD,40.0)
+	_sprite_export_check(checks,"opaque_shared_contact",hit.actor_id==actor.id and hit.contact.get("coverage")=="visible_sprite" and hit.contact.get("frame_pixel")==Vector2i(1,1))
+	await _sprite_export_fire(checks,"opaque_real_rivet",actor,22)
+	player.camera.look_at(Vector3(-1,origin.y,-8),Vector3.UP)
+	hit = resolve_aim(origin,-player.camera.global_basis.z,40.0)
+	_sprite_export_check(checks,"transparent_hole",hit.actor_id.is_empty())
+	await _sprite_export_fire(checks,"hole_real_rivet_no_damage",actor,0)
+	player.camera.rotation = Vector3.ZERO
+	actor.sprite.frame = 1
+	hit = resolve_aim(origin,Vector3.FORWARD,40.0)
+	_sprite_export_check(checks,"transparent_frame",hit.actor_id.is_empty())
+	await _sprite_export_fire(checks,"frame_switch_real_rivet_no_damage",actor,0)
+	actor.sprite.frame = 0
+	player.camera.look_at(Vector3(1,origin.y,-8),Vector3.UP)
+	var query = PhysicsRayQueryParameters3D.create(origin,origin-player.camera.global_basis.z*40,4)
+	query.exclude = [player.get_rid()]
+	_sprite_export_check(checks,"outside_capsule_setup",get_world_3d().direct_space_state.intersect_ray(query).is_empty())
+	hit = resolve_aim(origin,-player.camera.global_basis.z,40.0)
+	_sprite_export_check(checks,"outside_capsule_opaque",hit.actor_id==actor.id and hit.contact.get("frame_pixel")==Vector2i(2,1))
+	await _sprite_export_fire(checks,"outside_capsule_real_rivet",actor,22)
+	player.camera.rotation = Vector3.ZERO
+	var wall = level._box(Vector3(4,4,.2),Vector3(0,2,-4),null,true)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	hit = resolve_aim(origin,Vector3.FORWARD,40.0)
+	_sprite_export_check(checks,"solid_wall",hit.actor_id.is_empty() and hit.contact.get("collider")==wall)
+	await _sprite_export_fire(checks,"wall_real_rivet_no_damage",actor,0)
+	wall.collision_layer = 0
+	actor.collision_layer = 0
+	var actual = _sprite_export_actor("packed_actual_worker",Vector3(0,.04,-8))
+	var sprite: Sprite3D = actual.sprite
+	var atlas: Image = sprite.texture.get_image()
+	var valid: bool = atlas != null and not atlas.is_empty()
+	if valid and atlas.is_compressed(): valid = atlas.decompress()==OK
+	_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/worker.png")
+	if valid:
+		atlas.convert(Image.FORMAT_RGBA8)
+		var size = Vector2i(atlas.get_width()/sprite.hframes,atlas.get_height()/sprite.vframes)
+		var offset = Vector2i(sprite.frame%sprite.hframes,sprite.frame/sprite.hframes)*size
+		var chosen = Vector2i(-1,-1)
+		for y in range(size.y):
+			for x in range(size.x):
+				if atlas.get_pixelv(offset+Vector2i(x,y)).a>=sprite.alpha_scissor_threshold: chosen = Vector2i(x,y)
+		_sprite_export_check(checks,"actual_frame_has_opaque_texel",chosen.x>=0)
+		if chosen.x>=0:
+			var local = Vector2(chosen)+Vector2(.5,.5)-Vector2(size)*.5
+			var point: Vector3 = sprite.global_position+player.camera.global_basis.x*local.x*sprite.pixel_size-player.camera.global_basis.y*local.y*sprite.pixel_size
+			var exclusions: Array[RID] = [player.get_rid()]
+			var contact: Dictionary = SpriteHitQuery.cast(get_world_3d().direct_space_state,origin,origin+(point-origin).normalized()*40,player.camera,enemies,exclusions,5)
+			_sprite_export_check(checks,"actual_independent_alpha_texel",contact.get("collider")==actual and contact.get("sprite_pixel")==offset+chosen)
+		settings.auto_aim = true
+		await _sprite_export_fire(checks,"actual_worker_real_rivet",actual,22)
+	_sprite_export_check(checks,"six_finite_shots",state.ammo[1]==84)
+	await _sprite_export_finish(checks,recording)
+
+func _sprite_export_finish(checks: Dictionary, recording: WeakRef) -> void:
+	playing = false
+	music.stop()
+	effects.stop()
+	if is_instance_valid(level): level.queue_free()
+	level = null
+	player = null
+	enemies.clear()
+	get_tree().paused = false
+	await get_tree().process_frame
+	var deadline: int = Time.get_ticks_usec()+2000000
+	while recording != null and recording.get_ref()!=null and Time.get_ticks_usec()<deadline:
+		OS.delay_msec(2)
+		await get_tree().process_frame
+	_sprite_export_check(checks,"owned_menu_audio_released",recording==null or recording.get_ref()==null)
+	await get_tree().process_frame
+	call_deferred("_sprite_export_terminal",checks)
+
+func _sprite_export_terminal(checks: Dictionary) -> void:
+	# Let the probe coroutine release its Image/texture locals before shutdown.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var passed: bool = checks.values().all(func(value): return value==true)
+	print("PACKED_SPRITE_HIT_CONTRACT ",JSON.stringify(checks))
+	if passed: print("PASS packed shared SpriteHitQuery/Player.fire opaque/hole/frame/outside-capsule/wall/actual-worker alpha and six finite shots; arranged unit, not campaign/render/input/listening")
+	get_tree().quit(0 if passed else 1)

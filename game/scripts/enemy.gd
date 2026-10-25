@@ -121,6 +121,11 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.position.y = (cell/2.0-8)*sprite.pixel_size
 	add_child(sprite)
 
+func visual_hit_sprite() -> Sprite3D:
+	# Visual occupancy queries are separate from movement/placement capsules.
+	if hp <= 0 or not _current_map() or not game.playing: return null
+	return sprite if is_instance_valid(sprite) else null
+
 func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing or not is_instance_valid(game.player) or game.player.is_queued_for_deletion(): return
 	_released = false

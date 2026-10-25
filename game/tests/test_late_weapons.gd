@@ -24,6 +24,7 @@ class ObservedGame extends "res://scripts/main.gd":
 
 var game
 var serial: int = 0
+var music_release_refs: Array[WeakRef] = []
 var test_prefix = "user://test_late_weapons_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
 
 func _initialize() -> void:
@@ -63,7 +64,9 @@ func run() -> void:
 
 func arena(difficulty: int = 1, assisted: bool = false) -> bool:
 	Input.action_release("fire")
+	remember_music()
 	game.show_title()
+	remember_music()
 	paused = false
 	await process_frame
 	await process_frame
@@ -165,21 +168,18 @@ func check_launcher_boss_caps() -> bool:
 			actor.position = Vector3(0,1.03 if kind == "choir_avatar" else 0.03,-12)
 			actor.set_physics_process(false)
 			game.enemies.append(actor)
-			var shape = actor.get_child(0).shape
-			game.player.camera.look_at(actor.global_position+Vector3.UP*(shape.height-0.15))
 			await settle()
+			var visible: Dictionary = aim_opaque(actor,game.player.camera,true)
 			var origin: Vector3 = game.player.camera.global_position
-			var query = PhysicsRayQueryParameters3D.create(origin,origin-game.player.camera.global_basis.z*20,1|4)
-			var hit = game.get_world_3d().direct_space_state.intersect_ray(query)
-			if not expect(not hit.is_empty() and hit.collider == actor,"SETUP: upper-cap shot must hit the real boss capsule"): return false
-			var blast_point: Vector3 = hit.position+hit.normal*0.05
-			if not expect(blast_point.distance_to(actor.global_position+Vector3.UP*0.85)>Projectile.BLAST_RADIUS,"SETUP: native upper-cap impact must lie outside the splash-centre radius"): return false
+			# High opaque source-art contact, not the invisible capsule's upper cap.
+			if not expect(visible.alpha >= 0.75,"SETUP high current source-art texel must actually be occupied"): return false
+			if not expect(visible.point.distance_to(actor.global_position+Vector3.UP*0.85)>Projectile.BLAST_RADIUS,"SETUP actual high opaque contact lies outside splash-centre radius"): return false
 			var hp: int = actor.hp
 			if not expect(game.player.fire() and game.state.ammo[4]==23 and actor.hp==hp,"Upper-cap discharge spends one capsule and travels before damage"): return false
 			var flight = capsule()
 			if flight == null or not resolve(flight): return false
 			print("MEASURE upper_cap kind=",kind," difficulty=",difficulty," direct_damage=",hp-actor.hp)
-			if not expect(actor.hp==hp-game.player.WEAPONS[4].damage,"Direct marrow hit must damage the tall boss cap fully, regardless of splash-centre distance (intended RED)"): return false
+			if not expect(actor.hp==hp-game.player.WEAPONS[4].damage,"Direct marrow hit must damage high opaque boss texel fully, regardless of splash-centre distance (intended RED)"): return false
 			flight._physics_process(1.0)
 			if not expect(actor.hp==hp-game.player.WEAPONS[4].damage and game.state.health==200,"Upper-cap contact remains one-shot without remote self-damage"): return false
 	return true
@@ -188,18 +188,28 @@ func check_blast(difficulty: int, assisted: bool) -> bool:
 	if not await arena(difficulty,assisted): return false
 	var wall = box(Vector3(20,5,0.05),Vector3(0,2.5,-8))
 	# Exposed blast victims sit outside the assistance cone so this remains a wall shot.
-	var near = worker(Vector3(2,0.03,-7))
-	var far = worker(Vector3(3.25,0.03,-7))
+	var near = worker(Vector3(3.5,0.03,-7))
+	var far = worker(Vector3(3.7,0.03,-7))
 	var covered = worker(Vector3(0,0.03,-9))
 	var outside = worker(Vector3(8,0.03,-7))
-	var corner = worker(Vector3(-1.5,0.03,-5))
-	box(Vector3(0.05,4,1.8),Vector3(-0.6,2,-6.5))
+	var corner = worker(Vector3(-3.4,0.03,-6.5))
+	box(Vector3(0.05,4,3.2),Vector3(-0.6,2,-6.5))
 	box(Vector3(1.2,4,0.05),Vector3(-1.15,2,-5.6))
 	await settle()
 	var origin: Vector3 = game.player.camera.global_position
 	var sight = PhysicsRayQueryParameters3D.create(origin,origin+Vector3.FORWARD*20,1|4)
 	var hit = game.get_world_3d().direct_space_state.intersect_ray(sight)
 	if not expect(not hit.is_empty() and hit.collider == wall,"SETUP: center shot must meet thin blast cover, not an actor"): return false
+	# Independently bound the ENTIRE rendered sprite rectangle outside the
+	# unchanged .975 assistance cone, not just the narrower movement capsule.
+	for actor in [near,far,corner]:
+		var half_width: float = actor.sprite.texture.get_width()/float(actor.sprite.hframes)*actor.sprite.pixel_size*0.5
+		var nearest_x: float = absf(actor.position.x-origin.x)-half_width
+		var depth: float = absf(actor.position.z-origin.z)
+		if not expect(nearest_x > depth*sqrt(1.0/(0.975*0.975)-1.0),"SETUP whole sprite bounds independently outside unchanged assistance cone"): return false
+	var blast_origin: Vector3 = hit.position+hit.normal*0.05
+	for actor in [near,far,corner]:
+		if not expect(blast_origin.distance_to(actor.global_position+Vector3.UP*0.85)<Projectile.BLAST_RADIUS,"SETUP near/far/corner remain meaningfully inside actual blast radius"): return false
 	if assisted and not expect(game.autoaim_target(origin,Vector3.FORWARD,140.0) == null,"SETUP: assistance must have no exposed candidate away from the wall shot"): return false
 	if not expect(game.player.fire(),"Covered blast fixture must discharge"): return false
 	var flight = capsule()
@@ -360,6 +370,7 @@ func check_disruptor() -> bool:
 	await settle()
 	actor._physics_process(0)
 	if not expect(actor.telegraph_time > 0,"SETUP: real worker must enter its eligible windup"): return false
+	aim_opaque(actor,game.player.camera)
 	game.state.weapon = 5
 	if not expect(game.player.fire() and actor.telegraph_time == 0 and actor.stagger_time > 0 and actor.stagger_time <= 0.5 and game.events.get("stagger",0) == 1,"Pressure cancels an eligible windup through a finite existing counter window"): return false
 	var stagger: float = actor.stagger_time
@@ -372,7 +383,7 @@ func check_disruptor() -> bool:
 		await physics_frame
 		game.player._physics_process(STEP)
 		if frame%10 == 0:
-			game.player.camera.look_at(actor.global_position+Vector3.UP*1.35,Vector3.UP)
+			aim_opaque(actor,game.player.camera)
 			var hp: int = actor.hp
 			if game.player.fire():
 				if not expect(actor.hp < hp,"Counter stress must keep hitting the moving real capsule, rather than miss until it attacks"): return false
@@ -404,16 +415,70 @@ func expect(condition: bool, detail: String) -> bool:
 	if not condition: push_error(detail)
 	return condition
 
+func remember_music() -> void:
+	if is_instance_valid(game) and is_instance_valid(game.music) and is_instance_valid(game.music.player) and game.music.player.stream != null:
+		music_release_refs.append(weakref(game.music.player.stream))
+
+func music_released() -> bool:
+	for reference in music_release_refs:
+		if reference.get_ref() != null: return false
+	return true
+
 func finish(status: int) -> void:
 	Input.action_release("fire")
-	if is_instance_valid(game): game.show_title()
+	remember_music()
+	if is_instance_valid(game):
+		game.music.stop()
+		game.effects.stop()
+		game.free()
+	game = null
 	paused = false
-	# Established native effects/HUD grace: stopped voices release on the next mix.
-	await create_timer(0.1).timeout
-	if is_instance_valid(game): game.free()
 	await process_frame
-	await process_frame
+	# Native MP3 playbacks release on the mixer thread. Bound actual weakref
+	# drain; do not ignore warnings or sleep blindly and declare success.
+	var deadline: int = Time.get_ticks_usec()+2000000
+	while not music_released() and Time.get_ticks_usec() < deadline:
+		OS.delay_msec(2)
+		await process_frame
+	if not expect(music_released(),"All owned native music streams released within bounded teardown"): status = 1
 	for suffix in ["_campaign.json","_campaign.json.tmp","_preferences.json","_preferences.json.tmp"]:
 		var path = test_prefix+suffix
 		if FileAccess.file_exists(path): DirAccess.remove_absolute(path)
 	quit(status)
+
+# Independent fixture oracle: inspect the actual current source-art alpha, never
+# call SpriteHitQuery or infer a hit from the movement capsule. These fixtures
+# arrange an occupied texel; separate query tests prove transparent holes miss.
+func opaque_texel(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	var sprite: Sprite3D = actor.sprite
+	var image: Image = sprite.texture.get_image()
+	if image.is_compressed(): assert(image.decompress() == OK)
+	var width: int = image.get_width()/sprite.hframes
+	var height: int = image.get_height()/sprite.vframes
+	var offset := Vector2i(sprite.frame % sprite.hframes, sprite.frame / sprite.hframes)*Vector2i(width,height)
+	var best := Vector2i(-1,-1)
+	var score: float = INF
+	for y in range(height):
+		for x in range(width):
+			if image.get_pixelv(offset+Vector2i(x,y)).a < 0.75: continue
+			# High targets must remain near the centre column, not a random wing.
+			if high and absf(x+0.5-width*0.5) > width*0.2: continue
+			var candidate: float = float(y)*width*width + absf(x+0.5-width*0.5) if high else Vector2(x+0.5-width*0.5,y+0.5-height*0.5).length_squared()
+			if candidate < score:
+				score = candidate
+				best = Vector2i(x,y)
+	assert(best.x >= 0, "Current source-art frame must contain an occupied fixture texel")
+	var local := Vector2(best)+Vector2(0.5,0.5)
+	if sprite.flip_h: local.x = width-local.x
+	if sprite.flip_v: local.y = height-local.y
+	var start: Vector2 = sprite.offset-Vector2(width,height)*0.5 if sprite.centered else sprite.offset
+	var basis: Basis = camera.get_camera_transform().basis.orthonormalized()
+	var point: Vector3 = sprite.global_position + basis.x*((start.x+local.x)*sprite.pixel_size*sprite.global_basis.x.length()) + basis.y*((start.y+height-local.y)*sprite.pixel_size*sprite.global_basis.y.length())
+	return {"point":point,"frame":sprite.frame,"pixel":offset+best,"alpha":image.get_pixelv(offset+best).a}
+
+func aim_opaque(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	# Billboard orientation changes with camera pitch; settle the arranged aim
+	# against the same current source texel, rather than a capsule-height oracle.
+	for iteration in range(12):
+		camera.look_at(opaque_texel(actor,camera,high).point,Vector3.UP)
+	return opaque_texel(actor,camera,high)

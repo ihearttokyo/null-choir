@@ -85,7 +85,9 @@ func native_contact(palanquin: bool) -> void:
 	await process_frame
 	caster.target = victim
 	caster._committed_target = victim
-	caster._committed_aim = victim.global_position+Vector3.UP*0.55
+	var visible: Dictionary = opaque_texel(victim,game.player.camera)
+	expect(visible.alpha >= 0.75,"SETUP current source-art occupied texel")
+	caster._committed_aim = visible.point
 	caster.telegraph_time = 1.0/120.0
 	caster.attack_time = 20.0
 	caster.set_physics_process(true)
@@ -114,3 +116,40 @@ func run() -> void:
 	AudioServer.set_bus_mute(0,prior_mute)
 	if failures == 0: print("PASS SYNTHETIC enabled standalone observers/native enemy contact; not earned campaign evidence")
 	quit(0 if failures == 0 else 1)
+
+# Independent fixture oracle: inspect the actual current source-art alpha, never
+# call SpriteHitQuery or infer a hit from the movement capsule. These fixtures
+# arrange an occupied texel; separate query tests prove transparent holes miss.
+func opaque_texel(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	var sprite: Sprite3D = actor.sprite
+	var image: Image = sprite.texture.get_image()
+	if image.is_compressed(): assert(image.decompress() == OK)
+	var width: int = image.get_width()/sprite.hframes
+	var height: int = image.get_height()/sprite.vframes
+	var offset := Vector2i(sprite.frame % sprite.hframes, sprite.frame / sprite.hframes)*Vector2i(width,height)
+	var best := Vector2i(-1,-1)
+	var score: float = INF
+	for y in range(height):
+		for x in range(width):
+			if image.get_pixelv(offset+Vector2i(x,y)).a < 0.75: continue
+			# High targets must remain near the centre column, not a random wing.
+			if high and absf(x+0.5-width*0.5) > width*0.2: continue
+			var candidate: float = float(y)*width*width + absf(x+0.5-width*0.5) if high else Vector2(x+0.5-width*0.5,y+0.5-height*0.5).length_squared()
+			if candidate < score:
+				score = candidate
+				best = Vector2i(x,y)
+	assert(best.x >= 0, "Current source-art frame must contain an occupied fixture texel")
+	var local := Vector2(best)+Vector2(0.5,0.5)
+	if sprite.flip_h: local.x = width-local.x
+	if sprite.flip_v: local.y = height-local.y
+	var start: Vector2 = sprite.offset-Vector2(width,height)*0.5 if sprite.centered else sprite.offset
+	var basis: Basis = camera.get_camera_transform().basis.orthonormalized()
+	var point: Vector3 = sprite.global_position + basis.x*((start.x+local.x)*sprite.pixel_size*sprite.global_basis.x.length()) + basis.y*((start.y+height-local.y)*sprite.pixel_size*sprite.global_basis.y.length())
+	return {"point":point,"frame":sprite.frame,"pixel":offset+best,"alpha":image.get_pixelv(offset+best).a}
+
+func aim_opaque(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	# Billboard orientation changes with camera pitch; settle the arranged aim
+	# against the same current source texel, rather than a capsule-height oracle.
+	for iteration in range(12):
+		camera.look_at(opaque_texel(actor,camera,high).point,Vector3.UP)
+	return opaque_texel(actor,camera,high)

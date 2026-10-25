@@ -28,6 +28,7 @@ func run() -> void:
 		guardian.configure(game,{"id":"geometry_guardian","kind":"guardian","cell":[.5,.5],"yaw":0})
 		guardian.position = Vector3.ZERO
 		guardian.set_physics_process(false)
+		opaque_guardian_contact(guardian)
 		game.enemies = [guardian]
 		var source = CharacterBody3D.new()
 		game.level.add_child(source)
@@ -82,6 +83,7 @@ func body(game, id: String, role: String, location: Vector3):
 	actor.position = location
 	actor.set_physics_process(false)
 	actor.active = true
+	if role == "guardian": opaque_guardian_contact(actor)
 	game.enemies.append(actor)
 	return actor
 
@@ -114,7 +116,7 @@ func check_arrivals() -> void:
 		var hp: int = guardian.hp
 		var ammo: Array = game.state.ammo.duplicate()
 		shot._physics_process(.7)
-		expect(shot.is_queued_for_deletion(),"Real capsule contact retires traveling projectile")
+		expect(shot.is_queued_for_deletion(),"Real opaque sprite contact retires traveling projectile")
 		expect(hp-guardian.hp == row[4],"Actual arrival path/guardian rotation determine armor, not shooter location or survival: "+str(row))
 		expect(game.state.ammo == ammo,"NPC projectile geometry does not spend campaign ammunition")
 		expect(guardian.target == null if row[3] else guardian.target == source,"Retaliation retains only the actual living eligible source")
@@ -215,3 +217,16 @@ func check_context() -> void:
 	guardian.call("take_damage",14,source,{"incoming_direction":Vector3(0,0,1)})
 	expect(hp-guardian.hp == 4 and guardian.target == null,"Retired-map source retains valid incoming geometry but cannot cause retaliation")
 	await dispose(game)
+
+func opaque_guardian_contact(actor) -> void:
+	# Fixture-only opacity, not replacement game art: a solid2m square centred
+	# at y1,z−0.65 reproduces the old front contact and exact38/64 damage setup.
+	var image := Image.create(16,16,false,Image.FORMAT_RGBA8)
+	image.fill(Color.WHITE)
+	actor.sprite.texture = ImageTexture.create_from_image(image)
+	actor.sprite.hframes = 1
+	actor.sprite.vframes = 1
+	actor.sprite.frame = 0
+	actor.sprite.pixel_size = 0.125
+	actor.sprite.position = Vector3(0,1,-0.65)
+	assert(image.get_pixel(8,8).a == 1.0)
