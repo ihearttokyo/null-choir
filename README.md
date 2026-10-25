@@ -4,11 +4,23 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 ## Playtest download
 
-[Enter the NULL CHOIR splash page](https://ihearttokyo.github.io/null-choir/).
+[Enter the NULL CHOIR download page](https://null-choir.jaymoney.chatgpt.site).
 
-[![Illustrated NULL CHOIR key art](docs/site-assets/arch.jpg)](https://ihearttokyo.github.io/null-choir/)
+[![Illustrated NULL CHOIR key art](docs/site-assets/arch.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download the Apple Silicon Mac alpha](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.2/NULL-CHOIR-0.2.3-alpha.2-Apple-Silicon.zip). **Alpha 2 — unfinished checkpoint, not a final release.** Requires macOS 14 or newer. This download is Developer ID-signed and Apple-notarized, with its verification ticket included. Alpha 2 adds original title music and the nine-track Resonance Chamber Sound test while retaining Alpha 1's eight-map terrain, campaign art, weapons and HUD. Expect bugs, hitches and balance changes; full campaign and 120 FPS performance are not yet verified. Keep system security protections enabled. [Changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2).
+[Download Alpha 4 for Apple Silicon Macs](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-Apple-Silicon.zip). **Alpha 4 — unfinished incremental playtest, not completion of the full Alpha 4 scope or a final release.** Requires macOS 14 or newer. This archive is Developer ID-signed, Apple-notarized and stapled; keep system security protections enabled. [Alpha 4 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+
+### What changed between playtests
+
+- **Alpha 2:** title music and the nine-track Resonance Chamber Sound test. The revised topography across all eight campaign maps was already included.
+- **Alpha 3:** physics-step encounter activation and an unnecessary terrain-height lookup removed, with regression coverage. No measured FPS improvement is claimed.
+- **Alpha 4:** Pause/ending descent-progress screen with eight-depth status, Blood/Ivory objectives and earned record access. This is a text/status map, not the planned illustrated, semi-animated descent map.
+
+All three retain the same revised eight-map layouts. Alpha 3/4 do not add new levels, weapons or bosses. These releases use separate release-source branches; publishing them did not merge the outstanding gameplay PRs into this default branch.
+
+**Still unfinished:** the Heart Ivory/Return automated route exceeds its original time budget; full earned campaign completion with both seal orders/all difficulties, sustained performance, physical mouse/gamepad checks, listening acceptance, and the integrated illustrated descent map/intro artwork remain unverified or incomplete. Package checks and notarization do not establish those requirements.
+
+[Alpha 3 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) · [Alpha 2 release and rollback](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2)
 
 [LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
 
