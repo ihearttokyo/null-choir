@@ -28,8 +28,21 @@ func run() -> void:
 	assert(button("Descent map") != null)
 	button("Descent map").pressed.emit()
 	assert(game.menu.get_child(0).text == "DESCENT MAP" and paused and not game.playing)
-	assert(game.menu.get_child_count() == 4) # Title, Back, summary and scrollable map.
+	assert(game.menu.get_child_count() == 5) # Existing accessible text plus illustrated chart.
 	var map_body: RichTextLabel = game.menu.get_child(3)
+	var chart = game.menu.get_child(4)
+	var animation: CheckButton = chart.get_child(0)
+	var illustration = chart.get_child(1)
+	assert(illustration.rows.size() == 8 and illustration.textures.keys() == [0])
+	assert(not animation.button_pressed and not illustration.is_processing())
+	animation.button_pressed = true
+	await process_frame
+	await process_frame
+	assert(illustration.is_processing() and illustration.phase > 0.0)
+	animation.button_pressed = false
+	assert(not illustration.is_processing() and illustration.phase == 0.0)
+	illustration.rows[0].name = "Detached presentation mutation"
+	assert(game.state.to_dict() == before)
 	assert("01  The Intake" in map_body.text and "08  Uncharted descent" in map_body.text and not "The Heart" in map_body.text)
 	map_body.grab_focus()
 	await process_frame
@@ -73,6 +86,9 @@ func run() -> void:
 	game.show_ending()
 	before = game.state.to_dict().duplicate(true)
 	button("Descent map").pressed.emit()
+	var completed_chart = game.menu.get_child(4).get_child(1)
+	assert(completed_chart.textures.size() == 8 and completed_chart.rows.all(func(row): return row.status == "CLEARED"))
+	assert(not completed_chart.is_processing())
 	var read = button("Read: "+Narrative.RECORDS[0].title)
 	assert(read != null)
 	read.pressed.emit()
@@ -101,6 +117,6 @@ func run() -> void:
 		await process_frame
 		await physics_frame
 	await create_timer(0.12).timeout
-	print("PASS native descent-map menus: actual Intake startup, pause/back/resume, no state writes or unearned records, retired caller rejection and controlled ending/record navigation; not physical-input or campaign completion")
+	print("PASS native illustrated descent-map menus: earned-only texture reveals, detached presentation, opt-in animation/static reset,  actual Intake startup, pause/back/resume, no state writes or unearned records, retired caller rejection and controlled ending/record navigation; not physical-input or campaign completion")
 	# Let this resumed signal callback release its coroutine/locals before shutdown.
 	call_deferred("quit",0)

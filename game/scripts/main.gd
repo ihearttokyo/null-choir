@@ -761,7 +761,7 @@ func show_descent_map(back: Callable) -> void:
 	var view: Dictionary = preload("res://scripts/descent_map.gd").overview(state)
 	_show_menu("DESCENT MAP",[["Back",back]])
 	var summary = Label.new()
-	summary.text = "%d / 8 descents cleared · %d / 8 records recovered\n\n%s" % [view.cleared, view.records, view.objective]
+	summary.text = "%d / 8 descents cleared · %d / 8 records recovered\n\n%s\n\nIllustrated chapter descent below; not a navigational floor plan." % [view.cleared, view.records, view.objective]
 	summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	summary.add_theme_font_size_override("font_size",14)
 	menu.add_child(summary)
@@ -770,6 +770,9 @@ func show_descent_map(back: Callable) -> void:
 		entries.append("%02d  %s — %s\n%s" % [row.index+1, row.name, row.status, "Record recovered" if row.record_found else "Record not recovered"])
 	# Reuse the keyboard-scrollable, focus-outlined archive panel, not inert labels.
 	_record_body("\n\n".join(entries))
+	var chart = preload("res://scripts/descent_chart.gd").new()
+	chart.configure(view)
+	menu.add_child(chart)
 	for row in view.rows:
 		if row.record_found:
 			var index: int = row.index

@@ -1,0 +1,33 @@
+{
+  "kind": "source-native",
+  "vertex_edit_reverted": true,
+  "edited_objects": [
+    "intake fractured terrace",
+    "foundry fractured terrace",
+    "processional fractured terrace",
+    "reliquary fractured terrace",
+    "nursery fractured terrace",
+    "ossuary fractured terrace",
+    "inversion fractured terrace",
+    "heart fractured terrace",
+    "title foreground fracture",
+    "skin_bell_amber",
+    "vertebral_furnace_bruised",
+    "walking_bone_organ_bruised",
+    "reliquary_face_halo_bruised",
+    "Runtime nursery amber",
+    "ossuary_rib_bridge_bruised",
+    "inversion_surgical_cradle_bruised",
+    "heart_mouth_restraint_bruised"
+  ],
+  "blend_unchanged": true,
+  "packed_relative_images": true,
+  "privacy": {
+    "raw_copy": "privacy-uncompressed.blend",
+    "raw_sha256": "661e475ea82af7bb9a8d1fede7e65ee83ba263e03794c98de787bb4b7c01524a",
+    "raw_bytes": 43647994,
+    "scope": "reopened scene/dependencies reserialized uncompressed; not a scan of the compressed source stream"
+  },
+  "edit_revert_scope": "in-memory only; persistent edit/save/reopen/revert NOT RUN",
+  "rendered": false
+}

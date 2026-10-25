@@ -1,0 +1,61 @@
+{
+  "masters": [
+    {
+      "view": "intake",
+      "master_sha256": "8fa6218bb066fc4f29019a6d3d22e4cde042f3d16cf4e8b6ea86023a78b75fd4",
+      "runtime_sha256": "39e0bed6e50e1cb411521d566fbd48374dfe80f51ade7835931788ed4e15310f",
+      "runtime_bytes": 23416
+    },
+    {
+      "view": "foundry",
+      "master_sha256": "3cd45c5b7145478422b6840b0e1aea09a1dd688187b6e398b5580ef064076d95",
+      "runtime_sha256": "5a8ffe3de099e0d7a4d8ca359a8d0778fb5187d1f90440aa9645acd2db0ee55c",
+      "runtime_bytes": 24727
+    },
+    {
+      "view": "processional",
+      "master_sha256": "913e3f5d89a2644b27548a9fb0387e452267451f88dca6e63b79535b24c7ff8e",
+      "runtime_sha256": "49a4ddb42ccc7b6c37b3bbf88bf8bf91cb3a45f692a2641f63cf04bae7107c29",
+      "runtime_bytes": 20473
+    },
+    {
+      "view": "reliquary",
+      "master_sha256": "f177223a443526e6252d07d80eab184fbb25bda735899b48ef3d7d9b9ac3992b",
+      "runtime_sha256": "25eb81d65b3bb0c5f2d7aebc30114c15cec16b36d79bad41f861569fc513152c",
+      "runtime_bytes": 21651
+    },
+    {
+      "view": "nursery",
+      "master_sha256": "63fc95fec1361c8f8ec46182741e1d11ef2480a0cb354f2c4d2977712281387d",
+      "runtime_sha256": "f6c254fa1c8ad677700be7404c858ebd50a2fb57bef60fe48aa82248c396df68",
+      "runtime_bytes": 23425
+    },
+    {
+      "view": "ossuary",
+      "master_sha256": "c3a6a4400cbee7c97f5cf4952386f350e0dd55eec2c971687ba361bbfef7fec7",
+      "runtime_sha256": "a1ad3951ce5a638dea99413817c9fe8aaf31287478b69e9a13a07a8c5cefb0c3",
+      "runtime_bytes": 22068
+    },
+    {
+      "view": "inversion",
+      "master_sha256": "3402a745d9476391b4069fbbeb21068643797e9efc7414206305922d1671ae08",
+      "runtime_sha256": "a56d712d285c3a4e7f0523f58f3f0dfeedae156349ccc94350eb45d923d0024c",
+      "runtime_bytes": 16195
+    },
+    {
+      "view": "heart",
+      "master_sha256": "73f5495c6d1d4ddc8407dcb9e45a9e20e834011650d5164cb84e342ba28b4e57",
+      "runtime_sha256": "4134cb7a55c628ac772f00c95aee2418e687ce975033b82f660a8cd14ba60798",
+      "runtime_bytes": 42538
+    }
+  ],
+  "master_size": [
+    7680,
+    4320
+  ],
+  "runtime_size": [
+    640,
+    360
+  ],
+  "encoder": "Pillow12.2.0 RGB JPEG quality88 optimizeTrue; no inherited metadata"
+}

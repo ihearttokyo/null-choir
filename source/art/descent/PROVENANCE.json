@@ -1,0 +1,19 @@
+{
+  "scope": "Frozen editable source bundles; seven chapter images useprototype09, Heart usesheart74; original files untouched",
+  "sources": [
+    {
+      "source": "prototype09",
+      "recipe_sha256": "f7277c6946f400d3c2496cae7692a4899338ec63beb5ec57a75aa76aafe399d3",
+      "inputs_sha256": "a313c7de06603e6f21f209a663915153b1d28de2db97f75cf2d976b6e8e339b1",
+      "inspection_recipe_sha256": "7048299d0a171af62d4d909ea92695c4c828586265a67357f8136da3524cb421",
+      "blend_sha256": "72bc56fb18591b56840fbf93a5780e5f7caf841aae694fccaeafcf19b812e8ed"
+    },
+    {
+      "source": "heart74",
+      "recipe_sha256": "9c97d7e30ba434f7eb2f3e25354d67382d1f59e2f4a1efae88ea25ef1a55181f",
+      "inputs_sha256": "a313c7de06603e6f21f209a663915153b1d28de2db97f75cf2d976b6e8e339b1",
+      "inspection_recipe_sha256": "7048299d0a171af62d4d909ea92695c4c828586265a67357f8136da3524cb421",
+      "blend_sha256": "48030a5c6513cdce907fd09585ba79c8b605c0bec8adf6e94e0919a51c18209d"
+    }
+  ]
+}

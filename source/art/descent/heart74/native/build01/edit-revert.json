@@ -1,0 +1,255 @@
+{
+  "mouth47": {
+    "actual_mesh": true,
+    "cloned_materials": true,
+    "edit_save_reopen_revert": true,
+    "original_unchanged": true,
+    "no_touch_records": 2074,
+    "view_masks": {
+      "views": [
+        "title",
+        "intake",
+        "foundry",
+        "processional",
+        "reliquary",
+        "nursery",
+        "ossuary",
+        "inversion",
+        "heart",
+        "overview-1",
+        "overview-2",
+        "overview-3",
+        "overview-4",
+        "overview-5",
+        "overview-6",
+        "overview-7",
+        "overview-8",
+        "pulse-1",
+        "pulse-2",
+        "pulse-3",
+        "pulse-4",
+        "pulse-5",
+        "pulse-6",
+        "pulse-7",
+        "pulse-8"
+      ],
+      "objects_checked": 52100
+    },
+    "controls_rejected": [
+      "owner",
+      "actual vertex",
+      "material source",
+      "material recipe",
+      "view mask"
+    ],
+    "private_copy_hashes": {
+      "maw47-vertex-material-edit.blend": "89aa81e840b1d55333fcdb210ee23d7a2fe22c6b808df35282d3f711c001cc90",
+      "maw47-reverted.blend": "8afcbeacce3a0ab7da380672b5e6b4273f88c4291a7aecd3797dea179b2f213c"
+    },
+    "private_copies_cleaned": true,
+    "rendered": false
+  },
+  "kind": "source-native",
+  "vertex_edit_reverted": true,
+  "edited_objects": [
+    "intake fractured terrace",
+    "foundry fractured terrace",
+    "processional fractured terrace",
+    "reliquary fractured terrace",
+    "nursery fractured terrace",
+    "ossuary fractured terrace",
+    "inversion fractured terrace",
+    "heart fractured terrace",
+    "title foreground fracture",
+    "skin_bell_amber",
+    "vertebral_furnace_bruised",
+    "walking_bone_organ_bruised",
+    "reliquary_face_halo_bruised",
+    "Runtime nursery amber",
+    "ossuary_rib_bridge_bruised",
+    "inversion_surgical_cradle_bruised",
+    "heart_mouth_restraint_bruised"
+  ],
+  "props25": {
+    "objects": [
+      "heart route lantern 0",
+      "heart props25 candle 0 wick",
+      "heart props25 candle 0 flame",
+      "heart props25 candle 0 bracket",
+      "heart route lantern 1",
+      "heart props25 candle 1 wick",
+      "heart props25 candle 1 flame",
+      "heart props25 candle 1 bracket",
+      "heart route lantern 2",
+      "heart props25 candle 2 wick",
+      "heart props25 candle 2 flame",
+      "heart props25 candle 2 bracket",
+      "heart route lantern 3",
+      "heart props25 candle 3 wick",
+      "heart props25 candle 3 flame",
+      "heart props25 candle 3 bracket",
+      "heart route lantern 4",
+      "heart props25 candle 4 wick",
+      "heart props25 candle 4 flame",
+      "heart props25 candle 4 bracket",
+      "heart route lantern 5",
+      "heart props25 candle 5 wick",
+      "heart props25 candle 5 flame",
+      "heart props25 candle 5 bracket",
+      "heart route lantern 6",
+      "heart props25 candle 6 wick",
+      "heart props25 candle 6 flame",
+      "heart props25 candle 6 bracket",
+      "heart gothic20 hanging 0 cloth",
+      "heart gothic20 hanging 1 cloth",
+      "heart gothic20 hanging 2 cloth",
+      "heart gothic20 hanging 3 cloth"
+    ],
+    "plan_native_parity": true,
+    "edit_save_reopen": true,
+    "revert_save_reopen": true,
+    "original_unchanged": true,
+    "scratch": "props25-edit-save-reopen.blend",
+    "scratch_sha256": "6ee038215b4cac380e0c5b9420598b71b295158869be7793229a2089f63020b9",
+    "reverted": "props25-reverted-save-reopen.blend",
+    "reverted_sha256": "a9902824d06f38953c7e6c719f7ae94d3efe63811c13476aa0d539c303f9a5fa"
+  },
+  "atmosphere26": {
+    "actual_RNA": true,
+    "exact_shader": true,
+    "controls_rejected": [
+      "owner",
+      "density",
+      "node recipe",
+      "visibility"
+    ],
+    "view_masks": {
+      "views": [
+        "title",
+        "intake",
+        "foundry",
+        "processional",
+        "reliquary",
+        "nursery",
+        "ossuary",
+        "inversion",
+        "heart",
+        "overview-1",
+        "overview-2",
+        "overview-3",
+        "overview-4",
+        "overview-5",
+        "overview-6",
+        "overview-7",
+        "overview-8",
+        "pulse-1",
+        "pulse-2",
+        "pulse-3",
+        "pulse-4",
+        "pulse-5",
+        "pulse-6",
+        "pulse-7",
+        "pulse-8"
+      ],
+      "objects_checked": 52100
+    },
+    "edit_save_reopen": true,
+    "revert_save_reopen": true,
+    "all_existing_mesh_camera_light_unchanged": true,
+    "original_unchanged": true,
+    "scratch": "atmosphere26-density-edit.blend",
+    "scratch_sha256": "93859ed661da9c7d1268ddecf6446ce6c45edd13afe3d39c76f263ccc3ed8045",
+    "reverted": "atmosphere26-reverted.blend",
+    "reverted_sha256": "2f7fb2861bf496166dedffcb0e5382a477533d762187e71e88df731fee8b9ef6",
+    "rendered": false
+  },
+  "blend_unchanged": true,
+  "packed_relative_images": true,
+  "privacy": {
+    "raw_copy": "privacy-uncompressed.blend",
+    "raw_sha256": "c0f2d437cfd05e60fd57be13371cddf8e8bcc3a11f43d7213f3b9009696e278e",
+    "raw_bytes": 48715941,
+    "scope": "reopened scene/dependencies reserialized uncompressed; not a scan of the compressed source stream"
+  },
+  "camera_projection": [
+    {
+      "camera": "intake",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 6.103515636368684e-05,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "foundry",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 6.103515625e-05,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "processional",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 6.103515613631316e-05,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "reliquary",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 9.536743165838857e-06,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "nursery",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 6.675720207738323e-06,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "ossuary",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 3.0994415309848478e-06,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "inversion",
+      "type": "ORTHO",
+      "samples": 15,
+      "max_error": 6.103515625e-05,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "heart",
+      "type": "PERSP",
+      "samples": 15,
+      "max_error": 6.35981559818366e-05,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "heart",
+      "type": "PERSP",
+      "samples": 15,
+      "max_error": 3.576278686889811e-05,
+      "aspect": 1
+    },
+    {
+      "camera": "title",
+      "type": "ORTHO",
+      "samples": 7,
+      "max_error": 3.1590461725961028e-06,
+      "aspect": 1.7777777777777777
+    },
+    {
+      "camera": "overview",
+      "type": "ORTHO",
+      "samples": 7,
+      "max_error": 1.525878908026357e-05,
+      "aspect": 1.7777777777777777
+    }
+  ],
+  "edit_revert_scope": "legacy subjects in-memory; Props25 geometry and Atmosphere26 density persistent private-copy edit/save/reopen/revert",
+  "rendered": false
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "source-native",
+  "recipe_sha256": "f7277c6946f400d3c2496cae7692a4899338ec63beb5ec57a75aa76aafe399d3",
+  "inputs_sha256": "a313c7de06603e6f21f209a663915153b1d28de2db97f75cf2d976b6e8e339b1",
+  "inspection_recipe_sha256": "7048299d0a171af62d4d909ea92695c4c828586265a67357f8136da3524cb421",
+  "plan": {
+    "triangles": 249126,
+    "editable_meshes": 1454,
+    "cameras": 10,
+    "bounds": [
+      [
+        -68.73280133149582,
+        -12.8,
+        -89.0
+      ],
+      [
+        65.0,
+        50.5,
+        92.39999999999999
+      ]
+    ],
+    "kit_placements": 33,
+    "imported_glb_bytes_per_placement": 15416100,
+    "imported_image_payload_bytes_per_placement": 2597339,
+    "decoded_rgba_bytes_per_placement": 8830976
+  },
+  "actual_triangles": 249126,
+  "blend_sha256": "72bc56fb18591b56840fbf93a5780e5f7caf841aae694fccaeafcf19b812e8ed",
+  "blend_bytes": 7477271,
+  "rendered": false
+}

@@ -1,0 +1,2180 @@
+{
+  "assets": {
+    "skin_bell": {
+      "path": "game/assets/art/world/skin_bell.glb",
+      "sha256": "bbfb0c8a7b8bb23d9a695c6aa110ffcb68f22d310be733010e438bc12a60a054",
+      "bytes": 1283784,
+      "triangles": 19264,
+      "bounds": [
+        [
+          -3.16135311126709,
+          -3.16135311126709,
+          0.0
+        ],
+        [
+          3.16135311126709,
+          3.16135311126709,
+          8.180000305175781
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "skin_bell_amber",
+          "bounds": [
+            [
+              -0.48249104619026184,
+              -0.6299999952316284,
+              1.340000033378601
+            ],
+            [
+              0.45750895142555237,
+              0.3100000023841858,
+              4.980000019073486
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "skin_bell_brass",
+          "bounds": [
+            [
+              -3.1087279319763184,
+              -3.1087279319763184,
+              0.0
+            ],
+            [
+              3.1087279319763184,
+              3.1087279319763184,
+              8.180000305175781
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "skin_bell_ivory",
+          "bounds": [
+            [
+              -3.16135311126709,
+              -3.16135311126709,
+              0.6100000143051147
+            ],
+            [
+              3.16135311126709,
+              3.16135311126709,
+              7.849856376647949
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "skin_bell_tissue",
+          "bounds": [
+            [
+              -2.6144955158233643,
+              -2.6144955158233643,
+              2.1600000858306885
+            ],
+            [
+              2.6144955158233643,
+              2.6144955158233643,
+              7.004907608032227
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 19896,
+      "materials": [
+        "skin_bell_amber",
+        "skin_bell_brass",
+        "skin_bell_ivory",
+        "skin_bell_tissue"
+      ],
+      "images": [
+        {
+          "name": "skin_bell_atlas",
+          "sha256": "6ddbfaf63f61210cb22a670424b8b09ac1a8016225dcc956da279688aeac2c44",
+          "bytes": 527051,
+          "width": 512,
+          "height": 512,
+          "decoded_rgba_bytes": 1048576,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "vertebral_furnace": {
+      "path": "game/assets/art/world/vertebral_furnace.glb",
+      "sha256": "f89a725f584265ec73d59e715570cdd9367db00c21572692d4c2756ff7f625ad",
+      "bytes": 2126524,
+      "triangles": 24584,
+      "bounds": [
+        [
+          -3.1449999809265137,
+          -1.5800000429153442,
+          0.0
+        ],
+        [
+          3.322347640991211,
+          1.8200000524520874,
+          8.873035430908203
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "vertebral_furnace_bruised",
+          "bounds": [
+            [
+              -1.8180660009384155,
+              -0.47999995946884155,
+              0.3677494525909424
+            ],
+            [
+              1.818066120147705,
+              1.5650897026062012,
+              8.532999992370605
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_deep",
+          "bounds": [
+            [
+              -1.7336000204086304,
+              -1.5199999809265137,
+              0.3199999928474426
+            ],
+            [
+              2.433500051498413,
+              1.47819983959198,
+              8.5600004196167
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_petrol",
+          "bounds": [
+            [
+              -2.9656238555908203,
+              -1.5800000429153442,
+              0.0
+            ],
+            [
+              2.565000057220459,
+              1.8200000524520874,
+              5.593196392059326
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_sick",
+          "bounds": [
+            [
+              -1.649991512298584,
+              -1.314562201499939,
+              0.47453784942626953
+            ],
+            [
+              2.2849903106689453,
+              0.3799999952316284,
+              8.389999389648438
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_suture",
+          "bounds": [
+            [
+              -1.3243999481201172,
+              0.26919999718666077,
+              1.1411120891571045
+            ],
+            [
+              1.3243999481201172,
+              0.6819999814033508,
+              4.340142250061035
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_warm",
+          "bounds": [
+            [
+              -3.1449999809265137,
+              -1.315000057220459,
+              0.320000022649765
+            ],
+            [
+              3.322347640991211,
+              1.5350000858306885,
+              8.873035430908203
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "vertebral_furnace_worn",
+          "bounds": [
+            [
+              -3.059999942779541,
+              -1.34499990940094,
+              0.3199999928474426
+            ],
+            [
+              3.239999771118164,
+              1.5659281015396118,
+              8.699999809265137
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 49250,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Foundry skin incised tissue",
+          "sha256": "64b7b99d73660c81e6153710ce70eb001be072efa3e4061aca4a861a7f0224b3",
+          "bytes": 2902,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "Foundry scar incised tissue",
+          "sha256": "6a15b751171e4d7f6bc0840ceae09bac559c0fb6e5d0ea4e00721e788200f223",
+          "bytes": 2953,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "walking_bone_organ": {
+      "path": "game/assets/art/world/walking_bone_organ.glb",
+      "sha256": "acd5ed3fec4e92fed8fab89ade235f52dbe3a48423e9c7b346ec99756574662d",
+      "bytes": 1804628,
+      "triangles": 22384,
+      "bounds": [
+        [
+          -3.5299999713897705,
+          -2.2350001335144043,
+          0.0
+        ],
+        [
+          3.5299999713897705,
+          1.8849999904632568,
+          8.431999206542969
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "walking_bone_organ_bruised",
+          "bounds": [
+            [
+              -2.641526460647583,
+              -0.6399999856948853,
+              2.369619131088257
+            ],
+            [
+              2.8299999237060547,
+              1.133945107460022,
+              5.840000152587891
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_deep",
+          "bounds": [
+            [
+              -2.2006001472473145,
+              -1.4800000190734863,
+              2.5494000911712646
+            ],
+            [
+              2.8569998741149902,
+              0.9200000166893005,
+              5.802000045776367
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_petrol",
+          "bounds": [
+            [
+              -3.5299999713897705,
+              -2.2350001335144043,
+              0.0
+            ],
+            [
+              3.5299999713897705,
+              1.8849999904632568,
+              4.715000152587891
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_sick",
+          "bounds": [
+            [
+              -2.1349897384643555,
+              -1.6360000371932983,
+              2.6910977363586426
+            ],
+            [
+              2.9049999713897705,
+              1.0823357105255127,
+              4.654999732971191
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_suture",
+          "bounds": [
+            [
+              -3.1365909576416016,
+              -1.7699840068817139,
+              0.33463093638420105
+            ],
+            [
+              3.1365909576416016,
+              1.536782145500183,
+              5.869167804718018
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_warm",
+          "bounds": [
+            [
+              -3.4601943492889404,
+              -2.1937406063079834,
+              0.14015056192874908
+            ],
+            [
+              3.4601943492889404,
+              1.8399999141693115,
+              8.399999618530273
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "walking_bone_organ_worn",
+          "bounds": [
+            [
+              -2.7201945781707764,
+              -1.559999942779541,
+              1.1260379552841187
+            ],
+            [
+              2.8803107738494873,
+              1.570614218711853,
+              8.431999206542969
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 42150,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Processional skin incised tissue",
+          "sha256": "dfff136cd1a5ade346f0681193f3da2a6594c6610ff8fe18e2b7636ee0e54c97",
+          "bytes": 2750,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "Processional scar incised tissue",
+          "sha256": "df31c40bad4a2e049a6a0aeb898c322103c2850a95aebf99da0a3973ad375d81",
+          "bytes": 2791,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "reliquary_face_halo": {
+      "path": "game/assets/art/world/reliquary_face_halo.glb",
+      "sha256": "88ab77b66efba75076358e641fc6a4e5c3a8011773c9291c76e5f8042c4c0a9f",
+      "bytes": 898744,
+      "triangles": 10288,
+      "bounds": [
+        [
+          -2.430000066757202,
+          -1.4249999523162842,
+          0.0
+        ],
+        [
+          2.430000066757202,
+          1.4249999523162842,
+          8.260000228881836
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "reliquary_face_halo_bruised",
+          "bounds": [
+            [
+              -0.660235583782196,
+              -0.6322757005691528,
+              0.3329198658466339
+            ],
+            [
+              0.660235583782196,
+              0.45009857416152954,
+              6.9194183349609375
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "reliquary_face_halo_deep",
+          "bounds": [
+            [
+              -2.117600202560425,
+              -0.9399999976158142,
+              0.5138000249862671
+            ],
+            [
+              2.117600202560425,
+              -0.23000001907348633,
+              8.04423999786377
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "reliquary_face_halo_petrol",
+          "bounds": [
+            [
+              -2.424999952316284,
+              -1.4249999523162842,
+              0.0
+            ],
+            [
+              2.424999952316284,
+              1.4249999523162842,
+              0.23999999463558197
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "reliquary_face_halo_sick",
+          "bounds": [
+            [
+              -1.624199390411377,
+              -0.9945623278617859,
+              0.6210963129997253
+            ],
+            [
+              1.624199390411377,
+              0.6623643040657043,
+              7.290923118591309
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "reliquary_face_halo_warm",
+          "bounds": [
+            [
+              -2.3947465419769287,
+              -0.968999981880188,
+              0.24875400960445404
+            ],
+            [
+              2.3947465419769287,
+              0.9275449514389038,
+              8.149200439453125
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "reliquary_face_halo_worn",
+          "bounds": [
+            [
+              -2.430000066757202,
+              -1.285499930381775,
+              0.25
+            ],
+            [
+              2.430000066757202,
+              0.19200000166893005,
+              8.260000228881836
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 21202,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Processional skin incised tissue",
+          "sha256": "dfff136cd1a5ade346f0681193f3da2a6594c6610ff8fe18e2b7636ee0e54c97",
+          "bytes": 2750,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "surface_atlas",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "width": 192,
+          "height": 64,
+          "decoded_rgba_bytes": 49152,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "nursery_gestation_engine": {
+      "path": "game/assets/art/world/nursery_gestation_engine.glb",
+      "sha256": "53088d099b14f1e3c7e43212993c5fbaa34699229170a44e60d66ba44bb3c258",
+      "bytes": 1588276,
+      "triangles": 17574,
+      "bounds": [
+        [
+          -1.9249999523162842,
+          -1.5750000476837158,
+          0.0
+        ],
+        [
+          1.9249999523162842,
+          1.5750000476837158,
+          8.430000305175781
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "Runtime nursery amber",
+          "bounds": [
+            [
+              -0.26871323585510254,
+              -0.2282535582780838,
+              1.8300000429153442
+            ],
+            [
+              0.3050000071525574,
+              0.2282535582780838,
+              2.109999895095825
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "Runtime nursery bone",
+          "bounds": [
+            [
+              -1.729238510131836,
+              -1.050930142402649,
+              1.386723279953003
+            ],
+            [
+              1.729238510131836,
+              1.050930142402649,
+              8.118934631347656
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "Runtime nursery brass",
+          "bounds": [
+            [
+              -1.9249999523162842,
+              -1.5750000476837158,
+              0.0
+            ],
+            [
+              1.9249999523162842,
+              1.5750000476837158,
+              8.430000305175781
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "Runtime nursery shell",
+          "bounds": [
+            [
+              -1.2000000476837158,
+              -0.7799999713897705,
+              1.25
+            ],
+            [
+              1.2000000476837158,
+              0.7799999713897705,
+              7.949999809265137
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "Runtime nursery tissue",
+          "bounds": [
+            [
+              -0.7459090352058411,
+              -0.41749998927116394,
+              2.0119051933288574
+            ],
+            [
+              0.7459090352058411,
+              0.32340770959854126,
+              6.670000076293945
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 28711,
+      "materials": [
+        "nursery_v2_amber",
+        "nursery_v2_bone",
+        "nursery_v2_brass",
+        "nursery_v2_shell",
+        "nursery_v2_tissue"
+      ],
+      "images": [
+        {
+          "name": "nursery_gestation_atlas",
+          "sha256": "8d82afdae9e1ee615f0c84ead5020858d12151f7a200d53344cb2dbf125d88f0",
+          "bytes": 553942,
+          "width": 512,
+          "height": 512,
+          "decoded_rgba_bytes": 1048576,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "ossuary_rib_bridge": {
+      "path": "game/assets/art/world/ossuary_rib_bridge.glb",
+      "sha256": "3e3b213231d2ad5d6d1fb248d26dd0441665ae9b90e15199908f469cbbdcaa1d",
+      "bytes": 764272,
+      "triangles": 9112,
+      "bounds": [
+        [
+          -2.320492744445801,
+          -2.654562473297119,
+          0.0
+        ],
+        [
+          2.320492744445801,
+          2.575000047683716,
+          7.001492023468018
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "ossuary_rib_bridge_bruised",
+          "bounds": [
+            [
+              -2.320492744445801,
+              -2.2815945148468018,
+              0.2546643316745758
+            ],
+            [
+              2.320492744445801,
+              2.2649614810943604,
+              3.570132255554199
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ossuary_rib_bridge_deep",
+          "bounds": [
+            [
+              -2.0883500576019287,
+              -2.5999999046325684,
+              0.4837999939918518
+            ],
+            [
+              2.0883500576019287,
+              2.0037498474121094,
+              4.182539939880371
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ossuary_rib_bridge_petrol",
+          "bounds": [
+            [
+              -2.309999942779541,
+              -2.575000047683716,
+              0.0
+            ],
+            [
+              2.309999942779541,
+              2.575000047683716,
+              0.30000001192092896
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ossuary_rib_bridge_sick",
+          "bounds": [
+            [
+              -2.034987449645996,
+              -2.654562473297119,
+              0.5910963416099548
+            ],
+            [
+              1.984987497329712,
+              -2.622000217437744,
+              0.7051036953926086
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ossuary_rib_bridge_warm",
+          "bounds": [
+            [
+              -2.2200000286102295,
+              -2.628999948501587,
+              0.30000001192092896
+            ],
+            [
+              2.2200000286102295,
+              2.509999990463257,
+              7.001492023468018
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ossuary_rib_bridge_worn",
+          "bounds": [
+            [
+              -2.1549999713897705,
+              -2.634999990463257,
+              0.23999999463558197
+            ],
+            [
+              2.1534664630889893,
+              2.4035143852233887,
+              6.590000152587891
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 18136,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Processional skin incised tissue",
+          "sha256": "dfff136cd1a5ade346f0681193f3da2a6594c6610ff8fe18e2b7636ee0e54c97",
+          "bytes": 2750,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "surface_atlas",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "width": 192,
+          "height": 64,
+          "decoded_rgba_bytes": 49152,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "inversion_surgical_cradle": {
+      "path": "game/assets/art/world/inversion_surgical_cradle.glb",
+      "sha256": "bb58b2932a78e0a1fb229447b3c079524135067c495644eb9af52c9e39847cbd",
+      "bytes": 539452,
+      "triangles": 6224,
+      "bounds": [
+        [
+          -2.4749999046325684,
+          -1.5750000476837158,
+          0.0
+        ],
+        [
+          2.4749999046325684,
+          1.5750000476837158,
+          8.482589721679688
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "inversion_surgical_cradle_bruised",
+          "bounds": [
+            [
+              -0.9587823748588562,
+              0.3030566871166229,
+              0.3069983124732971
+            ],
+            [
+              0.9587823748588562,
+              0.9375190734863281,
+              6.953351020812988
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_deep",
+          "bounds": [
+            [
+              -1.3833999633789062,
+              -0.9200000166893005,
+              0.41659998893737793
+            ],
+            [
+              1.3833999633789062,
+              -0.16124999523162842,
+              6.1586198806762695
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_petrol",
+          "bounds": [
+            [
+              -2.4749999046325684,
+              -1.5750000476837158,
+              0.0
+            ],
+            [
+              2.4749999046325684,
+              1.5750000476837158,
+              6.5
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_sick",
+          "bounds": [
+            [
+              -1.3249887228012085,
+              -0.9745622873306274,
+              0.5410972237586975
+            ],
+            [
+              1.264988660812378,
+              -0.07180000096559525,
+              4.740600109100342
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_suture",
+          "bounds": [
+            [
+              -0.21701891720294952,
+              -0.054261356592178345,
+              2.7960000038146973
+            ],
+            [
+              0.21701891720294952,
+              0.31426137685775757,
+              5.666599750518799
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_warm",
+          "bounds": [
+            [
+              -2.013880491256714,
+              -0.9490000009536743,
+              0.40131935477256775
+            ],
+            [
+              2.013880491256714,
+              0.9839999675750732,
+              8.482589721679688
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "inversion_surgical_cradle_worn",
+          "bounds": [
+            [
+              -2.128499984741211,
+              -1.4144999980926514,
+              0.22617952525615692
+            ],
+            [
+              2.128499984741211,
+              0.8799999952316284,
+              7.293810844421387
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 12316,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Processional skin incised tissue",
+          "sha256": "dfff136cd1a5ade346f0681193f3da2a6594c6610ff8fe18e2b7636ee0e54c97",
+          "bytes": 2750,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "surface_atlas",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "width": 192,
+          "height": 64,
+          "decoded_rgba_bytes": 49152,
+          "relative_path": null
+        },
+        {
+          "name": "Processional scar incised tissue",
+          "sha256": "df31c40bad4a2e049a6a0aeb898c322103c2850a95aebf99da0a3973ad375d81",
+          "bytes": 2791,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "heart_mouth_restraint": {
+      "path": "game/assets/art/world/heart_mouth_restraint.glb",
+      "sha256": "32c16a0cc222b57b4464553b0ae722cf27e4f98f0035d6446d1a9ed03a38c55d",
+      "bytes": 857288,
+      "triangles": 9824,
+      "bounds": [
+        [
+          -3.674999952316284,
+          -2.4000000953674316,
+          0.0
+        ],
+        [
+          3.674999952316284,
+          2.4000000953674316,
+          8.223812103271484
+        ]
+      ],
+      "embedded": true,
+      "identity_nodes": true,
+      "node_bounds": [
+        {
+          "name": "heart_mouth_restraint_bruised",
+          "bounds": [
+            [
+              -3.509999990463257,
+              -1.1100001335144043,
+              0.2593928873538971
+            ],
+            [
+              3.509999990463257,
+              1.5508028268814087,
+              6.849999904632568
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_deep",
+          "bounds": [
+            [
+              -2.0320000648498535,
+              -1.5099999904632568,
+              0.4280000329017639
+            ],
+            [
+              2.0320000648498535,
+              -1.4300000667572021,
+              0.7720000147819519
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_petrol",
+          "bounds": [
+            [
+              -3.674999952316284,
+              -2.4000000953674316,
+              0.0
+            ],
+            [
+              3.674999952316284,
+              2.4000000953674316,
+              0.23999999463558197
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_sick",
+          "bounds": [
+            [
+              -1.9699891805648804,
+              -1.564562201499939,
+              0.5610975623130798
+            ],
+            [
+              1.9049891233444214,
+              -1.531999945640564,
+              0.6859024167060852
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_suture",
+          "bounds": [
+            [
+              -2.254018545150757,
+              -1.1303503513336182,
+              1.5717779397964478
+            ],
+            [
+              2.254018545150757,
+              1.6600000858306885,
+              6.088222026824951
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_warm",
+          "bounds": [
+            [
+              -2.75,
+              -1.5389999151229858,
+              0.23317879438400269
+            ],
+            [
+              2.75,
+              0.7900000214576721,
+              8.223812103271484
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "heart_mouth_restraint_worn",
+          "bounds": [
+            [
+              -3.4977574348449707,
+              -2.123999834060669,
+              0.23916667699813843
+            ],
+            [
+              3.4977574348449707,
+              0.593668520450592,
+              6.934831142425537
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 19956,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "Processional skin incised tissue",
+          "sha256": "dfff136cd1a5ade346f0681193f3da2a6594c6610ff8fe18e2b7636ee0e54c97",
+          "bytes": 2750,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        },
+        {
+          "name": "surface_atlas",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "width": 192,
+          "height": 64,
+          "decoded_rgba_bytes": 49152,
+          "relative_path": null
+        },
+        {
+          "name": "Processional scar incised tissue",
+          "sha256": "df31c40bad4a2e049a6a0aeb898c322103c2850a95aebf99da0a3973ad375d81",
+          "bytes": 2791,
+          "width": 64,
+          "height": 64,
+          "decoded_rgba_bytes": 16384,
+          "relative_path": null
+        }
+      ],
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "arch": {
+      "path": "game/assets/art/world/arch.glb",
+      "sha256": "a32c10e501ab9a4ebbf31676bbe7d89b20926adac0f330664b61705a3ed41dff",
+      "bytes": 130376,
+      "triangles": 1524,
+      "bounds": [
+        [
+          -2.3350000381469727,
+          -0.44999998807907104,
+          0.0
+        ],
+        [
+          2.3350000381469727,
+          0.44999998807907104,
+          5.071554183959961
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "arch_petrol",
+          "bounds": [
+            [
+              -2.2300000190734863,
+              -0.23000000417232513,
+              0.10000000149011612
+            ],
+            [
+              2.2300000190734863,
+              0.23000000417232513,
+              5.071554183959961
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "arch_sick",
+          "bounds": [
+            [
+              -0.11999999016523377,
+              -0.17999999970197678,
+              4.299999997019768
+            ],
+            [
+              0.11999999731779099,
+              0.020000003278255463,
+              4.700000002980232
+            ]
+          ],
+          "gltf_transform": {
+            "translation": [
+              0,
+              4.5,
+              0.07999999821186066
+            ],
+            "scale": [
+              0.11999999731779099,
+              0.20000000298023224,
+              0.10000000149011612
+            ]
+          }
+        },
+        {
+          "name": "arch_warm",
+          "bounds": [
+            [
+              -2.25,
+              -0.4099999964237213,
+              0.10000000149011612
+            ],
+            [
+              2.25,
+              0.16999998688697815,
+              4.990000247955322
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "arch_worn",
+          "bounds": [
+            [
+              -2.3350000381469727,
+              -0.44999998807907104,
+              0.0
+            ],
+            [
+              2.3350000381469727,
+              0.44999998807907104,
+              0.3199999928474426
+            ]
+          ],
+          "gltf_transform": {
+            "translation": [
+              -1.9600000381469727,
+              0.1599999964237213,
+              0
+            ]
+          }
+        }
+      ],
+      "uv0_count": 3136,
+      "materials": [
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "ribbed_wall": {
+      "path": "game/assets/art/world/ribbed_wall.glb",
+      "sha256": "a635605e0a9c1e9df05589f87b4263664fa8ad060253d9155912cb72a64f40b1",
+      "bytes": 222464,
+      "triangles": 2796,
+      "bounds": [
+        [
+          -2.0,
+          -0.39973145723342896,
+          0.0
+        ],
+        [
+          2.0,
+          0.3100000023841858,
+          3.5
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "ribbed_wall_bruised",
+          "bounds": [
+            [
+              -1.9500000476837158,
+              0.015000000596046448,
+              0.0
+            ],
+            [
+              1.9500000476837158,
+              0.26500000059604645,
+              3.5
+            ]
+          ],
+          "gltf_transform": {
+            "translation": [
+              0,
+              1.75,
+              -0.14000000059604645
+            ]
+          }
+        },
+        {
+          "name": "ribbed_wall_petrol",
+          "bounds": [
+            [
+              -2.0,
+              -0.3100000023841858,
+              0.0
+            ],
+            [
+              2.0,
+              0.3100000023841858,
+              3.499999910593033
+            ]
+          ],
+          "gltf_transform": {
+            "translation": [
+              0,
+              0.1599999964237213,
+              0
+            ]
+          }
+        },
+        {
+          "name": "ribbed_wall_warm",
+          "bounds": [
+            [
+              -1.909999966621399,
+              -0.39973145723342896,
+              0.2861783802509308
+            ],
+            [
+              1.909999966621399,
+              -0.026456445455551147,
+              3.2147088050842285
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "ribbed_wall_worn",
+          "bounds": [
+            [
+              -1.9046159678989323,
+              -0.350000012665987,
+              0.4250000345977867
+            ],
+            [
+              1.9046162690649453,
+              0.012499992735683918,
+              2.9099996968832897
+            ]
+          ],
+          "gltf_transform": {
+            "translation": [
+              -1.7999999523162842,
+              0.6499999761581421,
+              0.30000001192092896
+            ],
+            "scale": [
+              0.10999999940395355,
+              0.10999999940395355,
+              0.05000000074505806
+            ]
+          }
+        }
+      ],
+      "uv0_count": 5980,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Petrol industrial iron",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [
+        {
+          "name": "surface_atlas",
+          "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39",
+          "bytes": 9694,
+          "width": 192,
+          "height": 64,
+          "decoded_rgba_bytes": 49152,
+          "relative_path": null
+        }
+      ],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "cathedral_corner_rib": {
+      "path": "game/assets/art/world/cathedral_corner_rib.glb",
+      "sha256": "3ebe6ebfc2a647a4efa63a7e9baa4cb89fe3a8c8b44432f802f32e2197649da9",
+      "bytes": 170624,
+      "triangles": 2378,
+      "bounds": [
+        [
+          -1.3704098463058472,
+          -0.4278775751590729,
+          0.0
+        ],
+        [
+          1.3704098463058472,
+          0.4650000035762787,
+          3.373225212097168
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "cathedral_corner_rib_0",
+          "bounds": [
+            [
+              -1.3704098463058472,
+              -0.4278775751590729,
+              0.0
+            ],
+            [
+              1.3704098463058472,
+              0.4650000035762787,
+              3.373225212097168
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 4842,
+      "materials": [
+        "Cathedral carved atlas"
+      ],
+      "images": [
+        {
+          "name": "cathedral_kit_atlas",
+          "sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+          "bytes": 268046,
+          "width": 512,
+          "height": 512,
+          "decoded_rgba_bytes": 1048576,
+          "relative_path": "game/assets/art/textures/cathedral_kit_atlas.png"
+        }
+      ],
+      "embedded": false,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "cathedral_cluster_pier": {
+      "path": "game/assets/art/world/cathedral_cluster_pier.glb",
+      "sha256": "0f1652af278472a6b10a305cef0ae5d9c1d096e7f119e8a17000097175c665f9",
+      "bytes": 495132,
+      "triangles": 7956,
+      "bounds": [
+        [
+          -0.5252709984779358,
+          -0.5252709984779358,
+          0.0
+        ],
+        [
+          0.5252709984779358,
+          0.5252709984779358,
+          5.383123874664307
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "cathedral_cluster_pier_0",
+          "bounds": [
+            [
+              -0.5252709984779358,
+              -0.5252709984779358,
+              0.0
+            ],
+            [
+              0.5252709984779358,
+              0.5252709984779358,
+              5.383123874664307
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "cathedral_cluster_pier_1",
+          "bounds": [
+            [
+              -0.42500001192092896,
+              -0.42186596989631653,
+              1.9909474849700928
+            ],
+            [
+              0.4244484007358551,
+              0.42186596989631653,
+              2.029052495956421
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 13904,
+      "materials": [
+        "Cathedral carved atlas",
+        "Cathedral brass atlas"
+      ],
+      "images": [
+        {
+          "name": "cathedral_kit_atlas",
+          "sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140",
+          "bytes": 268046,
+          "width": 512,
+          "height": 512,
+          "decoded_rgba_bytes": 1048576,
+          "relative_path": "game/assets/art/textures/cathedral_kit_atlas.png"
+        }
+      ],
+      "embedded": false,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "conduit": {
+      "path": "game/assets/art/world/conduit.glb",
+      "sha256": "21749d90da038832125fa3363a672388cc1ff15402f11112821ffa0605ea7949",
+      "bytes": 232364,
+      "triangles": 2912,
+      "bounds": [
+        [
+          -0.49000000953674316,
+          -2.00600004196167,
+          0.0
+        ],
+        [
+          0.49000000953674316,
+          2.0220000743865967,
+          0.5849999785423279
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "conduit",
+          "bounds": [
+            [
+              -0.49000000953674316,
+              -2.00600004196167,
+              0.0
+            ],
+            [
+              0.49000000953674316,
+              2.0220000743865967,
+              0.5849999785423279
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 5332,
+      "materials": [
+        "Petrol industrial iron",
+        "Warm ivory ossification"
+      ],
+      "images": [
+        {
+          "name": "conduit-emission",
+          "sha256": "125ac36cebffb3810c206f5dbe57aacc76d10a5c1ae5cb67008a097f44c231a1",
+          "bytes": 8261,
+          "width": 256,
+          "height": 256,
+          "decoded_rgba_bytes": 262144,
+          "relative_path": null
+        },
+        {
+          "name": "conduit-base",
+          "sha256": "e5ab44127b440fb4144b95c1eb18604dea5f558d63f54990d238793d3f5eb6ff",
+          "bytes": 24207,
+          "width": 256,
+          "height": 256,
+          "decoded_rgba_bytes": 262144,
+          "relative_path": null
+        },
+        {
+          "name": "conduit-orm",
+          "sha256": "9c8ab02a56ace5d88944b82ecca16c15769484b77feeb4de0e6e48279203c4ac",
+          "bytes": 9036,
+          "width": 256,
+          "height": 256,
+          "decoded_rgba_bytes": 262144,
+          "relative_path": null
+        }
+      ],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "witness_relief": {
+      "path": "game/assets/art/world/witness_relief.glb",
+      "sha256": "2fd2f96e259efbbd801e0d0d2e6c143c1da09b7753f49afac3ac4e1dead9c5b3",
+      "bytes": 293196,
+      "triangles": 3897,
+      "bounds": [
+        [
+          -1.75,
+          -0.5147948861122131,
+          0.0
+        ],
+        [
+          1.719314694404602,
+          0.20000000298023224,
+          4.800000190734863
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "witness_relief_bruised",
+          "bounds": [
+            [
+              -1.340000033378601,
+              -0.3499999940395355,
+              0.30000001192092896
+            ],
+            [
+              1.225807785987854,
+              -0.10999999940395355,
+              3.75
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_deep",
+          "bounds": [
+            [
+              -0.0899999812245369,
+              -0.5090000629425049,
+              0.6631760597229004
+            ],
+            [
+              0.2950742840766907,
+              0.019999999552965164,
+              4.260000228881836
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_petrol",
+          "bounds": [
+            [
+              -1.75,
+              0.20000000298023224,
+              0.0
+            ],
+            [
+              1.649999976158142,
+              0.20000000298023224,
+              4.800000190734863
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_sick",
+          "bounds": [
+            [
+              -0.5159297585487366,
+              -0.4650000035762787,
+              0.7750000357627869
+            ],
+            [
+              0.5159297585487366,
+              -0.39500001072883606,
+              2.924999713897705
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_suture",
+          "bounds": [
+            [
+              -1.719314694404602,
+              -0.18493634462356567,
+              0.5800738334655762
+            ],
+            [
+              1.719314694404602,
+              0.19907405972480774,
+              4.554651260375977
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_warm",
+          "bounds": [
+            [
+              -1.3858221769332886,
+              -0.5147948861122131,
+              0.5138629078865051
+            ],
+            [
+              1.3858221769332886,
+              -0.015668069943785667,
+              4.510000228881836
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "witness_relief_worn",
+          "bounds": [
+            [
+              -0.11499965190887451,
+              -0.4699999690055847,
+              0.38499999046325684
+            ],
+            [
+              0.1146712601184845,
+              -0.3100000023841858,
+              3.695000171661377
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 7895,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "lumen_sconce": {
+      "path": "game/assets/art/world/lumen_sconce.glb",
+      "sha256": "3bc949d9267aa35e9436db1a2be7ebc1c76c32954eaf1b59f08357ec16d8b248",
+      "bytes": 81244,
+      "triangles": 916,
+      "bounds": [
+        [
+          -0.5,
+          -0.4100000262260437,
+          0.0
+        ],
+        [
+          0.5,
+          0.1899999976158142,
+          2.0
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "lumen_sconce_bruised",
+          "bounds": [
+            [
+              -0.4618126451969147,
+              -0.19453051686286926,
+              0.1693909764289856
+            ],
+            [
+              0.4618126451969147,
+              0.10258103907108307,
+              1.8322014808654785
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "lumen_sconce_deep",
+          "bounds": [
+            [
+              -0.052101004868745804,
+              -0.3845691680908203,
+              0.41884440183639526
+            ],
+            [
+              0.05209772661328316,
+              -0.3123495578765869,
+              1.604610562324524
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "lumen_sconce_petrol",
+          "bounds": [
+            [
+              -0.10999999940395355,
+              0.11000000685453415,
+              0.0
+            ],
+            [
+              0.10999999940395355,
+              0.1899999976158142,
+              2.0
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "lumen_sconce_sick",
+          "bounds": [
+            [
+              -0.15499837696552277,
+              -0.3700000047683716,
+              0.2695641815662384
+            ],
+            [
+              0.1449279487133026,
+              -0.10999999940395355,
+              1.7287365198135376
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "lumen_sconce_warm",
+          "bounds": [
+            [
+              -0.45500001311302185,
+              -0.358834832906723,
+              0.09999999403953552
+            ],
+            [
+              0.4549999535083771,
+              0.08500000834465027,
+              1.8999998569488525
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "lumen_sconce_worn",
+          "bounds": [
+            [
+              -0.5,
+              -0.4100000262260437,
+              0.0650000050663948
+            ],
+            [
+              0.5,
+              0.1899999976158142,
+              1.9350000619888306
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 1850,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    },
+    "containment_capsule": {
+      "path": "game/assets/art/world/containment_capsule.glb",
+      "sha256": "b594376e4d239b8a09c48e7f0efe569185922a0475c6dae0e95882d2f445def7",
+      "bytes": 550936,
+      "triangles": 6476,
+      "bounds": [
+        [
+          -1.100000023841858,
+          -0.8999999761581421,
+          0.0
+        ],
+        [
+          1.100000023841858,
+          0.8999999761581421,
+          5.0
+        ]
+      ],
+      "node_bounds": [
+        {
+          "name": "containment_capsule_bruised",
+          "bounds": [
+            [
+              -0.9088047742843628,
+              -0.2750000059604645,
+              0.2798379361629486
+            ],
+            [
+              0.9088047742843628,
+              0.709130585193634,
+              4.082447052001953
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_deep",
+          "bounds": [
+            [
+              -0.699999988079071,
+              -0.7799999713897705,
+              0.2199999988079071
+            ],
+            [
+              0.699999988079071,
+              0.5199999809265137,
+              3.9700000286102295
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_petrol",
+          "bounds": [
+            [
+              -1.100000023841858,
+              -0.8999999761581421,
+              0.0
+            ],
+            [
+              1.100000023841858,
+              0.8999999761581421,
+              5.0
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_sick",
+          "bounds": [
+            [
+              -0.7616501450538635,
+              -0.8021352887153625,
+              0.4892638623714447
+            ],
+            [
+              0.7616501450538635,
+              -0.6350000500679016,
+              3.600144147872925
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_suture",
+          "bounds": [
+            [
+              -0.43764162063598633,
+              -0.2726016044616699,
+              0.6095542311668396
+            ],
+            [
+              0.4395209550857544,
+              -0.03657499700784683,
+              3.6663758754730225
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_warm",
+          "bounds": [
+            [
+              -0.9399632215499878,
+              -0.7670000195503235,
+              0.29886874556541443
+            ],
+            [
+              0.9399632215499878,
+              0.044999998062849045,
+              4.89314603805542
+            ]
+          ],
+          "gltf_transform": {}
+        },
+        {
+          "name": "containment_capsule_worn",
+          "bounds": [
+            [
+              -1.0850000381469727,
+              -0.07775433361530304,
+              0.23999999463558197
+            ],
+            [
+              1.0850000381469727,
+              0.48000001907348633,
+              4.955955505371094
+            ]
+          ],
+          "gltf_transform": {}
+        }
+      ],
+      "uv0_count": 12902,
+      "materials": [
+        "Bruised burgundy membrane",
+        "Deep socket and suture",
+        "Petrol industrial iron",
+        "Sick amber lumen",
+        "Suture scar and cartilage",
+        "Warm ivory ossification",
+        "Worn rivet steel"
+      ],
+      "images": [],
+      "embedded": true,
+      "import_space": "node TRS in glTF Y-up, then Blender XYZ=(x,-z,y)"
+    }
+  },
+  "sources": [
+    {
+      "root": "Q",
+      "path": "AGENTS.md",
+      "sha256": "d71164e2505d530557778475197cf0d64db938020a52f76105a0a551c9c17710",
+      "bytes": 4802
+    },
+    {
+      "root": "Q",
+      "path": "DESIGN.md",
+      "sha256": "0cc68a7e1bd2c65e39c6dd38c073d946a33c9fa088880ae3363a801f7de4a17a",
+      "bytes": 10119
+    },
+    {
+      "root": "Q",
+      "path": "ARCHITECTURE.md",
+      "sha256": "297050cf03158dfc8b8314771c416261a020b403076dc7a6586405eca393eb92",
+      "bytes": 7322
+    },
+    {
+      "root": "Q",
+      "path": "CHECKPOINT.md",
+      "sha256": "11c5fbf9f6bf55b7e4d8d5320783c9c9732a8b2ef180fc3acead7cea356ef060",
+      "bytes": 39226
+    },
+    {
+      "root": "Q",
+      "path": "docs/ART.md",
+      "sha256": "083f128247e8d9dad8514cd3621f7bc116381862ee9c93d84ac39db14b149a08",
+      "bytes": 28021
+    },
+    {
+      "root": "Q",
+      "path": "source/art/manifest.json",
+      "sha256": "6997bd208ea4c709f908bc1fd499c80a6aef7f4d9d06de1694c84d6c215fd005",
+      "bytes": 311642
+    },
+    {
+      "root": "Q",
+      "path": "tools/art_recipe.py",
+      "sha256": "32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6",
+      "bytes": 1675
+    },
+    {
+      "root": "Q",
+      "path": "tools/build_art.py",
+      "sha256": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+      "bytes": 61535
+    },
+    {
+      "root": "Q",
+      "path": "tools/build_nursery_gestation_v2.py",
+      "sha256": "21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883",
+      "bytes": 44571
+    }
+  ],
+  "references": [
+    {
+      "root": "overview-reference",
+      "path": "descent-overview-reference.png",
+      "sha256": "544c5889164baec3feea7954ac50dc4f387af8dcfab4c0ae06fc2f2c0b637a17",
+      "bytes": 3306103,
+      "inspected": true
+    },
+    {
+      "root": "title-reference",
+      "path": "title-intro-reference.png",
+      "sha256": "5b374fb00105dbeab622a2f36fd12309ed492731daca4fa0ea3b2e14a58b6ca7",
+      "bytes": 3161997,
+      "inspected": true
+    },
+    {
+      "root": "project",
+      "path": "source/art/references/production-descent-20261017.png",
+      "sha256": "f3ec5f067ec4d0c87676ca7a467c1094b0ede7af0f171b478671753bcc39f6c3",
+      "bytes": 3435229,
+      "inspected": true
+    },
+    {
+      "root": "overview-reference",
+      "path": "PROMPT.txt",
+      "sha256": "6aa9e076e5c80a75627afd9f9086d5a19dbf2261ba5e9b26ff91525a6530dafc",
+      "bytes": 2235,
+      "inspected": false
+    },
+    {
+      "root": "title-reference",
+      "path": "PROMPT.txt",
+      "sha256": "a1963fdedb055988fa76186d17bda258c06d7f9487a640f04284d792895b5563",
+      "bytes": 1701,
+      "inspected": false
+    },
+    {
+      "root": "amendment",
+      "path": "VERTICAL-DESCENT-GOAL-AMENDMENT.md",
+      "sha256": "0de2a127885c8e5f006de4239911ae5b1826a848fbfa18c988cb2b8397b4bfb5",
+      "bytes": 4356,
+      "inspected": false
+    },
+    {
+      "root": "architecture-reference02",
+      "path": "selected-reference.png",
+      "sha256": "af60ca2c7ff6496e6d04f2b48c07f700a82507dff7303aa25b8ff2a905ca35bf",
+      "bytes": 3301502,
+      "role": "selected GPT Image reference",
+      "inspected": true
+    },
+    {
+      "root": "architecture-reference02",
+      "path": "prompt.txt",
+      "sha256": "f5ee699e4bc71a85e7406f110c716fed0eff94e2ad775fcda47da9a69e1b80e4",
+      "bytes": 2687,
+      "role": "generation prompt",
+      "inspected": false
+    },
+    {
+      "root": "source03",
+      "path": "native/build02/preview-title01.png",
+      "sha256": "43749efc43ab329181d8a44913166723a40251a23bbf804fa18ab6e449f221f7",
+      "bytes": 1387398,
+      "role": "rejected actual native draft",
+      "inspected": true
+    }
+  ]
+}
