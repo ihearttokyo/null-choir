@@ -8,12 +8,20 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 [![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download the Alpha 4 Major Features Preview 02 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-02-Apple-Silicon.zip). **Playable Alpha 4 preview. The major-feature roadmap remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
+[Download the Alpha 4 Major Features Preview 03 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-03-Apple-Silicon.zip). **Playable Alpha 4 preview. The major-feature roadmap remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
 
-Archive size: **204,654,637 bytes**  
-SHA-256: `8be2311dfe7649de9bd24f573df9cac4e2ba50766761251d17569e1eb83ac2d2`
+Archive size: **204,674,603 bytes**  
+SHA-256: `d953d8bbc8611a30fdeed46669c4f86bbf9a02157ce6eb64a20e637c71d2e247`
 
-[Preview source](https://github.com/ihearttokyo/null-choir/tree/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game) · [Alpha 4 Major Features Preview 02 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+[Preview source](https://github.com/ihearttokyo/null-choir/tree/a99595a89f0bff0febc2e76bb6bf48053f6e823d/game) · [Alpha 4 Major Features Preview 03 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+
+### What changed in Major Features Preview 03
+
+- **Shots follow the visible sprite:** manual and assisted aim, melee, pellets, repeater, piercing shots and swept projectiles use the current animation/facing frame’s nontransparent pixels. Transparent gaps are not enemy hits; visible pixels outside the movement capsule can be hit. Native walls still block shots.
+- **Combat rules retained:** finite reach, ammunition, cooldowns, three-target piercing, guardian armor, blast cover/falloff and stale-map cancellation remain checked. This is sprite-image coverage—not anatomical regions, headshots or spatial boss weak points. Enemy/weapon artwork is unchanged in this preview.
+- **Validation:** 14 native source-integration checks passed. A separate tiny synthetic Metal renderer produced zero coverage mismatches across eight cases. The actual exported package passed resource/art/audio/save/Continue/progression checks plus six real finite shots through the shipped hit module. A connected Heart Blood→Ivory/Return→checkpoint→disk Continue→finale→exit/ending run passed from arranged finite Heart-entry inventory; it is not an earned seven-map prefix or full-campaign acceptance. Physical controls, listening and sustained FPS remain unverified.
+
+Preview 02’s terrain, six title/chapter paintings, illustrated progression/interludes and offline Suno selections remain included below.
 
 ### What changed in Major Features Preview 02
 
@@ -32,7 +40,7 @@ This remains an incremental preview. The full eight-level earned campaign—with
 
 ### Previous downloads and rollback
 
-The previous Alpha 4 release remains available for rollback: [Alpha 4 release](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4) · [Alpha 4 chapter-preview package](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-chapter-preview-Apple-Silicon.zip) (SHA-256 `f9880daac9b0036f3a106c000f2e6a8038c584ff2a52d8835af36ab86ac38b04`). [Alpha 3](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) and [Alpha 2](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2) remain available as earlier rollback builds. Prior archives are not replaced or deleted.
+[Major Features Preview 02](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-02-Apple-Silicon.zip) remains available for rollback. The previous Alpha 4 release also remains available: [Alpha 4 release](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4) · [Alpha 4 chapter-preview package](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-chapter-preview-Apple-Silicon.zip) (SHA-256 `f9880daac9b0036f3a106c000f2e6a8038c584ff2a52d8835af36ab86ac38b04`). [Alpha 3](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.3) and [Alpha 2](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2) remain available as earlier rollback builds. Prior archives are not replaced or deleted.
 
 [LICENSE](LICENSE) governs the original project and soundtrack. Official unmodified binary archives may be shared free of charge for noncommercial use; source and assets are not open source or public domain. Third-party notices retain their own terms.
 
