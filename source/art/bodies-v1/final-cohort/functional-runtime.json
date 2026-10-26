@@ -1,0 +1,21 @@
+{
+  "actors": 8,
+  "actual_player_query_worker_contacts": 9,
+  "checks": 555,
+  "consumer_sha256": "6463ec67fce42419da719825776811c4779996a6be07dc414390becb10161229",
+  "evidence_class": "actual-native",
+  "fixture_sha256": "0c2db7fa1100d8c34801189c24c8f5e82c1f25d8571d4b9aa383c24170a5cfe2",
+  "normal_cell_count": 328,
+  "old_eight_context_images_qualified": false,
+  "player_sha256": "d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff",
+  "report": {
+    "bytes": 88311,
+    "path": "source/art/bodies-v1/final-cohort/functional-native02-report.json",
+    "sha256": "10eb2a7f143527c2a4a1372c93e4f069fcbd3c58fb1392a64f5a45daf2884c15"
+  },
+  "runner_sha256": "f4998d691020e7199469aaffdd5c118f10cfd2a083b0d66049caef20dfa2e30f",
+  "schema": "null-choir-eight-actor-functional-runtime-v1",
+  "scope": "Retained actual normal-import constructors/cellRGBA/alpha query/Player forwarding/Worker vent and failclosed guards only. Eight old front captures were wall-only and do not qualify context visibility. Later separate visible8 fixture qualifies only idle0. No gameplay/PCK claim.",
+  "status": "PASS",
+  "worker_helper_sha256": "563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67"
+}

@@ -1,0 +1,111 @@
+{
+  "actor_kind": "worker",
+  "actual_source_data": {
+    "editable_joint_empties": 96,
+    "internal_texts": [],
+    "material_count": 12,
+    "mesh_objects": 370,
+    "pose_collections": [
+      "idle",
+      "walk_a",
+      "walk_b",
+      "attack",
+      "dead",
+      "clutch_vent"
+    ],
+    "settings": {
+      "camera": "Registered 128px orthographic camera",
+      "color_type": "MATERIAL",
+      "engine": "BLENDER_WORKBENCH",
+      "initial_pose_states": [
+        {
+          "hide_render": false,
+          "hide_viewport": false,
+          "joint_empties": 16,
+          "mesh_objects": 61,
+          "polygons": 1863,
+          "pose": "idle",
+          "vertices": 2000
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 16,
+          "mesh_objects": 61,
+          "polygons": 1863,
+          "pose": "walk_a",
+          "vertices": 2000
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 16,
+          "mesh_objects": 61,
+          "polygons": 1863,
+          "pose": "walk_b",
+          "vertices": 2000
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 16,
+          "mesh_objects": 61,
+          "polygons": 1863,
+          "pose": "attack",
+          "vertices": 2000
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 16,
+          "mesh_objects": 61,
+          "polygons": 1863,
+          "pose": "dead",
+          "vertices": 2000
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 16,
+          "mesh_objects": 65,
+          "polygons": 2089,
+          "pose": "clutch_vent",
+          "vertices": 2202
+        }
+      ],
+      "light": "STUDIO",
+      "look": "None",
+      "render_aa": "OFF",
+      "resolution": [
+        128,
+        128,
+        100
+      ],
+      "studio_light": "paint.sl",
+      "threads": 2,
+      "threads_mode": "FIXED",
+      "transparent": true,
+      "view_transform": "Standard"
+    },
+    "source_data_sha256": "cca077b0324db9018af6010c7d431623e1f7a80b48de05d1cb2736d952a534a3"
+  },
+  "decoded_non_UI_bytes_identical": true,
+  "evidence_class": "actual-native",
+  "external_dependencies": false,
+  "geometry_material_camera_reconstruction": false,
+  "opened_original_source": true,
+  "opened_public_source": true,
+  "original_source_native_proof_sha256": "6afd50711566afee89143a88e152f07db55ce3a22e94efb23e89b4feb961b4ce",
+  "original_source_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+  "own_loaded_filepath_excluded": true,
+  "public_RGBA_reproduction_performed": false,
+  "public_source_sha256": "26d1b3fddcc90bcb608ae1487147edb8654ea51283b8d0dcf9c162a7811d7cf0",
+  "rendered_frame_count": 0,
+  "residual_home_in_source_data": false,
+  "schema": "null-choir-public-master-native-open-v1",
+  "scope": "Actual read-only public/original source opening and source-data comparison. Existing original full beauty reproduction plus exact non-UI byte identity retained as unchanged-output evidence; no new public pixel rendering or visual/PCK/gameplay/FPS qualification.",
+  "source_data_identical_to_original": true,
+  "source_resaved": false,
+  "status": "PASS_PUBLIC_COPY_NATIVE_OPEN_SOURCE_DATA_MATCH_ORIGINAL",
+  "ui_bridge_sha256": "d746830b0291f829c748d50bb4749d9a54d784ace4d7ef0fad8448d8961d673f"
+}

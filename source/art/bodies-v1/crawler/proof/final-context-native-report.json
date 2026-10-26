@@ -1,0 +1,204 @@
+{
+  "actor_position": [
+    90.0,
+    0.783268511295319,
+    90.0
+  ],
+  "actor_spec": {
+    "cell": [
+      22.5,
+      22.5
+    ],
+    "id": "intake_enemy_01",
+    "kind": "crawler",
+    "yaw": 73.0
+  },
+  "camera": {
+    "accepted": true,
+    "actual_bearing": 2,
+    "camera_cell": [
+      22.9385566711426,
+      21.0655422210693
+    ],
+    "camera_eye": [
+      91.7542266845703,
+      3.05722904205322,
+      84.2621688842773
+    ],
+    "eye_to_actor_origin_distance_m": 6.41645669937134,
+    "horizontal_distance_m": 6.00000143051147,
+    "native_floor": [
+      91.7542266845703,
+      1.46722888946533,
+      84.2621688842773
+    ],
+    "native_unobstructed_occupied_samples": 6,
+    "preferred_bearing": 6.0
+  },
+  "camera_trials": [
+    {
+      "accepted": false,
+      "camera_cell": [
+        21.0655422210693,
+        22.0614433288574
+      ],
+      "preferred_bearing": 0.0,
+      "reason": "actual player capsule obstructed"
+    },
+    {
+      "accepted": false,
+      "camera_cell": [
+        22.0614433288574,
+        23.9344577789307
+      ],
+      "preferred_bearing": 2.0,
+      "reason": "actual player capsule obstructed"
+    },
+    {
+      "accepted": true,
+      "actual_bearing": 2,
+      "camera_cell": [
+        22.9385566711426,
+        21.0655422210693
+      ],
+      "camera_eye": [
+        91.7542266845703,
+        3.05722904205322,
+        84.2621688842773
+      ],
+      "eye_to_actor_origin_distance_m": 6.41645669937134,
+      "horizontal_distance_m": 6.00000143051147,
+      "native_floor": [
+        91.7542266845703,
+        1.46722888946533,
+        84.2621688842773
+      ],
+      "native_unobstructed_occupied_samples": 6,
+      "preferred_bearing": 6.0
+    }
+  ],
+  "checks": [
+    {
+      "message": "Exact known role descriptor",
+      "passed": true
+    },
+    {
+      "message": "Actual role's unchanged authored map builds",
+      "passed": true
+    },
+    {
+      "message": "Exact role's authored spawn/yaw, no actor reposition",
+      "passed": true
+    },
+    {
+      "message": "Final Enemy constructor consumes actual normal CompressedTexture2D resource",
+      "passed": true
+    },
+    {
+      "message": "Exact actual eightdirection runtime layout",
+      "passed": true
+    },
+    {
+      "message": "Original runtime pixel size/foot anchor untouched",
+      "passed": true
+    },
+    {
+      "message": "Original shaded nearest billboard/discard flags",
+      "passed": true
+    },
+    {
+      "message": "Same actual accepted normal-import RGBA",
+      "passed": true
+    },
+    {
+      "message": "Actual Level static colliders remain registered in this native World3D",
+      "passed": true
+    },
+    {
+      "message": "An actual authored boundary wall exists for occluded-approach negative control",
+      "passed": true
+    },
+    {
+      "message": "Representative cross-boundary native ray really hits unchanged Level wall",
+      "passed": true
+    },
+    {
+      "message": "Same visibility predicate rejects actual wall-occluded approach; empty-space false pass impossible",
+      "passed": true
+    },
+    {
+      "message": "Actual walkable floor/player-clear/native-opaqueLOS camera found",
+      "passed": true
+    },
+    {
+      "message": "Exact previously validated approach distance, no zoom rescue",
+      "passed": true
+    },
+    {
+      "message": "Actual visible depth-tested actor pixels +stable ABA opaque source witness (wall-only/savePNG falsepass rejected)",
+      "passed": true
+    },
+    {
+      "message": "No production actor/art/scale/light/camera-source changes",
+      "passed": true
+    },
+    {
+      "message": "Static callbacks/AI/input stay disabled",
+      "passed": true
+    },
+    {
+      "message": "Actual render/background evidence retained",
+      "passed": true
+    }
+  ],
+  "collision_negative_control": {
+    "actual_floor_bodies": 41,
+    "blocked": true,
+    "boundary_tile": [
+      21,
+      22
+    ],
+    "nonwalkable_direction": [
+      0.0,
+      -1.0
+    ],
+    "ray_end": [
+      86.0,
+      2.54999995231628,
+      87.25
+    ],
+    "ray_start": [
+      86.0,
+      2.54999995231628,
+      88.75
+    ],
+    "registered_static_world_colliders": 312,
+    "scope": "negative control only, not a captured camera or moved actor"
+  },
+  "failures": 0,
+  "map": "01_intake.json",
+  "normal_RGBA": "3aedc249a859302f11064a44ac7d0b4063f354a80594f1e8ccb44e6cc72e8bfa",
+  "role": "crawler",
+  "runtime_uri": "res://assets/art/sprites/bodies-v1/crawler.png",
+  "scope": "Actual unchanged authored role map/spawn + final Enemy normal Texture2D; one manually selected idle0. No ImageTexture/scene-light/art/scale override, input/AI/gameplay/FPS claim",
+  "views": [
+    {
+      "actual_bearing": 2,
+      "backgrounds": [
+        "background-a.png",
+        "background-b.png"
+      ],
+      "file": "context-00.png",
+      "manual_idle_direction": 0,
+      "no_ImageTexture_override": true,
+      "resolution": [
+        640,
+        360
+      ],
+      "source_alpha_samples": 6,
+      "stable_opaque_source_witnesses": 6,
+      "tested_frame": 0,
+      "visible_changed_pixels": 1757
+    }
+  ]
+}

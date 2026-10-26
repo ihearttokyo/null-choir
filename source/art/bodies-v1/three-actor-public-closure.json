@@ -1,0 +1,169 @@
+{
+  "actor_packets": [
+    {
+      "actual-context": {
+        "bytes": 10583,
+        "path": "source/art/bodies-v1/worker/proof/actual-context.json",
+        "sha256": "2e0d3b503697f14da766b20fb43e21f331e1382fe76e0658bcb5fc830d73218d"
+      },
+      "independent": {
+        "bytes": 5449,
+        "path": "source/art/bodies-v1/worker/proof/independent.json",
+        "sha256": "bcb95d93cb3cf5b27270a04683ea3b3c6504f4d354c5b5d0995a786024aabbcb"
+      },
+      "kind": "worker",
+      "normal-import": {
+        "bytes": 4689,
+        "path": "source/art/bodies-v1/worker/proof/normal-import.json",
+        "sha256": "d6f1b94507b8e2ad3cd7a218c7276c739f0f47360a5f091f8a312b39004d528b"
+      },
+      "original_authored_source_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+      "public_master_bridge": {
+        "bytes": 4980,
+        "path": "source/art/bodies-v1/worker/proof/public-master-bridge.json",
+        "sha256": "2332ec7e300dad2e2968877b47202606929790bc009b43bc30f9134de7fe86fa"
+      },
+      "public_source": {
+        "bytes": 4179167,
+        "path": "source/art/bodies-v1/worker/worker.blend",
+        "sha256": "26d1b3fddcc90bcb608ae1487147edb8654ea51283b8d0dcf9c162a7811d7cf0"
+      },
+      "source-native": {
+        "bytes": 6604,
+        "path": "source/art/bodies-v1/worker/proof/source-native.json",
+        "sha256": "2d8c1af0b9dcb66874524043e507cdf6c28089eb3a3302f7d797b5a899d39ab9"
+      }
+    },
+    {
+      "actual-context": {
+        "bytes": 9082,
+        "path": "source/art/bodies-v1/crawler/proof/actual-context.json",
+        "sha256": "f2703670ee1e5829122179651d0ef004062607e92122df3742ca3058e0e0f4c4"
+      },
+      "independent": {
+        "bytes": 4877,
+        "path": "source/art/bodies-v1/crawler/proof/independent.json",
+        "sha256": "0f280730912bc9116e4b0daf29adc67066316c5632dd5f9a59485b226b97054d"
+      },
+      "kind": "crawler",
+      "normal-import": {
+        "bytes": 4117,
+        "path": "source/art/bodies-v1/crawler/proof/normal-import.json",
+        "sha256": "0885903c7af545f65bf0c7cb3c7e64ffd9e457210f8c734cd8c8bf2688d89185"
+      },
+      "original_authored_source_sha256": "4f57946fba3d49e969780c1d6c2aa74ebb122db4772a53bd2fa059e7dafba254",
+      "public_master_bridge": {
+        "bytes": 4989,
+        "path": "source/art/bodies-v1/crawler/proof/public-master-bridge.json",
+        "sha256": "1a42c3b174fda19fef82d24be54724e1e43b3f76e0a135b54af3031333ba7b8d"
+      },
+      "public_source": {
+        "bytes": 4885723,
+        "path": "source/art/bodies-v1/crawler/crawler.blend",
+        "sha256": "001d76d6b58c42add608bccff1d81e73b88611f9defbcaee204a6bf53825c50d"
+      },
+      "source-native": {
+        "bytes": 5890,
+        "path": "source/art/bodies-v1/crawler/proof/source-native.json",
+        "sha256": "d1a395c341511003d7ff9da0c52e36bd86d6363d12398cf1e960e7ec2820914d"
+      }
+    },
+    {
+      "actual-context": {
+        "bytes": 8996,
+        "path": "source/art/bodies-v1/brute/proof/actual-context.json",
+        "sha256": "b43d7e6ce9ac7e460551b25b9185a7b23df464afddcd6822e51fb074f3090245"
+      },
+      "independent": {
+        "bytes": 4869,
+        "path": "source/art/bodies-v1/brute/proof/independent.json",
+        "sha256": "59c88edd5afeef6bb0ebfe8f8db47786d38d1b39b8cfc2f318b75f7e1de6234f"
+      },
+      "kind": "brute",
+      "normal-import": {
+        "bytes": 4110,
+        "path": "source/art/bodies-v1/brute/proof/normal-import.json",
+        "sha256": "fd97b4f358bc5d386dfda368576cb717de994efbce798bff85427a620a1b0d01"
+      },
+      "original_authored_source_sha256": "d83059c622f341d128add73576255610752e386a89fe07438f39e45530b11922",
+      "public_master_bridge": {
+        "bytes": 4975,
+        "path": "source/art/bodies-v1/brute/proof/public-master-bridge.json",
+        "sha256": "bd4bc89b0dc0d0bfe17ae6a2659c4737b43f7771aa889628569eb4eb4075f744"
+      },
+      "public_source": {
+        "bytes": 3911210,
+        "path": "source/art/bodies-v1/brute/brute.blend",
+        "sha256": "5f9e599d6fcee3cccd7b8da1d73223f937ab8e51df2ae82752d4f35b9aed6b26"
+      },
+      "source-native": {
+        "bytes": 5876,
+        "path": "source/art/bodies-v1/brute/proof/source-native.json",
+        "sha256": "963727bd299bd7f48c6d1db6a242385b3b43fdfeb9755cd31c33afa03cd3d318"
+      }
+    }
+  ],
+  "actual_native_result_sha256": "dda3303e147c263cbf00e31737efc492577f8e5265db4b7b832bbf1503945e24",
+  "actual_native_seconds": 2.4135,
+  "all_input_byte_mtime_mode_flags_unchanged": true,
+  "diagnostics": [],
+  "fragment": {
+    "bytes": 120638,
+    "path": "source/art/bodies-v1/packet-three-actors.json",
+    "sha256": "83a5d917f4468f25fc427ee2b0720b7507485791157d6af2473f9e9b2b4b2c79"
+  },
+  "input_unchanged_evidence_sha256": "e1b97e9be54fdc02e35a998420ccb0e3653d4b695b957e97e0b60ec9cefa45c2",
+  "no_new_independent_art_review": true,
+  "pending_gates": [
+    "Five remaining actor packets",
+    "Exact final active eight-entry Enemy BODY_ATLASES source identity and matching actual context qualification",
+    "Bridge-aware strict ledger validation of exact original-authored/public UI-only source relationship; no blind source pin substitution",
+    "Canonical integration/retained legacy119 and140 guards; PCK/dynamic/human/FPS outside scope"
+  ],
+  "pending_roles": [
+    "caster",
+    "guardian",
+    "summoner",
+    "nursery_warden",
+    "choir_avatar"
+  ],
+  "portable_non_UI_digest_binding": "Each qualified public bridge exposes exact decoded_non_UI_sha256 and DNA-only zero-normalization method; original/public normalized digests equal; actual native receipt bytes unchanged.",
+  "public_RGBA_renders": 0,
+  "public_source_native_status": "ACTUAL_PASS_READONLY_ORIGINAL_PUBLIC_SOURCE_DATA_PARITY",
+  "raw_metadata_privacy_preparation": {
+    "actors": [
+      {
+        "kind": "worker",
+        "raw_png_metadata_bridge": {
+          "bytes": 50749,
+          "path": "source/art/bodies-v1/worker/proof/raw-PNG-File-metadata-bridge.json",
+          "sha256": "7eb0f4dc8cec3554d7613c84fafbeb7597c84db581e6a364138170f48f9effd9"
+        }
+      },
+      {
+        "kind": "crawler",
+        "raw_png_metadata_bridge": {
+          "bytes": 42441,
+          "path": "source/art/bodies-v1/crawler/proof/raw-PNG-File-metadata-bridge.json",
+          "sha256": "6ede0cbbb83030f62cea65a1a932beafea30f3808eca3d4345289fbe17ecb1fe"
+        }
+      },
+      {
+        "kind": "brute",
+        "raw_png_metadata_bridge": {
+          "bytes": 42387,
+          "path": "source/art/bodies-v1/brute/proof/raw-PNG-File-metadata-bridge.json",
+          "sha256": "808aa9ef9ad88543fa2a7e478b015dad8754985919de2e77c14bbb77c5fdf0d6"
+        }
+      }
+    ],
+    "native_receipts_unchanged": true,
+    "new_native_runs": 0,
+    "retained_preprivacy_fragment_sha256": "ccf0da57b5f7aa29beb8dddbdd0ca83694f04c9eba24f16d7d53f61bcdba72fe",
+    "scope": "Later pure public-copy File tEXt removal only. Prior native-open input-unchanged statements remain historical evidence of that original run, not a new run on this metadata-prepared fragment."
+  },
+  "sampled_peak_process_group_rss_bytes": 289652736,
+  "schema": "null-choir-three-actor-public-packet-closure-v1",
+  "status": "THREE_PUBLIC_ASSET_SOURCE_PACKETS_READY_FINAL_CONSUMER_AND_COHORT_PENDING",
+  "whole_eight_actor_cohort_qualified": false
+}

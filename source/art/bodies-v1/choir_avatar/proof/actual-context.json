@@ -1,0 +1,271 @@
+{
+  "actor_kind": "choir_avatar",
+  "actual_context_report": {
+    "bytes": 76383,
+    "sha256": "3acb18b6d264fe1bedb02c94d0b39aa7b4f9a4069685e4403ce9f00f96d642e6"
+  },
+  "actual_native_receipt": {
+    "bytes": 12739,
+    "sha256": "54e9230aca41676020297cb620653af0e4a4d738f50e9c6a5dafd3798e184e39"
+  },
+  "atlas_sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902",
+  "candidate_runtime_uri": "res://assets/art/sprites/bodies-v1/choir_avatar.png",
+  "configured_runtime_uri": "res://assets/art/sprites/choir_avatar.png",
+  "consumer_binding_qualification": "PENDING_FINAL_BODY_ATLASES_INTEGRATION",
+  "consumer_sha256": "4b8d84543100529b73145d23ceb4438368b0b12a4479f8f1f6876c6205abe63b",
+  "evidence_class": "actual-native",
+  "manual_atlas_direction": true,
+  "resolution": [
+    640,
+    360
+  ],
+  "rgba_sha256": "56353ec096401bc9c3a8c6be8e3dc3ceda25879cd5174f3ae6c77f95f8b7bc32",
+  "schema": "null-choir-actor-actual-context-v1",
+  "scope": "Actual static Level40 views, unchanged map lighting/profile/foot anchor. Final8 consumer/PCK/human/FPS not qualified.",
+  "status": "PASS",
+  "tested_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "texture_override": "Accepted full atlas ImageTexture on actual configured Enemy Sprite3D; separate actual normal-import receipt above. Static views, not observed AI/attack/death timing.",
+  "views": [
+    {
+      "bytes": 115510,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-00.png",
+      "sha256": "ff568628e634c781c8458a1797f187dc90eeb16a742138763c1e29914a5ceb2f"
+    },
+    {
+      "bytes": 112671,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-01.png",
+      "sha256": "30ecaf2db4c2bc458a04b5401c1cf60bc7785695bb30ddcab7d75031aa1bef85"
+    },
+    {
+      "bytes": 105441,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-02.png",
+      "sha256": "28599ba5b362232437a0bfb8a4b088ecf570535fac773f68137a7ed3e9a23880"
+    },
+    {
+      "bytes": 109514,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-03.png",
+      "sha256": "5027cdbbc7d79f880ddad2bdd4d8c700bd3016b5d5e45c2884c2808def5a5bb0"
+    },
+    {
+      "bytes": 110754,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-04.png",
+      "sha256": "2ae9366a77c5d7c0ed21a3c53231240b729565143a6166a3c56f1c27ac729fb6"
+    },
+    {
+      "bytes": 109026,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-05.png",
+      "sha256": "ff5d13222a5628fe90f5d7297943793d762f9c029fb47e53b228ffbe4a25c404"
+    },
+    {
+      "bytes": 104513,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-06.png",
+      "sha256": "63434223eceeaef5e842fdddae934b35e458983826dd398d56c7268845de3b48"
+    },
+    {
+      "bytes": 110863,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-07.png",
+      "sha256": "f4b82ce07ebca37bb9ca2926ec7e077b14dd1944c5ac906ce8a9ba5ad62c2c56"
+    },
+    {
+      "bytes": 116507,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-08.png",
+      "sha256": "b0ba95e996032be898911d39bf943a452f604b1718eba0a02af00c5ef64b6d62"
+    },
+    {
+      "bytes": 113686,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-09.png",
+      "sha256": "d36d77f57009b05c9e8730ab4a7dedd11a3b35e1e440f05996a42e3a3ca96317"
+    },
+    {
+      "bytes": 106787,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-10.png",
+      "sha256": "51d48447a84420608ad99a037012664771a0045b5afe66e989df921f06600642"
+    },
+    {
+      "bytes": 109663,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-11.png",
+      "sha256": "b475b7d5e8e6dde7fb70623c46bcad6a9593742d92b002abd819175167ab228e"
+    },
+    {
+      "bytes": 111618,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-12.png",
+      "sha256": "c4b3b65ec1d11caa906d80b13546d84ee6ea0d135d1046aa607f3624a3f7c3cc"
+    },
+    {
+      "bytes": 109474,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-13.png",
+      "sha256": "ad84b9cb5ea42e3db7e52dde2b6dcd6e37dba0cdac955fde274bc25421e99453"
+    },
+    {
+      "bytes": 104810,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-14.png",
+      "sha256": "0617b2850cbcc0a0f30d4abd022066e65e423046ecb13914580e738c880afb7d"
+    },
+    {
+      "bytes": 110210,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-15.png",
+      "sha256": "370a735646d63384ffcd4ea0a09e536ceaae3f278e57f676de174b80e4496456"
+    },
+    {
+      "bytes": 116078,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-16.png",
+      "sha256": "c09a4466f1c575843b78ea010a88d36e0feb3503de7ad9b0fe52660cef3fd455"
+    },
+    {
+      "bytes": 112246,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-17.png",
+      "sha256": "41f365715972aee49744ac0ef0399b1271f67e7576d5179d9320df449ecc0e54"
+    },
+    {
+      "bytes": 106318,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-18.png",
+      "sha256": "caeabf7b5ec3f1cc3bf7a73cbf32c4928ec314f96226096e30bbfb47c2672d40"
+    },
+    {
+      "bytes": 110351,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-19.png",
+      "sha256": "c503e55acbb2326e4ab6a4f363a6f4c1d61d213caa341a4b1f62b7a62b7b72dd"
+    },
+    {
+      "bytes": 110783,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-20.png",
+      "sha256": "3ba74e02f939922587de3b814b6b7100d438d0df7f04d0047862c55979d50ea0"
+    },
+    {
+      "bytes": 108819,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-21.png",
+      "sha256": "3438f68aefb0998d7525f84ffbc74ac97848fdbab433132390fa3be2668e3184"
+    },
+    {
+      "bytes": 104874,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-22.png",
+      "sha256": "a9e103b528ce8690aa3e24dd2b6dc952fa4c05d2f0ac582da4ada09e6eea8930"
+    },
+    {
+      "bytes": 111379,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-23.png",
+      "sha256": "03301abc97db859ad975f52e53e5a1dc41876338a6556a79bf93ae298a294337"
+    },
+    {
+      "bytes": 116428,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-24.png",
+      "sha256": "33017ad224a3bbce7f103b930655fb19173fd1539465ddf81efba313789b7b88"
+    },
+    {
+      "bytes": 113677,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-25.png",
+      "sha256": "8f5cfbc2c3e571412c5c991e1ca74901bdc2b6e9df22b78bdadedca29d8b496b"
+    },
+    {
+      "bytes": 106781,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-26.png",
+      "sha256": "981504bba93d09c7eacd807ec30ae10a85f5f52dd20282922389bc1c41514c3d"
+    },
+    {
+      "bytes": 110626,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-27.png",
+      "sha256": "c9c3f50024a8ff3ce531625dd39daa206e7c0516eb1969ed8158cf7c5d0bd505"
+    },
+    {
+      "bytes": 110809,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-28.png",
+      "sha256": "6be4791bda015f2a441deaa3c6b1126034331ef431ab3c7a73552df73c88bb33"
+    },
+    {
+      "bytes": 108886,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-29.png",
+      "sha256": "cb0de8e72eb5440d1cd86af3fe42d7b8a746146faa599dc37156401f694ba4d1"
+    },
+    {
+      "bytes": 105023,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-30.png",
+      "sha256": "af7eb99efd63ad6242aea6c77a7f0ff89ac9208b00cfee4e3ddd437763c4566f"
+    },
+    {
+      "bytes": 111854,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-31.png",
+      "sha256": "51d46662c21442959bbb8282712fa1c344edf074843d2465c1ee062190765cd8"
+    },
+    {
+      "bytes": 105330,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-32.png",
+      "sha256": "99f4a5b23fb3537a8e76933134a382c418a21f4067334e21a6d48f42828bf080"
+    },
+    {
+      "bytes": 104420,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-33.png",
+      "sha256": "34580090726fd9a8f7389fd5d7b3871f5ca1cc38985c9d3820a2d6f963cfd103"
+    },
+    {
+      "bytes": 102019,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-34.png",
+      "sha256": "10543fab62b9f813d2f028ed78f0f7ec6ec38f0c31ddc20c0c6cf9363ccac400"
+    },
+    {
+      "bytes": 101140,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-35.png",
+      "sha256": "2c79964675ac24bcc41b6053d304d5315e3b7e04446b419edab8be0d9f548fc3"
+    },
+    {
+      "bytes": 103210,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-36.png",
+      "sha256": "a2eaea41c25f171e224ecb967f7732ede519728c9e9c3160146f388fc7e678bf"
+    },
+    {
+      "bytes": 100571,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-37.png",
+      "sha256": "cc1889c535997abff07c7e2831c2740215ba81ec600053f390fc70274f84ad9f"
+    },
+    {
+      "bytes": 100710,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-38.png",
+      "sha256": "fd5c7bb8f8c677a3b216071c1e60e7d5aa4be954eef08a24bc0d2f0720ab78d5"
+    },
+    {
+      "bytes": 103732,
+      "path": "source/art/bodies-v1/choir_avatar/proof/context-39.png",
+      "sha256": "9d807c41bf7b92a371988d1ed528bc5b8a38bbbe72bff5d0c99067c98afaccb1"
+    }
+  ]
+}

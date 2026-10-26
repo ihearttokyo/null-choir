@@ -1,0 +1,23 @@
+{
+  "schema": "null-choir-independent-static-art-approval-v1",
+  "kind": "choir_avatar",
+  "status": "PASS",
+  "review_record": "Parent-curated score-free extract of actual independent read-only intended-use review; not a new review",
+  "private_original_review_sha256": "785b48359ad985db98cbff9f66224a7c718095a15e4ee5ea552075ca05e2adbf",
+  "scope": "Actual static Level Sprite3D at640x360/6m/shaded/nearest unchanged map lighting and scale; all8directions and baseposes",
+  "frames": 40,
+  "atlas_sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902",
+  "source_blend_sha256": "ade72ce2487972742db9e034561c040445a7ae6d900f835cc96de1eba0734e15",
+  "exporter_sha256": "74d61e00651ee4f0b5b573e593f2fa459fd6e4f51504ec9d70d98bfce719e5dc",
+  "actual_context_report_sha256": "3acb18b6d264fe1bedb02c94d0b39aa7b4f9a4069685e4403ce9f00f96d642e6",
+  "material_blockers": [],
+  "freeze": "No optional art polish; exact accepted bytes",
+  "not_proven": [
+    "Normal import by this review",
+    "PCK distribution",
+    "Dynamic AI/timing",
+    "Human input/listening/FPS"
+  ],
+  "actual_context_ready_sha256": "54e9230aca41676020297cb620653af0e4a4d738f50e9c6a5dafd3798e184e39",
+  "context_binding_note": "Report hash is actual native/renders/static-report.json; separate READY wrapper hash retained explicitly. Parent corrected wrapper-vs-report field, not a new review."
+}

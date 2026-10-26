@@ -1,0 +1,91 @@
+{
+  "actor_kind": "nursery_warden",
+  "actual_native_jobs": [
+    {
+      "batch": "all40",
+      "exit_code": 0,
+      "rendered_frame_count": 40,
+      "result": {
+        "bytes": 22905,
+        "sha256": "bd5289a01d8205fb30bbd09306438fb3248776ee790ae9a23d89adbe6486127c"
+      },
+      "source_unchanged": true
+    }
+  ],
+  "atlas_sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506",
+  "cell_rgba_sha256": [
+    "d368f050f8d62dbe2cef651d69a924768b432b5d2ed5f80d7dbef6067a0e2380",
+    "ea551246a0cdbb84d8ffbd9f702b3c2f04483150909736c145010c71fe1e1a47",
+    "603d3f720c4dd5a3c0c0f9116747613a5bd1bf88751521b796a0b4c571b34eb9",
+    "d127d8b911cf1d6f04fcd8c2e2b1eec8db21f5258c8cf948bc7c36b334033a39",
+    "f159db6f4a7f1b684b365e1417b7ffc730384b672cb90a9d2a1846c414e06bdd",
+    "dfb59ae1664ea87ef2d94d74dfb798b6e32148fc909be96e9acd747946fc3022",
+    "dcc52d9bd55d2c66b2200c5b7f4b3bdc437896b457f8ec08398d5a00f2e01366",
+    "5bab9602c2f07ab04a30c86eb3504a6703e52cca1bfec9835a1e5ce76e45d86d",
+    "316cf3c090f150db6a9d5c9ed90025355672a2a3730295f469ab004ab40153a7",
+    "e069d00383f71eaaf2e4ca4f661d91cd52648eb1a78949fd210f978218b8d593",
+    "e64ec6184021d715c8a6c695033f2fac92fe8743b94ea9c498ff1931fcae37c0",
+    "fa7c9d1f5689308e7ad465e1692ca8a8578100b71e8370ec2f5223285c60d61c",
+    "655e71fa564085e5648f04acd0cceeda22bde4fb0218600d286d38e41bcea4fc",
+    "7ef05805d42102ea94b639e69107140a12f611c6afa686eb6bd9125bd6ee9908",
+    "a5f47c70b551069cabba8ace7c79947bb52b73d9328c2393950722c21d65524d",
+    "cadf41d3f5526fba4e9e952e7be437559940f8db38b816937ceee507c85c6d96",
+    "97bfd49bb77fbcafd583254fe01cf23d431435c4a57a79f322c238b2c6bdf579",
+    "f694a16d3ba252231f2c163a01af83c16fff86ce03e93094be1b6d857cf5e1ae",
+    "613e269b29ad7ba09c6b8a0324dbb010f625504285473b402b57a06ba9fb10d7",
+    "6989067fb7450a00c3177372629d886ef0d67189ad993ab95993c2a77bd6b112",
+    "c908db8d202f65782fda7f1c36e3712540de0b13ec19ad36641e0e5984ec5d8d",
+    "52db41c4b95a85262e8e09600f8a2233a01c57f618c1a0602b8652281838fd5a",
+    "2cd1ada5c7e695e52ff0cd50b5a863591e68e9db06fe2f72fbb0f29dee83184f",
+    "66b00f2328defefddc732760bd11e1d6fa2038f178b90dd1a5897eb963016c4f",
+    "2fee90a87e3950d085c71dd02ea68d9444af29507abc0407c4b80820603ed161",
+    "43c1ced8c34090fc71952ebb3f95789e0b3f5e434c7af436eb80bbdd1d0b0d1d",
+    "418603ec18f2ee0c6f4a18f1a7288c132fe4cb9603ddd8eaf7756e6f49e61f74",
+    "266b2cb75eccac5de0f6c27d9de1186fad44e0f8207776161e9defd3986e89dc",
+    "7b606c2392aa4ff6c38e92ed32fb1f64c39a0a286bdf8dce8340070a8997aca5",
+    "1c0ec691b054b1434a7f72955392558e9f00d79caa1afb21bfd466f953b64ca9",
+    "db083fec7d99d3ba0db80da88adcc38543d6ac4ef1fe958c312d633e88d7c9d5",
+    "f86bf40ccd643c2c497cad91fc45b5b8889008239ed74de5c339a193a07ccec7",
+    "571205b45a993bac5ad18ae9c3e543c87b0231c96b07a248ccf93020a19e6c78",
+    "515e2db4198196c0ce9fa63f1dbbcbdce220370cb61868254409237519bcf289",
+    "124381b17fb5f4620805336bbec025e399cbc260fad4729f414438fedc34883f",
+    "f9f60eb37e6a1d237618e2fc1d971adc29800a8b36df2abbcb5b489e9831b76f",
+    "e1bbf03b228ff9f25d11a7273ecca35ecfeac71b2b30cde40f22107f3dc0fe34",
+    "fb4ce4fd1a64f7c0b2068a7434e1e415aa5207ea6c038f00bd7c5d6d2554e0a9",
+    "ba22e6acc43c80efbd0e785cfb1d7d6ccb921f178a17214d0b9d8b93489faf5f",
+    "63d362955dd6ef4ce6eb2b4d50cfabf0fae2d212ee701fc57dfab61fb18a71e3"
+  ],
+  "evidence_class": "actual-native",
+  "evidence_receipt": {
+    "bytes": 173123,
+    "sha256": "6806dfa69b8da4bae2a00ca57deb438cc22f9e2eeb4265d7ef1107b22ec5bb4b"
+  },
+  "generator_sha256": "b25b13563358b71016019251674e14788393391a72c0a5b22f801d9485a99e6e",
+  "geometry_not_image_card": true,
+  "geometry_reconstructed": false,
+  "opened_saved_source": true,
+  "pose_collections": [
+    "idle",
+    "walk_a",
+    "walk_b",
+    "attack",
+    "dead"
+  ],
+  "public_dependencies_only": true,
+  "rendered_frame_count": 40,
+  "rgba_sha256": "70f9746a80f8ec593541171fb3d95e32ca8476947424cb166fd19bdec1fe6694",
+  "saved_source_resaved": false,
+  "schema": "null-choir-actor-source-native-v1",
+  "scope": "Actual frozen original saved-master full40 source reproduction; does not qualify public UI-copy opening or portable path-adjusted generator.",
+  "source_blend_sha256": "d5fea323ba0fe3dd74890c7d70b0d96d02a52be7230bf599171341089da3c368",
+  "source_inputs": [
+    {
+      "bytes": 1972429,
+      "path": "source/art/bodies-v1/nursery_warden/actor-animation-reference-v2.png",
+      "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+    }
+  ],
+  "source_unchanged": true,
+  "status": "PASS",
+  "verified_editable_mesh_objects": 450
+}

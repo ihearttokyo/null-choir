@@ -1,0 +1,124 @@
+{
+  "actual_public_native_open_result_sha256": "dda3303e147c263cbf00e31737efc492577f8e5265db4b7b832bbf1503945e24",
+  "diagnostics": [],
+  "native_seconds": 2.4135,
+  "original_source_inspection": {
+    "actors": [
+      {
+        "embedded_text_blocks": 0,
+        "generator_dependencies": [],
+        "image_blocks": 0,
+        "kind": "worker",
+        "linked_library_blocks": 0,
+        "master_modified": false,
+        "master_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+        "notes": "Pair portable-source internal Text has empty filepath/library none in actual reopened-source evidence. Worker has no Text blocks. Generator reference PNG retained per actor, selected by exact hash. No master resave/path rewriting performed.",
+        "other_external_media_blocks": 0,
+        "saved_UI_metadata": [
+          {
+            "BHead_code": "DATA",
+            "BHead_offset": 241780,
+            "DNA_index": 849,
+            "DNA_structure": "FileSelectParams",
+            "field": "dir[1282]",
+            "field_offset": 96,
+            "meaning": "Incidental saved file-browser UI state; not a source dependency",
+            "path_value_redacted": true,
+            "payload_offset": 241812
+          }
+        ],
+        "source_environment": [
+          "Blender5.2",
+          "builtin Workbench paint.sl studio light"
+        ]
+      },
+      {
+        "embedded_text_blocks": 3,
+        "generator_dependencies": [
+          {
+            "bytes": 18329,
+            "path": "source/art/bodies-v1/crawler/actor_geometry_v02.py",
+            "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+          },
+          {
+            "bytes": 925700,
+            "path": "source/art/bodies-v1/crawler/portable-source.json",
+            "sha256": "d9b81efc64793625a1124a2434796f6118837f5f4ae2e8c398510b0347658dae"
+          }
+        ],
+        "image_blocks": 0,
+        "kind": "crawler",
+        "linked_library_blocks": 0,
+        "master_modified": false,
+        "master_sha256": "4f57946fba3d49e969780c1d6c2aa74ebb122db4772a53bd2fa059e7dafba254",
+        "notes": "Pair portable-source internal Text has empty filepath/library none in actual reopened-source evidence. Worker has no Text blocks. Generator reference PNG retained per actor, selected by exact hash. No master resave/path rewriting performed.",
+        "other_external_media_blocks": 0,
+        "saved_UI_metadata": [
+          {
+            "BHead_code": "DATA",
+            "BHead_offset": 241780,
+            "DNA_index": 849,
+            "DNA_structure": "FileSelectParams",
+            "field": "dir[1282]",
+            "field_offset": 96,
+            "meaning": "Incidental saved file-browser UI state; not a source dependency",
+            "path_value_redacted": true,
+            "payload_offset": 241812
+          }
+        ],
+        "source_environment": [
+          "Blender5.2",
+          "builtin Workbench paint.sl studio light"
+        ]
+      },
+      {
+        "embedded_text_blocks": 3,
+        "generator_dependencies": [
+          {
+            "bytes": 18329,
+            "path": "source/art/bodies-v1/brute/actor_geometry_v02.py",
+            "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+          },
+          {
+            "bytes": 684749,
+            "path": "source/art/bodies-v1/brute/portable-source.json",
+            "sha256": "1e4c9caba72f06b896d469a2a4c69429d69fe3cb1921764ba5a1afa2acfb728e"
+          }
+        ],
+        "image_blocks": 0,
+        "kind": "brute",
+        "linked_library_blocks": 0,
+        "master_modified": false,
+        "master_sha256": "d83059c622f341d128add73576255610752e386a89fe07438f39e45530b11922",
+        "notes": "Pair portable-source internal Text has empty filepath/library none in actual reopened-source evidence. Worker has no Text blocks. Generator reference PNG retained per actor, selected by exact hash. No master resave/path rewriting performed.",
+        "other_external_media_blocks": 0,
+        "saved_UI_metadata": [
+          {
+            "BHead_code": "DATA",
+            "BHead_offset": 241780,
+            "DNA_index": 849,
+            "DNA_structure": "FileSelectParams",
+            "field": "dir[1282]",
+            "field_offset": 96,
+            "meaning": "Incidental saved file-browser UI state; not a source dependency",
+            "path_value_redacted": true,
+            "payload_offset": 241812
+          }
+        ],
+        "source_environment": [
+          "Blender5.2",
+          "builtin Workbench paint.sl studio light"
+        ]
+      }
+    ],
+    "scope": "Known Blender5.2 BHead/DNA metadata/path inspection plus actual saved-source reproduction bindings; not a new native opening or a general parser for arbitrary Blender versions.",
+    "status": "PASS_PORTABLE_SOURCE_DEPENDENCY_INSPECTION_WITH_INCIDENTAL_UI_METADATA"
+  },
+  "public_RGBA_renders": 0,
+  "public_master_browser_directory": "// with remaining1280 buffer bytes zero",
+  "residual_home_in_public_master_bytes": false,
+  "sampled_peak_group_rss_bytes": 289652736,
+  "scope": "Readonly source open and original/public data equality only. Original masters remain retained unchanged locally; public sources retain all non-UI decoded source bytes.",
+  "source_data_parity_all_three": true,
+  "status": "PASS_PUBLIC_SOURCE_PORTABILITY_NATIVE_OPEN_SOURCE_DATA_PARITY"
+}

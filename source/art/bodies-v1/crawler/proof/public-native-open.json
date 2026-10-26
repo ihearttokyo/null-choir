@@ -1,0 +1,126 @@
+{
+  "actor_kind": "crawler",
+  "actual_source_data": {
+    "editable_joint_empties": 150,
+    "internal_texts": [
+      {
+        "bytes": 18329,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "actor_geometry_v02.py",
+        "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+      },
+      {
+        "bytes": 16827,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "build_pair_v04.py",
+        "sha256": "0c16b632f381656b50b9fa46fcd6bb0d267687273bfa6aeb81b2a033565f7fd0"
+      },
+      {
+        "bytes": 925700,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "portable-source.json",
+        "sha256": "d9b81efc64793625a1124a2434796f6118837f5f4ae2e8c398510b0347658dae"
+      }
+    ],
+    "material_count": 8,
+    "mesh_objects": 330,
+    "pose_collections": [
+      "idle",
+      "walk_a",
+      "walk_b",
+      "attack",
+      "dead"
+    ],
+    "settings": {
+      "camera": "Fixed contract128px camera",
+      "color_type": "MATERIAL",
+      "engine": "BLENDER_WORKBENCH",
+      "initial_pose_states": [
+        {
+          "hide_render": false,
+          "hide_viewport": false,
+          "joint_empties": 30,
+          "mesh_objects": 66,
+          "polygons": 2480,
+          "pose": "idle",
+          "vertices": 2508
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 30,
+          "mesh_objects": 66,
+          "polygons": 2480,
+          "pose": "walk_a",
+          "vertices": 2508
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 30,
+          "mesh_objects": 66,
+          "polygons": 2480,
+          "pose": "walk_b",
+          "vertices": 2508
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 30,
+          "mesh_objects": 66,
+          "polygons": 2480,
+          "pose": "attack",
+          "vertices": 2508
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 30,
+          "mesh_objects": 66,
+          "polygons": 2480,
+          "pose": "dead",
+          "vertices": 2508
+        }
+      ],
+      "light": "STUDIO",
+      "look": "None",
+      "render_aa": "OFF",
+      "resolution": [
+        128,
+        128,
+        100
+      ],
+      "studio_light": "paint.sl",
+      "threads": 2,
+      "threads_mode": "FIXED",
+      "transparent": true,
+      "view_transform": "Standard"
+    },
+    "source_data_sha256": "3f665ff1ae8447bcc909282cd77b4ac5c3a1f64aaa57c24d8b4b508b7b290001"
+  },
+  "decoded_non_UI_bytes_identical": true,
+  "evidence_class": "actual-native",
+  "external_dependencies": false,
+  "geometry_material_camera_reconstruction": false,
+  "opened_original_source": true,
+  "opened_public_source": true,
+  "original_source_native_proof_sha256": "e8e1c170c277c07006e1891ebdd9810873df9272685b7a30dac9460e88732853",
+  "original_source_sha256": "4f57946fba3d49e969780c1d6c2aa74ebb122db4772a53bd2fa059e7dafba254",
+  "own_loaded_filepath_excluded": true,
+  "public_RGBA_reproduction_performed": false,
+  "public_source_sha256": "001d76d6b58c42add608bccff1d81e73b88611f9defbcaee204a6bf53825c50d",
+  "rendered_frame_count": 0,
+  "residual_home_in_source_data": false,
+  "schema": "null-choir-public-master-native-open-v1",
+  "scope": "Actual read-only public/original source opening and source-data comparison. Existing original full beauty reproduction plus exact non-UI byte identity retained as unchanged-output evidence; no new public pixel rendering or visual/PCK/gameplay/FPS qualification.",
+  "source_data_identical_to_original": true,
+  "source_resaved": false,
+  "status": "PASS_PUBLIC_COPY_NATIVE_OPEN_SOURCE_DATA_MATCH_ORIGINAL",
+  "ui_bridge_sha256": "a84d5764053984229d29d7dceb6fc84d9a0dd674b19ddfab1e9b4ca454d42ff1"
+}

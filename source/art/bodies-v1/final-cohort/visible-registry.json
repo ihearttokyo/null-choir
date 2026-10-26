@@ -1,0 +1,378 @@
+{
+  "crawler": {
+    "map_index": 0,
+    "map_file": "01_intake.json",
+    "expected_spawn": {
+      "id": "intake_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        22.5,
+        22.5
+      ],
+      "yaw": 73
+    },
+    "baseline": {
+      "cell_size": 128,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        1024,
+        640
+      ],
+      "pixel_size": 0.0296875,
+      "offset_y": 1.6624999999999999,
+      "foot_anchor": [
+        64.0,
+        120
+      ],
+      "occupied_bottom_max": 119,
+      "hover_offset": 0.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "worker": {
+    "map_index": 0,
+    "map_file": "01_intake.json",
+    "expected_spawn": {
+      "id": "intake_enemy_00",
+      "kind": "worker",
+      "cell": [
+        8.5,
+        23.5
+      ],
+      "yaw": 0
+    },
+    "baseline": {
+      "cell_size": 128,
+      "pixel_size": 0.028515625,
+      "offset_y": 1.596875,
+      "foot_anchor": [
+        64,
+        120
+      ]
+    },
+    "camera": {
+      "horizontal_distance_m": 3,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        6,
+        0,
+        2,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "caster": {
+    "map_index": 2,
+    "map_file": "03_processional.json",
+    "expected_spawn": {
+      "id": "processional_enemy_07",
+      "kind": "caster",
+      "cell": [
+        9.5,
+        15.5
+      ],
+      "yaw": 129
+    },
+    "baseline": {
+      "cell_size": 128,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        1024,
+        640
+      ],
+      "pixel_size": 0.028515625,
+      "offset_y": 1.596875,
+      "foot_anchor": [
+        64.0,
+        120
+      ],
+      "occupied_bottom_max": 119,
+      "hover_offset": 1.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "brute": {
+    "map_index": 4,
+    "map_file": "05_nursery.json",
+    "expected_spawn": {
+      "id": "nursery_enemy_04",
+      "kind": "brute",
+      "cell": [
+        9.5,
+        11.5
+      ],
+      "yaw": 144.4623
+    },
+    "baseline": {
+      "cell_size": 128,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        1024,
+        640
+      ],
+      "pixel_size": 0.034375,
+      "offset_y": 1.9250000000000003,
+      "foot_anchor": [
+        64.0,
+        120
+      ],
+      "occupied_bottom_max": 119,
+      "hover_offset": 0.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "guardian": {
+    "map_index": 4,
+    "map_file": "05_nursery.json",
+    "expected_spawn": {
+      "id": "nursery_enemy_12",
+      "kind": "guardian",
+      "cell": [
+        22.5,
+        26.5
+      ],
+      "yaw": 59.0362
+    },
+    "baseline": {
+      "cell_size": 128,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        1024,
+        640
+      ],
+      "pixel_size": 0.03671875,
+      "offset_y": 2.05625,
+      "foot_anchor": [
+        64.0,
+        120
+      ],
+      "occupied_bottom_max": 119,
+      "hover_offset": 0.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "summoner": {
+    "map_index": 4,
+    "map_file": "05_nursery.json",
+    "expected_spawn": {
+      "id": "nursery_enemy_17",
+      "kind": "summoner",
+      "cell": [
+        13.5,
+        15.5
+      ],
+      "yaw": -11.3099
+    },
+    "baseline": {
+      "cell_size": 128,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        1024,
+        640
+      ],
+      "pixel_size": 0.04375,
+      "offset_y": 2.4499999999999997,
+      "foot_anchor": [
+        64.0,
+        120
+      ],
+      "occupied_bottom_max": 119,
+      "hover_offset": 0.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "nursery_warden": {
+    "map_index": 4,
+    "map_file": "05_nursery.json",
+    "expected_spawn": {
+      "id": "nursery_warden",
+      "kind": "nursery_warden",
+      "cell": [
+        30.5,
+        9.5
+      ],
+      "yaw": 180
+    },
+    "baseline": {
+      "cell_size": 256,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        2048,
+        1280
+      ],
+      "pixel_size": 0.028515625,
+      "offset_y": 3.421875,
+      "foot_anchor": [
+        128.0,
+        248
+      ],
+      "occupied_bottom_max": 247,
+      "hover_offset": 0.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  },
+  "choir_avatar": {
+    "map_index": 7,
+    "map_file": "08_heart.json",
+    "expected_spawn": {
+      "id": "heart_choir_avatar",
+      "kind": "choir_avatar",
+      "cell": [
+        34.0,
+        10.0
+      ],
+      "yaw": 180
+    },
+    "baseline": {
+      "cell_size": 256,
+      "hframes": 8,
+      "vframes": 5,
+      "dimensions": [
+        2048,
+        1280
+      ],
+      "pixel_size": 0.0296875,
+      "offset_y": 3.5625,
+      "foot_anchor": [
+        128.0,
+        248
+      ],
+      "occupied_bottom_max": 247,
+      "hover_offset": 1.0
+    },
+    "camera": {
+      "horizontal_distance_m": 6,
+      "eye_height_m": 1.55,
+      "player_floor_offset_m": 0.04,
+      "fov": 85,
+      "near": 0.08,
+      "bearing_preference_indices": [
+        0,
+        2,
+        6,
+        4,
+        1,
+        7,
+        3,
+        5
+      ],
+      "acceptance": "native floor witness + actual capsule clearance + occupied-pixel collision rays + rendered pixel-difference witness; never move actor"
+    }
+  }
+}

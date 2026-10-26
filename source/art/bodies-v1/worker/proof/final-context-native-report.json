@@ -1,0 +1,186 @@
+{
+  "actor_position": [
+    34.0,
+    0.0299999993294477,
+    94.0
+  ],
+  "actor_spec": {
+    "cell": [
+      8.5,
+      23.5
+    ],
+    "id": "intake_enemy_00",
+    "kind": "worker",
+    "yaw": 0.0
+  },
+  "camera": {
+    "accepted": true,
+    "actual_bearing": 2,
+    "camera_cell": [
+      9.25,
+      23.5
+    ],
+    "camera_eye": [
+      37.0,
+      1.5900000333786,
+      94.0
+    ],
+    "eye_to_actor_origin_distance_m": 3.38136076927185,
+    "horizontal_distance_m": 3.0,
+    "native_floor": [
+      37.0,
+      0.0,
+      94.0
+    ],
+    "native_unobstructed_occupied_samples": 7,
+    "preferred_bearing": 6.0
+  },
+  "camera_trials": [
+    {
+      "accepted": true,
+      "actual_bearing": 2,
+      "camera_cell": [
+        9.25,
+        23.5
+      ],
+      "camera_eye": [
+        37.0,
+        1.5900000333786,
+        94.0
+      ],
+      "eye_to_actor_origin_distance_m": 3.38136076927185,
+      "horizontal_distance_m": 3.0,
+      "native_floor": [
+        37.0,
+        0.0,
+        94.0
+      ],
+      "native_unobstructed_occupied_samples": 7,
+      "preferred_bearing": 6.0
+    }
+  ],
+  "checks": [
+    {
+      "message": "Exact known role descriptor",
+      "passed": true
+    },
+    {
+      "message": "Actual role's unchanged authored map builds",
+      "passed": true
+    },
+    {
+      "message": "Exact role's authored spawn/yaw, no actor reposition",
+      "passed": true
+    },
+    {
+      "message": "Final Enemy constructor consumes actual normal CompressedTexture2D resource",
+      "passed": true
+    },
+    {
+      "message": "Exact actual eightdirection runtime layout",
+      "passed": true
+    },
+    {
+      "message": "Original runtime pixel size/foot anchor untouched",
+      "passed": true
+    },
+    {
+      "message": "Original shaded nearest billboard/discard flags",
+      "passed": true
+    },
+    {
+      "message": "Same actual accepted normal-import RGBA",
+      "passed": true
+    },
+    {
+      "message": "Actual Level static colliders remain registered in this native World3D",
+      "passed": true
+    },
+    {
+      "message": "An actual authored boundary wall exists for occluded-approach negative control",
+      "passed": true
+    },
+    {
+      "message": "Representative cross-boundary native ray really hits unchanged Level wall",
+      "passed": true
+    },
+    {
+      "message": "Same visibility predicate rejects actual wall-occluded approach; empty-space false pass impossible",
+      "passed": true
+    },
+    {
+      "message": "Actual walkable floor/player-clear/native-opaqueLOS camera found",
+      "passed": true
+    },
+    {
+      "message": "Exact previously validated approach distance, no zoom rescue",
+      "passed": true
+    },
+    {
+      "message": "Actual visible depth-tested actor pixels +stable ABA opaque source witness (wall-only/savePNG falsepass rejected)",
+      "passed": true
+    },
+    {
+      "message": "No production actor/art/scale/light/camera-source changes",
+      "passed": true
+    },
+    {
+      "message": "Static callbacks/AI/input stay disabled",
+      "passed": true
+    },
+    {
+      "message": "Actual render/background evidence retained",
+      "passed": true
+    }
+  ],
+  "collision_negative_control": {
+    "actual_floor_bodies": 41,
+    "blocked": true,
+    "boundary_tile": [
+      8,
+      23
+    ],
+    "nonwalkable_direction": [
+      0.0,
+      -1.0
+    ],
+    "ray_end": [
+      34.0,
+      1.54999995231628,
+      91.25
+    ],
+    "ray_start": [
+      34.0,
+      1.54999995231628,
+      92.75
+    ],
+    "registered_static_world_colliders": 312,
+    "scope": "negative control only, not a captured camera or moved actor"
+  },
+  "failures": 0,
+  "map": "01_intake.json",
+  "normal_RGBA": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+  "role": "worker",
+  "runtime_uri": "res://assets/art/sprites/bodies-v1/worker.png",
+  "scope": "Actual unchanged authored role map/spawn + final Enemy normal Texture2D; one manually selected idle0. No ImageTexture/scene-light/art/scale override, input/AI/gameplay/FPS claim",
+  "views": [
+    {
+      "actual_bearing": 2,
+      "backgrounds": [
+        "background-a.png",
+        "background-b.png"
+      ],
+      "file": "context-00.png",
+      "manual_idle_direction": 0,
+      "no_ImageTexture_override": true,
+      "resolution": [
+        640,
+        360
+      ],
+      "source_alpha_samples": 7,
+      "stable_opaque_source_witnesses": 7,
+      "tested_frame": 0,
+      "visible_changed_pixels": 15536
+    }
+  ]
+}

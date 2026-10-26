@@ -1,0 +1,2393 @@
+{
+  "actors": [
+    {
+      "actual-context": {
+        "bytes": 9380,
+        "path": "source/art/bodies-v1/nursery_warden/proof/actual-context.json",
+        "sha256": "59e7fd8011a8c1866ac5a915952de79f2550f5342a4af8b58621c8c9af1b7f55"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "d368f050f8d62dbe2cef651d69a924768b432b5d2ed5f80d7dbef6067a0e2380",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 71494,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-00.png",
+            "sha256": "2dc8fe5d785d2f9802e51ec2a14faa6ca585309807067779683e10b66f9ead1a"
+          },
+          "raw_bbox": [
+            40,
+            28,
+            214,
+            227
+          ],
+          "raw_rgba_sha256": "4c628b5980042fc37718eefaeb3bb5349bba9be4124b2d8af6825fe0e5c7c54e",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "ea551246a0cdbb84d8ffbd9f702b3c2f04483150909736c145010c71fe1e1a47",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 67093,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-01.png",
+            "sha256": "95c2195357c6119c5c40a9f1d23f5a9486d465d120d02b671f87ce2730402f38"
+          },
+          "raw_bbox": [
+            46,
+            25,
+            195,
+            229
+          ],
+          "raw_rgba_sha256": "5b3fde3a4a250d3474cf86bde03dcde6f125178c8534019efc2aa1b3bb56515f",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "603d3f720c4dd5a3c0c0f9116747613a5bd1bf88751521b796a0b4c571b34eb9",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 52873,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-02.png",
+            "sha256": "637c009de66e31880d5ebfae6427b9b2f1aa91b07bd847208006d49691abd412"
+          },
+          "raw_bbox": [
+            83,
+            25,
+            197,
+            229
+          ],
+          "raw_rgba_sha256": "59b6fc2966408dd30a070d7fe4a39dfa500fd952d56f08e20ac9ae69cbc71e10",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "d127d8b911cf1d6f04fcd8c2e2b1eec8db21f5258c8cf948bc7c36b334033a39",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 60982,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-03.png",
+            "sha256": "a4c57a27397caa7cebd6fce51fa2f92b55db2d786ac3cba1f6eeeb887658a974"
+          },
+          "raw_bbox": [
+            52,
+            26,
+            193,
+            229
+          ],
+          "raw_rgba_sha256": "d84e7b8770aa3f418cb670b3ebb92fa26f5423ef31519bd4d83f2bbb5f0ba60d",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "f159db6f4a7f1b684b365e1417b7ffc730384b672cb90a9d2a1846c414e06bdd",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 64540,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-04.png",
+            "sha256": "5d287213347b92d1b2cbed11d38042c51eeeccecba5f6953265532c622caf652"
+          },
+          "raw_bbox": [
+            41,
+            28,
+            215,
+            230
+          ],
+          "raw_rgba_sha256": "72042a3e28831e0ebc55e1987ca9bfce680d31aafb6e02ae015025c9ba6b34cc",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "dfb59ae1664ea87ef2d94d74dfb798b6e32148fc909be96e9acd747946fc3022",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 60125,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-05.png",
+            "sha256": "630f5c36c4c70bf1feb96bbb0aac94838e345ac9755561593b579248f057690c"
+          },
+          "raw_bbox": [
+            60,
+            31,
+            209,
+            229
+          ],
+          "raw_rgba_sha256": "fbe2ec549b4a40ab74653cb3903f83223051e1a9b4e8e0d49406b640b9b9feb5",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "dcc52d9bd55d2c66b2200c5b7f4b3bdc437896b457f8ec08398d5a00f2e01366",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 50960,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-06.png",
+            "sha256": "09110fae569947169ffc847bfcbf0352c7297a75c86f4eb9c6e096e7c8af1ccd"
+          },
+          "raw_bbox": [
+            58,
+            33,
+            172,
+            229
+          ],
+          "raw_rgba_sha256": "fd521c27f7f13374f305da37e7d49bde1cb3bdca64f9a55380e4f9fc018cf172",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "5bab9602c2f07ab04a30c86eb3504a6703e52cca1bfec9835a1e5ce76e45d86d",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 65136,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-idle-07.png",
+            "sha256": "eae98cba35e0dc4cd73ad55374766d0ef29be1d537f915adcb58392fc7872b79"
+          },
+          "raw_bbox": [
+            62,
+            31,
+            203,
+            229
+          ],
+          "raw_rgba_sha256": "70647c22645d3095646b0ce2a558ad1022842a1c73ab44226352368872cd7f1b",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "316cf3c090f150db6a9d5c9ed90025355672a2a3730295f469ab004ab40153a7",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 72027,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-00.png",
+            "sha256": "f2f7c1e1ae33879f118d5e88ac2936ceb58be28d6661a52a6484f319bc216d6d"
+          },
+          "raw_bbox": [
+            40,
+            25,
+            214,
+            228
+          ],
+          "raw_rgba_sha256": "c56a5705d9ab26d204ab059bf4201673f631d110345ce50af5aeb5efda0dbc17",
+          "vertical_shift": 19
+        },
+        {
+          "cell_rgba_sha256": "e069d00383f71eaaf2e4ca4f661d91cd52648eb1a78949fd210f978218b8d593",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 65459,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-01.png",
+            "sha256": "58699b15ceb95f21bb181a004952bfc41fb2254d3ef26fd1030cdec52432c784"
+          },
+          "raw_bbox": [
+            51,
+            23,
+            194,
+            227
+          ],
+          "raw_rgba_sha256": "994dfdbf7d01d7f7706922e451f30803ceb49ae41eb3de9159c91d21b396ae7f",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "e64ec6184021d715c8a6c695033f2fac92fe8743b94ea9c498ff1931fcae37c0",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 54421,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-02.png",
+            "sha256": "613262b3d12d416b03a17e2646acc19920b1e4d366f58c15ffbfccf1ed46ad8a"
+          },
+          "raw_bbox": [
+            79,
+            23,
+            194,
+            227
+          ],
+          "raw_rgba_sha256": "767c1e9decfa79410ba828713ca40b769ca2a7169d29d94f69a2d5391d70da94",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "fa7c9d1f5689308e7ad465e1692ca8a8578100b71e8370ec2f5223285c60d61c",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 62006,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-03.png",
+            "sha256": "a77e10bb85e92e1d7265ae024226d47b5e0948f10bfc3c38d2cec745563238f8"
+          },
+          "raw_bbox": [
+            50,
+            24,
+            192,
+            229
+          ],
+          "raw_rgba_sha256": "0f8ec618b25de903767385335653b51f797e34f244f556a9453c2c0bde0f64b1",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "655e71fa564085e5648f04acd0cceeda22bde4fb0218600d286d38e41bcea4fc",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 64538,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-04.png",
+            "sha256": "a19e5de17d1248a0dc0ca482200055eba6aaedb39338073898f65d767717bee8"
+          },
+          "raw_bbox": [
+            41,
+            26,
+            215,
+            230
+          ],
+          "raw_rgba_sha256": "7c3fe860c292699f4b72c63dcdd5e1d9d3979e270fff909568ac3ca9ce5eac2b",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "7ef05805d42102ea94b639e69107140a12f611c6afa686eb6bd9125bd6ee9908",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 58968,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-05.png",
+            "sha256": "bdb4339896671048ac743fe063856c3190b3e3dc2fc882ed35ca895ff08d9254"
+          },
+          "raw_bbox": [
+            61,
+            29,
+            204,
+            229
+          ],
+          "raw_rgba_sha256": "9d4c14f64eaac19ef91a1ceb8632dfe119a69dea9fbe29fd4f17bc9c78033672",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "a5f47c70b551069cabba8ace7c79947bb52b73d9328c2393950722c21d65524d",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 52490,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-06.png",
+            "sha256": "fb761398afc0e7f268c87f4b51ef94af923637d20a05d3d23d0bec4bb34426ec"
+          },
+          "raw_bbox": [
+            61,
+            30,
+            176,
+            229
+          ],
+          "raw_rgba_sha256": "4958c7ed1e24d10c2edeeee878bb27620b4daf6ecc9767f94bc2b7ef928ce99e",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "cadf41d3f5526fba4e9e952e7be437559940f8db38b816937ceee507c85c6d96",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 65980,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_a-07.png",
+            "sha256": "592f95f8091e2158caa23f27bedb9fa71ce7afe117af2e88e9386f78a8bb7c01"
+          },
+          "raw_bbox": [
+            63,
+            28,
+            205,
+            230
+          ],
+          "raw_rgba_sha256": "1448b1bab4eddc61912ed9e38dbc31046d75bc86bac60f5b5af295ae989318cb",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "97bfd49bb77fbcafd583254fe01cf23d431435c4a57a79f322c238b2c6bdf579",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 71679,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-00.png",
+            "sha256": "428c328d4400817c22d27cd6bb43fc9c407f5faaac66b0ad807e79505239eeb0"
+          },
+          "raw_bbox": [
+            41,
+            29,
+            214,
+            228
+          ],
+          "raw_rgba_sha256": "a91465853c9f06550fb2f2f5f4a5d621409f94d25028ccb1e4ec3610d4a55b48",
+          "vertical_shift": 19
+        },
+        {
+          "cell_rgba_sha256": "f694a16d3ba252231f2c163a01af83c16fff86ce03e93094be1b6d857cf5e1ae",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 68327,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-01.png",
+            "sha256": "0425c658a115a76e5908a7fb9bb3250ae6a6ef255ccb6673d970d51e55651fdf"
+          },
+          "raw_bbox": [
+            42,
+            27,
+            196,
+            230
+          ],
+          "raw_rgba_sha256": "3c1bbc6760ab44087a32a1294fad66368b2bab4a04d36f27206d3df9a6a34506",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "613e269b29ad7ba09c6b8a0324dbb010f625504285473b402b57a06ba9fb10d7",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 53609,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-02.png",
+            "sha256": "fb13cdaf5bb4da5fd95e4460b1ae0710a1f96b7018b0f33fe2b477bb61c69467"
+          },
+          "raw_bbox": [
+            79,
+            26,
+            194,
+            229
+          ],
+          "raw_rgba_sha256": "8a089f14a3b5e22972e194f55a3af0a6fa692da963da408bdd8be86e3d11c78f",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "6989067fb7450a00c3177372629d886ef0d67189ad993ab95993c2a77bd6b112",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 59630,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-03.png",
+            "sha256": "2720c1f70b218b31009693de48c63e77e5585e705032da7f271bf6b2bc8a7b77"
+          },
+          "raw_bbox": [
+            55,
+            28,
+            194,
+            229
+          ],
+          "raw_rgba_sha256": "d11aa06a30100b4d5c9650c140cdc34bc9555feabcfac69adb80d1f33d48b6e8",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "c908db8d202f65782fda7f1c36e3712540de0b13ec19ad36641e0e5984ec5d8d",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 64269,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-04.png",
+            "sha256": "1cfadb0ad6793ce767baa2e25391b7dd9d617b899c7d92f933c822c8fff3474c"
+          },
+          "raw_bbox": [
+            41,
+            30,
+            214,
+            230
+          ],
+          "raw_rgba_sha256": "835fd4cc95faeddd9af33236902cce0a2ddfc637a4a32bde043893264debfc57",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "52db41c4b95a85262e8e09600f8a2233a01c57f618c1a0602b8652281838fd5a",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 61443,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-05.png",
+            "sha256": "d09c2d57f1e665ddac8c1a40eb58377a5c96081e0f72e2f9919ed71014bbe46e"
+          },
+          "raw_bbox": [
+            59,
+            32,
+            213,
+            229
+          ],
+          "raw_rgba_sha256": "3c894a27221d820565aea2ce10c1a70c9312a8ada45b6c0092e90685c56df111",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "2cd1ada5c7e695e52ff0cd50b5a863591e68e9db06fe2f72fbb0f29dee83184f",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 52287,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-06.png",
+            "sha256": "321f83748b1838dccbbf90308d2669c1dec5c3e811647b5f252733f0824e8408"
+          },
+          "raw_bbox": [
+            61,
+            31,
+            176,
+            227
+          ],
+          "raw_rgba_sha256": "66b60305b51d5d6281b19b03bb72a981b2934451b69f2a8b9b0e0655a70a3cca",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "66b00f2328defefddc732760bd11e1d6fa2038f178b90dd1a5897eb963016c4f",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 63405,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-walk_b-07.png",
+            "sha256": "8684a0b554c6f7917c1d84da61566c99197a7398950061e3b3ea62b376b5159c"
+          },
+          "raw_bbox": [
+            61,
+            31,
+            200,
+            227
+          ],
+          "raw_rgba_sha256": "86bce417e514a13321924b423016a9b014b44fbad8a590a7610761a93d91b0b3",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "2fee90a87e3950d085c71dd02ea68d9444af29507abc0407c4b80820603ed161",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 69092,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-00.png",
+            "sha256": "2295a45ea872d5905de709e7db082cf92f3fdea0afa164b5b1e733a3c4fb3a92"
+          },
+          "raw_bbox": [
+            26,
+            41,
+            217,
+            229
+          ],
+          "raw_rgba_sha256": "bbc9f321ddb35c08b14229db1c875227861841245565d9737b9c9db5785f8330",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "43c1ced8c34090fc71952ebb3f95789e0b3f5e434c7af436eb80bbdd1d0b0d1d",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 67584,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-01.png",
+            "sha256": "38b52718ef46605c56fb25d5013f6c5bdb7f7b7468a5062054322eb3ab8f069e"
+          },
+          "raw_bbox": [
+            9,
+            38,
+            187,
+            230
+          ],
+          "raw_rgba_sha256": "5e0420059b15e37099c00fef023b3a08ba9970b8670450dddb2e86762293e242",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "418603ec18f2ee0c6f4a18f1a7288c132fe4cb9603ddd8eaf7756e6f49e61f74",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 55345,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-02.png",
+            "sha256": "ef4d85d2b93c4757e9c81625ec7408453ce97cfb35530a1e584d2527dceed699"
+          },
+          "raw_bbox": [
+            57,
+            36,
+            195,
+            229
+          ],
+          "raw_rgba_sha256": "f2d7c18f95b31094284ecb8adbf862913552c5b4fd76579b78f98737ec1ef387",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "266b2cb75eccac5de0f6c27d9de1186fad44e0f8207776161e9defd3986e89dc",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 62662,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-03.png",
+            "sha256": "a9a45bfb8761f53d3fcd47073c72d216fb7b2fd6c050ce2762547abec99ddd35"
+          },
+          "raw_bbox": [
+            20,
+            36,
+            182,
+            229
+          ],
+          "raw_rgba_sha256": "b13a7b1ffda34408fd459196c6f2304b9a4e8ad2ccd2f0c153ed8f1702072b10",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "7b606c2392aa4ff6c38e92ed32fb1f64c39a0a286bdf8dce8340070a8997aca5",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 62878,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-04.png",
+            "sha256": "88aa8291f804c52e26febf86f0b87e0581e0a75788b369f5c556bb6fbc41ebfa"
+          },
+          "raw_bbox": [
+            38,
+            38,
+            229,
+            230
+          ],
+          "raw_rgba_sha256": "e67aa94843ae22400ac2379b0f95454cb6b11aedfa02b0eecafcbe58a7aa5edd",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "1c0ec691b054b1434a7f72955392558e9f00d79caa1afb21bfd466f953b64ca9",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 62052,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-05.png",
+            "sha256": "d6a0449a01a7c29f90bc9f39d0b8b6ea19c3b7b2445b2d182db142f484935bb0"
+          },
+          "raw_bbox": [
+            68,
+            41,
+            246,
+            229
+          ],
+          "raw_rgba_sha256": "7a0de67d8baced5ad95cd0ae74a91d523fe9762636b85566c6a71488765c212b",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "db083fec7d99d3ba0db80da88adcc38543d6ac4ef1fe958c312d633e88d7c9d5",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 53236,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-06.png",
+            "sha256": "31d5f4cd3fb5e52e6a3f6b54114e78920adf114752fe371dbc88bffcb293d0a4"
+          },
+          "raw_bbox": [
+            60,
+            43,
+            198,
+            229
+          ],
+          "raw_rgba_sha256": "580f1a16a2c978abe05505c027b1898f4139deb1cbbd8779b75cf390327bfb3a",
+          "vertical_shift": 18
+        },
+        {
+          "cell_rgba_sha256": "f86bf40ccd643c2c497cad91fc45b5b8889008239ed74de5c339a193a07ccec7",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 64879,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-attack-07.png",
+            "sha256": "cd8f340f4db8e69c37c6d73fdfb0e80d1cd273f2c9c79811bd7388421f507610"
+          },
+          "raw_bbox": [
+            73,
+            44,
+            235,
+            231
+          ],
+          "raw_rgba_sha256": "5ebd1717bfe3af9634b670251ca0192c5ec1e9a3ab62fdabada2fd88724a4dae",
+          "vertical_shift": 16
+        },
+        {
+          "cell_rgba_sha256": "571205b45a993bac5ad18ae9c3e543c87b0231c96b07a248ccf93020a19e6c78",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 45668,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-00.png",
+            "sha256": "863963681eeed9fb8b33a832ddb78a0989c3d324aa298e607a9f26e1de7ef262"
+          },
+          "raw_bbox": [
+            36,
+            126,
+            219,
+            227
+          ],
+          "raw_rgba_sha256": "8e3b1ba232d55248dd65d937b7026e4ffc09c698b1254573a3256877aca58723",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "515e2db4198196c0ce9fa63f1dbbcbdce220370cb61868254409237519bcf289",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 48707,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-01.png",
+            "sha256": "9a72e51ba2530ed7e644bc0eacdb52e8732b6cdd6db7ff59cd80ef96e6210703"
+          },
+          "raw_bbox": [
+            17,
+            127,
+            237,
+            227
+          ],
+          "raw_rgba_sha256": "592665b87872cfe7db3640bfe9639995d7272af30bd0b5d4c602cbe87966e2a6",
+          "vertical_shift": 20
+        },
+        {
+          "cell_rgba_sha256": "124381b17fb5f4620805336bbec025e399cbc260fad4729f414438fedc34883f",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 47618,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-02.png",
+            "sha256": "e145f38273263645c4fd070a1a2a64d798142325c9ab2f5bb4045ab2ae7f061e"
+          },
+          "raw_bbox": [
+            15,
+            127,
+            240,
+            226
+          ],
+          "raw_rgba_sha256": "49e08e409e695caff907b2455d9f4255aa9ce2e95569f7522c528c105ae03ee3",
+          "vertical_shift": 21
+        },
+        {
+          "cell_rgba_sha256": "f9f60eb37e6a1d237618e2fc1d971adc29800a8b36df2abbcb5b489e9831b76f",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 47680,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-03.png",
+            "sha256": "73a34e9df1900a3d9fa557d6df1ef604217e62185323104234fc6f2c81e821a0"
+          },
+          "raw_bbox": [
+            15,
+            126,
+            244,
+            225
+          ],
+          "raw_rgba_sha256": "8ab07423e44e14db6126c6a36088f252812fa3ff6300a6165c89c9a45bc16ace",
+          "vertical_shift": 22
+        },
+        {
+          "cell_rgba_sha256": "e1bbf03b228ff9f25d11a7273ecca35ecfeac71b2b30cde40f22107f3dc0fe34",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 42706,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-04.png",
+            "sha256": "020fc4c7c171c4b07a7e9e7ef73a5412abede0813a920a8e109d711d76303162"
+          },
+          "raw_bbox": [
+            36,
+            124,
+            219,
+            224
+          ],
+          "raw_rgba_sha256": "fa6ea95c00428a8745183a55fa9827b522735dc20220bbabd229b831cd5461c5",
+          "vertical_shift": 23
+        },
+        {
+          "cell_rgba_sha256": "fb4ce4fd1a64f7c0b2068a7434e1e415aa5207ea6c038f00bd7c5d6d2554e0a9",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 46431,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-05.png",
+            "sha256": "f44bd00b77c50044cefa31c24ad6f5b9daa9c05325b53e6251ef9b335d50e756"
+          },
+          "raw_bbox": [
+            18,
+            123,
+            238,
+            224
+          ],
+          "raw_rgba_sha256": "61f484353101aeca7d96cca412eea975f10f2eedaab4d47593a1664083b19fbd",
+          "vertical_shift": 23
+        },
+        {
+          "cell_rgba_sha256": "ba22e6acc43c80efbd0e785cfb1d7d6ccb921f178a17214d0b9d8b93489faf5f",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 47467,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-06.png",
+            "sha256": "afc0cd9ec4d91a19dd9e0ff111e49dd371e52dc9466ce2fb64f10feda778bb83"
+          },
+          "raw_bbox": [
+            15,
+            123,
+            240,
+            225
+          ],
+          "raw_rgba_sha256": "81ca5440f8ab1dfb804f8104aaca1e9a9d9c7a92294cb3ab765ce4c4eabd5a08",
+          "vertical_shift": 22
+        },
+        {
+          "cell_rgba_sha256": "63d362955dd6ef4ce6eb2b4d50cfabf0fae2d212ee701fc57dfab61fb18a71e3",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 48816,
+            "path": "source/art/bodies-v1/nursery_warden/frames/raw-dead-07.png",
+            "sha256": "473819d991b4d119edda8b53b1ad61fb7084f743de617a848446fafd0f3f8721"
+          },
+          "raw_bbox": [
+            11,
+            124,
+            240,
+            227
+          ],
+          "raw_rgba_sha256": "f3087132e80afd0bfba4c185acd9b8a1aed9d44016181078753ed9d084f3e916",
+          "vertical_shift": 20
+        }
+      ],
+      "generator": {
+        "bytes": 40148,
+        "path": "source/art/bodies-v1/nursery_warden/build_boss_bodies_v04.py",
+        "sha256": "b45ba5799b085f824ef16cdcaaaf0ecef79676f8e65b1c6d9c74091fdab61ea8"
+      },
+      "import_sidecar": {
+        "bytes": 976,
+        "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png.import",
+        "sha256": "5f3d7d5848e40d11b3fc0c8a3863d06756116f4a8764a48c36b9c7486ee65750"
+      },
+      "independent": {
+        "bytes": 5076,
+        "path": "source/art/bodies-v1/nursery_warden/proof/independent.json",
+        "sha256": "36a860f694ac76a050830ba4b2ca354dccbf8a5602ad352e14b39a29934dcfbd"
+      },
+      "kind": "nursery_warden",
+      "lineage": {
+        "generator": {
+          "bytes": 53153,
+          "path": "tools/build_late_combat_art.py",
+          "sha256": "8dc582d4f7984c47aa2e7257ff7d8ebf3516e146a2b09bb9bba74bdbe2ea684e"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          },
+          "tools/build_processional_art.py": {
+            "bytes": 34609,
+            "path": "tools/build_processional_art.py",
+            "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+          },
+          "tools/build_religious_art.py": {
+            "bytes": 37332,
+            "path": "tools/build_religious_art.py",
+            "sha256": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde"
+          }
+        },
+        "logical_generator": "tools/build_late_combat_art.py",
+        "output": {
+          "bytes": 917458,
+          "path": "game/assets/art/sprites/nursery_warden.png",
+          "sha256": "a93611e2654abca4e365c1cdf2e0a0ca850fbc3af0563ea8f41f4997773ed609"
+        },
+        "source": {
+          "bytes": 9501007,
+          "path": "source/art/nursery_warden.blend",
+          "sha256": "4481dc59a6ce92759dfdf0664041e7842ee4bb7d2ddd2fe4cfc0d534c20456a9"
+        }
+      },
+      "normal-import": {
+        "bytes": 4106,
+        "path": "source/art/bodies-v1/nursery_warden/proof/normal-import.json",
+        "sha256": "c0f1e5e85cd1fc0ba385c3ec06cc59fd90aeafecf468a52b0131c4dae34d42d3"
+      },
+      "output": {
+        "bytes": 767835,
+        "cell_bbox": [
+          [
+            40,
+            48,
+            214,
+            247
+          ],
+          [
+            46,
+            43,
+            195,
+            247
+          ],
+          [
+            83,
+            43,
+            197,
+            247
+          ],
+          [
+            52,
+            44,
+            193,
+            247
+          ],
+          [
+            41,
+            45,
+            215,
+            247
+          ],
+          [
+            60,
+            49,
+            209,
+            247
+          ],
+          [
+            58,
+            51,
+            172,
+            247
+          ],
+          [
+            62,
+            49,
+            203,
+            247
+          ],
+          [
+            40,
+            44,
+            214,
+            247
+          ],
+          [
+            51,
+            43,
+            194,
+            247
+          ],
+          [
+            79,
+            43,
+            194,
+            247
+          ],
+          [
+            50,
+            42,
+            192,
+            247
+          ],
+          [
+            41,
+            43,
+            215,
+            247
+          ],
+          [
+            61,
+            47,
+            204,
+            247
+          ],
+          [
+            61,
+            48,
+            176,
+            247
+          ],
+          [
+            63,
+            45,
+            205,
+            247
+          ],
+          [
+            41,
+            48,
+            214,
+            247
+          ],
+          [
+            42,
+            44,
+            196,
+            247
+          ],
+          [
+            79,
+            44,
+            194,
+            247
+          ],
+          [
+            55,
+            46,
+            194,
+            247
+          ],
+          [
+            41,
+            47,
+            214,
+            247
+          ],
+          [
+            59,
+            50,
+            213,
+            247
+          ],
+          [
+            61,
+            51,
+            176,
+            247
+          ],
+          [
+            61,
+            51,
+            200,
+            247
+          ],
+          [
+            26,
+            59,
+            217,
+            247
+          ],
+          [
+            9,
+            55,
+            187,
+            247
+          ],
+          [
+            57,
+            54,
+            195,
+            247
+          ],
+          [
+            20,
+            54,
+            182,
+            247
+          ],
+          [
+            38,
+            55,
+            229,
+            247
+          ],
+          [
+            68,
+            59,
+            246,
+            247
+          ],
+          [
+            60,
+            61,
+            198,
+            247
+          ],
+          [
+            73,
+            60,
+            235,
+            247
+          ],
+          [
+            36,
+            146,
+            219,
+            247
+          ],
+          [
+            17,
+            147,
+            237,
+            247
+          ],
+          [
+            15,
+            148,
+            240,
+            247
+          ],
+          [
+            15,
+            148,
+            244,
+            247
+          ],
+          [
+            36,
+            147,
+            219,
+            247
+          ],
+          [
+            18,
+            146,
+            238,
+            247
+          ],
+          [
+            15,
+            145,
+            240,
+            247
+          ],
+          [
+            11,
+            144,
+            240,
+            247
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "d368f050f8d62dbe2cef651d69a924768b432b5d2ed5f80d7dbef6067a0e2380",
+          "ea551246a0cdbb84d8ffbd9f702b3c2f04483150909736c145010c71fe1e1a47",
+          "603d3f720c4dd5a3c0c0f9116747613a5bd1bf88751521b796a0b4c571b34eb9",
+          "d127d8b911cf1d6f04fcd8c2e2b1eec8db21f5258c8cf948bc7c36b334033a39",
+          "f159db6f4a7f1b684b365e1417b7ffc730384b672cb90a9d2a1846c414e06bdd",
+          "dfb59ae1664ea87ef2d94d74dfb798b6e32148fc909be96e9acd747946fc3022",
+          "dcc52d9bd55d2c66b2200c5b7f4b3bdc437896b457f8ec08398d5a00f2e01366",
+          "5bab9602c2f07ab04a30c86eb3504a6703e52cca1bfec9835a1e5ce76e45d86d",
+          "316cf3c090f150db6a9d5c9ed90025355672a2a3730295f469ab004ab40153a7",
+          "e069d00383f71eaaf2e4ca4f661d91cd52648eb1a78949fd210f978218b8d593",
+          "e64ec6184021d715c8a6c695033f2fac92fe8743b94ea9c498ff1931fcae37c0",
+          "fa7c9d1f5689308e7ad465e1692ca8a8578100b71e8370ec2f5223285c60d61c",
+          "655e71fa564085e5648f04acd0cceeda22bde4fb0218600d286d38e41bcea4fc",
+          "7ef05805d42102ea94b639e69107140a12f611c6afa686eb6bd9125bd6ee9908",
+          "a5f47c70b551069cabba8ace7c79947bb52b73d9328c2393950722c21d65524d",
+          "cadf41d3f5526fba4e9e952e7be437559940f8db38b816937ceee507c85c6d96",
+          "97bfd49bb77fbcafd583254fe01cf23d431435c4a57a79f322c238b2c6bdf579",
+          "f694a16d3ba252231f2c163a01af83c16fff86ce03e93094be1b6d857cf5e1ae",
+          "613e269b29ad7ba09c6b8a0324dbb010f625504285473b402b57a06ba9fb10d7",
+          "6989067fb7450a00c3177372629d886ef0d67189ad993ab95993c2a77bd6b112",
+          "c908db8d202f65782fda7f1c36e3712540de0b13ec19ad36641e0e5984ec5d8d",
+          "52db41c4b95a85262e8e09600f8a2233a01c57f618c1a0602b8652281838fd5a",
+          "2cd1ada5c7e695e52ff0cd50b5a863591e68e9db06fe2f72fbb0f29dee83184f",
+          "66b00f2328defefddc732760bd11e1d6fa2038f178b90dd1a5897eb963016c4f",
+          "2fee90a87e3950d085c71dd02ea68d9444af29507abc0407c4b80820603ed161",
+          "43c1ced8c34090fc71952ebb3f95789e0b3f5e434c7af436eb80bbdd1d0b0d1d",
+          "418603ec18f2ee0c6f4a18f1a7288c132fe4cb9603ddd8eaf7756e6f49e61f74",
+          "266b2cb75eccac5de0f6c27d9de1186fad44e0f8207776161e9defd3986e89dc",
+          "7b606c2392aa4ff6c38e92ed32fb1f64c39a0a286bdf8dce8340070a8997aca5",
+          "1c0ec691b054b1434a7f72955392558e9f00d79caa1afb21bfd466f953b64ca9",
+          "db083fec7d99d3ba0db80da88adcc38543d6ac4ef1fe958c312d633e88d7c9d5",
+          "f86bf40ccd643c2c497cad91fc45b5b8889008239ed74de5c339a193a07ccec7",
+          "571205b45a993bac5ad18ae9c3e543c87b0231c96b07a248ccf93020a19e6c78",
+          "515e2db4198196c0ce9fa63f1dbbcbdce220370cb61868254409237519bcf289",
+          "124381b17fb5f4620805336bbec025e399cbc260fad4729f414438fedc34883f",
+          "f9f60eb37e6a1d237618e2fc1d971adc29800a8b36df2abbcb5b489e9831b76f",
+          "e1bbf03b228ff9f25d11a7273ecca35ecfeac71b2b30cde40f22107f3dc0fe34",
+          "fb4ce4fd1a64f7c0b2068a7434e1e415aa5207ea6c038f00bd7c5d6d2554e0a9",
+          "ba22e6acc43c80efbd0e785cfb1d7d6ccb921f178a17214d0b9d8b93489faf5f",
+          "63d362955dd6ef4ce6eb2b4d50cfabf0fae2d212ee701fc57dfab61fb18a71e3"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png",
+        "rgba_sha256": "70f9746a80f8ec593541171fb3d95e32ca8476947424cb166fd19bdec1fe6694",
+        "sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506"
+      },
+      "portable_generator_bridge": {
+        "bytes": 1358,
+        "path": "source/art/bodies-v1/nursery_warden/proof/portable-generator-reference-patch.json",
+        "sha256": "73fde76001e50e3f671f302e826c8d52880472b108403f69aeddab36a1af0db2"
+      },
+      "public_master_bridge": {
+        "bytes": 4777,
+        "path": "source/art/bodies-v1/nursery_warden/proof/public-master-bridge.json",
+        "sha256": "b2f3680031ad3c7c74d5b7004493442a7dcb4b3b4358c929509dec7f95b9a078"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42401,
+        "path": "source/art/bodies-v1/nursery_warden/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "504445037ae06a62ea2edb706eeb063739cb7fedd34e688a9ee7611882cc08eb"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          256,
+          256
+        ],
+        "columns": 8,
+        "dimensions": [
+          2048,
+          1280
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 247,
+        "origin_px": [
+          128,
+          248
+        ],
+        "pixel_size": 0.028515625,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 3.421875
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/nursery_warden.png",
+      "source-native": {
+        "bytes": 6191,
+        "path": "source/art/bodies-v1/nursery_warden/proof/source-native.json",
+        "sha256": "1d00b6b7a6262fcc199289d9fe362d894a78ab279f4da681e7352a24cc7530f2"
+      },
+      "source_blend": {
+        "bytes": 4739683,
+        "path": "source/art/bodies-v1/nursery_warden/nursery_warden.blend",
+        "sha256": "2cf72084dbb678722c803fd9eb7df31e6ade2243d3c78356efaaae20348a9d32"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/nursery_warden/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        }
+      ]
+    },
+    {
+      "actual-context": {
+        "bytes": 9294,
+        "path": "source/art/bodies-v1/choir_avatar/proof/actual-context.json",
+        "sha256": "fc2bb32e7e6e23ef7abe16cc1aae51428b3e9de2cba65161a03cefb1f56d5ec6"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "6d49ed72007f6c316875c769482d4a09665b01e734df8d70ce28a855bf6ade58",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 56033,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-00.png",
+            "sha256": "fccbae5736ac736d8a31c4b4b9028638f65c5866b557d1a30495b16df5724cfa"
+          },
+          "raw_bbox": [
+            55,
+            5,
+            200,
+            208
+          ],
+          "raw_rgba_sha256": "d93fa97fa50fbcb586f88dd08737ddb250bfaa987c8e6721466d47eceda1304c",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "a88845cce75e2c6feb7f0ce1755ee3434406d94560f8ebd3b9371140ebd24a46",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 51637,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-01.png",
+            "sha256": "1c69bebc9d6ddeac5694d8a309369d4742d2c1cef1002e33a9e4348c471a886f"
+          },
+          "raw_bbox": [
+            76,
+            6,
+            195,
+            208
+          ],
+          "raw_rgba_sha256": "3991e67c14188e15a9e54be99850956ead8bd4f35cca205e5862ae9c6acb05dd",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "436302322b74ed67a5e500c048abaf9f387713790781b169035e2d4a05a2575e",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 42867,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-02.png",
+            "sha256": "226c08b38c29fa2e9983bf5a268aee65d2b5d5dd8f9e4666fc9b4356f708542e"
+          },
+          "raw_bbox": [
+            91,
+            6,
+            170,
+            209
+          ],
+          "raw_rgba_sha256": "e08cf906ac66a9478026421feb875b06caece65d1711ead48fcc788e7ed1b002",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "ef84201d456f25288b08beeb95bd9a236e6fc5d9cd591966949d777a14c65e43",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 49725,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-03.png",
+            "sha256": "f8bc6ef6dae29495d3d5be480ee0da77da8e5af80c861766389a7b36613150d7"
+          },
+          "raw_bbox": [
+            76,
+            6,
+            195,
+            209
+          ],
+          "raw_rgba_sha256": "c318cddb28f8334544bc4fe8cdd810c0a6b7ec3ea31f8c43b30a96b344c20845",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "3588598111333bbe2ad426e65312c2671837defbfb73ae16e1e137f0c3743cce",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 50846,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-04.png",
+            "sha256": "c34483dbfeaa38be0733b9f70985aebe9d1042c866e7dcf6b505e35383fad900"
+          },
+          "raw_bbox": [
+            55,
+            7,
+            200,
+            209
+          ],
+          "raw_rgba_sha256": "aa67b087e43ce9539d87d839e5b2cc4451883525e14b1d618eb33dba441d6634",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "6c7830be34c5dabeabc1643de812cede7cdb66ffd168abe158d68ac4f4248d62",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 49109,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-05.png",
+            "sha256": "c2b9a2c9668482e32ee85245464e2ea93b41b4db48ffd5c0e59d495baa02fe3b"
+          },
+          "raw_bbox": [
+            60,
+            6,
+            179,
+            209
+          ],
+          "raw_rgba_sha256": "ef8f5c4df7f01f14af3dc1a1f0f4f9d8e5ff9866ae1154700e854b9417c7679f",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "dfc1132afd9562ee22dd1f5d98dd1a50cfdc8ad6ea7b43054ce983f027f240b2",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 41805,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-06.png",
+            "sha256": "e2fca6b2ad675ccd36164d714a0e4d2f856f3353e63bdb0ed2227414b1f454e6"
+          },
+          "raw_bbox": [
+            85,
+            6,
+            164,
+            209
+          ],
+          "raw_rgba_sha256": "b893db18fb2f01a0a3ef76c565d4ce0ecf326953bc418cb3dc4927aebf93bb5a",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "2bdbe437a7fbb0586762b07f3467d78b0d74f8dd4567c338e6f39b8693d8f987",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 51022,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-idle-07.png",
+            "sha256": "4553717b5732442cbab60584e78e2e4c5eca8bf2687d07c0f403e144115fceb7"
+          },
+          "raw_bbox": [
+            60,
+            6,
+            179,
+            208
+          ],
+          "raw_rgba_sha256": "943b1e89fc2bab051d9b624398df532eb918e3cc95f90f51ba55eb4c53f94c2c",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "bbc63caaea45c0fe19c71a01c7d5864396c9bfa86997542f3002aacbcedacb01",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 56031,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-00.png",
+            "sha256": "1d83405114ad888d88284e042591a250a489177ddf742140a7e8e3304b82b2ab"
+          },
+          "raw_bbox": [
+            54,
+            6,
+            200,
+            207
+          ],
+          "raw_rgba_sha256": "89b541ff0e8753c4f7469ec73d57e097aa66e00fd52f09949c2b8aa01679826b",
+          "vertical_shift": 40
+        },
+        {
+          "cell_rgba_sha256": "2f4cfbaee08af2dea80a020c5836ee3dfbd29479073eef943d59c75ead09240f",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 52663,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-01.png",
+            "sha256": "23ee4d299fde6a2863e603ac0645f23fe65c768c9591f9eea5bd61fdee89acc1"
+          },
+          "raw_bbox": [
+            73,
+            6,
+            200,
+            208
+          ],
+          "raw_rgba_sha256": "58edd2ecef517f2efdc2f9d0845a45690310d5029a7942553a44c4eda3193c82",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "c07fcf8eb8a9c5db4c0885a28c735299e1c52ca33fd56ac038535cb3d22b3751",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 43763,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-02.png",
+            "sha256": "83ed29baaf572c157b9e8fb9f801ac72373aa45b7857f15ff22805d96557c390"
+          },
+          "raw_bbox": [
+            89,
+            6,
+            172,
+            209
+          ],
+          "raw_rgba_sha256": "54888660d7c05c27d9d4224ed85a231d492d6b4b5f7285ff46646029a4cd5ff3",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "afda904606590ed53ea8123ebd7157160820c68cb0e7f5bf33ab1eafa71ccb62",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 49103,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-03.png",
+            "sha256": "526b5902ae13fa7e8f7e7b8c31410dda3e26c64510dfc6166b7b2c3872b5a6ba"
+          },
+          "raw_bbox": [
+            79,
+            6,
+            193,
+            209
+          ],
+          "raw_rgba_sha256": "8d0aeb72a2e48317f14dd1cf74f98f661fed6582e55f481b32d538f91247f588",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "9d8ebb50aa70b589b5638cd0dcba1edf62a8399f972210c630a5c7f0dc4aa655",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 50985,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-04.png",
+            "sha256": "af5db397c8543114e81e68763b59afadb050104685efa5442d19cc73bbc82246"
+          },
+          "raw_bbox": [
+            55,
+            7,
+            201,
+            209
+          ],
+          "raw_rgba_sha256": "ea1992f71be93ccc42df8c1e59af1a56291018a66b80c01fdbbe21ab1e42658a",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "a9415dffcfcf8e9fe57eff0a0c4c99ecb4e711cdee526e4ef8b22a9e6008b6be",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 49881,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-05.png",
+            "sha256": "ff8f13036d104bdd9f64cbe3670d06ef803af853f86e6e17f0f27803dc364558"
+          },
+          "raw_bbox": [
+            55,
+            6,
+            182,
+            209
+          ],
+          "raw_rgba_sha256": "c46156ec223aa769a30fad18ed3bcf4ee3aeed2d944c929e52afabdbcfc0b1bf",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "0f5ed39bce0f2018f82b06895b97a533fe8e03c0463805dd8f1152c265f539f9",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 42839,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-06.png",
+            "sha256": "81067744083ea039670f31ab2d5d8464ff5c90eba5ba249d7318b91d72ce75b7"
+          },
+          "raw_bbox": [
+            83,
+            6,
+            166,
+            209
+          ],
+          "raw_rgba_sha256": "153153c4e132661c26a55f41391152446bf911f850631e52a0af4383bd07421f",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "cb087e02daae9364d16e1c872d7672a8231879332dc63ca9b5931fc3ace56d19",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 50412,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_a-07.png",
+            "sha256": "e265b3ba827cc97b44ed26eaab8891960f906531cc13731599b0988e1dd104dd"
+          },
+          "raw_bbox": [
+            62,
+            6,
+            176,
+            208
+          ],
+          "raw_rgba_sha256": "919bd3812fd83a1595bb47337246a6e4c433ba66d982dc0470c900ac93f38467",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "7b1afbaabf7a1bc5fc0d5bf46ef9217002dc08051b7b41266082de992fa06430",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 56469,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-00.png",
+            "sha256": "79883e15c69fb259a4cb914d243ce99bbc4601c2f293cf03bbd0003c626d2ce5"
+          },
+          "raw_bbox": [
+            55,
+            5,
+            200,
+            208
+          ],
+          "raw_rgba_sha256": "a13305abb92a075d2f7cdad159a3bc079436705e110fa92e2bb08fa9ac2c2e06",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "fc5354745a169193c94444a9a6f8661b36a70b05e075b9252f5412ee6eaff750",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 50842,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-01.png",
+            "sha256": "02e9c8e81aa7ea7526ebc9c1c84dfdea29470fb2d9f4f9cefd85c634091a9afb"
+          },
+          "raw_bbox": [
+            78,
+            6,
+            189,
+            208
+          ],
+          "raw_rgba_sha256": "c48321925ea4c018fcdd4fdd75db46159e87e3ced226fe5a93cefcc731651157",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "bf7eed4b879900a2788db22a92c8be245b75e76be951260ede285a94dfa6286e",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 43779,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-02.png",
+            "sha256": "53cc2f5d79760491c85e266709450356e0d694bde0d210990a690214f48c126b"
+          },
+          "raw_bbox": [
+            90,
+            6,
+            172,
+            209
+          ],
+          "raw_rgba_sha256": "aefca5b38618e97e4f106d9c992abd1b1f4e1a2d73ce2c426fb0b60eaadc172f",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "51a74e4a263e2d16e2ee8dcb208655cd133b201ce2da71cf1087283d2684f0de",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 50423,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-03.png",
+            "sha256": "e92a4c0629a22bdfda28fe9f8d788561d773d105b3aed504d3cca703940e8bb0"
+          },
+          "raw_bbox": [
+            71,
+            7,
+            197,
+            209
+          ],
+          "raw_rgba_sha256": "7d9ac1d5e80ef297b1a93985a1b516719b33096c7157a4ca13ad24b67cd52cce",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "35b936b5194c97d1a0794eda257547e1dab81298cd469fe8af6fe8a604320f40",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 51741,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-04.png",
+            "sha256": "0b6c81312436e9c14a7aa0b89670fc154e5f0c5fb55af373647ae4bae740cb9f"
+          },
+          "raw_bbox": [
+            55,
+            7,
+            200,
+            209
+          ],
+          "raw_rgba_sha256": "c8f14631cc43cc904ec22560eb1dc78f2f385f09eb5d20216afb63fa4e93a398",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "c3bacea49e8e894f4a5115a7eae2d13fd9eab934f7a52a75dca9d6b5ec901348",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 48677,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-05.png",
+            "sha256": "6c450e247ce8b1bce7d1be8764d9abea21cc48bb394d3326fb69d7303327f7bd"
+          },
+          "raw_bbox": [
+            66,
+            7,
+            177,
+            209
+          ],
+          "raw_rgba_sha256": "6181edd2d497dadd6151b4fac48bd0eaf36da60d260e7ab6f7c7e782f4d96e5f",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "dfbf8fbc74eaac568ed33bb5871d8e4a7057ff9efa72c975788b629c0d10d6ba",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 42389,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-06.png",
+            "sha256": "276308e877073f5b08cf4277172f41da9c6482cb4a3e449100274d668253d3a1"
+          },
+          "raw_bbox": [
+            83,
+            6,
+            165,
+            209
+          ],
+          "raw_rgba_sha256": "3c717e17c555b4509677e946d51954627bc8b121903bccfc5761b3659b04477c",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "28b9c3091d84cbf2df10838fe6d2f6f587513ef78a2b58d7e05bc3adadac7eb4",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 51848,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-walk_b-07.png",
+            "sha256": "98c87955f1966fecf2d282272d76deb0903f23e0b07c7901991d7efbada40f69"
+          },
+          "raw_bbox": [
+            58,
+            6,
+            184,
+            208
+          ],
+          "raw_rgba_sha256": "a3f642bfa0a177efc0f2f3c29ace50511242e7f0f4455bc00663953a9965b0e3",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "74c3c8e384d487453a76d3cbf6cf146188eab5dca5806e1a77dc2da98c9cfe70",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 55882,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-00.png",
+            "sha256": "2129c03bd51d51d64f0878df7b4e5df8219b0016c0bc9547dbc2dce4b01c6941"
+          },
+          "raw_bbox": [
+            47,
+            5,
+            208,
+            208
+          ],
+          "raw_rgba_sha256": "1dd23e1799f5d7561c9d67b9d43a583105100dd1a7658eaec1d7e94b3396c0a1",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "4bd4daef7ce23b91f29233a9ca0f670132cff814c89850ceff8ba44976b20362",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 53080,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-01.png",
+            "sha256": "51d535b4ad7e2e315c6ff671295793372a1c4cb4f561ac23f7d09345550cfe3f"
+          },
+          "raw_bbox": [
+            70,
+            6,
+            194,
+            208
+          ],
+          "raw_rgba_sha256": "7319227a6e9cffd5c6fac7ea3bc122666c907f3a390004d7e9a40cf3464c429a",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "d630d512f66a74583beb50436aad527dfb6a41252d3796dc589a7b90e8c4a265",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 44274,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-02.png",
+            "sha256": "9666cc4985b4450b7bd0d623e1bc0c2a86e3433ea7d0f27bd2518b2fc635aa3f"
+          },
+          "raw_bbox": [
+            90,
+            6,
+            170,
+            209
+          ],
+          "raw_rgba_sha256": "57b5b5fd52ce39a98411faed667fa833bf0ab21a2810861f4706d306d90cf518",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "7a55eee63a89a31a5ed73815114fe044210207417f386765ce0b9fc7d08e4166",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 49985,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-03.png",
+            "sha256": "5c4192afbe2cfff2bf2d410f8266c701967331885cf9dfbf1d7ceab9013836a7"
+          },
+          "raw_bbox": [
+            69,
+            6,
+            194,
+            209
+          ],
+          "raw_rgba_sha256": "2d602a5e49ca20d742e8ddd6b8e8ecc2586e198cd6dead0b3bfa9bac96de9fb0",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "1984778ef819cfe235beaf9f41bd905854bc81d2bb2042ea6e5f00e29e75d373",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 50695,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-04.png",
+            "sha256": "5cf59e2e7d949e457a806cefa01542094de88df10086921b1c7ec6f14189d100"
+          },
+          "raw_bbox": [
+            47,
+            7,
+            208,
+            209
+          ],
+          "raw_rgba_sha256": "e60505e94fce61d2615e779616026439637f3713b2340a7e7fba5e0183db2a79",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "ad80ee743f5a253b79bc490e00081a3f07543672736ac6fccb3cbd931d7d8606",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 49334,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-05.png",
+            "sha256": "921df70bd1430cda09d62989d4268ee6d79d1bdebea3f982c0fee5c68f53b851"
+          },
+          "raw_bbox": [
+            61,
+            6,
+            185,
+            209
+          ],
+          "raw_rgba_sha256": "3fc8bdff86ea30620958346ef485c3239f7db2021420613b717a1cdb7e9fb0e5",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "880c9fbe61baf457d7d5a2f31085b545acc7b34c84f5c81fc4e4b32318bb1c74",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 43300,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-06.png",
+            "sha256": "f6688b2789b967a1985fc9556cf46f97b7b1a7fbeae5c461cc995d70d052e721"
+          },
+          "raw_bbox": [
+            85,
+            6,
+            165,
+            209
+          ],
+          "raw_rgba_sha256": "acf805216721e8027bd4741a1462202ee429d41dd8d88ec99a176972059aedb2",
+          "vertical_shift": 38
+        },
+        {
+          "cell_rgba_sha256": "4e47dab0d49115cd6c1ef70dbfa7ecd68247a434ec85953c2ef2f2a2ca363d4e",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 51968,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-attack-07.png",
+            "sha256": "34edf7e54983d723d73b9576fa7cc0d470ca187fd8371e6f3b887d0e00f562d0"
+          },
+          "raw_bbox": [
+            61,
+            6,
+            186,
+            208
+          ],
+          "raw_rgba_sha256": "dabd5898847211941b85c39b13508a1e8d17ec5b7920bfb7250e1d5384279425",
+          "vertical_shift": 39
+        },
+        {
+          "cell_rgba_sha256": "54b05a69f44560f3b383e40cb513c9d86b75bf5ed68261f3bff24dd75874484f",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 38845,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-00.png",
+            "sha256": "2117455d761f54444ac80650ba17929ebf5756d2dbbe762ad68e8ca6159f1a4d"
+          },
+          "raw_bbox": [
+            37,
+            138,
+            218,
+            219
+          ],
+          "raw_rgba_sha256": "d9e456d40c6b69288d206720fc4dc44eb71be4de2aaeaabb45409201f28d14c9",
+          "vertical_shift": 28
+        },
+        {
+          "cell_rgba_sha256": "ab66837f7cbf6dbd7f6165b8dbf0d4a67bea1e8fbdce14e0540988dc087607ba",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 38881,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-01.png",
+            "sha256": "2ceae6f9d1d89ed7f941f2fb630ba133dd9b2f18e4ef082b8fb76636fb48163c"
+          },
+          "raw_bbox": [
+            38,
+            139,
+            214,
+            220
+          ],
+          "raw_rgba_sha256": "ab905c512137f8716805e3cda52e8cd158979c460cd00b81ceb5dd46e49ca5cf",
+          "vertical_shift": 27
+        },
+        {
+          "cell_rgba_sha256": "fae2ee8b6fc854e284c6acdb21c19254cac71e06cc85123e2ecceb3bd9b58237",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 39672,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-02.png",
+            "sha256": "5d553fbecc406d8cedf408ed62a98fc2de33751fdd01804acb173e3a705449ef"
+          },
+          "raw_bbox": [
+            27,
+            136,
+            228,
+            222
+          ],
+          "raw_rgba_sha256": "b122b8642ab0ad2b5e76c07904d8826273b6c4c6707c57b5a4f82f06157637b4",
+          "vertical_shift": 25
+        },
+        {
+          "cell_rgba_sha256": "b018cfeebb46cac61b7681f0ad0fed09fa910e41b253cd2dadeba8abaa9c62de",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 39037,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-03.png",
+            "sha256": "2cb8563b336459c547470ffe068864c8d91289b71ce43b71c7fb03eac339009c"
+          },
+          "raw_bbox": [
+            46,
+            134,
+            205,
+            225
+          ],
+          "raw_rgba_sha256": "fba526147d93d21e58a0776aff35df49d49093f7d1a5cbc57551526997a0d732",
+          "vertical_shift": 22
+        },
+        {
+          "cell_rgba_sha256": "d133a5986776bc0ec22ef81ebb42e4d639d6cd59252c49ee5529c754632e67ad",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 38933,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-04.png",
+            "sha256": "2943523eca58c03ee00481daf1d1a22085257af5dea4fe04394e501dd2e335c7"
+          },
+          "raw_bbox": [
+            37,
+            134,
+            218,
+            225
+          ],
+          "raw_rgba_sha256": "87ab9d1cadb766974de263fdecefccac01cd2753935c2356daf58f9bae05483d",
+          "vertical_shift": 22
+        },
+        {
+          "cell_rgba_sha256": "4360f8b79ad927c4eb6c3bf999990cbb2ed2b0526b2e407f6277cc7436ff1b37",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 37961,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-05.png",
+            "sha256": "1b5439cbf97590d29fdccabce6a9d65931289d5717331a13021e16f4b8ea951e"
+          },
+          "raw_bbox": [
+            41,
+            135,
+            217,
+            223
+          ],
+          "raw_rgba_sha256": "66a32561fd532556b568f934d4848cf272392f47c0f9bd9cbc226f54445345d1",
+          "vertical_shift": 24
+        },
+        {
+          "cell_rgba_sha256": "ff27b6e29a17ce42f2b8aa5ddbb9d3588271291a39a6665cda73dc9e055788eb",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 38633,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-06.png",
+            "sha256": "d1d8bf18fcf76e7920cba378dc3d825d4a9c2c2af248de0fcaa79f7377018fce"
+          },
+          "raw_bbox": [
+            27,
+            137,
+            228,
+            220
+          ],
+          "raw_rgba_sha256": "3698c69da37a872f91399d971151d52ead3c8286fc15095fdef8fe097810fcae",
+          "vertical_shift": 27
+        },
+        {
+          "cell_rgba_sha256": "58f95426f80d1575e4a2617d65634a7098df5ed5c34789d6cc3cc3713c8d28b4",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 38164,
+            "path": "source/art/bodies-v1/choir_avatar/frames/raw-dead-07.png",
+            "sha256": "d3d392acc0339c9abf36092a888c6d2563096ced107ff032ebec948faa8a34aa"
+          },
+          "raw_bbox": [
+            50,
+            138,
+            208,
+            220
+          ],
+          "raw_rgba_sha256": "68b9df41ff32ffe780b8a0ab9ab96b2df3d3abe04572d3f4816cfd443f90f86e",
+          "vertical_shift": 27
+        }
+      ],
+      "generator": {
+        "bytes": 40429,
+        "path": "source/art/bodies-v1/choir_avatar/build_boss_bodies_v05.py",
+        "sha256": "07a4567b4d19ee08023ede91d6bc5158b591a62b772bb2d5f355edfb62127784"
+      },
+      "import_sidecar": {
+        "bytes": 969,
+        "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png.import",
+        "sha256": "82a33c2b1749e6fd5a7c1bc565260361202f10ef628d539dd868b5b2b11e4279"
+      },
+      "independent": {
+        "bytes": 5066,
+        "path": "source/art/bodies-v1/choir_avatar/proof/independent.json",
+        "sha256": "08832e6db96d1b41f19fc044118f5156046a6415f410fe51f91760461124de93"
+      },
+      "kind": "choir_avatar",
+      "lineage": {
+        "generator": {
+          "bytes": 53153,
+          "path": "tools/build_late_combat_art.py",
+          "sha256": "8dc582d4f7984c47aa2e7257ff7d8ebf3516e146a2b09bb9bba74bdbe2ea684e"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          },
+          "tools/build_processional_art.py": {
+            "bytes": 34609,
+            "path": "tools/build_processional_art.py",
+            "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+          },
+          "tools/build_religious_art.py": {
+            "bytes": 37332,
+            "path": "tools/build_religious_art.py",
+            "sha256": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde"
+          }
+        },
+        "logical_generator": "tools/build_late_combat_art.py",
+        "output": {
+          "bytes": 769528,
+          "path": "game/assets/art/sprites/choir_avatar.png",
+          "sha256": "e39b0173956d2fe3d7a5b5c1000c1a5d75bf8aba06da1de1613a4dff126d450d"
+        },
+        "source": {
+          "bytes": 6624981,
+          "path": "source/art/choir_avatar.blend",
+          "sha256": "a18acd0f52f7b07d1150e279f3c746c732fa0554b3f8be1cb73bec6634b01b9f"
+        }
+      },
+      "normal-import": {
+        "bytes": 4099,
+        "path": "source/art/bodies-v1/choir_avatar/proof/normal-import.json",
+        "sha256": "1e9d52bd5f367461eb625880f6215b76a3c1c39fa11a40c2a448c934dad869ec"
+      },
+      "output": {
+        "bytes": 564352,
+        "cell_bbox": [
+          [
+            55,
+            44,
+            200,
+            247
+          ],
+          [
+            76,
+            45,
+            195,
+            247
+          ],
+          [
+            91,
+            44,
+            170,
+            247
+          ],
+          [
+            76,
+            44,
+            195,
+            247
+          ],
+          [
+            55,
+            45,
+            200,
+            247
+          ],
+          [
+            60,
+            44,
+            179,
+            247
+          ],
+          [
+            85,
+            44,
+            164,
+            247
+          ],
+          [
+            60,
+            45,
+            179,
+            247
+          ],
+          [
+            54,
+            46,
+            200,
+            247
+          ],
+          [
+            73,
+            45,
+            200,
+            247
+          ],
+          [
+            89,
+            44,
+            172,
+            247
+          ],
+          [
+            79,
+            44,
+            193,
+            247
+          ],
+          [
+            55,
+            45,
+            201,
+            247
+          ],
+          [
+            55,
+            44,
+            182,
+            247
+          ],
+          [
+            83,
+            44,
+            166,
+            247
+          ],
+          [
+            62,
+            45,
+            176,
+            247
+          ],
+          [
+            55,
+            44,
+            200,
+            247
+          ],
+          [
+            78,
+            45,
+            189,
+            247
+          ],
+          [
+            90,
+            44,
+            172,
+            247
+          ],
+          [
+            71,
+            45,
+            197,
+            247
+          ],
+          [
+            55,
+            45,
+            200,
+            247
+          ],
+          [
+            66,
+            45,
+            177,
+            247
+          ],
+          [
+            83,
+            44,
+            165,
+            247
+          ],
+          [
+            58,
+            45,
+            184,
+            247
+          ],
+          [
+            47,
+            44,
+            208,
+            247
+          ],
+          [
+            70,
+            45,
+            194,
+            247
+          ],
+          [
+            90,
+            44,
+            170,
+            247
+          ],
+          [
+            69,
+            44,
+            194,
+            247
+          ],
+          [
+            47,
+            45,
+            208,
+            247
+          ],
+          [
+            61,
+            44,
+            185,
+            247
+          ],
+          [
+            85,
+            44,
+            165,
+            247
+          ],
+          [
+            61,
+            45,
+            186,
+            247
+          ],
+          [
+            37,
+            166,
+            218,
+            247
+          ],
+          [
+            38,
+            166,
+            214,
+            247
+          ],
+          [
+            27,
+            161,
+            228,
+            247
+          ],
+          [
+            46,
+            156,
+            205,
+            247
+          ],
+          [
+            37,
+            156,
+            218,
+            247
+          ],
+          [
+            41,
+            159,
+            217,
+            247
+          ],
+          [
+            27,
+            164,
+            228,
+            247
+          ],
+          [
+            50,
+            165,
+            208,
+            247
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "6d49ed72007f6c316875c769482d4a09665b01e734df8d70ce28a855bf6ade58",
+          "a88845cce75e2c6feb7f0ce1755ee3434406d94560f8ebd3b9371140ebd24a46",
+          "436302322b74ed67a5e500c048abaf9f387713790781b169035e2d4a05a2575e",
+          "ef84201d456f25288b08beeb95bd9a236e6fc5d9cd591966949d777a14c65e43",
+          "3588598111333bbe2ad426e65312c2671837defbfb73ae16e1e137f0c3743cce",
+          "6c7830be34c5dabeabc1643de812cede7cdb66ffd168abe158d68ac4f4248d62",
+          "dfc1132afd9562ee22dd1f5d98dd1a50cfdc8ad6ea7b43054ce983f027f240b2",
+          "2bdbe437a7fbb0586762b07f3467d78b0d74f8dd4567c338e6f39b8693d8f987",
+          "bbc63caaea45c0fe19c71a01c7d5864396c9bfa86997542f3002aacbcedacb01",
+          "2f4cfbaee08af2dea80a020c5836ee3dfbd29479073eef943d59c75ead09240f",
+          "c07fcf8eb8a9c5db4c0885a28c735299e1c52ca33fd56ac038535cb3d22b3751",
+          "afda904606590ed53ea8123ebd7157160820c68cb0e7f5bf33ab1eafa71ccb62",
+          "9d8ebb50aa70b589b5638cd0dcba1edf62a8399f972210c630a5c7f0dc4aa655",
+          "a9415dffcfcf8e9fe57eff0a0c4c99ecb4e711cdee526e4ef8b22a9e6008b6be",
+          "0f5ed39bce0f2018f82b06895b97a533fe8e03c0463805dd8f1152c265f539f9",
+          "cb087e02daae9364d16e1c872d7672a8231879332dc63ca9b5931fc3ace56d19",
+          "7b1afbaabf7a1bc5fc0d5bf46ef9217002dc08051b7b41266082de992fa06430",
+          "fc5354745a169193c94444a9a6f8661b36a70b05e075b9252f5412ee6eaff750",
+          "bf7eed4b879900a2788db22a92c8be245b75e76be951260ede285a94dfa6286e",
+          "51a74e4a263e2d16e2ee8dcb208655cd133b201ce2da71cf1087283d2684f0de",
+          "35b936b5194c97d1a0794eda257547e1dab81298cd469fe8af6fe8a604320f40",
+          "c3bacea49e8e894f4a5115a7eae2d13fd9eab934f7a52a75dca9d6b5ec901348",
+          "dfbf8fbc74eaac568ed33bb5871d8e4a7057ff9efa72c975788b629c0d10d6ba",
+          "28b9c3091d84cbf2df10838fe6d2f6f587513ef78a2b58d7e05bc3adadac7eb4",
+          "74c3c8e384d487453a76d3cbf6cf146188eab5dca5806e1a77dc2da98c9cfe70",
+          "4bd4daef7ce23b91f29233a9ca0f670132cff814c89850ceff8ba44976b20362",
+          "d630d512f66a74583beb50436aad527dfb6a41252d3796dc589a7b90e8c4a265",
+          "7a55eee63a89a31a5ed73815114fe044210207417f386765ce0b9fc7d08e4166",
+          "1984778ef819cfe235beaf9f41bd905854bc81d2bb2042ea6e5f00e29e75d373",
+          "ad80ee743f5a253b79bc490e00081a3f07543672736ac6fccb3cbd931d7d8606",
+          "880c9fbe61baf457d7d5a2f31085b545acc7b34c84f5c81fc4e4b32318bb1c74",
+          "4e47dab0d49115cd6c1ef70dbfa7ecd68247a434ec85953c2ef2f2a2ca363d4e",
+          "54b05a69f44560f3b383e40cb513c9d86b75bf5ed68261f3bff24dd75874484f",
+          "ab66837f7cbf6dbd7f6165b8dbf0d4a67bea1e8fbdce14e0540988dc087607ba",
+          "fae2ee8b6fc854e284c6acdb21c19254cac71e06cc85123e2ecceb3bd9b58237",
+          "b018cfeebb46cac61b7681f0ad0fed09fa910e41b253cd2dadeba8abaa9c62de",
+          "d133a5986776bc0ec22ef81ebb42e4d639d6cd59252c49ee5529c754632e67ad",
+          "4360f8b79ad927c4eb6c3bf999990cbb2ed2b0526b2e407f6277cc7436ff1b37",
+          "ff27b6e29a17ce42f2b8aa5ddbb9d3588271291a39a6665cda73dc9e055788eb",
+          "58f95426f80d1575e4a2617d65634a7098df5ed5c34789d6cc3cc3713c8d28b4"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png",
+        "rgba_sha256": "56353ec096401bc9c3a8c6be8e3dc3ceda25879cd5174f3ae6c77f95f8b7bc32",
+        "sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902"
+      },
+      "portable_generator_bridge": {
+        "bytes": 1354,
+        "path": "source/art/bodies-v1/choir_avatar/proof/portable-generator-reference-patch.json",
+        "sha256": "deb03cf52ff469d45330bb04b50ef078cb9117ba4df2ab4f1b5feb192b670f96"
+      },
+      "public_master_bridge": {
+        "bytes": 4763,
+        "path": "source/art/bodies-v1/choir_avatar/proof/public-master-bridge.json",
+        "sha256": "38496ddfc1879252da1a1fd54ebfa12e013a4fe110ea375e5a8530477787110d"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42319,
+        "path": "source/art/bodies-v1/choir_avatar/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "d9fdf09ca282817e228cade4abbc64bcaea25dc5a76d29abfe4706f2839f6dcb"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          256,
+          256
+        ],
+        "columns": 8,
+        "dimensions": [
+          2048,
+          1280
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 247,
+        "origin_px": [
+          128,
+          248
+        ],
+        "pixel_size": 0.0296875,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 3.5625
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/choir_avatar.png",
+      "source-native": {
+        "bytes": 6442,
+        "path": "source/art/bodies-v1/choir_avatar/proof/source-native.json",
+        "sha256": "aa70cf29fbbbbce3f0382c2ba5f21788a7bd34463d95bd296493e932e2362d88"
+      },
+      "source_blend": {
+        "bytes": 4279168,
+        "path": "source/art/bodies-v1/choir_avatar/choir_avatar.blend",
+        "sha256": "ab9a64e0d068cab86eaf54c5436f5f9160296a95e8c5f8450f3f506fcb922d67"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/choir_avatar/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        }
+      ]
+    }
+  ],
+  "pending_fields": [
+    "Strict typed canonical validator integration of boss source/native and one-line portable-reference generator identity; no generic changed-source exception",
+    "Final active8 Enemy source/current actual-context and independent acceptance",
+    "Other actor entries and canonical legacy119/140 references",
+    "PCK/gameplay/human/FPS evidence not supplied"
+  ],
+  "pending_roles": [
+    "crawler",
+    "worker",
+    "caster",
+    "brute",
+    "guardian",
+    "summoner"
+  ],
+  "schema": "null-choir-eight-actor-ledger-v1",
+  "scope": "Two frozen accepted boss art packets with actual public-source-open parity approved by root-scoped reconciliation. Original generator-native identity retained; portable generators remain unrun. Not qualified wholecohort.",
+  "source_open_reconciled_qualification": {
+    "bytes": 1778,
+    "path": "source/art/bodies-v1/boss-source-open-reconciled-qualification.json",
+    "sha256": "2caeeff306da03ffaf31e07ce4de542901775780abc928a462f5087d6aa0895d"
+  },
+  "status": "PENDING",
+  "version": 1
+}

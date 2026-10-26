@@ -1,0 +1,271 @@
+{
+  "actor_kind": "summoner",
+  "actual_context_report": {
+    "bytes": 77890,
+    "sha256": "f40fe14719b09334a986b1d8a065b37f7b13d6fffa6e7aeb8c455f5ee04ea63d"
+  },
+  "actual_native_receipt": {
+    "bytes": 12755,
+    "sha256": "64e652c17e5f6c55896d6fa76bd9bd6d1b22f8b10a9a723682be8207598f4ab3"
+  },
+  "atlas_sha256": "7499061d847bf8a4bd2bcf11ae4e62df01149ebed8c92740155d474079c84368",
+  "candidate_runtime_uri": "res://assets/art/sprites/bodies-v1/summoner.png",
+  "configured_runtime_uri": "res://assets/art/sprites/summoner.png",
+  "consumer_binding_qualification": "PENDING_FINAL_BODY_ATLASES_INTEGRATION",
+  "consumer_sha256": "4b8d84543100529b73145d23ceb4438368b0b12a4479f8f1f6876c6205abe63b",
+  "evidence_class": "actual-native",
+  "manual_atlas_direction": true,
+  "resolution": [
+    640,
+    360
+  ],
+  "rgba_sha256": "719d68c9c0d9b5ac12fb09b22cdd3e3c8b076e47a43f8dc1c534f49d9e78196c",
+  "schema": "null-choir-actor-actual-context-v1",
+  "scope": "Actual static Level40 intended-use views, unchanged map light/profile/foot anchor. Final8 consumer/PCK/human/FPS not qualified.",
+  "status": "PASS",
+  "tested_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "texture_override": "Accepted full atlas ImageTexture on actual Enemy Sprite3D; actual normal-import separately qualified. Static views, not observed AI/attack/death timing.",
+  "views": [
+    {
+      "bytes": 138177,
+      "path": "source/art/bodies-v1/summoner/proof/context-00.png",
+      "sha256": "ad47cbfbf132146a5fca8b01271709ccf7ed0e17b1bdde23b81d0cc8ee645f63"
+    },
+    {
+      "bytes": 138792,
+      "path": "source/art/bodies-v1/summoner/proof/context-01.png",
+      "sha256": "5869af8ee5bd477aabc0f75edef1d78be5cb850b1ff338e1bf9a8cf43e361166"
+    },
+    {
+      "bytes": 138246,
+      "path": "source/art/bodies-v1/summoner/proof/context-02.png",
+      "sha256": "fe7e2dcb70561276623191d0204e49e00058120156dd15f42f5a4ba35c05ec0c"
+    },
+    {
+      "bytes": 135838,
+      "path": "source/art/bodies-v1/summoner/proof/context-03.png",
+      "sha256": "5bc44ec0096e6653312b3354842dc16610d6c0acffc84f39e5c96cdffa4766bd"
+    },
+    {
+      "bytes": 134905,
+      "path": "source/art/bodies-v1/summoner/proof/context-04.png",
+      "sha256": "41900d074e3129c74128f83bb6f84c015a586f153e45a5ab4138475361ee93ba"
+    },
+    {
+      "bytes": 135100,
+      "path": "source/art/bodies-v1/summoner/proof/context-05.png",
+      "sha256": "419734fd9d7016154e2aae6effc0d2a39324da361259f7af194b0c302e190d32"
+    },
+    {
+      "bytes": 136268,
+      "path": "source/art/bodies-v1/summoner/proof/context-06.png",
+      "sha256": "3ca135a962155d0bd3b55a88f82c36c3b16ed747e50195a966721c025f716f71"
+    },
+    {
+      "bytes": 137313,
+      "path": "source/art/bodies-v1/summoner/proof/context-07.png",
+      "sha256": "6bf19869a4ac303071788e015155a979294a1187cfd9405a3f1d566e28238b7a"
+    },
+    {
+      "bytes": 138086,
+      "path": "source/art/bodies-v1/summoner/proof/context-08.png",
+      "sha256": "b70de87f29703127e49044f2262c83dca93e83b26c35a3aa51ccf63aa5086a77"
+    },
+    {
+      "bytes": 138697,
+      "path": "source/art/bodies-v1/summoner/proof/context-09.png",
+      "sha256": "a2dd822f367e5c760ac549a02bd06e41e8f7c095fc3d2524a45c9bd19ae98013"
+    },
+    {
+      "bytes": 138278,
+      "path": "source/art/bodies-v1/summoner/proof/context-10.png",
+      "sha256": "4090503823356a93fe70f862bb1c21d5d8380d147a83055ee089a9c5ff9c5007"
+    },
+    {
+      "bytes": 135795,
+      "path": "source/art/bodies-v1/summoner/proof/context-11.png",
+      "sha256": "12519737f26714706c411fcd76dd14d33f835878fdbc20fc64c926ac41f5bfe6"
+    },
+    {
+      "bytes": 134884,
+      "path": "source/art/bodies-v1/summoner/proof/context-12.png",
+      "sha256": "c4dc7750792ad131da42c1e65ef3853e0cfdd763e07c530bbb3b55fe3d9dcd75"
+    },
+    {
+      "bytes": 135059,
+      "path": "source/art/bodies-v1/summoner/proof/context-13.png",
+      "sha256": "b4bbc92372d418ea404449e1bebf390ffaac81d2beabd692f07a8f59532b1b6b"
+    },
+    {
+      "bytes": 136305,
+      "path": "source/art/bodies-v1/summoner/proof/context-14.png",
+      "sha256": "1eaa40deb9150b396f28f56eeaa0478677df3e03a4084a3c2771fdb40f54e50f"
+    },
+    {
+      "bytes": 137256,
+      "path": "source/art/bodies-v1/summoner/proof/context-15.png",
+      "sha256": "d6a721aed3ce5c351efd7ea43c27c4c4e6523680e6d0c3947c1ce12a1f76b029"
+    },
+    {
+      "bytes": 138173,
+      "path": "source/art/bodies-v1/summoner/proof/context-16.png",
+      "sha256": "94783c7cc0f6347e8c29aaa7c673eada605f83555818f512006cc7fcc578554f"
+    },
+    {
+      "bytes": 138747,
+      "path": "source/art/bodies-v1/summoner/proof/context-17.png",
+      "sha256": "0c0bafb76f29fa688a21c249183201a8c427bad1f320b1f11464a542b769836c"
+    },
+    {
+      "bytes": 138146,
+      "path": "source/art/bodies-v1/summoner/proof/context-18.png",
+      "sha256": "8d7671ba378fbcea53ac6475c0f295bee5de72287c7a8a6760a0341f3f96c325"
+    },
+    {
+      "bytes": 135829,
+      "path": "source/art/bodies-v1/summoner/proof/context-19.png",
+      "sha256": "efefbd8fd3c99e4f9b8ac032b39df40461756b18ac8f5f4aa735a5b2063214bf"
+    },
+    {
+      "bytes": 134883,
+      "path": "source/art/bodies-v1/summoner/proof/context-20.png",
+      "sha256": "3a16471f44432fba9beaf21a15621c1d3aeb4f4040196566a2d21b0cb058033d"
+    },
+    {
+      "bytes": 135059,
+      "path": "source/art/bodies-v1/summoner/proof/context-21.png",
+      "sha256": "2b9cda1c94e2af1043a56448397580f2fab600f20ddccccbd82a957b7abea340"
+    },
+    {
+      "bytes": 136265,
+      "path": "source/art/bodies-v1/summoner/proof/context-22.png",
+      "sha256": "4118dac9e3c1bf2c7719822fff7eb494016531f11c849a8d14a17c97e864f3b6"
+    },
+    {
+      "bytes": 137288,
+      "path": "source/art/bodies-v1/summoner/proof/context-23.png",
+      "sha256": "2d759c6255f34dd83fd9121eafaad0702f00bcd062b779ce89b8b1fbe3efaade"
+    },
+    {
+      "bytes": 138413,
+      "path": "source/art/bodies-v1/summoner/proof/context-24.png",
+      "sha256": "65f8dcbbb35e9377fdb0da5e81004c5c482d81adacebdb5acbf6bbd0eb4e14ff"
+    },
+    {
+      "bytes": 138808,
+      "path": "source/art/bodies-v1/summoner/proof/context-25.png",
+      "sha256": "f267e0aa11ea1a3266a7f9f01b47233295aaa0bab57ffaa70834b3cfa55915f2"
+    },
+    {
+      "bytes": 138135,
+      "path": "source/art/bodies-v1/summoner/proof/context-26.png",
+      "sha256": "21537d78e727b30d11a5811d1c2726f50673181465e8031857cbed11e9a9c845"
+    },
+    {
+      "bytes": 136199,
+      "path": "source/art/bodies-v1/summoner/proof/context-27.png",
+      "sha256": "efaee145c151a0032b17b45d8831fbcbc4c29352afc661efc710c5bd150066c0"
+    },
+    {
+      "bytes": 134539,
+      "path": "source/art/bodies-v1/summoner/proof/context-28.png",
+      "sha256": "79e2f1c81f60db18c670e88e3261f3e425193eee2252ab594ce4ed1b09e1f498"
+    },
+    {
+      "bytes": 135458,
+      "path": "source/art/bodies-v1/summoner/proof/context-29.png",
+      "sha256": "a500a97e3a6122459e333371d244c888a1329927daa8b2f13577731d2c4dd837"
+    },
+    {
+      "bytes": 136550,
+      "path": "source/art/bodies-v1/summoner/proof/context-30.png",
+      "sha256": "144912c35890c714dc25517660d21d5400ecc2b8e89ca143a828374824d4101b"
+    },
+    {
+      "bytes": 137701,
+      "path": "source/art/bodies-v1/summoner/proof/context-31.png",
+      "sha256": "14863d9ef4f23021c78e581944df44b749fcc41fdd599fbfba3344f8113febda"
+    },
+    {
+      "bytes": 138381,
+      "path": "source/art/bodies-v1/summoner/proof/context-32.png",
+      "sha256": "b7b07d1d99db52cc21da3f452413879492be0f7a93337f407e970416a0e24704"
+    },
+    {
+      "bytes": 138481,
+      "path": "source/art/bodies-v1/summoner/proof/context-33.png",
+      "sha256": "64cf72ed6a07815da2bdbe8f5503e1812f7a598756c5d3b992160924f1a9a685"
+    },
+    {
+      "bytes": 138630,
+      "path": "source/art/bodies-v1/summoner/proof/context-34.png",
+      "sha256": "a7ae4123c95e8135732930edc457d6a1841d21458ec5b6446798e2a7f6e60ce3"
+    },
+    {
+      "bytes": 138831,
+      "path": "source/art/bodies-v1/summoner/proof/context-35.png",
+      "sha256": "e38ce618acd57169652404192bdb85a35e634ea3421ea9e72e6875256dc69e34"
+    },
+    {
+      "bytes": 137793,
+      "path": "source/art/bodies-v1/summoner/proof/context-36.png",
+      "sha256": "6975a194c0ba101c1e50e8aebd78be250b2109ad97533b36f1489677bf48d6db"
+    },
+    {
+      "bytes": 136742,
+      "path": "source/art/bodies-v1/summoner/proof/context-37.png",
+      "sha256": "9a3b7392de098633e8229cfc5a31958a1ffa43e26bdccde663de315ce46714db"
+    },
+    {
+      "bytes": 136622,
+      "path": "source/art/bodies-v1/summoner/proof/context-38.png",
+      "sha256": "094ba173ccbf572e837efb6697244942663e19a60867c8440753a82afadcd37c"
+    },
+    {
+      "bytes": 137473,
+      "path": "source/art/bodies-v1/summoner/proof/context-39.png",
+      "sha256": "1b890912d5c3e6f30ab9698c2e6d49fc38f97f737efcc8987e796828485d1a29"
+    }
+  ]
+}

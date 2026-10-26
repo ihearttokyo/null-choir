@@ -1,5 +1,21 @@
 extends CharacterBody3D
 
+const WorkerHitRegions = preload("res://scripts/worker_hit_regions.gd")
+const BODY_ATLASES := {
+    "crawler": "res://assets/art/sprites/bodies-v1/crawler.png",
+    "worker": "res://assets/art/sprites/bodies-v1/worker.png",
+    "caster": "res://assets/art/sprites/bodies-v1/caster.png",
+    "brute": "res://assets/art/sprites/bodies-v1/brute.png",
+    "guardian": "res://assets/art/sprites/bodies-v1/guardian.png",
+    "summoner": "res://assets/art/sprites/bodies-v1/summoner.png",
+    "nursery_warden": "res://assets/art/sprites/bodies-v1/nursery_warden.png",
+    "choir_avatar": "res://assets/art/sprites/bodies-v1/choir_avatar.png"
+}
+# Worker alone owns the actual six-row pressure-vent atlas and authored region mask.
+const WORKER_BEAUTY_PATH := "res://assets/art/sprites/bodies-v1/worker.png"
+const WORKER_REGION_MANIFEST := "res://assets/art/regions/worker-clutch-v1.json"
+const CLUTCH_VENT_SECONDS := 1.1
+
 const Telegraph = preload("res://scripts/enemy_telegraph.gd")
 const Projectile = preload("res://scripts/projectile.gd")
 const WINDUPS = {"crawler":0.25,"worker":0.45,"caster":0.70,"brute":0.80,"guardian":0.75,"summoner":1.20,"nursery_warden":1.00,"choir_avatar":1.05}
@@ -47,6 +63,11 @@ var _rush_duration: float = 0
 var _recovery_duration: float = 0
 var _summoned_total: int = 0
 var _summon_owner_id: String = ""
+# Transient like attack/stagger; checkpoint/Continue restores a fresh combat state.
+var clutch_vent_time: float = 0.0
+var _worker_clutch_spent := false
+var _worker_regions: Dictionary = {}
+var _worker_atlas_valid := true
 
 static func health_cap(role: String, difficulty: int) -> int:
 	return int(LATE.get(role,{}).get("hp",50 if role == "crawler" else 90)*[0.85,1.0,1.3][difficulty])
@@ -110,9 +131,14 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	collider.position.y = shape.height/2
 	add_child(collider)
 	sprite = Sprite3D.new()
-	sprite.texture = load("res://assets/art/sprites/"+kind+".png")
+	# Explicit production worker resource; never fall back to the legacy119 atlas.
+	sprite.texture = load(BODY_ATLASES[kind])
 	sprite.hframes = 8
 	sprite.vframes = 5
+	if kind == "worker":
+		var rows := WorkerHitRegions.pose_rows(sprite.texture)
+		_worker_atlas_valid = rows > 0
+		if _worker_atlas_valid: sprite.vframes = rows
 	sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	sprite.shaded = true
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
@@ -121,6 +147,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.pixel_size = _profile.get("scale",3.8 if kind == "crawler" else 3.65)/float(cell)
 	sprite.position.y = (cell/2.0-8)*sprite.pixel_size
 	add_child(sprite)
+	if kind == "worker": _worker_regions = WorkerHitRegions.bind(sprite,WORKER_REGION_MANIFEST)
 	if kind in ["worker","brute","nursery_warden"]:
 		var tell = Telegraph.new()
 		tell.name = "CommittedShotTell"
@@ -128,7 +155,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 
 func visual_hit_sprite() -> Sprite3D:
 	# Visual occupancy queries are separate from movement/placement capsules.
-	if hp <= 0 or not _current_map() or not game.playing: return null
+	if hp <= 0 or not _current_map() or not game.playing or not _worker_atlas_valid: return null
 	return sprite if is_instance_valid(sprite) else null
 
 var _floor_settle_failed: bool = false
@@ -141,12 +168,13 @@ func _physics_process(delta: float) -> void:
 	attack_time = maxf(0,attack_time-delta)
 	pose_time = maxf(0,pose_time-delta)
 	stagger_time = maxf(0,stagger_time-delta)
+	clutch_vent_time = maxf(0,clutch_vent_time-delta)
 	recovery_time = maxf(0,recovery_time-delta)
 	_counter_time = maxf(0,_counter_time-delta)
 	var camera = game.player.camera
 	var view = global_basis.inverse()*(camera.global_position-global_position)
 	var direction_index = posmod(int(round(atan2(view.x,-view.z)/TAU*8)),8)
-	var frame = 4 if hp <= 0 else 3 if telegraph_time > 0 or pose_time > 0 or (not _profile.is_empty() and (recovery_time > 0 or _rush_time > 0)) else 1+int(age*6)%2 if active and alerted else 0
+	var frame = 4 if hp <= 0 else WorkerHitRegions.VENT_POSE if clutch_vent_time > 0 else 3 if telegraph_time > 0 or pose_time > 0 or (not _profile.is_empty() and (recovery_time > 0 or _rush_time > 0)) else 1+int(age*6)%2 if active and alerted else 0
 	sprite.frame = frame*8+direction_index
 	sprite.modulate = Color(1.7,0.7,0.6) if hurt_time > 0 else Color.WHITE
 	if hp <= 0: return
@@ -237,6 +265,9 @@ func combat_visual_state() -> Dictionary:
 		stage = "dead"
 		progress = 1.0
 	elif not active: stage = "dormant"
+	elif kind == "worker" and clutch_vent_time > 0:
+		stage = "clutch_vent"
+		progress = 1.0-clutch_vent_time/CLUTCH_VENT_SECONDS
 	elif stagger_time > 0:
 		stage = "stagger"
 		progress = 1.0-stagger_time/.25
@@ -453,6 +484,7 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 		_released = false
 		telegraph_time = 0
 		stagger_time = 0
+		clutch_vent_time = 0
 		recovery_time = 0
 		_rush_time = 0
 		collision_layer = 0
@@ -472,6 +504,34 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 		# The lock exceeds retry + the longest windup; further hits cannot refresh it.
 		_counter_time = 1.4 if _profile.is_empty() else 2.0
 		_event("stagger")
+	# Leave the complete ordinary-hit/death transaction above unchanged. This is
+	# an additional authored consequence, never the condition for interruption.
+	if _current_map() and game.playing and hp > 0:
+		_try_worker_clutch(source,context)
+
+func _try_worker_clutch(source: Node3D, context: Dictionary) -> void:
+	if kind != "worker" or _worker_clutch_spent or hp <= 0: return
+	if not _current_map() or not game.playing or not is_instance_valid(source) or source != game.player or source.get_parent() != game.level: return
+	if context.get("attack_kind") not in ["melee","hitscan","piercing"]: return
+	var contact = context.get("sprite_contact",{})
+	if not contact is Dictionary or WorkerHitRegions.region(_worker_regions,sprite,contact,get_instance_id()) != WorkerHitRegions.CLUTCH: return
+	_worker_clutch_spent = true
+	clutch_vent_time = CLUTCH_VENT_SECONDS
+	_committed_variant = -1
+	_committed_target = null
+	_released = false
+	telegraph_time = 0
+	pose_time = 0
+	_rush_time = 0
+	stagger_time = maxf(stagger_time,CLUTCH_VENT_SECONDS)
+	recovery_time = maxf(recovery_time,CLUTCH_VENT_SECONDS)
+	_recovery_duration = recovery_time
+	attack_time = maxf(attack_time,CLUTCH_VENT_SECONDS)
+	# Never shorten ordinary counter protection or allow vent/pellets to refresh it.
+	_counter_time = maxf(_counter_time,1.4)
+	velocity.x = 0
+	velocity.z = 0
+	_event("clutch_vent")
 
 
 func _next_step(destination: Vector3) -> Vector3:

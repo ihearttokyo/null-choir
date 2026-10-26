@@ -1,0 +1,155 @@
+{
+  "actor_kind": "summoner",
+  "actual_source_data": {
+    "UV_material_camera_world_sha256": "05c4345fbf814853825f6d6fedb78b7eb296fe0391ef0cd99ac52f79883bfc79",
+    "editable_joint_empties": 154,
+    "internal_texts": [
+      {
+        "bytes": 19701,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "build_ritual_roles_v07.py",
+        "sha256": "85ac11ca6b7e455a6b8ebc5bdc4e481b3394d5f9a4cedd0a094c602532b49ce9"
+      },
+      {
+        "bytes": 33299,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "geometry_v07.py",
+        "sha256": "9208027a1a8c282d9a04323b7214ffff48c5850032d1ecae0ca12752f7cc84ec"
+      },
+      {
+        "bytes": 13682,
+        "filepath_empty": true,
+        "in_memory": true,
+        "library_none": true,
+        "name": "paint_ritual_roles_v07.py",
+        "sha256": "f84007d7402f9a7051661f0faa583185c4b49b2f0e03ac526386654dff2399ab"
+      }
+    ],
+    "material_count": 10,
+    "mesh_objects": 276,
+    "packed_image_native_RGBA_UV_PBR": {
+      "native_image_RGBA_exact": true,
+      "packed_RGBA_exact": true,
+      "packed_png_sha256": "06f14f8f95fb220203eeb3b38030aa93a07f552e3d43c8327dce3655de096ec2",
+      "same_active_Workbench_PBR_image": true,
+      "saved_UV_meshes": 276
+    },
+    "pose_collections": [
+      "idle",
+      "walk_a",
+      "walk_b",
+      "attack",
+      "dead",
+      "windup",
+      "recovery"
+    ],
+    "settings": {
+      "camera": "Eight-direction registered camera",
+      "color_type": "TEXTURE",
+      "engine": "BLENDER_WORKBENCH",
+      "initial_pose_states": [
+        {
+          "hide_render": false,
+          "hide_viewport": false,
+          "joint_empties": 22,
+          "mesh_objects": 39,
+          "polygons": 1570,
+          "pose": "idle",
+          "vertices": 1830
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 39,
+          "polygons": 1570,
+          "pose": "walk_a",
+          "vertices": 1830
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 39,
+          "polygons": 1570,
+          "pose": "walk_b",
+          "vertices": 1830
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 41,
+          "polygons": 1638,
+          "pose": "attack",
+          "vertices": 1914
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 40,
+          "polygons": 1620,
+          "pose": "dead",
+          "vertices": 1890
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 39,
+          "polygons": 1570,
+          "pose": "windup",
+          "vertices": 1830
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 22,
+          "mesh_objects": 39,
+          "polygons": 1570,
+          "pose": "recovery",
+          "vertices": 1830
+        }
+      ],
+      "light": "STUDIO",
+      "look": "None",
+      "render_aa": "OFF",
+      "resolution": [
+        128,
+        128,
+        100
+      ],
+      "studio_light": "paint.sl",
+      "threads": 2,
+      "threads_mode": "FIXED",
+      "transparent": true,
+      "view_transform": "Standard"
+    },
+    "source_data_sha256": "2b5f0e386fbc21e02a550553a959271ba8566b8eadf4e3c6c8ed69a0b17cbf2d"
+  },
+  "decoded_non_UI_bytes_identical": true,
+  "decoded_non_UI_sha256": "d676af65cd37e878a63ce59adec2be99c1f8305ecf121e95998d57bb87dd8db9",
+  "evidence_class": "actual-native",
+  "external_dependencies": false,
+  "geometry_material_camera_reconstruction": false,
+  "opened_original_source": true,
+  "opened_public_source": true,
+  "original_source_native_proof_sha256": "3ff71388776a661fa373999ebbd87a3dd48d9ef0e485e9836109fcf08cccfdf2",
+  "original_source_sha256": "fee045d3c841512b3c786797f3bc3a2cd64cd26a6d5543fcbf3f7a837c4fa85c",
+  "own_loaded_filepath_excluded": true,
+  "public_RGBA_reproduction_performed": false,
+  "public_source_sha256": "f9db0a2888c9660f0f1906f52a38cf61fe33c4c95b02086b547ae9478982c920",
+  "rendered_frame_count": 0,
+  "residual_home_in_source_data": false,
+  "schema": "null-choir-public-master-native-open-v1",
+  "scope": "Actual original/public readonly opens and source-data/packed-image/UV/PBR/Text parity only. Original exact full40 rendering and non-UI byte comparison remain separate evidence; no new renders or final8 qualification.",
+  "source_data_identical_to_original": true,
+  "source_resaved": false,
+  "status": "PASS_PUBLIC_COPY_NATIVE_OPEN_SOURCE_DATA_MATCH_ORIGINAL",
+  "ui_bridge_sha256": "9f67fd316ac828de74da4da0ff50b838fb9e2159314e1366fbb081fa0460f9fb"
+}

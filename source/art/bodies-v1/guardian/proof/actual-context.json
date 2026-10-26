@@ -1,0 +1,271 @@
+{
+  "actor_kind": "guardian",
+  "actual_context_report": {
+    "bytes": 78027,
+    "sha256": "e0f5ce6860225b8b6a9c762018979dd40a7b59650465cf0017ec45bee2c9d69d"
+  },
+  "actual_native_receipt": {
+    "bytes": 12755,
+    "sha256": "d5d333815e7f833c9088f0bc078bfb031aa5a4d9b7d32f7416102920ebf2bd8a"
+  },
+  "atlas_sha256": "3b519f6b5557204a43bfb94e7b4df8543a6f3d0d7bb02e1e0748f33d6ab5a63a",
+  "candidate_runtime_uri": "res://assets/art/sprites/bodies-v1/guardian.png",
+  "configured_runtime_uri": "res://assets/art/sprites/guardian.png",
+  "consumer_binding_qualification": "PENDING_FINAL_BODY_ATLASES_INTEGRATION",
+  "consumer_sha256": "4b8d84543100529b73145d23ceb4438368b0b12a4479f8f1f6876c6205abe63b",
+  "evidence_class": "actual-native",
+  "manual_atlas_direction": true,
+  "resolution": [
+    640,
+    360
+  ],
+  "rgba_sha256": "2836788537fbd9972534ca60387a6689e7049342255a434ac70aea3129a3e537",
+  "schema": "null-choir-actor-actual-context-v1",
+  "scope": "Actual static Level40 intended-use views, unchanged map light/profile/foot anchor. Final8 consumer/PCK/human/FPS not qualified.",
+  "status": "PASS",
+  "tested_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "texture_override": "Accepted full atlas ImageTexture on actual Enemy Sprite3D; actual normal-import separately qualified. Static views, not observed AI/attack/death timing.",
+  "views": [
+    {
+      "bytes": 139735,
+      "path": "source/art/bodies-v1/guardian/proof/context-00.png",
+      "sha256": "7b4ff548b53492d340c10b74300456f3f6a722e0290128c7b6ead8b648787f4c"
+    },
+    {
+      "bytes": 139330,
+      "path": "source/art/bodies-v1/guardian/proof/context-01.png",
+      "sha256": "bdf809b78c723cd17800f23b78947b0ff8e4a76dfad3e9684d210fa7a91e226f"
+    },
+    {
+      "bytes": 137836,
+      "path": "source/art/bodies-v1/guardian/proof/context-02.png",
+      "sha256": "06a6625c0a816ffd07bfd96c914614af473bb8108532d82a7aa40134d39d0c34"
+    },
+    {
+      "bytes": 137891,
+      "path": "source/art/bodies-v1/guardian/proof/context-03.png",
+      "sha256": "4f32019c14129507aa696ecc6a6be06c2d9064749e5afa33bc116386458ac812"
+    },
+    {
+      "bytes": 136889,
+      "path": "source/art/bodies-v1/guardian/proof/context-04.png",
+      "sha256": "434a408c4a60702f98516cef494ad0dd72d7f2d8372e4a11bce3ee1220d65c56"
+    },
+    {
+      "bytes": 137846,
+      "path": "source/art/bodies-v1/guardian/proof/context-05.png",
+      "sha256": "e6c2d4cb7b4a3aafb09b07b464750183d110a2844ef1bbcdb581a7b7c704709d"
+    },
+    {
+      "bytes": 137738,
+      "path": "source/art/bodies-v1/guardian/proof/context-06.png",
+      "sha256": "b00b5260599f8d4333b144b127b8fc061964cbb922f172e4184bf5eb7a6f85e7"
+    },
+    {
+      "bytes": 139063,
+      "path": "source/art/bodies-v1/guardian/proof/context-07.png",
+      "sha256": "782935863fb120a5076b04cd434a4eced9b166e93ccc66f0f75bd6c135080627"
+    },
+    {
+      "bytes": 139995,
+      "path": "source/art/bodies-v1/guardian/proof/context-08.png",
+      "sha256": "4c49953f92177b6066c88cbbca21cbb2d92ad52ba61ee390c0f5516f0221062c"
+    },
+    {
+      "bytes": 139772,
+      "path": "source/art/bodies-v1/guardian/proof/context-09.png",
+      "sha256": "4a6843d60967f405d6c775435da1039de8f8ea82e58b4ddd50d2aec52f822443"
+    },
+    {
+      "bytes": 138294,
+      "path": "source/art/bodies-v1/guardian/proof/context-10.png",
+      "sha256": "bc90625ea4ae5bb89dcb607ea1f8b3c406902c416f65d590783f79c4b963dc84"
+    },
+    {
+      "bytes": 137953,
+      "path": "source/art/bodies-v1/guardian/proof/context-11.png",
+      "sha256": "33fd375241c2e750e2b4057f8cd1804efcc5f548440536d2359443531f28a220"
+    },
+    {
+      "bytes": 137112,
+      "path": "source/art/bodies-v1/guardian/proof/context-12.png",
+      "sha256": "248f571c5d78bd31a67ecfe10da273baaf66d3d02e5b3177d8fb78c09947bb64"
+    },
+    {
+      "bytes": 137920,
+      "path": "source/art/bodies-v1/guardian/proof/context-13.png",
+      "sha256": "c24f3940fb8b427493656e4ef4b1d633258a23172a18b7829ff5a863e70b4613"
+    },
+    {
+      "bytes": 137728,
+      "path": "source/art/bodies-v1/guardian/proof/context-14.png",
+      "sha256": "7584884c06f8e678fb72c67ff2162403745b555efecffcb79f5c90da3de40d71"
+    },
+    {
+      "bytes": 139099,
+      "path": "source/art/bodies-v1/guardian/proof/context-15.png",
+      "sha256": "f605730d862c78d9ef489c24fc62fe56b9734e3a93bb35a6c071e3fa5d49687f"
+    },
+    {
+      "bytes": 139640,
+      "path": "source/art/bodies-v1/guardian/proof/context-16.png",
+      "sha256": "2a2609bd14778f6781f80d5e44d76c2ae9940c0eef6720a43edae0d440f6973f"
+    },
+    {
+      "bytes": 139224,
+      "path": "source/art/bodies-v1/guardian/proof/context-17.png",
+      "sha256": "f9a435cf3c1d43cdd6250e5515fc04b7235a8ae5692ff4cd5d20cb4a4fe64ac5"
+    },
+    {
+      "bytes": 138142,
+      "path": "source/art/bodies-v1/guardian/proof/context-18.png",
+      "sha256": "05487908ea5f29a18e87bd6efcf5688fd79b44c86e12a34b3232c6b63b7a8756"
+    },
+    {
+      "bytes": 138122,
+      "path": "source/art/bodies-v1/guardian/proof/context-19.png",
+      "sha256": "433402fc8d76a2db8f32d8d346c48776a22afde2633618872c9b12fe9e504c0b"
+    },
+    {
+      "bytes": 137124,
+      "path": "source/art/bodies-v1/guardian/proof/context-20.png",
+      "sha256": "327e0d3ebf748d511319ca9637778352f896b3b3feb299398d4d50db1e1d7782"
+    },
+    {
+      "bytes": 137621,
+      "path": "source/art/bodies-v1/guardian/proof/context-21.png",
+      "sha256": "8cfb87062e3bccae37af2a275745ddb30b2494f5c1bfd336f4dcd352851b3fb2"
+    },
+    {
+      "bytes": 137884,
+      "path": "source/art/bodies-v1/guardian/proof/context-22.png",
+      "sha256": "9a0891b88da9f433805f13ea6629528d99090645b48d76bee271827a35a6d56e"
+    },
+    {
+      "bytes": 139282,
+      "path": "source/art/bodies-v1/guardian/proof/context-23.png",
+      "sha256": "6572199a39b3aada2e71d47f189f67e1196b923fc3770035366eed32ae9fcebe"
+    },
+    {
+      "bytes": 140478,
+      "path": "source/art/bodies-v1/guardian/proof/context-24.png",
+      "sha256": "d25493fc392a4ca04bc2b24bebfec94e26d641729d6da8653c30a292000ed135"
+    },
+    {
+      "bytes": 139988,
+      "path": "source/art/bodies-v1/guardian/proof/context-25.png",
+      "sha256": "95711fbba989b00200857e0d3d90c1f350245660642eb022414c0102771f99fe"
+    },
+    {
+      "bytes": 137735,
+      "path": "source/art/bodies-v1/guardian/proof/context-26.png",
+      "sha256": "dae8fff9e820bfdd280dc90b8ad5ae36f5d0b832b76d07b8943cc7220a934e37"
+    },
+    {
+      "bytes": 138093,
+      "path": "source/art/bodies-v1/guardian/proof/context-27.png",
+      "sha256": "df306ecd74289f0f2815e1bd100688e22aa27b808acda958944fd42dfc1296c6"
+    },
+    {
+      "bytes": 137043,
+      "path": "source/art/bodies-v1/guardian/proof/context-28.png",
+      "sha256": "5366d98740917ac4b8dc2897a29bfffdb1a920214f1411a838c8c1804644f7b7"
+    },
+    {
+      "bytes": 137887,
+      "path": "source/art/bodies-v1/guardian/proof/context-29.png",
+      "sha256": "75e7708e9b19abe011b7abcf6ae4cf35276dc55cb307fcb21f250d69d453351b"
+    },
+    {
+      "bytes": 137621,
+      "path": "source/art/bodies-v1/guardian/proof/context-30.png",
+      "sha256": "d785987311f7538dc5b60a961aea0f6d561b288ab1ca6cc27b6884af95b319e5"
+    },
+    {
+      "bytes": 139239,
+      "path": "source/art/bodies-v1/guardian/proof/context-31.png",
+      "sha256": "f83c05910d8a07f62ec6582076a6878069d7b22ab800a56518658611cac35741"
+    },
+    {
+      "bytes": 137545,
+      "path": "source/art/bodies-v1/guardian/proof/context-32.png",
+      "sha256": "102cdd6ced40005a6e7c3caa8119f1480fbc30e368c47ebdf48b61f4f59de976"
+    },
+    {
+      "bytes": 137744,
+      "path": "source/art/bodies-v1/guardian/proof/context-33.png",
+      "sha256": "ca85030d0695c75fe94c111767ccd8a480bb27b6a908312c33f10ec43ef9e3b7"
+    },
+    {
+      "bytes": 137616,
+      "path": "source/art/bodies-v1/guardian/proof/context-34.png",
+      "sha256": "2bfc5691d70e278c09514dbfe5168998d0923e1d5f3fb04a35be49ebdafc3047"
+    },
+    {
+      "bytes": 137459,
+      "path": "source/art/bodies-v1/guardian/proof/context-35.png",
+      "sha256": "85aa294b8a690b957aa486bfa63fbed45b3a707e7324b01220a3af71acd8e716"
+    },
+    {
+      "bytes": 136462,
+      "path": "source/art/bodies-v1/guardian/proof/context-36.png",
+      "sha256": "3f2b5c5629f60b0debd17ab11917797ff030e8f50d2754de19621eacfdc381ad"
+    },
+    {
+      "bytes": 136792,
+      "path": "source/art/bodies-v1/guardian/proof/context-37.png",
+      "sha256": "850754c3c0cbe45c6424db283fe200200fe59fcfce61b12271331506998ca2cd"
+    },
+    {
+      "bytes": 137227,
+      "path": "source/art/bodies-v1/guardian/proof/context-38.png",
+      "sha256": "f8146416ab172d78f431f2ee41749cffa81efac2170936ef551e240a2be24891"
+    },
+    {
+      "bytes": 137430,
+      "path": "source/art/bodies-v1/guardian/proof/context-39.png",
+      "sha256": "4bd44a15ac9d28322116f901f95beee980fb911f12565459c18a5de9a3be63db"
+    }
+  ]
+}

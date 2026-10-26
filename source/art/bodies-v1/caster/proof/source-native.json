@@ -1,0 +1,181 @@
+{
+  "actor_kind": "caster",
+  "actual_native_jobs": [
+    {
+      "actual_packed_image_UV_PBR_readback": {
+        "native_image_RGBA_exact": true,
+        "packed_RGBA_exact": true,
+        "packed_png_sha256": "744707a512ce55b244a9a2853cc8704fea3398f55f59ce932920f84ba96cd3c7",
+        "same_active_Workbench_PBR_image": true,
+        "saved_UV_meshes": 206
+      },
+      "batch": 1,
+      "exit_code": 0,
+      "manifest": {
+        "bytes": 17809,
+        "sha256": "426548928f7fe0d10a3eef67ec788837924776141ea577eabd253a39ef6f798e"
+      },
+      "raw_log": {
+        "bytes": 4237,
+        "sha256": "1402d4c40a9d1e0f6596683b4b6a43dcfb1927eb5c66684e2b2a15d1e54e6ff4"
+      },
+      "rendered_frame_count": 20,
+      "result": {
+        "bytes": 9439,
+        "sha256": "ef093154de3a96cbf78533002cb30c3006b6515b96a3a874d39177861d694d62"
+      },
+      "source_unchanged": true
+    },
+    {
+      "actual_packed_image_UV_PBR_readback": {
+        "native_image_RGBA_exact": true,
+        "packed_RGBA_exact": true,
+        "packed_png_sha256": "744707a512ce55b244a9a2853cc8704fea3398f55f59ce932920f84ba96cd3c7",
+        "same_active_Workbench_PBR_image": true,
+        "saved_UV_meshes": 206
+      },
+      "batch": 2,
+      "exit_code": 0,
+      "manifest": {
+        "bytes": 17794,
+        "sha256": "dae37b2174d7bcca24170fe629e2b859e7655131e39b8989308147cfc7f36cae"
+      },
+      "raw_log": {
+        "bytes": 4237,
+        "sha256": "4b755ab497cfd91bc91b5680c2d212834071b78011ba6ea688d96acad19e2f59"
+      },
+      "rendered_frame_count": 20,
+      "result": {
+        "bytes": 8201,
+        "sha256": "82396cf661685abf00212ec09c618d34886b3834c8ea5147f78458130ded3802"
+      },
+      "source_unchanged": true
+    }
+  ],
+  "actual_public_native_open": {
+    "bytes": 4956,
+    "path": "source/art/bodies-v1/caster/proof/public-native-open.json",
+    "sha256": "e8f5e72658bed3683376874577424fe4a21634e517f350ba75a7695f51ac8241"
+  },
+  "atlas_sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6",
+  "cell_rgba_sha256": [
+    "7384673d52a4bbad93c9f4b1cce3136e58915fb0b4fe6cad704a2bee58e933d1",
+    "ab90f3e084aeedc5086709bb0044c06471b1e61d5870459400c3365627a91eb8",
+    "7cf6749ae880bb16b0c232243736e4baba8a09b15e114208428da9de021a1817",
+    "1021f24ecfeab43366dde14ff385de037dacb60e3d4a5390f180f4bd8a253bed",
+    "2034db4b73d37c1de327e97e7dcdab1ff7c2e0663393fc198c6dac2b9ade3254",
+    "33ee9167073ba0a2ca8cc74442c9e6c46cbffd7d54068bc289397f5daed3a21a",
+    "67f9b15fe415baf372503ceccdf9a93cc5dcf26b0c77dcde164600d1ce6cb177",
+    "6641c0d5baff04c7b255292e3d279294394e46b51ce93831bf491e29dd118c2f",
+    "0cfbe6edb3d0b313059916f24694f062ee7745b88cf656b2d988103fd57c97f3",
+    "60b8942079c0901b8b414470545ffd840600a2245393b5101c3cef6f4d42ee4a",
+    "e62fa72abf2e76f358a9b102c97d3214bf86bde3194c723000ff78594c1d7f15",
+    "7c0f8c95e996db853a6a2adbee0aa75f1e82b974f466cee0038ed8909d413e6d",
+    "10f06da57f45e7c8c381f43c7ed3f1f64f8817b47d16bd5bc259c1ef5b62c348",
+    "e9fe4984da532237239dfc45df96e1bb9a288312d1f627156956306fbbca535f",
+    "76686c67d58cc7bed1db3f54e7de7388d5327cec3d44c758003834579acc72ef",
+    "ba4d340f3710bac5fd6f6c57d14d10c35ae75a2d8e2ac914f0239fd02237cdfe",
+    "40ff35a23433215a720634293e14140b3e9cdd49b2972cd788de6209f085dfa4",
+    "50dfb48a8162ce75bbdb39b78667e181d10eed8ac221098d8ec77d92bdbf4bfe",
+    "74c76ad67cdcc7a5d7f93a001c8be3e745460cb3df3810b537bc35c4f151184e",
+    "0620746e27cfa36286f482ce550b0dbb0b0bb3dc75266490ea89428bc21e3ddd",
+    "ce4b7a27975b3f946a80e8448f4b4ea599f2708e9e73b5bb11c3ffb7de621096",
+    "8d46f68dfd75fbf156c14852bcf2321b0cf2bc05e64ddb6a73386c872747b224",
+    "3fe63bb82292b618fd4a68a093e6b8631f70155b8daab57923b9b066f47218bd",
+    "39dce5451a59324c0d0198d6b4d059757abf54f6b51ca926676be869f0bd32a7",
+    "59d5a5859faf7d1c410174c9a91bcfc74c35b053da24672601d3899d510535e7",
+    "686be7d1aab641cf508b08296664e2a565adcc63103fcaba9f0d158dcdf3c876",
+    "4c04d3790d6126d764e1712a23331b6e52103c06d2af0de20c78154b80537bc5",
+    "d7f51d2af6638a4c7c9742a19e4c8ffb8f64e913badcf89c4db13d8bfce6f352",
+    "f7481d2f557e1693ca62cd512ea56fdce68fab441cc824dd0f1c61763955b975",
+    "8321e9531cf89e89d0db16a498314005aa7a31a014a619bca96eac6f591740f5",
+    "b93329d4ace5e800e8dbe01c4802c0633d364850c14c10b6ea6943049aaf64fc",
+    "47614f352e95c56b5b036dbbb4122679ae191ad4da997816d9e16d226bf255f7",
+    "36e10feef6c790ec79ae65bca1648f50f95df139c3d9b221d8340ab426ea790c",
+    "611211dee2075f16b47b43653778ff08b23b6f8972f2728955d66053ef6911f7",
+    "855729542df1e40e6ab8ad168c0d9ed98952d0540bc915da453945f4f3eabc3e",
+    "b7d48fb6152974f8574244278bdc3cb4f32bff68a1e805a14b9efcccca0c4cf0",
+    "60656c6c35fc7d1febf3501c8b926db388dbae8e883ad9db383bdfca6de73e81",
+    "53a78512d10ffa7cc46be93c56dac79f231b575b9cb3ecd4c9c91fbb8e10d44e",
+    "2bf375d7d7b3cdbfbdfdaa3871ff793d03075b632d50e19393245d6a1481b922",
+    "165974ca71d34187ff40b6d31fff4c2476eda7b6acdae5c338e8696c06f03051"
+  ],
+  "evidence_class": "actual-native",
+  "evidence_receipt": {
+    "bytes": 41568,
+    "sha256": "741538f4578b64dad5561e49677634e548bd918335711382a72b1c48a8ae53c9"
+  },
+  "extra_source_only_pose_collections": [
+    "windup",
+    "recovery"
+  ],
+  "generator_sha256": "85ac11ca6b7e455a6b8ebc5bdc4e481b3394d5f9a4cedd0a094c602532b49ce9",
+  "geometry_not_image_card": true,
+  "geometry_reconstructed": false,
+  "opened_saved_source": true,
+  "original_authored_source_sha256": "a6c7cafe66b0a03362a58267a4a1da5b66aea43cc6cfc464a5f1af4815425a05",
+  "original_full_beauty_reproduction": {
+    "bytes": 6968,
+    "path": "source/art/bodies-v1/caster/proof/source-native-original.json",
+    "sha256": "d50d08f780cbe23a737337facdbf9d46f58c127b0165bde9597331a41e99c57d"
+  },
+  "pose_collections": [
+    "idle",
+    "walk_a",
+    "walk_b",
+    "attack",
+    "dead"
+  ],
+  "public_RGBA_reproduction_performed": false,
+  "public_dependencies_only": true,
+  "public_master_bridge": {
+    "bytes": 4909,
+    "path": "source/art/bodies-v1/caster/proof/public-master-bridge.json",
+    "sha256": "45e24f47d4fda5955908e0291c05e544a7ab67babfe39c9725b72f4d37d9658b"
+  },
+  "public_rendered_frame_count": 0,
+  "rendered_frame_count": 40,
+  "rgba_sha256": "2585b80242d260e139dd010eb75732ec6e4be90c53d2f1f29dec39e4e74e2f0e",
+  "saved_source_resaved": false,
+  "schema": "null-choir-actor-source-native-v1",
+  "scope": "Current portable UI-only source qualified by actual readonly native open and exact non-UI parity. rendered_frame_count40 belongs to retained exact original-master full40 proof; no modified public-source render performed. Generator/dependencies remain exact original bytes.",
+  "source_blend_sha256": "c57496a93ff0e55e847fdc92420a5bf34c49cbfc64bc9b3f7c045660a564ad75",
+  "source_inputs": [
+    {
+      "bytes": 1972429,
+      "path": "source/art/bodies-v1/ritual-shared/actor-animation-reference-v2.png",
+      "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+    },
+    {
+      "bytes": 33299,
+      "path": "source/art/bodies-v1/caster/geometry_v07.py",
+      "sha256": "9208027a1a8c282d9a04323b7214ffff48c5850032d1ecae0ca12752f7cc84ec"
+    },
+    {
+      "bytes": 13682,
+      "path": "source/art/bodies-v1/caster/paint_ritual_roles_v07.py",
+      "sha256": "f84007d7402f9a7051661f0faa583185c4b49b2f0e03ac526386654dff2399ab"
+    }
+  ],
+  "source_unchanged": true,
+  "status": "PASS",
+  "surface_paint": {
+    "attribute": "RitualSurfaceUV",
+    "canonical_named_parts": 32,
+    "coordinate_system": "six canonical geometric face charts, not runtime view/atlas coordinates",
+    "gutter": 1,
+    "local_charts": 6,
+    "opaque": true,
+    "part_material_chart_assignments": 246,
+    "rgba_bottom_up_sha256": "a77baf6c155faaae39a0e5458fe12a6fec069a2d41eb843543a528125fce96a3",
+    "role": "caster",
+    "sampling": "Closest",
+    "size": [
+      512,
+      256
+    ],
+    "tile_size": 32,
+    "unique_pattern_tiles": 78
+  },
+  "verified_editable_mesh_objects": 206
+}

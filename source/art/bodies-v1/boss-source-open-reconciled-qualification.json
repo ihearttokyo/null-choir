@@ -1,0 +1,31 @@
+{
+  "acceptance_authority": "Root explicitly reviewed and accepted exact separate pure reconciliation4801 after independent original/public fullstats and original wrapper/log/runner byte identity verification. No new native run or review scores.",
+  "accepted_reconciliation": {
+    "bytes": 10643,
+    "sha256": "4801ce0c5810a209b47bb358b03a9ef4bd29081da0a0abb175c2e52bca46d9d1"
+  },
+  "all_bound_input_bytes_unchanged": true,
+  "all_four_original_public_master_fullstats_unchanged": true,
+  "diagnostics": [],
+  "final_eight_consumer_PCK_qualification": "PENDING",
+  "native_elapsed_seconds": 2.3249,
+  "native_exit_code": 0,
+  "native_sampled_RSS_bytes": 303595520,
+  "new_public_RGBA_renders": 0,
+  "original_native_log": {
+    "bytes": 995,
+    "sha256": "a9b0d0600dc485b6ac932e72e2119d1bab2756cb18ef7dec240c0eb45851bc7c"
+  },
+  "original_wrapper_result": {
+    "bytes": 599,
+    "path": "source/art/bodies-v1/boss-source-open-original-wrapper-result.json",
+    "sha256": "ce3198efb5b54fdcdb9f7a6a0d534186a35ed1d5660636e6d152709a9e00cc57"
+  },
+  "original_wrapper_status_retained": "FAIL_PRESERVED_STOP_NO_AUTOMATIC_RETRY",
+  "portable_generator_native_reproduction_performed": false,
+  "retry_rerender_or_threshold_change": false,
+  "schema": "null-choir-boss-public-source-open-reconciliation-v1",
+  "scope": "Actual four saved-source opens and original/public geometry/material/UV/poses/camera/Text/images/dependency parity only; original complete beauty proof remains original-source evidence.",
+  "sole_wrapper_failure": "Only newly created own supervisor runner st_flags changed0 to UF_TRACKED64; SHA/size/mtime/mode unchanged. No original/public source or other bound-input stat difference.",
+  "status": "ACCEPTED_ROOT_REVIEW_OF_EXISTING_ACTUAL_SOURCE_OPEN_ONLY"
+}

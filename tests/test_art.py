@@ -565,7 +565,18 @@ def check():
         file = ROOT / row['runtime_path']
         assert file not in owned_outputs, 'duplicate threshold runtime output ownership'
         owned_outputs.add(file)
-    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
+    # Exact eight-role ledger is an actual gate, not an existence/partial check.
+    actor_guard = runpy.run_path(str(ROOT / 'tools/actor_body_art_ledger.py'))
+    actors = actor_guard['validate_ledger'](ROOT)
+    assert actors['status'] == 'STRUCTURAL_EIGHT_ACTOR_LEDGER_VALID'
+    assert actors['actors'] == 8 and actors['cells'] == 328
+    assert actors['legacy_catalog_entries'] == 119 and actors['retained_preexisting_exports'] == 140
+    assert len(actors['runtime_outputs']) == 10
+    for relative in actors['runtime_outputs']:
+        file = ROOT / relative
+        assert file not in owned_outputs, 'duplicate replacement actor ownership'
+        owned_outputs.add(file)
+    actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json', '.regions')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'

@@ -1,0 +1,109 @@
+{
+  "actor_kind": "crawler",
+  "actual_public_native_open": {
+    "bytes": 4003,
+    "path": "source/art/bodies-v1/crawler/proof/public-native-open.json",
+    "sha256": "78a42651d3cc26f834167306f2db0b981354dc8aac071c9949cc89df8e5a414f"
+  },
+  "atlas_sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56",
+  "cell_rgba_sha256": [
+    "a699f59816d8a3e7127fb8b7bbf04ffe13e5c25fde885cf7c27180c4e7ff2c65",
+    "3ee4a8f7bafd1cba64a56bc2f980190af5591715aae804d00cff53c8f48aa65a",
+    "7e6566f8826a5f04231c3b17719e15620e9c851ed819d2cef907f3b1499be331",
+    "59a9882b28b579d78a6e0ac01c632c306e59073faa2eda5fbc67d577cc3ffebc",
+    "40c8c826c157875e84018f5a445cae19fbfc2cc3c409da9269ab841cdbda33ce",
+    "3368dabf2a2960cb77d6e120e5b4536332f181ee89318a8ec2956396f30235c5",
+    "8544fabb136ad9d316e3709f9ca43c36966dba258d7112d1c164b77593415f19",
+    "8c80763aed90987eb4152b6508e0dc0c7cd3fa96311737f7e6dc6ccc09e806c8",
+    "6f4444a3bf1f749062890336010f32268a2e63e0444af971a365a4dfe7489f78",
+    "ffe9199ae4ca9c5e9164ec20aab720e648619178dc8b67a04471d55bd6b9194a",
+    "74e3f77e26fa09aac57d7a0f0d6b391e51ed43081dbd846e122969c86818b6f2",
+    "e4c4cc9cff645c8db24b197cb9160f1e55dee2231f69ce00f1e98f4e38b29558",
+    "79489e9fdbc930b12f4f03cd11d59ac3d5dcfa26901daaa0e203ff2613ec860f",
+    "7ee6924e06f89545a9679f2f4a360dd51c7218ab22fa9750740305efa0aadcd2",
+    "5679850e7c073c51161b15cb1a72a706a1180bbaa2760ddc58cd20d12b5466f7",
+    "e1516ef4502fa557bfebf4abb334e23a86160cdde7e3a92c0cd6bacc996b04c1",
+    "92a5f20d3823f89962ceb263ddb2bb9ec9eb2e11659fb5d90807e64f59144689",
+    "b66ea5852b60da3c3ff80b55a5cbff1e089e86bdd698c43275ce738f77b00614",
+    "603c2fd213ffc74c9779f720abc156749565567dacd3e40d78c294a290ee1c94",
+    "dfdf9929d59e818dd89de715cd071976a8faece8e6af32d7cbbc5583012ab3b0",
+    "0b0f784c4b1322f7a148e689f761dadd17c1a6db45a52232fa054a85cde99075",
+    "7f1b424775c56971e8f700705d3ffa8c3ee08b84e2acaf094ce862581bfaa3a6",
+    "85a87cd9169f130ab0525bbe45ddf1f5a03beac9a183c02fb9fa5bef9ad02aff",
+    "816bfdf99568071f35b4f38d2e4ace086421d5619d5a4425e0482bfe124f1f93",
+    "6484f617f1da9e83a8557bd544909decb5d47aa44d70ea2a943e6f6094a30421",
+    "62eb2af663952b94436e1448ffbd54558148ab95371701ef33c511209744949a",
+    "2ce246f37e8f1d6089466e5abf7af12bf1f53c02eb7c7f52aacfdde987231e83",
+    "e7efab86fb0ba473fe7c87eb4e52a3a8b1291bffebca2448a2521b7f3a982e74",
+    "466cd3297723f33911824938442a21d1944384e64ccd162a55d8cac49597cee2",
+    "44318076906e30328255c4d7b74beb35757e231d7793478ebff550be7c4f1e39",
+    "48bc3f300d5a0679b97d42557d9ac44607b25a29b734d13ccdbda42dda07487d",
+    "3407b8d34a207bec342fd431abe0af3fb01494965d6845aca16003b32c7e876f",
+    "3a4def3cca337457b4b29f87988a0face15ff33e2ee3d4e0f2032a595c4edec7",
+    "b36ece71fe15600d4e197df9b9deea1676de5a9dcc36cb49aa45cd54bb4f4615",
+    "2b75c9926ee2d69e495dcb53473dad41b838d1af5910441e47162c0b2d94a1f8",
+    "da5f0b6cb7ea65c5a35c7c1296b90b199bba01d34cab2a8d7bf1cdb9cde092c9",
+    "52c256f72c190ceb4116d1d3923e27bc316b4ab01fa746e6b9d7905953f72595",
+    "884acc9817df785302f2117a29ebe67dcb4c81262c86ba7ccc5aeaf0925f02a1",
+    "4056cd13bb84a3a3deef80d81152132940dedb1abe04c663983362d826a3cece",
+    "bcb74fdf20cc573b7e42cdfd7cf973dc77f868035a68d7e346f67fce8a79cdc3"
+  ],
+  "evidence_class": "actual-native",
+  "evidence_receipt": {
+    "bytes": 34116,
+    "sha256": "4cc6f7b92a2afb030c733cb1c597d1b4e16f61905241c7a014603eec3a78609b"
+  },
+  "external_dependency_scope": "No external actor textures/libraries required by the observed saved-source reproduction; Blender5.2 builtin paint.sl studio light required.",
+  "generator_sha256": "0c16b632f381656b50b9fa46fcd6bb0d267687273bfa6aeb81b2a033565f7fd0",
+  "geometry_not_image_card": true,
+  "geometry_reconstructed": false,
+  "opened_saved_source": true,
+  "original_authored_source_sha256": "4f57946fba3d49e969780c1d6c2aa74ebb122db4772a53bd2fa059e7dafba254",
+  "original_full_beauty_reproduction": {
+    "bytes": 4661,
+    "path": "source/art/bodies-v1/crawler/proof/source-native-original.json",
+    "sha256": "e8e1c170c277c07006e1891ebdd9810873df9272685b7a30dac9460e88732853"
+  },
+  "pose_collections": [
+    "idle",
+    "walk_a",
+    "walk_b",
+    "attack",
+    "dead"
+  ],
+  "public_RGBA_reproduction_performed": false,
+  "public_dependencies_only": true,
+  "public_master_bridge": {
+    "bytes": 4989,
+    "path": "source/art/bodies-v1/crawler/proof/public-master-bridge.json",
+    "sha256": "1a42c3b174fda19fef82d24be54724e1e43b3f76e0a135b54af3031333ba7b8d"
+  },
+  "public_rendered_frame_count": 0,
+  "rendered_frame_count": 40,
+  "rendered_frame_count_origin": "Retained original authored saved-source native reproduction; not a new render of public source bytes.",
+  "rgba_sha256": "3aedc249a859302f11064a44ac7d0b4063f354a80594f1e8ccb44e6cc72e8bfa",
+  "saved_source_resaved": false,
+  "schema": "null-choir-actor-source-native-v1",
+  "scope": "Actual public source opened read-only and source-data matched original; retained original full beauty reproduction qualifies unchanged non-UI art data via exact decoded-byte bridge. No new publicRGBA, PCK, dynamic gameplay, human or FPS claim.",
+  "source_blend_sha256": "001d76d6b58c42add608bccff1d81e73b88611f9defbcaee204a6bf53825c50d",
+  "source_inputs": [
+    {
+      "bytes": 1972429,
+      "path": "source/art/bodies-v1/crawler/actor-animation-reference-v2.png",
+      "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+    },
+    {
+      "bytes": 18329,
+      "path": "source/art/bodies-v1/crawler/actor_geometry_v02.py",
+      "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+    },
+    {
+      "bytes": 925700,
+      "path": "source/art/bodies-v1/crawler/portable-source.json",
+      "sha256": "d9b81efc64793625a1124a2434796f6118837f5f4ae2e8c398510b0347658dae"
+    }
+  ],
+  "source_unchanged": true,
+  "status": "PASS",
+  "verified_editable_mesh_objects": 330
+}

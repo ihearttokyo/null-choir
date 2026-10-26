@@ -1,0 +1,23 @@
+{
+  "actor_kind": "choir_avatar",
+  "native_rendered_generator_sha256": "74d61e00651ee4f0b5b573e593f2fa459fd6e4f51504ec9d70d98bfce719e5dc",
+  "operation": {
+    "expected_original_line_sha256": "ff3685f8413d8d2a523c8f826ad1d8fb0a4d901ef247fd8135ef5c6291371a77",
+    "kind": "replace_one_complete_line",
+    "one_based_line": 18,
+    "replacement_utf8": "REFERENCE = OWNED / 'actor-animation-reference-v2.png'\n"
+  },
+  "original_generator_bytes": 40578,
+  "original_generator_sha256": "74d61e00651ee4f0b5b573e593f2fa459fd6e4f51504ec9d70d98bfce719e5dc",
+  "portable_generator": {
+    "bytes": 40429,
+    "path": "source/art/bodies-v1/choir_avatar/build_boss_bodies_v05.py",
+    "sha256": "07a4567b4d19ee08023ede91d6bc5158b591a62b772bb2d5f355edfb62127784"
+  },
+  "portable_generator_native_reproduction_performed": false,
+  "schema": "null-choir-portable-generator-reference-patch-v1",
+  "scope": "Only reference asset location changes; original geometry/export code bytes remain identical. Not a new render, approval, generic changed-source exception, or replacement of historical generator identity.",
+  "status": "PENDING_NATIVE_REPRODUCTION_NOT_PERFORMED",
+  "unchanged_prefix_sha256": "76750193fad955390573115e0600826566e9b6114a8fcbeaf063d70b811f8854",
+  "unchanged_suffix_sha256": "083c42b7ff46084e3859a455f64a4b3493aa5a21dc9df4bdc5efd333b072d50e"
+}

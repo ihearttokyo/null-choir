@@ -1,0 +1,420 @@
+{
+  "schema": "null-choir-worker-regions-v1",
+  "kind": "worker",
+  "width": 1024,
+  "height": 768,
+  "hframes": 8,
+  "vframes": 6,
+  "vent_pose": 5,
+  "cell_size": [
+    128,
+    128
+  ],
+  "alpha_min_byte": 128,
+  "regions": {
+    "0": "ordinary",
+    "1": "pressure_clutch"
+  },
+  "beauty_path": "res://assets/art/sprites/bodies-v1/worker.png",
+  "mask_path": "res://assets/art/regions/worker-clutch-v1.regions",
+  "beauty_source_sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52",
+  "source_blend_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+  "beauty_rgba_sha256": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+  "mask_sha256": "e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5",
+  "authored_objects": [
+    "idle/Recessed convex amber pressure chamber",
+    "idle/Clutch chamber curved light plane",
+    "walk_a/Recessed convex amber pressure chamber",
+    "walk_a/Clutch chamber curved light plane",
+    "walk_b/Recessed convex amber pressure chamber",
+    "walk_b/Clutch chamber curved light plane",
+    "attack/Recessed convex amber pressure chamber",
+    "attack/Clutch chamber curved light plane"
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "pose": 0,
+      "direction": 0,
+      "labels": 178,
+      "mask_sha256": "380465fb00a64449d27b89029b228cbc7fcf8b367b0d72dacbd7103147500f04",
+      "beauty_rgba_sha256": "779f645d6e7d11393454106a0a7c15d7adc61a8c60ab0e329ad12e3e3385e119"
+    },
+    {
+      "frame": 1,
+      "pose": 0,
+      "direction": 1,
+      "labels": 79,
+      "mask_sha256": "2c258970446d20f5f77aca3d4812c279357e34a3ed4c1204705d94cc0c1e0022",
+      "beauty_rgba_sha256": "ac39b9e94bdf5bd1ef67a54e6485c20ee3e278277132d5a6409ba38baf4d9443"
+    },
+    {
+      "frame": 2,
+      "pose": 0,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "4c066b562e8bbec3b5c835ada97190ec8fd1492e2a1569f1312f25b2a2c34dbe"
+    },
+    {
+      "frame": 3,
+      "pose": 0,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "7639c4eda5275d93482bb55e315ee8273290a88a8b33bd716c2ed01b1049acfa"
+    },
+    {
+      "frame": 4,
+      "pose": 0,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "b09e124883b8eafccba51bbb9279dd722b82d9a132e2e209c72e213198cdd9ef"
+    },
+    {
+      "frame": 5,
+      "pose": 0,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "98ccd5f293682d9ac7459928787467d875e01cdf3956e5002f7fffe3f57d4c82"
+    },
+    {
+      "frame": 6,
+      "pose": 0,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "4dd2d34ca035cec111f9516281e1b2971c2d4d134b529469e3a53f0c37e81527"
+    },
+    {
+      "frame": 7,
+      "pose": 0,
+      "direction": 7,
+      "labels": 95,
+      "mask_sha256": "937257bbdfb4be42b2982fd0567057751d7ad42ed2e94bb8ccedb0c6764bc6ea",
+      "beauty_rgba_sha256": "996c5edbb9626c346e636a0aded2f16af6138610c01d61a7dc7d936cad4ef321"
+    },
+    {
+      "frame": 8,
+      "pose": 1,
+      "direction": 0,
+      "labels": 186,
+      "mask_sha256": "df276bd1545513b9fe99527af700dc16ede3167a8f73f1d6b7d2aad9f918af72",
+      "beauty_rgba_sha256": "27908b32b9bd513c1cf7b73349b88adf45f46852dd6726c7ee1a20a203933526"
+    },
+    {
+      "frame": 9,
+      "pose": 1,
+      "direction": 1,
+      "labels": 79,
+      "mask_sha256": "56e92cb7d85ff7c2a7f8863c404e32ae3e37457d3febf5a236d9be989a2146d8",
+      "beauty_rgba_sha256": "d6e7c374ecb16bccb959cbfbae6dda0edff2a1a1361bf272b36a879f3230aed6"
+    },
+    {
+      "frame": 10,
+      "pose": 1,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "11aebd97f8c0c7b527a49b52907d589fa2c17efe5f25f372ef7aa3878cb9e5c6"
+    },
+    {
+      "frame": 11,
+      "pose": 1,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "6b1b7449a0204f5770f2b0d4e99dceee922114611899581abc2bfc21623296b5"
+    },
+    {
+      "frame": 12,
+      "pose": 1,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "fc7442c30b51e04ba3c43dad74aa0fae0327ccdad77079013eba8780fb3663f8"
+    },
+    {
+      "frame": 13,
+      "pose": 1,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "adee45f54ab6e76d4fe575acde2f6c41c4c8b0502df0c099c8a4655cdae003e7"
+    },
+    {
+      "frame": 14,
+      "pose": 1,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "8f23a988ae45e8b940e4e8b2f891060ed6fac2da3682b8eaa90e6467100855b8"
+    },
+    {
+      "frame": 15,
+      "pose": 1,
+      "direction": 7,
+      "labels": 98,
+      "mask_sha256": "cd1fa316111702bd5a7d1b7944c1f41f92874a36528274b8bdbc33d9f92fc510",
+      "beauty_rgba_sha256": "f6a3dec37e46b88256026c97b33f2ad30ccb19283adbdcb9c6ea72ea448aa974"
+    },
+    {
+      "frame": 16,
+      "pose": 2,
+      "direction": 0,
+      "labels": 171,
+      "mask_sha256": "bd51d2cf5fc3bb25ca9b9d66b4116a28811e9967d9bae469f8cb046902b73262",
+      "beauty_rgba_sha256": "c3d2a9b02a29c8fea1f926add8b9472cd8390f2f24d26f3bf897cb874bafb16f"
+    },
+    {
+      "frame": 17,
+      "pose": 2,
+      "direction": 1,
+      "labels": 79,
+      "mask_sha256": "d4ac2919267a89cdd17196012f54416a04c01af6bc4559957731f74cc1afdf8a",
+      "beauty_rgba_sha256": "5cc318d26cb9c075ee823114dc8eeeaf7f1be74b81bf1ac86b953a48d68e290c"
+    },
+    {
+      "frame": 18,
+      "pose": 2,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "8d08257d7b15415ee8c0098c0e262ef55d5b32eca7991fe794cf937d5daf4496"
+    },
+    {
+      "frame": 19,
+      "pose": 2,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "4384967c336482ac603757735f8e2e26d71d41143917d7e6b1ba095037531739"
+    },
+    {
+      "frame": 20,
+      "pose": 2,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "3c968250ca92fc02b0f7e3f1c16e5795a2ba8c34e6ca129bb9128c7bfeb6589f"
+    },
+    {
+      "frame": 21,
+      "pose": 2,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "31ed74d8918d41200536316e0210c58a3b69223877d994ac605f1814d7578890"
+    },
+    {
+      "frame": 22,
+      "pose": 2,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "e43403bee4ff15fa01c7a031e9dca0a2e0e1f5b7108765d03798d22b51ea196a"
+    },
+    {
+      "frame": 23,
+      "pose": 2,
+      "direction": 7,
+      "labels": 97,
+      "mask_sha256": "c12266e2965b0d00a9b042e3b92f812b11c4410d9f4e7c05c2789390f8b978c8",
+      "beauty_rgba_sha256": "ea067a5bfc906d4691ce005d41d7ee38486f909c369d7a091317243b7341701c"
+    },
+    {
+      "frame": 24,
+      "pose": 3,
+      "direction": 0,
+      "labels": 165,
+      "mask_sha256": "a976f772bd28996f511a7daf34f25856637172dca3c83389cf57d5a43fcfc8c4",
+      "beauty_rgba_sha256": "ac5943bc583323892cc98581c1523c841e7a3a762366a207bb325f1ebae1e856"
+    },
+    {
+      "frame": 25,
+      "pose": 3,
+      "direction": 1,
+      "labels": 76,
+      "mask_sha256": "62eac8d770b107c3647c1a9c7307eb22ff33ee0f0a7656acc88bcdd2a65cf8af",
+      "beauty_rgba_sha256": "cb41f94a3a452d110ada2c966c69c82852dd5d6b699cf00fbc213d7db738d2df"
+    },
+    {
+      "frame": 26,
+      "pose": 3,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "4a01baf0e1ba15b2fbadd8108387add95727d30336057a7a3e79c539a311d8f3"
+    },
+    {
+      "frame": 27,
+      "pose": 3,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "14aae309ee8f0d4c76740ab3156cd2b5d25e5050bab836028b7b6f6a14ebff2c"
+    },
+    {
+      "frame": 28,
+      "pose": 3,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "1eb30e144c7fee0db354760b0b7ff8a2dd122b414b0466c80b51fdbf55219390"
+    },
+    {
+      "frame": 29,
+      "pose": 3,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "e8a66536d8b723329df3dae2b6e159acb180e8cbea2accde191b86329cfa650d"
+    },
+    {
+      "frame": 30,
+      "pose": 3,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "cd73a83d9f16039a974939dc2a72933e9126d0ae1a4afceb4f0bb8e409f8ead0"
+    },
+    {
+      "frame": 31,
+      "pose": 3,
+      "direction": 7,
+      "labels": 92,
+      "mask_sha256": "30633089d523944d0283b3227bdbe4cf2b559484c6e09a2853b4bd1d1bec8d26",
+      "beauty_rgba_sha256": "e34e1bfb4d956eb7467521506b3980f4553e80d80894bbb792d645bd6745a2b5"
+    },
+    {
+      "frame": 32,
+      "pose": 4,
+      "direction": 0,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "6399214c9f32c2bec32ba4cf576ff5f75194d08b5b87bf0e7a9581f3e038e8fa"
+    },
+    {
+      "frame": 33,
+      "pose": 4,
+      "direction": 1,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "4e22b4b814252ce79f653f03713151df4ee5e25770d15ee2c88bde693da25c4d"
+    },
+    {
+      "frame": 34,
+      "pose": 4,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "b3b92b286c2c1b79922ce121d5b5adb5717ddf8c2ecd23a898ec96c57311198b"
+    },
+    {
+      "frame": 35,
+      "pose": 4,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "5af6c5167625efaab296ad32e92adb7511dc3519735feaa6fbfc9d2b6f259bc0"
+    },
+    {
+      "frame": 36,
+      "pose": 4,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "f26a9aa6f3937d64e71b8db1c7094d20b9de1ec9300adbac672a9ffbfa397e31"
+    },
+    {
+      "frame": 37,
+      "pose": 4,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "1b3717eee7b3f2e7e917cf058038410315912aa82f8f5fa8fecdd00d238db425"
+    },
+    {
+      "frame": 38,
+      "pose": 4,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "64df529c49f70c2eedef63fb59872f5b8f1f4985e2c24aaa54fae7656196d49c"
+    },
+    {
+      "frame": 39,
+      "pose": 4,
+      "direction": 7,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "5e1ca76e1bc4e18c1abc3e841295b25bb0034dd25002476b9bbce20308da008d"
+    },
+    {
+      "frame": 40,
+      "pose": 5,
+      "direction": 0,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "280c18a65bd962b679a28192a3f42f2e32de18786846aea9e02ffba8ef10aa2d"
+    },
+    {
+      "frame": 41,
+      "pose": 5,
+      "direction": 1,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "75a38313442113f8aa3646db6af91a17971b6ae58f29a01af03c67c238635641"
+    },
+    {
+      "frame": 42,
+      "pose": 5,
+      "direction": 2,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "281b9366a614b93be58e064a0c5034a4d58c6b6cf99b42f51d0905c246a4e90b"
+    },
+    {
+      "frame": 43,
+      "pose": 5,
+      "direction": 3,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "ad13a4b32c56a9cd51c6700cbad4fdbdd63dd312ec0e799199a51483479fa1bc"
+    },
+    {
+      "frame": 44,
+      "pose": 5,
+      "direction": 4,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "f8b888883738e2cac8cc7bb2dbf3de7108536ca483144afb23e08d509f0b30b1"
+    },
+    {
+      "frame": 45,
+      "pose": 5,
+      "direction": 5,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "b18a7cb2887a3edb0636e2b9effff6ca3b826c3464b816bfecf3e1b0e475e3b8"
+    },
+    {
+      "frame": 46,
+      "pose": 5,
+      "direction": 6,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "b1b569a5b4b61060c4dda2d8098a18537fe7088e40b84a358dba3179ffe4b138"
+    },
+    {
+      "frame": 47,
+      "pose": 5,
+      "direction": 7,
+      "labels": 0,
+      "mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "beauty_rgba_sha256": "fa653b700b7369252588161f67ebf2afd52e8abdf3ef02b9191d5091450300b5"
+    }
+  ]
+}

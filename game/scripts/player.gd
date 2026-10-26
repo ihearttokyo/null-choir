@@ -231,7 +231,7 @@ func fire() -> bool:
 			# The shared query skips transparent texels before selecting a victim, so
 			# holes never consume the three-victim limit. The finite wall query remains.
 			excluded.append(hit.collider.get_rid())
-			var accepted: bool = _damage_shot_target(hit.collider, weapon.damage, {"attack_kind":"piercing","weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position}, original_map)
+			var accepted: bool = _damage_shot_target(hit.collider, weapon.damage, {"attack_kind":"piercing","sprite_contact":_sprite_contact(hit),"weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position}, original_map)
 			if not _shot_current(original_map): break
 			if accepted and game.has_method("hit_feedback"): game.hit_feedback()
 			if accepted and _shot_current(original_map) and game.has_method("impact"): game.impact(hit.position)
@@ -261,12 +261,18 @@ func fire() -> bool:
 				if index == 2:
 					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
 					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
-				accepted_contact = _damage_shot_target(hit.collider, damage, {"attack_kind":"melee" if index == 0 else "hitscan","weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position}, original_map)
+				accepted_contact = _damage_shot_target(hit.collider, damage, {"attack_kind":"melee" if index == 0 else "hitscan","sprite_contact":_sprite_contact(hit),"weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position}, original_map)
 				if not _shot_current(original_map): break
 				if accepted_contact and game.has_method("hit_feedback"): game.hit_feedback()
 			if not _shot_current(original_map): break
 			if accepted_contact and game.has_method("impact"): game.impact(hit.position)
 	return true
+
+func _sprite_contact(hit: Dictionary) -> Dictionary:
+	# Forward the existing query's actual accepted texel; never recast a headbox.
+	if hit.get("coverage") != "visible_sprite": return {}
+	return {"coverage":hit.coverage,"collider_id":hit.get("collider_id"),"sprite_frame":hit.get("sprite_frame"),
+		"sprite_pixel":hit.get("sprite_pixel"),"frame_pixel":hit.get("frame_pixel")}
 
 func _shot_current(original_map: Node) -> bool:
 	return _current_map() and game.playing and game.level == original_map

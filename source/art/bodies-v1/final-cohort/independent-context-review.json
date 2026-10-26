@@ -1,0 +1,148 @@
+{
+  "consumer_sha256": "6463ec67fce42419da719825776811c4779996a6be07dc414390becb10161229",
+  "evidence_class": "independent-review-of-actual-native",
+  "fixture_sha256": "bb34ab6131d757d2839568f02c137d47ebb7b9e5c9f25bfc56e0079ba4366d16",
+  "original_review_sha256": "88e98c652f49862d20829d4d9fd1c7d4240260e578671ef870e0e04da0ef950b",
+  "review_role": "independent",
+  "roles": [
+    {
+      "actual_bearing": 2,
+      "actual_context_sha256": "3c838e388e2d7c38358a55591d150b80f60a2530175a73373474ad2048729fab",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "1bcb65f474441bf6789148bc7df4b6d92dc101cff8dc32e0637a9e6f85d8521d",
+        "8d93f37d3c9be3761180a6b65dbb493397709e17116c9f1389a5aa2b5469a0bc"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 7,
+      "kind": "worker",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "d4a171a7b2540b4c5e755d02d91cd21fab0c55d610bacd7d8a76488a8b1b825f",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+      "recomputed_RGB_changed_pixels": 15536,
+      "view_sha256": "f72f19a65cb38a9d264060569cabf710e978de5308d81b2a37c92461db44ee76"
+    },
+    {
+      "actual_bearing": 2,
+      "actual_context_sha256": "7082540ee245b2999ca60022f5332533a8e67482b188671f105b6e203fd511ad",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "e7eb0b0741e52310525813c13eb85a734c6eaedaa40393d2a0b89e5eb7a199be",
+        "6f7343570ffaac354f4f927bc91645295dd7e15191bddd9bfacefbb03b95bf2a"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 6,
+      "kind": "crawler",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "d98378fdd8d7c6d2093d4c2f67e994a88484197e0984873c53e277088f192018",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "3aedc249a859302f11064a44ac7d0b4063f354a80594f1e8ccb44e6cc72e8bfa",
+      "recomputed_RGB_changed_pixels": 1757,
+      "view_sha256": "10d6f76e0a6673ffcc8b878de6f6005b15275f34141713cabefe741b9e692f4a"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "5a6fef7e7dcbdb984f1ad61a6c428f74882db5e1b3243b5b82c32b2c0b0f1af8",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "160414b810d473e6dbbbfea56975d82f5745776bcacadb3639b17a58fca5e1b6",
+        "e1d6f82bc6a252b3f5787f5b0dcdc280c4e0f7b29b146c864b1a60119cf9a70f"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 9,
+      "kind": "brute",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "aa2206567773eabaecafd0487f146230aad870e005806b990e13ded8068fa80f",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "b57c94c718c335fd2d27b5c031622945a5649418456c49d2b257271c3fa1e0a3",
+      "recomputed_RGB_changed_pixels": 5057,
+      "view_sha256": "e43593c1975ed40b39ca1d0ded83656b366bb44082322ae74ef67ef8343bad88"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "9f2700c489554429ec83aa9e91b038f147b2d317fd1b46984d59b6a2f3fcb1fc",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "844b6a43def582f279893be703d5117f65a3dcb3507ff25f35598e5d79f15b55",
+        "a90fbf845e460afdbe2128e2284f2bae0a6f8f9342429b47ac13baa0b532fc6b"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 9,
+      "kind": "nursery_warden",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "3c07df079a20c67dbe0defbe739323c2873d2c8c860f6074c730bdb27ea21518",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "70f9746a80f8ec593541171fb3d95e32ca8476947424cb166fd19bdec1fe6694",
+      "recomputed_RGB_changed_pixels": 20248,
+      "view_sha256": "2635a3a883a20595f4988b7f6a7ab4338247fb2fc8b8ca56167df6f5642a79e3"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "f789d878f093aa3491ed64197fa49c0b65c6852935a173d77547c4df9280e714",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "5bba4b27fafe931c70a8e05ec7531170d7c52b957ad7cc8ff457c7afb1b13876",
+        "5f0279b7ec6bb0076649936ca1f87f02e670fa1a80ae07fd90c39032c669d301"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 7,
+      "kind": "choir_avatar",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "bc5a40443c76369eea16e256e30cbe347fc594d180ebcc423a36c623b8815122",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "56353ec096401bc9c3a8c6be8e3dc3ceda25879cd5174f3ae6c77f95f8b7bc32",
+      "recomputed_RGB_changed_pixels": 13431,
+      "view_sha256": "ff568628e634c781c8458a1797f187dc90eeb16a742138763c1e29914a5ceb2f"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "fac0bb3c89f436dd8e56ca8d91b75c7215da40aaafcf91469ea5a1e08e910a4c",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "0dcdea2370498c7f366cc37a2dd70ff6d1d585a0926aca1dfbb3e455f54d1b8d",
+        "9b63d8a5bc57898ffdb442066da299f15a4b51f12fdcffceb63651d0ee2b0495"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 8,
+      "kind": "caster",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "356d14f852478ffc083bd15142ac4fb96b57ff21934cec7bc1cb85cc4b7479a5",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "2585b80242d260e139dd010eb75732ec6e4be90c53d2f1f29dec39e4e74e2f0e",
+      "recomputed_RGB_changed_pixels": 4840,
+      "view_sha256": "318cb071c6f178a4782aefeaf02efaeedf9b4c9764fda9ed185f2309a39d4441"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "ea5f34578a4fff5e0c33ecd5e3e0677ca3f84e8f059c0f4c5b5d64e8b7c4d41d",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "465ce187bf1e290d06b53c71c91de89f80fb4078ee0206466b1654fdb47d6286",
+        "ef93ffc85df1b6d137dd1fd6e91fbb1e5174ef3056b7ed686e6b09a667f47b81"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 9,
+      "kind": "guardian",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "1a91cbd92cacfabf0b3b475f1dfd9437cbd97cfe1a6048fa27b68f4e22ef6104",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "2836788537fbd9972534ca60387a6689e7049342255a434ac70aea3129a3e537",
+      "recomputed_RGB_changed_pixels": 5193,
+      "view_sha256": "7b4ff548b53492d340c10b74300456f3f6a722e0290128c7b6ead8b648787f4c"
+    },
+    {
+      "actual_bearing": 0,
+      "actual_context_sha256": "f67d641ed3a8e48a31a8fa244ca78c4b9cb1d3c9e0d3a21869c03a339410e3eb",
+      "authored_spec_exact": true,
+      "background_sha256": [
+        "2dc1dbf10a86dbbcf04564a94b3cfcf303a24662cc1bb25b2cb2e85258355b51",
+        "b1e5432693d37c4bbf01057fa334f5deeb612710f94304364bfa9e9795663d11"
+      ],
+      "independently_projected_opaque_stable_ABA_witnesses": 7,
+      "kind": "summoner",
+      "manual_idle_direction": 0,
+      "native_report_sha256": "b76761a574b2ecd2977776be9c05800c39a4d153950b67241be409dd0273566c",
+      "native_wall_negative_control_pass": true,
+      "normal_RGBA": "719d68c9c0d9b5ac12fb09b22cdd3e3c8b076e47a43f8dc1c534f49d9e78196c",
+      "recomputed_RGB_changed_pixels": 7775,
+      "view_sha256": "ad47cbfbf132146a5fca8b01271709ccf7ed0e17b1bdde23b81d0cc8ee645f63"
+    }
+  ],
+  "schema": "null-choir-final-context-independent-review-v1",
+  "scope": "Actual eight new-normal-resource idle0 contexts visibly contain actors; independently decoded24PNGs and recomputed RGB/ABA opaque witnesses. Not a new art grade or fullmatrix rerender. Original fullmatrix source/art approvals retained unchanged.",
+  "status": "PASS"
+}

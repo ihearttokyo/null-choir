@@ -1,0 +1,271 @@
+{
+  "actor_kind": "caster",
+  "actual_context_report": {
+    "bytes": 77891,
+    "sha256": "7dd46c08458cba313e06eea2441d99eaf67c62c85b982b8365de2381c3bd4e4e"
+  },
+  "actual_native_receipt": {
+    "bytes": 12733,
+    "sha256": "f8e51dc3737caa316a848f2065c858ea5cd4d98d5b659b77c42c079c142cf331"
+  },
+  "atlas_sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6",
+  "candidate_runtime_uri": "res://assets/art/sprites/bodies-v1/caster.png",
+  "configured_runtime_uri": "res://assets/art/sprites/caster.png",
+  "consumer_binding_qualification": "PENDING_FINAL_BODY_ATLASES_INTEGRATION",
+  "consumer_sha256": "4b8d84543100529b73145d23ceb4438368b0b12a4479f8f1f6876c6205abe63b",
+  "evidence_class": "actual-native",
+  "manual_atlas_direction": true,
+  "resolution": [
+    640,
+    360
+  ],
+  "rgba_sha256": "2585b80242d260e139dd010eb75732ec6e4be90c53d2f1f29dec39e4e74e2f0e",
+  "schema": "null-choir-actor-actual-context-v1",
+  "scope": "Actual static Level40 intended-use views, unchanged map light/profile/foot anchor. Final8 consumer/PCK/human/FPS not qualified.",
+  "status": "PASS",
+  "tested_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "texture_override": "Accepted full atlas ImageTexture on actual Enemy Sprite3D; actual normal-import separately qualified. Static views, not observed AI/attack/death timing.",
+  "views": [
+    {
+      "bytes": 177184,
+      "path": "source/art/bodies-v1/caster/proof/context-00.png",
+      "sha256": "e5167fca15507749a252f8bda4df2762cbbd4ce59e69674ad913154a785fdfd8"
+    },
+    {
+      "bytes": 176422,
+      "path": "source/art/bodies-v1/caster/proof/context-01.png",
+      "sha256": "8e6f5642ff4274da79729bdc2dc261174a08cb4f12f52a43194437514695bf06"
+    },
+    {
+      "bytes": 174414,
+      "path": "source/art/bodies-v1/caster/proof/context-02.png",
+      "sha256": "ab59db34b3a132d172ce92d14f02f01bb62987c7167c4c9734b3c3329bae30b0"
+    },
+    {
+      "bytes": 174654,
+      "path": "source/art/bodies-v1/caster/proof/context-03.png",
+      "sha256": "edfcbfadf8294a53f67530e8325990919053a6175604a7b8a081fe0549db1b24"
+    },
+    {
+      "bytes": 175040,
+      "path": "source/art/bodies-v1/caster/proof/context-04.png",
+      "sha256": "d3275f5dba5a4c30cdf9b034a14e285939636850a6f4ec5b583d35e612ec8fa0"
+    },
+    {
+      "bytes": 174724,
+      "path": "source/art/bodies-v1/caster/proof/context-05.png",
+      "sha256": "a3583d022ca5d5e23844b211021729580fc238a78f9546263e249cf08e4932fe"
+    },
+    {
+      "bytes": 174306,
+      "path": "source/art/bodies-v1/caster/proof/context-06.png",
+      "sha256": "3f65065d8fdaec2f03204921684fd46cd4f7f9620085a1ba3efb6954b1c74f6f"
+    },
+    {
+      "bytes": 176071,
+      "path": "source/art/bodies-v1/caster/proof/context-07.png",
+      "sha256": "7327669af26cb82e4a9e10b8b9ed5e9226e2e6d004d37f08f4ebfa4a3c8e6e8c"
+    },
+    {
+      "bytes": 177275,
+      "path": "source/art/bodies-v1/caster/proof/context-08.png",
+      "sha256": "b26f368d43763f880c041692017f68f3777caf458bfb8ddb85dcb68a7bb5f985"
+    },
+    {
+      "bytes": 176410,
+      "path": "source/art/bodies-v1/caster/proof/context-09.png",
+      "sha256": "97da52b91f9dfe4a0dd6bdd170341c0e5db0d2a0bde57a2cb08cadf00a33931d"
+    },
+    {
+      "bytes": 174468,
+      "path": "source/art/bodies-v1/caster/proof/context-10.png",
+      "sha256": "9567ac9ec1d02875f6334e094b262d58b2e63f62178ca11b8dc5da2d65ddfc0b"
+    },
+    {
+      "bytes": 174627,
+      "path": "source/art/bodies-v1/caster/proof/context-11.png",
+      "sha256": "33eca35a924136e6f13f8f2105b29fffecebc42bbf941ed0866b17f12eefe75a"
+    },
+    {
+      "bytes": 174996,
+      "path": "source/art/bodies-v1/caster/proof/context-12.png",
+      "sha256": "ca6b01b3e5451850868b74085476f05a8fe3b42f65b097f9d4d4e5e548831620"
+    },
+    {
+      "bytes": 174649,
+      "path": "source/art/bodies-v1/caster/proof/context-13.png",
+      "sha256": "30f90135f9d9dd9e68df91aeaf3a3526dbfacd25901dda3105b3e845d901fdd5"
+    },
+    {
+      "bytes": 174293,
+      "path": "source/art/bodies-v1/caster/proof/context-14.png",
+      "sha256": "a833346d8ed822869b4337db5cac27e5849869c0c14b34ff6cdf29fe87ebf47a"
+    },
+    {
+      "bytes": 176110,
+      "path": "source/art/bodies-v1/caster/proof/context-15.png",
+      "sha256": "7ad90c24f81db70806fcc11c6a60a34645de3ffc1a92ef09b60a0baffd181343"
+    },
+    {
+      "bytes": 177198,
+      "path": "source/art/bodies-v1/caster/proof/context-16.png",
+      "sha256": "2ac1035b8753618613f7feecde93768f482253efc24e949ce0789547ca56d254"
+    },
+    {
+      "bytes": 176442,
+      "path": "source/art/bodies-v1/caster/proof/context-17.png",
+      "sha256": "42ceee71f9c83d75f1e901b40bb173c1db195b5bce07ac41bb8b00aa7151fcca"
+    },
+    {
+      "bytes": 174428,
+      "path": "source/art/bodies-v1/caster/proof/context-18.png",
+      "sha256": "aa04180fcf1189a4b1dcc539d7bc71b6a1a6563e19653a511c0947f8c813dd36"
+    },
+    {
+      "bytes": 174588,
+      "path": "source/art/bodies-v1/caster/proof/context-19.png",
+      "sha256": "574eea96d0460d33c067deb2bca95dedff6612764b3cde6855329fc1a3cc5736"
+    },
+    {
+      "bytes": 175095,
+      "path": "source/art/bodies-v1/caster/proof/context-20.png",
+      "sha256": "f4aad18589529e71c5e052b0db40bcb70f284eedb571ded733a5eeaff0aafbed"
+    },
+    {
+      "bytes": 174727,
+      "path": "source/art/bodies-v1/caster/proof/context-21.png",
+      "sha256": "52cc14e4c96a852b72361e9d3e918e60a5486d85acc0f96d89dda9e6a5012a05"
+    },
+    {
+      "bytes": 174301,
+      "path": "source/art/bodies-v1/caster/proof/context-22.png",
+      "sha256": "3c346198a5a2ff03c5ec32e207b3c634422ba387f6e58edfb4f33a944e7ea7ae"
+    },
+    {
+      "bytes": 176187,
+      "path": "source/art/bodies-v1/caster/proof/context-23.png",
+      "sha256": "3f718bdf22e029a4999ade953b13ce79eafeebb779757a20cf6c5f89b5a782b3"
+    },
+    {
+      "bytes": 177659,
+      "path": "source/art/bodies-v1/caster/proof/context-24.png",
+      "sha256": "8ac41e9d3e5057e6f2695a48f1650947f6a62c3dfc5b83119a95055d563212fa"
+    },
+    {
+      "bytes": 177559,
+      "path": "source/art/bodies-v1/caster/proof/context-25.png",
+      "sha256": "548ef77720c9314c528a14b28c0533c0bca70117c47e9c0126f84a470ada56c5"
+    },
+    {
+      "bytes": 175412,
+      "path": "source/art/bodies-v1/caster/proof/context-26.png",
+      "sha256": "acfabfc53d9632c34b702c383fe1c5d5a8aa1682b684f8c2350e852e2a931bbf"
+    },
+    {
+      "bytes": 176084,
+      "path": "source/art/bodies-v1/caster/proof/context-27.png",
+      "sha256": "b33c1c47da1f853e0e37bfc022baa6401b9947055e787be3f42fbebbdac945b6"
+    },
+    {
+      "bytes": 175577,
+      "path": "source/art/bodies-v1/caster/proof/context-28.png",
+      "sha256": "4960600ad13e6e9aa14f741723b5818b3f9dab5e85ab441b93d8c04a2b255e2f"
+    },
+    {
+      "bytes": 175504,
+      "path": "source/art/bodies-v1/caster/proof/context-29.png",
+      "sha256": "206250aab4511ee24bb6a81d9c31a6b40e800e300e1db458133ce12f8edf1ab2"
+    },
+    {
+      "bytes": 174556,
+      "path": "source/art/bodies-v1/caster/proof/context-30.png",
+      "sha256": "e5f0fb22b361a60ed4f40bd29197424a1caa18a295a7fc7a69090bd5889e296e"
+    },
+    {
+      "bytes": 176353,
+      "path": "source/art/bodies-v1/caster/proof/context-31.png",
+      "sha256": "e2a3ae521f76ccaf5c12d3a9be93b77f269ac252ab19ac7d4a2194a09193edfb"
+    },
+    {
+      "bytes": 173376,
+      "path": "source/art/bodies-v1/caster/proof/context-32.png",
+      "sha256": "af0b48ebebb24e1d9c5447afb6b60be6717d6a5fc9c2d7106255da714298453c"
+    },
+    {
+      "bytes": 173567,
+      "path": "source/art/bodies-v1/caster/proof/context-33.png",
+      "sha256": "b07263968e66ab52038ba9433140e24a8c5544ddc1ee617a5440d8441f529254"
+    },
+    {
+      "bytes": 173254,
+      "path": "source/art/bodies-v1/caster/proof/context-34.png",
+      "sha256": "8f443a588737e0dc06ccdd58b19ec0dc87b72f1a889fae397b6a3bfbeeb12130"
+    },
+    {
+      "bytes": 173601,
+      "path": "source/art/bodies-v1/caster/proof/context-35.png",
+      "sha256": "ba466aeff4d34121b55742d249c96305c6020e5c81cc5d9baa03bb227cdbfb52"
+    },
+    {
+      "bytes": 173307,
+      "path": "source/art/bodies-v1/caster/proof/context-36.png",
+      "sha256": "f0d66a4584ec8e1e438df16746c9fb458081db58c1535b072cf44b2b9f3c1bae"
+    },
+    {
+      "bytes": 172903,
+      "path": "source/art/bodies-v1/caster/proof/context-37.png",
+      "sha256": "4cc48b65dc817539b3cf5857a788ff816eb1cd9f86ab7d4f516d566f9a3a689e"
+    },
+    {
+      "bytes": 172607,
+      "path": "source/art/bodies-v1/caster/proof/context-38.png",
+      "sha256": "0f33510ba8c592a1eb2c20b6fb18ba62cd495db9f24efcc764432242cb02c291"
+    },
+    {
+      "bytes": 173278,
+      "path": "source/art/bodies-v1/caster/proof/context-39.png",
+      "sha256": "4ed8551e6def93c27584982b92598d27c507cb31dc2396ef3c38ab819fb1328e"
+    }
+  ]
+}
