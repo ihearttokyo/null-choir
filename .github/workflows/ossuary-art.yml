@@ -33,4 +33,5 @@ jobs:
       - run: |
           python -B tests/test_ossuary_buttress.py
           python -B tests/test_art.py
+          python -B tests/test_weapon_raster_ledger.py
           python -B tests/test_title_theme.py

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "kind": "native-current-six-weapon-import-qualification",
+  "status": "PASS",
+  "engine": "Godot4.7.2.stable.official.ed1daf0bf",
+  "source_contract": "Six exact accepted source PNG hashes in weapon-raster-v3.json; oldlegacy119catalog preserved",
+  "importer": "lossless0/nomips/nonpremult/fix_alpha_border=true; native independentUIDs assigned; paramsunchanged",
+  "assets": [
+    {
+      "id": "impact_tool",
+      "uri": "res://assets/art/weapons/painted-v3/impact_tool.png",
+      "uid": "uid://dimmkwdyxdwor",
+      "sidecar": "game/assets/art/weapons/painted-v3/impact_tool.png.import",
+      "sidecar_sha256": "a22802d03aebb866cf1b897442f2db1cd95cff486fdadb415806d1cd9e8de2b0",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 7539,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    },
+    {
+      "id": "rivet_pistol",
+      "uri": "res://assets/art/weapons/painted-v3/rivet_pistol.png",
+      "uid": "uid://b7nilrrmfq6wr",
+      "sidecar": "game/assets/art/weapons/painted-v3/rivet_pistol.png.import",
+      "sidecar_sha256": "401591a0dd9e94b4acb13194f5d88916333f76c56a53901addfde777744c83bd",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 7480,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    },
+    {
+      "id": "scattergun",
+      "uri": "res://assets/art/weapons/painted-v3/scattergun.png",
+      "uid": "uid://d138s0nxdge72",
+      "sidecar": "game/assets/art/weapons/painted-v3/scattergun.png.import",
+      "sidecar_sha256": "25ecb5da09513deffe8c4e012e0d6c4eb001aeba3c3f1ed163a7abb18dd11167",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 6842,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    },
+    {
+      "id": "sawtooth_repeater",
+      "uri": "res://assets/art/weapons/painted-v3/sawtooth_repeater.png",
+      "uid": "uid://f2at70n2iiih",
+      "sidecar": "game/assets/art/weapons/painted-v3/sawtooth_repeater.png.import",
+      "sidecar_sha256": "b4834ee30ed53bb0d48141cc5624e71d1d4ebd84ffc44de95fa925eeb316c96e",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 6348,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    },
+    {
+      "id": "marrow_launcher",
+      "uri": "res://assets/art/weapons/painted-v3/marrow_launcher.png",
+      "uid": "uid://cs1ohe1dkfqxb",
+      "sidecar": "game/assets/art/weapons/painted-v3/marrow_launcher.png.import",
+      "sidecar_sha256": "c73fe11ffc93b97a87ccfe77544ba3ce7c5281c8a274d42a05a42e84764d0750",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 7929,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    },
+    {
+      "id": "choir_disruptor",
+      "uri": "res://assets/art/weapons/painted-v3/choir_disruptor.png",
+      "uid": "uid://wq8yww0qhrfa",
+      "sidecar": "game/assets/art/weapons/painted-v3/choir_disruptor.png.import",
+      "sidecar_sha256": "0a7a2fad85d331d5cfaabd46c06731a196c63e5424bac999350c453ade403fb8",
+      "params_identical_except_new_uid": true,
+      "invisible_rgb_changed_pixels": 10659,
+      "cooked_alpha_exact": true,
+      "opaque_rgb_exact": true
+    }
+  ],
+  "native_import": {
+    "seconds": 2.055242249974981,
+    "strict": true,
+    "audio": "Dummy",
+    "temporary_test_ignore_restored": true
+  },
+  "current_hud": {
+    "strict": true,
+    "seconds": 1.3350046249106526,
+    "poses": 18,
+    "actualResourceLoader": true,
+    "resource_override": false,
+    "actual_player_frame_ids": [
+      0,
+      1,
+      2
+    ],
+    "visible_pixels_match_source": true,
+    "backend": "Mobile/Metal",
+    "scope": "Synthetic weaponconsumer only; noMain/Level/gameplayworld"
+  },
+  "cadence": {
+    "strict": true,
+    "seconds": 16.19749141705688,
+    "fixture": "unchanged test_fire_intent.gd inherited by externalassetqualification",
+    "fixture_sha256": "742016e1aacf4a870bd9d209c405bd42e97b5a6c7541badf06020c7e910846a3",
+    "ordinary_repeater_window_seconds": 10,
+    "actual_shots": 118,
+    "configured_shots": 117.647058823529,
+    "scope": "Actual native60Hz virtualInput and finiteammo/first-postshot frame/recovery/dry/handledmenu guards; not physicalhuman/fullcampaign"
+  },
+  "main_probe_ids": "Native actualscript/helper sourcebinding/basename checks PASS; actual full internalPCKprobe deferred to artifact05",
+  "artifact05_pck": "NOT BUILT/VERIFIED by this qualification",
+  "scope_limits": [
+    "No shader/artscore/rating evidence",
+    "No fullcampaign matrix rerun",
+    "No physicalinput/listening/FPS/publication",
+    "TransparentRGBchanges are MEASURED; no rawRGBAexact claim"
+  ]
+}

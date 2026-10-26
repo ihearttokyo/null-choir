@@ -1,0 +1,120 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "output_png_sha256": "f3ddc8d03ef74a9fd8766d9dcb08290c89da94960a5cf5519715a6d95020b6a2",
+  "output_rgba8_sha256": "3618ee4f66a93ddd65708463aee805fb2aa7fbdb6e4513fd9d7269f3dc1d02ad",
+  "poses": [
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        20,
+        46,
+        258,
+        199
+      ],
+      "opaque_pixels": 19534,
+      "pose": "idle",
+      "rgba8_sha256": "e2a7ac265dd576db6eedaeb0aebcae25eb7fccf5ffc8f2b50ab5f39fb0a4fbfb",
+      "source_anchor_local": [
+        365.0,
+        290.0
+      ],
+      "source_cell_rect": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        21,
+        51,
+        257,
+        199
+      ],
+      "opaque_pixels": 19999,
+      "pose": "fire",
+      "rgba8_sha256": "0a864ec63ba416b22d697e59191b729d1b05b55d0107aba315aed6f3f5b9753d",
+      "source_anchor_local": [
+        365.0,
+        274.0
+      ],
+      "source_cell_rect": [
+        724.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        20,
+        49,
+        256,
+        199
+      ],
+      "opaque_pixels": 19425,
+      "pose": "recover",
+      "rgba8_sha256": "a93b856efc450490b477a7d40ae0e1ccc977324780c3e44c9967a957fc025a33",
+      "source_anchor_local": [
+        364.0,
+        280.0
+      ],
+      "source_cell_rect": [
+        1448.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    }
+  ],
+  "registration_sha256": "2a5e457beb97ef3d63b9dd4a20b4fc4b6171556dfff7d7d53db94e22d936c955",
+  "scope": "NONSHIPPING nativeCPU measured source extraction, no repaint/newBlender/creativepixel edits/quality/gameplay acceptance",
+  "source_sha256": "37585f2a18c0e6a4deb4ce5372db7ab1a87dc497abfada6082ce2e95383f93d2",
+  "weapon_id": "choir_disruptor"
+}

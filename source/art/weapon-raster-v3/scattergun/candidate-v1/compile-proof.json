@@ -1,0 +1,120 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "output_png_sha256": "bdb98c9d3574185647968b3b6a8679c255d5bbd29e872a718dab66a43398b798",
+  "output_rgba8_sha256": "db6ac31eb19c74eafcbc699c45454f1e367fe24f30147e2662611b2c4f23349c",
+  "poses": [
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        5,
+        55,
+        272,
+        199
+      ],
+      "opaque_pixels": 21300,
+      "pose": "idle",
+      "rgba8_sha256": "39f29086ae9d084eb164e0f6d1a8018c5ce872f9a1c496ecb881aa5b9d40d254",
+      "source_anchor_local": [
+        365.0,
+        348.0
+      ],
+      "source_cell_rect": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.37
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        34,
+        55,
+        247,
+        199
+      ],
+      "opaque_pixels": 18355,
+      "pose": "fire",
+      "rgba8_sha256": "6759f61e1be576656a1a9303cd083dc78f3aa650fa0255a91223d2b32ea944a4",
+      "source_anchor_local": [
+        365.0,
+        239.0
+      ],
+      "source_cell_rect": [
+        724.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.37
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        19,
+        55,
+        259,
+        199
+      ],
+      "opaque_pixels": 20219,
+      "pose": "recover",
+      "rgba8_sha256": "257d85cdc09fa5d1921137fd3c8e9e87a35ff15513cf15cfa7f1fc179e6f34ae",
+      "source_anchor_local": [
+        365.0,
+        298.0
+      ],
+      "source_cell_rect": [
+        1448.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.37
+    }
+  ],
+  "registration_sha256": "6c049ce765cf6aabdb3187205992535ce06e0b6001ebbe6e5652c3aa2fbe7565",
+  "scope": "NONSHIPPING nativeCPU measured source extraction, no repaint/newBlender/creativepixel edits/quality/gameplay acceptance",
+  "source_sha256": "6f34dc85cc11a0b648210ad728353f24df286bb8ca7b951dd6528a43fc070bd2",
+  "weapon_id": "scattergun"
+}

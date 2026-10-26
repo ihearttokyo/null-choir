@@ -537,6 +537,14 @@ def check():
         assert list(struct.unpack('>II', data[16:24])) == chapter['native_dimensions'], file
         assert file not in owned_outputs
         owned_outputs.add(file)
+    # Registered raster weapons have separate truthful source/export provenance.
+    # Validate all six explicitly, retaining every legacy Blender/catalog guard.
+    raster_guard = runpy.run_path(str(ROOT / 'source/art/weapon-raster-v3/validate_ledger.py'))
+    raster = raster_guard['validate_ledger'](ROOT, 'source/art/weapon-raster-v3.json')
+    for relative in raster['runtime_outputs']:
+        file = ROOT / relative
+        assert file not in owned_outputs, 'duplicate raster output ownership'
+        owned_outputs.add(file)
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'

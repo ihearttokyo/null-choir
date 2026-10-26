@@ -1,0 +1,120 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "output_png_sha256": "46687d1d52efa42effb5687ba2d0edaaf4349dee980f9183e5e0a3e05682ea2d",
+  "output_rgba8_sha256": "6a8bbd28c26cb19f712448e34761f127741bdb8ea7153f353da91cb50418a0d1",
+  "poses": [
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        23,
+        55,
+        255,
+        199
+      ],
+      "opaque_pixels": 19370,
+      "pose": "idle",
+      "rgba8_sha256": "d9876a320e22ce5ccc987058351a09e8d5474b849f8978e667ccd3fcf649500d",
+      "source_anchor_local": [
+        360.0,
+        294.0
+      ],
+      "source_cell_rect": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        20,
+        31,
+        257,
+        199
+      ],
+      "opaque_pixels": 24033,
+      "pose": "fire",
+      "rgba8_sha256": "472179ddaac7b43f1d8f21e34b36513c43193f2300c3ead14347caf5b0c43333",
+      "source_anchor_local": [
+        365.0,
+        307.0
+      ],
+      "source_cell_rect": [
+        724.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        22,
+        44,
+        255,
+        199
+      ],
+      "opaque_pixels": 21878,
+      "pose": "recover",
+      "rgba8_sha256": "14c39384d14eb6dbf2819d5d3bc9675ea3e2a3452101d727a164ecd56fc27ea1",
+      "source_anchor_local": [
+        369.0,
+        294.0
+      ],
+      "source_cell_rect": [
+        1448.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.33
+    }
+  ],
+  "registration_sha256": "3a2e3118019881661cc10ebb59080766d878ec8392ea70e54b0d24f26c965861",
+  "scope": "NONSHIPPING nativeCPU measured source extraction, no repaint/newBlender/creativepixel edits/quality/gameplay acceptance",
+  "source_sha256": "cd55da94e32545fc172aebf88d782b8280b4ccb3e0e4d070b2d796402eb86a27",
+  "weapon_id": "marrow_launcher"
+}

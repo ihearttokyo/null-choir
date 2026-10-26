@@ -1,0 +1,120 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "output_png_sha256": "b23cdf22e843b0b8be0075ce09859737fbb36263011da0cf368469ade9924b8c",
+  "output_rgba8_sha256": "5ec00f75bb093f8503f3c7749b3d1d773ab08cfdb6d71f1f2ee6684a405c617c",
+  "poses": [
+    {
+      "native_anchor": [
+        160.0,
+        140.0
+      ],
+      "opaque_bounds_inclusive": [
+        56,
+        43,
+        254,
+        199
+      ],
+      "opaque_pixels": 15444,
+      "pose": "idle",
+      "rgba8_sha256": "bb75c109a7babbf4a4af39282924ff93a30fd52b131390c55cb389e2455545ac",
+      "source_anchor_local": [
+        365.0,
+        500.0
+      ],
+      "source_cell_rect": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.3
+    },
+    {
+      "native_anchor": [
+        160.0,
+        140.0
+      ],
+      "opaque_bounds_inclusive": [
+        60,
+        60,
+        257,
+        199
+      ],
+      "opaque_pixels": 14282,
+      "pose": "fire",
+      "rgba8_sha256": "262de38f1c4f80678e306e42b03eb46ff15399329dd1a15691fe532e3f22c708",
+      "source_anchor_local": [
+        358.0,
+        500.0
+      ],
+      "source_cell_rect": [
+        724.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.3
+    },
+    {
+      "native_anchor": [
+        160.0,
+        140.0
+      ],
+      "opaque_bounds_inclusive": [
+        59,
+        46,
+        250,
+        199
+      ],
+      "opaque_pixels": 14826,
+      "pose": "recover",
+      "rgba8_sha256": "c2852e89750e57cad090a8fbdb8426753351506b5a6ddb1646aba8a6914628e9",
+      "source_anchor_local": [
+        378.0,
+        500.0
+      ],
+      "source_cell_rect": [
+        1448.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        724.0,
+        724.0
+      ],
+      "uniform_scale": 0.3
+    }
+  ],
+  "registration_sha256": "d7635c78856cf8cac7cb20e843e1a24030c6fbac453fc472431dd158de074b88",
+  "scope": "NONSHIPPING nativeCPU measured source extraction, no repaint/newBlender/creativepixel edits/quality/gameplay acceptance",
+  "source_sha256": "4ee9c4c990e9a8a84d56ee7631a3ee8ae8235069cfca95d1b56a32ac048ee3a0",
+  "weapon_id": "impact_tool"
+}

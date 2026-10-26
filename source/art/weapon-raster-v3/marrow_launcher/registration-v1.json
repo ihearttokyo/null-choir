@@ -1,0 +1,109 @@
+{
+  "schema": 2,
+  "weapon_id": "marrow_launcher",
+  "status": "NONSHIPPING_MANUALLY_REGISTERED_NEW_PRODUCTION_RASTER_NOT_BLENDER",
+  "generator": "Codex builtin image_gen production-directed new3pose raster; references priorProconceptandacceptedRivetmaterialstandard",
+  "source_file": "production-source-v1.png",
+  "source_sha256": "cd55da94e32545fc172aebf88d782b8280b4ccb3e0e4d070b2d796402eb86a27",
+  "source_dimensions": [
+    2172,
+    724
+  ],
+  "source_cell_rects": [
+    [
+      0,
+      0,
+      724,
+      724
+    ],
+    [
+      724,
+      0,
+      724,
+      724
+    ],
+    [
+      1448,
+      0,
+      724,
+      724
+    ]
+  ],
+  "uniform_scale": 0.33,
+  "native_anchor_px": [
+    140,
+    62
+  ],
+  "native_origin": [
+    160,
+    200
+  ],
+  "registration_basis": "Actual forward axial brass endcap/front stem (visible in front of rear loading chamber). Rear white round/amber feed chamber is NOT muzzle. Opened petal tips213remain visible; uniformscale preserves full mechanical opening.",
+  "alpha_cutoff_byte": 128,
+  "native_output": "candidate-v1/marrow_launcher-registered-v1.png",
+  "poses": [
+    {
+      "id": "idle",
+      "source_cell": 0,
+      "source_anchor_local": [
+        360,
+        294
+      ],
+      "extraction_local": [
+        0,
+        0,
+        724,
+        724
+      ]
+    },
+    {
+      "id": "fire",
+      "source_cell": 1,
+      "source_anchor_local": [
+        365,
+        307
+      ],
+      "extraction_local": [
+        0,
+        0,
+        724,
+        724
+      ]
+    },
+    {
+      "id": "recover",
+      "source_cell": 2,
+      "source_anchor_local": [
+        369,
+        294
+      ],
+      "extraction_local": [
+        0,
+        0,
+        724,
+        724
+      ]
+    }
+  ],
+  "reference_inputs": [
+    {
+      "role": "prior Pro concept visual reference only",
+      "sha256": "4e4f037bfbb0be97b6dfc701a9ba73cfa428020ddb2e09decf26ea1aea8751f5"
+    },
+    {
+      "role": "frozen accepted Rivet material-craft reference",
+      "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+    }
+  ],
+  "manual_measurement": "Visual/source-pixel landmarks; explicit different source-cell coordinates registered with one uniform scale perweapon; no perpose scale or repaint. Actual runtime640canvas/HUDrect/native320cells unchanged.",
+  "source_original_retained": "work/runtime-art-next-20261026/marrow_launcher-generated-production-source-v1.png",
+  "provenance_receipt": "work/runtime-art-next-20261026/five-generated-production-sources-v1.json",
+  "pixel_operations_only": [
+    "explicit source-cell extraction",
+    "uniformscale/registeredtranslation",
+    "nearestpixel sampling",
+    "alpha>=128hardthreshold"
+  ],
+  "baked_external_fx_added": false,
+  "shipping_promoted": false
+}

@@ -1,0 +1,104 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "3ed3d6a44c97f8c6d38ad908842ee2d897f761d4ffd64ac812f88a3a2bc5a1f9",
+  "creative_pixel_edits": false,
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "full_original_preserved": true,
+  "nearest_only": true,
+  "original_source_sha256": "0f611f1c800c12b3ccb84ccef4670bf0ff5923d8a80d9fe7890055386b5a0a9a",
+  "output_png_sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417",
+  "output_rgba8_sha256": "e75faaea4380b6c6d16ffefd555f6ba036975be3267875ba6c28715dc0121223",
+  "poses": [
+    {
+      "cell_rgba8_sha256": "e1e72a6d126b7c764e399eafa5b85f3dd27a16f609baecb6705b6d920a3741a4",
+      "native_muzzle": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        133,
+        47,
+        319,
+        199
+      ],
+      "opaque_pixels": 10792,
+      "pose": "idle",
+      "scale": 0.34,
+      "source_crop": [
+        114.0,
+        180.0,
+        610.0,
+        544.0
+      ],
+      "source_muzzle": [
+        154.0,
+        238.0
+      ]
+    },
+    {
+      "cell_rgba8_sha256": "603968ba1c44af8aa02396463b9c0dfc940488d7f18e34804ee3ef2109150baa",
+      "native_muzzle": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        133,
+        47,
+        319,
+        199
+      ],
+      "opaque_pixels": 11422,
+      "pose": "fire",
+      "scale": 0.34,
+      "source_crop": [
+        99.0,
+        180.0,
+        625.0,
+        544.0
+      ],
+      "source_muzzle": [
+        139.0,
+        238.0
+      ]
+    },
+    {
+      "cell_rgba8_sha256": "aa061681812abebec32c0b16ef8e5bfae2258a1e2314a33588ce86607883c9d3",
+      "native_muzzle": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        133,
+        47,
+        319,
+        199
+      ],
+      "opaque_pixels": 10848,
+      "pose": "recover",
+      "scale": 0.34,
+      "source_crop": [
+        68.0,
+        180.0,
+        656.0,
+        544.0
+      ],
+      "source_muzzle": [
+        108.0,
+        238.0
+      ]
+    }
+  ],
+  "registration_sha256": "b299a089f9fa3441de7d6ca59640a55d89ee55c6a1e0ce1df9badf65ab2dc442",
+  "scope": "NONSHIPPING nativeCPU registered extraction; not newpainting/Blender/3D/gameplay/visualacceptance"
+}
