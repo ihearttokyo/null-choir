@@ -1,0 +1,16 @@
+{
+  "file": "reliquary_integrated_construction_v1.png",
+  "sha256": "33a88ef22fae02f6ddddbe385620739635a5843286ca1f204977498d69d6af91",
+  "bytes": 3467701,
+  "dimensions": [
+    1957,
+    804
+  ],
+  "kind": "art-led-integrated-leaf-construction-albedo",
+  "generator": "builtin image_gen",
+  "prompt": "Original NULL CHOIR production painted COLOR SURFACE for a real sculpted industrial-cosmic-horror gate leaf. SINGLE landscape2.44:1 opaque rectangle, continuous surface fills every edge, no outerframe/room/floor/background. An extraordinarily crafted coherent manufactured construction, NOT bare cloth with little rings/bars pasted on it: substantial connected load transitions, thick rolled margins, broad quiet planes and beautifully authored pigment. High-end hand-painted retrohorror texture art, readable at640\u00d7360; restrained agedbone/bronze/claret/charcoal family. Orthographic front, no perspective/collage/text/labels/glow/transparentholes, no copiedgameart. Illustrated material cues only; actual editable relief will follow the macroforms. No movable latch painted into empty seats; actual separatecarriages provide motion. Notnative8K. A mineral archive closure: FIVE UNEQUAL anonymous mask-like pressure impressions nested in deep backed receptacles, no eyes/teeth/livingfaces. Indexed offset layers of glazed ivory mineral and darkslate with restrained oxidizedjade/bronzetrim. Each receptacle has substantial enclosing cradled lips and retention jaws, joined by ONE layered stepped mineral register/web\u2014not five identical ovals on a flat sheet. Quiet architectural asymmetry, visible accumulated revisions and worn indexing shoulders, dominant largecentral/offcenter chamber. Two EMPTY dark receiver beds at21%across72%down and81%across36%down, sculpturally integrated into that register, not a border.",
+  "native8K": false,
+  "original_retained": true,
+  "status": "SOURCE_INPUT_ONLY_NOT_RUNTIME_ACCEPTED",
+  "note": "Actual generated macroform counts/layout govern source registration; not a flat plane or auto-luminance displacement. Static construction and empty receiver seats; movinglocks separate genuinegeometry."
+}

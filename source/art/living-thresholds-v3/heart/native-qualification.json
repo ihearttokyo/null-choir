@@ -1,0 +1,167 @@
+{
+  "actual_static_context": {
+    "checks": 45,
+    "failures": 0,
+    "run_id": "artled-remaining5-native01",
+    "views": [
+      {
+        "arranged_keys": [],
+        "file": "none-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "502837732869c774b095c8b533028275fe2d677e0c1a43776f8f7c9d86ba5b30"
+      },
+      {
+        "arranged_keys": [
+          "blood"
+        ],
+        "file": "blood-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "11f724259d4b81190fcc60aa56fae029fdaabf78a0746bc3fc758f015204170e"
+      },
+      {
+        "arranged_keys": [
+          "ivory"
+        ],
+        "file": "ivory-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "9dba5a066ccf4db0071389cd97d01a93d5509e452fbaa5158ab24be7edd1907f"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "b2d8ae53c703980edecc217a033f07d2c4a261d6dee677453daef521c8bdbade"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-back.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "3c496e24afabfd8d498943523e8a9236a1b7eaf0bd81c62560dd005e4fa52a13"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-oblique.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "085ca53850233dc0c853e723bdc6a8605dbec433f28906d10ea7aa9c620d7fae"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "open-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "9804bf256ad1f8c49084db48685fd689ebc9b5d05a678a638d85ff1c984a2f97"
+      }
+    ]
+  },
+  "asset_id": "heart_final_gate",
+  "claim_scope": "normal-import-and-runtime-consumer",
+  "code_source_hashes": {
+    "game/scripts/gate_art.gd": "6271f88a1c7e301b7e983cc47aa2052f03de220e10ab6829e02ae87d77aaf753",
+    "game/scripts/gate_visual.gd": "cfdd15d22e012e6794669a46038bbf5fd3b1cf708e22018a4058f75f327fe53f",
+    "game/scripts/level.gd": "a901c991a9d85df2ffa25969db0bb9d48f7bfed25616104b4375299a230d9b3e",
+    "game/scripts/main.gd": "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6372f531",
+    "game/tests/test_gate_art.gd": "660d1c3a65b705767ebc7602dfc62bf2c73a8448cbd47e2faf8ab5d3992440d8",
+    "game/tests/test_gate_integration.gd": "9f651471dd0b9537fe6aa35efa34e457b3a2a67933de54045bae9cb00b257237"
+  },
+  "diagnostics": [],
+  "engine_version": "v4.7.2.stable.official.ed1daf0bf",
+  "evidence_bindings": [
+    {
+      "artifact": "import.log",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "1e12d4991f43cc52f09106ae9012b6c7c0b6e4e4fb3b141ab1d6fb5a805f5b14"
+    },
+    {
+      "artifact": "service-all8-artled.log",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "b7aaddd9f2b039f9f7469aeb83f43d10d70a3a1bbe53a54299ffb7773549ed21"
+    },
+    {
+      "artifact": "sources.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "bde08618c2101cf650865aefa205ce7d766cace5c34b2e8df304ac297d090454"
+    },
+    {
+      "artifact": "native-sidecars.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "d5251eb4942e74015762932592bf123b24cb523b073178ace32912e87935cb59"
+    },
+    {
+      "artifact": "results.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "edd601d60ac022d902b5e3763f54121a879bc79b70a3ed77c6f2d62b80931eec"
+    },
+    {
+      "artifact": "restored.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "9da118477e953619763e01b89fb2e646e366a6b4294bd11ec68e646a594e1a99"
+    },
+    {
+      "artifact": "context-map7/context-report.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "9b1dce7c26eec30d96287b354aa6cf2748af7f2b0d2568875431b2eede5027e3"
+    }
+  ],
+  "executed_context_fixture": {
+    "code_sha256": "613deb8e5c518a0d938735c76fe128e0b582a7daa3fc36f8a9dfe32118e544b9",
+    "fixture": "game/tests/test_gate_context.gd",
+    "historical_context_reused": false,
+    "map_index": 7,
+    "run_id": "artled-remaining5-native01"
+  },
+  "executed_latest_fixtures": [
+    "game/tests/test_gate_art.gd"
+  ],
+  "exit_code": 0,
+  "integration_scope": "Latest all-eight normal import and current art-service consumer. Main and integration fixture are current SHA-bound inputs, not newly executed by this batch; prior unchanged four-runtime Main logic evidence is reused. No new disk Continue, gameplay, physical input, audio/listening, FPS or campaign claim.",
+  "limits": [
+    "No engine was rerun while assembling this receipt.",
+    "Native consumer evidence is separate from independent appearance acceptance.",
+    "Retained run artifact names/hashes identify existing local evidence without publishing private machine paths."
+  ],
+  "normal_import_sidecar": {
+    "path": "game/assets/art/thresholds-v3/heart_threshold.glb.import",
+    "sha256": "8bf22d954482907fe60b89407b966213282ca8a04bc6a04a9fb66a05e8e7762e"
+  },
+  "run_id": "artled-remaining5-native01-all8-service",
+  "runtime_sha256": "d9d4ee9fd0616d54ff5730fb4a5d2dbc62abf4678665b0dcca20333d4dcffbc3",
+  "schema": "null-choir.threshold-native-qualification",
+  "schema_version": 1,
+  "source_blend_sha256": "c297ab54099b5c94e0330a67858c7e113e6cc9de2ee74b919e7a9e6093576889",
+  "source_only": false,
+  "source_proof_sha256": "494d6809e6ceb42b0c69afc8f87e666be8fb76f0ea9135d88bb4ecd6af8a4d53",
+  "strict": true,
+  "visual_acceptance": false
+}

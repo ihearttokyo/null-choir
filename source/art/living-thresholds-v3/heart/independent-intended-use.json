@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "heart_final_gate",
+  "asset_sha256": "d9d4ee9fd0616d54ff5730fb4a5d2dbc62abf4678665b0dcca20333d4dcffbc3",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T14:31:07.548856+00:00",
+    "root_freeze_identity": "FROZEN-HEART.json",
+    "root_freeze_sha256": "80d68240e360f753ad946cda4753bad4779dcce1855018c4a4902c34299c8a0b",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

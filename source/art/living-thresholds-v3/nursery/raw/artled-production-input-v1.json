@@ -1,0 +1,16 @@
+{
+  "file": "nursery_integrated_construction_v1.png",
+  "sha256": "87eec042ee384c9bab65a4ab1a2c8868daa9987ad599752ab2993776ed45dab2",
+  "bytes": 3202492,
+  "dimensions": [
+    1959,
+    803
+  ],
+  "kind": "art-led-integrated-leaf-construction-albedo",
+  "generator": "builtin image_gen",
+  "prompt": "Original NULL CHOIR production painted COLOR SURFACE for a real sculpted industrial-cosmic-horror gate leaf. SINGLE landscape2.44:1 opaque rectangle, continuous surface fills every edge, no outerframe/room/floor/background. An extraordinarily crafted coherent manufactured construction, NOT bare cloth with little rings/bars pasted on it: substantial connected load transitions, thick rolled margins, broad quiet planes and beautifully authored pigment. High-end hand-painted retrohorror texture art, readable at640\u00d7360; restrained agedbone/bronze/claret/charcoal family. Orthographic front, no perspective/collage/text/labels/glow/transparentholes, no copiedgameart. Illustrated material cues only; actual editable relief will follow the macroforms. No movable latch painted into empty seats; actual separatecarriages provide motion. Notnative8K. A maintained clinical delivery-cradle closure, not an egg/embryo/creature: THREE UNEQUAL broad pressure lobes, one largeupper and two opposedlower, dry warmivory/greyfiber with a branching darkcrimson Y seam. A substantial pale ceramic-and-agedbronze cradle/web is inseparable from the lobes, wraps their margins and connects supported isolation collars and pressure saddles into a complete manufactured surface. Broad lightfields, deliberate deep restrained vascular seams and clinical fittings, no genericgrunge. Two EMPTY dark receiver beds at19%across70%down and78%across33%down integrated into the cradle.",
+  "native8K": false,
+  "original_retained": true,
+  "status": "SOURCE_INPUT_ONLY_NOT_RUNTIME_ACCEPTED",
+  "note": "Actual generated macroform counts/layout govern source registration; not a flat plane or auto-luminance displacement. Static construction and empty receiver seats; movinglocks separate genuinegeometry."
+}

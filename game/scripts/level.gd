@@ -3,6 +3,7 @@ extends Node3D
 const Layout = preload("res://scripts/level_data.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
 const Landmarks = preload("res://scripts/level_landmarks.gd")
+const GateArt = preload("res://scripts/gate_art.gd")
 const PURPOSE_ART = {
 	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
 	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
@@ -15,6 +16,7 @@ var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
 var machine_lights: Dictionary = {}
+var gate_presentations: Dictionary = {}
 var floor_bodies: Array[StaticBody3D] = []
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
@@ -39,11 +41,7 @@ func build(owner_game: Node, index: int) -> bool:
 		base.name = "LandmarkBase_"+hero.id
 		base.rotation.y = deg_to_rad(hero.yaw)
 	for spec in layout.data.doors:
-		if spec.id in game.state.removed:
-			continue
-		var door = _box(Vector3(spec.size[0],spec.size[1],spec.size[2]), layout.world_position(spec.cell) + Vector3(0,spec.size[1]/2,0), _material(Color(0.14,0.08,0.09)), true)
-		door.rotation.y = deg_to_rad(spec.yaw)
-		doors[spec.id] = door
+		_build_gate(spec)
 	for spec in layout.data.pickups + layout.data.interactions:
 		if spec.id in game.state.removed:
 			continue
@@ -51,6 +49,44 @@ func build(owner_game: Node, index: int) -> bool:
 	refresh_machine_lights()
 	_build_navigation()
 	return true
+
+func _build_gate(spec: Dictionary) -> void:
+	var removed: bool = spec.id in game.state.removed
+	var door: StaticBody3D
+	if not removed:
+		door = _box(Vector3(spec.size[0],spec.size[1],spec.size[2]), layout.world_position(spec.cell) + Vector3(0,spec.size[1]/2,0), _material(Color(0.14,0.08,0.09)), true)
+		door.rotation.y = deg_to_rad(spec.yaw)
+		doors[spec.id] = door
+	var result: Dictionary = GateArt.create(spec)
+	var rig: Variant = result.get("rig")
+	var cover: Variant = result.get("cover")
+	if not rig is Node3D or not cover is Node3D or rig.get_parent() != null or (cover != rig and not rig.is_ancestor_of(cover)):
+		if rig is Node:
+			rig.free()
+		return # Keep the closed fallback; removed IDs remain a clear/open route.
+	if not rig.has_method("hydrate") or not rig.has_method("present_keys") or not rig.has_method("begin_open_visuals") or not rig.has_method("present_removed"):
+		rig.free()
+		return
+	rig.position = layout.world_position(spec.cell)
+	rig.rotation.y = deg_to_rad(float(spec.yaw))
+	add_child(rig)
+	rig.hydrate("blood" in game.state.keys, "ivory" in game.state.keys, removed)
+	if removed:
+		rig.present_removed()
+	else:
+		# The original body/collider remains authoritative; only its visual fallback is hidden.
+		door.hide()
+	gate_presentations[spec.id] = {"rig":rig,"cover":cover,"body":door,"removed":removed}
+
+func refresh_gate_presentations() -> void:
+	if game == null or not is_instance_valid(game): return
+	var keys: Array = game.state.keys.duplicate()
+	for id in gate_presentations:
+		var presentation: Dictionary = gate_presentations[id]
+		if presentation.get("removed",false): continue
+		var rig: Variant = presentation.get("rig")
+		if is_instance_valid(rig) and rig.has_method("present_keys"):
+			rig.present_keys("blood" in keys,"ivory" in keys)
 
 func _place_marker(spec: Dictionary) -> Node3D:
 	var art: String = PURPOSE_ART[spec.kind]
@@ -310,10 +346,19 @@ func remove_marker(id: String) -> void:
 func open_door(id: String) -> void:
 	if not doors.has(id): return
 	var door = doors[id]
+	var presentation: Dictionary = gate_presentations.get(id,{})
+	# Collision and every moving opaque visual clear in this same synchronous transaction.
+	# The normal release pose is presented only after the original Level work below.
 	door.collision_layer = 0
+	var cover: Variant = presentation.get("cover")
+	if is_instance_valid(cover): cover.hide()
+	door.hide()
 	var tween = create_tween()
 	tween.tween_property(door,"position:y",door.position.y+6.0,0.65)
 	tween.finished.connect(door.queue_free)
 	doors.erase(id)
 	var routes = get_node_or_null("NavigationRoutes")
 	if routes != null: routes.invalidate_doors()
+	var rig: Variant = presentation.get("rig")
+	if is_instance_valid(rig) and rig.has_method("begin_open_visuals"):
+		rig.begin_open_visuals()

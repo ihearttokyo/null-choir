@@ -1,0 +1,83 @@
+{
+  "chapter": "Nursery",
+  "brief": {
+    "chapter": "Nursery",
+    "stable_id": "nursery_growth_gate",
+    "aperture_m": [
+      12.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 0,
+    "origin_xyz_m": [
+      102,
+      2,
+      66.8
+    ],
+    "width_axis": "world X",
+    "run_m": [
+      96,
+      108
+    ],
+    "roof_margin_above_old_box_m": 3,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -3.75,
+        1.5,
+        0
+      ],
+      "Ivory": [
+        3.45,
+        3.35,
+        0
+      ]
+    },
+    "form_and_material": "Manufactured delivery cradle around a dry opaque unequal-lobed seal. Sparse fixed incomplete orbital brackets may echo a seed orrery. Load path lobe margin\u2192clamp sockets\u2192cradle shoulder\u2192lateral returns; feeder terminates at visible isolation housing. Parchment/grey fiber, restrained metal, maintained rear service sockets. Blood isolates/retracts feeder; Ivory cocks sterile collar. Leaf gathers laterally into upper receivers. Engineered and quiet, not a creature/hatching cue.",
+    "construction_reference_prompt": "Create a precise delivery-cradle gate around a thick opaque asymmetrical lobed membrane. Show clamp sockets, connected cradle shoulders, feeder ending at isolation housing, two asymmetric approach-visible carriages at local Z=0, hardware contained within local Z \u00b10.3 m; cut visible receiver beds into leaf and upper lateral receivers holding gathered leaf above local Y=5. Include rear service access and front/back/three-quarter views. Keep fixed structure outside central 11.72 m corridor. No room, creature, light bake, script or collision.",
+    "full_leaf_albedo_prompt": "Orthographic full-leaf material study only: dry parchment-grey fiber, broad unequal lobes, restrained seam reinforcement and clamp-contact wear. Opaque and manufactured. No translucent pod effects, egg/embryo imagery, background, lighting, shadow, text or whole-gate rendering.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "nursery_construction_reference_v1.png",
+      "sha256": "140fd774c3473d62177d045dc119441f0e47c6baf52a2172d54fb6c55d39736d",
+      "bytes": 2673402,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "kind": "construction-reference-only",
+      "prompt": "Original NULL CHOIR Nursery production construction reference. FOUR panels2x2: closedfront, closedthree-quarter, rearclosed, fullyopenwithclosureclearlygatheredaboveLOCAL5m. SAMEmodelinallpanels. Actual LOWWIDE aperture 12.2width x5height x0.6depth, notportrait. Manufactured delivery cradle around a dry opaque unequal-lobed seal. Sparse fixed incomplete orbital brackets may echo a seed orrery. Load path lobe margin\u2192clamp sockets\u2192cradle shoulder\u2192lateral returns; feeder terminates at visible isolation housing. Parchment/grey fiber, restrained metal, maintained rear service sockets. Blood isolates/retracts feeder; Ivory cocks sterile collar. Leaf gathers laterally into upper receivers. Engineered and quiet, not a creature/hatching cue. Create a precise delivery-cradle gate around a thick opaque asymmetrical lobed membrane. Show clamp sockets, connected cradle shoulders, feeder ending at isolation housing, two asymmetric approach-visible carriages at local Z=0, hardware contained within local Z \u00b10.3 m; cut visible receiver beds into leaf and upper lateral receivers holding gathered leaf above local Y=5. Include rear service access and front/back/three-quarter views. Keep fixed structure outside central 11.72 m corridor. No room, creature, light bake, script or collision. Crucial: primaryidentity andindependentsealmechanisms mustreadonvisibleleaf/inner shoulders, notonlyoutboardhiddenchassis. No religious caricature/copiedgameart. Originalcosmic/body-horror restraintengineering, richlyauthoredshape/materialhierarchy, NOTflatplanks/noisytexture/arrayofbars. Sculpturalpressure/lobes/folds andconnectedloadpaths. Ordinaryneutralnonemissivelighting, nofloorguardshoesblockingaperture. DesignreferenceONLY\u2014notfinishedruntime or8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "nursery_leaf_albedo_v1.png",
+      "sha256": "682acd047210d1486751c9c14f0e23cae6043e4fcb164b333768b6dae53bf9e5",
+      "bytes": 3017481,
+      "dimensions": [
+        1959,
+        803
+      ],
+      "kind": "leaf-albedo",
+      "prompt": "Make ONLY a flat COLOR ALBEDO painting of a Nursery seal SURFACE. SINGLE edge-to-edge rectangular paintcanvas aspect2.44:1, opaque paintfillsEVERYpixel toall4edges. A continuous dry pale containment membrane with THREE UNEQUAL broad inflated pressure lobes and a branching offset vascular seam. One large upper lobe and two smaller opposedlowerlobes, enclosing-cradle pressureimpressions, chalkyparchment/greyfiber/quietwarmivory with restrained deepcrimson seamtraces. Not eggs/embryos/pods/objects, no outercradle. Beautifully composed original industrialcosmic-horror surface artwork for realmodeledlobes/folds. Materialpigment/pressurelandmarksonly, evenlydiffuselit,no directionallight/castshadows/specularhighlights. ABSOLUTELY NO gate/doorframe, jambs, hinges, actuator, metalouterborder, floor, wall, object-on-white-background, emptybackground, labels, letterings, glow or transparentpixels. Do NOT draw a cutout object: extend the continuous SURFACE painting toall4edges. No full doorway or illustrative room. Quiet broadlightfields+localizedcraftedwear, no densegenericnoise, no horizontalplank/debugbands. Matching3Dgeometrywillprovidevolume; thisisonlysourcecolor,not8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "bytes": 2893698,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "kind": "shared-hardware-albedo",
+      "prompt": "Shared original hardware palette from Intake, original hash retained",
+      "native8K": false,
+      "original_retained": true
+    }
+  ],
+  "generator": "builtin image_gen; reference and actual surfacepainting source, NOTfinishedruntime",
+  "note": "First reference-guided albedo attempts included unwantedframe/background and were rejected. Chosen directsurfacepaintings are opaque/fullbleed; no imageplane substitute."
+}

@@ -1,0 +1,434 @@
+{
+  "assets": [
+    {
+      "dimensions": [
+        8.2,
+        5.0,
+        0.6
+      ],
+      "id": "containment_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/intake/independent-intended-use.json",
+        "sha256": "9777c907d1fdaae967974a379eaac7c0a9e403a56bde1559077f39ffc77feac2"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/intake/native-qualification.json",
+        "sha256": "4b6137a01d5b88683266a0b01de4c7f167ae939752115f9ddf51421921ff1699"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/intake/build_source.py",
+        "sha256": "eaee27c0533e4a6dbcf3c56c05be84dc5dee7dee8b992cd7aad1ee49f3fed6bf"
+      },
+      "runtime": {
+        "bytes": 7668288,
+        "path": "game/assets/art/thresholds-v3/intake_threshold.glb",
+        "sha256": "0a894d4d468fe1f9e1765539e90cc14bff9496f5012acb25c544c10cea521294",
+        "uri": "res://assets/art/thresholds-v3/intake_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/intake/intake_threshold.blend",
+        "sha256": "153bbe21616f140c7d80f7c206a0e2eecb1cfcea759bd53e71f6309611f29751"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/intake/source-proof.json",
+        "sha256": "41448f097508b378b34fb2da5331ec3ec7c83a36558008d0acc45c5c8d40ce6a"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/intake/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/intake/raw/intake_membrane_pigment_v3.png",
+          "sha256": "312735b7c9a6b0bf882ddfc6013ab36bdcbd07f3963593c85b6f76621e1a8b28"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/intake/uv-registration.json",
+        "sha256": "e063afc69bd1e5bf95c4811ea33b86642fc688bdfde8e2e30baa7959246906d1"
+      }
+    },
+    {
+      "dimensions": [
+        8.2,
+        5.0,
+        0.6
+      ],
+      "id": "foundry_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/foundry/independent-intended-use.json",
+        "sha256": "7387d332e893c49737338a8e11911dc5d2a34626d6cb7358151e05bf64035e2b"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/foundry/native-qualification.json",
+        "sha256": "d47fe0a6a75bae0f18ffdd50a0084fefbf2dcab5c70850f97023805c7da7f2bc"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/foundry/build_source.py",
+        "sha256": "d63a05f84d3d583f56cfa4c85589bb4d4b6fb2f1c6e823d2633c11634152d9a6"
+      },
+      "runtime": {
+        "bytes": 8771724,
+        "path": "game/assets/art/thresholds-v3/foundry_threshold.glb",
+        "sha256": "15b052c3cc67396e64509913d13d872632e4eba853bcf85e3459274a0d745481",
+        "uri": "res://assets/art/thresholds-v3/foundry_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/foundry/foundry_threshold.blend",
+        "sha256": "d3fcf4dac00e2064ce6a29a2fbfe4d1471e8e61914db10897859f26119dd72f5"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/foundry/source-proof.json",
+        "sha256": "b44a6b521ec19dd9c1e9f2a72065c327dcc7cfd10c7d6d4f28d9ede3f37a6bd7"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/foundry/raw/foundry_three_lobe_albedo_v6.png",
+          "sha256": "a74a2b0ece732862d94b4bd18f10689cd6d0e385e6a1efb53d2f6666a6c9fee2"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/foundry/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/foundry/uv-registration-qualified.json",
+        "sha256": "648302eb1a70b940b5394ee64fbcab12811194f983e29b6db47814c7e2a46de2"
+      }
+    },
+    {
+      "dimensions": [
+        8.2,
+        5.0,
+        0.6
+      ],
+      "id": "processional_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/processional/independent-intended-use.json",
+        "sha256": "e039a77845bf756653ec813e1d7116c0530a891236940a3070a292df33ae3e13"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/processional/native-qualification.json",
+        "sha256": "317c4722545e8368406cf34a726e3b5930e4db05825d456a1476b1dd30c0f00a"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/processional/build_source_artled_v2.py",
+        "sha256": "bcba7637679ef3fb8c86214c308551abaf040b44e7ddd8953c9a15e784ae3530"
+      },
+      "runtime": {
+        "bytes": 7611864,
+        "path": "game/assets/art/thresholds-v3/processional_threshold.glb",
+        "sha256": "c1c302efeb6c1a17ed54d79caaab8eb7e32a0d259ff3f571a4338aba295c85d8",
+        "uri": "res://assets/art/thresholds-v3/processional_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/processional/processional_threshold_artled_v2.blend",
+        "sha256": "bff8d80849dec688c5ae2e0c31574a3184dfa2a4ed6ab7377e96c5e0adce66e1"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/processional/source-proof-artled-v2.json",
+        "sha256": "e052158257e88d6aaf72a2b1f80a8d8a26ca44bbd2cbaa2434ff0b3d7eda968b"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/processional/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/processional/raw/processional_integrated_construction_v1.png",
+          "sha256": "035b12a8aa2fe0b9f2becb8cf3f57dfa7fe3ce92953f99c50ad022f64fc5d494"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/processional/uv-registration-qualified.json",
+        "sha256": "05a88da5277d9e40481dbcf7994c0e7f580e049cb8e90da186bcbb248aa24358"
+      }
+    },
+    {
+      "dimensions": [
+        12.2,
+        5.0,
+        0.6
+      ],
+      "id": "reliquary_index_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/reliquary/independent-intended-use.json",
+        "sha256": "36442bb9a21a142f7fa7f38569d3507c23cf7844d85906d75c44bb69e2b48d43"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/reliquary/native-qualification.json",
+        "sha256": "72f6960d3103408c1b829d6837a5ee633478de0d4ad1d194ce244957150b8af8"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/reliquary/build_source_artled_v1.py",
+        "sha256": "2d91147b72a5cc724a976da2cbc5a4cd2f38b94840f26bf79fb42d21d79c96ef"
+      },
+      "runtime": {
+        "bytes": 8228204,
+        "path": "game/assets/art/thresholds-v3/reliquary_threshold.glb",
+        "sha256": "b87da8187530454775308d01bc9d0b234421a2c7058b89df76583def708f2416",
+        "uri": "res://assets/art/thresholds-v3/reliquary_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/reliquary/reliquary_threshold_artled_v1.blend",
+        "sha256": "68e50b8154e1838cc3341e6cf5116a977166db2f55595f28b228c249ee3d612a"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/reliquary/source-proof-artled-v1.json",
+        "sha256": "d5e5e5517929d04708dd102e9397f2599de453db5127301f3bb60b794e5d34d2"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/reliquary/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/reliquary/raw/reliquary_integrated_construction_v1.png",
+          "sha256": "33a88ef22fae02f6ddddbe385620739635a5843286ca1f204977498d69d6af91"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/reliquary/uv-registration-qualified.json",
+        "sha256": "d6cdc4a29c47898b7fc2452af1d38a16ed7074f38b5e45f2986a05c4cec91108"
+      }
+    },
+    {
+      "dimensions": [
+        12.2,
+        5.0,
+        0.6
+      ],
+      "id": "nursery_growth_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/nursery/independent-intended-use.json",
+        "sha256": "f291982b86725f9e3af02333adddec292d9d64395abda6b1eb476fdd59f1b987"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/nursery/native-qualification.json",
+        "sha256": "b9b379090a0f50d6b5ff605a6cfa2c0701971689934b0ff47ca02694baaf56e1"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/nursery/build_source_artled_v1.py",
+        "sha256": "1564a71f4e6015d5cd1f37543a249ba75dad5dbf703601be5057bedc8870965a"
+      },
+      "runtime": {
+        "bytes": 7985956,
+        "path": "game/assets/art/thresholds-v3/nursery_threshold.glb",
+        "sha256": "acf8fa0e37cef98e8cfe96bbf5962e3585771e809823a05832bd835ceb42eecd",
+        "uri": "res://assets/art/thresholds-v3/nursery_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/nursery/nursery_threshold_artled_v1.blend",
+        "sha256": "926df4bd30f1202a7f091338103cabf1cc672eaf322f7ca85e6b82699d98f43f"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/nursery/source-proof-artled-v1.json",
+        "sha256": "03fac3f5e29ba01407d002a584eadd882b9c97d79bd8996c7cdee17e9cd09b39"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/nursery/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/nursery/raw/nursery_integrated_construction_v1.png",
+          "sha256": "87eec042ee384c9bab65a4ab1a2c8868daa9987ad599752ab2993776ed45dab2"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/nursery/uv-registration-qualified.json",
+        "sha256": "56bd1b4e776c66784d6e503f32db947c96b4e92b66e9af68b98d1b175d776024"
+      }
+    },
+    {
+      "dimensions": [
+        12.2,
+        5.0,
+        0.6
+      ],
+      "id": "ossuary_transfer_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/ossuary/independent-intended-use.json",
+        "sha256": "dbb9ed0422ecd1cea5f155598ee4c3c3f825ab3a4cd4ff37a02cfc697ddd8146"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/ossuary/native-qualification.json",
+        "sha256": "896967d93dfd835f7d6e06135c35ee1feac750a05e2550ccb00b2c82bfbfd00e"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/ossuary/build_source_artled_v1.py",
+        "sha256": "2670cd9b118dbc0f3a0220ca24a18ceae6869d9378390a9e979de4d0a6b23872"
+      },
+      "runtime": {
+        "bytes": 7820244,
+        "path": "game/assets/art/thresholds-v3/ossuary_threshold.glb",
+        "sha256": "f706327b168bbcdb71ed433d951385057b72f751f6cba14ec038fff2fdd57ede",
+        "uri": "res://assets/art/thresholds-v3/ossuary_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/ossuary/ossuary_threshold_artled_v1.blend",
+        "sha256": "e228a0fe3ad8a419d95b2e3e9de11d544cd5c3ed4ebea1c3afa37897488d8e2b"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/ossuary/source-proof-artled-v1.json",
+        "sha256": "b7adb31bf2a70682de05ed73ebd25cd0a9676dbbcec91b8a3cc50251f89a1a35"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/ossuary/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/ossuary/raw/ossuary_integrated_construction_v1.png",
+          "sha256": "0f13ed84dfd3b6dabd71a9ba585c59ad3142f1d8a4b0507e27b7676a18920a01"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/ossuary/uv-registration-qualified.json",
+        "sha256": "2e4620faa6a3dc37e7f07bacf326f256dad228a25dcb021f4329ba9612ee31cb"
+      }
+    },
+    {
+      "dimensions": [
+        12.2,
+        5.0,
+        0.6
+      ],
+      "id": "inversion_alignment_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/inversion/independent-intended-use.json",
+        "sha256": "08c85039e82a219ae23dd3ee197535f86f9abf1314a902b5c161cdaa7200498f"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/inversion/native-qualification.json",
+        "sha256": "62f5edcb19876a969abc829e426bab03c3f0be6b8bcb00e351bd8b2ea6ec214e"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/inversion/build_source_artled_v1.py",
+        "sha256": "0a56126b0c1210d2e58eec1817920c061c542b196b7061ec5883e17abf5dcf92"
+      },
+      "runtime": {
+        "bytes": 7486576,
+        "path": "game/assets/art/thresholds-v3/inversion_threshold.glb",
+        "sha256": "d29c5d66c623b51d2f5c5ad9e5bdba984f12e611c452db5477e0b3ce39ae1a72",
+        "uri": "res://assets/art/thresholds-v3/inversion_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/inversion/inversion_threshold_artled_v1.blend",
+        "sha256": "206f688f97a167a2719b4d93c1d5bc8e00a98897a03b45f082c59fb838098ac0"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/inversion/source-proof-artled-v1.json",
+        "sha256": "556699d6b0c1aaf990e3c6106febbe676e705cf5d695588e8b09f962f1680c99"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/inversion/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/inversion/raw/inversion_integrated_construction_v1.png",
+          "sha256": "f5e2cfe9f3f92f02d3287ad32af41be39f27d12217b3d8810cb1b28cebe71be8"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/inversion/uv-registration-qualified.json",
+        "sha256": "05a1440ce27c103cea48a8859ad542b5194d208de537e79e0638b769aa339595"
+      }
+    },
+    {
+      "dimensions": [
+        12.2,
+        5.0,
+        0.6
+      ],
+      "id": "heart_final_gate",
+      "importer_policy": {
+        "embedded_image_handling": 3,
+        "importer": "scene",
+        "resource_type": "PackedScene"
+      },
+      "independent_intended_use": {
+        "path": "source/art/living-thresholds-v3/heart/independent-intended-use.json",
+        "sha256": "b2a72b053ffb8d34fbe8098861b332632997268b93d00d611073c4c7a912e249"
+      },
+      "native_qualification": {
+        "path": "source/art/living-thresholds-v3/heart/native-qualification.json",
+        "sha256": "9d80cff8d47a75c8847233c66ff822043ea9320ee3ca36599fca5d4881e714b9"
+      },
+      "recipe": {
+        "path": "source/art/living-thresholds-v3/heart/build_source_artled_v1.py",
+        "sha256": "dce2328e2fc748ea4a31048aeec86aaa1fd5bb67f8676b118bf3f4680e19f12c"
+      },
+      "runtime": {
+        "bytes": 7742432,
+        "path": "game/assets/art/thresholds-v3/heart_threshold.glb",
+        "sha256": "d9d4ee9fd0616d54ff5730fb4a5d2dbc62abf4678665b0dcca20333d4dcffbc3",
+        "uri": "res://assets/art/thresholds-v3/heart_threshold.glb"
+      },
+      "source_blend": {
+        "path": "source/art/living-thresholds-v3/heart/heart_threshold_artled_v1.blend",
+        "sha256": "c297ab54099b5c94e0330a67858c7e113e6cc9de2ee74b919e7a9e6093576889"
+      },
+      "source_proof": {
+        "path": "source/art/living-thresholds-v3/heart/source-proof-artled-v1.json",
+        "sha256": "494d6809e6ceb42b0c69afc8f87e666be8fb76f0ea9135d88bb4ecd6af8a4d53"
+      },
+      "used_raw_inputs": [
+        {
+          "path": "source/art/living-thresholds-v3/heart/raw/hardware_pigments_v3.png",
+          "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+        },
+        {
+          "path": "source/art/living-thresholds-v3/heart/raw/heart_integrated_construction_v1.png",
+          "sha256": "ae417aad83236c97f0acc1ab71fb659bdcd618e5fa96caa748eb437184cef8d9"
+        }
+      ],
+      "uv_registration": {
+        "path": "source/art/living-thresholds-v3/heart/uv-registration-qualified.json",
+        "sha256": "780adf74087c249b6fc8a7df78149b4e1d609a045938232d6b35c9df738de413"
+      }
+    }
+  ],
+  "kind": "eight-authored-threshold-assets",
+  "legacy_catalog_unchanged_sha256": "c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928",
+  "original_legacy_catalog": "source/art/manifest.json",
+  "qualification_scope": "Complete exact-eight source/runtime/normal-import consumer bindings and independent intended-use decisions. Not a standalone build, public release, campaign, human-input, disk-Continue or performance acceptance.",
+  "schema": "null-choir.threshold-art-ledger",
+  "schema_version": 1
+}

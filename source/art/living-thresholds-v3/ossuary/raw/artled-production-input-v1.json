@@ -1,0 +1,16 @@
+{
+  "file": "ossuary_integrated_construction_v1.png",
+  "sha256": "0f13ed84dfd3b6dabd71a9ba585c59ad3142f1d8a4b0507e27b7676a18920a01",
+  "bytes": 3432692,
+  "dimensions": [
+    1961,
+    802
+  ],
+  "kind": "art-led-integrated-leaf-construction-albedo",
+  "generator": "builtin image_gen",
+  "prompt": "Original NULL CHOIR production painted COLOR SURFACE for a real sculpted industrial-cosmic-horror gate leaf. SINGLE landscape2.44:1 opaque rectangle, continuous surface fills every edge, no outerframe/room/floor/background. An extraordinarily crafted coherent manufactured construction, NOT bare cloth with little rings/bars pasted on it: substantial connected load transitions, thick rolled margins, broad quiet planes and beautifully authored pigment. High-end hand-painted retrohorror texture art, readable at640\u00d7360; restrained agedbone/bronze/claret/charcoal family. Orthographic front, no perspective/collage/text/labels/glow/transparentholes, no copiedgameart. Illustrated material cues only; actual editable relief will follow the macroforms. No movable latch painted into empty seats; actual separatecarriages provide motion. Notnative8K. A restrained skeletal LOAD-TRANSFER closure, NOT a bridge or walkablepath: opaque charcoal/oxblood load skin held by THREE enormous pale bone-ceramic tensile arms with forked broad joints and curved socketed margins, all integrated into a complete asymmetric manufactured carrier. Strong upper-left to lower-right diagonal hierarchy answered by one shorter opposing brace, massive ivory members with layered bronze joints, dark inset load compartments. No flimsy bone filaments/spaghetti or creatureteeth, no grunge-dominant blacksheet. Broad readable ivory/black/bronze separation and actual supported retentions, beautifully controlled dry mineral wear. Two EMPTY dark receiverbeds at18%across74%down and76%across32%down are integrated into the broad joints; do not paint movable latches.",
+  "native8K": false,
+  "original_retained": true,
+  "status": "SOURCE_INPUT_ONLY_NOT_RUNTIME_ACCEPTED",
+  "note": "Handregister actual macroforms; static integral construction+emptyreceivers, movingcarriagesseparate; genuineeditable relief/nativequality required."
+}

@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "released_configuration_bounds": {
+    "min": [
+      -3.9000000953674316,
+      5.065000057220459,
+      -0.21230466663837433
+    ],
+    "max": [
+      3.9000000953674316,
+      5.394999980926514,
+      0.21230466663837433
+    ],
+    "size": [
+      7.800000190734863,
+      0.3299999237060547,
+      0.42460933327674866
+    ]
+  },
+  "released_aperture_clearance_m": 0.06500005722045898,
+  "released_root": "StationaryFrame/ReleasedClosure",
+  "released_neutral_source_hidden": true,
+  "release_story": "Authored thin gathered skin in fixed receiving mouth, no fluid simulation/newtimer/opaque aperture geometry",
+  "actual_closed_assembly_bounds": {
+    "min": [
+      -4.96999979019165,
+      0.0,
+      -0.5350000262260437
+    ],
+    "max": [
+      4.96999979019165,
+      5.5,
+      0.5550000071525574
+    ],
+    "size": [
+      9.9399995803833,
+      5.5,
+      1.090000033378601
+    ]
+  },
+  "actual_both_seal_assembly_bounds": {
+    "min": [
+      -5.820000171661377,
+      0.0,
+      -0.5350000262260437
+    ],
+    "max": [
+      5.820000171661377,
+      5.5,
+      0.5550000071525574
+    ],
+    "size": [
+      11.640000343322754,
+      5.5,
+      1.090000033378601
+    ]
+  },
+  "carriage_origins_godot": {
+    "BloodLatch": [
+      -3.22,
+      1.72,
+      0
+    ],
+    "IvoryLatch": [
+      3.22,
+      3.23,
+      0
+    ]
+  },
+  "motion_witnesses": [],
+  "scope": "Source-only original editable Blender model, actual GLB export and actual saved-source reopen. Native normal import, visual matching and mounting acceptance pending.",
+  "source": "intake_threshold.blend",
+  "source_sha256": "153bbe21616f140c7d80f7c206a0e2eecb1cfcea759bd53e71f6309611f29751",
+  "recipe": "build_source.py",
+  "recipe_sha256": "eaee27c0533e4a6dbcf3c56c05be84dc5dee7dee8b992cd7aad1ee49f3fed6bf",
+  "candidate_glb_sha256": "0a894d4d468fe1f9e1765539e90cc14bff9496f5012acb25c544c10cea521294",
+  "candidate_glb_bytes": 7668288,
+  "actual_shell_bounds": {
+    "min": [
+      -4.099999904632568,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      4.099999904632568,
+      5.0,
+      0.30000001192092896
+    ],
+    "size": [
+      8.199999809265137,
+      5.0,
+      0.6000000238418579
+    ]
+  },
+  "actual_assembly_bounds": {
+    "min": [
+      -4.96999979019165,
+      0.0,
+      -0.5350000262260437
+    ],
+    "max": [
+      4.96999979019165,
+      5.5,
+      0.5550000071525574
+    ],
+    "size": [
+      9.9399995803833,
+      5.5,
+      1.090000033378601
+    ]
+  },
+  "actual_export_parts": {
+    "StationaryFrame": {
+      "triangles": 11504,
+      "vertices": 5976,
+      "surfaces": 4
+    },
+    "MovingLeaf": {
+      "triangles": 11952,
+      "vertices": 6002,
+      "surfaces": 3
+    },
+    "BloodLatch": {
+      "triangles": 2164,
+      "vertices": 1128,
+      "surfaces": 2
+    },
+    "IvoryLatch": {
+      "triangles": 2604,
+      "vertices": 1352,
+      "surfaces": 3
+    },
+    "ReleasedClosure": {
+      "triangles": 3608,
+      "vertices": 1806,
+      "surfaces": 1
+    }
+  },
+  "actual_triangles": 31832,
+  "actual_export_surfaces": 13,
+  "editable_source_meshes": 198,
+  "packed_images": [
+    {
+      "name": "hardware_pigments_v3.png",
+      "filepath": "//hardware_pigments_v3.png",
+      "packed_bytes": 2893698,
+      "packed_sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+    },
+    {
+      "name": "intake_membrane_pigment_v3.png",
+      "filepath": "//intake_membrane_pigment_v3.png",
+      "packed_bytes": 3174773,
+      "packed_sha256": "312735b7c9a6b0bf882ddfc6013ab36bdcbd07f3963593c85b6f76621e1a8b28"
+    }
+  ],
+  "privacy": {
+    "actual_rna_paths_checked": 6,
+    "custom_string_properties_checked": 9,
+    "private_absolute_paths": 0,
+    "paths": [
+      "//hardware_pigments_v3.png",
+      "//intake_membrane_pigment_v3.png",
+      "//hardware_pigments_v3.png",
+      "//intake_membrane_pigment_v3.png",
+      "//",
+      "//"
+    ],
+    "sanitizer": "tools/build_art.py:sanitize_source_paths",
+    "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+  },
+  "actual_vertex_edit_revert": true,
+  "source_unchanged_after_reopen": true,
+  "native8K": false,
+  "normal_roughness_images": false,
+  "rendered_baked_simulated": false
+}

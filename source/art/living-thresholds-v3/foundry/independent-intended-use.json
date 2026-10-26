@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "foundry_gate",
+  "asset_sha256": "15b052c3cc67396e64509913d13d872632e4eba853bcf85e3459274a0d745481",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T12:56:29.932967+00:00",
+    "root_freeze_identity": "FROZEN-FOUNDRY.json",
+    "root_freeze_sha256": "437d9d169086097b6f0fad851aa0d395078b05785ea71a36e41554c864378941",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

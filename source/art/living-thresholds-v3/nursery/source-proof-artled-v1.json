@@ -1,0 +1,552 @@
+{
+  "schema": 1,
+  "actual_closed_volume_proof": [
+    {
+      "mesh": "Registered closed sculptural leaf",
+      "evaluated_vertices": 26082,
+      "evaluated_triangles": 52160,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 22.620222252964076
+    },
+    {
+      "mesh": "Blood supported full-stroke slide land-1",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09416879713535309
+    },
+    {
+      "mesh": "Blood junction socket foundation back",
+      "evaluated_vertices": 102,
+      "evaluated_triangles": 200,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.1337560754296294
+    },
+    {
+      "mesh": "Blood substantial keyed receiver jaws back",
+      "evaluated_vertices": 26,
+      "evaluated_triangles": 48,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09815991134382783
+    },
+    {
+      "mesh": "Blood keyed pressure body back",
+      "evaluated_vertices": 20,
+      "evaluated_triangles": 36,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.06250750290928409
+    },
+    {
+      "mesh": "Blood bone pressure bearing back",
+      "evaluated_vertices": 108,
+      "evaluated_triangles": 212,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.01179188741887683
+    },
+    {
+      "mesh": "Blood crimson pressure inset back",
+      "evaluated_vertices": 12,
+      "evaluated_triangles": 20,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00046649980746830516
+    },
+    {
+      "mesh": "Blood bone receiver shoulder back",
+      "evaluated_vertices": 54,
+      "evaluated_triangles": 104,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.002663129530442159
+    },
+    {
+      "mesh": "Blood bone receiver shoulder back.001",
+      "evaluated_vertices": 54,
+      "evaluated_triangles": 104,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.0026630265327654006
+    },
+    {
+      "mesh": "Blood supported pressure slide",
+      "evaluated_vertices": 24,
+      "evaluated_triangles": 44,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.0024082492794453474
+    },
+    {
+      "mesh": "Blood supported full-stroke slide land1",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09416879713535309
+    },
+    {
+      "mesh": "Blood junction socket foundation front",
+      "evaluated_vertices": 102,
+      "evaluated_triangles": 200,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.1337561081019522
+    },
+    {
+      "mesh": "Blood substantial keyed receiver jaws front",
+      "evaluated_vertices": 26,
+      "evaluated_triangles": 48,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09816013424036402
+    },
+    {
+      "mesh": "Blood keyed pressure body front",
+      "evaluated_vertices": 20,
+      "evaluated_triangles": 36,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.06250750209437683
+    },
+    {
+      "mesh": "Blood bone pressure bearing front",
+      "evaluated_vertices": 108,
+      "evaluated_triangles": 212,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.011791890301303946
+    },
+    {
+      "mesh": "Blood crimson pressure inset front",
+      "evaluated_vertices": 12,
+      "evaluated_triangles": 20,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00046649875973040807
+    },
+    {
+      "mesh": "Blood bone receiver shoulder front",
+      "evaluated_vertices": 54,
+      "evaluated_triangles": 104,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.002662893804351067
+    },
+    {
+      "mesh": "Blood bone receiver shoulder front.001",
+      "evaluated_vertices": 54,
+      "evaluated_triangles": 104,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.0026630218149724296
+    },
+    {
+      "mesh": "Blood supported pressure slide.001",
+      "evaluated_vertices": 24,
+      "evaluated_triangles": 44,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.0024082492018351327
+    },
+    {
+      "mesh": "Ivory supported full-stroke slide land-1",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09416875243186949
+    },
+    {
+      "mesh": "Ivory junction socket foundation back",
+      "evaluated_vertices": 102,
+      "evaluated_triangles": 200,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.1337560402723833
+    },
+    {
+      "mesh": "Ivory substantial keyed receiver jaws back",
+      "evaluated_vertices": 26,
+      "evaluated_triangles": 48,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09815964405424897
+    },
+    {
+      "mesh": "Ivory keyed pressure body back",
+      "evaluated_vertices": 20,
+      "evaluated_triangles": 36,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.06250750772111738
+    },
+    {
+      "mesh": "Ivory bone pressure bearing back",
+      "evaluated_vertices": 108,
+      "evaluated_triangles": 212,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.011791894453462355
+    },
+    {
+      "mesh": "Ivory pale fixed socket saddle back",
+      "evaluated_vertices": 84,
+      "evaluated_triangles": 164,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.004335797110930648
+    },
+    {
+      "mesh": "Ivory protected shield spine back",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00021599848211432553
+    },
+    {
+      "mesh": "Ivory supported pressure slide",
+      "evaluated_vertices": 24,
+      "evaluated_triangles": 44,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00240824887441704
+    },
+    {
+      "mesh": "Ivory supported full-stroke slide land1",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09416869034369786
+    },
+    {
+      "mesh": "Ivory junction socket foundation front",
+      "evaluated_vertices": 102,
+      "evaluated_triangles": 200,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.13375595566473214
+    },
+    {
+      "mesh": "Ivory substantial keyed receiver jaws front",
+      "evaluated_vertices": 26,
+      "evaluated_triangles": 48,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.09816008262957136
+    },
+    {
+      "mesh": "Ivory keyed pressure body front",
+      "evaluated_vertices": 20,
+      "evaluated_triangles": 36,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.06250750645025013
+    },
+    {
+      "mesh": "Ivory bone pressure bearing front",
+      "evaluated_vertices": 108,
+      "evaluated_triangles": 212,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.01179188741276823
+    },
+    {
+      "mesh": "Ivory pale fixed socket saddle front",
+      "evaluated_vertices": 84,
+      "evaluated_triangles": 164,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00433587473661608
+    },
+    {
+      "mesh": "Ivory protected shield spine front",
+      "evaluated_vertices": 8,
+      "evaluated_triangles": 12,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.00021600034475947438
+    },
+    {
+      "mesh": "Ivory supported pressure slide.001",
+      "evaluated_vertices": 24,
+      "evaluated_triangles": 44,
+      "nonclosed_or_inconsistent_edges": 0,
+      "signed_volume_m3": 0.0024082487968068267
+    }
+  ],
+  "actual_moving_support_proof": [
+    {
+      "mechanism": "BloodLatch",
+      "evaluated_vertex_stroke_samples": 1640,
+      "maximum_actual_substrate_depth_m": 0.057999998331069946,
+      "minimum_surface_clearance_m": 0.08699999749660492
+    },
+    {
+      "mechanism": "IvoryLatch",
+      "evaluated_vertex_stroke_samples": 1600,
+      "maximum_actual_substrate_depth_m": 0.057999998331069946,
+      "minimum_surface_clearance_m": 0.08699999749660492
+    }
+  ],
+  "stable_id": "nursery_growth_gate",
+  "support_lands_xy_m": [
+    [
+      -6.1,
+      -3.14,
+      0.76,
+      2.24
+    ],
+    [
+      3.06,
+      6.03,
+      2.6100000000000003,
+      4.09
+    ]
+  ],
+  "observed_pressure_packs": 4,
+  "back_registration": "Same global XY painting/surface; viewed from rear artwork mirrors physically",
+  "clear_run_half_m": 5.86,
+  "geometry_method": "Handpicked curved chamber contours and substantial rolled cradle web; no pixel-derived displacement",
+  "mechanism_contact_proof": [
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws back",
+      "moving_mesh": "Blood keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.9701546476107914,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 2.384185791015625e-07,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.9687621188943916,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws front",
+      "moving_mesh": "Blood keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 1.4901161193847656e-08,
+          "evaluated_pressure_distance_m": 0.0,
+          "released_pressure_distance_m": 0.9701546476107914,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 7.450580596923828e-08,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.9687621188943916,
+          "contact_depth_m": 0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws back",
+      "moving_mesh": "Ivory keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 2.425733297482089e-07,
+          "evaluated_pressure_distance_m": 2.9802322387695312e-08,
+          "released_pressure_distance_m": 0.9701546303312716,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 1.4901161193847656e-08,
+          "evaluated_pressure_distance_m": 2.497889789080651e-07,
+          "released_pressure_distance_m": 0.9687621342760429,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws front",
+      "moving_mesh": "Ivory keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 7.450580596923828e-08,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.9701546303312716,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 2.425733297482089e-07,
+          "released_pressure_distance_m": 0.9687621342760429,
+          "contact_depth_m": 0.2
+        }
+      ]
+    }
+  ],
+  "released_configuration_bounds": {
+    "min": [
+      -3.8308844566345215,
+      5.179999828338623,
+      -0.2229783535003662
+    ],
+    "max": [
+      3.8308844566345215,
+      5.519999980926514,
+      0.2229783535003662
+    ],
+    "size": [
+      7.661768913269043,
+      0.3400001525878906,
+      0.4459567070007324
+    ]
+  },
+  "released_aperture_clearance_m": 0.17999982833862305,
+  "released_root": "StationaryFrame/ReleasedClosure",
+  "released_neutral_source_hidden": true,
+  "release_story": "Authored thin gathered skin in fixed receiving mouth, no fluid simulation/newtimer/opaque aperture geometry",
+  "actual_closed_assembly_bounds": {
+    "min": [
+      -6.320000171661377,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.320000171661377,
+      5.570000171661377,
+      0.30000001192092896
+    ],
+    "size": [
+      12.640000343322754,
+      5.570000171661377,
+      0.6000000238418579
+    ]
+  },
+  "actual_both_seal_assembly_bounds": {
+    "min": [
+      -6.320000171661377,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.320000171661377,
+      5.570000171661377,
+      0.30000001192092896
+    ],
+    "size": [
+      12.640000343322754,
+      5.570000171661377,
+      0.6000000238418579
+    ]
+  },
+  "carriage_origins_godot": {
+    "BloodLatch": [
+      -3.75,
+      1.5,
+      0
+    ],
+    "IvoryLatch": [
+      3.45,
+      3.35,
+      0
+    ]
+  },
+  "motion_witnesses": [],
+  "scope": "Source-only original editable Blender model, actual GLB export and actual saved-source reopen. Native normal import, visual matching and mounting acceptance pending.",
+  "uv_registration": "uv-registration-artled-v1.json",
+  "uv_registration_sha256": "6c5314b1d4715e2c2ecf884633a73398177d6086cca04dd6df2db6d54923579d",
+  "source": "nursery_threshold_artled_v1.blend",
+  "source_sha256": "926df4bd30f1202a7f091338103cabf1cc672eaf322f7ca85e6b82699d98f43f",
+  "recipe": "build_source_artled_v1.py",
+  "recipe_sha256": "1564a71f4e6015d5cd1f37543a249ba75dad5dbf703601be5057bedc8870965a",
+  "candidate_glb_sha256": "acf8fa0e37cef98e8cfe96bbf5962e3585771e809823a05832bd835ceb42eecd",
+  "candidate_glb_bytes": 7985956,
+  "actual_shell_bounds": {
+    "min": [
+      -6.099999904632568,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.099999904632568,
+      5.0,
+      0.30000001192092896
+    ],
+    "size": [
+      12.199999809265137,
+      5.0,
+      0.6000000238418579
+    ]
+  },
+  "actual_assembly_bounds": {
+    "min": [
+      -6.320000171661377,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.320000171661377,
+      5.570000171661377,
+      0.30000001192092896
+    ],
+    "size": [
+      12.640000343322754,
+      5.570000171661377,
+      0.6000000238418579
+    ]
+  },
+  "actual_export_parts": {
+    "StationaryFrame": {
+      "triangles": 5136,
+      "vertices": 2668,
+      "surfaces": 4
+    },
+    "MovingLeaf": {
+      "triangles": 53944,
+      "vertices": 27010,
+      "surfaces": 4
+    },
+    "BloodLatch": {
+      "triangles": 624,
+      "vertices": 328,
+      "surfaces": 3
+    },
+    "IvoryLatch": {
+      "triangles": 608,
+      "vertices": 320,
+      "surfaces": 3
+    },
+    "ReleasedClosure": {
+      "triangles": 6152,
+      "vertices": 3078,
+      "surfaces": 1
+    }
+  },
+  "actual_triangles": 66464,
+  "actual_export_surfaces": 15,
+  "editable_source_meshes": 88,
+  "packed_images": [
+    {
+      "name": "hardware_pigments_v3.png",
+      "filepath": "//hardware_pigments_v3.png",
+      "packed_bytes": 2893698,
+      "packed_sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+    },
+    {
+      "name": "nursery_integrated_construction_v1.png",
+      "filepath": "//nursery_integrated_construction_v1.png",
+      "packed_bytes": 3202492,
+      "packed_sha256": "87eec042ee384c9bab65a4ab1a2c8868daa9987ad599752ab2993776ed45dab2"
+    }
+  ],
+  "privacy": {
+    "actual_rna_paths_checked": 6,
+    "custom_string_properties_checked": 10,
+    "private_absolute_paths": 0,
+    "paths": [
+      "//hardware_pigments_v3.png",
+      "//nursery_integrated_construction_v1.png",
+      "//hardware_pigments_v3.png",
+      "//nursery_integrated_construction_v1.png",
+      "//",
+      "//"
+    ],
+    "sanitizer": "tools/build_art.py:sanitize_source_paths",
+    "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+  },
+  "actual_vertex_edit_revert": true,
+  "source_unchanged_after_reopen": true,
+  "native8K": false,
+  "normal_roughness_images": false,
+  "rendered_baked_simulated": false
+}

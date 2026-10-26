@@ -1,0 +1,22 @@
+{
+  "candidate_glb_sha256": "d9d4ee9fd0616d54ff5730fb4a5d2dbc62abf4678665b0dcca20333d4dcffbc3",
+  "coordinates": "Original retained source registration: normalized UV coordinates, U right/V up. This additive adapter binds material inputs; exact selected UVs remain in the unchanged Blender source and original registration.",
+  "hardware": {
+    "file": "raw/hardware_pigments_v3.png",
+    "mapping": "Existing four-quadrant hardware pigment atlas mapped by unchanged source material swatches.",
+    "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+  },
+  "membrane": {
+    "file": "raw/heart_integrated_construction_v1.png",
+    "mapping": "Original selected full-leaf painting mapped by the unchanged source recipe and original retained registration; no image edits or reconstructed UVs.",
+    "sha256": "ae417aad83236c97f0acc1ab71fb659bdcd618e5fa96caa748eb437184cef8d9"
+  },
+  "normalization_scope": "Metadata schema adapter only. Original registration, recipe, source, packed images and runtime GLB are unchanged. No new engine or quality claims.",
+  "original_registration": {
+    "path": "source/art/living-thresholds-v3/heart/uv-registration-artled-v1.json",
+    "sha256": "04d4d840ae9def5c143a3cc8174045ff9c23b7b4940d4ea6c81da32fed7acb7f"
+  },
+  "schema": "null-choir.threshold-uv-registration-adapter",
+  "schema_version": 1,
+  "source_blend_sha256": "c297ab54099b5c94e0330a67858c7e113e6cc9de2ee74b919e7a9e6093576889"
+}

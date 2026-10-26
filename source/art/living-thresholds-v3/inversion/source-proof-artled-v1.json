@@ -1,0 +1,294 @@
+{
+  "schema": 1,
+  "shell_topology": {
+    "mesh": "MovingLeaf_Visual",
+    "undirected_edges": 47008,
+    "closed_opposed_edge_winding": true,
+    "signed_volume_m3": 18.32040917620707
+  },
+  "stroke_support_proof": [
+    {
+      "mechanism": "Blood",
+      "samples": 504,
+      "maximum_support_depth_m": 0.058,
+      "pressure_body_inner_depth_m": 0.145,
+      "minimum_pressure_to_substrate_clearance_m": 0.087
+    },
+    {
+      "mechanism": "Ivory",
+      "samples": 504,
+      "maximum_support_depth_m": 0.058,
+      "pressure_body_inner_depth_m": 0.145,
+      "minimum_pressure_to_substrate_clearance_m": 0.087
+    }
+  ],
+  "registration_file": "uv-registration-artled-v1.json",
+  "method": "Handregistered opposed S-swept broad pale returns, integral cast rolled loadpaths/dark counterfields/backed pivot pockets; no pixel-height sampling, overlay bars or rings",
+  "mechanism_contact_proof": [
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws back",
+      "moving_mesh": "Blood keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.1920928955078125e-07,
+          "released_pressure_distance_m": 0.9701544325767447,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.9687619189329029,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws front",
+      "moving_mesh": "Blood keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 1.4901161193847656e-08,
+          "evaluated_pressure_distance_m": 1.1920928955078125e-07,
+          "released_pressure_distance_m": 0.9701544325767447,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 7.450580596923828e-08,
+          "evaluated_pressure_distance_m": 0.0,
+          "released_pressure_distance_m": 0.9687619189329029,
+          "contact_depth_m": 0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws back",
+      "moving_mesh": "Ivory keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 4.470348358154297e-08,
+          "evaluated_pressure_distance_m": 2.9802322387695312e-08,
+          "released_pressure_distance_m": 0.970154415297221,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 2.384185791015625e-07,
+          "released_pressure_distance_m": 0.9687619189329029,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws front",
+      "moving_mesh": "Ivory keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 2.425733297482089e-07,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 0.970154415297221,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 2.384185791015625e-07,
+          "released_pressure_distance_m": 0.9687619189329029,
+          "contact_depth_m": 0.2
+        }
+      ]
+    }
+  ],
+  "released_configuration_bounds": {
+    "min": [
+      -5.980000019073486,
+      5.130000114440918,
+      -0.17499999701976776
+    ],
+    "max": [
+      5.980000019073486,
+      5.369999885559082,
+      0.17499999701976776
+    ],
+    "size": [
+      11.960000038146973,
+      0.23999977111816406,
+      0.3499999940395355
+    ]
+  },
+  "released_aperture_clearance_m": 0.13000011444091797,
+  "released_root": "StationaryFrame/ReleasedClosure",
+  "released_neutral_source_hidden": true,
+  "release_story": "Authored thin gathered counter-tension returns in fixed overhead receiving mouth above Y5 and below existing local roofY9; no fluid simulation/new timer",
+  "actual_closed_assembly_bounds": {
+    "min": [
+      -6.565000057220459,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.565000057220459,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.130000114440918,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "actual_both_seal_assembly_bounds": {
+    "min": [
+      -6.565000057220459,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.565000057220459,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.130000114440918,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "carriage_origins_godot": {
+    "BloodLatch": [
+      -3.5,
+      1.4,
+      0
+    ],
+    "IvoryLatch": [
+      3.75,
+      3.35,
+      0
+    ]
+  },
+  "motion_witnesses": [],
+  "scope": "Source-only original editable Blender model, actual GLB export and actual saved-source reopen. Native normal import, visual matching and mounting acceptance pending.",
+  "source": "inversion_threshold_artled_v1.blend",
+  "source_sha256": "206f688f97a167a2719b4d93c1d5bc8e00a98897a03b45f082c59fb838098ac0",
+  "recipe": "build_source_artled_v1.py",
+  "recipe_sha256": "0a56126b0c1210d2e58eec1817920c061c542b196b7061ec5883e17abf5dcf92",
+  "candidate_glb_sha256": "d29c5d66c623b51d2f5c5ad9e5bdba984f12e611c452db5477e0b3ce39ae1a72",
+  "candidate_glb_bytes": 7486576,
+  "actual_shell_bounds": {
+    "min": [
+      -6.099999904632568,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.099999904632568,
+      5.0,
+      0.30000001192092896
+    ],
+    "size": [
+      12.199999809265137,
+      5.0,
+      0.6000000238418579
+    ]
+  },
+  "actual_assembly_bounds": {
+    "min": [
+      -6.565000057220459,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.565000057220459,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.130000114440918,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "actual_export_parts": {
+    "StationaryFrame": {
+      "triangles": 2000,
+      "vertices": 1040,
+      "surfaces": 4
+    },
+    "MovingLeaf": {
+      "triangles": 48744,
+      "vertices": 24402,
+      "surfaces": 4
+    },
+    "BloodLatch": {
+      "triangles": 624,
+      "vertices": 328,
+      "surfaces": 3
+    },
+    "IvoryLatch": {
+      "triangles": 608,
+      "vertices": 320,
+      "surfaces": 3
+    },
+    "ReleasedClosure": {
+      "triangles": 3376,
+      "vertices": 1690,
+      "surfaces": 1
+    }
+  },
+  "actual_triangles": 55352,
+  "actual_export_surfaces": 15,
+  "editable_source_meshes": 52,
+  "packed_images": [
+    {
+      "name": "hardware_pigments_v3.png",
+      "filepath": "//hardware_pigments_v3.png",
+      "packed_bytes": 2893698,
+      "packed_sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+    },
+    {
+      "name": "inversion_integrated_construction_v1.png",
+      "filepath": "//inversion_integrated_construction_v1.png",
+      "packed_bytes": 3109844,
+      "packed_sha256": "f5e2cfe9f3f92f02d3287ad32af41be39f27d12217b3d8810cb1b28cebe71be8"
+    }
+  ],
+  "privacy": {
+    "actual_rna_paths_checked": 6,
+    "custom_string_properties_checked": 5,
+    "private_absolute_paths": 0,
+    "paths": [
+      "//hardware_pigments_v3.png",
+      "//inversion_integrated_construction_v1.png",
+      "//hardware_pigments_v3.png",
+      "//inversion_integrated_construction_v1.png",
+      "//",
+      "//"
+    ],
+    "sanitizer": "tools/build_art.py:sanitize_source_paths",
+    "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+  },
+  "actual_vertex_edit_revert": true,
+  "source_unchanged_after_reopen": true,
+  "native8K": false,
+  "normal_roughness_images": false,
+  "rendered_baked_simulated": false
+}

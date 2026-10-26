@@ -1,0 +1,167 @@
+{
+  "actual_static_context": {
+    "checks": 38,
+    "failures": 0,
+    "run_id": "foundry-runtime-form06",
+    "views": [
+      {
+        "arranged_keys": [],
+        "file": "none-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "1fd19e0a292a8d706bc53c7f242709c9972bf0408dc9b33b6495ae2f38482463"
+      },
+      {
+        "arranged_keys": [
+          "blood"
+        ],
+        "file": "blood-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "ada6b5e626a9a4df1cbc2e7be072e32b0ea425debfb314d133a301bdbf2be5ac"
+      },
+      {
+        "arranged_keys": [
+          "ivory"
+        ],
+        "file": "ivory-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "d7e2915444cf7b16d9e2dfc0efc65fcca8671b6608d120931cd33947bf8ff889"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "3df756ac84ccf80cdb8d69030213263286a97eda44654215e9d203c74d568cc2"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-back.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "3b65d5172c001ac43eda8be3aa80522381f633739578b1f013c43f66ccfacf9c"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "both-oblique.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "013a41596f64b7e85973c79db7c5987c68ad0ecff0a15ad0634526605f13b916"
+      },
+      {
+        "arranged_keys": [
+          "blood",
+          "ivory"
+        ],
+        "file": "open-front.png",
+        "resolution": [
+          640,
+          360
+        ],
+        "sha256": "e8ee171eefe7110bb4ee7c054443a2f8d0ce69003ee7d424dcef688bceec824d"
+      }
+    ]
+  },
+  "asset_id": "foundry_gate",
+  "claim_scope": "normal-import-and-runtime-consumer",
+  "code_source_hashes": {
+    "game/scripts/gate_art.gd": "6271f88a1c7e301b7e983cc47aa2052f03de220e10ab6829e02ae87d77aaf753",
+    "game/scripts/gate_visual.gd": "cfdd15d22e012e6794669a46038bbf5fd3b1cf708e22018a4058f75f327fe53f",
+    "game/scripts/level.gd": "a901c991a9d85df2ffa25969db0bb9d48f7bfed25616104b4375299a230d9b3e",
+    "game/scripts/main.gd": "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6372f531",
+    "game/tests/test_gate_art.gd": "660d1c3a65b705767ebc7602dfc62bf2c73a8448cbd47e2faf8ab5d3992440d8",
+    "game/tests/test_gate_integration.gd": "9f651471dd0b9537fe6aa35efa34e457b3a2a67933de54045bae9cb00b257237"
+  },
+  "diagnostics": [],
+  "engine_version": "v4.7.2.stable.official.ed1daf0bf",
+  "evidence_bindings": [
+    {
+      "artifact": "import.log",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "1e12d4991f43cc52f09106ae9012b6c7c0b6e4e4fb3b141ab1d6fb5a805f5b14"
+    },
+    {
+      "artifact": "service-all8-artled.log",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "b7aaddd9f2b039f9f7469aeb83f43d10d70a3a1bbe53a54299ffb7773549ed21"
+    },
+    {
+      "artifact": "sources.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "bde08618c2101cf650865aefa205ce7d766cace5c34b2e8df304ac297d090454"
+    },
+    {
+      "artifact": "native-sidecars.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "d5251eb4942e74015762932592bf123b24cb523b073178ace32912e87935cb59"
+    },
+    {
+      "artifact": "results.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "edd601d60ac022d902b5e3763f54121a879bc79b70a3ed77c6f2d62b80931eec"
+    },
+    {
+      "artifact": "restored.json",
+      "run_id": "artled-remaining5-native01",
+      "sha256": "9da118477e953619763e01b89fb2e646e366a6b4294bd11ec68e646a594e1a99"
+    },
+    {
+      "artifact": "context/context-report.json",
+      "run_id": "foundry-runtime-form06",
+      "sha256": "475b9ce055e93990e868c02e7efca867b29b23aff64cba538a03da19522ae228"
+    }
+  ],
+  "executed_context_fixture": {
+    "code_sha256": "a4b3274fefeb0f5a1b0d9c667632f75208e033e5dc72e7c7d1898807fcd59392",
+    "fixture": "game/tests/test_gate_context.gd",
+    "historical_context_reused": true,
+    "map_index": 1,
+    "run_id": "foundry-runtime-form06"
+  },
+  "executed_latest_fixtures": [
+    "game/tests/test_gate_art.gd"
+  ],
+  "exit_code": 0,
+  "integration_scope": "Latest all-eight normal import and current art-service consumer. Main and integration fixture are current SHA-bound inputs, not newly executed by this batch; prior unchanged four-runtime Main logic evidence is reused. No new disk Continue, gameplay, physical input, audio/listening, FPS or campaign claim.",
+  "limits": [
+    "No engine was rerun while assembling this receipt.",
+    "Native consumer evidence is separate from independent appearance acceptance.",
+    "Retained run artifact names/hashes identify existing local evidence without publishing private machine paths."
+  ],
+  "normal_import_sidecar": {
+    "path": "game/assets/art/thresholds-v3/foundry_threshold.glb.import",
+    "sha256": "a1d113f63dd31df7fc705df94289c9ec916596f6bbe20ba3e7b28516c337ca83"
+  },
+  "run_id": "artled-remaining5-native01-all8-service",
+  "runtime_sha256": "15b052c3cc67396e64509913d13d872632e4eba853bcf85e3459274a0d745481",
+  "schema": "null-choir.threshold-native-qualification",
+  "schema_version": 1,
+  "source_blend_sha256": "d3fcf4dac00e2064ce6a29a2fbfe4d1471e8e61914db10897859f26119dd72f5",
+  "source_only": false,
+  "source_proof_sha256": "b44a6b521ec19dd9c1e9f2a72065c327dcc7cfd10c7d6d4f28d9ede3f37a6bd7",
+  "strict": true,
+  "visual_acceptance": false
+}

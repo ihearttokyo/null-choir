@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "nursery_growth_gate",
+  "asset_sha256": "acf8fa0e37cef98e8cfe96bbf5962e3585771e809823a05832bd835ceb42eecd",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T14:31:07.464687+00:00",
+    "root_freeze_identity": "FROZEN-NURSERY.json",
+    "root_freeze_sha256": "e366c84fd0e7524bbfdfaf6c0743468b9e103a849a85da572552e1acac0bf265",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

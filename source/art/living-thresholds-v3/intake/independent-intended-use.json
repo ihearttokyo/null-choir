@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "containment_gate",
+  "asset_sha256": "0a894d4d468fe1f9e1765539e90cc14bff9496f5012acb25c544c10cea521294",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T11:43:24.693926+00:00",
+    "root_freeze_identity": "FROZEN-INTAKE.json",
+    "root_freeze_sha256": "8df739aa970b19b7e5147a5f56223c6ffb5d3003c19b173e6b0eb6e2c39f523a",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}
