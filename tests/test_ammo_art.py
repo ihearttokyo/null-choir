@@ -2,7 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
-from test_art import EXPECTED, png
+from test_art import EXPECTED, png, validate_forward_recipe
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,14 +12,11 @@ def check():
     entries = [entry for entry in manifest['assets'] if entry['id'] == 'ammo_vfx']
     assert len(entries) == 1
     entry = entries[0]
-    for key, path in [('source_sha256', entry['source']),
-                      ('recipe_sha256', entry['provenance']['authoring_script'])]:
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == entry[key]
+    validate_forward_recipe(ROOT, entry)
+    assert hashlib.sha256((ROOT / entry['source']).read_bytes()).hexdigest() == entry['source_sha256']
     assert (ROOT / entry['source']).read_bytes()[:7] == b'BLENDER'
     for reference in entry['reference_images']:
         assert hashlib.sha256((ROOT / reference['path']).read_bytes()).hexdigest() == reference['sha256']
-    for path, pin in entry['recipe_dependencies'].items():
-        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == pin
     output, = entry['outputs']
     path = ROOT / output['path']
     assert hashlib.sha256(path.read_bytes()).hexdigest() == output['sha256']

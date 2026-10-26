@@ -4561,8 +4561,8 @@
     {
       "id": "nursery_gestation_engine",
       "source": "source/art/nursery_gestation_engine_v2.blend",
-      "source_sha256": "9f171be05132457e140ab9415b9f3eb3dfb6e033d9a2124778f25df6523a100c",
-      "recipe_sha256": "42e03bc2565796cc4fbaba395190a5d74e6dcc0b624b4fd2eae2d177b00d7bec",
+      "source_sha256": "83225ec33f7f9581123c0af72f5b8c3ad107c936ea7308dace9b64bc4a0be536",
+      "recipe_sha256": "21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883",
       "outputs": [
         {
           "path": "game/assets/art/world/nursery_gestation_engine.glb",
@@ -4597,17 +4597,10 @@
           "path": "source/art/nursery_gestation_engine.blend",
           "sha256": "e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0"
         },
-        "source_regeneration": {
-          "from_source_sha256": "83225ec33f7f9581123c0af72f5b8c3ad107c936ea7308dace9b64bc4a0be536",
-          "from_recipe_sha256": "21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883",
-          "method": "Fresh Blender 5.2.2 LTS generation after removing an unused map checksum; actual reopened geometry, UVs, material assignments, transforms, shader parameters and packed images match the retained source; runtime GLB and atlas bytes unchanged",
-          "geometry_uv_assignments_transforms_sha256": "c5ae2c05962d36d0ed3256f2b1c605468c69f4a823c737d44ca913a9af6021a1",
-          "materials_sha256": "ec95c79c2dab1e4b2d6f6327a545b01f1406b4c21f9649ecc4031fac5ffdc7da",
-          "previous_source_metadata_repair": {
-            "from_source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
-            "method": "Blender RNA path-field sanitization; geometry, UVs, material assignments, transforms and packed image bytes verified unchanged after reopen",
-            "geometry_uv_material_matrix_sha256": "0e370b89af5efa01849cce4b0c3cd08c3b17b7c340e32cb52c19c73efa0c9e05"
-          }
+        "source_metadata_repair": {
+          "from_source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
+          "method": "Blender RNA path-field sanitization; geometry, UVs, material assignments, transforms and packed image bytes verified unchanged after reopen",
+          "geometry_uv_material_matrix_sha256": "0e370b89af5efa01849cce4b0c3cd08c3b17b7c340e32cb52c19c73efa0c9e05"
         }
       },
       "physical_bounds_m": {
@@ -7768,7 +7761,7 @@
     {
       "id": "marker_ivorykey",
       "source": "source/art/marker_ivorykey.blend",
-      "source_sha256": "cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487",
+      "source_sha256": "4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60",
       "recipe_sha256": "a5eed30aeaf2aaf55eefb8cd006e27d6d88655600d25f564c6a9e8645b45ef64",
       "outputs": [
         {
@@ -8652,7 +8645,7 @@
   ],
   "build": {
     "blender_version": "5.2.2 LTS",
-    "script_sha256": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "script_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a",
     "render_engine": "none",
     "threads": 4,
     "samples": 0,

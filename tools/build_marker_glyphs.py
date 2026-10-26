@@ -13,8 +13,8 @@ sys.dont_write_bytecode = True
 SOURCE_ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = 'source/art/references/marker-identities-v2.png'
 REFERENCE_SHA = '061ac88b9d4ff2ae70da4b1996cc1f6d4cda92bf05a698d5887159a8fb2475f0'
-HELPER_SHA = {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581',
-              'tools/build_hud_art.py': 'c224381a98b316b7d41d5c77d0f95f9f3bbea061a99eaa3d56d6bdce6ad25a26'}
+HELPER_SHA = {'tools/build_art.py': '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a',
+              'tools/build_hud_art.py': '1d848be2f0ce27ee8ec088922863c7ffb612b4277e504217955f4e04ac991a3d'}
 NAMES = ('ammo', 'health', 'armor', 'key', 'weapon', 'story', 'checkpoint', 'exit',
          'seal_blood', 'seal_ivory', 'impact_tool', 'rivet_pistol', 'scattergun',
          'sawtooth_repeater', 'marrow_launcher', 'choir_disruptor')
@@ -295,6 +295,7 @@ def build(output, isolation, recipe_sha):
     scene['recipe_dependencies'] = json.dumps(HELPER_SHA, sort_keys=True)
     scene['glyph_collection_order'] = json.dumps(NAMES)
     scene['glyph_contracts'] = json.dumps(CONTRACTS, sort_keys=True)
+    art.sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(art.target(paths['blend'])), compress=False)
     pixels = art.pixels_render(scene, 'marker-glyphs-native', 256, 256)
     for offset in range(0, len(pixels), 4):

@@ -13,7 +13,7 @@ from types import SimpleNamespace
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 ID = 'ossuary_living_buttress'
-BASELINE = '34b8a727013fd478f5c0983e759438bc8dbe5ff175cbef078c72da0bc39eb67a'
+BASELINE = 'b72a28cd995917905db1f94ebaf543ed17dd7787498dacde5d0511d36019f278'
 GEOMETRY = 'd1b6bcfe7ac4c2cb759ccfdd917a55d9c764b697abd6f85616c657c8d59d042a'
 
 
@@ -67,6 +67,12 @@ def check_catalog():
     assert len(entries) == 1, 'decorative buttress catalog entry absent'
     baseline = copy.deepcopy(manifest)
     baseline['assets'] = [a for a in baseline['assets'] if a['id'] != ID]
+    assert baseline['build']['script_sha256'] == hashlib.sha256((ROOT / 'tools/build_art.py').read_bytes()).hexdigest(), 'current helper build pin'
+    baseline['build']['script_sha256'] = '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581'
+    # Project only the reviewed metadata-only source copy back to the frozen catalog.
+    ivory = next(a for a in baseline['assets'] if a['id'] == 'marker_ivorykey')
+    assert ivory['source_sha256'] == '4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60', 'normalized Ivory source pin'
+    ivory['source_sha256'] = 'cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487'
     assert len(baseline['assets']) == 118 and digest(baseline) == BASELINE, 'old catalog/build/palette changed'
     from tools.build_ossuary_buttress import design, preflight, assert_clean_source
     from tools.ossuary_buttress_contract import validate_entry

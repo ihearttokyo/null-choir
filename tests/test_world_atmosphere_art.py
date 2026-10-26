@@ -9,6 +9,8 @@ import shutil
 import struct
 import tempfile
 
+from test_art import validate_recipe, resolve_recipe
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'tools/build_world_atmosphere_art.py'
 
@@ -132,6 +134,19 @@ def check():
 
 
 
+# The same retained recipe ran with two separately recorded, trusted helper generations.
+RETAINED_GENERATIONS = {'de68b7d9aad169828c0417d941d18b43de7ea9dea3c3e338df22aba35ff46623': [{'tools/build_art.py': '25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95', 'tools/build_foundry_art.py': 'c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587', 'tools/build_religious_art.py': '746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde'}, {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/build_foundry_art.py': 'c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587', 'tools/build_religious_art.py': '746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde'}]}
+
+
+def validate_generation(project, entry, recipe):
+    sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    dependencies = {path: sha(ROOT / path) for path in recipe['DEPENDENCIES']}
+    generations = {**RETAINED_GENERATIONS, sha(SOURCE): [dependencies]}
+    assert entry['recipe_sha256'] in generations, 'trusted atmosphere generation'
+    assert entry['recipe_dependencies'] in generations[entry['recipe_sha256']], 'atmosphere helper pins'
+    validate_recipe(project, entry, recipe['RECIPE'], recipe['DEPENDENCIES'])
+
+
 def check_candidates(receipt, project):
     """Validate real parent-built vertices/textures; appearance is not a source assertion."""
     recipe = runpy.run_path(str(project / 'tools/build_world_atmosphere_art.py'))
@@ -153,12 +168,11 @@ def check_candidates(receipt, project):
         output, _ = recipe['intake'].candidate_roots(output_path, receipt, project)
         recipe['intake'].candidate_roots(output, receipt, ROOT)
         assert candidate['project_root'] == str(project)
-        assert sha(Path(candidate['source_root']) / recipe['RECIPE']) == entry['recipe_sha256']
+        resolve_recipe(Path(candidate['source_root']), recipe['RECIPE'], entry['recipe_sha256'])
         assert candidate['status'] == 'native_candidate_not_integrated'
         assert candidate['manifest_sha256_read'] == hashlib.sha256(manifest_data).hexdigest()
         assert entry['id'] == asset and entry['level_id'] == asset.split('_', 1)[0] and entry['loop_id'] is None
-        assert entry['recipe_sha256'] == sha(project / recipe['RECIPE'])
-        assert entry['recipe_dependencies'] == dependencies
+        validate_generation(project, entry, recipe)
         assert entry['reference_images'] == [{'path': path, 'sha256': digest} for path, digest in recipe['REFERENCES'][asset].items()]
         assert entry['machine_purpose'] == recipe['PURPOSES'][asset]
         assert entry['facing'] == 'front Blender -Y; exported Godot +Z' and entry['collision'].startswith('none;')

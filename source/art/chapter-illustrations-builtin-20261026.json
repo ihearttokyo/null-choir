@@ -1,0 +1,27 @@
+{
+  "generator": "Codex built-in image_gen; disclosed alternative, not ChatGPT Pro",
+  "native_dimensions": [
+    1672,
+    941
+  ],
+  "native8k": false,
+  "editable_blender": false,
+  "assets": [
+    {
+      "runtime_path": "res://assets/art/descent/intake-builtin-v4.png",
+      "sha256": "dd2b42f3d1e9b1f80ef6c39425b7dbff224dbaa712a632ab4d732d0b9592c659",
+      "bytes": 3018591
+    },
+    {
+      "runtime_path": "res://assets/art/descent/reliquary-builtin-v3.png",
+      "sha256": "bfcc7f608d131c6470585224d223709d1be3ee90bc06d8b6ee36ac884ef80560",
+      "bytes": 3001290
+    },
+    {
+      "runtime_path": "res://assets/art/descent/nursery-builtin-v3.png",
+      "sha256": "b425493f32ed9c98c75bd15fd1dee62f1924c0e9e207a43a257cc53c495eb90a",
+      "bytes": 2721814
+    }
+  ],
+  "review_status": "Independent adversarial intended-use PASS; actual canonical ResourceLoader captures match accepted candidate pixels exactly. Numerical ratings are not implementation inputs."
+}

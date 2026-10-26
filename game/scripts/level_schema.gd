@@ -12,7 +12,12 @@ static func validate(content: Variant, art_exists: Callable) -> String:
 	if not content is Dictionary: return "level: expected a JSON object"
 	var error = _primitive(content,"level")
 	if not error.is_empty(): return error
-	if content.has("floor_revision") and (not _integer(content.floor_revision) or content.floor_revision < 0 or content.floor_revision > (2 if content.get("id","") in ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"] else 1)): return "floor_revision: expected a known revision for this map"
+	if content.has("floor_revision") and (not _integer(content.floor_revision) or content.floor_revision < 0 or content.floor_revision > (3 if content.get("id","") == "ossuary" else 2 if content.get("id","") in ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"] else 1)): return "floor_revision: expected a known revision for this map"
+	if content.has("terrain_patch"):
+		var patch: Variant = content.terrain_patch
+		if content.get("id") != "ossuary" or content.get("floor_revision") != 3 or content.get("cell_size") != 4: return "terrain_patch: only Ossuary revision3/cell4 supports this recipe"
+		if not patch is Dictionary or patch.size() != 2 or patch.get("recipe") != "ossuary_marrow_v3" or patch.get("arch_sha256") != preload("res://scripts/ossuary_surfaces_v3.gd").ARCH_SHA256: return "terrain_patch: unknown recipe or mismatched immutable arch identity"
+	elif content.get("floor_revision") == 3: return "terrain_patch: revision3 requires its exact surface recipe"
 	if not art_exists.is_valid(): return "art_exists: supply an art-ID existence boundary"
 	# shortcut: no visual-profile consumer/schema exists yet; define both before accepting profiles.
 	if content.has("visual_profile"): return "visual_profile: unsupported until its consuming boundary defines known fields and bounds"

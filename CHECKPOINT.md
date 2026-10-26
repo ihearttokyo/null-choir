@@ -3,7 +3,50 @@
 Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 
-## Alpha 1 checkpoint — 19 October 2026
+## Alpha 2 checkpoint — 19 October 2026
+
+**Current public download: unfinished alpha for Apple Silicon, macOS 14 or newer.**
+
+[Download Alpha 2](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.2/NULL-CHOIR-0.2.3-alpha.2-Apple-Silicon.zip).
+[Release notes and known limits](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.2).
+
+Alpha 2 adds original offline title music and the nine-track Resonance Chamber
+Sound test with its animated fractal instrument. It includes the reviewed HUD
+update and bounded frame-trace instrumentation. Alpha 1's map, campaign-art,
+recorded-level-score, player, enemy, level and save-codec blobs are unchanged.
+
+### Exact delivered artifact
+
+- Source: [`1a07030cf86deca39709ee87743ad9fe83500697`](https://github.com/ihearttokyo/null-choir/commit/1a07030cf86deca39709ee87743ad9fe83500697).
+  This combines main `0e6d5a4fd54282911c65799817d6bca371d5d53e` with
+  the previously published Alpha 1 source `a5cd327773e53ef0707fe097ea88720bb0ec82be`;
+  it does not merge PR95 into main or certify its remaining campaign work.
+- Archive: `NULL-CHOIR-0.2.3-alpha.2-Apple-Silicon.zip`, 182147397 bytes.
+- Archive SHA-256: `4a015443733ec78eb158dd429a9d7ec7602fb9f465058f22b73ac5af42e3fed9`.
+- Resource pack SHA-256: `7579f58312deeafc0fdaa4cbe4e2b53c9c9e14dad7954ad3dbc48b3a72771626`.
+- Native export: Godot 4.7.2, Metal shader baking, arm64-only; application
+  version 0.2.3 and macOS 14 minimum. Developer ID signature uses hardened
+  runtime and a secure timestamp.
+- Apple notarization: Accepted, submission
+  `716a8141-cc1c-4ed9-be88-faa4eb7a31c2`. Stapled ticket included.
+
+### Evidence and remaining work
+
+| Status | Evidence |
+| --- | --- |
+| PASS — actual standalone | The extracted final ZIP passes strict signature, staple validation and Gatekeeper. Its actual arm64 binary passes all eight scene/art/recorded-PCM and retained-MIDI checks, late weapons/boss imports, title/start/fire/pause/checkpoint, native Metal caches, isolated userdata and system-only dependencies. |
+| PASS — exact resources | The exported map and retained-MIDI bytes match the source archive. Git blob/tree equality confirms the retained Alpha 1 content listed above. |
+| PASS — affected native tests | Exact exported resources pass Sound test, title transport/decoded PCM/release, menu retirement and HUD checks. The bounded trace's native source/schema/guard checks pass separately; its plaintext-source subtest cannot run against compiled export scripts. Expected invalid-audio rejection controls are counted explicitly. These are not human listening. |
+| PASS — native Metal UI | Sound test focus, scrolling, real UI event dispatch and reduced-motion checks pass at 640×360, 360×640 and 1280×720. The fixture uses programmatic inputs and instantiates no gameplay. Physical controller acceptance remains open. |
+| PASS — public download | The complete public ZIP was downloaded after publication. Its byte count, SHA-256 and CRC match the final signed/notarized archive, and GitHub's asset digest agrees. |
+| NOT RUN — full acceptance | Full earned/physical campaign across both seal orders and all difficulties, physical gamepad coverage, final listening, sustained frame rate, cold input-ready startup, transitions and final GPU/memory/scaling acceptance remain open. |
+
+Fullscreen performance remains under investigation; this release establishes
+no frame-rate improvement. New final-size level-intro art is not included.
+The longer campaign regressions remain in progress; PR95 stays unmerged.
+Prior releases and the historical checkpoints below remain available for rollback.
+
+## Historical Alpha 1 checkpoint — 19 October 2026
 
 **Unfinished alpha. Expect bugs, hitches and balance changes.**
 The full campaign, physical gamepad coverage, musical quality and sustained

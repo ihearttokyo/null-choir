@@ -130,7 +130,7 @@ func check_trust_and_recovery(state, document: Dictionary, old, layout) -> void:
 				"future": invalid.version = 3
 				"revision":
 					invalid = migrated.duplicate(true)
-					for snapshot in [invalid,invalid.checkpoint,invalid.level_start]: snapshot.floor_revision = 2
+					for snapshot in [invalid,invalid.checkpoint,invalid.level_start]: snapshot.floor_revision = layout.floor_revision()+1
 				"mixed": target["floor_revision"] = 1
 				"born-history": target.removed.append("summon:unknown:1")
 			var before = var_to_bytes(invalid)

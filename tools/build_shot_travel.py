@@ -14,8 +14,8 @@ sys.path.insert(0,str(HERE))
 from shot_atlas import validate
 
 PINS={
- 'tools/build_art.py':'285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581',
- 'tools/build_ammo_vfx.py':'4988b1eab654935fd66dc8aeb143dcc33c01da4e633a8ec39df0112458edbd2d',
+ 'tools/build_art.py':'07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a',
+ 'tools/build_ammo_vfx.py':'2761076cbbbe3b172ce6b94f51b6994c0b8e00e78e761a2da4c855b112045bb6',
  'source/art/references/shot-transport-construction-20261018.png':'c48eefc9b364b169c2b7c7fa65ba0a55804a362ab42430c432aaf73d7221b15f'}
 FAMILIES=('rivet_square_amber','flechette_single_bone','needle_serrated_red','choir_hollow_pressure')
 
@@ -196,11 +196,7 @@ def main():
     scene['forward_axis']='+X; camera +Z; rows top to bottom rivet, flechette, needle, choir'
     blend=art.target(art.ART/'shot_travel.blend')
     atlas=art.target(art.OUT/'shot_travel.png')
-    for screen in bpy.data.screens:
-        for area in screen.areas:
-            for space in area.spaces:
-                if space.type=='FILE_BROWSER' and space.params is not None:
-                    space.params.directory=b'//'
+    art.sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=False)
     pixels=art.pixels_render(scene,'shot-travel-native',256,256)
     frames=validate(pixels)

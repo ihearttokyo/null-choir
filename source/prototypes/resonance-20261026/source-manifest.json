@@ -1,0 +1,60 @@
+{
+  "scope": "Exact unaccepted prototype source snapshot, not runtime asset",
+  "files": [
+    {
+      "relative_original_path": "game/ui/resonance/sound_test.gd",
+      "prototype_sha256": "b87093a2e4e97010652b64ef249621dabea1f8dde2a4efa1c024fec35d7fc4c8",
+      "bytes": 24409
+    },
+    {
+      "relative_original_path": "game/ui/resonance/resonance.gdshader",
+      "prototype_sha256": "70c75ae9dbbfe983cdf65e1a5b8f111080b15e296e4889d99cecc62ca1579c25",
+      "bytes": 22507
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test.gd",
+      "prototype_sha256": "f7edf05a666d33122f19be0af1de31b8d46b030efb48b101100ebbbe330784e1",
+      "bytes": 6867
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test.gd.uid",
+      "prototype_sha256": "e492b2ae6b2e9bed226fb10d02057606a1f380e6ea31c6699671eab35505215a",
+      "bytes": 20
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_accessible_ui.gd",
+      "prototype_sha256": "f0fb0751fec3db885f2a7f7b1d6b0e69cb150211cbd99d5275c44ef3a6a3fa15",
+      "bytes": 6890
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_intended_render.gd",
+      "prototype_sha256": "6321817ad9a2283a9d8a6c5a1c533e979bccff96eefeb877c02a7d14999601ed",
+      "bytes": 8465
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_menu.gd",
+      "prototype_sha256": "93ac3577a905eec45a5b6b67030fdb75d3f6fb4ddb05936d9c864483a0365995",
+      "bytes": 6862
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_menu.gd.uid",
+      "prototype_sha256": "ae3a29ad523add3e8a8e57b11c395cfa1e19262dd2785030d9725211c9502183",
+      "bytes": 20
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_motion_preferences.gd",
+      "prototype_sha256": "edde3bf4e7e483e5579cdbe98f2df58484d62b48ff93a810c248f73974fae2e7",
+      "bytes": 3447
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_procedural_art.gd",
+      "prototype_sha256": "30a7469579c35f06bba0df94c3fabc7c99d368ce2012d613859638645559a953",
+      "bytes": 4201
+    },
+    {
+      "relative_original_path": "game/tests/test_sound_test_spectrum.gd",
+      "prototype_sha256": "21e74ce07a29bc8e5d573eb5b8797533399b347f78b26bfd46b2b1ad0d1fe157",
+      "bytes": 11983
+    }
+  ]
+}

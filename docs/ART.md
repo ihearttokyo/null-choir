@@ -212,7 +212,7 @@ integration, not rendered appearance or packed-app acceptance.
 
 ## Recorded recipe generations
 
-Validate each asset's logical authoring recipe and helper dependencies against its recorded SHA-256. `tools/art_recipe.py` resolves exact current bytes first, then exact archived bytes under `source/art/recipe_history/<sha256>/<logical-path>.txt`; missing, modified or symlinked inputs fail closed. The two `tools/build_art.py.txt` snapshots are immutable authoring sources, not runtime assets or a cache. Keep the current helper equal to `manifest.build.script_sha256`; do not rewrite old pins when that helper changes.
+Validate each asset's logical authoring recipe and helper dependencies against its recorded SHA-256. `tools/art_recipe.py` resolves exact current bytes first, then exact archived bytes under `source/art/recipe_history/<sha256>/<logical-path>.txt`; missing, modified or symlinked inputs fail closed. The recorded `tools/build_art.py.txt` snapshots are immutable authoring sources, not runtime assets or a cache. Keep the current helper equal to `manifest.build.script_sha256`; do not rewrite old pins when that helper changes.
 
 For historical regeneration, copy the recorded recipe and dependencies unchanged into an isolated project's original logical `tools/` layout, alongside the required pinned inputs. Run the existing Blender command there, never the `.py.txt` archive in place: original recipes derive their project root from their location. Check actual generated sources/exports and retain native editability evidence before adopting any result. The archive proves source availability, not that a new native regeneration ran.
 
@@ -240,21 +240,6 @@ and reference-quality parity remain unverified. The rounded cranium, separate re
 and three asymmetric upper rib pairs improve the earlier flat skull. Full
 reference-quality parity remains open. This is source integration, not final art
 or application promotion.
-
-The level JSON is not a modeling input. The current recipe no longer pins it:
-terrain revisions can change independently of this asset. The four retained
-recipe/source pins and both generated-image input hashes remain enforced.
-A fresh Blender5.2.2 LTS build after this dependency correction reproduces the
-runtime GLB and atlas byte-for-byte. Fresh source reopens match geometry, UVs,
-material assignments, transforms, shader parameters and packed image bytes;
-all four assemblies passed edited-save/reopen/revert checks. This does not close
-the game-lighting, transparency or reference-quality gates above.
-
-The preceding recipe is retained byte-exact under
-`source/art/recipe_history/21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883/`.
-The manifest records the regenerated source, its recipe and the previous source
-metadata repair as history, rather than claiming the new file is the old repair.
-Original editable sources and prior committed versions remain unchanged in history.
 
 Rebuild into a fresh directory whose parent exists, outside this project:
 
@@ -304,3 +289,20 @@ for source, shipped-byte, UV, 61-sample animation and rejection controls.
 The GLB does not configure production Godot autoplay or looping. Repetition and
 pause/resume were checked with explicit test-scene configuration, not gameplay
 placement. Source tests do not approve in-game appearance or performance.
+
+
+## Metadata-only source normalization
+
+The Ivory key source has a metadata-only normalized copy. Its original authoring
+recipe and helper pins remain unchanged; they identify the geometry generation,
+not a new build. The current save helper clears stored build-path fields in future
+sources. Historical recipe snapshots remain immutable.
+
+| Source | Original SHA-256 | Normalized SHA-256 |
+| --- | --- | --- |
+| `marker_ivorykey.blend` | `cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487` | `4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60` |
+
+Native byte-locality and edit/save/reopen/revert checks cover this one copy. Its
+runtime GLB and preview are byte-exact to the original. Original source bytes are
+retained privately and in existing Git history. This is not a full-source privacy
+audit or a new rendered-art acceptance.

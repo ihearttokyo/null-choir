@@ -15,7 +15,7 @@ MATERIAL_SHA = 'eed15e41ba0bf85de489dbe4e25364324e8ead8e33a333182edeca89077b6ac7
 HELPER_SHA = '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6'
 BASELINE_PINS = {
     'source/art/skin_bell.blend': 'b044b449d4ebfeed02f17793a75347f1fdb696adbf627155e3387cfd148d557d',
-    'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581',
+    'tools/build_art.py': '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a',
 }
 SECTORS = 48
 BELL_PROFILE = ((3.48, 2.52), (3.60, 2.58), (3.82, 2.43), (4.12, 2.24),
@@ -546,6 +546,11 @@ def main():
     sys.path.insert(0,str(helper.parent))
     from art_recipe import resolve_recipe
     assert resolve_recipe(project,'tools/art_recipe.py',HELPER_SHA)==helper
+    import importlib.util
+    art_path = pinned_file(project/'tools/build_art.py', BASELINE_PINS['tools/build_art.py'])
+    spec = importlib.util.spec_from_file_location('skin_bell_art', art_path)
+    art = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(art)
     import bpy
     from mathutils import Vector
     root.mkdir(parents=True,exist_ok=False)
@@ -614,6 +619,7 @@ def main():
     pose_camera((3,-16,4.4),(0,0,4))
     blend=root/'skin_bell_v2.blend'
     if blend.exists(): raise FileExistsError(blend)
+    art.sanitize_source_paths(bpy)
     bpy.ops.wm.save_as_mainfile(filepath=str(blend),compress=False)
     runtime=bpy.data.collections.new('Temporary runtime groups'); scene.collection.children.link(runtime)
     temporary=[]
@@ -650,7 +656,7 @@ def main():
         p=root/name
         return {'path':name,'sha256':sha(p),'bytes':p.stat().st_size}
     record={'id':'skin_bell','source':'source/art/skin_bell_v2.blend','source_sha256':sha(blend),
-            'recipe_sha256':sha(__file__),'recipe_dependencies':{'tools/art_recipe.py':HELPER_SHA},
+            'recipe_sha256':sha(__file__),'recipe_dependencies':{'tools/art_recipe.py':HELPER_SHA, 'tools/build_art.py':BASELINE_PINS['tools/build_art.py']},
             'outputs':[dict(output_record('skin_bell.glb'),path='game/assets/art/world/skin_bell.glb')],
             'physical_bounds_m':{'min':low,'max':high,'size':[b-a for a,b in zip(low,high)],'axes':'Blender XYZ, Z up; GLB/Godot Y up'},
             'origin':'ground-centered at Blender (0,0,0); GLB Y up','loop_id':'intake_loop_bell',

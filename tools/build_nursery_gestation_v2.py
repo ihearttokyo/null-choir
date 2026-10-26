@@ -13,10 +13,11 @@ ID = 'nursery_gestation_engine'
 REFERENCE_SHA = '3c046b70ff27b05aba6b850a6c7f430af22feeb8028f010b6f2241af14235144'
 MATERIAL_SHA = '4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781'
 PINS = {
-    'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581',
+    'tools/build_art.py': '07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a',
     'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6',
     'tools/build_religious_late_art.py': 'f1fa327818fd7b2cfc45ba2aeebb45d8bcd65265b91bf0e97fb5cd6659e20331',
     'source/art/nursery_gestation_engine.blend': 'e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0',
+    'game/data/05_nursery.json': '8e04f3d5f704ac4f5b3ee698b3442ff27670843c244baca8b2ffdcd426bfa257',
 }
 ROLLBACK_COMMIT = '84d27115f178a25c38dab0c6c98bafdd7ed918b8'
 ROLLBACK_PINS = {

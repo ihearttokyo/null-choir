@@ -287,6 +287,9 @@ func start_level() -> void:
 			return
 		if not _valid_restored_actors() or not _repair_loaded_position():
 			show_title()
+			# Invalid current poses remain rejected. Recovery is an explicit player choice,
+			# using original healthy envelopes, never a silent repaired save/refund.
+			show_recovery()
 			notify("NO SAFE RECOVERY POSITION",8)
 			return
 	menu_scroll.hide()
@@ -325,7 +328,7 @@ func _valid_restored_actors() -> bool:
 		if not contacts.is_empty():
 			# Native movement may retain submillimetre floor contact, never other overlap.
 			var allowance: float = minf(actor.safe_margin,0.001)
-			var floor_y: float = layout.capsule_floor_support(Vector2(actor.position.x,actor.position.z),collider.shape.radius)
+			var floor_y: float = layout.capsule_floor_support_at_y(Vector2(actor.position.x,actor.position.z),collider.shape.radius,actor.position.y,.08)
 			if not is_finite(floor_y) or actor.position.y < floor_y-allowance: return false
 			while not contacts.is_empty():
 				var body = contacts[0].collider
@@ -337,7 +340,7 @@ func _valid_restored_actors() -> bool:
 			query.transform.origin.y += allowance
 			if not space.intersect_shape(query,1).is_empty(): return false
 		var cell = Vector2(actor.position.x,actor.position.z)/float(layout.data.cell_size)
-		var floor_point: Vector3 = layout.world_position([cell.x,cell.y])
+		var floor_point: Vector3 = layout.surface_position_at_y([cell.x,cell.y],actor.position.y)
 		var support = PhysicsRayQueryParameters3D.create(floor_point+Vector3.UP*0.5,floor_point-Vector3.UP,1)
 		var hit = space.intersect_ray(support)
 		if hit.is_empty() or hit.normal.y < 0.5 or absf(hit.position.y-floor_point.y) > 0.08: return false
@@ -354,6 +357,8 @@ func _capture_actor_state() -> bool:
 	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"actors":[]}
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0:
+			# A failed LIVE native floor settlement must never become a new saved image.
+			if actor._floor_settle_failed: return false
 			snapshot.actors.append(actor.snapshot())
 	if not state._valid_actor_resources(snapshot,level.layout,state.difficulty):
 		# Legacy Continue may have lost born-not-dead nodes before this feature existed.
@@ -735,9 +740,14 @@ func show_sound_test() -> void:
 	_close_sound_test()
 	menu_scroll.hide()
 	sound_test = load("res://ui/resonance/sound_test.gd").new()
+	sound_test.set_reduced_motion(settings.get("sound_test_reduced_motion",false))
 	sound_test.bind_music(music)
 	sound_test.back_requested.connect(show_title)
 	sound_test.music_volume_changed.connect(_sound_test_volume_changed)
+	# Released SoundTest lacks the prototype-only persistence signal. Keep that API optional.
+	var motion_callback := Callable(self,"_sound_test_motion_changed")
+	if sound_test.has_signal("reduced_motion_changed") and motion_callback.is_valid() and not sound_test.is_connected("reduced_motion_changed",motion_callback):
+		sound_test.connect("reduced_motion_changed",motion_callback)
 	canvas.add_child(sound_test)
 
 func _close_sound_test() -> void:
@@ -749,6 +759,10 @@ func _close_sound_test() -> void:
 func _sound_test_volume_changed(value: float) -> void:
 	settings.music_volume = value
 	_apply_volumes()
+	_save_settings()
+
+func _sound_test_motion_changed(enabled: bool) -> void:
+	settings.sound_test_reduced_motion = enabled
 	_save_settings()
 
 func continue_campaign() -> void:
@@ -922,7 +936,7 @@ func _show_chapter_intro(index: int) -> void:
 
 func show_settings() -> void:
 	_show_menu("SETTINGS",[])
-	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["reduced_damage_flashes","Reduced damage flashes"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
+	for option in [["head_bob","Head bob"],["camera_shake","Camera shake"],["reduced_damage_flashes","Reduced damage flashes"],["sound_test_reduced_motion","Sound test: reduced motion"],["invert_y","Invert Y"],["auto_aim","Classic auto-aim"]]:
 		var button = CheckButton.new()
 		button.text = option[1]
 		button.button_pressed = settings[option[0]]

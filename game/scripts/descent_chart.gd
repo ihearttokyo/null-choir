@@ -4,7 +4,7 @@ extends VBoxContainer
 const VIEWS = ["intake", "foundry", "processional", "reliquary", "nursery", "ossuary", "inversion", "heart"]
 # Explicit approved runtime mapping; stable chapter IDs remain unchanged.
 # Three unqualified paintings retain their prior runtime assets.
-const ART_FILES = ["intake.jpg", "foundry-pro-v2.jpg", "processional-pro-v2.jpg", "reliquary.jpg", "nursery.jpg", "ossuary-pro-v2.jpg", "inversion-pro-v2.jpg", "heart-pro-v2.jpg"]
+const ART_FILES = ["intake-builtin-v4.png", "foundry-pro-v2.jpg", "processional-pro-v2.jpg", "reliquary-builtin-v3.png", "nursery-builtin-v3.png", "ossuary-pro-v2.jpg", "inversion-pro-v2.jpg", "heart-pro-v2.jpg"]
 
 static func art_path(index: int) -> String:
 	if index < 0 or index >= ART_FILES.size(): return ""
