@@ -1,0 +1,12 @@
+{
+  "reference": "pixel-music-garden-20261027.png",
+  "sha256": "32b10690763b9e35bb79a5253bf3e9f5588b108f1fff19c0fa3c53d5600d8025",
+  "source": "Built-in GPT Image art-direction reference; original NULL CHOIR characters and scene",
+  "selection": "Cute mechanical music garden, crisp chunky1995-era pixel silhouettes, original beetle/blob/bird cast, playful procedural motion; actual shader uses its own fixed16-color palette and code-generated shapes",
+  "runtime": [
+    "game/ui/resonance/resonance.gdshader",
+    "game/ui/resonance/sound_test.gd"
+  ],
+  "reference_not_runtime": "Reference PNG is not loaded by SoundTest. Runtime characters/scenery are generated live by editable shader code; no Tyrian code/art/music copied.",
+  "master_claim": "Reference only, not native8K chapter art or a Blender render"
+}

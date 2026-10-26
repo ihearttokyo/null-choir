@@ -2,6 +2,7 @@ extends Control
 
 signal back_requested
 signal music_volume_changed(linear_gain: float)
+signal reduced_motion_changed(enabled: bool)
 
 const Resonance = preload("resonance.gdshader")
 const BONE := Color("eedfc0")
@@ -16,6 +17,8 @@ var _start_confirmed := false
 var _reduced_motion := false
 var _phase := 0.0
 var _art_energy := 0.0
+var _audio_bands := Vector3.ZERO
+var _analyzer: AudioEffectSpectrumAnalyzer
 var _visual_style := 0
 var _style: OptionButton
 var _art_caption: Label
@@ -62,11 +65,13 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_build_ui()
+	set_reduced_motion(_reduced_motion) # Pre-ready preference initialization is silent.
 	resized.connect(_layout)
 	visibility_changed.connect(_on_visibility_changed)
 	_rebuild_tracks()
 	_layout()
 	_sync_transport()
+	_on_visibility_changed()
 	_back.grab_focus()
 	if not _track_buttons.is_empty() and not _track_buttons[0].disabled:
 		_track_buttons[0].grab_focus()
@@ -112,6 +117,10 @@ func play_track(index: int) -> bool:
 		set_visual_style(index % 3)
 	_preview_stream = player.stream
 	_preview_player_ref = weakref(player)
+	# Retire buffered samples only after a confirmed successful selection.
+	_remove_analyzer()
+	_zero_audio_signal()
+	_ensure_analyzer()
 	_feedback("")
 	if is_node_ready():
 		_sync_transport()
@@ -132,14 +141,23 @@ func step_track(direction: int) -> void:
 func set_reduced_motion(enabled: bool) -> void:
 	_reduced_motion = enabled
 	_phase = 0.0
+	_zero_audio_signal()
 	if _art_material != null:
 		_art_material.set_shader_parameter("phase", _phase)
-		_art_energy = 0.0
-		_art_material.set_shader_parameter("energy", 0.0)
+	if is_instance_valid(_art_caption):
+		_art_caption.text = "Still pixel art · Audio response off" if enabled else "Live pixel art · Playback-time animation · Measured Music low/mid/high bands"
 	if is_instance_valid(_motion):
 		_motion.set_pressed_no_signal(enabled)
 
+func _on_motion_toggled(enabled: bool) -> void:
+	if enabled == _reduced_motion:
+		return
+	set_reduced_motion(enabled)
+	reduced_motion_changed.emit(enabled)
+
 func _stop_preview() -> void:
+	_remove_analyzer()
+	_zero_audio_signal()
 	if _owns_preview():
 		_owner().call("stop")
 		_owner().call("set_paused", false)
@@ -153,6 +171,8 @@ func _on_playback_started() -> void:
 		# Another screen can start the same cached stream; identity alone cannot prove ownership.
 		_preview_stream = null
 		_preview_player_ref = null
+		_remove_analyzer()
+		_zero_audio_signal()
 
 func _detach_music() -> void:
 	_stop_preview()
@@ -199,22 +219,119 @@ func set_visual_style(index: int) -> void:
 	if is_instance_valid(_style):
 		_style.select(_visual_style)
 
+func _analyzer_location() -> Vector2i:
+	if _analyzer == null:
+		return Vector2i(-1, -1)
+	for bus in range(AudioServer.get_bus_count()):
+		for effect in range(AudioServer.get_bus_effect_count(bus)):
+			if AudioServer.get_bus_effect(bus, effect) == _analyzer:
+				return Vector2i(bus, effect)
+	return Vector2i(-1, -1)
+
+func _remove_analyzer() -> void:
+	if _analyzer == null:
+		return
+	# Resolve by exact resource identity on every removal, never a stale index.
+	for bus in range(AudioServer.get_bus_count()):
+		for effect in range(AudioServer.get_bus_effect_count(bus) - 1, -1, -1):
+			if AudioServer.get_bus_effect(bus, effect) == _analyzer:
+				AudioServer.remove_bus_effect(bus, effect)
+	_analyzer = null
+
+func _ensure_analyzer() -> void:
+	if not is_inside_tree() or not is_visible_in_tree() or not _owns_preview():
+		return
+	var bus := AudioServer.get_bus_index("Music")
+	if bus < 0:
+		return
+	var location := _analyzer_location()
+	if location.x == bus:
+		return
+	_remove_analyzer()
+	_analyzer = AudioEffectSpectrumAnalyzer.new()
+	_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_1024
+	_analyzer.buffer_length = 0.1
+	AudioServer.add_bus_effect(bus, _analyzer)
+
+func _zero_bands() -> void:
+	_audio_bands = Vector3.ZERO
+	if _art_material != null:
+		_art_material.set_shader_parameter("audio_bands", _audio_bands)
+
+func _normalized_band(stereo: Vector2) -> float:
+	var magnitude := maxf(stereo.x, stereo.y)
+	if not is_finite(magnitude) or magnitude <= 0.0:
+		return 0.0
+	# Fixed measured-magnitude dB normalization, not RMS or beat inference.
+	var normalized := clampf((linear_to_db(maxf(magnitude, 0.000001)) + 60.0) / 60.0, 0.0, 1.0)
+	return 0.0 if normalized <= 0.04 else (normalized - 0.04) / 0.96
+
+func _effective_music_gain(bus: int) -> float:
+	if bus < 0:
+		return 0.0
+	var gain := db_to_linear(AudioServer.get_bus_volume_db(bus)) * db_to_linear(AudioServer.get_bus_volume_db(0))
+	return gain if is_finite(gain) and gain > 0.000001 else 0.0
+
+func _zero_audio_signal() -> void:
+	_art_energy = 0.0
+	_zero_bands()
+	if _art_material != null:
+		_art_material.set_shader_parameter("energy", 0.0)
+
+func _analyzer_instance(location: Vector2i) -> AudioEffectSpectrumAnalyzerInstance:
+	return AudioServer.get_bus_effect_instance(location.x, location.y) as AudioEffectSpectrumAnalyzerInstance
+
 func _update_art(delta: float) -> void:
-	# Geometry is seeded; movement follows the real, owned transport position.
-	# Brightness uses the real Music bus peak, not an invented FFT/beat detector.
 	var player := _player()
-	if _reduced_motion or not _owns_preview() or not is_instance_valid(player) or not player.playing or player.stream_paused:
+	if not _owns_preview() or not is_instance_valid(player):
+		_remove_analyzer()
+		_zero_audio_signal()
+		return
+	_ensure_analyzer()
+	var bus := AudioServer.get_bus_index("Music")
+	var effective_gain := _effective_music_gain(bus)
+	var muted: bool = effective_gain == 0.0 or AudioServer.is_bus_mute(0) or (bus >= 0 and AudioServer.is_bus_mute(bus))
+	# Reduced neutral state overrides pause. Mute/gain-zero clears signal even
+	# while paused, but never advances that paused transport's decorative phase.
+	if _reduced_motion:
+		_phase = 0.0
+		if _art_material != null:
+			_art_material.set_shader_parameter("phase", _phase)
+		_zero_audio_signal()
+		return
+	if muted:
+		_zero_audio_signal()
+	if player.stream_paused:
+		return # Normal unmuted pause holds exact phase AND measured signal.
+	if not player.playing:
+		_zero_audio_signal()
 		return
 	_phase = maxf(0.0, player.get_playback_position()) * 0.45
-	var bus := AudioServer.get_bus_index("Music")
-	var target := 0.0
-	if bus >= 0 and not AudioServer.is_bus_mute(bus) and not AudioServer.is_bus_mute(0):
-		var peak := maxf(AudioServer.get_bus_peak_volume_left_db(bus, 0), AudioServer.get_bus_peak_volume_right_db(bus, 0))
-		if is_finite(peak):
-			target = clampf(db_to_linear(peak), 0.0, 1.0)
+	if _art_material != null:
+		_art_material.set_shader_parameter("phase", _phase)
+	if muted:
+		return # Muted PLAYING may animate; it never invents audio response.
+	var location := _analyzer_location()
+	if location.x < 0 or not AudioServer.is_bus_effect_enabled(location.x, location.y):
+		_zero_audio_signal()
+		return
+	var instance := _analyzer_instance(location)
+	if instance == null:
+		_zero_audio_signal()
+		return
+	# The peak meter is already post-fader: never multiply its gain again.
+	var peak := maxf(AudioServer.get_bus_peak_volume_left_db(bus, 0), AudioServer.get_bus_peak_volume_right_db(bus, 0))
+	var target := clampf(db_to_linear(peak), 0.0, 1.0) if is_finite(peak) else 0.0
 	_art_energy = lerpf(_art_energy, target, 1.0 - exp(-maxf(delta, 0.0) * 8.0))
-	_art_material.set_shader_parameter("phase", _phase)
-	_art_material.set_shader_parameter("energy", _art_energy)
+	# Passive FFT samples before bus faders; apply Music+Master gain once.
+	var measured := Vector3(
+		_normalized_band(instance.get_magnitude_for_frequency_range(40, 250, AudioEffectSpectrumAnalyzerInstance.MAGNITUDE_MAX) * effective_gain),
+		_normalized_band(instance.get_magnitude_for_frequency_range(250, 2000, AudioEffectSpectrumAnalyzerInstance.MAGNITUDE_MAX) * effective_gain),
+		_normalized_band(instance.get_magnitude_for_frequency_range(2000, 12000, AudioEffectSpectrumAnalyzerInstance.MAGNITUDE_MAX) * effective_gain))
+	_audio_bands = _audio_bands.lerp(measured, 1.0 - exp(-maxf(delta, 0.0) * 9.0))
+	if _art_material != null:
+		_art_material.set_shader_parameter("energy", _art_energy)
+		_art_material.set_shader_parameter("audio_bands", _audio_bands)
 
 func _process(delta: float) -> void:
 	if not is_visible_in_tree():
@@ -238,6 +355,8 @@ func _sync_transport() -> void:
 	if _preview_stream != null and not _owns_preview():
 		_preview_stream = null
 		_preview_player_ref = null
+		_remove_analyzer()
+		_zero_audio_signal()
 	var player := _player()
 	var available := is_instance_valid(player) and not _tracks.is_empty()
 	_play.disabled = not available
@@ -386,11 +505,11 @@ func _build_ui() -> void:
 	_play = _button("Play", controls, toggle_playback)
 	_next = _button("Next", controls, step_track.bind(1))
 	_style = OptionButton.new()
-	_style.add_item("Vaults")
-	_style.add_item("Orrery")
-	_style.add_item("Reliquary")
+	_style.add_item("Garden")
+	_style.add_item("Star Parade")
+	_style.add_item("Orbit Play")
 	_style.accessibility_name = "Visual style"
-	_style.tooltip_text = "Procedural visual style. Each track also seeds its own architecture and palette."
+	_style.tooltip_text = "Original pixel garden with seeded stars and orbit variants. Motion follows playback time; low/mid/high response uses measured Music bands."
 	_style.focus_mode = Control.FOCUS_ALL
 	_style.item_selected.connect(set_visual_style)
 	controls.add_child(_style)
@@ -398,7 +517,7 @@ func _build_ui() -> void:
 	_motion.text = "Reduced motion"
 	_motion.focus_mode = Control.FOCUS_ALL
 	_motion.button_pressed = _reduced_motion
-	_motion.toggled.connect(set_reduced_motion)
+	_motion.toggled.connect(_on_motion_toggled)
 	controls.add_child(_motion)
 	_back = _button("Back", controls, request_back)
 	_volume_label = _label("Music volume", footer, 14)
@@ -411,7 +530,7 @@ func _build_ui() -> void:
 	_volume.tooltip_text = "Music volume. Left and right adjust the existing Music bus."
 	_volume.value_changed.connect(_change_volume)
 	footer.add_child(_volume)
-	_art_caption = _label("Procedural cathedral art · Playback-time motion · Music-bus peak glow", footer, 11)
+	_art_caption = _label("Live pixel art · Playback-time animation · Measured Music low/mid/high bands", footer, 11)
 	_message = _label("", footer, 14)
 	_message.add_theme_color_override("font_color", BONE)
 

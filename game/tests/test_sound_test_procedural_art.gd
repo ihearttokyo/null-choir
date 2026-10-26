@@ -20,6 +20,10 @@ func run() -> void:
 	var bus_count := AudioServer.get_bus_count()
 	assert(player.stream == null)
 	assert(screen._style.item_count == 3 and screen._style.focus_mode == Control.FOCUS_ALL)
+	assert(screen._style.get_item_text(0) == "Garden" and screen._style.get_item_text(1) == "Star Parade" and screen._style.get_item_text(2) == "Orbit Play")
+	assert(screen._art.material == screen._art_material and screen._art_material.shader == SoundTest.Resonance, "Actual shipping ColorRect owns the candidate consumer")
+	assert(screen._art_caption.text == "Live pixel art · Playback-time animation · Measured Music low/mid/high bands")
+	assert(screen._audio_bands == Vector3.ZERO and screen._art_material.get_shader_parameter("audio_bands") == Vector3.ZERO)
 	var seeds: Array = []
 	var recording_refs: Array[WeakRef] = []
 	for index in screen._tracks.size():
@@ -36,7 +40,7 @@ func run() -> void:
 	assert(screen._style.selected == 2)
 	screen._update_art(0.1)
 	assert(absf(screen._phase - player.get_playback_position() * 0.45) < 0.1) # Native mixer may advance between reads.
-	assert(screen._art_energy == 0.0, "Muted bus must not invent visible audio amplitude")
+	assert(screen._art_energy == 0.0 and screen._audio_bands == Vector3.ZERO, "Muted bus must not invent audio response")
 	screen.toggle_playback()
 	assert(player.stream_paused)
 	var held_phase: float = screen._phase
@@ -49,12 +53,16 @@ func run() -> void:
 	assert(screen._phase == 0.0 and screen._art_energy == 0.0)
 	assert(screen._art_material.get_shader_parameter("phase") == 0.0)
 	assert(screen._art_material.get_shader_parameter("energy") == 0.0)
+	assert(screen._audio_bands == Vector3.ZERO and screen._art_material.get_shader_parameter("audio_bands") == Vector3.ZERO)
+	assert(screen._art_caption.text == "Still pixel art · Audio response off")
 	screen.hide()
 	assert(not screen.is_processing() and not screen.is_processing_unhandled_input())
+	assert(not screen._art.is_visible_in_tree() and screen._analyzer == null, "Hidden actual ColorRect is culled and analyzer retired")
 	assert(not player.playing and player.stream == null)
 	screen.show()
 	assert(screen.is_processing())
 	screen.close()
+	assert(not screen._art.is_visible_in_tree() and screen._audio_bands == Vector3.ZERO and screen._art_energy == 0.0)
 	screen.free()
 	music.stop()
 	music.free()

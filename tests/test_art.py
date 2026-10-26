@@ -545,6 +545,14 @@ def check():
         file = ROOT / relative
         assert file not in owned_outputs, 'duplicate raster output ownership'
         owned_outputs.add(file)
+    # One accepted native Rivet owner is separate from all six retained rasters.
+    native_guard = runpy.run_path(str(ROOT / 'tools/rivet_forward_art_ledger.py'))
+    native = native_guard['validate_ledger'](ROOT, 'source/art/rivet-forward-v4/ledger.json')
+    assert native['status'] == 'STRUCTURAL_SINGLE_NATIVE_RIVET_VALID' and native['entries'] == 1
+    for relative in native['runtime_outputs']:
+        file = ROOT / relative
+        assert file not in owned_outputs, 'duplicate native Rivet output ownership'
+        owned_outputs.add(file)
     # Authored threshold scenes have their own strict eight-ID ledger. Keep this
     # separate from the immutable legacy Blender catalog and add only paths the
     # validator binds to GateArt plus actual game/data dimensions.

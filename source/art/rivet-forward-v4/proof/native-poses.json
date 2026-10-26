@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "atlas_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "actual_reopened_poses": [
+    {
+      "pose": "idle",
+      "axis": [
+        -3.340943521834561e-08,
+        1.0,
+        -5.983764594930108e-09
+      ],
+      "expected_axis": [
+        -1.3003269303166244e-17,
+        1.0,
+        -4.163336342344337e-17
+      ],
+      "muzzle_px": [
+        140.0,
+        62.00001239776611
+      ],
+      "axis_vp_px": [
+        139.99998092651367,
+        37.000107765197754
+      ]
+    },
+    {
+      "pose": "fire",
+      "axis": [
+        0.005580869968980551,
+        0.9996629357337952,
+        0.025354521349072456
+      ],
+      "expected_axis": [
+        0.005580754950642586,
+        0.9996629357337952,
+        0.02535456418991089
+      ],
+      "muzzle_px": [
+        139.99998092651367,
+        62.00002431869507
+      ],
+      "axis_vp_px": [
+        142.09243774414062,
+        27.472615242004395
+      ]
+    },
+    {
+      "pose": "recover",
+      "axis": [
+        -0.0021927731577306986,
+        0.9999444484710693,
+        -0.010317528620362282
+      ],
+      "expected_axis": [
+        -0.0021928867790848017,
+        0.9999443888664246,
+        -0.010317415930330753
+      ],
+      "muzzle_px": [
+        139.99998092651367,
+        62.00003623962402
+      ],
+      "axis_vp_px": [
+        139.1800594329834,
+        40.866780281066895
+      ]
+    }
+  ],
+  "geometry_frozen_across_material_finish": true,
+  "all_original_non_sight_vertices_verified_against_original_recipe": true,
+  "pose_pixel_bounds": {
+    "idle": [
+      101,
+      41,
+      293,
+      199
+    ],
+    "fire": [
+      101,
+      41,
+      277,
+      199
+    ],
+    "recover": [
+      102,
+      41,
+      301,
+      199
+    ]
+  },
+  "actual_idle_triangles": 11808,
+  "pipeline": "Blender5.2.2CyclesCPU64samples2threads; retained tools/build_art.py:pixels_render31-step quantized native readback/hardalpha",
+  "alpha_values": [
+    0,
+    255
+  ],
+  "all_three_distinct": true
+}

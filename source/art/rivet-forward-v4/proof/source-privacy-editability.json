@@ -1,0 +1,122 @@
+{
+  "scope": "Actual saved accepted source opened once; metadata/privacy/editability only; no render/bake/save",
+  "source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "source_bytes": 219389,
+  "source_unchanged": true,
+  "blender_version": "5.2.2 LTS",
+  "checked_string_or_path_fields": 9,
+  "private_or_absolute_path_count": 0,
+  "findings": [],
+  "excluded_necessary_field": {
+    "field": "bpy.data.filepath",
+    "reason": "Own currently opened file absolute path required by native source open; not an embedded asset dependency; value omitted"
+  },
+  "images": 0,
+  "libraries": 0,
+  "used_image_texture_nodes": 0,
+  "used_unique_meshes": 100,
+  "all_used_meshes_have_nonzero_3D_extent": true,
+  "editable_materials": 13,
+  "poses": [
+    {
+      "pose": "idle",
+      "mesh_objects": 99,
+      "vertices": 6078,
+      "triangles": 11808,
+      "barrel_matrix_basis": [
+        [
+          0.4166547358036041,
+          0.9090648293495178,
+          -2.7434872151843592e-08,
+          -0.9791386127471924
+        ],
+        [
+          -0.8031293749809265,
+          0.36810100078582764,
+          0.46849215030670166,
+          0.49609971046447754
+        ],
+        [
+          0.4258897304534912,
+          -0.19519945979118347,
+          0.8834676742553711,
+          -2.215609073638916
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose": "fire",
+      "mesh_objects": 99,
+      "vertices": 6078,
+      "triangles": 11808,
+      "barrel_matrix_basis": [
+        [
+          0.41649213433265686,
+          0.9090648889541626,
+          0.01163372490555048,
+          -0.9989224672317505
+        ],
+        [
+          -0.8158973455429077,
+          0.3681008219718933,
+          0.4458848834037781,
+          0.5574412941932678
+        ],
+        [
+          0.4010559022426605,
+          -0.19519945979118347,
+          0.8950147032737732,
+          -2.192068576812744
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose": "recover",
+      "mesh_objects": 99,
+      "vertices": 6078,
+      "triangles": 11808,
+      "barrel_matrix_basis": [
+        [
+          0.4166277348995209,
+          0.9090648889541626,
+          -0.004726690240204334,
+          -0.9709380865097046
+        ],
+        [
+          -0.7977628111839294,
+          0.3681008517742157,
+          0.47757306694984436,
+          0.4710438847541809
+        ],
+        [
+          0.4358847737312317,
+          -0.19519945979118347,
+          0.8785791993141174,
+          -2.224668025970459
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "editability_scope": "Real editable volumetric meshes and material node graphs with distinct saved pose transforms; no visual quality reapproval",
+  "status": "PASS",
+  "source": "source/art/rivet-forward-v4/rivet_pistol.blend",
+  "packaging_note": "Byte-identical accepted source, renamed for this public family; native audit verified the identical SHA before packaging."
+}

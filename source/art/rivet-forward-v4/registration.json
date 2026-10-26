@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "native-forward-rivet-registration",
+  "source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "atlas_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "runtime_contract": {
+    "atlas": [
+      960,
+      200
+    ],
+    "cell_size": [
+      320,
+      200
+    ],
+    "columns": 3,
+    "frames": [
+      "idle",
+      "fire",
+      "recover"
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "origin_px": [
+      160,
+      200
+    ],
+    "muzzle_px": [
+      140,
+      62
+    ],
+    "neutral_vanishing_point_px": [
+      140,
+      37
+    ],
+    "hud_destination": [
+      180,
+      143,
+      320,
+      200
+    ],
+    "filter": "nearest"
+  },
+  "pose_rgba8_sha256": [
+    "f3ee99b9a9c7c6603113d848f993fd7358cf0621da8ae20c3b66cf375aba96db",
+    "4d478d28be43b793a950da37bb86005cbec0c3e8d8b74fcedc737098ccf28516",
+    "a861b983d8d3b17c65e88bbaf1de7e91eb6f533e92f3b825979dc96e6ed68994"
+  ],
+  "runtime_uri": "res://assets/art/weapons/native-v4/rivet_pistol.png",
+  "player_asset_path": "native-v4/rivet_pistol",
+  "frame_pngs": [
+    {
+      "path": "source/art/rivet-forward-v4/frames/idle.png",
+      "sha256": "f0244cb2f22d146f4b22dde153c3b1c77371a5d8d26d136525460903098a89d9",
+      "bytes": 14987
+    },
+    {
+      "path": "source/art/rivet-forward-v4/frames/fire.png",
+      "sha256": "f7a694a5d370ee1db0513ac96c1930a1c92a9953a9323d67ee8cca8a8d202968",
+      "bytes": 14509
+    },
+    {
+      "path": "source/art/rivet-forward-v4/frames/recover.png",
+      "sha256": "3ecaf2aaae154800dbbed5ee1ef67230059ec39bc015de337e705b96112bf334",
+      "bytes": 15231
+    }
+  ],
+  "native_render_masters": [
+    {
+      "path": "source/art/rivet-forward-v4/masters/idle-native-render.png",
+      "sha256": "8264421863d58672b1730bd0c8e626cee508016d9fa84ba464f82869f40e7331",
+      "bytes": 55305
+    },
+    {
+      "path": "source/art/rivet-forward-v4/masters/fire-native-render.png",
+      "sha256": "03fd15c8a1e4c54188f5554f6e739ff4bd7f2def39b4b4fcc1c2f311d019941a",
+      "bytes": 53327
+    },
+    {
+      "path": "source/art/rivet-forward-v4/masters/recover-native-render.png",
+      "sha256": "e25d2c550d9614530b69e75655401808d1370f3a43e6145b38d48580a95f8f86",
+      "bytes": 55795
+    }
+  ],
+  "masters_classification": "Uncompiled same native draws before retained helper quantization; framePNGs/atlas are exact quantized runtime-pipeline bytes",
+  "atlas_rgba8_pixel_sha256": "78f9613ff8c8463181135a5cd139d416f7aed891784743f9b1e66ccba022f245",
+  "neutral_crosshair_screen_px": [
+    320,
+    180
+  ],
+  "muzzle_flash_screen_px": [
+    320,
+    205
+  ]
+}
