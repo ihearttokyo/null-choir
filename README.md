@@ -8,21 +8,29 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot presents 
 
 [![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download the Alpha 4 Major Features Preview 05 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-05-Apple-Silicon.zip). **Incremental playable preview; Alpha 4 remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
+[Download the Alpha 4 Major Features Preview 06 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-06-Apple-Silicon.zip). **Incremental playable preview; Alpha 4 remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
 
-Archive size: **212,095,872 bytes**
+Archive size: **289,894,541 bytes**
 
-SHA-256: `2ae7ab195417635a8cb7f181c977e9611e791af67f918d3bdc9d4422d81742ff`
+SHA-256: `79f8e2e3e90a5a987344bbbb97be4bd032e060db385ac2717ee172ee4df6ee16`
 
-[Export source commit](https://github.com/ihearttokyo/null-choir/tree/c133801f2d43a65076c54717c66ab035305ab08b/game) · [Shipping-identical source successor](https://github.com/ihearttokyo/null-choir/tree/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game) · [Alpha 4 Major Features Preview 05 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+[Export source commit](https://github.com/ihearttokyo/null-choir/tree/a126e4064e33190c7da8b42503c4b1a6c05b43b1/game) · [Merged source with the exact same tree](https://github.com/ihearttokyo/null-choir/tree/6e798220c16594c56f8be84cd959764999037157/game) · [Preview 06 release details](docs/releases/major-features-preview-06.md) · [All Alpha 4 builds](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+
+### What changed in Major Features Preview 06
+
+- **Eight living thresholds:** the Intake’s pressure sutures, Foundry’s refractory lobes, Processional’s cast-web chambers, Reliquary’s mineral archive, Nursery’s clinical cradle, Ossuary’s bone carrier, Inversion’s opposed returns and Heart’s final valve now appear on the actual interactive gates.
+- **Visible Blood and Ivory engagement:** separate keyed restraints withdraw independently. Opening clears the whole aperture immediately and leaves the authored released structure; Continue reconstructs an already-open gate without replaying an animation.
+- **Retained editable sources:** each runtime rig has a matching Blender source, packed paintings and artifact-bound qualification record. The existing collider, key requirements, route authority, save format and weapon balance are unchanged. These are not native8K chapter masters, and this is not a whole-map rebuild.
+
+[Preview 05 immediate rollback](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-05-Apple-Silicon.zip) — 212,095,872 bytes; SHA-256 `2ae7ab195417635a8cb7f181c977e9611e791af67f918d3bdc9d4422d81742ff`.
 
 ### What changed in Major Features Preview 05
 
 - **Six refreshed weapon sprites:** the Impact Tool, Rivet Pistol, Scattergun, Sawtooth Repeater, Marrow Launcher and Choir Disruptor now use the new original raster artwork in the runtime HUD. The six weapon identities, gameplay statistics, firing cadence and existing HUD placement are unchanged.
 - **Artwork, not gameplay captures:** these images show weapon sprite atlases, not first-person screenshots, anatomical hit areas or new weapons. The original 960×200 three-frame atlases remain the game assets; the public page shows only the idle pose.
-- **Earlier preview retained:** this package is built from the Alpha 4 Major Features Preview 04 release line; the exact Preview 04 download remains available below as the immediate rollback.
+- **Earlier preview retained:** this package is built from the Alpha 4 Major Features Preview 04 release line; the exact Preview 04 download remains available below as an earlier rollback.
 
-Living membrane gates and nearby environmental variation—and the “cathedral remembers” feature—remain planned, not shipped in Preview 05. The broader Alpha 4 / major-feature roadmap is still in progress. Do not describe this preview as the completed Alpha 4 milestone.
+Gate assemblies first ship in Preview 06, not in Preview 05. The optional “cathedral remembers” return-room feature and broader environmental upgrades remain planned. Neither Preview 05 nor Preview 06 is a completed Alpha 4 milestone.
 
 [Preview 04 rollback](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-04-Apple-Silicon.zip) — 211,454,661 bytes; SHA-256 `ad9ed7e8a822ed37c7b1624dc40363966423356edf7c198d556740aaace9728b`.
 
@@ -55,7 +63,7 @@ Preview 02’s terrain, six title/chapter paintings, illustrated progression/int
 
 ### Still unfinished and known limits
 
-This is an incremental early playable preview, not a completed Alpha 4 or full-goal release. Further campaign and visual work remains. Physical keyboard/mouse/gamepad play, human listening, full played pacing and sustained FPS are not certified by automated checks. Gamepad support and fullscreen performance remain under development. The experimental richer SoundTest and concept enemy/weapon art are not shipped upgrades in this preview.
+This is an incremental early playable preview, not a completed Alpha 4 or full-goal release. Further campaign and visual work remains. Physical keyboard/mouse/gamepad play, human listening, full played pacing and sustained FPS are not certified by automated checks. Gamepad support and fullscreen performance remain under development. The experimental richer SoundTest and enemy concept studies are not shipped runtime upgrades in this preview.
 
 ### Previous downloads and rollback
 
@@ -66,9 +74,9 @@ This is an incremental early playable preview, not a completed Alpha 4 or full-g
 
 ## Development status
 
-The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. Preview 05 adds six raster weapon atlases while retaining the prior chapter art and Ossuary crossing; this does not certify the entire campaign or remaining art roadmap. Original authoring sources and earlier assets remain retained.
+The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. Preview 06 adds eight authored gate assemblies and retains the six Preview 05 weapon atlases, chapter art and Ossuary crossing; this does not certify the entire campaign or remaining art roadmap. Original authoring sources and earlier assets remain retained.
 
-The unaccepted SoundTest upgrade and focused tests are preserved in `source/prototypes/resonance-20261026/`. The runtime module and its active test suite retain the already-released Preview 03 version. The new weapon sprites are raster assets, not a claim of new editable Blender models. No richer-visualizer, native-8K, human-play or FPS claim is made for this update. [DESIGN.md](DESIGN.md) remains the full project brief.
+The unaccepted SoundTest upgrade and focused tests are preserved in `source/prototypes/resonance-20261026/`. The runtime module and its active test suite retain the already-released Preview 03 version. The weapon sprites are raster assets with retained matching editable 3D design companions; the raster atlases are not described as Blender renders. No richer-visualizer, native-8K, human-play or FPS claim is made for this update. [DESIGN.md](DESIGN.md) remains the full project brief.
 
 ## Run and build
 
