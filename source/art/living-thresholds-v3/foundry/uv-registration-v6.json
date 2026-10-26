@@ -1,0 +1,48 @@
+{
+  "albedo_sha256": "a74a2b0ece732862d94b4bd18f10689cd6d0e385e6a1efb53d2f6666a6c9fee2",
+  "actual_dimensions": [
+    1606,
+    979
+  ],
+  "mapping": "wholeleafglobalXY U=(x+4.1)/8.2,V=y/5; no fourbandatlas",
+  "channels_normalized_bottom_origin": [
+    [
+      [
+        0,
+        0.965
+      ],
+      [
+        0.29,
+        0.86
+      ],
+      [
+        0.14,
+        0.24
+      ],
+      [
+        0.93,
+        0.005
+      ]
+    ],
+    [
+      [
+        0.2,
+        1
+      ],
+      [
+        0.65,
+        0.96
+      ],
+      [
+        0.62,
+        0.39
+      ],
+      [
+        1,
+        0.16
+      ]
+    ]
+  ],
+  "geometry": "world-distance to80segments perBezier drives actual continuous scars/rolled rims/broadlobes",
+  "not_native8K": true
+}

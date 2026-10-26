@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "ossuary_transfer_gate",
+  "asset_sha256": "f706327b168bbcdb71ed433d951385057b72f751f6cba14ec038fff2fdd57ede",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T14:31:07.493966+00:00",
+    "root_freeze_identity": "FROZEN-OSSUARY.json",
+    "root_freeze_sha256": "11f92a8640b09d2b282522954d67d91d94344c08c9eb3e90dd32fc0bb4434573",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

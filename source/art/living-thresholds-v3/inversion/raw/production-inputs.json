@@ -1,0 +1,86 @@
+{
+  "chapter": "Inversion",
+  "method": "Built-in image_gen; construction reference is design evidence only; full-bleed albedo and hardware palette registered to genuine editable sculpted mesh. Not native8K.",
+  "prompts": {
+    "reference": "Original NULL CHOIR Inversion construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Static counter-tension loop around continuous opaque curtain, not a rotating gimbal. Load path apparent lower restraint\u2192side return\u2192overhead anchor\u2192opposite shoulder; all supports visibly terminate at architecture. Dark structure, pale surgical lining, restrained bronze; reverse view explains service/reset. Blood cocks counterweight carriage; Ivory releases fixed alignment index. Leaf gathers into upper receiver; aperture never turns. Optional two-depth braces only if connected and clear of normal camera pitches. Create a static counter-tension threshold with continuous opaque curtain and traceable support loop from lower restraint to side return, overhead anchor and opposite shoulder. Show two offset visible carriages, fixed alignment housing and gathered leaf in upper receiver above local Y=5. Orient 12.2 m width along world Z at yaw 90\u00b0; static lower structure outside that Z corridor. Front/back/three-quarter views. No room, camera, gravity, collision or lighting bake. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K.",
+    "leaf_albedo": "Use case: stylized-concept. Asset: NULL CHOIR Inversion full-bleed opaque base-color pigment texture for a sculpted counter-tension surgical membrane, landscape 2.44:1. ONLY one continuous rectangular material surface fully reaching all four image edges. Broad pale-grey surgical textile skin folds diagonally under opposing tension: a large hooked downward-left sweep answered by a smaller upward-right sweep, connected dark claret tension path, sparse brass repair staples and dry pale suture scars. Very legible asymmetry and broad quiet parchment fields with localized finely painted craftsmanship; otherworldly suspension, not a flag or four straight boards. Original industrial cosmic body-horror. Neutral diffuse pigment ONLY; no rendered shadows, specular highlights, glowing effects or baked lighting. No complete gate, frame, rails, machinery, latch, border, floor, wall, backdrop, text, labels, symbols, collage, separate objects or perspective. Not a concept sheet. The whole image IS the unbroken skin surface, no transparent/white background or holes. Genuine sculpted 3D runtime source supplies its depth later. Not an 8K master."
+  },
+  "brief": {
+    "chapter": "Inversion",
+    "stable_id": "inversion_alignment_gate",
+    "aperture_m": [
+      12.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 90,
+    "origin_xyz_m": [
+      146.8,
+      -5,
+      110
+    ],
+    "width_axis": "world Z",
+    "run_m": [
+      104,
+      116
+    ],
+    "roof_margin_above_old_box_m": 4,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -3.5,
+        1.4,
+        0.0
+      ],
+      "Ivory": [
+        3.75,
+        3.35,
+        0.0
+      ]
+    },
+    "form_and_material": "Static counter-tension loop around continuous opaque curtain, not a rotating gimbal. Load path apparent lower restraint\u2192side return\u2192overhead anchor\u2192opposite shoulder; all supports visibly terminate at architecture. Dark structure, pale surgical lining, restrained bronze; reverse view explains service/reset. Blood cocks counterweight carriage; Ivory releases fixed alignment index. Leaf gathers into upper receiver; aperture never turns. Optional two-depth braces only if connected and clear of normal camera pitches.",
+    "construction_reference_prompt": "Create a static counter-tension threshold with continuous opaque curtain and traceable support loop from lower restraint to side return, overhead anchor and opposite shoulder. Show two offset visible carriages, fixed alignment housing and gathered leaf in upper receiver above local Y=5. Orient 12.2 m width along world Z at yaw 90\u00b0; static lower structure outside that Z corridor. Front/back/three-quarter views. No room, camera, gravity, collision or lighting bake.",
+    "full_leaf_albedo_prompt": "Full-leaf orthographic material only: pale surgical lining, restrained dark structural contact seams, subtle wear, no directional lighting cues. Opaque continuous curtain distinct from metal counter-tension hardware. No frame, room, shadows, text, glow or whole-gate image.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "inversion_construction_reference_v1.png",
+      "sha256": "6467ec26f9c29f4c2c6b0f1c0a2a4dc516046d9817c11517e929199b3bf140ea",
+      "kind": "construction-reference-only",
+      "dimensions": [
+        1956,
+        804
+      ],
+      "bytes": 2189346,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Original NULL CHOIR Inversion construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Static counter-tension loop around continuous opaque curtain, not a rotating gimbal. Load path apparent lower restraint\u2192side return\u2192overhead anchor\u2192opposite shoulder; all supports visibly terminate at architecture. Dark structure, pale surgical lining, restrained bronze; reverse view explains service/reset. Blood cocks counterweight carriage; Ivory releases fixed alignment index. Leaf gathers into upper receiver; aperture never turns. Optional two-depth braces only if connected and clear of normal camera pitches. Create a static counter-tension threshold with continuous opaque curtain and traceable support loop from lower restraint to side return, overhead anchor and opposite shoulder. Show two offset visible carriages, fixed alignment housing and gathered leaf in upper receiver above local Y=5. Orient 12.2 m width along world Z at yaw 90\u00b0; static lower structure outside that Z corridor. Front/back/three-quarter views. No room, camera, gravity, collision or lighting bake. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K."
+    },
+    {
+      "file": "inversion_leaf_albedo_v1.png",
+      "sha256": "8680436eac834588aef106aa5fba6edda554948d745dc69e4f81c4f1ba28d9e4",
+      "kind": "leaf-albedo",
+      "dimensions": [
+        1958,
+        803
+      ],
+      "bytes": 2965743,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Use case: stylized-concept. Asset: NULL CHOIR Inversion full-bleed opaque base-color pigment texture for a sculpted counter-tension surgical membrane, landscape 2.44:1. ONLY one continuous rectangular material surface fully reaching all four image edges. Broad pale-grey surgical textile skin folds diagonally under opposing tension: a large hooked downward-left sweep answered by a smaller upward-right sweep, connected dark claret tension path, sparse brass repair staples and dry pale suture scars. Very legible asymmetry and broad quiet parchment fields with localized finely painted craftsmanship; otherworldly suspension, not a flag or four straight boards. Original industrial cosmic body-horror. Neutral diffuse pigment ONLY; no rendered shadows, specular highlights, glowing effects or baked lighting. No complete gate, frame, rails, machinery, latch, border, floor, wall, backdrop, text, labels, symbols, collage, separate objects or perspective. Not a concept sheet. The whole image IS the unbroken skin surface, no transparent/white background or holes. Genuine sculpted 3D runtime source supplies its depth later. Not an 8K master."
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "kind": "shared-hardware-albedo",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 2893698,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Shared original hardware palette from Intake, hash retained"
+    }
+  ]
+}

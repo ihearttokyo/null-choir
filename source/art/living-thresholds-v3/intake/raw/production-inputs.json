@@ -1,0 +1,31 @@
+{
+  "assets": [
+    {
+      "file": "intake_membrane_pigment_v3.png",
+      "sha256": "312735b7c9a6b0bf882ddfc6013ab36bdcbd07f3963593c85b6f76621e1a8b28",
+      "bytes": 3174773,
+      "dimensions": [
+        1608,
+        978
+      ],
+      "generator": "builtin image_gen",
+      "use": "albedo only; not true normal/roughness or native8K; not a finished model",
+      "original_retained": true
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "bytes": 2893698,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "generator": "builtin image_gen",
+      "use": "albedo only; not true normal/roughness or native8K; not a finished model",
+      "original_retained": true
+    }
+  ],
+  "reference_sha256": "139255d2fb0905ff5563fc1708eb8b45152cf70325fa4c9e9b64522b006cc4cb",
+  "requested_geometry": "wide8.2x5x.6 productionIntake; realmodeledlobesandconnectedhardware, notimageplane",
+  "native8K": false
+}

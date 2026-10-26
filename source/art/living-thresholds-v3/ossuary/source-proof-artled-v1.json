@@ -1,0 +1,396 @@
+{
+  "schema": 1,
+  "registration": "artled-registration-v1.json",
+  "registration_sha256": "3c07a39017f08bdcf7f417bdd0dc9a302d4f1f4fa0fd59008d523a05130edfc8",
+  "closed_geometry_proof": [
+    {
+      "mesh": "Registered closed sculptural leaf",
+      "closed_edges_checked": 47008,
+      "signed_volume_m3": 18.62513095235588,
+      "all_edges_two_faces": true
+    },
+    {
+      "mesh": "Gathered registered closure",
+      "closed_edges_checked": 3376,
+      "signed_volume_m3": 0.60852456529877,
+      "all_edges_two_faces": true
+    }
+  ],
+  "actual_global_uv_registration": {
+    "mapping": "global XY U right V up; mirrored same pigment on back",
+    "front_vertices": 11753,
+    "back_vertices": 11753,
+    "registered_loops": 94016,
+    "actual_selected_painting_sha256": "0f13ed84dfd3b6dabd71a9ba585c59ad3142f1d8a4b0507e27b7676a18920a01"
+  },
+  "swept_support_contact_proof": [
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "stroke_m": 0,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 4.915124923727108e-07
+    },
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "stroke_m": 0.675,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 9.830249847454215e-07
+    },
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "stroke_m": 1.35,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "stroke_m": 0,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 4.76837158203125e-07
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "stroke_m": 0.675,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 1.018524616398517e-06
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "stroke_m": 1.35,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "stroke_m": 0,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "stroke_m": 0.675,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "stroke_m": 1.35,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 5.331201499700045e-07
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "stroke_m": 0,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "stroke_m": 0.675,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 0.0
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "stroke_m": 1.35,
+      "evaluated_shoe_distance_m": 0.0,
+      "evaluated_land_distance_m": 5.331201499700045e-07
+    }
+  ],
+  "mechanism_contact_proof": [
+    {
+      "mechanism": "Blood",
+      "face": -1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws back",
+      "moving_mesh": "Blood keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 5.960464477539063e-08,
+          "released_pressure_distance_m": 1.070593221946345,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 4.770699320310986e-07,
+          "evaluated_pressure_distance_m": 1.1920928955078125e-07,
+          "released_pressure_distance_m": 1.0693315183644017,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Blood",
+      "face": 1,
+      "receiver_mesh": "Blood substantial keyed receiver jaws front",
+      "moving_mesh": "Blood keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 1.4901161193847656e-08,
+          "evaluated_pressure_distance_m": 5.960464477539063e-08,
+          "released_pressure_distance_m": 1.070593221946345,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.1920928955078125e-07,
+          "released_pressure_distance_m": 1.0693315183644017,
+          "contact_depth_m": 0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": -1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws back",
+      "moving_mesh": "Ivory keyed pressure body back",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 1.0705936908291545,
+          "contact_depth_m": -0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 1.0693319355441242,
+          "contact_depth_m": -0.2
+        }
+      ]
+    },
+    {
+      "mechanism": "Ivory",
+      "face": 1,
+      "receiver_mesh": "Ivory substantial keyed receiver jaws front",
+      "moving_mesh": "Ivory keyed pressure body front",
+      "root_z": -0.0,
+      "jaw_contacts": [
+        {
+          "local_y": -0.3,
+          "evaluated_receiver_distance_m": 1.4901161193847656e-08,
+          "evaluated_pressure_distance_m": 0.0,
+          "released_pressure_distance_m": 1.0705936908291545,
+          "contact_depth_m": 0.2
+        },
+        {
+          "local_y": 0.3,
+          "evaluated_receiver_distance_m": 0.0,
+          "evaluated_pressure_distance_m": 1.4901161193847656e-08,
+          "released_pressure_distance_m": 1.0693319355441242,
+          "contact_depth_m": 0.2
+        }
+      ]
+    }
+  ],
+  "released_configuration_bounds": {
+    "min": [
+      -5.980000019073486,
+      5.130000114440918,
+      -0.17499999701976776
+    ],
+    "max": [
+      5.980000019073486,
+      5.369999885559082,
+      0.17499999701976776
+    ],
+    "size": [
+      11.960000038146973,
+      0.23999977111816406,
+      0.3499999940395355
+    ]
+  },
+  "released_aperture_clearance_m": 0.13000011444091797,
+  "released_root": "StationaryFrame/ReleasedClosure",
+  "released_neutral_source_hidden": true,
+  "release_story": "Same actual selected pigment authored as folded compressed carrier in fixed receiving mouth, no fluid simulation/newtimer/opaque aperture geometry",
+  "actual_closed_assembly_bounds": {
+    "min": [
+      -6.704999923706055,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.704999923706055,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.40999984741211,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "actual_both_seal_assembly_bounds": {
+    "min": [
+      -6.704999923706055,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.704999923706055,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.40999984741211,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "carriage_origins_godot": {
+    "BloodLatch": [
+      -3.9,
+      1.3,
+      0
+    ],
+    "IvoryLatch": [
+      3.2,
+      3.4,
+      0
+    ]
+  },
+  "motion_witnesses": [],
+  "scope": "Source-only original editable Blender model, actual GLB export and actual saved-source reopen. Native normal import, visual matching and mounting acceptance pending.",
+  "source": "ossuary_threshold_artled_v1.blend",
+  "source_sha256": "e228a0fe3ad8a419d95b2e3e9de11d544cd5c3ed4ebea1c3afa37897488d8e2b",
+  "recipe": "build_source_artled_v1.py",
+  "recipe_sha256": "2670cd9b118dbc0f3a0220ca24a18ceae6869d9378390a9e979de4d0a6b23872",
+  "candidate_glb_sha256": "f706327b168bbcdb71ed433d951385057b72f751f6cba14ec038fff2fdd57ede",
+  "candidate_glb_bytes": 7820244,
+  "actual_full_MovingLeaf_Visual_bounds": {
+    "min": [
+      -6.099999904632568,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.099999904632568,
+      5.0,
+      0.30000001192092896
+    ],
+    "size": [
+      12.199999809265137,
+      5.0,
+      0.6000000238418579
+    ]
+  },
+  "actual_shell_bounds": {
+    "min": [
+      -6.099999904632568,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.099999904632568,
+      5.0,
+      0.30000001192092896
+    ],
+    "size": [
+      12.199999809265137,
+      5.0,
+      0.6000000238418579
+    ]
+  },
+  "actual_assembly_bounds": {
+    "min": [
+      -6.704999923706055,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      6.704999923706055,
+      5.454999923706055,
+      0.30000001192092896
+    ],
+    "size": [
+      13.40999984741211,
+      5.454999923706055,
+      0.6000000238418579
+    ]
+  },
+  "actual_export_parts": {
+    "StationaryFrame": {
+      "triangles": 2000,
+      "vertices": 1040,
+      "surfaces": 4
+    },
+    "MovingLeaf": {
+      "triangles": 48920,
+      "vertices": 24498,
+      "surfaces": 4
+    },
+    "BloodLatch": {
+      "triangles": 600,
+      "vertices": 312,
+      "surfaces": 3
+    },
+    "IvoryLatch": {
+      "triangles": 584,
+      "vertices": 304,
+      "surfaces": 3
+    },
+    "ReleasedClosure": {
+      "triangles": 3376,
+      "vertices": 1690,
+      "surfaces": 1
+    }
+  },
+  "actual_triangles": 55480,
+  "actual_export_surfaces": 15,
+  "editable_source_meshes": 52,
+  "packed_images": [
+    {
+      "name": "hardware_pigments_v3.png",
+      "filepath": "//hardware_pigments_v3.png",
+      "packed_bytes": 2893698,
+      "packed_sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+    },
+    {
+      "name": "ossuary_integrated_construction_v1.png",
+      "filepath": "//ossuary_integrated_construction_v1.png",
+      "packed_bytes": 3432692,
+      "packed_sha256": "0f13ed84dfd3b6dabd71a9ba585c59ad3142f1d8a4b0507e27b7676a18920a01"
+    }
+  ],
+  "privacy": {
+    "actual_rna_paths_checked": 6,
+    "custom_string_properties_checked": 5,
+    "private_absolute_paths": 0,
+    "paths": [
+      "//hardware_pigments_v3.png",
+      "//ossuary_integrated_construction_v1.png",
+      "//hardware_pigments_v3.png",
+      "//ossuary_integrated_construction_v1.png",
+      "//",
+      "//"
+    ],
+    "sanitizer": "tools/build_art.py:sanitize_source_paths",
+    "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+  },
+  "actual_vertex_edit_revert": true,
+  "source_unchanged_after_reopen": true,
+  "native8K": false,
+  "normal_roughness_images": false,
+  "rendered_baked_simulated": false
+}

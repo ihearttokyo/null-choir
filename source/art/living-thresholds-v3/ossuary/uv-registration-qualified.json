@@ -1,0 +1,22 @@
+{
+  "candidate_glb_sha256": "f706327b168bbcdb71ed433d951385057b72f751f6cba14ec038fff2fdd57ede",
+  "coordinates": "Original retained source registration: normalized UV coordinates, U right/V up. This additive adapter binds material inputs; exact selected UVs remain in the unchanged Blender source and original registration.",
+  "hardware": {
+    "file": "raw/hardware_pigments_v3.png",
+    "mapping": "Existing four-quadrant hardware pigment atlas mapped by unchanged source material swatches.",
+    "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f"
+  },
+  "membrane": {
+    "file": "raw/ossuary_integrated_construction_v1.png",
+    "mapping": "Original selected full-leaf painting mapped by the unchanged source recipe and original retained registration; no image edits or reconstructed UVs.",
+    "sha256": "0f13ed84dfd3b6dabd71a9ba585c59ad3142f1d8a4b0507e27b7676a18920a01"
+  },
+  "normalization_scope": "Metadata schema adapter only. Original registration, recipe, source, packed images and runtime GLB are unchanged. No new engine or quality claims.",
+  "original_registration": {
+    "path": "source/art/living-thresholds-v3/ossuary/artled-registration-v1.json",
+    "sha256": "3c07a39017f08bdcf7f417bdd0dc9a302d4f1f4fa0fd59008d523a05130edfc8"
+  },
+  "schema": "null-choir.threshold-uv-registration-adapter",
+  "schema_version": 1,
+  "source_blend_sha256": "e228a0fe3ad8a419d95b2e3e9de11d544cd5c3ed4ebea1c3afa37897488d8e2b"
+}

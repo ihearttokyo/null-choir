@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "inversion_alignment_gate",
+  "asset_sha256": "d29c5d66c623b51d2f5c5ad9e5bdba984f12e611c452db5477e0b3ce39ae1a72",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T14:31:07.522177+00:00",
+    "root_freeze_identity": "FROZEN-INVERSION.json",
+    "root_freeze_sha256": "2377931f6a4dcb40871b1a8fa0426124cbb90b9acb31e42c0e19b458c887a5a5",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

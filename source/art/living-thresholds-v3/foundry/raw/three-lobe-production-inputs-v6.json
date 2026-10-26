@@ -1,0 +1,30 @@
+[
+  {
+    "file": "foundry_three_lobe_reference_v6.png",
+    "sha256": "8904422699a7c138ae02ee96d936d4ad210ef0843a60e24a59038bc35cba7a51",
+    "bytes": 3141863,
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "kind": "construction-reference-only",
+    "prompt": "NEW ORIGINAL NULL CHOIR FOUNDRY containment-seal design reference, major FORM redesign, NOT another four-plank door. Four panels2x2 landscape sheet: closed front, closed three-quarter, rear closed, and OPEN with compressed closure stowed in overhead receiver. Each aperture is LOW WIDE8.2width x5height; no portrait gate. The closure is a continuous opaque dark refractory-fiber blanket carrying THREE UNEQUAL, DIAGONALLY INTERLOCKED, deeply CURVED MINERALIZED pressure lobes, like flexible ceramic-coated furnace gills. Each has substantial rolled bearing rim, recessed dark scar/channel and distinct protected heat-shield face. Asymmetric sculptural masses, not parallel horizontal bands, rectangular planks, rows of buttons or uniform plates. Exposed fibrous backing joins the three shapes; no see-through holes. The rigid pressure machinery stays peripheral; large independently sliding LEFT pressure ram and RIGHT withdrawal wedge must be plainly readable well INWARD at x\u00b12.4, not hidden by sidewalls. Both ready remains closed; open image clearly shows a shallow compressed three-lobe remnant ABOVE5m aperture in a connected header receiver, with entirepassage clear. Broad protected mineral-coated faces with carefully composed fine fractures/repair incisions; restrained charcoal/crimson heat-scored seams, aged bronze load connections, tiny petrol-steel accents. NO dense all-over rust/slate mottling, no blank beige block faces, no generic steampunk clutter. Original unsettling biomechanical/surgical-industrial craft; warm ash ivory and cool mineral grey with dark carbon seams. Model real relief within a0.6mdeep closure. Every support/feed ends in socket/receiver. Header low max5.5m, stationary architecture outside passage. Strong actual3D layered edge hierarchy, physically intelligible but weird enough to be memorable. Clear material/shape hierarchy readable at640x360. Neutral nonemissive illumination, no glow/flames/lava/room/mystic symbols/lettering except small viewlabels. Design input for genuine editableBlender production, NOT a runtime asset or8K master.",
+    "generator": "builtin image_gen",
+    "native8K": false,
+    "original_retained": true
+  },
+  {
+    "file": "foundry_three_lobe_albedo_v6.png",
+    "sha256": "a74a2b0ece732862d94b4bd18f10689cd6d0e385e6a1efb53d2f6666a6c9fee2",
+    "bytes": 3897344,
+    "dimensions": [
+      1606,
+      979
+    ],
+    "kind": "leaf-albedo",
+    "prompt": "Create a new original PRODUCTION COLOR/ALBEDO painting for the CLOSED Foundry flexible mineralized seal in the supplied reference. Output ONE full-bleed opaque wide landscape face8.2:5, no panels, frame, machinery, wall, room, labels or border. Exactly THREE UNEQUAL DIAGONALLY INTERLOCKING CURVED MINERAL PRESSURE LOBES: slender lower-left sweeping lobe, broad central lens, opposed upper-right lobe, all joined by a continuous refractory-fiber backing. Strong composed flowing S-curve edge hierarchy, NO straight horizontal plank strips. Quiet large protected warm ash-ivory/cool mineral-grey faces with beautifully authored fine pressure fractures and localized repair incisions, dark charcoal/carbonized-crimson fibrous rolled margins. Material craftsmanship communicates heat/protection and tension, not dense all-over rust/slate/granite mottling or generic beige plaster. Keep~80percent protectedlighterareas, darkmaterialconcentratedalongmodeledcurvedseams/rims. Layering must be clear at640x360. This is PIGMENT/albedo: completely even diffuse illumination, no directional cast shadows/specular highlights/baked room AO/glow. The matching genuine3D mesh will create bulges/rolled edges and shadows. No see-through gaps and no alpha. Original cosmic-horror biomechanical industrial artwork, not existing gameart. Use reference only for three-lobe design/material hierarchy; do not copy the full doorway/photo lighting. Actual output resolution recorded, NOT8K.",
+    "generator": "builtin image_gen",
+    "native8K": false,
+    "original_retained": true
+  }
+]

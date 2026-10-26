@@ -543,6 +543,7 @@ func collect_key(id: String) -> void:
 			state.removed.append(id)
 			level.remove_marker(id)
 			level.refresh_machine_lights()
+			level.refresh_gate_presentations()
 			if effects != null: effects.play("seal_release",-6)
 			notify(spec.text)
 			return

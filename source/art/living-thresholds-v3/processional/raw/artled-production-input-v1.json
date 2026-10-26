@@ -1,0 +1,16 @@
+{
+  "file": "processional_integrated_construction_v1.png",
+  "sha256": "035b12a8aa2fe0b9f2becb8cf3f57dfa7fe3ce92953f99c50ad022f64fc5d494",
+  "bytes": 3407585,
+  "dimensions": [
+    1677,
+    938
+  ],
+  "kind": "art-led-integrated-leaf-construction-albedo",
+  "generator": "builtin image_gen",
+  "prompt": "Use case: stylized-concept. Production COLOR SURFACE PAINTING for NULL CHOIR's Processional living threshold, landscape1.64:1. SINGLE continuous opaque rectangular surface filling every pixel to all4edges; NOT a whole doorway in a room and NO outerframe/background. Design an extraordinarily beautiful original hand-painted industrial-cosmic-horror organ-pressure closure: seven UNEQUAL, bent, overlapping bellows chambers\u2014not7equal tubes or planks\u2014nested into ONE continuous sculptural cast-bronze and oldivory structural web. Four dominant twisted cushioned chambers plus3small offset chambers, each meeting a deep dark mineral-lined lobed throat through broad curved bronze saddles, folded leatherlike pressure skin, reinforced rolled lips and convincing continuous load transitions. The big connected manufactured construction IS the leaf surface, not little rings or bars pasted over plain cloth. Strong asymmetric near/mid form hierarchy and deliberate broad quiet planes; warm agedbone/bronze/darkclaret, no generic dense grunge. A deeply integrated dark receiver bed at about22%across/73%down and another at75%across/35%down, each modest sized, EMPTY\u2014no latch or movablebar painted into it. Real articulated moving carriages will be authored separately. Fixed structural web, chamber folds and emptyreceivers travel with wholeleaf onrelease. Richly crafted confident brushwork and material pigment, like exquisite high-end retrohorror game texture art, legible at640\u00d7360. Orthographic front surface registration, neutral even pigment illumination. No perspective, castshadow, specular/glow, lettering, symbols, labels, watermark, collage, outside wall/floor, freestanding frame or white background. Every edge continues the surface. No faces/eyes/teeth/creature mouth, no copiedgameart. The dark throats are opaque backed construction, not transparentholes. Actual editable sculpted relief will match this painting; do not claim native8K.",
+  "native8K": false,
+  "original_retained": true,
+  "status": "SOURCE_INPUT_ONLY_NOT_RUNTIME_ACCEPTED",
+  "note": "Surface painting including STATIC structural web and empty receivers; actual moving carriages remain separate geometry. Requires matching genuine relief/native review; no flat-plane substitute."
+}

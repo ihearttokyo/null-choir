@@ -1,0 +1,27 @@
+{
+  "additional_reviewed_views": [
+    "oblique"
+  ],
+  "asset_id": "processional_gate",
+  "asset_sha256": "c1c302efeb6c1a17ed54d79caaab8eb7e32a0d259ff3f571a4338aba295c85d8",
+  "coverage": {
+    "actual_level": true,
+    "closed": true,
+    "four_key_states": true,
+    "front_and_back": true,
+    "released": true
+  },
+  "decision": "PASS",
+  "decision_authority": {
+    "recorded_utc": "2026-10-26T14:04:06.370844+00:00",
+    "root_freeze_identity": "FROZEN-PROCESSIONAL.json",
+    "root_freeze_sha256": "788665a94f7503fd524a84ea67201d2f25c9f78d9542fcdfd84ae61f48c2ef82",
+    "state": "PASS_FROZEN"
+  },
+  "provenance": "Independent intended-use PASS is transcribed from the root-owned PASS_FROZEN decision for these exact bytes. This assembler is not the reviewer and does not publish private review scores.",
+  "release_status": "Unreleased qualified candidate; not a standalone or public-release receipt.",
+  "reviewer_independent": true,
+  "schema": "null-choir.threshold-independent-intended-use",
+  "schema_version": 1,
+  "scope": "threshold-native640-intended-use-v1"
+}

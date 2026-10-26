@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "coordinates": "Blender UV bottom origin; sourcePNG pixel coordinates top origin",
+  "membrane": {
+    "file": "raw/intake_membrane_pigment_v3.png",
+    "sha256": "312735b7c9a6b0bf882ddfc6013ab36bdcbd07f3963593c85b6f76621e1a8b28",
+    "dimensions": [
+      1608,
+      978
+    ],
+    "hub_uv": [
+      0.622,
+      0.54
+    ],
+    "hub_source_px_top": [
+      1000.176,
+      449.87999999999994
+    ],
+    "front": "UV(u,v) exact entire opaque painting over actual inflated shell geometry",
+    "back": "Same original painting mirroredU on independently modeled back shell; not another generated painting",
+    "authored_curved_seam_paths_uv": [
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.595,
+          0.72
+        ],
+        [
+          0.575,
+          0.89
+        ],
+        [
+          0.58,
+          1
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.43,
+          0.7
+        ],
+        [
+          0.3,
+          0.77
+        ],
+        [
+          0.2,
+          1
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.36,
+          0.61
+        ],
+        [
+          0.14,
+          0.57
+        ],
+        [
+          0,
+          0.54
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.38,
+          0.43
+        ],
+        [
+          0.16,
+          0.29
+        ],
+        [
+          0,
+          0.13
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.58,
+          0.31
+        ],
+        [
+          0.54,
+          0.12
+        ],
+        [
+          0.51,
+          0
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.77,
+          0.3
+        ],
+        [
+          0.9,
+          0.17
+        ],
+        [
+          1,
+          0.08
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.81,
+          0.51
+        ],
+        [
+          0.94,
+          0.52
+        ],
+        [
+          1,
+          0.62
+        ]
+      ],
+      [
+        [
+          0.622,
+          0.54
+        ],
+        [
+          0.79,
+          0.69
+        ],
+        [
+          0.91,
+          0.83
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    ],
+    "geometry_relief_z_m": [
+      0.052,
+      0.3
+    ],
+    "surface_grid": [
+      64,
+      40
+    ],
+    "editing": "Original raster unmodified; no image crop/resize/repaint/displacement/normal fabrication",
+    "receiver_compression_beds": {
+      "world_xy_in_leaf": [
+        [
+          -3.22,
+          1.72
+        ],
+        [
+          3.22,
+          3.23
+        ]
+      ],
+      "purpose": "Actual mesh indentation lets substantial shoes seat and remain visible inside sole blocker depth; no color-image manipulation"
+    }
+  },
+  "hardware": {
+    "file": "raw/hardware_pigments_v3.png",
+    "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "uv_rects": {
+      "steel": [
+        0.02,
+        0.52,
+        0.48,
+        0.98
+      ],
+      "bronze": [
+        0.52,
+        0.52,
+        0.98,
+        0.98
+      ],
+      "ivory": [
+        0.02,
+        0.02,
+        0.48,
+        0.48
+      ],
+      "hose": [
+        0.52,
+        0.02,
+        0.98,
+        0.48
+      ]
+    },
+    "registration": "Per-solid dominant-face projection into the manually selected swatch interior; no whole-door image mesh"
+  },
+  "maps": "Color albedos only; no normal/roughness image maps; native geometry normals and actual numeric PBR materials",
+  "moving_aperture_parts_z_envelope_m": [
+    -0.3,
+    0.3
+  ],
+  "wall_mount_anchors": {
+    "local_x": [
+      -4.14,
+      4.14
+    ],
+    "plate_width_m": 0.28,
+    "actual_wall_return_x": [
+      -4,
+      4
+    ],
+    "wall_thickness_m": 0.28,
+    "claim": "Intentional outboard connection to sidewall returns; native mounting fit NOT yet passed"
+  },
+  "released_configuration": {
+    "root": "StationaryFrame/ReleasedClosure",
+    "derived_from": "Original pigment UV over separate authored closed thin gathered mesh; intact leaf geometry/UV unmodified",
+    "uv_front": "Entire original(u,v)",
+    "uv_back": "Same original(1-u,v)",
+    "geometry_bounds_godot": {
+      "min": [
+        -3.9000000953674316,
+        5.065000057220459,
+        -0.21230466663837433
+      ],
+      "max": [
+        3.9000000953674316,
+        5.394999980926514,
+        0.21230466663837433
+      ],
+      "size": [
+        7.800000190734863,
+        0.3299999237060547,
+        0.42460933327674866
+      ]
+    },
+    "aperture_top_clearance_m": 0.06500005722045898,
+    "visible_closed": false,
+    "visible_open_and_removed": true,
+    "simulation_or_new_timer": false
+  }
+}

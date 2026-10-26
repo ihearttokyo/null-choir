@@ -1,0 +1,86 @@
+{
+  "chapter": "Ossuary",
+  "method": "Built-in image_gen; construction reference is design evidence only; full-bleed albedo and hardware palette registered to genuine editable sculpted mesh. Not native8K.",
+  "prompts": {
+    "reference": "Original NULL CHOIR Ossuary construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Vertical transfer carrier retaining continuous opaque load. Ribs carry: membrane margins\u2192tied rib sockets\u2192carrier corners\u2192side bearings. Strong rigid corners/bearing faces with few short restraints; distinguish from separate horizontal bridge. Chalk bone, dark backing, blackened bearing metal. Blood tensions bearing-associated draw; Ivory releases opposite indexing tie. Leaf/ties gather into upper side receivers; open state shows unloaded carrier, empty anchors and folded restraint. Keep silhouette distinct from nearby bridge/rib forms; do not alter bridge terrain/collision. Sculpt a vertical load-retaining transfer gate with continuous leaf, true load-bearing ribs, tied margins, carrier corners, side bearings and two asymmetric visible carriage mechanisms. Show connected load path and released leaf gathered into upper receivers above local Y=5. Static lower supports outside central 11.72 m corridor; distinguish silhouette from horizontal bridge. Front/back/three-quarter views. No environment, lighting bake, collision or bridge edits. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K.",
+    "leaf_albedo": "Use case: stylized-concept. Asset: NULL CHOIR Ossuary full-bleed opaque base-color pigment texture for a sculpted transfer membrane, landscape 2.44:1. ONLY a continuous rectangular material surface, fully reaching all four image edges. Near-black wine and smoked parchment load skin, diagonally tensioned ivory bone-fiber bundles sweeping across broad quiet dark fields, socketlike compressed seams at left and right margins, small old ochre stitch repairs. Strong composed hierarchy: one broad asymmetric diagonal tensile sweep and sparse secondary fibers, handcrafted oily painted detail, not dense mottled noise. Original industrial cosmic body-horror, restrained and credible. Neutral diffuse pigment ONLY: no lighting/shadows/highlight baked into texture. No complete gate, frame, rails, machinery, latch, border, floor, wall, backdrop, text, labels, symbols, collage or perspective. Not a concept sheet. The whole image IS the skin surface; no white background or disconnected objects; opaque, no holes. Genuine sculpted 3D runtime source supplies its depth later. Not an 8K master."
+  },
+  "brief": {
+    "chapter": "Ossuary",
+    "stable_id": "ossuary_transfer_gate",
+    "aperture_m": [
+      12.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 0,
+    "origin_xyz_m": [
+      90,
+      -1,
+      118.8
+    ],
+    "width_axis": "world X",
+    "run_m": [
+      84,
+      96
+    ],
+    "roof_margin_above_old_box_m": 3,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -3.9,
+        1.3,
+        0.0
+      ],
+      "Ivory": [
+        3.2,
+        3.4,
+        0.0
+      ]
+    },
+    "form_and_material": "Vertical transfer carrier retaining continuous opaque load. Ribs carry: membrane margins\u2192tied rib sockets\u2192carrier corners\u2192side bearings. Strong rigid corners/bearing faces with few short restraints; distinguish from separate horizontal bridge. Chalk bone, dark backing, blackened bearing metal. Blood tensions bearing-associated draw; Ivory releases opposite indexing tie. Leaf/ties gather into upper side receivers; open state shows unloaded carrier, empty anchors and folded restraint. Keep silhouette distinct from nearby bridge/rib forms; do not alter bridge terrain/collision.",
+    "construction_reference_prompt": "Sculpt a vertical load-retaining transfer gate with continuous leaf, true load-bearing ribs, tied margins, carrier corners, side bearings and two asymmetric visible carriage mechanisms. Show connected load path and released leaf gathered into upper receivers above local Y=5. Static lower supports outside central 11.72 m corridor; distinguish silhouette from horizontal bridge. Front/back/three-quarter views. No environment, lighting bake, collision or bridge edits.",
+    "full_leaf_albedo_prompt": "Full opaque leaf only: chalked bone/fiber membrane, restrained dark backing, tied socket wear and readable nonrepeating broad rib-contact zones. Keep vertical carrier distinct from bridge deck. No frame, scenery, lighting, shadows, text or whole-room image.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "ossuary_construction_reference_v1.png",
+      "sha256": "0d44feb31ed59100dc633d4f4dd6ed2f63b905e92e5878329649a922925bcdc0",
+      "kind": "construction-reference-only",
+      "dimensions": [
+        1959,
+        803
+      ],
+      "bytes": 2365449,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Original NULL CHOIR Ossuary construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Vertical transfer carrier retaining continuous opaque load. Ribs carry: membrane margins\u2192tied rib sockets\u2192carrier corners\u2192side bearings. Strong rigid corners/bearing faces with few short restraints; distinguish from separate horizontal bridge. Chalk bone, dark backing, blackened bearing metal. Blood tensions bearing-associated draw; Ivory releases opposite indexing tie. Leaf/ties gather into upper side receivers; open state shows unloaded carrier, empty anchors and folded restraint. Keep silhouette distinct from nearby bridge/rib forms; do not alter bridge terrain/collision. Sculpt a vertical load-retaining transfer gate with continuous leaf, true load-bearing ribs, tied margins, carrier corners, side bearings and two asymmetric visible carriage mechanisms. Show connected load path and released leaf gathered into upper receivers above local Y=5. Static lower supports outside central 11.72 m corridor; distinguish silhouette from horizontal bridge. Front/back/three-quarter views. No environment, lighting bake, collision or bridge edits. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K."
+    },
+    {
+      "file": "ossuary_leaf_albedo_v1.png",
+      "sha256": "162f735cc43f876d82d660b61dd0a527cc85f1a53e2a3f4a834a53a6811fd7db",
+      "kind": "leaf-albedo",
+      "dimensions": [
+        1959,
+        803
+      ],
+      "bytes": 3115836,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Use case: stylized-concept. Asset: NULL CHOIR Ossuary full-bleed opaque base-color pigment texture for a sculpted transfer membrane, landscape 2.44:1. ONLY a continuous rectangular material surface, fully reaching all four image edges. Near-black wine and smoked parchment load skin, diagonally tensioned ivory bone-fiber bundles sweeping across broad quiet dark fields, socketlike compressed seams at left and right margins, small old ochre stitch repairs. Strong composed hierarchy: one broad asymmetric diagonal tensile sweep and sparse secondary fibers, handcrafted oily painted detail, not dense mottled noise. Original industrial cosmic body-horror, restrained and credible. Neutral diffuse pigment ONLY: no lighting/shadows/highlight baked into texture. No complete gate, frame, rails, machinery, latch, border, floor, wall, backdrop, text, labels, symbols, collage or perspective. Not a concept sheet. The whole image IS the skin surface; no white background or disconnected objects; opaque, no holes. Genuine sculpted 3D runtime source supplies its depth later. Not an 8K master."
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "kind": "shared-hardware-albedo",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 2893698,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Shared original hardware palette from Intake, hash retained"
+    }
+  ]
+}

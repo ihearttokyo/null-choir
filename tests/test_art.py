@@ -545,6 +545,18 @@ def check():
         file = ROOT / relative
         assert file not in owned_outputs, 'duplicate raster output ownership'
         owned_outputs.add(file)
+    # Authored threshold scenes have their own strict eight-ID ledger. Keep this
+    # separate from the immutable legacy Blender catalog and add only paths the
+    # validator binds to GateArt plus actual game/data dimensions.
+    threshold_guard = runpy.run_path(str(ROOT / 'tools/threshold_art_ledger.py'))
+    thresholds = threshold_guard['validate_ledger'](ROOT, 'source/art/living-thresholds-v3/ledger.json')
+    assert thresholds['status'] == 'STRUCTURAL_EIGHT_THRESHOLD_LEDGER_VALID'
+    assert thresholds['assets'] == 8 and thresholds['complete_registry'] is True
+    assert len(thresholds['runtime_assets']) == 8
+    for row in thresholds['runtime_assets']:
+        file = ROOT / row['runtime_path']
+        assert file not in owned_outputs, 'duplicate threshold runtime output ownership'
+        owned_outputs.add(file)
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'

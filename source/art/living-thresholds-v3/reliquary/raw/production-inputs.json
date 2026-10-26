@@ -1,0 +1,83 @@
+{
+  "chapter": "Reliquary",
+  "brief": {
+    "chapter": "Reliquary",
+    "stable_id": "reliquary_index_gate",
+    "aperture_m": [
+      12.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 0,
+    "origin_xyz_m": [
+      78,
+      0,
+      30.8
+    ],
+    "width_axis": "world X",
+    "run_m": [
+      72,
+      84
+    ],
+    "roof_margin_above_old_box_m": 3,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -3.55,
+        1.4,
+        0
+      ],
+      "Ivory": [
+        3.8,
+        3.2,
+        0
+      ]
+    },
+    "form_and_material": "Continuous mineral/tissue seal with offset register bands and visible depth; indexing wheel and axle cradle visibly connect to broad shoulders. Memory reads as revision/omission through interrupted bands, repeated fasteners, filled sockets and empty registers. Quiet mineral impressions and restrained patina. Blood cocks a detent; Ivory releases a keeper. Released leaf gathers in upper receivers, leaving an empty register. Wheel restrained, not puzzle/free-spin. Main identity must read on visible leaf/inner shoulders despite foreground ribs occluding chassis.",
+    "construction_reference_prompt": "Design a continuous opaque indexed seal with offset broad bands, mineral/tissue thickness, visible axle cradle and strong shoulders. Show restrained wheel, two asymmetric approach-visible carriages, closed/gathered-open poses, rear service sockets and stationary frame. Preserve 12.2x5x0.6 m leaf; supports outside central 11.72 m corridor at all depths. Front/back/three-quarter views. No text, puzzle markings, room or lighting bake.",
+    "full_leaf_albedo_prompt": "Full-leaf-only orthographic material reference: muted mineral tissue, shallow pressure impressions, a few broken/repeated register bands, filled/empty fastener sockets and restrained aged metal. Readable without lettering or portrait. No wheel, frame, background, room lights, shadows, glow or baked scene.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "reliquary_construction_reference_v1.png",
+      "sha256": "ba231371339097288368f5f34467a282fe6acc9437f1b3d0d844b186aed80fdb",
+      "bytes": 2620424,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "kind": "construction-reference-only",
+      "prompt": "Original NULL CHOIR Reliquary production construction reference. FOUR panels2x2: closedfront, closedthree-quarter, rearclosed, fullyopenwithclosureclearlygatheredaboveLOCAL5m. SAMEmodelinallpanels. Actual LOWWIDE aperture 12.2width x5height x0.6depth, notportrait. Continuous mineral/tissue seal with offset register bands and visible depth; indexing wheel and axle cradle visibly connect to broad shoulders. Memory reads as revision/omission through interrupted bands, repeated fasteners, filled sockets and empty registers. Quiet mineral impressions and restrained patina. Blood cocks a detent; Ivory releases a keeper. Released leaf gathers in upper receivers, leaving an empty register. Wheel restrained, not puzzle/free-spin. Main identity must read on visible leaf/inner shoulders despite foreground ribs occluding chassis. Design a continuous opaque indexed seal with offset broad bands, mineral/tissue thickness, visible axle cradle and strong shoulders. Show restrained wheel, two asymmetric approach-visible carriages, closed/gathered-open poses, rear service sockets and stationary frame. Preserve 12.2x5x0.6 m leaf; supports outside central 11.72 m corridor at all depths. Front/back/three-quarter views. No text, puzzle markings, room or lighting bake. Crucial: primaryidentity andindependentsealmechanisms mustreadonvisibleleaf/inner shoulders, notonlyoutboardhiddenchassis. No religious caricature/copiedgameart. Originalcosmic/body-horror restraintengineering, richlyauthoredshape/materialhierarchy, NOTflatplanks/noisytexture/arrayofbars. Sculpturalpressure/lobes/folds andconnectedloadpaths. Ordinaryneutralnonemissivelighting, nofloorguardshoesblockingaperture. DesignreferenceONLY\u2014notfinishedruntime or8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "reliquary_leaf_albedo_v1.png",
+      "sha256": "c3e69b798db0df609efdf96b25fc0dda45f9e2ebb2024fd44f0c9e9234051fd4",
+      "bytes": 3588563,
+      "dimensions": [
+        1959,
+        803
+      ],
+      "kind": "leaf-albedo",
+      "prompt": "Make ONLY a flat COLOR ALBEDO painting of a Reliquary seal SURFACE. SINGLE edge-to-edge rectangular paintcanvas aspect2.44:1, opaque paintfillsEVERYpixel toall4edges. A broad continuous pale mineral-tissue ARCHIVE SEAL surface: irregular offset shallow pressure-register bands, five unequal anonymous face-LIKE pressure depressions (not literal portraits), traces of filled sockets and erased fastening positions. Quiet cool ivory/grey protected expanses, sparse oxblood pressure seams, restrained darkpatina localizedatregisteredges. No metal wheel, no rack, no mechanical outer parts. Beautifully composed original industrialcosmic-horror surface artwork for realmodeledlobes/folds. Materialpigment/pressurelandmarksonly, evenlydiffuselit,no directionallight/castshadows/specularhighlights. ABSOLUTELY NO gate/doorframe, jambs, hinges, actuator, metalouterborder, floor, wall, object-on-white-background, emptybackground, labels, letterings, glow or transparentpixels. Do NOT draw a cutout object: extend the continuous SURFACE painting toall4edges. No full doorway or illustrative room. Quiet broadlightfields+localizedcraftedwear, no densegenericnoise, no horizontalplank/debugbands. Matching3Dgeometrywillprovidevolume; thisisonlysourcecolor,not8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "bytes": 2893698,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "kind": "shared-hardware-albedo",
+      "prompt": "Shared original hardware palette from Intake, original hash retained",
+      "native8K": false,
+      "original_retained": true
+    }
+  ],
+  "generator": "builtin image_gen; reference and actual surfacepainting source, NOTfinishedruntime",
+  "note": "First reference-guided albedo attempts included unwantedframe/background and were rejected. Chosen directsurfacepaintings are opaque/fullbleed; no imageplane substitute."
+}

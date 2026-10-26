@@ -1,0 +1,42 @@
+{
+  "generator": "builtin image_gen",
+  "assets": [
+    {
+      "file": "foundry_construction_reference_v3.png",
+      "sha256": "56085ad3eecc3c26df4ce2943fe0ad42c62e47b83d30772a6de06bf88b8f33e7",
+      "bytes": 2603172,
+      "dimensions": [
+        1586,
+        992
+      ],
+      "kind": "referenceonly-notruntime",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "foundry_refractory_pigment_v3.png",
+      "sha256": "e908ec2240a911e30e63aa3f2299419eca1038e43355da706c61e734cc75fa1e",
+      "bytes": 3414506,
+      "dimensions": [
+        1605,
+        980
+      ],
+      "kind": "albedo",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "bytes": 2893698,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "kind": "sharedhardwarealbedo",
+      "native8K": false,
+      "original_retained": true
+    }
+  ],
+  "roles": "fourfoldflexiblerefractoryclosure, actual8.2x5x.6, heavyfixedvertebralcompressionhousings notIntakeframecopy; explicitreleasedconfigurationabove5moutsideclearaperture"
+}

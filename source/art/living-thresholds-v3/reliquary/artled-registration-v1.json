@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "source_image": "reliquary_integrated_construction_v1.png",
+  "source_sha256": "33a88ef22fae02f6ddddbe385620739635a5843286ca1f204977498d69d6af91",
+  "image_dimensions": [
+    1957,
+    804
+  ],
+  "registration": "Manual inspection of actual pixels; U right/V up. No luminance displacement or procedural image height sampling.",
+  "world_dimensions_m": [
+    12.2,
+    5,
+    0.6
+  ],
+  "root_origins": {
+    "BloodLatch": [
+      -3.55,
+      1.4,
+      0
+    ],
+    "IvoryLatch": [
+      3.8,
+      3.2,
+      0
+    ]
+  },
+  "chambers": 5,
+  "description": [
+    "upper-left slender split-pressure archive",
+    "dominant central tall deep-backed mask register",
+    "upper-right broad shouldered archive",
+    "lower-left squat backed mineral chamber",
+    "lower-right narrow tapered archive"
+  ],
+  "geometry_method": "One closed double surface with perimeter returns; manually registered concave basin/lip/profile fields and indexed architectural shoulder web. Both end-state pressure bodies share actual jaw-contact and continuous support witnesses.",
+  "native8K": false,
+  "executed": false
+}

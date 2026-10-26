@@ -1,0 +1,86 @@
+{
+  "chapter": "Heart",
+  "method": "Built-in image_gen; construction reference is design evidence only; full-bleed albedo and hardware palette registered to genuine editable sculpted mesh. Not native8K.",
+  "prompts": {
+    "reference": "Original NULL CHOIR Heart construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Quiet terminal valve: continuous pale opaque leaf, broad opposed restraint margins, low lateral housings and recessed sockets. Load path margins\u2192sockets\u2192housings; no literal jaw/second face. Optional small dry-crimson service path must not become pulse meter/target. Blood cocks one margin restraint; Ivory releases opposite keeper. Keep ending sightline clear and identity on visible leaf/inner shoulders despite rib occlusion. Rear shows exhausted lining/empty sockets. No boss, heartbeat, pulse or combat mechanic. Design a restrained terminal valve gate with broad opaque leaf, opposed restraint margins, recessed load-bearing sockets and low lateral housings. Show two asymmetric visible carriages, connected load paths, stable gathered-open leaf in receiver above local Y=5 and clear central sightline. Preserve 12.2x5x0.6 m aperture and 11.72 m clear corridor. Front/back/three-quarter views. No jaw/face motif, room, lighting bake or gameplay. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K.",
+    "leaf_albedo": "Use case: stylized-concept. Asset: NULL CHOIR Heart full-bleed opaque base-color pigment texture for a sculpted quiet terminal valve membrane, landscape2.44:1. ONLY a continuous rectangular material surface fully reaching all four edges. Two broad opposed pale ivory valve margins press toward a narrow off-center dry crimson curving closure path, which gently forks once then rejoins; upper field cool chalk bone, lower field muted warm parchment, fine compressed suture stitching and sparse old ochre repairs around the joining seam. Large quiet luminous-but-NONEMISSIVE fields with precise artisan pigment detail localized at the seam, dignified and ominous. NOT a literal anatomical heart, mouth, face, eyes, teeth or boss/target. Original industrial cosmic body-horror material. Neutral diffuse pigment ONLY: no baked shadows, highlights, lighting or glow. No gateframe, rails, hardware, borders, floor, wall, backdrop, labels, text, collage, panels, separate objects or perspective. The entire image IS the unbroken skin surface; no white background/holes/transparency. Real sculpted 3D geometry supplies volume later. Not an8Kmaster."
+  },
+  "brief": {
+    "chapter": "Heart",
+    "stable_id": "heart_final_gate",
+    "aperture_m": [
+      12.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 0,
+    "origin_xyz_m": [
+      126,
+      -3,
+      70.8
+    ],
+    "width_axis": "world X",
+    "run_m": [
+      120,
+      132
+    ],
+    "roof_margin_above_old_box_m": 11,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -4,
+        1.5,
+        0.0
+      ],
+      "Ivory": [
+        3.4,
+        3.35,
+        0.0
+      ]
+    },
+    "form_and_material": "Quiet terminal valve: continuous pale opaque leaf, broad opposed restraint margins, low lateral housings and recessed sockets. Load path margins\u2192sockets\u2192housings; no literal jaw/second face. Optional small dry-crimson service path must not become pulse meter/target. Blood cocks one margin restraint; Ivory releases opposite keeper. Keep ending sightline clear and identity on visible leaf/inner shoulders despite rib occlusion. Rear shows exhausted lining/empty sockets. No boss, heartbeat, pulse or combat mechanic.",
+    "construction_reference_prompt": "Design a restrained terminal valve gate with broad opaque leaf, opposed restraint margins, recessed load-bearing sockets and low lateral housings. Show two asymmetric visible carriages, connected load paths, stable gathered-open leaf in receiver above local Y=5 and clear central sightline. Preserve 12.2x5x0.6 m aperture and 11.72 m clear corridor. Front/back/three-quarter views. No jaw/face motif, room, lighting bake or gameplay.",
+    "full_leaf_albedo_prompt": "Full opaque leaf only: pale mineral/fiber surface, broad opposed restraint margins, subtle exhausted lining and restrained dry-crimson service seams. Keep center quiet and legible. No heartbeat graphics, target marks, portrait, frame, room, shadows, glow or baked lighting.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "heart_construction_reference_v1.png",
+      "sha256": "af48abe0e82280f418f2c567b2f2b92b32aaf66a656f2f94a5bb010cad8518e5",
+      "kind": "construction-reference-only",
+      "dimensions": [
+        1959,
+        803
+      ],
+      "bytes": 2589433,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Original NULL CHOIR Heart construction reference for genuine editable3D asset. Fourpanels2x2 SAMEassembly: frontclosed, three-quarterclosed, rearclosed, openwithclosureexplicitlystowed ABOVELOCAL5m. LOWWIDE12.2width x5height x.6depth, notportrait. Quiet terminal valve: continuous pale opaque leaf, broad opposed restraint margins, low lateral housings and recessed sockets. Load path margins\u2192sockets\u2192housings; no literal jaw/second face. Optional small dry-crimson service path must not become pulse meter/target. Blood cocks one margin restraint; Ivory releases opposite keeper. Keep ending sightline clear and identity on visible leaf/inner shoulders despite rib occlusion. Rear shows exhausted lining/empty sockets. No boss, heartbeat, pulse or combat mechanic. Design a restrained terminal valve gate with broad opaque leaf, opposed restraint margins, recessed load-bearing sockets and low lateral housings. Show two asymmetric visible carriages, connected load paths, stable gathered-open leaf in receiver above local Y=5 and clear central sightline. Preserve 12.2x5x0.6 m aperture and 11.72 m clear corridor. Front/back/three-quarter views. No jaw/face motif, room, lighting bake or gameplay. Makeprimaryclosedleafidentity andasymmetricsealmechanismsvisibleinward, notonlyoutboardhousingshiddenbycorridorribs. Wholeclosedleafopaque, connectedloadpaths, richrealcurvedform/scar/rim hierarchy, no flatplank/debugbands/no genericnoisytexture. Originalindustrialcosmic/body-horror; no copiedart/religiouscaricature. Nonemissiveneutralillumination onplaincharcoalreferencebackground; no room/gameplaychanges. ReferenceONLY\u2014notruntime/not8K."
+    },
+    {
+      "file": "heart_leaf_albedo_v1.png",
+      "sha256": "b213ed3a88af98914cea9b11b1ff6e0a647d59feb1b82c4eeaa7e21e5558487d",
+      "kind": "leaf-albedo",
+      "dimensions": [
+        1958,
+        803
+      ],
+      "bytes": 3127516,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Use case: stylized-concept. Asset: NULL CHOIR Heart full-bleed opaque base-color pigment texture for a sculpted quiet terminal valve membrane, landscape2.44:1. ONLY a continuous rectangular material surface fully reaching all four edges. Two broad opposed pale ivory valve margins press toward a narrow off-center dry crimson curving closure path, which gently forks once then rejoins; upper field cool chalk bone, lower field muted warm parchment, fine compressed suture stitching and sparse old ochre repairs around the joining seam. Large quiet luminous-but-NONEMISSIVE fields with precise artisan pigment detail localized at the seam, dignified and ominous. NOT a literal anatomical heart, mouth, face, eyes, teeth or boss/target. Original industrial cosmic body-horror material. Neutral diffuse pigment ONLY: no baked shadows, highlights, lighting or glow. No gateframe, rails, hardware, borders, floor, wall, backdrop, labels, text, collage, panels, separate objects or perspective. The entire image IS the unbroken skin surface; no white background/holes/transparency. Real sculpted 3D geometry supplies volume later. Not an8Kmaster."
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "kind": "shared-hardware-albedo",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 2893698,
+      "native8K": false,
+      "original_retained": true,
+      "prompt": "Shared original hardware palette from Intake, hash retained"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "chapter": "Processional",
+  "brief": {
+    "chapter": "Processional",
+    "stable_id": "processional_gate",
+    "aperture_m": [
+      8.2,
+      5,
+      0.6
+    ],
+    "yaw_deg": 0,
+    "origin_xyz_m": [
+      64,
+      5,
+      18.8
+    ],
+    "width_axis": "world X",
+    "run_m": [
+      60,
+      68
+    ],
+    "roof_margin_above_old_box_m": 1,
+    "carriage_origins_local_xyz_m": {
+      "Blood": [
+        -2.25,
+        1.35,
+        0
+      ],
+      "Ivory": [
+        2.05,
+        3.25,
+        0
+      ]
+    },
+    "form_and_material": "Visible carried bellows-throat with unequal broad folds and real return depth, shallow carrying beam, broad side supports, chalked fibrous lining against dark suspension; rear repairs, loops and patches. Load path leaf\u2192carrier\u2192side supports. Gathering ends visibly in upper side receivers. Avoid repeated plank courses or a flat accordion billboard.",
+    "construction_reference_prompt": "Sculpt a compact, load-bearing gate assembly in restrained biomechanical cathedral style. Show broad asymmetrical bellows folds with thickness/returns, shallow carrier beam, side supports, two asymmetric approach-visible carriages at local Z=0, hardware contained within local Z \u00b10.3 m; cut visible receiver beds into leaf, fixed sidewall connections and upper receivers for the gathered leaf above local Y=5. Front, back and three-quarter views with scale cue. Keep supports outside central 7.72 m corridor at every depth. No environment, lettering, light bake or gameplay changes.",
+    "full_leaf_albedo_prompt": "Orthographic full-leaf-only albedo reference for uneven fibrous bellows: chalked membrane, dark suspension seams, worn repair patches and restrained edge reinforcement. Keep silhouette/folds legible. No room lighting, shadows, frame, background, text, emissive glow or pre-rendered whole gate.",
+    "release_pose": "Leaf visibly gathers into receivers above local Y=5.0 m relative to gate bottom."
+  },
+  "assets": [
+    {
+      "file": "processional_construction_reference_v1.png",
+      "sha256": "b12eae567bc4bf5472b010b14e9628adde78e0eccb78bf09bafe9c9d8418028e",
+      "bytes": 2427431,
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "kind": "construction-reference-only",
+      "prompt": "Original NULL CHOIR Processional production construction reference. FOUR panels2x2: closedfront, closedthree-quarter, rearclosed, fullyopenwithclosureclearlygatheredaboveLOCAL5m. SAMEmodelinallpanels. Actual LOWWIDE aperture 8.2width x5height x0.6depth, notportrait. Visible carried bellows-throat with unequal broad folds and real return depth, shallow carrying beam, broad side supports, chalked fibrous lining against dark suspension; rear repairs, loops and patches. Load path leaf\u2192carrier\u2192side supports. Gathering ends visibly in upper side receivers. Avoid repeated plank courses or a flat accordion billboard. Sculpt a compact, load-bearing gate assembly in restrained biomechanical cathedral style. Show broad asymmetrical bellows folds with thickness/returns, shallow carrier beam, side supports, two asymmetric approach-visible carriages at local Z=0, hardware contained within local Z \u00b10.3 m; cut visible receiver beds into leaf, fixed sidewall connections and upper receivers for the gathered leaf above local Y=5. Front, back and three-quarter views with scale cue. Keep supports outside central 7.72 m corridor at every depth. No environment, lettering, light bake or gameplay changes. Crucial: primaryidentity andindependentsealmechanisms mustreadonvisibleleaf/inner shoulders, notonlyoutboardhiddenchassis. No religious caricature/copiedgameart. Originalcosmic/body-horror restraintengineering, richlyauthoredshape/materialhierarchy, NOTflatplanks/noisytexture/arrayofbars. Sculpturalpressure/lobes/folds andconnectedloadpaths. Ordinaryneutralnonemissivelighting, nofloorguardshoesblockingaperture. DesignreferenceONLY\u2014notfinishedruntime or8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "processional_leaf_albedo_v1.png",
+      "sha256": "14114d3b5a1eb10a983750f7e08e779231e04d14ffef32c4e657eb78fd16f50c",
+      "bytes": 3252470,
+      "dimensions": [
+        1604,
+        980
+      ],
+      "kind": "leaf-albedo",
+      "prompt": "Make ONLY a flat COLOR ALBEDO painting of a Processional seal SURFACE. SINGLE edge-to-edge rectangular paintcanvas aspect1.64:1, opaque paintfillsEVERYpixel toall4edges. SEVEN UNEQUAL broad VERTICAL cushioned bellows folds in chalked fibrous membrane, irregularly spaced deep dark suspension seams, softly bowed pale fold faces, a few large repaired stitches/patches. Original biomechanical carried-throat surface, not organ pipes, no planks. Pale ash/dirty ivory with charcoal fold channels and restrained warmbrown repairs. Beautifully composed original industrialcosmic-horror surface artwork for realmodeledlobes/folds. Materialpigment/pressurelandmarksonly, evenlydiffuselit,no directionallight/castshadows/specularhighlights. ABSOLUTELY NO gate/doorframe, jambs, hinges, actuator, metalouterborder, floor, wall, object-on-white-background, emptybackground, labels, letterings, glow or transparentpixels. Do NOT draw a cutout object: extend the continuous SURFACE painting toall4edges. No full doorway or illustrative room. Quiet broadlightfields+localizedcraftedwear, no densegenericnoise, no horizontalplank/debugbands. Matching3Dgeometrywillprovidevolume; thisisonlysourcecolor,not8K.",
+      "native8K": false,
+      "original_retained": true
+    },
+    {
+      "file": "hardware_pigments_v3.png",
+      "sha256": "97bbaf2cd4c91011a79f8584eecb0c491b1d6a9e880867d50bd4a52aebed305f",
+      "bytes": 2893698,
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "kind": "shared-hardware-albedo",
+      "prompt": "Shared original hardware palette from Intake, original hash retained",
+      "native8K": false,
+      "original_retained": true
+    }
+  ],
+  "generator": "builtin image_gen; reference and actual surfacepainting source, NOTfinishedruntime",
+  "note": "First reference-guided albedo attempts included unwantedframe/background and were rejected. Chosen directsurfacepaintings are opaque/fullbleed; no imageplane substitute."
+}
