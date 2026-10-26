@@ -472,6 +472,23 @@ def validate_ledger(root: Path, ledger_path: str | Path) -> dict:
         for path in (source.get("path"),regrow.get("path"),accepted.get("path"),proof.get("path"),runtime_s,import_rec.get("sidecar_path")):
             if path in used_refs: fail(f"{asset_id}: duplicate file/path ownership {path}")
             used_refs.add(path)
+    # Replacement appearances retain actual matching editable model designs.
+    companions=ledger.get("editable_blender_designs")
+    if not isinstance(companions,dict): fail("matching editable Blender source ledger required")
+    _,model_bytes=_relative_digest(root,companions.get("path"),companions.get("sha256"),label="matching model ledger",allowed_roots={"source"})
+    models=json.loads(model_bytes)
+    rows=models.get("assets",[])
+    if len(rows)!=6 or {r.get("id") for r in rows}!=IDS: fail("exact six matching model sources required")
+    for row in rows:
+        expected=f"source/art/weapon-raster-v3/blender-source/{row['id']}.blend"
+        if row.get("path")!=expected or row.get("poses")!=["V3_idle","V3_fire","V3_recover"]: fail("matching model path/poses")
+        _,data=_relative_digest(root,expected,row.get("sha256"),label="editable Blender model",allowed_roots={"source"})
+        if not data.startswith((b"BLENDER",b"\x28\xb5\x2f\xfd")): fail("unsupported Blender source container")
+        source_row=next(a for a in ledger['assets'] if a['id']==row['id'])
+        if row.get("reference_sha256")!=source_row['source']['sha256']: fail("model/raster design reference mismatch")
+    for name in ("source_validation","generator","actual_saved_source_overview"):
+        rec=models.get(name,{})
+        _relative_digest(root,rec.get("path"),rec.get("sha256"),label="model evidence "+name,allowed_roots={"source"})
     # Report reference presence only; this structural validator does not authenticate a native run.
     return {"status":"STRUCTURAL_RASTER_LEDGER_VALID","entries":6,"runtime_outputs":sorted(claimed),"historic_manifest_untouched":True,"player_paths_registered":True,"nearest_lossless_import_declared":True,"actual_native_import_run_receipt_in_ledger":bool(ledger.get("native_import_qualification")),"note":"Structural source/PNG/compiler/import contract only. It does not score artwork, prove end-user use, or authenticate a native Godot fixture run."}
 

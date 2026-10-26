@@ -619,5 +619,10 @@
     "path": "source/art/weapon-raster-v3/native-import-proof.json",
     "sha256": "bf1fc2c85938c4070085c6de6eb845fc1eda86612cebde293e368e2ba13bbb5d",
     "status": "PASS actual six cookedtextures alpha+opaqueRGB, currentHUDactualResourceLoader18poses and unchanged nativefireintentcadence; artifact05PCK stillpending"
+  },
+  "editable_blender_designs": {
+    "path": "source/art/weapon-raster-v3/blender-source/matching-review.json",
+    "sha256": "ab3b5b61ec9a893bd422a583d9d142ce88404621f68ef79c32ca616eb537df31",
+    "kind": "Matching original editable3D design companions; not the generator of the separately sourced raster PNGs"
   }
 }

@@ -13,7 +13,7 @@ Date: 26 October 2026. Baseline: public Major Features Preview04; main `1db8b7c`
 ## Actual remaining gaps
 
 1. **Repeated world presentation.** All eight interactive gates are the same burgundy box, despite some different gate-shaped scenery elsewhere. The scenery is not wired to the interactive doors. Foundry and Processional lack even those named gate scenery pieces.
-2. **Environment identity and meaningful variation.** Seven tradition-associated catalog pieces and two hero IDs are present per chapter, but later chapters overlap hero/catalog lists. Counts/tags are not proof of seven additional unique structures or finished staging. Audit distinct major pieces and fill real gaps rather than count the same asset twice.
+2. **Environment identity and meaningful variation.** Seven tradition-associated catalog pieces and two hero IDs are present per chapter. DESIGN.md explicitly allows a hero to fulfill a tradition category when its actual design supports it; do not invent a requirement for seven additional pieces or ten extra assets. The remaining gap is demonstrated visual identity, purpose and staging—not another catalog-count exercise.
 3. **Enemy/boss production art and explicit physiology.** The retained eight enemy concept sheets are not complete directional/animated runtime assets. Anatomical/weak-point work needs actual art/masks and intentional combat behavior—not bounding-box relabeling.
 4. **Rich music-responsive artwork.** The audio/control foundation works; the procedural visual treatment still needs a coherent finished art direction. Preserve experiments without advertising them as shipped.
 5. **Source/master deliverables.** Genuine native8K chapter masters and matching editable native/Blender sources remain unproved. Do not upscale current images and call that done.
@@ -24,7 +24,7 @@ Date: 26 October 2026. Baseline: public Major Features Preview04; main `1db8b7c`
 Deliver the six accepted native three-pose weapon atlases in the actual game: impact tool, rivet pistol, scattergun, sawtooth repeater, marrow launcher and choir disruptor.
 
 - Keep the six `painted-v3` asset bindings and all numeric combat profiles, firing/hit logic, cooldowns and save schema unchanged.
-- Finish the narrow raster-ledger ownership integration; retain the legacy119-asset Blender catalog and original atlases unchanged.
+- Finish the narrow raster-ledger ownership integration and retain genuinely matching editable Blender design sources; keep the legacy119-asset catalog and original atlases unchanged. Painted PNG approval does not by itself close the editable-model requirement. Do not substitute empty files, image planes, or unqualified old models.
 - One coherent PR, affected native/art checks, exact packaged-resource/HUD binding, signed/notarized installable build, README + current Site update, preserved Preview04 rollback.
 - Do not hold this accepted batch for the unaccepted visualizer or unfinished gates. No further art polish or full campaign rerun absent a demonstrated regression.
 

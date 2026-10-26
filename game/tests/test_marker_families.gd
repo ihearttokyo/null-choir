@@ -27,7 +27,7 @@ func check_families() -> bool:
 	metadata = JSON.parse_string(FileAccess.get_file_as_string("res://assets/art/hud/marker_glyphs.json"))
 	if not expect(metadata.contracts.weapons == WEAPON_GLYPHS and metadata.dimensions == [256.0,256.0] and metadata.cell_size == [64.0,64.0] and metadata.columns == 4,"Native atlas metadata fixes canonical full-square frame order"): return false
 	for weapon in range(6):
-		if not expect(Player.WEAPONS[weapon].asset == WEAPON_GLYPHS[weapon],"Canonical WEAPONS identity: "+str(weapon)): return false
+		if not expect(String(Player.WEAPONS[weapon].asset).get_file() == WEAPON_GLYPHS[weapon],"Canonical WEAPONS identity: "+str(weapon)): return false
 	owner = MarkerOwner.new()
 	root.add_child(owner)
 	var seen = {}

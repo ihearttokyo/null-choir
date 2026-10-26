@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "qualification": "Independent matching-design SOURCE review PASS; source polish frozen",
+  "scope": "Genuine editable original volumetric designs, connected hands/grips/receivers and articulated mechanism poses correspond to retained raster references. NOT a claim that generated runtime PNGs were rendered from these Blender files, nor pixel-identical painted material reproduction.",
+  "runtime_art_unchanged": true,
+  "source_validation": {
+    "path": "source/art/weapon-raster-v3/blender-source/source-validation.json",
+    "sha256": "2d4953fcdbabfb256e205ffb9f8f4d1090a1355d95bf5104e6c958e897841fb3"
+  },
+  "generator": {
+    "path": "source/art/weapon-raster-v3/blender-source/build_companions.py",
+    "sha256": "5d377ab76cf2de378b0ccb39598428b1bb450ae8abf93e1192f358d087a4d619"
+  },
+  "actual_saved_source_overview": {
+    "path": "source/art/weapon-raster-v3/blender-source/matching-source-overview.png",
+    "sha256": "c67312d0044f36c1f3d97f5609684b8afe1f80a92a893ebf7b6def5ec995b23b",
+    "rows": [
+      "choir_disruptor",
+      "impact_tool",
+      "marrow_launcher",
+      "rivet_pistol",
+      "sawtooth_repeater",
+      "scattergun"
+    ],
+    "columns": [
+      "idle",
+      "fire",
+      "recover"
+    ]
+  },
+  "assets": [
+    {
+      "id": "impact_tool",
+      "path": "source/art/weapon-raster-v3/blender-source/impact_tool.blend",
+      "sha256": "14e2b6864a995ce0d42532d0440b11d7fa6a14eabeb5175f6ef840443e55572c",
+      "reference_sha256": "4ee9c4c990e9a8a84d56ee7631a3ee8ae8235069cfca95d1b56a32ac048ee3a0",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    },
+    {
+      "id": "rivet_pistol",
+      "path": "source/art/weapon-raster-v3/blender-source/rivet_pistol.blend",
+      "sha256": "5368be3aeb8a584f180b32d1f285f676798049896e3562357337719e09e3fd1f",
+      "reference_sha256": "0f611f1c800c12b3ccb84ccef4670bf0ff5923d8a80d9fe7890055386b5a0a9a",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    },
+    {
+      "id": "scattergun",
+      "path": "source/art/weapon-raster-v3/blender-source/scattergun.blend",
+      "sha256": "e88b472b2c9ee6a79fcd1fa5102c32987c57573dd5606a526bd9ef3944d00aee",
+      "reference_sha256": "6f34dc85cc11a0b648210ad728353f24df286bb8ca7b951dd6528a43fc070bd2",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    },
+    {
+      "id": "sawtooth_repeater",
+      "path": "source/art/weapon-raster-v3/blender-source/sawtooth_repeater.blend",
+      "sha256": "1da00618528ab4e304892a23826012826cfb97da31ff983d5a308cc7fb8b989e",
+      "reference_sha256": "0f23b51fb9dc5ba4084dc86f179a5c38d0567aa82c23a615baebbb0ef8fcda21",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    },
+    {
+      "id": "marrow_launcher",
+      "path": "source/art/weapon-raster-v3/blender-source/marrow_launcher.blend",
+      "sha256": "203e7e74d2596be801f67fb52e906faf29d9af75eb5c51a4782b035194a8a451",
+      "reference_sha256": "cd55da94e32545fc172aebf88d782b8280b4ccb3e0e4d070b2d796402eb86a27",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    },
+    {
+      "id": "choir_disruptor",
+      "path": "source/art/weapon-raster-v3/blender-source/choir_disruptor.blend",
+      "sha256": "d34051a4312dbe8afa326437a8017fba1c4a5f4cc493654e543e0a35a9d85d9b",
+      "reference_sha256": "37585f2a18c0e6a4deb4ce5372db7ab1a87dc497abfada6082ce2e95383f93d2",
+      "poses": [
+        "V3_idle",
+        "V3_fire",
+        "V3_recover"
+      ]
+    }
+  ]
+}
