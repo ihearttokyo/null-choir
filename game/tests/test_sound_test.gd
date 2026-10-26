@@ -16,18 +16,24 @@ func run() -> void:
 	AudioServer.set_bus_volume_db(bus, -12.0)
 	var player: AudioStreamPlayer = music.player
 	var bus_count := AudioServer.get_bus_count()
+	var initial_effects := AudioServer.get_bus_effect_count(bus)
 	var screen = SoundTest.new()
 	screen.bind_music(music)
 	root.add_child(screen)
 	screen.set_process(false)
 	assert(player.stream == null, "Opening must not start or replace music")
+	assert(screen._analyzer == null and AudioServer.get_bus_effect_count(bus) == initial_effects)
 	assert(music.level_tracks.size() == 8)
 	assert(screen._tracks.size() == 9)
 	for i in 8:
 		assert(screen._track_buttons[i].text == "%d  %s" % [i + 1, music.level_tracks[i].get_file().get_basename().capitalize()])
 		assert(screen._track_buttons[i].focus_mode == Control.FOCUS_ALL)
 		assert(screen._track_buttons[i].get_node(screen._track_buttons[i].focus_next) != null)
+		var old_analyzer: AudioEffectSpectrumAnalyzer = screen._analyzer
 		assert(screen.play_track(i))
+		assert(screen._analyzer != null and screen._analyzer != old_analyzer, "Successful selection retires buffered spectrum")
+		assert(screen._audio_bands == Vector3.ZERO and screen._art_energy == 0.0)
+		assert(AudioServer.get_bus_effect_count(bus) == initial_effects + 1)
 		assert(player.stream.resource_path == music.level_tracks[i])
 		assert(player.playing and player.stream is AudioStreamMP3)
 		assert((player.stream as AudioStreamMP3).loop)
@@ -63,6 +69,9 @@ func run() -> void:
 	assert(not screen.play_track(0) and player.stream == stream)
 	screen._tracks[0] = real_track
 	var selected_before: int = screen._selected
+	var analyzer_before: AudioEffectSpectrumAnalyzer = screen._analyzer
+	var bands_before: Vector3 = screen._audio_bands
+	var energy_before: float = screen._art_energy
 	var incompatible := "res://audio/effects/death.wav"
 	assert(ResourceLoader.exists(incompatible), "Wrong-type resource must exist to reach Music's real loader")
 	screen._tracks[0] = incompatible
@@ -70,6 +79,7 @@ func run() -> void:
 	print("EXPECTED_NEGATIVE: Music rejects one existing non-MP3 recording")
 	assert(not screen.play_track(0))
 	assert(player.stream == stream and player.playing and screen._selected == selected_before)
+	assert(screen._analyzer == analyzer_before and screen._audio_bands == bands_before and screen._art_energy == energy_before, "Failed replacement preserves the active preview signal")
 	assert(screen._message.text.contains("could not start"))
 	screen._tracks[0] = real_track
 	music.level_tracks[0] = real_track
@@ -95,16 +105,20 @@ func run() -> void:
 	assert(AudioServer.is_bus_mute(bus))
 	screen.hide()
 	assert(player.stream == null and not player.playing)
+	assert(not screen._art.is_visible_in_tree() and screen._analyzer == null)
+	assert(screen._audio_bands == Vector3.ZERO and screen._art_energy == 0.0)
 	screen.show()
 	assert(screen.play_track(0))
 	music.stop()
 	screen._sync_transport()
 	assert(screen._preview_stream == null, "External stop releases the retained preview resource")
+	assert(screen._analyzer == null and screen._audio_bands == Vector3.ZERO and screen._art_energy == 0.0)
 	assert(screen.play_track(0))
 	music.play_level(0)
 	screen.close()
 	assert(player.stream != null and player.playing, "External same-track start relinquishes preview ownership")
 	assert(screen._music_ref == null and screen._preview_stream == null)
+	assert(screen._analyzer == null and AudioServer.get_bus_effect_count(bus) == initial_effects)
 	screen.bind_music(music)
 	assert(screen.play_track(8))
 	music.play_title()
@@ -139,6 +153,7 @@ func run() -> void:
 	music.player.free()
 	unavailable._sync_transport()
 	assert(unavailable._play.disabled and unavailable._previous.disabled and unavailable._next.disabled)
+	assert(unavailable._analyzer == null and unavailable._audio_bands == Vector3.ZERO and unavailable._art_energy == 0.0)
 	assert(not unavailable.play_track(0), "Freed player with live Music owner is unavailable")
 	music.free()
 	assert(not unavailable.play_track(0))
