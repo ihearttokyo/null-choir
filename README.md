@@ -1,20 +1,30 @@
 # NULL CHOIR
 
-Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Blender-built pixel sprites in a 3D containment cathedral; eight selected Suno instrumentals play offline through the native Music bus. Original MIDI compositions and their synth remain preserved.
+Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot presents original pixel-art weapon sprites inside a 3D containment cathedral; eight selected Suno instrumentals play offline through the native Music bus. Original MIDI compositions and their synth remain preserved.
 
 ## Playtest download
 
 [Enter the NULL CHOIR download page](https://null-choir.jaymoney.chatgpt.site).
 
-[![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/9b6828cb72284bd1218441aa9ec7aa0e0506a310/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
+[![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download the Alpha 4 Major Features Preview 04 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-04-Apple-Silicon.zip). **Playable Alpha 4 preview. The major-feature roadmap remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
+[Download the Alpha 4 Major Features Preview 05 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-05-Apple-Silicon.zip). **Incremental playable preview; Alpha 4 remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
 
-Archive size: **211,454,661 bytes**
+Archive size: **212,095,872 bytes**
 
-SHA-256: `ad9ed7e8a822ed37c7b1624dc40363966423356edf7c198d556740aaace9728b`
+SHA-256: `2ae7ab195417635a8cb7f181c977e9611e791af67f918d3bdc9d4422d81742ff`
 
-[Preview source](https://github.com/ihearttokyo/null-choir/tree/4b02827310422fe5961cd52127dcb7173dd018e3/game) · [Alpha 4 Major Features Preview 04 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+[Export source commit](https://github.com/ihearttokyo/null-choir/tree/c133801f2d43a65076c54717c66ab035305ab08b/game) · [Shipping-identical source successor](https://github.com/ihearttokyo/null-choir/tree/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game) · [Alpha 4 Major Features Preview 05 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+
+### What changed in Major Features Preview 05
+
+- **Six refreshed weapon sprites:** the Impact Tool, Rivet Pistol, Scattergun, Sawtooth Repeater, Marrow Launcher and Choir Disruptor now use the new original raster artwork in the runtime HUD. The six weapon identities, gameplay statistics, firing cadence and existing HUD placement are unchanged.
+- **Artwork, not gameplay captures:** these images show weapon sprite atlases, not first-person screenshots, anatomical hit areas or new weapons. The original 960×200 three-frame atlases remain the game assets; the public page shows only the idle pose.
+- **Earlier preview retained:** this package is built from the Alpha 4 Major Features Preview 04 release line; the exact Preview 04 download remains available below as the immediate rollback.
+
+Living membrane gates and nearby environmental variation—and the “cathedral remembers” feature—remain planned, not shipped in Preview 05. The broader Alpha 4 / major-feature roadmap is still in progress. Do not describe this preview as the completed Alpha 4 milestone.
+
+[Preview 04 rollback](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-04-Apple-Silicon.zip) — 211,454,661 bytes; SHA-256 `ad9ed7e8a822ed37c7b1624dc40363966423356edf7c198d556740aaace9728b`.
 
 ### What changed in Major Features Preview 04
 
@@ -56,9 +66,9 @@ This is an incremental early playable preview, not a completed Alpha 4 or full-g
 
 ## Development status
 
-The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. New chapter paintings and the Ossuary span are part of this feature-scoped preview; they do not certify the entire campaign or remaining art roadmap. Original authoring sources and earlier assets remain retained.
+The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. Preview 05 adds six raster weapon atlases while retaining the prior chapter art and Ossuary crossing; this does not certify the entire campaign or remaining art roadmap. Original authoring sources and earlier assets remain retained.
 
-The unaccepted SoundTest upgrade and focused tests are preserved in `source/prototypes/resonance-20261026/`. The runtime module and its active test suite retain the already-released Preview 03 version. No richer-visualizer, native-8K, new editable-3D, human-play or FPS claim is made for this update. [DESIGN.md](DESIGN.md) remains the full project brief.
+The unaccepted SoundTest upgrade and focused tests are preserved in `source/prototypes/resonance-20261026/`. The runtime module and its active test suite retain the already-released Preview 03 version. The new weapon sprites are raster assets, not a claim of new editable Blender models. No richer-visualizer, native-8K, human-play or FPS claim is made for this update. [DESIGN.md](DESIGN.md) remains the full project brief.
 
 ## Run and build
 
