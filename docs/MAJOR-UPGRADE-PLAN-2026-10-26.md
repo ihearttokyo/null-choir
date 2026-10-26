@@ -28,9 +28,9 @@ Preview05 delivered the six accepted native three-pose weapon atlases in the act
 - PR105 and the matching release-documentation PR106 are merged. The actual Apple Silicon build is signed/notarized, packaged-resource checked, installed and publicly downloadable; README and Site match it.
 - Preview04 remains available for rollback. Unaccepted gate and SoundTest prototypes are not in Preview05.
 
-## Release06 — Eight Living Thresholds (qualified; release packaging next)
+## Release06 — Eight Living Thresholds (delivered)
 
-All eight authored gate assemblies now pass independent intended-use review and targeted native service/context checks. Their exact source/runtime bytes are frozen. Packaging, merge and matching publication remain required before calling Preview06 shipped. Chapter-specific fixed surrounds and integrated material/construction identities are part of these assemblies; this is not a claim that the surrounding maps have been rebuilt.
+All eight authored gate assemblies now pass independent intended-use review and targeted native service/context checks. Their exact source/runtime bytes are frozen. PR107 is merged; the exact Preview06 Apple Silicon archive is signed/notarized, packaged-resource checked and publicly downloadable. Matching release details are recorded in `docs/releases/major-features-preview-06.md`. Chapter-specific fixed surrounds and integrated material/construction identities are part of these assemblies; this is not a claim that the surrounding maps have been rebuilt.
 
 | Chapter | New threshold identity |
 |---|---|
