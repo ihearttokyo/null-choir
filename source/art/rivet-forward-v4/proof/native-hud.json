@@ -1,0 +1,149 @@
+{
+  "atlas_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "dimensions": [
+    640,
+    360
+  ],
+  "failures": 0,
+  "fixture_overrides": [
+    "Hud._ready minimal frozenview",
+    "Hud._instrument_frame suppressed",
+    "Hud._instrument_art suppressed"
+  ],
+  "scope": "Actual productionHud._draw + actualPlayer clock methods, candidateImageTexture injection; mockHost, Player outside tree; no Main/AI/physics/input/audio/listening/gameplay/FPS proof",
+  "source_and_imports_intentionally_modified": false,
+  "source_campaign_sha256": "f5f3d1245d4f66af0c94d0855276ca3ce275f8bc72b331385b60cb4e0c2c594d",
+  "source_hud_sha256": "44e466410c46d72431228923082318eb65618b283b5ae86106d02ae981a587f7",
+  "source_player_sha256": "300d53b5c4f69ee0934206e492a49e6ee2aa1e801924534e938896eb1d78f272",
+  "views": [
+    {
+      "actual_separate_flash": false,
+      "actual_shot_age": 0.24,
+      "all16_source_reticle_arm_pixels_exact": true,
+      "crosshair_center": [
+        320,
+        180
+      ],
+      "draw_frame_fence_seconds": 0.077452,
+      "frame": 0,
+      "muzzle_center_pixel": [
+        0.752941191196442,
+        0.721568644046783,
+        0.627451002597809,
+        1.0
+      ],
+      "native_flash_center": [
+        320,
+        205
+      ],
+      "native_flash_destination": [
+        272,
+        157,
+        96,
+        96
+      ],
+      "offcenter3px_negative_rejected": true,
+      "png_sha256": "9a9c9bb636a9f8d5a796cb23bf36d7f1b8fd3b4b478176daeb5951c44ce4d3fa",
+      "pose": "idle",
+      "reticle_left_segment_pixel": [
+        0.898039221763611,
+        0.850980401039124,
+        0.721568644046783,
+        1.0
+      ],
+      "visible_weapon_sample_exact": true,
+      "weapon_draw_destination": [
+        180,
+        143,
+        320,
+        200
+      ]
+    },
+    {
+      "actual_separate_flash": true,
+      "actual_shot_age": 0.03,
+      "all16_source_reticle_arm_pixels_exact": true,
+      "crosshair_center": [
+        320,
+        180
+      ],
+      "draw_frame_fence_seconds": 0.011036,
+      "frame": 1,
+      "muzzle_center_pixel": [
+        0.972549021244049,
+        0.847058832645416,
+        0.564705908298492,
+        1.0
+      ],
+      "native_flash_center": [
+        320,
+        205
+      ],
+      "native_flash_destination": [
+        272,
+        157,
+        96,
+        96
+      ],
+      "offcenter3px_negative_rejected": true,
+      "png_sha256": "6e630f75b0ffe54570f2ce86d149422e2fca087e3adcde64ccb332959b492bc7",
+      "pose": "fire",
+      "reticle_left_segment_pixel": [
+        0.898039221763611,
+        0.850980401039124,
+        0.721568644046783,
+        1.0
+      ],
+      "visible_weapon_sample_exact": true,
+      "weapon_draw_destination": [
+        180,
+        143,
+        320,
+        200
+      ]
+    },
+    {
+      "actual_separate_flash": false,
+      "actual_shot_age": 0.1575,
+      "all16_source_reticle_arm_pixels_exact": true,
+      "crosshair_center": [
+        320,
+        180
+      ],
+      "draw_frame_fence_seconds": 0.025799,
+      "frame": 2,
+      "muzzle_center_pixel": [
+        0.752941191196442,
+        0.721568644046783,
+        0.627451002597809,
+        1.0
+      ],
+      "native_flash_center": [
+        320,
+        205
+      ],
+      "native_flash_destination": [
+        272,
+        157,
+        96,
+        96
+      ],
+      "offcenter3px_negative_rejected": true,
+      "png_sha256": "0276d73602a431d8c8436001fde2aef4d0886e6021e8aaa65c0ebc640b317595",
+      "pose": "recover",
+      "reticle_left_segment_pixel": [
+        0.898039221763611,
+        0.850980401039124,
+        0.721568644046783,
+        1.0
+      ],
+      "visible_weapon_sample_exact": true,
+      "weapon_draw_destination": [
+        180,
+        143,
+        320,
+        200
+      ]
+    }
+  ]
+}

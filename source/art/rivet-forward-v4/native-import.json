@@ -1,0 +1,30 @@
+{
+  "binary_alpha": true,
+  "bit_exact_rgba_to_source": true,
+  "dimensions": [
+    960,
+    200
+  ],
+  "driver": "Dummy",
+  "failures": 0,
+  "godot_version": "4.7.2-stable (official)",
+  "png_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "pose_rgba8_sha256": [
+    "f3ee99b9a9c7c6603113d848f993fd7358cf0621da8ae20c3b66cf375aba96db",
+    "4d478d28be43b793a950da37bb86005cbec0c3e8d8b74fcedc737098ccf28516",
+    "a861b983d8d3b17c65e88bbaf1de7e91eb6f533e92f3b825979dc96e6ed68994"
+  ],
+  "rgba8_pixel_sha256": "78f9613ff8c8463181135a5cd139d416f7aed891784743f9b1e66ccba022f245",
+  "schema_version": 1,
+  "scope": "Actual ResourceLoader imported Texture2D.get_image; no injected ImageTexture, gameplay, artwork or performance acceptance",
+  "source_file": "res://assets/art/weapons/native-v4/rivet_pistol.png",
+  "status": "PASS",
+  "sidecar_sha256": "dfef19f997de887d7e3767ed753ee7ba8d6e28752e76e3261fc5738cb04e136f",
+  "uid": "uid://bdoou6uo7or3m",
+  "imported_path": "res://.godot/imported/rivet_pistol.png-b569979d166978b72f50b616a6602cbc.ctex",
+  "imported_bytes": 31452,
+  "imported_sha256": "00a6bd1541f9df95d2dce63f90b48c041396636e6de1cda5975d6dc36c381cf7",
+  "fix_alpha_border": false,
+  "native_assigned_uid_unique_against_retained": true,
+  "native_imports": 2
+}

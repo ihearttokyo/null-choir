@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "atlas_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "hud_sha256": "44e466410c46d72431228923082318eb65618b283b5ae86106d02ae981a587f7",
+  "failures": 0,
+  "three_native_poses_verified": true,
+  "actual_hud_verified": true,
+  "scope": "Exact accepted nativeBlender source/threeposes/materialfinish +actual640x360staticproductionHUD weapon/crosshair/separateflash consumer; NOT physicalinput/gameplay/performance/packedapp acceptance",
+  "runtime_output": {
+    "path": "game/assets/art/weapons/native-v4/rivet_pistol.png",
+    "sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+    "bytes": 41941
+  },
+  "source": {
+    "path": "source/art/rivet-forward-v4/rivet_pistol.blend",
+    "sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+    "bytes": 219389
+  },
+  "runtime_contract": {
+    "atlas": [
+      960,
+      200
+    ],
+    "cell_size": [
+      320,
+      200
+    ],
+    "columns": 3,
+    "frames": [
+      "idle",
+      "fire",
+      "recover"
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "origin_px": [
+      160,
+      200
+    ],
+    "muzzle_px": [
+      140,
+      62
+    ],
+    "neutral_vanishing_point_px": [
+      140,
+      37
+    ],
+    "hud_destination": [
+      180,
+      143,
+      320,
+      200
+    ],
+    "filter": "nearest"
+  },
+  "actual_hud_images": [
+    {
+      "path": "source/art/rivet-forward-v4/proof/hud-idle.png",
+      "sha256": "9a9c9bb636a9f8d5a796cb23bf36d7f1b8fd3b4b478176daeb5951c44ce4d3fa",
+      "bytes": 20109
+    },
+    {
+      "path": "source/art/rivet-forward-v4/proof/hud-fire.png",
+      "sha256": "6e630f75b0ffe54570f2ce86d149422e2fca087e3adcde64ccb332959b492bc7",
+      "bytes": 18405
+    },
+    {
+      "path": "source/art/rivet-forward-v4/proof/hud-recover.png",
+      "sha256": "0276d73602a431d8c8436001fde2aef4d0886e6021e8aaa65c0ebc640b317595",
+      "bytes": 20433
+    }
+  ],
+  "actual_hud_receipt": "source/art/rivet-forward-v4/proof/native-hud.json",
+  "actual_pose_receipt": "source/art/rivet-forward-v4/proof/native-poses.json",
+  "source_privacy_editability_receipt": "source/art/rivet-forward-v4/proof/source-privacy-editability.json",
+  "source_privacy_status": "PASS",
+  "private_or_absolute_dependency_path_count": 0,
+  "pipeline": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 64,
+    "threads": 2,
+    "denoising": false,
+    "image_generator_used_for_current_raster": false,
+    "native_source_matches_current_raster": true,
+    "color_and_pixel_helper": {
+      "path": "tools/build_art.py",
+      "sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+    },
+    "blender_version": "5.2.2 LTS",
+    "compiler": "source/art/rivet-forward-v4/export_native.py"
+  },
+  "construction_lineage": {
+    "original_native_source": {
+      "path": "source/art/rivet_pistol_v2.blend",
+      "sha256": "b29ac487f2339a7668a7207f84159ad8da4a5aca27803f5349d12ae50a57e3aa"
+    },
+    "original_native_output": {
+      "path": "game/assets/art/weapons/rivet_pistol.png",
+      "sha256": "e774365b70615e5e1efeff1cb0b3264100fc9ed43735a8d389f1048329d47a17"
+    },
+    "original_recipe": {
+      "path": "tools/build_rivet_pistol_v2.py",
+      "sha256": "a1bd6849a6475275c723c927ef5c1de5013505c7c0086f04470e8cd0be10a710"
+    },
+    "retained_design_reference": {
+      "path": "source/art/references/rivet-pistol-reference-v2.png",
+      "sha256": "246d6f6b39d252115465feac28832664285686567f1612db9df9301cfeff8e15"
+    },
+    "retained_legacy_and_raster_records": {
+      "legacy_manifest": {
+        "path": "source/art/manifest.json",
+        "sha256": "c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928"
+      },
+      "raster_ledger": {
+        "path": "source/art/weapon-raster-v3.json",
+        "sha256": "a1700b645eaf15185ce0c50cde53bdbd33c1357f9cb794730e24c174b00fbfa5"
+      },
+      "retained_painted_output": {
+        "path": "game/assets/art/weapons/painted-v3/rivet_pistol.png",
+        "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+      },
+      "original_native_source": {
+        "path": "source/art/rivet_pistol_v2.blend",
+        "sha256": "b29ac487f2339a7668a7207f84159ad8da4a5aca27803f5349d12ae50a57e3aa"
+      },
+      "original_native_output": {
+        "path": "game/assets/art/weapons/rivet_pistol.png",
+        "sha256": "e774365b70615e5e1efeff1cb0b3264100fc9ed43735a8d389f1048329d47a17"
+      }
+    },
+    "construction_modules_and_graphs": [
+      {
+        "path": "source/art/rivet-forward-v4/construction/camera_model_detailed.py",
+        "sha256": "3db7796acf78a9055490572dc0dfa2bce0fa219732d9aafeeb4041b7bdd7814a",
+        "bytes": 2677
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/detailed_geometry_repair.py",
+        "sha256": "78b0d7f411742c99f77eea97ac096809263c37baa1019ee91b5ef2d2b42845be",
+        "bytes": 3263
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/patch_detailed_source.py",
+        "sha256": "d227f21d61095d0d125b0675335d0e225a1b04112b26d52da569620bc188f3ef",
+        "bytes": 9541
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/patch_detailed_repair.py",
+        "sha256": "4234d81607e927a95fe36b452d07b6a878df87c5e0157f86eee4e1129b007bc4",
+        "bytes": 4740
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/finish_material_source02.py",
+        "sha256": "58dd8be784a54d9f3659d622b1c80a537df5701554ee704e6070204b619ea86b",
+        "bytes": 10002
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/materials-before.json",
+        "sha256": "54ea84749114dd58b970ed766bce2e66c9bb76b0cef1ac53c7011005b3cfb767",
+        "bytes": 216421
+      },
+      {
+        "path": "source/art/rivet-forward-v4/construction/materials-after.json",
+        "sha256": "755b85b63fe85b5c4320492ae13b392ba78b260a2854bf7a48b4752d1582ae66",
+        "bytes": 195878
+      }
+    ],
+    "method": "Original detailed v2 volumetric source fork; proper rigid barrel-axis camera alignment, closedbreech/connected-sight repair, scoped workedmetal/leather materialfinish; no flatcard/rasteranglewarp"
+  },
+  "independent_visual_acceptance": {
+    "status": "ACCEPTED_AND_FROZEN",
+    "scope": "Exact threeposeatlas +actualstaticHUD +materialfinish"
+  },
+  "native_hud_fixture_limits": [
+    "Hud._ready minimal frozenview",
+    "Hud._instrument_frame suppressed",
+    "Hud._instrument_art suppressed"
+  ],
+  "native_hud_fixture_scope": "Actual productionHud._draw + actualPlayer clock methods, candidateImageTexture injection; mockHost, Player outside tree; no Main/AI/physics/input/audio/listening/gameplay/FPS proof",
+  "portable_exporter_validation": {
+    "status": "NATIVE_EXPORT_MATCHES_EXACT_ACCEPTED_ATLAS",
+    "native_render_executed_from_portable_exporter": true,
+    "required_future_gate": "Completed: same public exporter actualfirst native run reproduced exact accepted atlas with unchanged source.",
+    "static_receipt": "source/art/rivet-forward-v4/proof/portable-exporter-static.json",
+    "static_tests_passed": 8,
+    "native_result_field": "portable_export",
+    "historical_preparation_note": "The initial static-only/native-unrun statement was accurate at preparation; this actual same-exporter first-run result supersedes it."
+  },
+  "publication_boundary": "No native-import.json,ledger.json or invented textureUID in this packet; integration owner binds actual production import separately.",
+  "source_privacy_native_run": {
+    "read_only": true,
+    "rendered": false,
+    "saved_source": false,
+    "wall_seconds": 1.570709666935727,
+    "exact_max_rss_bytes": 254558208,
+    "limits": {
+      "wall_seconds": 10,
+      "rss_bytes": 536870912
+    },
+    "private_path_field_findings": 0
+  },
+  "portable_export": {
+    "schema_version": 1,
+    "status": "PASS",
+    "failures": 0,
+    "scope": "Actual first invocation of unchanged public portableexporter; three native frames exactly reproduced acceptedatlas; no art/source/light/code tuning or retry",
+    "source": {
+      "path": "source/art/rivet-forward-v4/rivet_pistol.blend",
+      "sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+      "bytes": 219389,
+      "unchanged": true
+    },
+    "exporter": {
+      "path": "source/art/rivet-forward-v4/export_native.py",
+      "sha256": "3e504765c81d0afdcfbe075e21b688ecc6fbbbef0df4a3a2d146390f84cdca76"
+    },
+    "helper": {
+      "path": "tools/build_art.py",
+      "sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+    },
+    "blender_version": "5.2.2 LTS",
+    "engine": "CYCLES",
+    "device": "CPU",
+    "threads": 2,
+    "samples": 64,
+    "denoising": false,
+    "rendered": true,
+    "output": {
+      "path": "game/assets/art/weapons/native-v4/rivet_pistol.png",
+      "sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+      "bytes": 41941,
+      "dimensions": [
+        960,
+        200
+      ],
+      "rgba8_pixel_sha256": "78f9613ff8c8463181135a5cd139d416f7aed891784743f9b1e66ccba022f245",
+      "pose_rgba8_sha256": [
+        "f3ee99b9a9c7c6603113d848f993fd7358cf0621da8ae20c3b66cf375aba96db",
+        "4d478d28be43b793a950da37bb86005cbec0c3e8d8b74fcedc737098ccf28516",
+        "a861b983d8d3b17c65e88bbaf1de7e91eb6f533e92f3b825979dc96e6ed68994"
+      ]
+    },
+    "byte_identical_to_accepted_atlas": true,
+    "source_unchanged": true,
+    "actual_reopened_poses": [
+      {
+        "pose": "idle",
+        "actual_mesh_axis": [
+          -3.340943521834561e-08,
+          1.0,
+          -5.983764594930108e-09
+        ],
+        "muzzle_local_px": [
+          140.0,
+          62.00001239776611
+        ],
+        "axis_vanishing_local_px": [
+          139.99998092651367,
+          37.000107765197754
+        ],
+        "editable_mesh_parts": 99,
+        "triangles": 11808
+      },
+      {
+        "pose": "fire",
+        "actual_mesh_axis": [
+          0.005580869968980551,
+          0.9996629357337952,
+          0.025354521349072456
+        ],
+        "muzzle_local_px": [
+          139.99998092651367,
+          62.00002431869507
+        ],
+        "axis_vanishing_local_px": [
+          142.09243774414062,
+          27.472615242004395
+        ],
+        "editable_mesh_parts": 99,
+        "triangles": 11808
+      },
+      {
+        "pose": "recover",
+        "actual_mesh_axis": [
+          -0.0021927731577306986,
+          0.9999444484710693,
+          -0.010317528620362282
+        ],
+        "muzzle_local_px": [
+          139.99998092651367,
+          62.00003623962402
+        ],
+        "axis_vanishing_local_px": [
+          139.1800594329834,
+          40.866780281066895
+        ],
+        "editable_mesh_parts": 99,
+        "triangles": 11808
+      }
+    ],
+    "frames": [
+      {
+        "pose": "idle",
+        "public_frame_path": "source/art/rivet-forward-v4/frames/idle.png",
+        "sha256": "f0244cb2f22d146f4b22dde153c3b1c77371a5d8d26d136525460903098a89d9",
+        "bytes": 14987,
+        "native_draw_and_readback_seconds": 1.1495189169654623,
+        "raw_same_draw_sha256": "6d6d6e7bf3bbf3fe88b6dddcaab3a2feff837c7dd31fe8521593452c6ea56d32",
+        "raw_classification": "Uncompiled same native draw retained in local rawrun evidence, not a new public file"
+      },
+      {
+        "pose": "fire",
+        "public_frame_path": "source/art/rivet-forward-v4/frames/fire.png",
+        "sha256": "f7a694a5d370ee1db0513ac96c1930a1c92a9953a9323d67ee8cca8a8d202968",
+        "bytes": 14509,
+        "native_draw_and_readback_seconds": 1.0624338750494644,
+        "raw_same_draw_sha256": "44383fd708201fbd7702cce9505b67bffb2bc5204fbe7cc37ccea911d6a6655d",
+        "raw_classification": "Uncompiled same native draw retained in local rawrun evidence, not a new public file"
+      },
+      {
+        "pose": "recover",
+        "public_frame_path": "source/art/rivet-forward-v4/frames/recover.png",
+        "sha256": "3ecaf2aaae154800dbbed5ee1ef67230059ec39bc015de337e705b96112bf334",
+        "bytes": 15231,
+        "native_draw_and_readback_seconds": 1.1185563750332221,
+        "raw_same_draw_sha256": "c8b7f94e83d82dd1c0bd49cdc2e7c44b881657c3fde56b7538fe9ccb09a3b78e",
+        "raw_classification": "Uncompiled same native draw retained in local rawrun evidence, not a new public file"
+      }
+    ],
+    "wall_seconds": 4.886909291963093,
+    "exact_max_child_rss_bytes": 285655040,
+    "limits": {
+      "frame_seconds": 10,
+      "process_seconds": 40,
+      "rss_bytes": 805306368
+    },
+    "portable_command": [
+      "blender",
+      "--background",
+      "--threads",
+      "2",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "source/art/rivet-forward-v4/export_native.py",
+      "--",
+      "--repo",
+      ".",
+      "--source",
+      "source/art/rivet-forward-v4/rivet_pistol.blend",
+      "--owned-output-root",
+      "<owned-scratch>",
+      "--output",
+      "<owned-scratch>/portable-rebuild01",
+      "--render"
+    ],
+    "command_note": "Public-relative representation of the actual absolute-path invocation; private machine/output paths omitted. Full raw command and native log retained locally, not an additional public file."
+  }
+}

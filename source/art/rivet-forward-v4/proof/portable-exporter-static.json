@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "STATIC_TESTS_PASS",
+  "tests_passed": 8,
+  "scope": "Portable exporter code/path/schema/negative controls and native-cell byte compilation only; no native source-open/render by this exporter yet",
+  "exporter": {
+    "path": "source/art/rivet-forward-v4/export_native.py",
+    "sha256": "3e504765c81d0afdcfbe075e21b688ecc6fbbbef0df4a3a2d146390f84cdca76"
+  },
+  "accepted_source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "accepted_atlas_sha256": "9470e33b6c9a33127afb554a1848310c42d0cfd4bab1e05cbbe33a0495524618",
+  "frame_png_pixel_bytes_compile_exactly_to_accepted_atlas": true,
+  "in_memory_original_png_encoding_matches_accepted_atlas_sha256": true,
+  "all3_portable_native_render_executed": false,
+  "next_gate": "Separate explicitnativegrant; verify exact acceptedSHA after actualall3render. No automaticrerender/fallback."
+}

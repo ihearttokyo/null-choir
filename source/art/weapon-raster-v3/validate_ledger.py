@@ -11,6 +11,7 @@ import json
 import math
 from pathlib import Path, PurePosixPath
 import re
+import runpy
 import struct
 import zlib
 
@@ -344,9 +345,19 @@ def validate_ledger(root: Path, ledger_path: str | Path) -> dict:
     player_data=_checked_file(root,PLAYER_PATH,label="Player.WEAPONS consumer",allowed_roots={"game"})[1]
     player_text=player_data.decode("utf-8",errors="strict")
     records=re.findall(r'\{"name":"[^"]+","asset":"([^"]+)"[^}]*\}',player_text)
-    expected_player={f"painted-v3/{asset_id}" for asset_id in IDS}
-    if len(records)!=6 or set(records)!=expected_player:
-        fail("Player.WEAPONS must register all six exact versioned painted-v3 paths")
+    order=("impact_tool","rivet_pistol","scattergun","sawtooth_repeater","marrow_launcher","choir_disruptor")
+    expected_player=["painted-v3/"+asset_id for asset_id in order]
+    native_player=expected_player.copy(); native_player[1]="native-v4/rivet_pistol"
+    if records == native_player:
+        # Exact index-1 supersession only. The native validator never calls this
+        # function; all six old rasters/sources/imports remain validated below.
+        native_guard=runpy.run_path(str(root/"tools/rivet_forward_art_ledger.py"))
+        try:
+            native_guard["validate_ledger"](root,"source/art/rivet-forward-v4/ledger.json")
+        except ValueError as exc:
+            fail("native Rivet supersession is not qualified: "+str(exc))
+    elif records != expected_player:
+        fail("Player.WEAPONS must retain five exact positions and only the checked index1 native Rivet alternate")
     hud_data=_checked_file(root,HUD_PATH,label="HUD texture consumer",allowed_roots={"game"})[1]
     hud_text=hud_data.decode("utf-8",errors="strict")
     if HUD_NEAREST not in hud_text or HUD_ASSET_CONSUMER not in hud_text:
