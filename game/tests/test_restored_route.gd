@@ -1,7 +1,7 @@
 extends SceneTree
 const Main = preload("res://scripts/main.gd")
 const Chart = preload("res://scripts/descent_chart.gd")
-const EXPECTED_ART_FILES = ["intake.jpg", "foundry-pro-v2.jpg", "processional-pro-v2.jpg", "reliquary.jpg", "nursery.jpg", "ossuary-pro-v2.jpg", "inversion-pro-v2.jpg", "heart-pro-v2.jpg"]
+const EXPECTED_ART_FILES = ["intake-builtin-v4.png", "foundry-pro-v2.jpg", "processional-pro-v2.jpg", "reliquary-builtin-v3.png", "nursery-builtin-v3.png", "ossuary-pro-v2.jpg", "inversion-pro-v2.jpg", "heart-pro-v2.jpg"]
 func _initialize() -> void:
  AudioServer.set_bus_mute(0, true)
  call_deferred("run")

@@ -4,10 +4,12 @@ const WallClock = preload("res://tests/wall_clock_wait.gd")
 
 func _initialize(): call_deferred("run")
 
-func exclude_nonfloor(node: Node, out: Array[RID]) -> void:
-    if node is CollisionObject3D and not (node.get_parent() is MeshInstance3D and str(node.get_parent().name).begins_with("Floor")):
+func exclude_nonfloor(node: Node, out: Array[RID], floor_rids: Dictionary) -> void:
+    # Floor identity is owned by Level, not inferred from the render-mesh name.
+    # Revision-3 Ossuary's real floor colliders are AuthoredSurface_* meshes.
+    if node is CollisionObject3D and not floor_rids.has(node.get_rid()):
         out.append(node.get_rid())
-    for child in node.get_children(): exclude_nonfloor(child,out)
+    for child in node.get_children(): exclude_nonfloor(child,out,floor_rids)
 
 func run():
     var fixture=OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_ROOT")
@@ -36,7 +38,9 @@ func run():
         await physics_frame
         await physics_frame
         var exclude:Array[RID]=[]
-        exclude_nonfloor(root,exclude)
+        var floor_rids:Dictionary={}
+        for body in game.level.floor_bodies: floor_rids[body.get_rid()]=true
+        exclude_nonfloor(root,exclude,floor_rids)
         var space=game.level.get_world_3d().direct_space_state
         for hero in game.level.layout.data.heroes:
             if not hero.has("base"): continue
