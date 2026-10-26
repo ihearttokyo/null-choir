@@ -85,10 +85,22 @@ func run() -> void:
 
 func finish(status: int) -> void:
 	Input.action_release("fire")
-	if is_instance_valid(game): game.show_title()
+	var recording: WeakRef
+	if is_instance_valid(game):
+		game.show_title()
+		recording = weakref(game.music.player.stream)
+		game.music.stop()
+		game.effects.stop()
 	paused = false
-	await create_timer(0.15).timeout
-	if is_instance_valid(game): game.free()
+	if is_instance_valid(game): game.queue_free()
 	await process_frame
-	await process_frame
+	# Title playback belongs to this fixture. Let the native mixer release it,
+	# checking actual resource lifetime rather than sleeping or ignoring leaks.
+	var deadline: int = Time.get_ticks_usec() + 2000000
+	while recording != null and recording.get_ref() != null and Time.get_ticks_usec() < deadline:
+		OS.delay_msec(2)
+		await process_frame
+	if recording != null and recording.get_ref() != null:
+		push_error("Fixture-owned title recording must be released before exit")
+		status = 1
 	quit(status)

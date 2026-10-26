@@ -57,9 +57,9 @@ static func matches(owner, fields: Array, frozen: Dictionary, aliases: Dictionar
 	return fields_match(owner,remaining,expected)
 
 static func entry_document(values: Dictionary) -> Dictionary:
-	var entry: Dictionary = {"health":values.health,"armor":values.armor,"ammo":values.ammo.duplicate(),"owned_weapons":values.owned_weapons.duplicate(),"weapon":values.weapon,"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]}
+	var entry: Dictionary = {"health":values.health,"armor":values.armor,"ammo":values.ammo.duplicate(),"owned_weapons":values.owned_weapons.duplicate(),"weapon":values.weapon,"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]}
 	var document: Dictionary = entry.duplicate(true)
-	document.merge({"version":1,"difficulty":1,"level_index":6,"discoveries":[3,4,5],"explored":[],"checkpoint":entry.duplicate(true),"level_start":entry.duplicate(true)},true)
+	document.merge({"version":2,"difficulty":1,"level_index":6,"discoveries":[3,4,5],"explored":[],"checkpoint":entry.duplicate(true),"level_start":entry.duplicate(true)},true)
 	return document
 
 static func before_capture_document(captured: Dictionary, previous_actors: Array, cached_yaw: Variant, cached_pitch: Variant) -> Dictionary:
@@ -228,9 +228,9 @@ func before_exit() -> bool:
 	cx_expected_bytes = JSON.stringify(cx_expected,"",true,true).to_utf8_buffer()
 	cx_expected_sha = CxPreparation.digest(cx_expected_bytes)
 	var resources: Dictionary = ledger.duplicate(true)
-	resources.merge({"keys":keys.duplicate(),"removed":removed.duplicate(),"checkpoint_id":CxPreparation.CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":[],"yaw":CxPreparation.canonical(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
+	resources.merge({"keys":keys.duplicate(),"removed":removed.duplicate(),"floor_revision":1,"checkpoint_id":CxPreparation.CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":[],"yaw":CxPreparation.canonical(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
 	cx_capture_document = resources.duplicate(true)
-	cx_capture_document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4,5],"explored":explored.duplicate(true),"checkpoint":checkpoint.duplicate(true),"level_start":start.duplicate(true)},true)
+	cx_capture_document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4,5],"explored":explored.duplicate(true),"checkpoint":checkpoint.duplicate(true),"level_start":start.duplicate(true)},true)
 	cx_before_capture_document = before_capture_document(cx_capture_document,actor_image,game.state.yaw,game.state.pitch)
 	cx_phase = "exit_pending"
 	cx_trace.append("exit_before")
@@ -313,7 +313,7 @@ func before_pickup(_id: String) -> Dictionary:
 	return {}
 func before_encounter(id: String) -> Dictionary:
 	# Main polls earned regions each render; only their unchanged no-op is allowed.
-	require(ok and current() and game.transport_witness == self and prior_frozen() and activated.has(id) and removed.count("encounter:"+id) == 1 and game.state.removed == removed and stack("/main.gd","_process") and stack("/test_ossuary_transport_loop.gd","activate_encounter"),"C only repeats already-earned encounter without effects")
+	require(ok and current() and game.transport_witness == self and prior_frozen() and activated.has(id) and removed.count("encounter:"+id) == 1 and game.state.removed == removed and stack("/main.gd","_update_encounters") and (stack("/main.gd","_process") or (Engine.is_in_physics_frame() and stack("/main.gd","update_encounter_triggers") and stack("/player.gd","_physics_process"))) and stack("/test_ossuary_transport_loop.gd","activate_encounter"),"C only repeats already-earned encounter without effects")
 	return {}
 func before_shot(_weapon: int) -> void: forbidden("shot")
 func before_hurt(_amount: int) -> void: forbidden("damage")

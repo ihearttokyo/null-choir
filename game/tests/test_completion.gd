@@ -1,5 +1,7 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -25,8 +27,11 @@ func run() -> void:
 	game._unhandled_input(event)
 	if not expect(not game.playing and game.level == null,"Escape must not resume completed map"): return
 	if FileAccess.file_exists(game.progress_path): DirAccess.remove_absolute(game.progress_path)
+	game.music.stop()
+	await WallClock.seconds(self,0.15)
 	game.queue_free()
 	paused = false
+	await process_frame
 	print("PASS completed Intake releases old map and cannot resume via Escape")
 	quit()
 

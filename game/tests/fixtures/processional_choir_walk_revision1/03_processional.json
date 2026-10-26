@@ -1,0 +1,2103 @@
+{
+  "id": "processional",
+  "title": "THE PROCESSIONAL",
+  "subtitle": "03 / GIVE THE RESTRAINT A VOICE",
+  "cell_size": 4,
+  "spawn": [
+    21.5,
+    29.5
+  ],
+  "spawn_yaw": 0,
+  "rects": [
+    [
+      20,
+      28,
+      23,
+      31
+    ],
+    [
+      20,
+      25,
+      21,
+      28
+    ],
+    [
+      3,
+      23,
+      30,
+      25
+    ],
+    [
+      14,
+      6,
+      18,
+      26
+    ],
+    [
+      15,
+      1,
+      16,
+      6
+    ],
+    [
+      2,
+      10,
+      10,
+      18
+    ],
+    [
+      10,
+      10,
+      14,
+      12
+    ],
+    [
+      2,
+      18,
+      4,
+      23
+    ],
+    [
+      0,
+      12,
+      2,
+      14
+    ],
+    [
+      11,
+      7,
+      24,
+      9
+    ],
+    [
+      23,
+      8,
+      31,
+      16
+    ],
+    [
+      28,
+      16,
+      30,
+      23
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        -10,
+        0,
+        60,
+        7
+      ],
+      "height": 5
+    },
+    {
+      "rect": [
+        -10,
+        7,
+        60,
+        11
+      ],
+      "axis": 1,
+      "start": 15.0,
+      "end": 7,
+      "height": 5
+    },
+    {
+      "rect": [
+        -10,
+        11,
+        60,
+        19
+      ],
+      "height": 2.5
+    },
+    {
+      "rect": [
+        -10,
+        19,
+        60,
+        23
+      ],
+      "axis": 1,
+      "start": 23.0,
+      "end": 19,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        -10,
+        23,
+        60,
+        50
+      ],
+      "height": 0
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        0,
+        10,
+        10,
+        18
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        23,
+        8,
+        31,
+        16
+      ],
+      "height": 8
+    }
+  ],
+  "loops": [
+    {
+      "id": "processional_loop_organ",
+      "route": [
+        [
+          16,
+          24
+        ],
+        [
+          3,
+          24
+        ],
+        [
+          3,
+          18
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          16,
+          24
+        ]
+      ],
+      "hero": "walking_bone_organ"
+    },
+    {
+      "id": "processional_loop_palanquin",
+      "route": [
+        [
+          16,
+          24
+        ],
+        [
+          29,
+          24
+        ],
+        [
+          29,
+          16
+        ],
+        [
+          29,
+          9
+        ],
+        [
+          24,
+          9
+        ],
+        [
+          24,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          16,
+          24
+        ]
+      ],
+      "hero": "ossified_palanquin"
+    }
+  ],
+  "heroes": [
+    {
+      "id": "walking_bone_organ",
+      "cell": [
+        7.5,
+        14.5
+      ],
+      "yaw": 20,
+      "base": [
+        7.8,
+        0.55,
+        5.6
+      ],
+      "seal": "blood",
+      "light_ids": [
+        "organ_feed",
+        "organ_core"
+      ]
+    },
+    {
+      "id": "ossified_palanquin",
+      "cell": [
+        27.5,
+        12.5
+      ],
+      "yaw": -15,
+      "base": [
+        7.8,
+        0.55,
+        5.6
+      ],
+      "seal": "ivory",
+      "light_ids": [
+        "palanquin_feed",
+        "palanquin_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "processional_gate",
+      "cell": [
+        16,
+        4.7
+      ],
+      "size": [
+        8.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "yaw": 0
+    }
+  ],
+  "interactions": [
+    {
+      "id": "processional_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        3.5,
+        10.5
+      ],
+      "text": "ORGAN BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "processional_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        30.5,
+        9.5
+      ],
+      "text": "PALANQUIN IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "processional_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        16.5,
+        8.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "processional_story",
+      "kind": "story",
+      "cell": [
+        0.5,
+        13.5
+      ],
+      "text": "The old score names the recovery technician. The date is earlier than your birth."
+    },
+    {
+      "id": "processional_exit",
+      "kind": "exit",
+      "cell": [
+        15.5,
+        1.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "AIR FEED RESTORED / DESCEND"
+    }
+  ],
+  "mission": "RECOVERY ORDER 03: restore both air-feed seals. Do not follow the melody.",
+  "pickups": [
+    {
+      "id": "processional_scattergun",
+      "kind": "weapon",
+      "weapon": 2,
+      "amount": 16,
+      "cell": [
+        20.5,
+        25.5
+      ]
+    },
+    {
+      "id": "processional_entry_rivets",
+      "kind": "ammo",
+      "cell": [
+        22.5,
+        30.5
+      ],
+      "amount": 35,
+      "weapon": 1
+    },
+    {
+      "id": "processional_nave_health",
+      "kind": "health",
+      "cell": [
+        15.5,
+        24.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "processional_organ_armor",
+      "kind": "armor",
+      "cell": [
+        2.7,
+        17.5
+      ],
+      "amount": 60
+    },
+    {
+      "id": "processional_organ_rivets",
+      "kind": "ammo",
+      "cell": [
+        9.5,
+        10.5
+      ],
+      "amount": 50,
+      "weapon": 1
+    },
+    {
+      "id": "processional_organ_shells",
+      "kind": "ammo",
+      "cell": [
+        3.5,
+        20.5
+      ],
+      "amount": 14,
+      "weapon": 2
+    },
+    {
+      "id": "processional_organ_health",
+      "kind": "health",
+      "cell": [
+        9.5,
+        18.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "processional_north_shells",
+      "kind": "ammo",
+      "cell": [
+        12.5,
+        8.5
+      ],
+      "amount": 12,
+      "weapon": 2
+    },
+    {
+      "id": "processional_palanquin_armor",
+      "kind": "armor",
+      "cell": [
+        30.5,
+        15.5
+      ],
+      "amount": 60
+    },
+    {
+      "id": "processional_palanquin_health",
+      "kind": "health",
+      "cell": [
+        23.5,
+        10.5
+      ],
+      "amount": 30
+    },
+    {
+      "id": "processional_palanquin_shells",
+      "kind": "ammo",
+      "cell": [
+        29.5,
+        20.5
+      ],
+      "amount": 16,
+      "weapon": 2
+    },
+    {
+      "id": "processional_palanquin_rivets",
+      "kind": "ammo",
+      "cell": [
+        28.6,
+        21.5
+      ],
+      "amount": 50,
+      "weapon": 1
+    },
+    {
+      "id": "processional_gate_shells",
+      "kind": "ammo",
+      "cell": [
+        15.5,
+        8.5
+      ],
+      "amount": 12,
+      "weapon": 2
+    },
+    {
+      "id": "processional_return_health",
+      "kind": "health",
+      "cell": [
+        24.5,
+        24.5
+      ],
+      "amount": 25
+    }
+  ],
+  "enemies": [
+    {
+      "id": "processional_enemy_00",
+      "kind": "worker",
+      "cell": [
+        15.5,
+        20.65
+      ],
+      "yaw": 20
+    },
+    {
+      "id": "processional_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        17.5,
+        18.5
+      ],
+      "yaw": 87
+    },
+    {
+      "id": "processional_enemy_02",
+      "kind": "crawler",
+      "cell": [
+        12.25,
+        8.5
+      ],
+      "yaw": 154
+    },
+    {
+      "id": "processional_enemy_03",
+      "kind": "worker",
+      "cell": [
+        6.5,
+        23.5
+      ],
+      "yaw": 221
+    },
+    {
+      "id": "processional_enemy_04",
+      "kind": "crawler",
+      "cell": [
+        3.5,
+        20.5
+      ],
+      "yaw": 288
+    },
+    {
+      "id": "processional_enemy_05",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        16.5
+      ],
+      "yaw": 355
+    },
+    {
+      "id": "processional_enemy_06",
+      "kind": "crawler",
+      "cell": [
+        4.5,
+        11.5
+      ],
+      "yaw": 62
+    },
+    {
+      "id": "processional_enemy_07",
+      "kind": "caster",
+      "cell": [
+        9.5,
+        15.5
+      ],
+      "yaw": 129
+    },
+    {
+      "id": "processional_enemy_08",
+      "kind": "worker",
+      "cell": [
+        10.5,
+        11.5
+      ],
+      "yaw": 196
+    },
+    {
+      "id": "processional_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        13.5,
+        9.25
+      ],
+      "yaw": 263
+    },
+    {
+      "id": "processional_enemy_10",
+      "kind": "worker",
+      "cell": [
+        17.5,
+        10.5
+      ],
+      "yaw": 330
+    },
+    {
+      "id": "processional_enemy_11",
+      "kind": "caster",
+      "cell": [
+        16.5,
+        12.5
+      ],
+      "yaw": 37
+    },
+    {
+      "id": "processional_enemy_12",
+      "kind": "crawler",
+      "cell": [
+        15.5,
+        12.5
+      ],
+      "yaw": 104
+    },
+    {
+      "id": "processional_enemy_13",
+      "kind": "worker",
+      "cell": [
+        25.5,
+        24.5
+      ],
+      "yaw": 171
+    },
+    {
+      "id": "processional_enemy_14",
+      "kind": "crawler",
+      "cell": [
+        29.5,
+        21.5
+      ],
+      "yaw": 238
+    },
+    {
+      "id": "processional_enemy_15",
+      "kind": "worker",
+      "cell": [
+        30.5,
+        17.5
+      ],
+      "yaw": 305
+    },
+    {
+      "id": "processional_enemy_16",
+      "kind": "crawler",
+      "cell": [
+        29.5,
+        14.5
+      ],
+      "yaw": 12
+    },
+    {
+      "id": "processional_enemy_17",
+      "kind": "caster",
+      "cell": [
+        24.5,
+        12.5
+      ],
+      "yaw": 79
+    },
+    {
+      "id": "processional_enemy_18",
+      "kind": "worker",
+      "cell": [
+        30,
+        10.5
+      ],
+      "yaw": 146
+    },
+    {
+      "id": "processional_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        25.5,
+        9.5
+      ],
+      "yaw": 213
+    },
+    {
+      "id": "processional_enemy_20",
+      "kind": "caster",
+      "cell": [
+        27.5,
+        15.5
+      ],
+      "yaw": 280
+    },
+    {
+      "id": "processional_enemy_21",
+      "kind": "worker",
+      "cell": [
+        22.5,
+        8.5
+      ],
+      "yaw": 347
+    },
+    {
+      "id": "processional_enemy_22",
+      "kind": "crawler",
+      "cell": [
+        20.5,
+        8.5
+      ],
+      "yaw": 54
+    },
+    {
+      "id": "processional_enemy_23",
+      "kind": "worker",
+      "cell": [
+        15.5,
+        2.5
+      ],
+      "yaw": 121
+    },
+    {
+      "id": "processional_enemy_24",
+      "kind": "crawler",
+      "cell": [
+        16.5,
+        5.5
+      ],
+      "yaw": 188
+    },
+    {
+      "id": "processional_enemy_25",
+      "kind": "worker",
+      "cell": [
+        16.5,
+        7.5
+      ],
+      "yaw": 255
+    }
+  ],
+  "scenery": [
+    {
+      "art": "vault_span",
+      "cell": [
+        22,
+        30
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        24
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        20
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        16
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        12
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        8
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        8.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        25.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        6.5,
+        11.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        13,
+        8.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        27.5,
+        9.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        30,
+        15
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        29.5,
+        20
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        20.15,
+        30.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        23.85,
+        29.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        14.15,
+        21.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        18.85,
+        18.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        2.15,
+        16.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.85,
+        15.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        7.5,
+        10.15
+      ],
+      "yaw": 0,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        6.5,
+        18.85
+      ],
+      "yaw": 180,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        23.15,
+        11.5
+      ],
+      "yaw": 90,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        31.85,
+        12.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        27.5,
+        8.15
+      ],
+      "yaw": 0,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        25.5,
+        16.85
+      ],
+      "yaw": 180,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        12.5,
+        7.15
+      ],
+      "yaw": 0,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        8.5,
+        25.85
+      ],
+      "yaw": 180,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        25.5,
+        25.85
+      ],
+      "yaw": 180,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        16.85,
+        2.5
+      ],
+      "yaw": 270,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        20.7,
+        30.5
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        23.1,
+        28.7
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        14.6,
+        23
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        18.4,
+        19
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        14.6,
+        15
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        18.4,
+        10
+      ],
+      "height": 3
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        2.8,
+        14.5
+      ],
+      "height": 7
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        10,
+        16.7
+      ],
+      "height": 7
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        24,
+        14.8
+      ],
+      "height": 5
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        31,
+        10.7
+      ],
+      "height": 5
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        20.6,
+        31.3
+      ],
+      "yaw": 20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        23.4,
+        31.3
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        3,
+        10.5
+      ],
+      "yaw": 20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        9,
+        16.7
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        23.7,
+        16.2
+      ],
+      "yaw": 20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        31.3,
+        16.2
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        30.9,
+        8.6
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        14.6,
+        7
+      ],
+      "yaw": 20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        18.4,
+        7
+      ],
+      "yaw": -20,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        23.5,
+        30.5
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        7,
+        25.6
+      ],
+      "yaw": 180,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        25,
+        25.6
+      ],
+      "yaw": 180,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        2.4,
+        15.8
+      ],
+      "yaw": 90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        10.4,
+        12.8
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        24,
+        16.5
+      ],
+      "yaw": 180,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        31.5,
+        13.8
+      ],
+      "yaw": -90,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        16,
+        1.1
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "processional_pipe_choir",
+      "tradition": "Christian",
+      "cell": [
+        6,
+        18.4
+      ],
+      "yaw": 0,
+      "scale": [
+        0.95,
+        0.95,
+        0.95
+      ],
+      "solid": [
+        6.0325,
+        0.55,
+        2.6125
+      ]
+    },
+    {
+      "art": "processional_gong_carousel",
+      "tradition": "Buddhist",
+      "cell": [
+        9.9,
+        13.4
+      ],
+      "yaw": 0,
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "solid": [
+        4.76,
+        0.55,
+        3.08
+      ]
+    },
+    {
+      "art": "processional_bound_drums",
+      "tradition": "Shinto",
+      "cell": [
+        12.4,
+        23.3
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.6352,
+        0.55,
+        1.1407
+      ]
+    },
+    {
+      "art": "processional_acoustic_canopy",
+      "tradition": "Islamic",
+      "cell": [
+        18.35,
+        16
+      ],
+      "yaw": 90,
+      "scale": [
+        0.61,
+        0.61,
+        0.61
+      ],
+      "solid": [
+        3.355,
+        0.55,
+        2.135
+      ]
+    },
+    {
+      "art": "processional_reed_chariot",
+      "tradition": "Hindu",
+      "cell": [
+        30.9,
+        11.2
+      ],
+      "yaw": -90,
+      "scale": [
+        0.82,
+        0.82,
+        0.82
+      ],
+      "solid": [
+        3.8704,
+        0.55,
+        3.6113
+      ]
+    },
+    {
+      "art": "processional_seven_reeds",
+      "tradition": "Jewish",
+      "cell": [
+        15.55,
+        20
+      ],
+      "yaw": 90,
+      "scale": [
+        0.67,
+        0.67,
+        0.67
+      ],
+      "solid": [
+        4.2679,
+        0.55,
+        1.943
+      ]
+    },
+    {
+      "art": "processional_winged_sarcophagus",
+      "tradition": "ancient Egyptian",
+      "cell": [
+        27,
+        25.15
+      ],
+      "yaw": 180,
+      "scale": [
+        0.73,
+        0.73,
+        0.73
+      ],
+      "solid": [
+        5.4224,
+        0.55,
+        1.9768
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        20.15,
+        30.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.85,
+        29.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.85,
+        27.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        14.15,
+        21.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.85,
+        18.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        14.15,
+        15.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.85,
+        12.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "processional_nave_return"
+    },
+    {
+      "cell": [
+        2.15,
+        16.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.85,
+        15.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        7.5,
+        10.15
+      ],
+      "height": 4.3,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        6.5,
+        18.85
+      ],
+      "height": 4.3,
+      "fixture_yaw": 180,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.15,
+        11.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 90,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "palanquin_return"
+    },
+    {
+      "cell": [
+        31.85,
+        12.5
+      ],
+      "height": 4.3,
+      "fixture_yaw": 270,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        27.5,
+        8.15
+      ],
+      "height": 4.3,
+      "fixture_yaw": 0,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25.5,
+        16.85
+      ],
+      "height": 4.3,
+      "fixture_yaw": 180,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        12.5,
+        7.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "organ_return"
+    },
+    {
+      "cell": [
+        8.5,
+        25.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        25.5,
+        25.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.22,
+        0.62,
+        0.8
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        15.15,
+        2.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        16.85,
+        2.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.35,
+        0.13
+      ],
+      "energy": 3.8,
+      "range": 15,
+      "id": "processional_gate_feed"
+    },
+    {
+      "cell": [
+        5.5,
+        11.5
+      ],
+      "target": [
+        7.5,
+        14.5
+      ],
+      "height": 8.5,
+      "color": [
+        1,
+        0.38,
+        0.12
+      ],
+      "energy": 5.5,
+      "range": 22,
+      "shadow": true,
+      "id": "organ_feed"
+    },
+    {
+      "cell": [
+        9.5,
+        17
+      ],
+      "target": [
+        7.5,
+        14.5
+      ],
+      "height": 8,
+      "color": [
+        0.35,
+        0.34,
+        0.68
+      ],
+      "energy": 4,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        25.5,
+        9.5
+      ],
+      "target": [
+        27.5,
+        12.5
+      ],
+      "height": 6.8,
+      "color": [
+        0.19,
+        0.65,
+        0.91
+      ],
+      "energy": 5.5,
+      "range": 22,
+      "shadow": true
+    },
+    {
+      "cell": [
+        30,
+        15
+      ],
+      "target": [
+        27.5,
+        12.5
+      ],
+      "height": 6.8,
+      "color": [
+        1,
+        0.36,
+        0.12
+      ],
+      "energy": 4.5,
+      "range": 22,
+      "shadow": true,
+      "id": "palanquin_feed"
+    },
+    {
+      "cell": [
+        22,
+        30
+      ],
+      "height": 4.8,
+      "color": [
+        0.27,
+        0.45,
+        0.61
+      ],
+      "energy": 2,
+      "range": 18
+    },
+    {
+      "cell": [
+        16.5,
+        17.5
+      ],
+      "height": 5.3,
+      "color": [
+        0.54,
+        0.19,
+        0.07
+      ],
+      "energy": 2,
+      "range": 18
+    },
+    {
+      "cell": [
+        7.5,
+        14.5
+      ],
+      "height": 5,
+      "color": [
+        1,
+        0.18,
+        0.04
+      ],
+      "energy": 2,
+      "range": 18,
+      "id": "organ_core"
+    },
+    {
+      "cell": [
+        27.5,
+        12.5
+      ],
+      "height": 3.7,
+      "color": [
+        0.22,
+        0.49,
+        0.7
+      ],
+      "energy": 2,
+      "range": 18,
+      "id": "palanquin_core"
+    },
+    {
+      "id": "processional_pipe_choir_rim",
+      "cell": [
+        6,
+        17.6
+      ],
+      "target": [
+        6,
+        18.4
+      ],
+      "height": 6.8,
+      "color": [
+        0.28,
+        0.43,
+        0.66
+      ],
+      "energy": 1.8,
+      "range": 14
+    },
+    {
+      "id": "processional_acoustic_canopy_rim",
+      "cell": [
+        17.95,
+        16.6
+      ],
+      "target": [
+        18.35,
+        16
+      ],
+      "height": 4.7,
+      "color": [
+        0.25,
+        0.47,
+        0.61
+      ],
+      "energy": 1.8,
+      "range": 11
+    }
+  ],
+  "encounters": [
+    {
+      "id": "processional_organ_answer",
+      "region": [
+        2,
+        10,
+        10.75,
+        18.75
+      ],
+      "enemy_ids": [
+        "processional_enemy_05",
+        "processional_enemy_06",
+        "processional_enemy_07",
+        "processional_enemy_08"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE ORGAN BREATHES AGAINST YOUR MEASURE",
+        "light_ids": [
+          "organ_feed",
+          "organ_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "processional_palanquin_escort",
+      "region": [
+        23,
+        8,
+        31.75,
+        16.75
+      ],
+      "enemy_ids": [
+        "processional_enemy_16",
+        "processional_enemy_17",
+        "processional_enemy_18",
+        "processional_enemy_19",
+        "processional_enemy_20"
+      ],
+      "requires": [],
+      "cue": {
+        "text": "THE PALANQUIN UNVEILS ITS TWO VOICES",
+        "light_ids": [
+          "palanquin_feed",
+          "palanquin_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "processional_nave_response",
+      "region": [
+        14,
+        7,
+        18.75,
+        13
+      ],
+      "enemy_ids": [
+        "processional_enemy_10",
+        "processional_enemy_11",
+        "processional_enemy_12"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "BOTH AIR FEEDS ANSWER WITH YOUR NAME",
+        "light_ids": [
+          "processional_nave_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "processional_organ_return",
+      "region": [
+        11,
+        7,
+        13.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "processional_enemy_02",
+        "processional_enemy_09"
+      ],
+      "requires": [
+        "blood"
+      ],
+      "cue": {
+        "text": "THE ORGAN SENDS ITS LOWEST NOTES AHEAD",
+        "light_ids": [
+          "organ_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "processional_palanquin_return",
+      "region": [
+        19,
+        7,
+        24.75,
+        9.75
+      ],
+      "enemy_ids": [
+        "processional_enemy_21",
+        "processional_enemy_22"
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE HIGH FEED CARRIES A SECOND VOICE",
+        "light_ids": [
+          "palanquin_return"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "processional_gate_release",
+      "region": [
+        15,
+        1.75,
+        16.75,
+        7.75
+      ],
+      "enemy_ids": [
+        "processional_enemy_23",
+        "processional_enemy_24",
+        "processional_enemy_25"
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "cue": {
+        "text": "THE PROCESSION HAS RESERVED YOUR PLACE",
+        "light_ids": [
+          "processional_gate_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "floor_revision": 1
+}

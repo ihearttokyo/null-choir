@@ -1,11 +1,13 @@
 extends "res://tests/test_reliquary_earned_exit.gd"
 
-const N_EXIT_SHA = "a53139b852cb1f0fdcf3ef46515fb4f178a22edfbd23ec99f5dbc8d2c221061a"
-const N_MAP_SHA = "8e04f3d5f704ac4f5b3ee698b3442ff27670843c244baca8b2ffdcd426bfa257"
+const N_EXIT_SHA = "e8a135be5d593609101c71660c55bc8cf174411f3b44d9290010e620341e5a7b"
+const N_MAP_SHA = "41b6ae57321ea422d329027b5f4fe458af847e0cbeedf4baeae0a71e8f1c350f"
+# Revision-one entry/Survey rectangle z28..50 is authored at -3.5; legacy entry stays0.
+const N_ENTRY_Y: float = -3.5
 const N_LIMIT = 30
 const N_SECONDS = 10
 const N_ENTRY_GUARD = "NATIVE RED Nursery ENTRY requires actual unique connected Descend signal, same earned owner/profile and original fresh fifth scene within30 frames/10 seconds"
-const N_CARRY = {"health":82,"armor":170,"ammo":[0,162,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const N_CARRY = {"health":82,"armor":165,"ammo":[0,162,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const N_E_FIELDS = ["e_base","e_pickup_calls","e_ok","e_ticks","e_shots","e_last","e_slot","e_last_time","e_shot_start_age","e_shot_start_time","e_health_loss","e_absorbed","e_removed","e_activation","e_activated","e_attacks","e_roles","e_damage_attacks","e_hurts","e_deaths","e_finishes","e_births","e_contacts","e_projectile_used","e_pending","e_release","e_melee_pending","e_enemy_contacts","e_enemy_pending","e_enemy_used","e_route_b","e_health_gain","e_rivets","e_consumed","e_explored","e_last_cell","e_checkpoint","e_start","e_actor_image","e_captures","e_checkpoint_saves","e_exit_saves","e_checkpoint_doc","e_checkpoint_sha","e_save_sha","e_exit_expected","e_gate_calls","e_gate_intent","e_exit_intent","e_inputs","e_completed"]
 # Independent authored rows: id, role, cell x/z, floor height, degrees, encounter index.
 const N_GROUPS = ["nursery_first_commit","nursery_second_commit","nursery_first_return","nursery_second_return","nursery_finale"]
@@ -40,6 +42,8 @@ const N_ACTORS = [
 	["nursery_enemy_26","worker",31.5,5.5,0.0,150.2551,4],
 	["nursery_enemy_27","caster",30.5,12.5,0.0,124.992,4],
 	["nursery_warden","nursery_warden",30.5,9.5,0.0,180.0,4]]
+# Independent revision-one floor heights, in authored actor order; legacy rows stay immutable.
+const N_CURRENT_FLOORS = [3.25,2.416666666666666,4.5,4.5,4.083333333333333,4.5,4.083333333333333,4.5,-3.0625,-3.5,-3.5,-3.5,-2.1875,-1.3125,-3.5,-2.1875,2.416666666666666,2.0,1.75,-3.0625,-1.3125,-0.4375,4.5,4.5,4.5,2.416666666666666,4.5,3.25,4.5]
 
 class NurseryEntryMain:
 	extends "res://tests/test_reliquary_earned_exit.gd".ReliquaryExitMain
@@ -57,25 +61,26 @@ class NurseryEntryMain:
 	var n_last_cell: Vector2i = Vector2i(-1,-1)
 	func n_handoff() -> Dictionary:
 		var resources: Dictionary = N_CARRY.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 		var document: Dictionary = resources.duplicate(true)
-		document.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+		document.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 		return document
 	func n_originals() -> Array:
 		var result: Array = []
-		for spec in N_ACTORS:
-			var point: Vector3 = Vector3(spec[2]*4.0,spec[4],spec[3]*4.0)+Vector3(0,0.03,0)
+		for index in range(N_ACTORS.size()):
+			var spec: Array = N_ACTORS[index]
+			var point: Vector3 = Vector3(spec[2]*4.0,N_CURRENT_FLOORS[index],spec[3]*4.0)+Vector3(0,0.03,0)
 			if spec[1] == "caster": point.y += 1.0
 			var native_yaw: float = Vector3(0,deg_to_rad(spec[5]),0).y
 			result.append({"id":spec[0],"hp":N_ROLES[spec[1]][0],"position":[point.x,point.y,point.z],"yaw":e_yaw(native_yaw),"alerted":false})
 		return result
 	func n_start() -> Dictionary:
 		var result: Dictionary = N_CARRY.duplicate(true)
-		result.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[18.0,0.0,134.0],"actors":n_originals(),"yaw":0.0,"pitch":0.0},true)
+		result.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[18.0,N_ENTRY_Y,134.0],"actors":n_originals(),"yaw":0.0,"pitch":0.0},true)
 		return result
 	func n_entry_document() -> Dictionary:
 		var result: Dictionary = n_start()
-		result.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":n_start(),"level_start":n_start()},true)
+		result.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3],"explored":[],"checkpoint":n_start(),"level_start":n_start()},true)
 		return result
 	func n_current() -> bool:
 		return n_enabled and playing and not get_tree().paused and not placement_pending and not loaded_positions and state.level_index == 4 and _scene_level_index == 4 and is_instance_valid(level) and not level.is_queued_for_deletion() and level.get_instance_id() == n_level_id and is_instance_valid(player) and not player.is_queued_for_deletion() and player.get_parent() == level and player.get_instance_id() == n_player_id
@@ -99,8 +104,8 @@ class NurseryEntryMain:
 		if not n_enabled: return super._capture_actor_state()
 		n_captures += 1
 		var expected: Dictionary = n_handoff()
-		expected.merge({"position":[18.0,0.0,134.0],"yaw":0.0,"pitch":0.0},true)
-		n_ok = n_ok and n_captures == 1 and not e_enabled and not playing and not placement_pending and not loaded_positions and state.to_dict() == expected and h_stack("/main.gd","start_level") and level.get_script() == Level and player.get_script() == Player and player.position == Vector3(18,0.04,134) and player.rotation.y == 0.0 and player.camera.rotation.x == 0.0 and enemies.size() == 29
+		expected.merge({"position":[18.0,N_ENTRY_Y,134.0],"yaw":0.0,"pitch":0.0},true)
+		n_ok = n_ok and n_captures == 1 and not e_enabled and not playing and not placement_pending and not loaded_positions and state.to_dict() == expected and h_stack("/main.gd","start_level") and level.get_script() == Level and player.get_script() == Player and player.position == Vector3(18,N_ENTRY_Y+0.04,134) and player.rotation.y == 0.0 and player.camera.rotation.x == 0.0 and enemies.size() == 29
 		n_level_id = level.get_instance_id()
 		n_player_id = player.get_instance_id()
 		var records: Array = n_originals()
@@ -134,10 +139,10 @@ class NurseryEntryMain:
 		n_ok = n_ok and cell == Vector2i(4,33)
 		if cell == n_last_cell: return
 		n_last_cell = cell
-		# Independent original entry room and zero-height floor; Survey writes its own observations.
+		# Independent revision-one entry room height; Survey writes its own observations.
 		for x in range(2,7):
 			for z in range(31,35):
-				var end: Vector3 = Vector3((x+0.5)*4.0,1.55,(z+0.5)*4.0)
+				var end: Vector3 = Vector3((x+0.5)*4.0,N_ENTRY_Y+1.55,(z+0.5)*4.0)
 				var ray = PhysicsRayQueryParameters3D.create(player.camera.global_position,end,1)
 				if Vector2i(x,z) == cell or level.get_world_3d().direct_space_state.intersect_ray(ray).is_empty(): n_explored.append([x,z])
 
@@ -188,7 +193,7 @@ func walk_into_nursery(observer: NurseryEntryMain, profile_prefix: String = "") 
 	return await descend_nursery()
 
 func freeze_nursery_boundary() -> bool:
-	if not expect(game is NurseryEntryMain and game.e_enabled and game.e_route_b and game.e_completed and game.e_ok and game.budget() == N_CARRY and game.state.to_dict() == game.n_handoff() and game.e_exit_expected == game.n_handoff() and observer_witness(e_fields) == e_frozen,"Accepted complete default B E history and independent82/170/162/32 fresh menu envelope before retirement"): return false
+	if not expect(game is NurseryEntryMain and game.e_enabled and game.e_route_b and game.e_completed and game.e_ok and game.budget() == N_CARRY and game.state.to_dict() == game.n_handoff() and game.e_exit_expected == game.n_handoff() and observer_witness(e_fields) == e_frozen,"Accepted complete default B E history and independent82/165/162/32 fresh menu envelope before retirement"): return false
 	var saved = game.Campaign.new()
 	n_saved_sha = FileAccess.get_sha256(r_profile)
 	if not expect(game.get_instance_id() == r_main_id and game.state.get_instance_id() == r_campaign_id and game.progress_path == r_profile and r_profile == prefix+"_campaign.json" and game.settings_path == game.r_settings_origin and game.settings_path == prefix+"_preferences.json" and saved.load_progress(r_profile) and saved.to_dict() == game.n_handoff() and n_saved_sha == game.e_save_sha and game.state.actors == null and game.state.yaw == null and game.state.pitch == null and not game.playing and not game.placement_pending and not game.loaded_positions and paused and game.level == null and game.player == null and game.prefix_bookkeeping_retired and observers_retired() and e_retired.all(func(ref): return ref.get_ref() == null) and e_markers.values().all(func(ref): return ref.get_ref() == null),"Same actual owner/profile and E-pinned loaded fresh handoff; fourth scene/Player/actors/markers remain drained"): return false
@@ -239,22 +244,25 @@ func nursery_entry_result() -> bool:
 	for group_index in range(N_GROUPS.size()):
 		if not expect(data.encounters[group_index].enemy_ids == N_ACTORS.filter(func(spec): return spec[6] == group_index).map(func(spec): return spec[0]),"Original exact inactive encounter membership: "+N_GROUPS[group_index]): return false
 	var records: Array = game.n_originals()
+	var original_layout = scene.layout.original_floor(4)
+	if not expect(original_layout.world_position(data.spawn).y == 0.0 and scene.layout.world_position(data.spawn).y == N_ENTRY_Y,"Independent immutable original zero-height entry and authored revision-one entry height"): return false
 	for index in range(N_ACTORS.size()):
 		var spec: Array = N_ACTORS[index]
+		if not expect(scene.layout.floor_revision() == 1 and absf(original_layout.world_position([spec[2],spec[3]]).y-spec[4]) < 0.000001 and absf(scene.layout.world_position([spec[2],spec[3]]).y-N_CURRENT_FLOORS[index]) < 0.000001,"Independent immutable original and revision-one floor tables: "+spec[0]): return false
 		var actor = game.enemies[index]
 		var record: Dictionary = records[index]
 		var capsule: CollisionShape3D = actor.get_child(0)
 		if not expect(data.enemies[index] == {"id":spec[0],"kind":spec[1],"cell":[spec[2],spec[3]],"yaw":spec[5]} and is_instance_valid(actor) and actor.get_script() == game.Enemy and game.n_bindings.get(actor.id,[]) == [actor.get_instance_id(),capsule.get_instance_id(),capsule.shape.get_instance_id()] and actor.id == spec[0] and actor.kind == spec[1] and actor.hp == record.hp and actor.max_hp == record.hp and actor.encounter_id == N_GROUPS[spec[6]] and not actor.active and not actor.alerted and actor._current_map() and actor.get_parent() == scene and actor.is_physics_processing() and not actor.is_queued_for_deletion() and actor.collision_layer == 4 and actor.collision_mask == 7 and actor.position == Vector3(record.position[0],record.position[1],record.position[2]) and actor.rotation.y == Vector3(0,deg_to_rad(spec[5]),0).y and actor.age > 0.0 and actor.age <= float(elapsed+1)/60.0+0.000001 and not capsule.disabled and capsule.shape is CapsuleShape3D and absf(capsule.shape.radius-N_ROLES[spec[1]][1]) < 0.000001 and absf(capsule.shape.height-N_ROLES[spec[1]][2]) < 0.000001 and capsule.position == Vector3(0,capsule.shape.height/2.0,0),"Independent original native actor role/HP/pose/capsule/group/age: "+spec[0]): return false
 	var collider: CollisionShape3D = player.get_child(0)
-	if not expect(game.n_roster_matches() and game.n_bindings.size() == 29 and not collider.disabled and player.collision_layer == 2 and player.collision_mask == 5 and collider.shape is CapsuleShape3D and collider.shape.radius == Vector3(0.32,0,0).x and collider.shape.height == Vector3(1.65,0,0).x and collider.position == Vector3(0,0.85,0) and player.position.is_finite() and player.position.x == 18.0 and player.position.z == 134.0 and absf(player.position.y) <= 0.05 and player.rotation.y == 0.0 and player.camera.rotation.x == 0.0,"Exact29 scene children and original native Player capsule with bounded automatic spawn settling"): return false
+	if not expect(game.n_roster_matches() and game.n_bindings.size() == 29 and not collider.disabled and player.collision_layer == 2 and player.collision_mask == 5 and collider.shape is CapsuleShape3D and collider.shape.radius == Vector3(0.32,0,0).x and collider.shape.height == Vector3(1.65,0,0).x and collider.position == Vector3(0,0.85,0) and player.position.is_finite() and player.position.x == 18.0 and player.position.z == 134.0 and absf(player.position.y-N_ENTRY_Y) <= 0.05 and player.rotation.y == 0.0 and player.camera.rotation.x == 0.0,"Exact29 scene children and original native Player capsule with bounded automatic spawn settling"): return false
 	var space = scene.get_world_3d().direct_space_state
-	var hit: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(18,2,134),Vector3(18,-0.5,134),1))
+	var hit: Dictionary = space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(18,N_ENTRY_Y+2,134),Vector3(18,N_ENTRY_Y-0.5,134),1))
 	var query = PhysicsShapeQueryParameters3D.new()
 	query.shape = collider.shape
 	query.transform = collider.global_transform
 	query.collision_mask = 1|4
 	query.exclude = [player.get_rid()]
-	if not expect(not hit.is_empty() and absf(hit.position.y) <= 0.08 and hit.normal.y >= 0.7 and space.intersect_shape(query,1).is_empty(),"Actual independent zero-height authored floor and safe native capsule support/clearance"): return false
+	if not expect(not hit.is_empty() and absf(hit.position.y-N_ENTRY_Y) <= 0.08 and hit.normal.y >= 0.7 and nursery_player_clearance(scene,player,query),"Actual independent revision-one authored floor and safe native capsule support/clearance"): return false
 	var expected: Dictionary = game.n_entry_document()
 	expected.position = [player.position.x,player.position.y,player.position.z]
 	expected.explored = game.n_explored.duplicate(true)
@@ -266,3 +274,21 @@ func nursery_entry_result() -> bool:
 	if not expect(attempt == [4,4,r_main_id,game.n_level_id,game.n_player_id,n_epoch,false,true],"Fresh capture belongs to actual fifth generation/Player after readiness; inherited retired recorder/history remain intact"): return false
 	print("NURSERY_EARNED_ENTRY frames=",elapsed," wall_us=",Time.get_ticks_usec()-n_wall," originals=",game.n_bindings.size()," captures=",game.n_captures," production_start_frames=",game.n_start_frames," registration_frames=",n_registration_frames," explored=",game.n_explored," saved_sha=",n_saved_sha)
 	return true
+
+func nursery_player_clearance(scene, player, query: PhysicsShapeQueryParameters3D) -> bool:
+	var space = scene.get_world_3d().direct_space_state
+	var contacts = space.intersect_shape(query,1)
+	if contacts.is_empty(): return true
+	var allowance: float = minf(player.safe_margin,0.001)
+	var floor_y: float = scene.layout.capsule_floor_support(Vector2(query.transform.origin.x,query.transform.origin.z),query.shape.radius)
+	# Player's capsule center is offset; bound its actual bottom, not its node origin.
+	if not is_finite(floor_y) or query.transform.origin.y-query.shape.height/2.0 < floor_y-allowance: return false
+	while not contacts.is_empty():
+		var body = contacts[0].collider
+		if not body is StaticBody3D or not body in scene.floor_bodies or body.get_parent().get_parent() != scene: return false
+		query.exclude = query.exclude+[contacts[0].rid]
+		contacts = space.intersect_shape(query,1)
+	# Floor-only exclusion above cannot hide thin foreign contact at the unchanged pose.
+	query.exclude = [player.get_rid()]
+	query.transform.origin.y += allowance
+	return space.intersect_shape(query,1).is_empty()

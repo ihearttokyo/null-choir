@@ -1,0 +1,390 @@
+{
+  "kind": "source-native",
+  "recipe_sha256": "9c97d7e30ba434f7eb2f3e25354d67382d1f59e2f4a1efae88ea25ef1a55181f",
+  "inputs_sha256": "a313c7de06603e6f21f209a663915153b1d28de2db97f75cf2d976b6e8e339b1",
+  "inspection_recipe_sha256": "7048299d0a171af62d4d909ea92695c4c828586265a67357f8136da3524cb421",
+  "plan": {
+    "triangles": 299770,
+    "editable_meshes": 1828,
+    "cameras": 10,
+    "bounds": [
+      [
+        -100.29309428595839,
+        -12.8,
+        -91.90477682942833
+      ],
+      [
+        90.2710242297152,
+        210.45111864755208,
+        84.4
+      ]
+    ],
+    "kit_placements": 33,
+    "imported_glb_bytes_per_placement": 15416100,
+    "imported_image_payload_bytes_per_placement": 2597339,
+    "decoded_rgba_bytes_per_placement": 8830976
+  },
+  "heart_lighting24": {
+    "generation": 24,
+    "world_strength": 0.35,
+    "overrides": [
+      {
+        "name": "heart local key",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          24,
+          -3,
+          -28
+        ],
+        "target": [
+          31,
+          9,
+          -43
+        ],
+        "color": [
+          1,
+          0.78,
+          0.58
+        ],
+        "power": 3000,
+        "size": 4.5
+      },
+      {
+        "name": "heart gallery lamp 0",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          24,
+          8,
+          -47
+        ],
+        "target": [
+          31,
+          9,
+          -43
+        ],
+        "color": [
+          1,
+          0.4,
+          0.13
+        ],
+        "power": 500,
+        "size": 1.5
+      },
+      {
+        "name": "heart gallery lamp 1",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          39,
+          6,
+          -40
+        ],
+        "target": [
+          31,
+          9,
+          -43
+        ],
+        "color": [
+          1,
+          0.63,
+          0.36
+        ],
+        "power": 400,
+        "size": 2
+      },
+      {
+        "name": "heart lower gallery amber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          35,
+          28,
+          -49
+        ],
+        "target": [
+          41,
+          36,
+          -38
+        ],
+        "color": [
+          1,
+          0.39,
+          0.12
+        ],
+        "power": 900,
+        "size": 3
+      },
+      {
+        "name": "heart inhabited gallery recess amber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          26,
+          43,
+          -50
+        ],
+        "target": [
+          26,
+          63,
+          -44
+        ],
+        "color": [
+          1,
+          0.43,
+          0.18
+        ],
+        "power": 800,
+        "size": 3
+      },
+      {
+        "name": "heart inhabited gallery upper shaft",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          50,
+          29,
+          -15
+        ],
+        "target": [
+          60,
+          26,
+          -32
+        ],
+        "color": [
+          0.5,
+          0.58,
+          0.8
+        ],
+        "power": 1300,
+        "size": 6
+      }
+    ],
+    "added": [
+      {
+        "name": "heart lighting24 mouth rim",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          42,
+          13,
+          -30
+        ],
+        "target": [
+          31,
+          9,
+          -40
+        ],
+        "color": [
+          1,
+          0.6,
+          0.36
+        ],
+        "power": 2400,
+        "size": 3
+      },
+      {
+        "name": "heart lighting24 mouth uplight",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          25,
+          3,
+          -49
+        ],
+        "target": [
+          31,
+          9,
+          -39
+        ],
+        "color": [
+          1,
+          0.28,
+          0.09
+        ],
+        "power": 950,
+        "size": 2.5
+      },
+      {
+        "name": "heart lighting24 distant windows",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          58,
+          24,
+          -12
+        ],
+        "target": [
+          38,
+          25,
+          -31
+        ],
+        "color": [
+          0.43,
+          0.48,
+          0.82
+        ],
+        "power": 2100,
+        "size": 7
+      },
+      {
+        "name": "heart lighting24 rear lower chamber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          26,
+          51,
+          -48
+        ],
+        "target": [
+          26,
+          65,
+          -44
+        ],
+        "color": [
+          1,
+          0.34,
+          0.1
+        ],
+        "power": 1300,
+        "size": 3
+      },
+      {
+        "name": "heart lighting24 rear upper chamber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          50,
+          51,
+          -26
+        ],
+        "target": [
+          50,
+          65,
+          -21
+        ],
+        "color": [
+          1,
+          0.46,
+          0.2
+        ],
+        "power": 1000,
+        "size": 3
+      },
+      {
+        "name": "heart lighting24 right lower chamber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          73,
+          8,
+          -49
+        ],
+        "target": [
+          83,
+          8,
+          -43
+        ],
+        "color": [
+          1,
+          0.32,
+          0.09
+        ],
+        "power": 1100,
+        "size": 3
+      },
+      {
+        "name": "heart lighting24 right upper chamber",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          73,
+          26,
+          -27
+        ],
+        "target": [
+          83,
+          26,
+          -20
+        ],
+        "color": [
+          1,
+          0.48,
+          0.22
+        ],
+        "power": 850,
+        "size": 3
+      },
+      {
+        "name": "heart lighting24 near bounce",
+        "chapter": 8,
+        "type": "AREA",
+        "position": [
+          15,
+          -12,
+          -39
+        ],
+        "target": [
+          31,
+          9,
+          -43
+        ],
+        "color": [
+          0.66,
+          0.72,
+          0.85
+        ],
+        "power": 350,
+        "size": 12
+      }
+    ]
+  },
+  "heart_atmosphere26": {
+    "generation": 26,
+    "name": "heart atmosphere26 bounded air",
+    "chapter": 8,
+    "material": "heart_atmosphere26",
+    "visible_views": [
+      "heart",
+      "overview-8"
+    ],
+    "center": [
+      48,
+      36,
+      -17.5
+    ],
+    "size": [
+      80,
+      64,
+      67
+    ],
+    "shader": "ShaderNodeVolumeScatter",
+    "density": 0.004,
+    "color": [
+      0.62,
+      0.52,
+      0.78,
+      1
+    ],
+    "anisotropy": 0.25
+  },
+  "heart_maw47": {
+    "generation": 47,
+    "chapter": 8,
+    "fold_depth": 0.12,
+    "tooth_curve": 0.34,
+    "wet_roughness": 0.27,
+    "sectors": 64,
+    "teeth": 24,
+    "removed_triangles": 4744,
+    "original_glb_sha256": "32c16a0cc222b57b4464553b0ae722cf27e4f98f0035d6446d1a9ed03a38c55d"
+  },
+  "maw47_source_sha256": "c93372e32cf8b35d9244e6d0231a85ba969e0b2ff8f4ad44ca7964bcbe5fe2e3",
+  "maw47_mapping_sha256": "6c41ff1f8abc89972cae3e1254d89fcc69e24279e0fba1c0dc8e35218a99e79b",
+  "ancestor26_sha256": "b5320d36f6a7566d3c699e267b676b94da80f739731b337c172a74e72100f7e9",
+  "actual_triangles": 299770,
+  "blend_sha256": "48030a5c6513cdce907fd09585ba79c8b605c0bec8adf6e94e0919a51c18209d",
+  "blend_bytes": 8151621,
+  "rendered": false
+}

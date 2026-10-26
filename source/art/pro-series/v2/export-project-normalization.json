@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "frozen_original_project_sha256": "286c8e0166f9cedde21006f682e506a5c38bb536799ee6100e66120417078f20",
+  "native_editor_project_sha256": "3bd73b143095a218bae8b31c91c870a66893c84c72a853365acc02978c86c486",
+  "removed_redundant_defaults": {
+    "rendering/renderer/rendering_method.mobile": "\"mobile\"",
+    "rendering/textures/default_filters/use_nearest_mipmap_filter": "false"
+  },
+  "added_values": {},
+  "changed_values": {},
+  "packed_project_settings": {
+    "application/config/name": "NULL CHOIR",
+    "application/run/main_scene": "res://scenes/main.tscn",
+    "application/config/features": {
+      "variant_type": 34,
+      "encoded_hex": "220000000200000004000000342e3700070000004d6f62696c650000"
+    },
+    "display/window/size/viewport_width": 640,
+    "display/window/size/viewport_height": 360,
+    "display/window/size/window_width_override": 1280,
+    "display/window/size/window_height_override": 720,
+    "display/window/stretch/mode": "viewport",
+    "display/window/stretch/scale_mode": "integer",
+    "rendering/textures/canvas_textures/default_texture_filter": 0,
+    "rendering/renderer/rendering_method": "mobile",
+    "rendering/textures/vram_compression/import_etc2_astc": true,
+    "rendering/occlusion_culling/use_occlusion_culling": true
+  },
+  "source_policy": "This source snapshot retains the original frozen project.godot bytes. Native Godot4.7.2 export elided exactly these two default assignments; generated output was recorded and not silently used as source.",
+  "scope": "Local unsigned universal export from exact907frozen source inputs. Six9+reviewed runtime paintings, nine retained raster originals; no all-nine artistic, physical, listening, performance, publication or signing claim."
+}

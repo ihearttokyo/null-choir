@@ -192,7 +192,9 @@ func dead_caster(control: String = "") -> void:
 	var original_level = game.level
 	await settle()
 	game.kill_after_birth = true
-	arm(caster,crawler,crawler.global_position+Vector3.UP*0.55)
+	var visible: Dictionary = opaque_texel(crawler,game.player.camera)
+	expect(visible.alpha >= 0.75,"SETUP actual current crawler texel is occupied")
+	arm(caster,crawler,visible.point)
 	for frame in range(100):
 		await physics_frame
 		await process_frame
@@ -204,6 +206,7 @@ func dead_caster(control: String = "") -> void:
 		expect(game.contact_seen and not game.h_ok,"Malformed contact RID must latch the narrow provenance guard")
 	else:
 		expect(caster.hp == 0 and game.dead_source_id == caster.get_instance_id() and game.h_births.size() == 1,"SETUP original caster released one retained projectile before synthetic source death")
+		print("HALO_DEAD_SOURCE_DIAGNOSTIC ",JSON.stringify({"control":control,"contact_seen":game.contact_seen,"victim_hp":crawler.hp,"target_player":crawler.target==game.player,"same_instance":crawler.get_instance_id()==victim_id,"same_rid":crawler.get_rid()==victim_rid,"deaths":game.h_deaths,"finishes":game.h_finishes,"h_ok":game.h_ok,"removed_count":game.state.removed.count(crawler.id),"layer":crawler.collision_layer,"mask":crawler.collision_mask,"frame":crawler.sprite.frame,"aim_frame":visible.frame,"aim":str(visible.point),"births":game.h_births.size()}))
 		expect(crawler.get_instance_id() == victim_id and crawler.get_rid() == victim_rid and crawler.target == game.player and crawler.hp == 0 and game.h_deaths.get(crawler.id,0) == 1 and game.h_finishes.get(crawler.id,"unproven") == "infighting" and game.h_ok and game.state.removed.count(crawler.id) == 1 and crawler.collision_layer == 0 and crawler.collision_mask == 0,"PROVENANCE exact dead-caster retained projectile/contact death; missing enemy callback must fail here")
 	if original_level != game.level and is_instance_valid(original_level): original_level.queue_free()
 	await drain()
@@ -327,3 +330,40 @@ func run() -> void:
 	AudioServer.set_bus_mute(0,prior_mute)
 	if failures == 0: print("PASS SYNTHETIC native Halo provenance arenas only; arranged poses/HP/timers are not earned route or campaign evidence")
 	quit(0 if failures == 0 else 1)
+
+# Independent fixture oracle: inspect the actual current source-art alpha, never
+# call SpriteHitQuery or infer a hit from the movement capsule. These fixtures
+# arrange an occupied texel; separate query tests prove transparent holes miss.
+func opaque_texel(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	var sprite: Sprite3D = actor.sprite
+	var image: Image = sprite.texture.get_image()
+	if image.is_compressed(): assert(image.decompress() == OK)
+	var width: int = image.get_width()/sprite.hframes
+	var height: int = image.get_height()/sprite.vframes
+	var offset := Vector2i(sprite.frame % sprite.hframes, sprite.frame / sprite.hframes)*Vector2i(width,height)
+	var best := Vector2i(-1,-1)
+	var score: float = INF
+	for y in range(height):
+		for x in range(width):
+			if image.get_pixelv(offset+Vector2i(x,y)).a < 0.75: continue
+			# High targets must remain near the centre column, not a random wing.
+			if high and absf(x+0.5-width*0.5) > width*0.2: continue
+			var candidate: float = float(y)*width*width + absf(x+0.5-width*0.5) if high else Vector2(x+0.5-width*0.5,y+0.5-height*0.5).length_squared()
+			if candidate < score:
+				score = candidate
+				best = Vector2i(x,y)
+	assert(best.x >= 0, "Current source-art frame must contain an occupied fixture texel")
+	var local := Vector2(best)+Vector2(0.5,0.5)
+	if sprite.flip_h: local.x = width-local.x
+	if sprite.flip_v: local.y = height-local.y
+	var start: Vector2 = sprite.offset-Vector2(width,height)*0.5 if sprite.centered else sprite.offset
+	var basis: Basis = camera.get_camera_transform().basis.orthonormalized()
+	var point: Vector3 = sprite.global_position + basis.x*((start.x+local.x)*sprite.pixel_size*sprite.global_basis.x.length()) + basis.y*((start.y+height-local.y)*sprite.pixel_size*sprite.global_basis.y.length())
+	return {"point":point,"frame":sprite.frame,"pixel":offset+best,"alpha":image.get_pixelv(offset+best).a}
+
+func aim_opaque(actor, camera: Camera3D, high: bool = false) -> Dictionary:
+	# Billboard orientation changes with camera pitch; settle the arranged aim
+	# against the same current source texel, rather than a capsule-height oracle.
+	for iteration in range(12):
+		camera.look_at(opaque_texel(actor,camera,high).point,Vector3.UP)
+	return opaque_texel(actor,camera,high)

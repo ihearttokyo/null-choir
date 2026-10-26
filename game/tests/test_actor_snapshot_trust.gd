@@ -146,6 +146,7 @@ func fresh_document(index: int, difficulty: int) -> Dictionary:
 	state.level_index = index
 	var layout = Layout.new()
 	expect(layout.load_level(index),"Actual layout loads")
+	state.floor_revision = layout.floor_revision()
 	state.actors = []
 	# Unattached real Main/Level instances provide the production configure inputs;
 	# no scene, physics, music or GUI startup is claimed by this codec/trust fixture.

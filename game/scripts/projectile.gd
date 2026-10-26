@@ -1,5 +1,7 @@
 extends Node3D
 
+const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
+
 const SPEED = 12.0
 const DAMAGE = 14
 const MARROW_SPEED = 24.0
@@ -50,27 +52,46 @@ func _physics_process(delta: float) -> void:
 	var original_player: Node = game.player
 	var ray_start: Vector3 = global_position
 	var end = ray_start+velocity*minf(delta,lifetime)
-	var query = PhysicsRayQueryParameters3D.create(ray_start,end,1|2|4)
-	query.exclude = [shooter.get_rid()] if is_instance_valid(shooter) else []
-	query.hit_from_inside = true
-	var hit = get_world_3d().direct_space_state.intersect_ray(query)
+	var excluded: Array[RID] = []
+	if is_instance_valid(shooter): excluded.append(shooter.get_rid())
+	var view: Camera3D = null
+	if is_instance_valid(original_player):
+		var candidate: Variant = original_player.get("camera")
+		if candidate is Camera3D and is_instance_valid(candidate): view = candidate
+	# Retain the player's physical capsule and mask; only enemy sprite bodies
+	# use shared current-frame alpha coverage for this finite swept segment.
+	var catalog: Variant = game.get("enemies")
+	var actors: Array = catalog if catalog is Array else []
+	var hit = SpriteHitQuery.cast(get_world_3d().direct_space_state, ray_start, end, view, actors, excluded, 1|2|4)
 	if not hit.is_empty():
 		global_position = hit.position
 		queue_free()
+		var accepted_contact: bool = true
 		if blast_damage > 0:
 			# Offset toward the exposed side, never through thin cover to the hidden victims.
 			_blast(hit.position+hit.normal*0.05,hit.collider)
 		elif hit.collider == original_player:
 			var observed: bool = _observe_debug("queued_player_contact",{"ray_start":ray_start,"ray_end":end,"hit":hit})
+			if not is_instance_valid(self): return
 			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and game.playing):
 				game.hurt_player(int(DAMAGE*[0.7,1.0,1.4][game.state.difficulty]))
 		elif hit.collider.has_method("take_damage"):
+			accepted_contact = false
 			var original_victim: Node = hit.collider
 			var observed: bool = _observe_debug("queued_enemy_contact",{"ray_start":ray_start,"ray_end":end,"hit":hit})
 			if not is_instance_valid(self): return
 			if not observed or (_current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_player) and not original_player.is_queued_for_deletion() and original_player.get_parent() == original_map and is_instance_valid(original_victim) and not original_victim.is_queued_for_deletion() and original_victim.get_parent() == original_map and game.playing):
+				var before: Variant = original_victim.get("hp")
 				original_victim.take_damage(DAMAGE,shooter if is_instance_valid(shooter) else null,{"attack_kind":"projectile","incoming_direction":velocity.normalized(),"hit_position":hit.position})
-		if _current_map() and game.playing and game.has_method("impact"):
+				if not is_instance_valid(self): return
+				if _current_map() and game.level == original_map and game.player == original_player and is_instance_valid(original_victim) and not original_victim.is_queued_for_deletion() and original_victim.get_parent() == original_map and game.playing:
+					var after: Variant = original_victim.get("hp")
+					if before is int or before is float:
+						accepted_contact = (after is int or after is float) and after < before
+					else:
+						# Legacy nonvisual callback acceptance is not HP-decrease proof.
+						accepted_contact = not original_victim.has_method("visual_hit_sprite")
+		if accepted_contact and _current_map() and game.level == original_map and game.player == original_player and game.playing and game.has_method("impact"):
 			game.impact(hit.position)
 		return
 	global_position = end

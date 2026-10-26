@@ -1,13 +1,13 @@
 extends "res://tests/test_reliquary_wheel_ivory.gd"
 
-const V_WHEEL_SHA = "5dc9f090192e5c5b7a0f1199a4c4b4855f233fa02b59593ec053c2f02c73cfd2"
+const V_WHEEL_SHA = "a6b8df260aacedc3c14bdcd4fff1c5476eae1a8d23ade40ea43a090524cc241e"
 const V_IDS = ["reliquary_enemy_19","reliquary_enemy_20","reliquary_enemy_21"]
 const V_GROUP = {"id":"reliquary_wheel_return","region":[21.5,11.0,22.5,14.0],"enemy_ids":V_IDS,"requires":["ivory"],"cue":{"text":"A MEMORY LEAVES THE DRUM WITHOUT YOU","light_ids":["reliquary_wheel_return"],"sound":"seal_release"}}
 const V_PICKUPS = {
 	"reliquary_wheel_recess_health":{"id":"reliquary_wheel_recess_health","kind":"health","cell":[36.5,19.5],"amount":25.0},
 	"reliquary_wheel_return_rivets":{"id":"reliquary_wheel_return_rivets","kind":"ammo","cell":[23.5,12.5],"amount":45.0,"weapon":1.0},
 	"reliquary_wheel_return_shells":{"id":"reliquary_wheel_return_shells","kind":"ammo","cell":[24.5,13.5],"amount":8.0,"weapon":2.0}}
-const V_CARRY = {"health":86,"armor":184,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
+const V_CARRY = {"health":70,"armor":179,"ammo":[0,148,32,0,0,0],"owned_weapons":[0,1,2],"weapon":1}
 const V_APPROACH = [[35.5,19.5],[36.5,19.5],[35.5,19.5],[35.5,16.5],[35.5,13.5],[35.5,12],[32.5,12],[29.5,12],[26.5,12],[23.5,12],[23.5,12.5],[22.25,12.5]]
 const V_CLOSE = [[21,12.5]]
 const V_SHOT_CAP = 24
@@ -130,10 +130,10 @@ class WheelReturnMain:
 		if gain > 0:
 			v_ok = v_ok and v_activation == 0 and v_shots.is_empty() and v_health_loss == 0 and v_absorbed == 0
 			if ammo:
-				v_ok = v_ok and slot == 1 and gain == 32 and v_health_gain == 14 and before.ammo[1] == 148
+				v_ok = v_ok and slot == 1 and gain == 32 and v_health_gain == 25 and before.ammo[1] == 148
 				v_rivets += gain
 			else:
-				v_ok = v_ok and id == "reliquary_wheel_recess_health" and before == v_base and gain == 14
+				v_ok = v_ok and id == "reliquary_wheel_recess_health" and before == v_base and gain == 25
 				v_health_gain += gain
 			v_consumed[id] = v_consumed.get(id,0)+1
 			v_removed.append(id)
@@ -150,7 +150,7 @@ class WheelReturnMain:
 		v_ok = v_ok and v_current() and id in [W_GROUP.id,V_GROUP.id]
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			v_ok = v_ok and id == V_GROUP.id and v_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(21.5,11),Vector2(22.5,14))) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage")
+			v_ok = v_ok and id == V_GROUP.id and v_activation == 0 and state.keys == ["blood","ivory"] and cell.is_equal_approx(cell.clamp(Vector2(21.5,11),Vector2(22.5,14))) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage")
 		super.activate_encounter(id)
 		if not prior:
 			v_activation += 1
@@ -311,7 +311,7 @@ func walk_through_wheel_return(observer: WheelReturnMain, profile_prefix: String
 	return wheel_return_result()
 
 func start_wheel_return() -> bool:
-	if not expect(game is WheelReturnMain and game.w_enabled and game.w_ok and wheel_result() and game.budget() == V_CARRY and route_player.position.distance_to(route_level.layout.world_position(W_IVORY.cell)) < 0.2,"Exact actual reviewed Ivory boundary86HP184armor148pistol32shells; same live scene, not a loaded substitute"): return false
+	if not expect(game is WheelReturnMain and game.w_enabled and game.w_ok and wheel_result() and game.budget() == V_CARRY and route_player.position.distance_to(route_level.layout.world_position(W_IVORY.cell)) < 0.2,"Exact actual reviewed Ivory boundary70HP179armor148pistol32shells; same live scene, not a loaded substitute"): return false
 	if not expect(V_LIMIT == (V_APPROACH.size()+V_CLOSE.size())*HOP_LIMIT+V_FIGHT_LIMIT+V_DRAIN,"Fresh13 split hops plus240 combat and6 drain frames; old budgets unchanged"): return false
 	if not expect(route_level.layout.data.encounters.filter(func(item): return item.id == V_GROUP.id) == [V_GROUP],"Original Ivory-gated Wheel RETURN region/group/cue"): return false
 	for id in V_PICKUPS:
@@ -406,7 +406,7 @@ func wheel_return_result() -> bool:
 	if not expect(view.get("seals",[]) == [{"key":"blood","owned":true},{"key":"ivory","owned":true}] and view.get("objective","") == "OPEN GATE" and view.get("health",-1) == resources.health and view.get("armor",-1) == resources.armor and view.get("weapon_name","") == "RIVET PISTOL" and view.get("ammo","") == str(resources.ammo[1]) and view.get("capacity","") == "CAP 180","Automatic Wheel RETURN HUD model reflects both earned seals and independent resources"): return false
 	if not expect(game.hud.labels.Objective.text == "OPEN GATE" and game.hud.labels.SealState.text == "BLOOD [+]  IVORY [+]" and game.hud.labels.VitalValue.text == str(resources.health) and game.hud.labels.ArmorValue.text == str(resources.armor) and game.hud.labels.WeaponName.text == "RIVET PISTOL" and game.hud.labels.AmmoValue.text == str(resources.ammo[1]) and game.hud.labels.AmmoCapacity.text == "CAP 180","Actual automatic native HUD labels; models/text are not pixels"): return false
 	print("RELIQUARY_WHEEL_RETURN_LIMIT frames=",east_elapsed()," wall_us=",Time.get_ticks_usec()-v_wall," closure_frames=",v_closure_frames," drain_frames=",v_drain_frames," position=",route_player.position," resources=",resources," shots=",game.v_shots," consumed=",game.v_consumed," pickup_calls=",game.v_pickup_calls," roles=",game.v_roles," hurts=",game.v_hurts," deaths=",game.v_deaths," provenance=",game.v_finishes)
-	return wheel_return_earned() and expect(v_closed and v_closure_frames > 0 and v_closure_frames <= HOP_LIMIT and v_drain_frames == V_DRAIN and route_player.position.distance_to(route_level.layout.world_position(V_CLOSE.back())) < 0.2 and game.v_consumed == {"reliquary_wheel_recess_health":1,"reliquary_wheel_return_rivets":1} and game.v_health_gain == 14 and game.v_rivets == 32 and v_markers["reliquary_wheel_recess_health"].get_ref() == null and v_markers["reliquary_wheel_return_rivets"].get_ref() == null and v_markers["reliquary_wheel_return_shells"].get_ref() == route_level.markers.get("reliquary_wheel_return_shells") and game.v_melee_pending.is_empty(),"Exact3 original earned deaths before measured bounded closure/drain; two original capped supplies once, shells and later branch untouched")
+	return wheel_return_earned() and expect(v_closed and v_closure_frames > 0 and v_closure_frames <= HOP_LIMIT and v_drain_frames == V_DRAIN and route_player.position.distance_to(route_level.layout.world_position(V_CLOSE.back())) < 0.2 and game.v_consumed == {"reliquary_wheel_recess_health":1,"reliquary_wheel_return_rivets":1} and game.v_health_gain == 25 and game.v_rivets == 32 and v_markers["reliquary_wheel_recess_health"].get_ref() == null and v_markers["reliquary_wheel_return_rivets"].get_ref() == null and v_markers["reliquary_wheel_return_shells"].get_ref() == route_level.markers.get("reliquary_wheel_return_shells") and game.v_melee_pending.is_empty(),"Exact3 original earned deaths before measured bounded closure/drain; two original capped supplies once, shells and later branch untouched")
 
 func live_route() -> bool:
 	if not v_started: return super.live_route()

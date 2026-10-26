@@ -450,13 +450,30 @@ func check_old_roles() -> bool:
 
 func finish(status: int) -> void:
 	Input.action_release("fire")
-	if is_instance_valid(game): game.show_title()
+	# Observe only the owned MP3 streams, without retaining their strong references.
+	# Dummy audio releases can outlast a fixed100ms; wait for actual ownership drain.
+	var owned_recordings: Array[WeakRef] = []
+	if is_instance_valid(game):
+		if game.music.player.stream is AudioStreamMP3: owned_recordings.append(weakref(game.music.player.stream))
+		game.show_title()
+		if game.music.player.stream is AudioStreamMP3: owned_recordings.append(weakref(game.music.player.stream))
 	paused = false
 	# Established native mix-release grace before freeing production audio/HUD nodes.
 	await create_timer(0.1).timeout
 	if is_instance_valid(game): game.free()
 	await process_frame
 	await process_frame
+	var deadline := Time.get_ticks_usec()+2000000
+	while Time.get_ticks_usec()<deadline:
+		var live := false
+		for recording in owned_recordings:
+			if recording.get_ref()!=null: live=true
+		if not live: break
+		await process_frame
+	for recording in owned_recordings:
+		if recording.get_ref()!=null:
+			push_error("Late-role fixture owned MP3 did not drain within2seconds")
+			status=1
 	for suffix in ["_campaign.json","_campaign.json.tmp","_preferences.json","_preferences.json.tmp"]:
 		var path = test_prefix+suffix
 		if FileAccess.file_exists(path): DirAccess.remove_absolute(path)

@@ -253,8 +253,13 @@ func transport_route(cells: Array) -> bool:
 		var target: Vector3 = route_level.layout.world_position(cell)+Vector3.UP*0.04
 		var began: int = Engine.get_physics_frames()
 		var arrived: bool = false
+		var frozen: bool = false
 		for frame in range(Witness.LEG):
-			if not live_route(): return false
+			if ot_started:
+				# Only this synchronous continuation shares the retired-value result.
+				if frame == 0: frozen = transport_prior_frozen()
+				if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+			elif not live_route(): return false
 			var start: Vector3 = route_player.position
 			var clear: bool = clear_point(cell) != null
 			var samples: int = ceili(Vector2(start.x-target.x,start.z-target.z).length()/0.5)
@@ -274,7 +279,13 @@ func transport_route(cells: Array) -> bool:
 					break
 				if not transport_fire(): route_player.look_at(Vector3(target.x,route_player.position.y,target.z),Vector3.UP)
 				nursery_finale_move(target)
-			if not await route_tick(): return false
+			if ot_started:
+				if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+				await physics_frame
+				# Native callbacks may change history: never reuse a pre-wait result.
+				frozen = transport_prior_frozen()
+				if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+			elif not await route_tick(): return false
 		if not expect(arrived and Engine.get_physics_frames()-began+12 < Witness.LEG,"new-only900-frame leg including settle: "+str(cell)): return false
 		release_actions()
 		for frame in range(12):
@@ -289,8 +300,12 @@ func transport_route(cells: Array) -> bool:
 
 func transport_fight(group: String) -> bool:
 	if not expect(ot_witness.activated.has(group),"fight follows actual earned region activation: "+group): return false
+	var frozen: bool = false
 	for frame in range(Witness.FIGHT):
-		if not live_route(): return false
+		if ot_started:
+			if frame == 0: frozen = transport_prior_frozen()
+			if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+		elif not live_route(): return false
 		if ot_witness.all_dead(group):
 			release_actions()
 			await process_frame
@@ -308,7 +323,12 @@ func transport_fight(group: String) -> bool:
 				rows.append({"id":actor.id,"hp":actor.hp,"position":actor.position,"target":actor.target.get_instance_id() if is_instance_valid(actor.target) else 0,"distance":route_player.camera.global_position.distance_to(aim),"hit":collider.id if is_instance_valid(collider) and collider.get_script() == game.Enemy else str(collider),"hit_position":hit.get("position"),"hit_rid":str(hit.get("rid"))})
 			print("OSSUARY_FIGHT_NO_TARGET group=",group," player=",route_player.position," weapon=",game.state.weapon," ammo=",game.state.ammo[1]," shots=",ot_witness.shots.size()," frame=",Engine.get_physics_frames()-ot_witness.epoch," alive_rays=",rows)
 			return expect(false,"finite native committed fight requires visible target: "+group)
-		if not await route_tick(): return false
+		if ot_started:
+			if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+			await physics_frame
+			frozen = transport_prior_frozen()
+			if not expect(frozen,"all retired Main and fixture observer VALUES unchanged, including nf/oss") or not expect(ot_witness.validate(),"Ossuary per-segment witness: "+str(ot_witness.failures)): return false
+		elif not await route_tick(): return false
 	release_actions()
 	return expect(false,"new-only1800-frame fight cap: "+group)
 
@@ -398,39 +418,39 @@ func transport_controls() -> bool:
 const OT_PRODUCTION_FIELDS = ["state", "playing", "loaded_positions", "placement_pending", "preferences", "settings", "progress_path", "settings_path", "level", "player", "music", "effects", "enemies", "menu", "menu_scroll", "pending_action", "pending_button", "hud", "canvas", "message", "message_time", "damage_flash", "hit_flash", "quitting", "_scene_level_index", "aim_observation", "interaction_observation", "_passive_scan_tick", "_interaction_edges", "_interaction_incoming_eligible", "_interaction_pending_player", "_interaction_axis_held"]
 
 const OT_PINS = {
- "res://data/06_ossuary.json": "781a86ab846db76d7189f108281f009b300812a5c2136faa754b9a74000bc74c",
- "res://scripts/campaign.gd": "34f9c3347acb72534140335106c6e8a74d778e2f2ad30d25da1028b8830bca6f",
+ "res://data/06_ossuary.json": "73c64534bfc52f6ba0af603062962a980e99364628aeb934e54efebfb5b5e97d",
+ "res://scripts/campaign.gd": "628534c4b2446fb0d9a6be8e2f4429d370bf9fae5f9e30a2a41be528d9f3bbb8",
  "res://scripts/enemy.gd": "a927bd16ec949430015cd9f3843441361f2ea9490c8e4ab04ad92cf1c3dd6ebe",
- "res://scripts/level.gd": "bfd64a31f8d9df56e5e9dfbd5a4e16ce5df5ec738423a4e75436750318bee053",
- "res://scripts/level_data.gd": "40b6946232de22af2cd60c6f98db3852a6ebac9eb6cd42b8994ef4345a777674",
- "res://scripts/level_schema.gd": "20c67dfe1dcd776fbac7dabfeba1b63187a7d575449ec6edf5e1e6106291d0ce",
- "res://scripts/main.gd": "763d98bee99686ace80bc3ac0d355ddc1e8fdbd3053efb1f5459cb141836ff61",
- "res://scripts/player.gd": "ed55b3961296d9bacb80e31286ea25d3d43702a5c7f499e6bbfffaa27571e8a9",
+ "res://scripts/level.gd": "f439eb75e6e978c3760d974fe8bcfb4e597e07505ac695d6bc5ee857c0551b50",
+ "res://scripts/level_data.gd": "4dd17624ef8cf31f70e9ae57db11bf4db48724db7221285407286446da526c7e",
+ "res://scripts/level_schema.gd": "b77674f0989791aa573919a98c112605b54a05061b63e3e94e90d45e3595e989",
+ "res://scripts/main.gd": "ce2ac704c8d304eedcaf17080ccd8c372df359aaa07ecdf2cc346bca220b0489",
+ "res://scripts/player.gd": "d34660bc36221801a8bc07c13161f08d0599fd676d2193fc9a4cd6e6fdf69f90",
  "res://scripts/preferences.gd": "e225e74aabaafdd3f3e25a31b22264a5ba365e4ba7d0f6e3709f67b10f327139",
  "res://scripts/projectile.gd": "bbda549a1c3d964bea81171dfc44d0395084023e804e3bdb72e22d285f87e873",
  "res://scripts/survey.gd": "0a9a1d70718dcc57d475ddd51b65d90adb24c314a99ebbbcdb199a5c0b55b8e5",
  "res://tests/passive_physics_step.gd": "021399c7412fa45714932b0cc410817e4a3b938c5276b4dd568d1c377e5c0085",
- "res://tests/test_active_boss_fights.gd": "cf19198056b5e2b56fc246ce4ecf9c2eca34681838959edccb90109508bdcfa0",
- "res://tests/test_foundry_earned_walk.gd": "9c22c9e1533e60bdd95cb2875a14c8a7b35449ec856fab7d997b34bc28ebd2d0",
+ "res://tests/test_active_boss_fights.gd": "6aabbfb7b85cdced52cfbb2c2a3799d031dd08691f1250b940dfd21a2992299a",
+ "res://tests/test_foundry_earned_walk.gd": "8577bb3424b904a2960570fe5f84363a61ca55d2e93a689cf5ba9c836d6ffb89",
  "res://tests/test_intake_combat.gd": "be3af33d75e3ae1ffec46a3435228d1f991660537093048c55059a5ee7722166",
- "res://tests/test_intake_complete_walk.gd": "876dd3a47336776c18871779faed569ec2295e00099994e1b48654b16e06d50b",
+ "res://tests/test_intake_complete_walk.gd": "60ab1b2687e51ffa91da80c167b279329b552a344ea7acacab6d7b022f60f2de",
  "res://tests/test_intake_walk.gd": "4716c98dbe10abb4d5a0b1613428760509ec9925082870b475ea0c3c3ea372ea",
  "res://tests/test_intake_west_seal.gd": "e7339710046bdf7c4cc18bc6a86622f87531c7bc4b58bb13db04049f2e024e0a",
- "res://tests/test_nursery_earned_campaign.gd": "257661504d65ae51237d281cce41e1a16a46bce89262dd85167e5fa480ee13c6",
- "res://tests/test_nursery_earned_entry.gd": "7beb6aa145461669e3a1d177dae61ec3c26a7c0c420b34f5123502729f2d0503",
- "res://tests/test_nursery_finale_loop.gd": "e7a562f237da66f2031598a21f93dea9e34d6becef0bef68434677a55368d9d6",
- "res://tests/test_nursery_seed_loop.gd": "0f2ff7346002ac97bb01b11db3536cb032a200b9c136f16cfe81d73a059b0044",
- "res://tests/test_processional_earned_entry.gd": "3d690414263b1a79a5c18988e60576603d105f6d6723a86ed55f680835ac6782",
- "res://tests/test_processional_earned_exit.gd": "c512f7e5d526eb792373e9602f5d46e7baa6e33db1ba851c0b243094aee36854",
- "res://tests/test_processional_earned_organ.gd": "713c477ee98f8dde6097cacfaf251a28b33166dffba413c75981c367d311b7c0",
- "res://tests/test_processional_earned_palanquin.gd": "2c5ae831c35ac47512e68845581722e4b3699983502b92acace0853dcae9c831",
- "res://tests/test_reliquary_blood_story.gd": "2fcc1e8fe326d4b5347f10162ddfedc866e6f58a6fb43b64c0f6ff6c0098149a",
- "res://tests/test_reliquary_catalogue.gd": "8a7ef41015a8dcbfa95bcbddc1644352fab9618b0a4a0a6a524b57ee6de6aba1",
- "res://tests/test_reliquary_earned_entry.gd": "6ed92c140d451aa20f5c10ed26025e9b2210e88c02e573f17c06121753328c21",
- "res://tests/test_reliquary_earned_exit.gd": "a53139b852cb1f0fdcf3ef46515fb4f178a22edfbd23ec99f5dbc8d2c221061a",
- "res://tests/test_reliquary_halo_feasibility.gd": "f82d38ddbf283a3daf6440e31d3381e8160af230e4b78a923d03af1181b6afd7",
- "res://tests/test_reliquary_halo_return.gd": "f3dcfd8bb1771207c9d9b44a516982e1e17467a8d66eb48eb4fd73d4dc233e22",
- "res://tests/test_reliquary_wheel_ivory.gd": "5dc9f090192e5c5b7a0f1199a4c4b4855f233fa02b59593ec053c2f02c73cfd2",
- "res://tests/test_reliquary_wheel_return.gd": "c7012540d3506fd2618fdc33d1c05cfb70ceb558d83137b0964b18c28c754df7",
- "res://tests/ossuary_transport_witness.gd": "734692066ee86c1dfeb8b9c0da9cb07f4873ef396227c448fd7cae48c87c78db"
+ "res://tests/test_nursery_earned_campaign.gd": "71cbbd8bf3ca97e8c03356c45d782131d3fa60afb69b4801629f7fc1da25ec7c",
+ "res://tests/test_nursery_earned_entry.gd": "d78bf81616845e51f5e90033305d06d1f91b4c2e5a0bc76d2e2e66a52f0bf822",
+ "res://tests/test_nursery_finale_loop.gd": "dfb1e7be440f2af53c8568a13c26aa7e21c069d3ec028589ac1ecb0ce0851107",
+ "res://tests/test_nursery_seed_loop.gd": "89d4e3d693842860975d4f0f5f4b6d896526fb7cfef17eb9aff5a0598b5dba4e",
+ "res://tests/test_processional_earned_entry.gd": "07b2eefb242b7b8ac721e004226cbfea9163320d3198e1baef1d4286cde1b347",
+ "res://tests/test_processional_earned_exit.gd": "9706b27c6f3df5bd93769971e9aa31e409d15229942a3bfa4ed8f90c8fc070ee",
+ "res://tests/test_processional_earned_organ.gd": "7b5a0fcd1d20d923984b6ecfc6335878a53662c910b6ffbb3e654360bbe3ea73",
+ "res://tests/test_processional_earned_palanquin.gd": "6d4ccd5f3111ee8ad6d53da8f00d69fbcf675ab015c3664204d56c982dbb46d9",
+ "res://tests/test_reliquary_blood_story.gd": "4da70de02f81010e4d6c194dca70dd98f0cb8ba602a5009a414bf1cf0f6fe932",
+ "res://tests/test_reliquary_catalogue.gd": "5f28099fc03be8d250d95f90b718dadcc1648c8e6d1c47db2005f2e247e9575b",
+ "res://tests/test_reliquary_earned_entry.gd": "74bbbce7a6a35693350da63e8b1008af10963bae952a5828c2c5120f338cbe0c",
+ "res://tests/test_reliquary_earned_exit.gd": "2beb67c3e74449804c4e8ea41a17b5583bdea85e86dd2c0b17582fc6ecb110be",
+ "res://tests/test_reliquary_halo_feasibility.gd": "dd4cc127af65778a89e0e0922ca828222e0752ba822074e46ae451374f04c424",
+ "res://tests/test_reliquary_halo_return.gd": "8e1d3e62f5384465e915d1d1c6be73a8bf2d91b01a28eaad2848e93950f1d62e",
+ "res://tests/test_reliquary_wheel_ivory.gd": "df208bc814cda4800ee6487e68b2afc12218664b7691cddff7b6f4ac0b01300a",
+ "res://tests/test_reliquary_wheel_return.gd": "f300efd11c2681e364dc5ba5982bab61ac83f1f43733bcc6e058689cb57347ba",
+ "res://tests/ossuary_transport_witness.gd": "040494255440b21cfd5c002d2b3ee4662f2137a408511ade28fdcb7d67e1a9fc"
 }

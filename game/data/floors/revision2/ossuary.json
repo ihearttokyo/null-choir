@@ -1,0 +1,2214 @@
+{
+  "id": "ossuary",
+  "title": "THE OSSUARY",
+  "subtitle": "06 / RESTORE THE TRANSPORT LOCKS",
+  "cell_size": 4,
+  "spawn": [
+    35.5,
+    24.5
+  ],
+  "spawn_yaw": 90,
+  "rects": [
+    [
+      33,
+      22,
+      37,
+      27
+    ],
+    [
+      25,
+      23,
+      33,
+      25
+    ],
+    [
+      20,
+      21,
+      28,
+      25
+    ],
+    [
+      5,
+      23,
+      20,
+      25
+    ],
+    [
+      3,
+      12,
+      10,
+      22
+    ],
+    [
+      11,
+      12,
+      20,
+      14
+    ],
+    [
+      18,
+      10,
+      20,
+      23
+    ],
+    [
+      24,
+      8,
+      34,
+      16
+    ],
+    [
+      26,
+      17,
+      28,
+      21
+    ],
+    [
+      21,
+      10,
+      23,
+      12
+    ],
+    [
+      21,
+      26,
+      23,
+      30
+    ],
+    [
+      17,
+      31,
+      27,
+      38
+    ],
+    [
+      1,
+      12,
+      2,
+      15
+    ],
+    [
+      28,
+      4,
+      30,
+      7
+    ],
+    [
+      29,
+      22,
+      31,
+      25
+    ],
+    [
+      28,
+      34,
+      31,
+      37
+    ],
+    [
+      10,
+      17,
+      18,
+      18
+    ]
+  ],
+  "elevations": [
+    {
+      "rect": [
+        10,
+        17,
+        13,
+        19
+      ],
+      "axis": 0,
+      "start": 4,
+      "end": 13,
+      "height": 5
+    },
+    {
+      "rect": [
+        13,
+        17,
+        14,
+        19
+      ],
+      "height": 5
+    },
+    {
+      "rect": [
+        14,
+        17,
+        19,
+        19
+      ],
+      "axis": 0,
+      "start": 19,
+      "end": 14,
+      "height": 5
+    },
+    {
+      "rect": [
+        20,
+        28,
+        25,
+        31
+      ],
+      "height": -1.0
+    },
+    {
+      "rect": [
+        28,
+        11,
+        31,
+        14
+      ],
+      "height": -3.0
+    },
+    {
+      "rect": [
+        0,
+        -10,
+        8,
+        60
+      ],
+      "height": 5
+    },
+    {
+      "rect": [
+        8,
+        -10,
+        11,
+        60
+      ],
+      "axis": 0,
+      "start": 14.0,
+      "end": 8,
+      "height": 5
+    },
+    {
+      "rect": [
+        11,
+        -10,
+        15,
+        60
+      ],
+      "height": 2.5
+    },
+    {
+      "rect": [
+        15,
+        -10,
+        18,
+        60
+      ],
+      "axis": 0,
+      "start": 18.0,
+      "end": 15,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        18,
+        -10,
+        22,
+        60
+      ],
+      "height": 0
+    },
+    {
+      "rect": [
+        22,
+        -10,
+        25,
+        60
+      ],
+      "axis": 0,
+      "start": 22.0,
+      "end": 25,
+      "height": -2
+    },
+    {
+      "rect": [
+        25,
+        -10,
+        28,
+        60
+      ],
+      "height": -2
+    },
+    {
+      "rect": [
+        28,
+        -10,
+        31,
+        60
+      ],
+      "axis": 0,
+      "start": 25.0,
+      "end": 31,
+      "height": -4
+    },
+    {
+      "rect": [
+        31,
+        -10,
+        50,
+        60
+      ],
+      "height": -4
+    }
+  ],
+  "ceilings": [
+    {
+      "rect": [
+        1,
+        10,
+        11,
+        26
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        24,
+        4,
+        35,
+        17
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        33,
+        22,
+        38,
+        28
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        29,
+        22,
+        32,
+        26
+      ],
+      "height": 10
+    },
+    {
+      "rect": [
+        17,
+        31,
+        32,
+        39
+      ],
+      "height": 14
+    },
+    {
+      "rect": [
+        0,
+        0,
+        42,
+        42
+      ],
+      "height": 8
+    }
+  ],
+  "loops": [
+    {
+      "id": "ossuary_loop_transport",
+      "hero": "ossuary_rib_bridge",
+      "route": [
+        [
+          24,
+          24
+        ],
+        [
+          6,
+          24
+        ],
+        [
+          6,
+          18.5
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          13,
+          18
+        ],
+        [
+          14,
+          18
+        ],
+        [
+          19,
+          18
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          18.5
+        ],
+        [
+          6,
+          24
+        ],
+        [
+          24,
+          24
+        ]
+      ]
+    },
+    {
+      "id": "ossuary_loop_mandala",
+      "hero": "ossuary_bone_mandala",
+      "route": [
+        [
+          24,
+          24
+        ],
+        [
+          27,
+          24
+        ],
+        [
+          27,
+          18
+        ],
+        [
+          27,
+          16
+        ],
+        [
+          33,
+          16
+        ],
+        [
+          33,
+          9
+        ],
+        [
+          25,
+          9
+        ],
+        [
+          25,
+          11
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          19,
+          24
+        ],
+        [
+          24,
+          24
+        ]
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "ossuary_bone_mandala",
+      "cell": [
+        29.5,
+        12.5
+      ],
+      "yaw": 0,
+      "base": [
+        5.85,
+        0.55,
+        5.3
+      ],
+      "tradition_aesthetic": "Buddhist",
+      "seal": "ivory",
+      "light_ids": [
+        "ossuary_mandala_feed",
+        "ossuary_mandala_core"
+      ]
+    },
+    {
+      "id": "ossuary_rib_bridge",
+      "cell": [
+        6.5,
+        18.5
+      ],
+      "yaw": 0,
+      "tradition_aesthetic": "Christian",
+      "seal": "blood",
+      "light_ids": [
+        "ossuary_bridge_feed",
+        "ossuary_bridge_core"
+      ]
+    }
+  ],
+  "doors": [
+    {
+      "id": "ossuary_transfer_gate",
+      "cell": [
+        22.5,
+        29.7
+      ],
+      "yaw": 0,
+      "size": [
+        12.2,
+        5,
+        0.6
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "id": "ossuary_blood",
+      "kind": "key",
+      "key": "blood",
+      "cell": [
+        9.5,
+        14.5
+      ],
+      "text": "RIB CARRIER BLOOD SEAL RECOVERED"
+    },
+    {
+      "id": "ossuary_ivory",
+      "kind": "key",
+      "key": "ivory",
+      "cell": [
+        33.5,
+        13.5
+      ],
+      "text": "BONE INDEX IVORY SEAL RECOVERED"
+    },
+    {
+      "id": "ossuary_checkpoint",
+      "kind": "checkpoint",
+      "cell": [
+        22.5,
+        28.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "text": "TRANSFER RECOVERY IMAGE STORED"
+    },
+    {
+      "id": "ossuary_story",
+      "kind": "story",
+      "cell": [
+        1.5,
+        15.5
+      ],
+      "text": "The bone tags mark every locked carrier as containment. Your mission voice calls the same locks damaged transport."
+    },
+    {
+      "id": "ossuary_descent",
+      "kind": "exit",
+      "cell": [
+        22.5,
+        37.5
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ]
+    }
+  ],
+  "pickups": [
+    {
+      "id": "ossuary_entry_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 60,
+      "cell": [
+        35.5,
+        23.5
+      ]
+    },
+    {
+      "id": "ossuary_entry_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 16,
+      "cell": [
+        34.5,
+        24.5
+      ]
+    },
+    {
+      "id": "ossuary_entry_health",
+      "kind": "health",
+      "amount": 30,
+      "cell": [
+        35.5,
+        25.5
+      ]
+    },
+    {
+      "id": "ossuary_entry_armor",
+      "kind": "armor",
+      "amount": 30,
+      "cell": [
+        34.5,
+        25.5
+      ]
+    },
+    {
+      "id": "ossuary_scattergun",
+      "kind": "weapon",
+      "weapon": 2,
+      "amount": 0,
+      "cell": [
+        34.5,
+        23.5
+      ]
+    },
+    {
+      "id": "ossuary_first_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 45,
+      "cell": [
+        12.5,
+        24.5
+      ]
+    },
+    {
+      "id": "ossuary_first_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        13.5,
+        24.5
+      ]
+    },
+    {
+      "id": "ossuary_first_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 45,
+      "cell": [
+        14.5,
+        13.5
+      ]
+    },
+    {
+      "id": "ossuary_first_return_health",
+      "kind": "health",
+      "amount": 20,
+      "cell": [
+        13.5,
+        13.5
+      ]
+    },
+    {
+      "id": "ossuary_second_approach_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 45,
+      "cell": [
+        27.5,
+        20.5
+      ]
+    },
+    {
+      "id": "ossuary_second_approach_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 8,
+      "cell": [
+        28.5,
+        20.5
+      ]
+    },
+    {
+      "id": "ossuary_second_return_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 45,
+      "cell": [
+        22.5,
+        11.5
+      ]
+    },
+    {
+      "id": "ossuary_second_return_health",
+      "kind": "health",
+      "amount": 20,
+      "cell": [
+        23.5,
+        11.5
+      ]
+    },
+    {
+      "id": "ossuary_launcher",
+      "kind": "weapon",
+      "weapon": 4,
+      "amount": 8,
+      "cell": [
+        24.5,
+        22.5
+      ]
+    },
+    {
+      "id": "ossuary_repeater_ammo",
+      "kind": "ammo",
+      "weapon": 3,
+      "amount": 60,
+      "cell": [
+        23.5,
+        22.5
+      ]
+    },
+    {
+      "id": "ossuary_finale_rivets",
+      "kind": "ammo",
+      "weapon": 1,
+      "amount": 60,
+      "cell": [
+        22.5,
+        27.5
+      ]
+    },
+    {
+      "id": "ossuary_finale_shells",
+      "kind": "ammo",
+      "weapon": 2,
+      "amount": 12,
+      "cell": [
+        21.5,
+        26.5
+      ]
+    },
+    {
+      "id": "ossuary_finale_health",
+      "kind": "health",
+      "amount": 35,
+      "cell": [
+        21.5,
+        27.5
+      ]
+    },
+    {
+      "id": "ossuary_finale_armor",
+      "kind": "armor",
+      "amount": 35,
+      "cell": [
+        23.5,
+        27.5
+      ]
+    },
+    {
+      "id": "ossuary_launcher_ammo",
+      "kind": "ammo",
+      "weapon": 4,
+      "amount": 8,
+      "cell": [
+        23.5,
+        26.5
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "ossuary_enemy_00",
+      "kind": "brute",
+      "cell": [
+        4.5,
+        21.5
+      ],
+      "yaw": 225
+    },
+    {
+      "id": "ossuary_enemy_01",
+      "kind": "crawler",
+      "cell": [
+        8.5,
+        21.5
+      ],
+      "yaw": 135
+    },
+    {
+      "id": "ossuary_enemy_02",
+      "kind": "worker",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "yaw": 243
+    },
+    {
+      "id": "ossuary_enemy_03",
+      "kind": "crawler",
+      "cell": [
+        8.5,
+        18.5
+      ],
+      "yaw": 90
+    },
+    {
+      "id": "ossuary_enemy_04",
+      "kind": "worker",
+      "cell": [
+        9.5,
+        16.5
+      ],
+      "yaw": 124
+    },
+    {
+      "id": "ossuary_enemy_05",
+      "kind": "caster",
+      "cell": [
+        9.5,
+        12.5
+      ],
+      "yaw": 153
+    },
+    {
+      "id": "ossuary_enemy_06",
+      "kind": "crawler",
+      "cell": [
+        5.5,
+        14.5
+      ],
+      "yaw": 194
+    },
+    {
+      "id": "ossuary_enemy_07",
+      "kind": "worker",
+      "cell": [
+        3.5,
+        12.5
+      ],
+      "yaw": 207
+    },
+    {
+      "id": "ossuary_enemy_08",
+      "kind": "guardian",
+      "cell": [
+        26.5,
+        15.5
+      ],
+      "yaw": 207
+    },
+    {
+      "id": "ossuary_enemy_09",
+      "kind": "crawler",
+      "cell": [
+        31.5,
+        15.5
+      ],
+      "yaw": 117
+    },
+    {
+      "id": "ossuary_enemy_10",
+      "kind": "worker",
+      "cell": [
+        33.5,
+        11.5
+      ],
+      "yaw": 149
+    },
+    {
+      "id": "ossuary_enemy_11",
+      "kind": "crawler",
+      "cell": [
+        27.5,
+        9.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "ossuary_enemy_12",
+      "kind": "worker",
+      "cell": [
+        32.5,
+        8.5
+      ],
+      "yaw": 149
+    },
+    {
+      "id": "ossuary_enemy_13",
+      "kind": "caster",
+      "cell": [
+        29.5,
+        7.5
+      ],
+      "yaw": 180
+    },
+    {
+      "id": "ossuary_enemy_14",
+      "kind": "crawler",
+      "cell": [
+        24.5,
+        12.5
+      ],
+      "yaw": 217
+    },
+    {
+      "id": "ossuary_enemy_15",
+      "kind": "worker",
+      "cell": [
+        25.5,
+        8.5
+      ],
+      "yaw": 202
+    },
+    {
+      "id": "ossuary_enemy_16",
+      "kind": "summoner",
+      "cell": [
+        18.5,
+        13.5
+      ],
+      "yaw": 90
+    },
+    {
+      "id": "ossuary_enemy_17",
+      "kind": "crawler",
+      "cell": [
+        19.5,
+        16.5
+      ],
+      "yaw": 0
+    },
+    {
+      "id": "ossuary_enemy_18",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        20.5
+      ],
+      "yaw": 346
+    },
+    {
+      "id": "ossuary_enemy_19",
+      "kind": "crawler",
+      "cell": [
+        19.5,
+        10.5
+      ],
+      "yaw": 243
+    },
+    {
+      "id": "ossuary_enemy_20",
+      "kind": "worker",
+      "cell": [
+        20.5,
+        11.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "ossuary_enemy_21",
+      "kind": "crawler",
+      "cell": [
+        20.5,
+        22.5
+      ],
+      "yaw": 14
+    },
+    {
+      "id": "ossuary_enemy_22",
+      "kind": "worker",
+      "cell": [
+        19.5,
+        32.5
+      ],
+      "yaw": 288
+    },
+    {
+      "id": "ossuary_enemy_23",
+      "kind": "crawler",
+      "cell": [
+        25.5,
+        33.5
+      ],
+      "yaw": 56
+    },
+    {
+      "id": "ossuary_enemy_24",
+      "kind": "caster",
+      "cell": [
+        26.5,
+        36.5
+      ],
+      "yaw": 53
+    },
+    {
+      "id": "ossuary_enemy_25",
+      "kind": "worker",
+      "cell": [
+        18.5,
+        37.5
+      ],
+      "yaw": 315
+    },
+    {
+      "id": "ossuary_enemy_26",
+      "kind": "crawler",
+      "cell": [
+        23.5,
+        36.5
+      ],
+      "yaw": 18
+    }
+  ],
+  "encounters": [
+    {
+      "id": "ossuary_first_commit",
+      "region": [
+        3,
+        12,
+        10.9,
+        22.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "ossuary_enemy_00",
+        "ossuary_enemy_01",
+        "ossuary_enemy_02",
+        "ossuary_enemy_03",
+        "ossuary_enemy_04",
+        "ossuary_enemy_05",
+        "ossuary_enemy_06",
+        "ossuary_enemy_07"
+      ],
+      "cue": {
+        "text": "THE RIB CARRIER OPENS ITS TRANSPORT PASSAGE",
+        "light_ids": [
+          "ossuary_bridge_feed",
+          "ossuary_bridge_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "ossuary_second_commit",
+      "region": [
+        24,
+        8,
+        34.9,
+        16.9
+      ],
+      "requires": [],
+      "enemy_ids": [
+        "ossuary_enemy_08",
+        "ossuary_enemy_09",
+        "ossuary_enemy_10",
+        "ossuary_enemy_11",
+        "ossuary_enemy_12",
+        "ossuary_enemy_13",
+        "ossuary_enemy_14",
+        "ossuary_enemy_15"
+      ],
+      "cue": {
+        "text": "THE BONE INDEX RECEIVES YOUR SIGNATURE",
+        "light_ids": [
+          "ossuary_mandala_feed",
+          "ossuary_mandala_core"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "ossuary_first_return",
+      "region": [
+        16,
+        12,
+        18,
+        14.9
+      ],
+      "requires": [
+        "blood"
+      ],
+      "enemy_ids": [
+        "ossuary_enemy_16",
+        "ossuary_enemy_17",
+        "ossuary_enemy_18"
+      ],
+      "cue": {
+        "text": "THE CARRIER UNLOCKS THE RETURN COLUMN",
+        "light_ids": [
+          "ossuary_first_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "ossuary_second_return",
+      "region": [
+        19,
+        10,
+        20.9,
+        12.9
+      ],
+      "requires": [
+        "ivory"
+      ],
+      "enemy_ids": [
+        "ossuary_enemy_19",
+        "ossuary_enemy_20",
+        "ossuary_enemy_21"
+      ],
+      "cue": {
+        "text": "THE INDEX SENDS ITS RESERVES TOWARD YOU",
+        "light_ids": [
+          "ossuary_second_return_feed"
+        ],
+        "sound": "seal_release"
+      }
+    },
+    {
+      "id": "ossuary_finale",
+      "region": [
+        17,
+        31,
+        31.9,
+        38.9
+      ],
+      "requires": [
+        "blood",
+        "ivory"
+      ],
+      "enemy_ids": [
+        "ossuary_enemy_22",
+        "ossuary_enemy_23",
+        "ossuary_enemy_24",
+        "ossuary_enemy_25",
+        "ossuary_enemy_26"
+      ],
+      "cue": {
+        "text": "ALL CONTAINED CARRIERS ARE NOW IN TRANSIT",
+        "light_ids": [
+          "ossuary_transfer_feed"
+        ],
+        "sound": "seal_release"
+      }
+    }
+  ],
+  "scenery": [
+    {
+      "art": "drain_altar",
+      "cell": [
+        6.015,
+        17.9425
+      ],
+      "yaw": 0,
+      "scale": [
+        0.23,
+        0.25,
+        0.3
+      ],
+      "solid": [
+        0.85,
+        0.3,
+        0.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        6.985,
+        17.9425
+      ],
+      "yaw": 0,
+      "scale": [
+        0.23,
+        0.25,
+        0.3
+      ],
+      "solid": [
+        0.85,
+        0.3,
+        0.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        6.015,
+        19.0575
+      ],
+      "yaw": 0,
+      "scale": [
+        0.23,
+        0.25,
+        0.3
+      ],
+      "solid": [
+        0.85,
+        0.3,
+        0.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        6.985,
+        19.0575
+      ],
+      "yaw": 0,
+      "scale": [
+        0.23,
+        0.25,
+        0.3
+      ],
+      "solid": [
+        0.85,
+        0.3,
+        0.8
+      ]
+    },
+    {
+      "art": "ossuary_bound_gate",
+      "cell": [
+        36.5,
+        26.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "solid": [
+        3.01,
+        0.5,
+        0.9
+      ],
+      "tradition_aesthetic": "Shinto"
+    },
+    {
+      "art": "ossuary_cell_archive",
+      "cell": [
+        2,
+        13.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.57,
+        0.5,
+        1.38
+      ],
+      "tradition_aesthetic": "Islamic"
+    },
+    {
+      "art": "ossuary_tower_cluster",
+      "cell": [
+        29.5,
+        5.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.16,
+        0.5,
+        2.21
+      ],
+      "tradition_aesthetic": "Hindu"
+    },
+    {
+      "art": "ossuary_seven_reservoirs",
+      "cell": [
+        30.5,
+        23.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "solid": [
+        3.75,
+        0.5,
+        1.71
+      ],
+      "tradition_aesthetic": "Jewish"
+    },
+    {
+      "art": "ossuary_winged_sarcophagus",
+      "cell": [
+        29.5,
+        35.5
+      ],
+      "yaw": 0,
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ],
+      "solid": [
+        4.485,
+        0.5,
+        2.0475
+      ],
+      "tradition_aesthetic": "ancient Egyptian"
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        35.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        30.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        16.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        11.5,
+        24.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        14.5,
+        13.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        19.5,
+        18.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        27.5,
+        19.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        22.5,
+        11.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "vault_span",
+      "cell": [
+        22.5,
+        28.5
+      ],
+      "yaw": 0
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        3.15,
+        16.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        10.85,
+        20.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        24.15,
+        13.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        34.85,
+        14.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        17.15,
+        35.5
+      ],
+      "yaw": 90
+    },
+    {
+      "art": "witness_relief",
+      "cell": [
+        27.85,
+        32.5
+      ],
+      "yaw": 270
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        8.5,
+        19.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        31.5,
+        10.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "suspended_cadaver",
+      "cell": [
+        25.5,
+        37.5
+      ],
+      "yaw": 0,
+      "height": 4
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        8.5,
+        20
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        4.5,
+        15.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        9.5,
+        19
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        5.5,
+        21.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        26.5,
+        13.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        32,
+        10.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        31.5,
+        14
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        26.5,
+        10.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        18.5,
+        18.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        23,
+        23.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        20,
+        34.5
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "containment_capsule",
+      "cell": [
+        25,
+        36
+      ],
+      "yaw": 0,
+      "solid": [
+        2.2,
+        4.9,
+        1.8
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        24,
+        32.5
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "drain_altar",
+      "cell": [
+        19,
+        36
+      ],
+      "yaw": 0,
+      "solid": [
+        3,
+        1.6,
+        2.2
+      ]
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        5,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        5,
+        20
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        8,
+        17
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        8,
+        20
+      ],
+      "height": 9.2,
+      "yaw": 0
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        28,
+        11
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        28,
+        14
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        31,
+        11
+      ],
+      "height": 9.2,
+      "yaw": 180
+    },
+    {
+      "art": "ossuary_sorting_vault",
+      "cell": [
+        31,
+        14
+      ],
+      "height": 9.2,
+      "yaw": 180
+    }
+  ],
+  "lights": [
+    {
+      "cell": [
+        37.85,
+        24.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        34.5,
+        22.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        31.5,
+        22.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        26.5,
+        25.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        18.5,
+        25.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        12.5,
+        23.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        3.15,
+        21.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        10.85,
+        16.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        4.5,
+        12.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        1.15,
+        14.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        13.5,
+        12.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "ossuary_first_return_feed",
+      "cell": [
+        17.5,
+        14.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "ossuary_second_return_feed",
+      "cell": [
+        18.15,
+        11.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        20.85,
+        17.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        26.15,
+        19.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        34.85,
+        11.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        24.15,
+        14.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        31.5,
+        8.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        28.15,
+        5.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        23.5,
+        10.15
+      ],
+      "height": 3.1,
+      "fixture_yaw": 0,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        31.85,
+        22.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "cell": [
+        21.15,
+        28.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "ossuary_transfer_feed",
+      "cell": [
+        17.15,
+        33.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 90,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        27.85,
+        38.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        22.5,
+        38.85
+      ],
+      "height": 3.1,
+      "fixture_yaw": 180,
+      "color": [
+        0.3,
+        0.65,
+        0.85
+      ],
+      "energy": 4.2,
+      "range": 20
+    },
+    {
+      "cell": [
+        31.85,
+        35.5
+      ],
+      "height": 3.1,
+      "fixture_yaw": 270,
+      "color": [
+        0.82,
+        0.42,
+        0.16
+      ],
+      "energy": 3.8,
+      "range": 15
+    },
+    {
+      "id": "ossuary_bridge_feed",
+      "cell": [
+        3.5,
+        21.5
+      ],
+      "height": 9,
+      "target": [
+        6.5,
+        18.5
+      ],
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "ossuary_bridge_core",
+      "cell": [
+        9.5,
+        13.5
+      ],
+      "height": 9,
+      "target": [
+        6.5,
+        18.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "ossuary_mandala_feed",
+      "cell": [
+        25.5,
+        15.5
+      ],
+      "height": 9,
+      "target": [
+        29.5,
+        12.5
+      ],
+      "color": [
+        0.84,
+        0.36,
+        0.16
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "ossuary_mandala_core",
+      "cell": [
+        33.5,
+        9.5
+      ],
+      "height": 9,
+      "target": [
+        29.5,
+        12.5
+      ],
+      "color": [
+        0.28,
+        0.62,
+        0.84
+      ],
+      "energy": 6.4,
+      "range": 30,
+      "shadow": true
+    },
+    {
+      "id": "atmosphere_0_0",
+      "cell": [
+        4.5,
+        17.5
+      ],
+      "height": 8,
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_0_1",
+      "cell": [
+        9.4,
+        17.5
+      ],
+      "height": 8,
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_0",
+      "cell": [
+        26,
+        12.5
+      ],
+      "height": 8,
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "energy": 1.2,
+      "range": 22
+    },
+    {
+      "id": "atmosphere_1_1",
+      "cell": [
+        33,
+        12.5
+      ],
+      "height": 8,
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "energy": 1.2,
+      "range": 22
+    }
+  ],
+  "mission": "UNLOCK BOTH CARRIERS / RETURN TO THE TRANSFER GALLERY",
+  "floor_revision": 2
+}

@@ -10,7 +10,8 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot draws Ble
 
 [Download the Alpha 4 Major Features Preview 03 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-03-Apple-Silicon.zip). **Playable Alpha 4 preview. The major-feature roadmap remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and launch checks passed for this exact package. Keep system security protections enabled.
 
-Archive size: **204,674,603 bytes**  
+Archive size: **204,674,603 bytes**
+
 SHA-256: `d953d8bbc8611a30fdeed46669c4f86bbf9a02157ce6eb64a20e637c71d2e247`
 
 [Preview source](https://github.com/ihearttokyo/null-choir/tree/a99595a89f0bff0febc2e76bb6bf48053f6e823d/game) · [Alpha 4 Major Features Preview 03 changes and known limitations](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).

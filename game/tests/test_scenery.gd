@@ -1,6 +1,7 @@
 extends SceneTree
 
 const RecordedAudioRelease = preload("res://tests/recorded_audio_release.gd")
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 
 const PurposeContract = preload("res://tests/test_marker_purposes.gd")
 
@@ -110,6 +111,7 @@ func run() -> void:
 	cleanup()
 	await process_frame
 	await process_frame
+	await WallClock.seconds(self,0.15)
 	Input.mouse_mode = mouse_mode
 	AudioServer.set_bus_mute(0,master_muted)
 	print("PASS ",level_id," scene contains Blender scenery, local lit floors/ceilings, bounded shadow lighting and combat-readable depth fog")

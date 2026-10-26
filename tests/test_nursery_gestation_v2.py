@@ -23,6 +23,12 @@ def geometry_fingerprint(fields):
     return hashlib.sha256(json.dumps(rounded,separators=(',',':')).encode()).hexdigest()
 
 
+class RecipeInputs(unittest.TestCase):
+    def test_only_immutable_authoring_inputs_are_pinned(self):
+        self.assertEqual(set(art.PINS), {
+            'tools/build_art.py','tools/art_recipe.py','tools/build_religious_late_art.py',
+            'source/art/nursery_gestation_engine.blend'})
+
 class Fingerprints(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

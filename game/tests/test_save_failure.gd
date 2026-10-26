@@ -1,5 +1,6 @@
 extends SceneTree
 
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
 
 func _initialize() -> void:
@@ -141,7 +142,9 @@ func run() -> void:
 	DirAccess.remove_absolute(game.progress_path)
 	game.music.playback_started.disconnect(observe_start)
 	game.show_title()
+	game.music.stop()
 	game.queue_free()
 	paused = false
+	await WallClock.seconds(self,0.15)
 	print("PASS actual checkpoint failure feedback, failed save/close, dead Continue, healthy recovery and focus-loss pause")
 	quit()

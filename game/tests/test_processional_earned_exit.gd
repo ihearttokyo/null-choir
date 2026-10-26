@@ -2,7 +2,7 @@ extends "res://tests/test_processional_earned_palanquin.gd"
 
 const X_LIMIT = 2500
 const X_SECONDS = 60
-const X_PALANQUIN_SHA = "2c5ae831c35ac47512e68845581722e4b3699983502b92acace0853dcae9c831"
+const X_PALANQUIN_SHA = "6d4ccd5f3111ee8ad6d53da8f00d69fbcf675ab015c3664204d56c982dbb46d9"
 const X_ROUTE = [[16.5,21.0],[16.5,17.5],[16.5,14.5],[16.5,11.5],[16.5,8.5],[15.5,8.5],[16.0,6.75],[16.0,5.7]]
 const X_EXIT = [[16.0,3.5],[15.5,2.5],[15.5,1.5]]
 const X_FINAL = ["processional_enemy_23","processional_enemy_24","processional_enemy_25"]
@@ -91,7 +91,7 @@ class ExitMain:
 					x_ok = x_ok and L_ACTORS.has(actor.id) and absf(angle_difference(actor.rotation.y,deg_to_rad(float(L_ACTORS[actor.id].yaw)))) <= 0.000001
 				var originals: Array = original_capture()
 				x_ok = x_ok and originals.size() == 26 and enemies.all(func(actor): return actor.hp == actor.max_hp) and state.keys.is_empty() and state.removed.is_empty()
-				x_start = {"health":93,"armor":89,"ammo":[0,164,0,0,0,0],"owned_weapons":[0,1],"weapon":1,"keys":[],"removed":[],"checkpoint_id":"entry","position":[86.0,0.0,118.0],"actors":originals,"yaw":0.0,"pitch":0.0}
+				x_start = {"health":93,"armor":89,"ammo":[0,164,0,0,0,0],"owned_weapons":[0,1],"weapon":1,"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[86.0,0.0,118.0],"actors":originals,"yaw":0.0,"pitch":0.0}
 			if exit_enabled and "processional_checkpoint" in state.removed and not "processional_checkpoint" in x_removed:
 				x_ok = x_ok and Engine.is_in_physics_frame() and state.keys == ["blood","ivory"] and player.position.distance_to(level.layout.world_position([16.5,8.5])) < 3.2 and get_stack().any(func(frame): return str(frame.get("source","")).ends_with("/main.gd") and frame.get("function","") == "update_passive_triggers")
 				x_removed.append("processional_checkpoint")
@@ -176,7 +176,7 @@ class ExitMain:
 		return result
 	func checkpoint_resources() -> Dictionary:
 		var expected: Dictionary = x_ledger.duplicate(true)
-		expected.merge({"keys":["blood","ivory"],"removed":x_removed.duplicate(),"checkpoint_id":"processional_checkpoint","position":[player.position.x,player.position.y,player.position.z],"actors":original_capture(),"yaw":observed_yaw(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
+		expected.merge({"keys":["blood","ivory"],"removed":x_removed.duplicate(),"floor_revision":1,"checkpoint_id":"processional_checkpoint","position":[player.position.x,player.position.y,player.position.z],"actors":original_capture(),"yaw":observed_yaw(player.rotation.y),"pitch":clampf(player.camera.rotation.x,-1.35,1.35)},true)
 		return expected
 	func _save() -> Error:
 		if not exit_enabled: return super._save()
@@ -186,7 +186,7 @@ class ExitMain:
 			x_ok = x_ok and x_checkpoint_saves == 0 and state.checkpoint_id == "processional_checkpoint" and "processional_checkpoint" in x_removed and Engine.is_in_physics_frame() and get_stack().any(func(frame): return str(frame.get("source","")).ends_with("/main.gd") and frame.get("function","") == "update_passive_triggers")
 			x_checkpoint = checkpoint_resources()
 			expected = x_checkpoint.duplicate(true)
-			expected.merge({"version":1,"difficulty":1,"level_index":2,"discoveries":[],"explored":x_explored.duplicate(true),"checkpoint":x_checkpoint.duplicate(true),"level_start":x_start.duplicate(true)},true)
+			expected.merge({"version":2,"difficulty":1,"level_index":2,"discoveries":[],"explored":x_explored.duplicate(true),"checkpoint":x_checkpoint.duplicate(true),"level_start":x_start.duplicate(true)},true)
 		else:
 			x_ok = x_ok and state.level_index == 3 and x_exit_intent and Engine.is_in_physics_frame() and Input.is_action_pressed("interact") and get_stack().any(func(frame): return str(frame.get("source","")).ends_with("/main.gd") and frame.get("function","") == "interact")
 			expected = x_exit_expected.duplicate(true)
@@ -306,9 +306,9 @@ func processional_exit() -> bool:
 	for group in route_level.layout.data.encounters:
 		if not expect(game.state.removed.count("encounter:"+group.id) == 1,"Each original Processional encounter activated once: "+group.id): return false
 	var resources: Dictionary = game.x_ledger.duplicate(true)
-	resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+	resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 	game.x_exit_expected = resources.duplicate(true)
-	game.x_exit_expected.merge({"version":1,"difficulty":1,"level_index":3,"discoveries":[],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+	game.x_exit_expected.merge({"version":2,"difficulty":1,"level_index":3,"discoveries":[],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 	for node in [route_level,route_player]+game.enemies: retired.append(weakref(node))
 	aim_interaction([15.5,1.5])
 	game.x_exit_intent = true

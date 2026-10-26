@@ -2,6 +2,7 @@ extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
+const Landmarks = preload("res://scripts/level_landmarks.gd")
 const PURPOSE_ART = {
 	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
 	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
@@ -14,6 +15,7 @@ var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
 var machine_lights: Dictionary = {}
+var floor_bodies: Array[StaticBody3D] = []
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
 
@@ -24,8 +26,9 @@ func build(owner_game: Node, index: int) -> bool:
 	_build_geometry()
 	_build_environment()
 	_build_scenery()
+	Landmarks.build(self,layout)
 	for hero in layout.data.heroes:
-		_place_model(hero.id,layout.world_position(hero.cell),hero.yaw)
+		_place_model(hero.id,layout.world_position(hero.cell)+Vector3.UP*hero.get("height",0.0),hero.yaw)
 		if not hero.has("base"): continue
 		var base = _box(Vector3(hero.base[0],hero.base[1],hero.base[2]),layout.world_position(hero.cell)+Vector3.UP*(hero.base[1]/2),null,true)
 		if hero.get("round",false):
@@ -137,9 +140,10 @@ func _build_geometry() -> void:
 		for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.ONE,Vector2.DOWN]:
 			var point = Vector2(cell)+offset
 			corners.append(Vector3(point.x*size,layout.height_at(point),point.y*size))
-		for i in [0,1,2,0,2,3]:
-			chunks[chunk][0].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
-			chunks[chunk][0].add_vertex(corners[i])
+		if not layout.OssuarySurfaces.enabled(layout.data):
+			for i in [0,1,2,0,2,3]:
+				chunks[chunk][0].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
+				chunks[chunk][0].add_vertex(corners[i])
 		for i in [0,2,1,0,3,2]:
 			chunks[chunk][1].set_uv(Vector2(corners[i].x/size,corners[i].z/size))
 			chunks[chunk][1].add_vertex(corners[i]+Vector3.UP*_roof_height(cell))
@@ -165,8 +169,11 @@ func _build_geometry() -> void:
 				var drop = tall-_roof_height(cell+direction)
 				var dimensions = Vector3(0.28,drop,size) if direction.x else Vector3(size,drop,0.28)
 				_box(dimensions,Vector3(point.x*size,h+tall-drop/2,point.y*size),wall_material,false)
+	if layout.OssuarySurfaces.enabled(layout.data):
+		_build_surface_patch(floor_material)
 	for chunk in chunks:
 		for i in range(2):
+			if i == 0 and layout.OssuarySurfaces.enabled(layout.data): continue
 			var mesh = MeshInstance3D.new()
 			mesh.name = ("Floor" if i == 0 else "Ceiling")+str(chunk.x)+"_"+str(chunk.y)
 			chunks[chunk][i].generate_normals()
@@ -175,7 +182,39 @@ func _build_geometry() -> void:
 			add_child(mesh)
 			if i == 0:
 				mesh.create_trimesh_collision()
+				floor_bodies.append(mesh.get_child(0))
 				mesh.get_child(0).get_child(0).shape.backface_collision = true
+
+
+# Render and physical collision commit the SAME exact triangle entries, including new visible deck.
+func _build_surface_patch(bank_material: Material) -> void:
+	var materials = {"bank":bank_material,"bone":_material(Color(.57,.49,.34)),"marrow":_material(Color(.19,.035,.025),.12)}
+	var tools = {}
+	for face in layout.surface_faces():
+		var t: Array = face.triangle
+		var key = str(floori(t[0].x/16.0))+"_"+str(floori(t[0].z/16.0))+"_"+face.material
+		if not tools.has(key):
+			var tool = SurfaceTool.new()
+			tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+			tool.set_smooth_group(-1)
+			tools[key] = {"tool":tool,"material":face.material}
+		for vertex in t:
+			tools[key].tool.set_uv(Vector2(vertex.x,vertex.z)/4.0)
+			tools[key].tool.add_vertex(vertex)
+	for key in tools:
+		var tool = tools[key].tool
+		tool.generate_normals()
+		var mesh = MeshInstance3D.new()
+		mesh.name = "AuthoredSurface_"+key
+		mesh.mesh = tool.commit()
+		mesh.material_override = materials[tools[key].material]
+		# Visible both sides, matching backface collision on thin deck/vertical cut walls.
+		mesh.material_override = mesh.material_override.duplicate()
+		mesh.material_override.cull_mode = BaseMaterial3D.CULL_DISABLED
+		add_child(mesh)
+		mesh.create_trimesh_collision()
+		mesh.get_child(0).get_child(0).shape.backface_collision = true
+		floor_bodies.append(mesh.get_child(0))
 
 # Blender -Y fronts export as Godot +Z; these are Godot-space yaw angles.
 func _place_model(id: String, position_world: Vector3, yaw: float = 0.0, scale_model: Array = [1,1,1]) -> Node3D:

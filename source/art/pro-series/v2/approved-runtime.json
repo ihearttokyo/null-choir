@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "selection": "Six actual-native9+qualified artworks admitted: title,Foundry,Processional,Ossuary,Inversion,Heart. Intake,Reliquary,Nursery retain prior runtime artwork; all nineV2source originals remain preserved.",
+  "generation": "Pro visual-remakeV2; actual raster originals retained separately in originals/. No claim these are native8K or Blender models.",
+  "conversion": "Byte-exact copies of previously native-tested private derivatives: existing Pillow12.2.0 RGB/LANCZOS full-image resize640x360, JPEGquality88 optimize. No cropping, inpainting, content manipulation, new generation or upscaling. OriginalPNG1672x941.",
+  "records": [
+    {
+      "id": "title",
+      "source": "source/art/pro-series/v2/originals/null_choir_00_title.png",
+      "source_sha256": "9879713ecf2032a08711cc42dce70145d36dcc5764caf9e1432534ca93922126",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/title/pro-series-v2.jpg",
+      "runtime_sha256": "6f74b190786a1721a83e1b2677f9c1c9b5906ed473c50ee09b561dc17b27bdbf",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 66310,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.0,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-final-actual",
+        "evidence_frame": "actual-title.png",
+        "scope": "Actual640x360productionHUD/menu nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    },
+    {
+      "id": "foundry",
+      "source": "source/art/pro-series/v2/originals/null_choir_02_the_foundry.png",
+      "source_sha256": "e2c37e61e9e065bb97fa1d9317fe1cc62f45522b4fcb99a1ef4cc0e71d8e564e",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/descent/foundry-pro-v2.jpg",
+      "runtime_sha256": "574cd0f71c0866162e1253878f0c42c5cf3e011161f5d98d07d28b4100576945",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 103664,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.025,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-final-actual",
+        "evidence_frame": "actual-cleared-chapter-02.png",
+        "scope": "Actual640x360productionHUD/menu nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    },
+    {
+      "id": "processional",
+      "source": "source/art/pro-series/v2/originals/null_choir_03_the_processional.png",
+      "source_sha256": "5c2aa2c6b6bb96bebc2cab65126e612ea0025abea3168aff93e1622e547f3f1e",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/descent/processional-pro-v2.jpg",
+      "runtime_sha256": "12c0653a06581f76fff756f402a9b7900fafa6076dff52aa8d9a3fb5e569c984",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 94598,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.025,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-final-actual",
+        "evidence_frame": "actual-cleared-chapter-03.png",
+        "scope": "Actual640x360productionHUD/menu nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    },
+    {
+      "id": "ossuary",
+      "source": "source/art/pro-series/v2/originals/null_choir_06_the_ossuary.png",
+      "source_sha256": "25dc53e521ae74790c92045d7dec9535e6f72b3286df1f8acfd1b11bddbaf4f4",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/descent/ossuary-pro-v2.jpg",
+      "runtime_sha256": "cba61d38557bcf658e48052b2701fd47d67cdc38aeb3b037178978e75851b491",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 97360,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.05,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-compact-final",
+        "evidence_frame": "actual-cleared-chapter-06.png",
+        "scope": "Actual640x360productionHUD/menu bottom-rail/ending nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    },
+    {
+      "id": "inversion",
+      "source": "source/art/pro-series/v2/originals/null_choir_07_the_inversion.png",
+      "source_sha256": "935f347409b8ba271eaddfb6a947a397f23b5af5491b00ab8f185c7d6ecad713",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/descent/inversion-pro-v2.jpg",
+      "runtime_sha256": "932cfbbe5d6f179307764c9af45412dbb36bd4c5461be1f3e3c860594e4cffda",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 95670,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.05,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-compact-final",
+        "evidence_frame": "actual-cleared-chapter-07.png",
+        "scope": "Actual640x360productionHUD/menu bottom-rail/ending nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    },
+    {
+      "id": "heart",
+      "source": "source/art/pro-series/v2/originals/null_choir_08_the_heart.png",
+      "source_sha256": "b695b7cec9f91fbc07416e3b3ea347212650547b0d78bf9e0f422d0a3a03d352",
+      "source_dimensions": [
+        1672,
+        941
+      ],
+      "runtime": "game/assets/art/descent/heart-pro-v2.jpg",
+      "runtime_sha256": "e3a604e01b8324f94f9f3873e6e4c682ae4f3b932e28eb4a17f85b13494addf6",
+      "runtime_dimensions": [
+        640,
+        360
+      ],
+      "runtime_bytes": 76766,
+      "tested_private_derivative_byte_exact": true,
+      "actual_native_review": {
+        "score": 9.0,
+        "rubric": "six-criterion9+weighted review",
+        "record": "review-v2-compact-final",
+        "evidence_frame": "actual-cleared-chapter-08.png",
+        "scope": "Actual640x360productionHUD/menu bottom-rail/ending nativeMobile/Metal, arrangedstates; independentvisualreview. Not physical input, earned campaign or release/export acceptance."
+      }
+    }
+  ],
+  "preservation": "All previous canonical JPEGs and retained source originals remain at their original paths. Three below9chapter paintings (Intake,Reliquary,Nursery) are not admitted.",
+  "validation": "Six qualified versioned runtime paths verified by serialized native import and focused title/restored-route tests, clean Dummy/master-muted. Additional3painting bytes/positions had prior actualMobile/Metal bottom-rail/ending review; no redundant13screen rerender. No fullcampaign/physicalinput/listening/export/publication acceptance.",
+  "publication": "Not published, rebuilt, signed or notarized by this integration.",
+  "native_validation": {
+    "evidence_batch": "qualified6-final",
+    "import_seconds": 1.785,
+    "test_title_background_seconds": 0.203,
+    "test_restored_route_seconds": 0.507,
+    "warnings": 0,
+    "errors": 0,
+    "six_versioned_canonical_paths_verified": true,
+    "all_nine_canonical": false,
+    "unqualified_three": "Intake,Reliquary,Nursery remain legacycanonical; privateV2candidates preserved solelyforreview.",
+    "ending_guard": "Main checks ResourceLoader.exists(DescentChart.art_path(7)); actual mappedHeartpath/depth7negative/depth8positive HUDidentity checked. Missing-file live negative unrun: no injectableloader without mutating retained files."
+  },
+  "qualified_count": 6,
+  "all_nine_canonical": false,
+  "native_validation_history": [
+    {
+      "evidence_batch": "qualified3-bottomrail",
+      "import_seconds": 4.445,
+      "test_title_background_seconds": 0.272,
+      "test_restored_route_seconds": 0.506,
+      "hidden_mobile_metal_render_seconds": 1.305,
+      "warnings": 0,
+      "errors": 0,
+      "versioned_paths_verified": true,
+      "all_nine_canonical": false
+    }
+  ]
+}

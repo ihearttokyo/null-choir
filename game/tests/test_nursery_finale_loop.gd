@@ -1,12 +1,14 @@
 extends "res://tests/test_nursery_seed_loop.gd"
 
 # Provisional seed dependency: parent rebinds ONLY this pin after accepted seed review.
-const NF_SEED_SHA = "0f2ff7346002ac97bb01b11db3536cb032a200b9c136f16cfe81d73a059b0044"
-const NF_OSSUARY_SHA = "781a86ab846db76d7189f108281f009b300812a5c2136faa754b9a74000bc74c"
-const NF_ANCESTOR_SAVE_SHA = "1da02250064a304d13212f4f8fe1c4ab2dda32e20ce152b2246d4e05d3e348d0"
-const NF_RESULT_SAVE_SHA = "15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce"
-const NF_RESULT_RESOURCES = {"health":93,"armor":197,"ammo":[0,99,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
-const NF_CARRY = {"health":78,"armor":194,"ammo":[0,163,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
+const NF_SEED_SHA = "89d4e3d693842860975d4f0f5f4b6d896526fb7cfef17eb9aff5a0598b5dba4e"
+const NF_OSSUARY_SHA = "73c64534bfc52f6ba0af603062962a980e99364628aeb934e54efebfb5b5e97d"
+const NF_ANCESTOR_SAVE_SHA = "efb82afebf07f7e2a2acb315c96fe716e01e5fe5cc6847b02ad3d0923c083171"
+const NF_RESULT_SAVE_SHA = "10b642c95f92e756a6cae8e0850b87ba483f48af8e65dc65af12e9729b5c0d0c"
+# Revision-one Ossuary spawn rectangle x31..50 is authored at -4; legacy entry stays0.
+const NF_O_ENTRY_Y: float = -4.0
+const NF_RESULT_RESOURCES = {"health":74,"armor":200,"ammo":[0,98,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
+const NF_CARRY = {"health":34,"armor":194,"ammo":[0,154,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
 # New phase only: finite route plus81 ideal pistol hits for1660 original finale HP.
 const NF_LIMIT = 9000
 const NF_SECONDS = 300
@@ -33,6 +35,8 @@ const NF_DESCENT = {"id":"nursery_descent","kind":"exit","cell":[35.5,5.5],"requ
 const NF_IDS = ["nursery_enemy_22","nursery_enemy_23","nursery_enemy_24","nursery_enemy_25","nursery_enemy_26","nursery_enemy_27","nursery_warden"]
 const NF_NS_FIELDS = ["ns_ok","ns_ticks","ns_ledger","ns_removed","ns_keys","ns_pickups","ns_consumed","ns_shots","ns_last_time","ns_last_tick","ns_slot","ns_activated","ns_events","ns_deaths","ns_finishes","ns_hurts","ns_births","ns_contacts","ns_projectile_pending","ns_worker","ns_melee","ns_summons","ns_summon_attacks","ns_explored","ns_last_cell","ns_inputs","ns_capture_calls","ns_mouse_attempts","ns_save_calls","ns_start","ns_bindings","ns_markers","ns_select","ns_selections","ns_actor_image","ns_checkpoint","ns_saved_sha","ns_hp","ns_damage_events"]
 const NF_O_ACTORS = [["ossuary_enemy_00","brute",4.5,21.5,1.5,225,"ossuary_first_commit"],["ossuary_enemy_01","crawler",8.5,21.5,1.5,135,"ossuary_first_commit"],["ossuary_enemy_02","worker",4.5,17.5,1.5,243,"ossuary_first_commit"],["ossuary_enemy_03","crawler",8.5,18.5,1.5,90,"ossuary_first_commit"],["ossuary_enemy_04","worker",9.5,16.5,1.5,124,"ossuary_first_commit"],["ossuary_enemy_05","caster",9.5,12.5,1.5,153,"ossuary_first_commit"],["ossuary_enemy_06","crawler",5.5,14.5,1.5,194,"ossuary_first_commit"],["ossuary_enemy_07","worker",3.5,12.5,1.5,207,"ossuary_first_commit"],["ossuary_enemy_08","guardian",26.5,15.5,-1.5,207,"ossuary_second_commit"],["ossuary_enemy_09","crawler",31.5,15.5,-1.5,117,"ossuary_second_commit"],["ossuary_enemy_10","worker",33.5,11.5,-1.5,149,"ossuary_second_commit"],["ossuary_enemy_11","crawler",27.5,9.5,-1.5,180,"ossuary_second_commit"],["ossuary_enemy_12","worker",32.5,8.5,-1.5,149,"ossuary_second_commit"],["ossuary_enemy_13","caster",29.5,7.5,-1.5,180,"ossuary_second_commit"],["ossuary_enemy_14","crawler",24.5,12.5,-1.5,217,"ossuary_second_commit"],["ossuary_enemy_15","worker",25.5,8.5,-1.5,202,"ossuary_second_commit"],["ossuary_enemy_16","summoner",18.5,13.5,0.0,90,"ossuary_first_return"],["ossuary_enemy_17","crawler",19.5,16.5,0.0,0,"ossuary_first_return"],["ossuary_enemy_18","worker",18.5,20.5,0.0,346,"ossuary_first_return"],["ossuary_enemy_19","crawler",19.5,10.5,0.0,243,"ossuary_second_return"],["ossuary_enemy_20","worker",20.5,11.5,-0.1875,270,"ossuary_second_return"],["ossuary_enemy_21","crawler",20.5,22.5,0.0,14,"ossuary_second_return"],["ossuary_enemy_22","worker",19.5,32.5,0.0,288,"ossuary_finale"],["ossuary_enemy_23","crawler",25.5,33.5,0.0,56,"ossuary_finale"],["ossuary_enemy_24","caster",26.5,36.5,0.0,53,"ossuary_finale"],["ossuary_enemy_25","worker",18.5,37.5,0.0,315,"ossuary_finale"],["ossuary_enemy_26","crawler",23.5,36.5,0.0,18,"ossuary_finale"]]
+# Independent revision-one floor heights, in authored actor order; legacy rows stay immutable.
+const NF_O_CURRENT_FLOORS = [5.0,4.583333333333334,5.0,4.583333333333334,3.75,3.75,5.0,5.0,-2.0,-4.0,-4.0,-2.0,-4.0,-3.0,-1.6666666666666665,-2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,-2.0,-2.0,0.0,-1.0]
 
 class NurseryFinaleMain:
 	extends "res://tests/test_nursery_seed_loop.gd".NurserySeedMain
@@ -160,7 +164,7 @@ class NurseryFinaleMain:
 		var spec: Dictionary = rows[0]
 		var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
 		var region: Array = spec.region
-		nf_ok = nf_ok and nf_current() and id == "nursery_finale" and not nf_activated.has(id) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in nf_keys)
+		nf_ok = nf_ok and nf_current() and id == "nursery_finale" and not nf_activated.has(id) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in nf_keys)
 		super.activate_encounter(id)
 		nf_activated[id] = [Engine.get_physics_frames(),cell,state.keys.duplicate()]
 		nf_removed.append("encounter:"+id)
@@ -329,9 +333,9 @@ class NurseryFinaleMain:
 		if checkpoint_save:
 			nf_ok = nf_ok and nf_current() and nf_checkpoint_saves == 0 and h_stack("/main.gd","update_passive_triggers") and state.checkpoint_id == NF_CHECKPOINT.id
 			nf_checkpoint = nf_ledger.duplicate(true)
-			nf_checkpoint.merge({"keys":nf_keys.duplicate(),"removed":nf_removed.duplicate(),"checkpoint_id":NF_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":nf_records(),"yaw":state.yaw,"pitch":state.pitch},true)
+			nf_checkpoint.merge({"keys":nf_keys.duplicate(),"removed":nf_removed.duplicate(),"floor_revision":1,"checkpoint_id":NF_CHECKPOINT.id,"position":[player.position.x,player.position.y,player.position.z],"actors":nf_records(),"yaw":state.yaw,"pitch":state.pitch},true)
 			expected = nf_checkpoint.duplicate(true)
-			expected.merge({"version":1,"difficulty":1,"level_index":4,"discoveries":[3,4],"explored":nf_explored.duplicate(true),"checkpoint":nf_checkpoint.duplicate(true),"level_start":nf_start.duplicate(true)},true)
+			expected.merge({"version":2,"difficulty":1,"level_index":4,"discoveries":[3,4],"explored":nf_explored.duplicate(true),"checkpoint":nf_checkpoint.duplicate(true),"level_start":nf_start.duplicate(true)},true)
 		else:
 			nf_ok = nf_ok and state.level_index == 5 and nf_exit_saves == 0 and nf_intent == NF_DESCENT.id and Engine.is_in_physics_frame() and Input.is_action_pressed("interact") and h_stack("/main.gd","interact")
 			expected = nf_handoff()
@@ -378,9 +382,9 @@ class NurseryFinaleMain:
 		return enemies.size() == 29 and enemies.all(func(actor): return nf_actor(actor) and actor.hp == 0 and actor.collision_layer == 0 and actor.collision_mask == 0 and state.removed.count(actor.id) == 1) and NF_IDS.all(func(id): return nf_deaths.get(id,0) == 1 and nf_finishes.get(id,"") in ["player","infighting"]) and nf_deaths.size() == 7 and nf_activated.keys() == ["nursery_finale"]
 	func nf_handoff() -> Dictionary:
 		var resources: Dictionary = nf_ledger.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[0.0,0.0,0.0]},true)
 		var document: Dictionary = resources.duplicate(true)
-		document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
+		document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":resources.duplicate(true),"level_start":resources.duplicate(true)},true)
 		return document
 	func unlock_door(id: String) -> bool:
 		if not nf_enabled: return super.unlock_door(id)
@@ -406,18 +410,19 @@ class NurseryFinaleMain:
 		return oss_enabled and playing and not get_tree().paused and not placement_pending and not loaded_positions and state.level_index == 5 and _scene_level_index == 5 and is_instance_valid(level) and not level.is_queued_for_deletion() and level.get_instance_id() == oss_level_id and is_instance_valid(player) and not player.is_queued_for_deletion() and player.get_parent() == level and player.get_instance_id() == oss_player_id
 	func oss_originals() -> Array:
 		var records: Array = []
-		for spec in NF_O_ACTORS:
-			var point: Vector3 = Vector3(spec[2]*4.0,spec[4],spec[3]*4.0)+Vector3.UP*0.03
+		for index in range(NF_O_ACTORS.size()):
+			var spec: Array = NF_O_ACTORS[index]
+			var point: Vector3 = Vector3(spec[2]*4.0,NF_O_CURRENT_FLOORS[index],spec[3]*4.0)+Vector3.UP*0.03
 			if spec[1] == "caster": point.y += 1.0
 			records.append({"id":spec[0],"hp":N_ROLES[spec[1]][0],"position":[point.x,point.y,point.z],"yaw":e_yaw(Vector3(0,deg_to_rad(spec[5]),0).y),"alerted":false})
 		return records
 	func oss_start() -> Dictionary:
 		var resources: Dictionary = nf_ledger.duplicate(true)
-		resources.merge({"keys":[],"removed":[],"checkpoint_id":"entry","position":[142.0,0.0,98.0],"actors":oss_originals(),"yaw":Vector3(0,deg_to_rad(90),0).y,"pitch":0.0},true)
+		resources.merge({"keys":[],"removed":[],"floor_revision":1,"checkpoint_id":"entry","position":[142.0,NF_O_ENTRY_Y,98.0],"actors":oss_originals(),"yaw":Vector3(0,deg_to_rad(90),0).y,"pitch":0.0},true)
 		return resources
 	func oss_document() -> Dictionary:
 		var document: Dictionary = oss_start()
-		document.merge({"version":1,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":oss_start(),"level_start":oss_start()},true)
+		document.merge({"version":2,"difficulty":1,"level_index":5,"discoveries":[3,4],"explored":[],"checkpoint":oss_start(),"level_start":oss_start()},true)
 		return document
 	func start_level() -> void:
 		if not oss_enabled:
@@ -429,7 +434,7 @@ class NurseryFinaleMain:
 		oss_ok = oss_ok and oss_current() and state.to_dict() == oss_document()
 	func oss_capture() -> bool:
 		oss_captures += 1
-		oss_ok = oss_ok and oss_captures == 1 and not nf_enabled and not playing and not placement_pending and not loaded_positions and h_stack("/main.gd","start_level") and level.get_script() == Level and player.get_script() == Player and player.position == Vector3(142,0.04,98) and player.rotation.y == Vector3(0,deg_to_rad(90),0).y and player.camera.rotation.x == 0.0 and enemies.size() == NF_O_ACTORS.size()
+		oss_ok = oss_ok and oss_captures == 1 and not nf_enabled and not playing and not placement_pending and not loaded_positions and h_stack("/main.gd","start_level") and level.get_script() == Level and player.get_script() == Player and player.position == Vector3(142,NF_O_ENTRY_Y+0.04,98) and player.rotation.y == Vector3(0,deg_to_rad(90),0).y and player.camera.rotation.x == 0.0 and enemies.size() == NF_O_ACTORS.size()
 		oss_level_id = level.get_instance_id()
 		oss_player_id = player.get_instance_id()
 		var expected: Array = oss_originals()
@@ -483,7 +488,7 @@ func run() -> void:
 	await finish(0 if ok else 1)
 
 static func finale_outcome_matches(attacks: Array, shot_count: int, resources: Dictionary, actual_save_sha: String) -> bool:
-	return [[0,0],[1,0],[0,1],[1,1]].all(func(pair): return attacks.any(func(attack): return attack[1] == pair[0] and attack[2] == pair[1])) and shot_count == 81 and resources == NF_RESULT_RESOURCES and actual_save_sha == NF_RESULT_SAVE_SHA
+	return [[0,0],[1,0],[0,1],[1,1]].all(func(pair): return attacks.any(func(attack): return attack[1] == pair[0] and attack[2] == pair[1])) and shot_count == 82 and resources == NF_RESULT_RESOURCES and actual_save_sha == NF_RESULT_SAVE_SHA
 
 func finale_pins_match() -> bool:
 	return FileAccess.get_sha256("res://tests/test_nursery_seed_loop.gd") == NF_SEED_SHA and FileAccess.get_sha256("res://tests/test_nursery_earned_campaign.gd") == NS_CAMPAIGN_SHA and FileAccess.get_sha256("res://tests/test_nursery_earned_entry.gd") == NC_ENTRY_SHA and FileAccess.get_sha256("res://data/05_nursery.json") == N_MAP_SHA and FileAccess.get_sha256("res://data/06_ossuary.json") == NF_OSSUARY_SHA and NC_CORE_PINS.keys().all(func(path): return FileAccess.get_sha256(path) == NC_CORE_PINS[path])
@@ -494,7 +499,7 @@ func walk_through_nursery_finale(observer: NurseryFinaleMain, profile_prefix: St
 		return false
 	var fixture: String = profile_prefix if not profile_prefix.is_empty() else "user://reliquary_catalogue_exit_nursery_finale_"+str(OS.get_process_id())+"_"+str(Time.get_ticks_usec())
 	if not await walk_through_nursery_seeds(observer,fixture): return false
-	if not expect(finale_pins_match() and game.ns_ok and game.ns_enabled and game.budget() == NF_CARRY and game.nc_deaths.size() == 11 and game.ns_deaths.size() == 11 and game.ns_summons.is_empty() and game.nc_summons.is_empty() and game.ns_saved_sha == NF_ANCESTOR_SAVE_SHA and FileAccess.get_sha256(r_profile) == NF_ANCESTOR_SAVE_SHA,"Actual pinned same four-map/two-loop seed boundary; exact earned78/194/163/32/60 and22 original deaths"): return false
+	if not expect(finale_pins_match() and game.ns_ok and game.ns_enabled and game.budget() == NF_CARRY and game.nc_deaths.size() == 11 and game.ns_deaths.size() == 11 and game.ns_summons.is_empty() and game.nc_summons.is_empty() and game.ns_saved_sha == NF_ANCESTOR_SAVE_SHA and FileAccess.get_sha256(r_profile) == NF_ANCESTOR_SAVE_SHA,"Actual pinned same four-map/two-loop seed boundary; exact earned34/194/154/32/60 and22 original deaths"): return false
 	var actual: Array = game.get_property_list().filter(func(property): return str(property.name).begins_with("ns_") and property.name != "ns_enabled").map(func(property): return property.name)
 	actual.sort()
 	var declared: Array = NF_NS_FIELDS.duplicate()
@@ -751,14 +756,17 @@ func nursery_finale_ossuary() -> bool:
 
 func nursery_ossuary_result() -> bool:
 	if not expect(game.oss_ok and game.oss_current() and game.oss_start_calls == 1 and game.oss_captures == 1 and game.oss_mouse_attempts.size() == 1 and game.oss_ticks >= 1 and Engine.get_physics_frames()-nf_entry_epoch <= NF_ENTRY_LIMIT and Time.get_ticks_usec()-nf_entry_wall <= NF_ENTRY_SECONDS*1000000 and finale_prior_frozen() and not game.nf_enabled and observer_witness(nf_entry_fields) == nf_entry_frozen and game.get_instance_id() == r_main_id and game.state.get_instance_id() == r_campaign_id and game.progress_path == r_profile and game.settings_path == game.r_settings_origin,"Nonquitting same earned Main/Campaign/profile; every completed finale/prior observer frozen;30-frame/10s fresh entry cap"): return false
-	if not expect(finale_outcome_matches(game.nf_boss_attacks,game.nf_shots.size(),game.budget(),FileAccess.get_sha256(r_profile)),"NATIVE RED exact retained finale variant/phase,81shots,93/197resources and finalsave identity"): return false
+	if not expect(finale_outcome_matches(game.nf_boss_attacks,game.nf_shots.size(),game.budget(),FileAccess.get_sha256(r_profile)),"NATIVE RED exact retained finale variant/phase,82shots,74/200resources and finalsave identity"): return false
 	var scene = game.level
 	var player = game.player
 	var data: Dictionary = scene.layout.data
 	if not expect(scene.get_script() == game.Level and player.get_script() == game.Player and scene.get_instance_id() != game.n_level_id and player.get_instance_id() != game.n_player_id and scene.get_instance_id() == game.oss_level_id and player.get_instance_id() == game.oss_player_id and data.id == "ossuary" and data.spawn == [35.5,24.5] and data.spawn_yaw == 90 and data.enemies.size() == 27 and game.enemies.size() == 27 and game.oss_bindings.size() == 27 and scene.get_children().filter(func(node): return node.get_script() == game.Enemy).size() == 27 and game.is_processing() and game.is_physics_processing() and player.is_physics_processing() and player._current_map() and not game.menu_scroll.visible and not game.quitting,"Fresh original sixth Level/Player/27 native actors, live processing and exact original spawn"): return false
 	var records: Array = game.oss_originals()
+	var original_layout = scene.layout.original_floor(5)
+	if not expect(original_layout.world_position(data.spawn).y == 0.0 and scene.layout.world_position(data.spawn).y == NF_O_ENTRY_Y,"Independent immutable original zero-height Ossuary entry and authored revision-one entry height"): return false
 	for index in range(NF_O_ACTORS.size()):
 		var spec: Array = NF_O_ACTORS[index]
+		if not expect(scene.layout.floor_revision() == 1 and absf(original_layout.world_position([spec[2],spec[3]]).y-spec[4]) < 0.000001 and absf(scene.layout.world_position([spec[2],spec[3]]).y-NF_O_CURRENT_FLOORS[index]) < 0.000001,"Independent immutable original and revision-one floor tables: "+spec[0]): return false
 		var record: Dictionary = records[index]
 		var actor = game.enemies[index]
 		var capsule: CollisionShape3D = actor.get_child(0)
@@ -769,7 +777,7 @@ func nursery_ossuary_result() -> bool:
 	expected.position = [player.position.x,player.position.y,player.position.z]
 	expected.explored = game.oss_explored.duplicate(true)
 	var saved = game.Campaign.new()
-	if not expect(player.position.x == 142.0 and player.position.z == 98.0 and absf(player.position.y) <= 0.05 and not support.is_empty() and support.normal.y >= 0.7 and absf(player.position.y-support.position.y) <= 0.15 and player.rotation.y == Vector3(0,deg_to_rad(90),0).y and player.camera.rotation.x == 0.0 and game.state.position == player.position and game.state.yaw == game.Enemy.canonical_yaw(player.rotation.y) and game.state.pitch == clampf(player.camera.rotation.x,-1.35,1.35) and player.collision_layer == 2 and player.collision_mask == 5 and not capsule.disabled and capsule.shape is CapsuleShape3D and capsule.shape.radius == Vector3(0.32,0,0).x and capsule.shape.height == Vector3(1.65,0,0).x and capsule.position == Vector3(0,0.85,0) and player._weapon_intent == -1 and not player._fire_pressed and game._interaction_pending_player == 0 and game.state.to_dict() == expected and game.budget() == game.nf_ledger and saved.load_progress(r_profile) and saved.to_dict() == game.nf_exit_expected and FileAccess.get_sha256(r_profile) == game.nf_saved_sha and nf_retired.all(func(ref): return ref.get_ref() == null) and nf_marker_refs.values().all(func(ref): return ref.get_ref() == null),"Actual settled sixth Player/pose/capsule/Survey with unchanged earned resources/story; live fresh checkpoint versus persisted zero-position handoff, stale actors/input drained"): return false
+	if not expect(player.position.x == 142.0 and player.position.z == 98.0 and absf(player.position.y-NF_O_ENTRY_Y) <= 0.05 and not support.is_empty() and support.normal.y >= 0.7 and absf(player.position.y-support.position.y) <= 0.15 and player.rotation.y == Vector3(0,deg_to_rad(90),0).y and player.camera.rotation.x == 0.0 and game.state.position == player.position and game.state.yaw == game.Enemy.canonical_yaw(player.rotation.y) and game.state.pitch == clampf(player.camera.rotation.x,-1.35,1.35) and player.collision_layer == 2 and player.collision_mask == 5 and not capsule.disabled and capsule.shape is CapsuleShape3D and capsule.shape.radius == Vector3(0.32,0,0).x and capsule.shape.height == Vector3(1.65,0,0).x and capsule.position == Vector3(0,0.85,0) and player._weapon_intent == -1 and not player._fire_pressed and game._interaction_pending_player == 0 and game.state.to_dict() == expected and game.budget() == game.nf_ledger and saved.load_progress(r_profile) and saved.to_dict() == game.nf_exit_expected and FileAccess.get_sha256(r_profile) == game.nf_saved_sha and nf_retired.all(func(ref): return ref.get_ref() == null) and nf_marker_refs.values().all(func(ref): return ref.get_ref() == null),"Actual settled sixth Player/pose/capsule/Survey with unchanged earned resources/story; live fresh checkpoint versus persisted zero-position handoff, stale actors/input drained"): return false
 	print("NURSERY_EARNED_FINALE frames=",Engine.get_physics_frames()-nf_epoch," shots=",game.nf_shots.size()," boss_attacks=",game.nf_boss_attacks," native_charge_contacts=",game.nf_charge_contacts," boss_flight_steps=",game.nf_flight_steps," deaths=",game.nf_deaths," provenance=",game.nf_finishes," resources=",game.nf_ledger," saved_sha=",game.nf_saved_sha," ossuary_entry_frames=",Engine.get_physics_frames()-nf_entry_epoch)
 	return true
 

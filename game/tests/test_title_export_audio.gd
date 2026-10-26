@@ -26,7 +26,7 @@ func run() -> void:
 	game.music.title_track = title_path
 	game.music.play_level(0)
 	checks = await game._export_title_audio_checks()
-	assert(not checks.title_recording, "Campaign MP3 must not masquerade as the title Ogg")
+	assert(not checks.title_recording, "A different campaign MP3 must not masquerade as the selected title recording")
 	game.music.play_title()
 	var muted := AudioServer.is_bus_mute(0)
 	game.music.set_paused(true)

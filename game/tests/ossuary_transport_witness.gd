@@ -9,8 +9,8 @@ const SHOTS = 100
 const OWNER = "ossuary_enemy_16"
 const GROUPS = ["ossuary_first_commit","ossuary_first_return"]
 const BLOOD = {"id":"ossuary_blood","kind":"key","key":"blood","cell":[9.5,14.5],"text":"RIB CARRIER BLOOD SEAL RECOVERED"}
-const CARRY = {"health":93,"armor":197,"ammo":[0,99,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
-const SAVE_SHA = "15353b6ea7d39856fcd975c2195d391bfdd7cc2f17d567022945bd749f4558ce"
+const CARRY = {"health":74,"armor":200,"ammo":[0,98,32,120,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
+const SAVE_SHA = "10b642c95f92e756a6cae8e0850b87ba483f48af8e65dc65af12e9729b5c0d0c"
 const ROLES = {"crawler":[50,0.42,1.1],"worker":[90,0.34,2.7],"caster":[90,0.34,2.7],"brute":[210,0.62,3.3],"guardian":[260,0.65,3.7],"summoner":[150,0.45,4.2]}
 const SUPPLIES = ["ossuary_entry_rivets","ossuary_entry_shells","ossuary_entry_health","ossuary_entry_armor","ossuary_scattergun","ossuary_first_approach_rivets","ossuary_first_approach_shells","ossuary_first_return_rivets","ossuary_first_return_health"]
 var game
@@ -218,7 +218,7 @@ func before_encounter(id: String) -> Dictionary:
 	var spec: Dictionary = rows[0]
 	var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
 	var region: Array = spec.region
-	require(current() and id in GROUPS and not activated.has(id) and stack("/main.gd","_process") and not stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in keys),"actual inclusive region/key encounter: "+id)
+	require(current() and id in GROUPS and not activated.has(id) and Engine.is_in_physics_frame() and stack("/main.gd","update_encounter_triggers") and stack("/player.gd","_physics_process") and not stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in keys),"actual inclusive region/key encounter: "+id)
 	return spec
 
 func after_encounter(spec: Dictionary) -> void:

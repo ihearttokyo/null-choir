@@ -15,6 +15,10 @@ var _starting_preview := false
 var _start_confirmed := false
 var _reduced_motion := false
 var _phase := 0.0
+var _art_energy := 0.0
+var _visual_style := 0
+var _style: OptionButton
+var _art_caption: Label
 var _status_clock := 0.0
 var _content: VBoxContainer
 var _body: BoxContainer
@@ -103,6 +107,9 @@ func play_track(index: int) -> bool:
 			_sync_transport()
 		return false
 	_selected = index
+	if _art_material != null:
+		_art_material.set_shader_parameter("seed", float(index + 1))
+		set_visual_style(index % 3)
 	_preview_stream = player.stream
 	_preview_player_ref = weakref(player)
 	_feedback("")
@@ -127,6 +134,8 @@ func set_reduced_motion(enabled: bool) -> void:
 	_phase = 0.0
 	if _art_material != null:
 		_art_material.set_shader_parameter("phase", _phase)
+		_art_energy = 0.0
+		_art_material.set_shader_parameter("energy", 0.0)
 	if is_instance_valid(_motion):
 		_motion.set_pressed_no_signal(enabled)
 
@@ -172,7 +181,10 @@ func _exit_tree() -> void:
 	_art_material = null
 
 func _on_visibility_changed() -> void:
-	if not is_visible_in_tree():
+	var visible_now := is_visible_in_tree()
+	set_process(visible_now)
+	set_process_unhandled_input(visible_now)
+	if not visible_now:
 		_stop_preview()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -180,12 +192,34 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		request_back()
 
+func set_visual_style(index: int) -> void:
+	_visual_style = clampi(index, 0, 2)
+	if _art_material != null:
+		_art_material.set_shader_parameter("visual_style", _visual_style)
+	if is_instance_valid(_style):
+		_style.select(_visual_style)
+
+func _update_art(delta: float) -> void:
+	# Geometry is seeded; movement follows the real, owned transport position.
+	# Brightness uses the real Music bus peak, not an invented FFT/beat detector.
+	var player := _player()
+	if _reduced_motion or not _owns_preview() or not is_instance_valid(player) or not player.playing or player.stream_paused:
+		return
+	_phase = maxf(0.0, player.get_playback_position()) * 0.45
+	var bus := AudioServer.get_bus_index("Music")
+	var target := 0.0
+	if bus >= 0 and not AudioServer.is_bus_mute(bus) and not AudioServer.is_bus_mute(0):
+		var peak := maxf(AudioServer.get_bus_peak_volume_left_db(bus, 0), AudioServer.get_bus_peak_volume_right_db(bus, 0))
+		if is_finite(peak):
+			target = clampf(db_to_linear(peak), 0.0, 1.0)
+	_art_energy = lerpf(_art_energy, target, 1.0 - exp(-maxf(delta, 0.0) * 8.0))
+	_art_material.set_shader_parameter("phase", _phase)
+	_art_material.set_shader_parameter("energy", _art_energy)
+
 func _process(delta: float) -> void:
 	if not is_visible_in_tree():
 		return
-	if not _reduced_motion:
-		_phase = fmod(_phase + maxf(delta, 0.0) * 0.06, TAU)
-		_art_material.set_shader_parameter("phase", _phase)
+	_update_art(delta)
 	_status_clock += maxf(delta, 0.0)
 	if _status_clock >= 0.2:
 		_status_clock = 0.0
@@ -237,7 +271,14 @@ func _clock(seconds: float) -> String:
 	return "%d:%02d" % [whole / 60, whole % 60]
 
 func _track_name(index: int) -> String:
-	return ("Title — " if index == _tracks.size() - 1 else "") + _tracks[index].get_file().get_basename().capitalize()
+	var recording_name := _tracks[index].get_file().get_basename().capitalize()
+	if index == _tracks.size() - 1:
+		# This menu-role resource contains the selected Processional recording,
+		# not an additional composition named after its technical file path.
+		if _tracks[index] == "res://audio/title/title-suno.mp3":
+			recording_name = "Processional"
+		return "Title — " + recording_name
+	return recording_name
 
 func _feedback(text: String) -> void:
 	if is_instance_valid(_message):
@@ -260,7 +301,7 @@ func _rebuild_tracks() -> void:
 	var controls: Array[Control] = []
 	for button in _track_buttons:
 		controls.append(button)
-	controls.append_array([_previous, _play, _next, _volume, _motion, _back])
+	controls.append_array([_previous, _play, _next, _volume, _style, _motion, _back])
 	for i in controls.size():
 		controls[i].focus_next = controls[i].get_path_to(controls[(i + 1) % controls.size()])
 		controls[i].focus_previous = controls[i].get_path_to(controls[posmod(i - 1, controls.size())])
@@ -344,6 +385,15 @@ func _build_ui() -> void:
 	_previous = _button("Previous", controls, step_track.bind(-1))
 	_play = _button("Play", controls, toggle_playback)
 	_next = _button("Next", controls, step_track.bind(1))
+	_style = OptionButton.new()
+	_style.add_item("Vaults")
+	_style.add_item("Orrery")
+	_style.add_item("Reliquary")
+	_style.accessibility_name = "Visual style"
+	_style.tooltip_text = "Procedural visual style. Each track also seeds its own architecture and palette."
+	_style.focus_mode = Control.FOCUS_ALL
+	_style.item_selected.connect(set_visual_style)
+	controls.add_child(_style)
 	_motion = CheckButton.new()
 	_motion.text = "Reduced motion"
 	_motion.focus_mode = Control.FOCUS_ALL
@@ -361,6 +411,7 @@ func _build_ui() -> void:
 	_volume.tooltip_text = "Music volume. Left and right adjust the existing Music bus."
 	_volume.value_changed.connect(_change_volume)
 	footer.add_child(_volume)
+	_art_caption = _label("Procedural cathedral art · Playback-time motion · Music-bus peak glow", footer, 11)
 	_message = _label("", footer, 14)
 	_message.add_theme_color_override("font_color", BONE)
 

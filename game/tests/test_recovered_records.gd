@@ -38,7 +38,7 @@ func run() -> void:
 	assert(game.playing)
 	game.pause_game()
 	var pause_buttons = game.menu.get_children().filter(func(node):return node is Button)
-	assert(pause_buttons.map(func(node):return node.text)==["Resume","Settings","Restart level","Save and return to title","Recovered records"])
+	assert(pause_buttons.map(func(node):return node.text)==["Resume","Settings","Restart level","Save and return to title","Recovered records","Descent map"])
 	# Reader fixture arranges three discoveries; actual optional collection has its own eight-map test.
 	for i in [0,3,7]: game.state.discover(i)
 	assert(game._save()==OK)
@@ -85,7 +85,12 @@ func run() -> void:
 		await game.continue_campaign()
 		var expected_title = "YOUR VOICE ISSUED THE FIRST ORDER\nTHE RESTRAINT WAS BUILT AROUND YOU" if clues.size()==8 else "THE RESTRAINT IS OPEN\nTHE VOICE NOW USES YOUR NAME"
 		assert(game.menu.get_child(0).text==expected_title)
-		assert(game.menu.get_child(4).text==narrative.ENDINGS["complete" if clues.size()==8 else "normal"].body)
+		assert(game.menu.get_child(4).text=="Descent map")
+		assert(game.menu.get_child(5).text==narrative.ENDINGS["complete" if clues.size()==8 else "normal"].body)
+		game.menu.get_child(4).pressed.emit()
+		assert(game.menu.get_child(0).text=="DESCENT MAP" and game.state.to_dict()==before and FileAccess.get_sha256(game.progress_path)==saved_sha)
+		game.menu.get_child(1).pressed.emit()
+		assert(game.menu.get_child(0).text==expected_title)
 		game.menu.get_child(3).pressed.emit()
 		assert(game.menu.get_children().filter(func(node):return node is Button).size()==clues.size()+1)
 		game.menu.get_child(1).pressed.emit()

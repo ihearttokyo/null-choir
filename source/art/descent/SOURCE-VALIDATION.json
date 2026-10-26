@@ -1,0 +1,21 @@
+{
+  "scope": "Actual Blender reopen/edit/revert/packed-relative-image/privacy checks in portable source layout; raw diagnostics retained privately, not runtime assets or visual acceptance",
+  "results": [
+    {
+      "source": "prototype09",
+      "blend_unchanged": true,
+      "packed_relative_images": true,
+      "vertex_edit_reverted": true,
+      "raw_privacy_scope": "reopened scene/dependencies reserialized uncompressed; not a scan of the compressed source stream",
+      "native_receipt_sha256": "0c707fb28361b00b29c1dd1fb9db9d3e8509392d6ea5730a3a340382a692c5e7"
+    },
+    {
+      "source": "heart74",
+      "blend_unchanged": true,
+      "packed_relative_images": true,
+      "vertex_edit_reverted": true,
+      "raw_privacy_scope": "reopened scene/dependencies reserialized uncompressed; not a scan of the compressed source stream",
+      "native_receipt_sha256": "fb0ddd082283f5411f805947a22f2544e1cc422ac1b5eada74a83c20aeb41375"
+    }
+  ]
+}

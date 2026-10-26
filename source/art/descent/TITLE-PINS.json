@@ -1,0 +1,20 @@
+{
+  "kind": "compact native Blender title candidate, NOT8Kmaster",
+  "width": 1280,
+  "height": 720,
+  "samples": 64,
+  "cpu_threads": 2,
+  "seconds": 49.093,
+  "blend_sha256": "48030a5c6513cdce907fd09585ba79c8b605c0bec8adf6e94e0919a51c18209d",
+  "blend_unchanged": true,
+  "png_sha256": "a87788c6aed151276ff37e08081b924daeefd23a99e4ba1248840ff1cfd7bdee",
+  "view": "title",
+  "quality": "Final rendered UI/visual acceptance remains open",
+  "runtime_sha256": "92cc52ac4f11e334ade659afca9d219de5290354097a8af146f0a26b9cede05f",
+  "runtime_bytes": 40252,
+  "runtime_size": [
+    640,
+    360
+  ],
+  "encoding": "Pillow12.2.0 RGB JPEG quality90 optimizeTrue, LANCZOS resize, no inheritedmetadata"
+}

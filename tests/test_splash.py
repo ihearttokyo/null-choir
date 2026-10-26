@@ -1,66 +1,60 @@
-"""Static public-playtest entry, privacy and delivery contracts."""
+"""Current hosted playtest delivery plus retained static-page/privacy/license contracts.
+GitHub Pages is retired. docs/ is historical material, NOT the current download host.
+Preview04 must not become primary until its matching standalone artifact is verified.
+"""
 from pathlib import Path
 from html.parser import HTMLParser
+import re
 ROOT=Path(__file__).resolve().parents[1]
-class Page(HTMLParser):
-    def __init__(self):
-        super().__init__(); self.tags=[]
-    def handle_starttag(self,tag,attrs):
-        self.tags.append((tag,dict(attrs)))
-page=ROOT/"docs/index.html"
-assert page.exists(), "Public playtest entry missing"
-text=page.read_text(); dom=Page(); dom.feed(text)
-assert ('html',{'lang':'en'}) in dom.tags
-assert any(t=='meta' and a.get('name')=='viewport' for t,a in dom.tags)
-links=[a for t,a in dom.tags if t=='a']
-assert any(a.get('class')=='download' and a.get('href')=='https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.2/NULL-CHOIR-0.2.3-alpha.2-Apple-Silicon.zip' for a in links)
-assert '<title>NULL CHOIR — Mac alpha</title>' in text
-assert 'Download Mac alpha' in text and 'Alpha checkpoint, not a finished release' in text
-assert 'Expect bugs, hitches and balance changes.' in text
-download=next(a['href'] for a in links if a.get('class')=='download')
-assert 'suno' not in download.lower() and '/v0.2.3-alpha.2/' in download
-assert 'Full campaign and 120 FPS performance are not yet verified.' in text
-assert any(a.get('class')=='skip' and a.get('href')=='#main' for a in links)
-assert not any(t in ['script','iframe','video','audio'] for t,a in dom.tags)
-assert 'Developer ID-signed and Apple-notarized' in text
-assert 'not Apple Developer ID-signed or notarized' not in text
-assert 'Illustrated key art' in text and 'not a gameplay screenshot' in text
-assert 'five minutes' in text and 'six weapon slots' in text
-assert '/Users/' not in text and 'whatsapp.net' not in text
-css=(ROOT/'docs/site-assets/splash.css').read_text()
-assert ':focus-visible' in css and 'max-width:760px' in css
-assert (ROOT/'docs/site-assets/arch.jpg').is_file()
-assert (ROOT/'docs/site-assets/arch.jpg').stat().st_size<1_500_000
-assert (ROOT/'LICENSE').read_bytes()==(ROOT/'game/licenses/NULL-CHOIR.txt').read_bytes()
-license_text=(ROOT/"LICENSE").read_text()
-assert "Copyright (c) 2026 ihearttokyo. All rights reserved." in license_text
-assert "© 2026 ihearttokyo" in text
-assert "Jared" not in license_text and "Bland" not in license_text and "Jared" not in text and "Bland" not in text
-assert "Third-party components remain governed by their own notices and licenses." in license_text
-workflow=(ROOT/'.github/workflows/site.yml').read_text()
-assert "      - 'LICENSE'" in workflow and "      - 'game/licenses/NULL-CHOIR.txt'" in workflow, 'License-only changes must run parity checks'
-assert '@media(max-width:480px)' in css and 'repeat(2,minmax(0,1fr))' in css, "Narrow mobile chapter grid requires two columns"
-assert '.skip:hover{color:var(--ink)}' in css, "Hovered skip link contrast must remain readable"
-
-assert 'The cathedral is listening.' in text
-assert 'Resonance Chamber' in text and 'title music' in text
-assert 'Alpha 2' in text
-assert '180 MB' not in text, 'Do not guess final archive size'
-assert len([t for t,a in dom.tags if t=='h1'])==1
-assert 'gameplay screenshot' in text
-assert 'matching tested standalone build' in (ROOT/'AGENTS.md').read_text()
-assert 'unverified build' in (ROOT/'AGENTS.md').read_text()
-
+SITE='https://null-choir.jaymoney.chatgpt.site'
+DOWNLOAD='https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-03-Apple-Silicon.zip'
+SHA256='d953d8bbc8611a30fdeed46669c4f86bbf9a02157ce6eb64a20e637c71d2e247'
+SOURCE='a99595a89f0bff0febc2e76bb6bf48053f6e823d'
 readme=(ROOT/'README.md').read_text()
-assert download in readme and 'releases/tag/v0.2.3-alpha.2' in readme, 'README and Pages must deliver the same current alpha'
-assert 'Alpha 2 — unfinished checkpoint' in readme
-
-assert '@media(max-width:1100px)' in css, 'Tablet chapters require four columns before long names overlap'
-
-assert "      - 'AGENTS.md'" in workflow, 'Delivery-contract-only edits must run the splash assertions'
-assert "      - 'CHECKPOINT.md'" in workflow, 'Release-evidence-only edits must run the splash assertions'
-checkpoint=(ROOT/'CHECKPOINT.md').read_text().split('## Historical Alpha 1 checkpoint',1)[0]
-for evidence in [download,'1a07030cf86deca39709ee87743ad9fe83500697','4a015443733ec78eb158dd429a9d7ec7602fb9f465058f22b73ac5af42e3fed9','7579f58312deeafc0fdaa4cbe4e2b53c9c9e14dad7954ad3dbc48b3a72771626','182147397','716a8141-cc1c-4ed9-be88-faa4eb7a31c2']:
-    assert evidence in checkpoint, 'Current alpha checkpoint lacks exact release evidence: '+evidence
-assert any(t=='link' and a.get('rel')=='stylesheet' and a.get('href')=='site-assets/splash.css?v=0.2.3-alpha.2' for t,a in dom.tags), 'Returning players must request the current stylesheet instead of a cached previous release'
-print('PASS static splash entry, links, responsive/focus rules, asset budget, privacy and license parity')
+primary=readme.split('## Playtest download',1)[1].split('### ',1)[0]
+assert re.search(r'\[Enter the NULL CHOIR download page\]\('+re.escape(SITE)+r'/?\)',primary), 'Current entry must be the existing ChatGPT Site'
+assert 'ihearttokyo.github.io' not in primary, 'Retired Pages must not be the primary host'
+assert re.search(r'\[Download[^\]]*Preview 03[^\]]*\]\('+re.escape(DOWNLOAD)+r'\)',primary), 'Keep the actual verified Preview03 primary until04verification'
+assert SHA256 in primary and '204,674,603 bytes' in primary, 'Primary archive identity must match the verified03package'
+assert SOURCE+'/game' in primary, 'Pin the source corresponding to the current verified package'
+assert 'macOS 14' in primary and 'Apple Silicon' in primary
+assert 'Developer ID-signed' in primary and 'Apple-notarized' in primary
+assert 'Keep system security protections enabled.' in primary
+assert 'preview' in primary.lower() and 'roadmap remains in progress' in primary
+assert 'releases/tag/v0.2.3-alpha.4' in primary
+for rollback in ['major-features-preview-02-Apple-Silicon.zip','chapter-preview-Apple-Silicon.zip','releases/tag/v0.2.3-alpha.2']:
+    assert rollback in readme, 'Earlier verified rollback link retained: '+rollback
+assert '__PREVIEW04_VERIFIED_' not in readme, 'Do not publish unfilled release-copy templates'
+# Historical static page checks remain real; they no longer dictate README's current version.
+class Page(HTMLParser):
+    def __init__(self):super().__init__();self.tags=[]
+    def handle_starttag(self,tag,attrs):self.tags.append((tag,dict(attrs)))
+page=ROOT/'docs/index.html';assert page.is_file(), 'Retain historical public-page source'
+text=page.read_text();dom=Page();dom.feed(text);links=[a for t,a in dom.tags if t=='a']
+assert ('html',{'lang':'en'}) in dom.tags
+assert any(t=='meta'and a.get('name')=='viewport'for t,a in dom.tags)
+assert any(a.get('class')=='skip'and a.get('href')=='#main'for a in links)
+assert len([t for t,a in dom.tags if t=='h1'])==1
+assert not any(t in ['script','iframe','video','audio']for t,a in dom.tags)
+assert 'Illustrated key art'in text and 'not a gameplay screenshot'in text
+assert '© 2026 ihearttokyo'in text
+for private in ['/Users/','whatsapp.net','Jared','Bland']:assert private not in text and private not in readme
+css=(ROOT/'docs/site-assets/splash.css').read_text()
+for rule in [':focus-visible','max-width:760px','@media(max-width:480px)','repeat(2,minmax(0,1fr))','.skip:hover{color:var(--ink)}','@media(max-width:1100px)']:
+    assert rule in css, 'Retain actual historical responsive/focus rule: '+rule
+asset=ROOT/'docs/site-assets/arch.jpg';assert asset.is_file()and asset.stat().st_size<1_500_000
+assert (ROOT/'LICENSE').read_bytes()==(ROOT/'game/licenses/NULL-CHOIR.txt').read_bytes()
+license_text=(ROOT/'LICENSE').read_text()
+assert 'Copyright (c) 2026 ihearttokyo. All rights reserved.'in license_text
+assert 'Third-party components remain governed by their own notices and licenses.'in license_text
+assert 'Jared'not in license_text and 'Bland'not in license_text
+workflow=(ROOT/'.github/workflows/site.yml').read_text()
+assert 'pull_request:'in workflow and 'python3 -B tests/test_splash.py'in workflow
+assert 'contents: read'in workflow and 'persist-credentials: false'in workflow
+for path in ['LICENSE','game/licenses/NULL-CHOIR.txt','README.md','AGENTS.md','CHECKPOINT.md','tests/test_splash.py']:
+    assert "      - '"+path+"'"in workflow, 'Relevant ownership/delivery changes must run this check'
+for retired in ['deploy-pages','upload-pages-artifact','pages: write','id-token: write']:
+    assert retired not in workflow, 'Retired GitHubPages deployment must not be reintroduced'
+agents=(ROOT/'AGENTS.md').read_text()
+assert 'matching tested standalone build'in agents and 'unverified build'in agents
+print('PASS current ChatGPT Site/verified Preview03/rollback contract, historical page accessibility/privacy, license parity and non-deploying CI')

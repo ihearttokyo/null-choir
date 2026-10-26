@@ -150,8 +150,9 @@ func from_dict(data: Dictionary) -> bool:
 		if snapshots.any(func(snapshot): return snapshot.has("floor_revision")): return false
 	else:
 		for snapshot in snapshots:
-			if not _integer(snapshot.get("floor_revision"),1,1): return false
+			if not _integer(snapshot.get("floor_revision"),1,3): return false
 		revision = int(data.floor_revision)
+		if revision == 3 and int(data.level_index) != 5: return false
 		if snapshots.any(func(snapshot): return int(snapshot.floor_revision) != revision): return false
 	var layout = Layout.new()
 	if int(data.level_index) < 8 and not layout.load_level(int(data.level_index)):
@@ -159,16 +160,24 @@ func from_dict(data: Dictionary) -> bool:
 		return false
 	var current_revision: int = layout.floor_revision()
 	if revision > current_revision: return false
-	var old_layout = layout.original_floor(int(data.level_index)) if revision < current_revision else layout
+	var old_layout = layout.floor_at_revision(int(data.level_index),revision)
+	if old_layout == null: return false
 	for snapshot in snapshots:
 		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
+	if revision == 3:
+		var current_specs = actor_specs(layout)
+		for snapshot in snapshots:
+			if not _trench_migration_clearance(snapshot,layout,current_specs): return false
 	if revision < current_revision:
 		data = data.duplicate(true)
+		var specs = actor_specs(layout)
 		for snapshot in [data,data.checkpoint,data.level_start]:
 			snapshot.position = _shift_floor(snapshot.position,old_layout,layout,true)
 			if snapshot.has("actors"):
 				for actor in snapshot.actors:
-					actor.position = _shift_floor(actor.position,old_layout,layout,false)
+					actor.position = _shift_floor(actor.position,old_layout,layout,false,Enemy.capsule_radius(specs[actor.id].kind))
+			if current_revision == 3:
+				if not _trench_migration_clearance(snapshot,layout,specs): return false
 			snapshot["floor_revision"] = current_revision
 			if not _valid_resources(snapshot) or not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
 		saved_checkpoint = data.checkpoint
@@ -183,14 +192,23 @@ func from_dict(data: Dictionary) -> bool:
 	_apply_resources(data)
 	return true
 
-func _shift_floor(values: Array, old_layout, layout, player: bool) -> Array:
+func _shift_floor(values: Array, old_layout, layout, player: bool, radius: float = 0.0) -> Array:
 	var point = Vector3(values[0],values[1],values[2])
 	if player and point == Vector3.ZERO: return values.duplicate()
 	var cell = Vector2(point.x,point.z)/float(old_layout.data.cell_size)
 	# Preserve invalid/outside player poses for Main's existing native recovery path.
 	if player and not old_layout.is_walkable(Vector2i(cell.floor())): return values.duplicate()
 	var current_cell = Vector2(point.x,point.z)/float(layout.data.cell_size)
-	point.y += layout.world_position([current_cell.x,current_cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	if player and layout.floor_revision() == 3 and layout.migration_patch_overlap(Vector2(point.x,point.z),0.32):
+		# Local trench opt-in: actual player lower-sphere support, not centre ray.
+		var center = Vector2(point.x,point.z)
+		point.y += layout.capsule_floor_support(center,0.32)-old_layout.capsule_floor_support(center,0.32)
+	elif player:
+		point.y += layout.world_position([current_cell.x,current_cell.y]).y-old_layout.world_position([cell.x,cell.y]).y
+	else:
+		# Preserve signed clearance, including existing penetration; never repair invalid actors.
+		var center = Vector2(point.x,point.z)
+		point.y += layout.capsule_floor_support(center,radius)-old_layout.capsule_floor_support(center,radius)
 	return [point.x,point.y,point.z]
 
 func _normalized_resources(data: Dictionary) -> Dictionary:
@@ -316,12 +334,13 @@ func _valid_actor_pose(record: Dictionary, spec: Dictionary, layout) -> bool:
 			inside = true
 			break
 	if not inside or not layout.is_walkable(Vector2i(cell.floor())): return false
-	var floor_point: Vector3 = layout.world_position([cell.x,cell.y])
+	var local_patch: bool = layout.floor_revision() == 3 and layout.migration_patch_overlap(Vector2(point.x,point.z),Enemy.capsule_radius(spec.kind))
+	var floor_point: Vector3 = layout.surface_position_at_y([cell.x,cell.y],point.y+0.08) if local_patch else layout.world_position([cell.x,cell.y])
 	# Moving/falling actors can be above their support, not necessarily at spawn height.
 	if point.y < floor_point.y-0.08: return false
 	for offset in [Vector2.ZERO,Vector2.RIGHT,Vector2.LEFT,Vector2.UP,Vector2.DOWN]:
 		var sample: Vector2 = cell+offset*Enemy.capsule_radius(spec.kind)/float(layout.data.cell_size)
-		var ceiling: float = layout.world_position([sample.x,sample.y]).y+layout.roof_height(Vector2i(sample.floor()))
+		var ceiling: float = (layout.height_at(sample) if local_patch else layout.world_position([sample.x,sample.y]).y)+layout.roof_height(Vector2i(sample.floor()))
 		if point.y+Enemy.capsule_height(spec.kind)+0.03 >= ceiling: return false
 	return true
 
@@ -406,3 +425,21 @@ func load_progress(path: String = SAVE_PATH) -> bool:
 		return false
 	var data = parser.data
 	return data is Dictionary and from_dict(data)
+
+func _trench_migration_clearance(snapshot: Dictionary, layout, specs: Dictionary) -> bool:
+	# Local changed geometry ONLY; untouched map retains the exact old trust
+	# and Main player-recovery policy. Trusted .08 is the existing floor policy,
+	# never saved input and never a wall/rail/underside penetration allowance.
+	# Pure geometry validation supplied by the V3 shared surface recipe; no
+	# Main recovery, teleports, checkpoint substitution or native-state mutation.
+	# Missing validator must fail closed, not silently accept pit-wall overlap.
+	if not layout.has_method("migration_capsule_clearance") or not layout.has_method("migration_patch_overlap"): return false
+	var p = snapshot.position
+	if Vector3(p[0],p[1],p[2]) != Vector3.ZERO and layout.migration_patch_overlap(Vector2(p[0],p[2]),0.32):
+		if not layout.migration_capsule_clearance(Vector3(p[0],p[1],p[2]),0.32,1.65,0.025,snapshot.removed,0.08): return false
+	for actor in snapshot.get("actors",[]):
+		var spec: Dictionary = specs[actor.id]
+		var values = actor.position
+		if layout.migration_patch_overlap(Vector2(values[0],values[2]),Enemy.capsule_radius(spec.kind)):
+			if not layout.migration_capsule_clearance(Vector3(values[0],values[1],values[2]),Enemy.capsule_radius(spec.kind),Enemy.capsule_height(spec.kind),0.0,snapshot.removed,0.08): return false
+	return true

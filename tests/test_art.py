@@ -220,6 +220,7 @@ def check_nursery_v2(a, blob):
     current_dependencies = {key: recipe['PINS'][key] for key in ['tools/build_art.py', 'tools/art_recipe.py']}
     generations = {'21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6'},
                    hashlib.sha256((ROOT / script).read_bytes()).hexdigest(): current_dependencies}
+    generations['42e03bc2565796cc4fbaba395190a5d74e6dcc0b624b4fd2eae2d177b00d7bec'] = generations['21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883']
     assert a['recipe_sha256'] in generations, 'trusted nursery generation'
     assert a['recipe_dependencies'] == generations[a['recipe_sha256']], 'nursery helper pins'
     for logical, digest in recipe['PINS'].items():
@@ -522,6 +523,20 @@ def check():
         if a['id'] in ('impact_tool', 'rivet_pistol', 'scattergun') or a['id'] in LATE_WEAPONS:
             assert a['columns'] == 3 and a['cell_size'] == [320, 200]
             assert a['frames'] == ['idle', 'fire', 'recover']
+    # Raster chapter paintings have truthful separate provenance, not fabricated
+    # Blender/mesh entries. Keep full ownership parity: no blanket directory skip.
+    chapter = json.loads((ROOT / 'source/art/chapter-illustrations-builtin-20261026.json').read_text())
+    chapter_names = {'intake-builtin-v4.png', 'reliquary-builtin-v3.png', 'nursery-builtin-v3.png'}
+    assert {r['runtime_path'] for r in chapter['assets']} == {'res://assets/art/descent/' + n for n in chapter_names}
+    assert chapter['native_dimensions'] == [1672, 941] and chapter['native8k'] is False and chapter['editable_blender'] is False
+    for row in chapter['assets']:
+        file = ROOT / 'game' / row['runtime_path'].removeprefix('res://')
+        data = file.read_bytes()
+        assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256'], file
+        assert data[:8] == b'\x89PNG\r\n\x1a\n' and data[12:16] == b'IHDR', file
+        assert list(struct.unpack('>II', data[16:24])) == chapter['native_dimensions'], file
+        assert file not in owned_outputs
+        owned_outputs.add(file)
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
     assert actual == owned_outputs, 'manifest/output parity'

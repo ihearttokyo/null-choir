@@ -1,6 +1,7 @@
 extends SceneTree
 
 const Preferences = preload("res://scripts/preferences.gd")
+var recording_refs: Array[WeakRef] = []
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -16,9 +17,14 @@ func run() -> void:
 	if not expect(prefs.from_dict(legacy),"Complete v1 options and rebound desktop/gamepad bindings migrate"): return
 	var expected: Dictionary = legacy.values.duplicate()
 	expected.reduced_damage_flashes = false
+	expected.sound_test_reduced_motion = false
 	if not expect(prefs.values == expected and prefs.bindings == legacy.bindings,"Migration preserves every old value and chord; camera shake does not choose flash comfort"): return
 	var current: Dictionary = prefs.to_dict()
-	if not expect(current.version == 2 and current.values.size() == 8,"Only complete v2 documents are serialized"): return
+	if not expect(current.version == 3 and current.values.size() == 9,"Only complete v3 documents are serialized"): return
+	var old_v2: Dictionary = original.duplicate(true)
+	old_v2.version = 2
+	old_v2.values.reduced_damage_flashes = false
+	if not expect(prefs.from_dict(old_v2) and prefs.to_dict() == current,"Genuine strict eight-option v2 migrates in memory to v3"): return
 	legacy.values.sensitivity = 4.0
 	legacy.bindings.fire[0].ctrl = false
 	if not expect(prefs.to_dict() == current,"Successful migration does not retain caller-owned dictionary aliases"): return
@@ -28,19 +34,19 @@ func run() -> void:
 	if not expect(prefs.to_dict() == current,"Serialized dictionaries do not alias live options or nested bindings"): return
 	# JSON decodes integer binding codes as floats; compare both primitive documents in that representation.
 	var restored = Preferences.new()
-	if not expect(restored.from_dict(JSON.parse_string(JSON.stringify(current))) and JSON.parse_string(JSON.stringify(restored.to_dict())) == JSON.parse_string(JSON.stringify(current)),"Migrated v2 survives a real JSON roundtrip"): return
+	if not expect(restored.from_dict(JSON.parse_string(JSON.stringify(current))) and JSON.parse_string(JSON.stringify(restored.to_dict())) == JSON.parse_string(JSON.stringify(current)),"Migrated v3 survives a real JSON roundtrip"): return
 	var no_survey: Dictionary = original.duplicate(true)
 	no_survey.bindings.erase("survey")
 	if not expect(restored.from_dict(no_survey),"Older v1 without the additive survey action remains supported"): return
 	var expected_bindings: Dictionary = no_survey.bindings.duplicate(true)
 	expected_bindings.survey = Preferences.default_bindings().survey
 	if not expect(restored.values == expected and restored.bindings == expected_bindings and not no_survey.bindings.has("survey"),"Survey migration adds only its default, without mutating the legacy input"): return
-	for version in [0,3,1.5,"1",true,NAN,INF]:
+	for version in [0,4,1.5,"1",true,NAN,INF]:
 		var invalid: Dictionary = current.duplicate(true)
 		invalid.version = version
 		if not rejected(prefs,invalid,current,"unsupported version "+str(version)): return
-	for version in [1,2]:
-		var valid: Dictionary = original if version == 1 else current
+	for version in [1,2,3]:
+		var valid: Dictionary = original if version == 1 else (old_v2 if version == 2 else current)
 		for mutation in ["root_extra","root_missing","options_type","options_extra","options_missing","options_unknown","nonfinite","range","controls_type","controls_extra","controls_missing","controls_unknown","controls_partial","duplicate_family","binding_bool","binding_extra"]:
 			var invalid: Dictionary = valid.duplicate(true)
 			match mutation:
@@ -69,27 +75,33 @@ func run() -> void:
 			var invalid: Dictionary = valid.duplicate(true)
 			invalid.values[option] = 0 if valid.values[option] is bool else NAN
 			if not rejected(prefs,invalid,current,"v%d wrong type/nonfinite %s" % [version,option]): return
+	var partial_v2: Dictionary = old_v2.duplicate(true)
+	partial_v2.values.erase("reduced_damage_flashes")
+	if not rejected(prefs,partial_v2,current,"Historical v2 must require all eight options"): return
+	var future_v2: Dictionary = old_v2.duplicate(true)
+	future_v2.values.sound_test_reduced_motion = false
+	if not rejected(prefs,future_v2,current,"Historical v2 must reject ninth v3 option"): return
 	var missing_new: Dictionary = current.duplicate(true)
 	missing_new.values.erase("reduced_damage_flashes")
-	if not rejected(prefs,missing_new,current,"v2 must not silently supply a missing new option"): return
+	if not rejected(prefs,missing_new,current,"v3 must not silently supply missing damage comfort"): return
 	var extra_new: Dictionary = original.duplicate(true)
 	extra_new.values.reduced_damage_flashes = false
 	if not rejected(prefs,extra_new,current,"v1 must retain its exact seven-option schema"): return
 	var missing_survey: Dictionary = current.duplicate(true)
 	missing_survey.bindings.erase("survey")
-	if not rejected(prefs,missing_survey,current,"v2 must not silently supply missing bindings"): return
+	if not rejected(prefs,missing_survey,current,"v3 must not silently supply missing bindings"): return
 	for option in ["sensitivity","music_volume","effects_volume"]:
 		for value in [-INF,INF,-1.0,5.0]:
 			var invalid: Dictionary = current.duplicate(true)
 			invalid.values[option] = value
 			if not rejected(prefs,invalid,current,"invalid range "+option): return
-	for version in [1,2]:
+	for version in [1,2,3]:
 		for upper in [false,true]:
-			var boundary: Dictionary = (original if version == 1 else current).duplicate(true)
+			var boundary: Dictionary = (original if version == 1 else (old_v2 if version == 2 else current)).duplicate(true)
 			boundary.values.sensitivity = 4.0 if upper else 0.1
 			boundary.values.music_volume = 1.0 if upper else 0.0
 			boundary.values.effects_volume = 1.0 if upper else 0.0
-			if not expect(restored.from_dict(boundary),"Both versions accept the existing inclusive numeric boundaries"): return
+			if not expect(restored.from_dict(boundary),"All versions accept the existing inclusive numeric boundaries"): return
 	var path = "user://damage_flash_preferences_"+str(Time.get_ticks_usec())+".json"
 	var raw = JSON.stringify(original)
 	var file = FileAccess.open(path,FileAccess.WRITE)
@@ -100,13 +112,14 @@ func run() -> void:
 	file = FileAccess.open(path,FileAccess.WRITE)
 	file.store_string(partial)
 	file.close()
-	if not expect(not prefs.load_file(path) and JSON.parse_string(JSON.stringify(prefs.to_dict())) == JSON.parse_string(JSON.stringify(current)) and FileAccess.get_file_as_string(path) == partial,"A partial v2 file is rejected atomically and not rewritten"): return
+	if not expect(not prefs.load_file(path) and JSON.parse_string(JSON.stringify(prefs.to_dict())) == JSON.parse_string(JSON.stringify(current)) and FileAccess.get_file_as_string(path) == partial,"A partial v3 file is rejected atomically and not rewritten"): return
 	file = FileAccess.open(path,FileAccess.WRITE)
 	file.store_string(raw)
 	file.close()
 	var game = load("res://scripts/main.gd").new()
 	game.settings_path = path
 	root.add_child(game)
+	recording_refs.append(weakref(game.music.player.stream))
 	if not expect(JSON.parse_string(JSON.stringify(game.preferences.to_dict())) == JSON.parse_string(JSON.stringify(current)) and FileAccess.get_file_as_string(path) == raw,"Native startup loads old settings without a migration write"): return
 	game.show_settings()
 	var reduced: CheckButton
@@ -119,17 +132,20 @@ func run() -> void:
 			if child.text == "Reduced damage flashes": reduced = child
 			if child.text == "Camera shake": shake = child
 		if child is HSlider: sliders += 1
-	if not expect(reduced != null and shake != null and checks == 5 and sliders == 3,"One native comfort checkbox joins the existing family without another slider"): return
+	if not expect(reduced != null and shake != null and checks == 6 and sliders == 3,"One native comfort checkbox joins the existing family without another slider"): return
 	if not expect(not reduced.button_pressed and not shake.button_pressed,"Legacy shake-off does not enable reduced flashes"): return
 	reduced.button_pressed = true
-	if not expect(restored.load_file(path) and restored.values.reduced_damage_flashes and not restored.values.camera_shake and restored.to_dict().version == 2,"Real checkbox signal persists only the independently chosen comfort setting as v2"): return
+	if not expect(restored.load_file(path) and restored.values.reduced_damage_flashes and not restored.values.camera_shake and restored.to_dict().version == 3,"Real checkbox signal persists only the independently chosen comfort setting as v3"): return
 	shake.button_pressed = true
 	if not expect(game.settings.reduced_damage_flashes and restored.load_file(path) and restored.values.reduced_damage_flashes and restored.values.camera_shake,"Camera shake toggle preserves independently reduced flashes"): return
+	game.music.stop()
+	game.effects.stop()
 	game.free()
 	paused = false
 	game = load("res://scripts/main.gd").new()
 	game.settings_path = path
 	root.add_child(game)
+	recording_refs.append(weakref(game.music.player.stream))
 	if not expect(game.settings.reduced_damage_flashes and game.settings.camera_shake,"Native application restart preserves the checkbox choice"): return
 	if not expect(game.hud.has_method("damage_flash_alpha"),"The actual HUD exposes the flash-alpha policy used by its draw path"): return
 	for camera_shake in [false,true]:
@@ -142,10 +158,17 @@ func run() -> void:
 				var alpha = minf(0.45,duration*1.3)*(0.6 if reduced_flashes else 1.0)
 				if not expect(is_equal_approx(game.hud.call("damage_flash_alpha"),alpha),"Actual native HUD alpha follows reduced flashes, independently of camera shake and with the old cap"): return
 			if not expect(game.preferences.to_dict() == frozen,"Reading HUD alpha never mutates preferences"): return
+	game.music.stop()
+	game.effects.stop()
 	game.free()
 	paused = false
+	var release_deadline: int = Time.get_ticks_usec()+2000000
+	while not recordings_released() and Time.get_ticks_usec()<release_deadline:
+		OS.delay_msec(2)
+		await process_frame
+	if not expect(recordings_released(),"Fixture-owned title MP3 resources must release before exit"): return
 	DirAccess.remove_absolute(path)
-	print("PASS strict lossless v1/v2 migration, atomic malformed rejection, no load rewrite, native checkbox persistence and independent HUD flash alpha")
+	print("PASS strict lossless v1/v2/v3 migration, atomic malformed rejection, no load rewrite, native checkbox persistence and independent HUD flash alpha")
 	quit()
 
 func rejected(prefs: RefCounted, invalid: Dictionary, frozen: Dictionary, reason: String) -> bool:
@@ -163,10 +186,33 @@ func rejected(prefs: RefCounted, invalid: Dictionary, frozen: Dictionary, reason
 		if not value is float or is_finite(value): continue
 		var after = after_fields[key]
 		if not expect(after is float and (is_nan(after) if is_nan(value) else after == value),"Reject preserves nonfinite caller field: "+reason): return false
-	return expect(not accepted and prefs.to_dict() == frozen and JSON.stringify(invalid) == JSON.stringify(input_before),"Reject without live or caller mutation: "+reason)
+	return expect(not accepted and prefs.to_dict() == frozen and primitive_equal(invalid,input_before),"Reject without live or caller mutation: "+reason)
 
 func expect(condition: bool, message: String) -> bool:
 	if not condition:
 		push_error(message)
 		quit(1)
 	return condition
+
+func recordings_released() -> bool:
+	for recording in recording_refs:
+		if recording.get_ref() != null: return false
+	return true
+
+func primitive_equal(a: Variant, b: Variant) -> bool:
+	# Preserve primitive types (including boolean versus numeric) and NaN identity
+	# without asking JSON to serialize deliberately malformed/nonfinite fixtures.
+	if typeof(a) != typeof(b): return false
+	if a is float:
+		return is_nan(b) if is_nan(a) else a == b
+	if a is Dictionary:
+		if a.size() != b.size(): return false
+		for key in a:
+			if not b.has(key) or not primitive_equal(a[key],b[key]): return false
+		return true
+	if a is Array:
+		if a.size() != b.size(): return false
+		for index in a.size():
+			if not primitive_equal(a[index],b[index]): return false
+		return true
+	return a == b

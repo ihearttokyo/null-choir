@@ -146,74 +146,152 @@
       29,
       31,
       30
+    ],
+    [
+      12,
+      16,
+      12,
+      17
     ]
   ],
   "elevations": [
     {
       "rect": [
-        4,
-        23,
-        7,
-        27
+        9,
+        16,
+        11,
+        17
       ],
-      "axis": 1,
-      "start": 27,
-      "end": 23,
-      "height": 2.5
+      "axis": 0,
+      "start": 0,
+      "end": 11,
+      "height": 5.5
     },
     {
       "rect": [
-        10,
-        8,
+        11,
+        16,
+        13,
+        17
+      ],
+      "height": 5.5
+    },
+    {
+      "rect": [
+        13,
+        16,
         15,
-        11
+        17
       ],
       "axis": 0,
-      "start": 15,
-      "end": 10,
-      "height": 2.5
+      "start": 16.03448275862069,
+      "end": 13,
+      "height": 5.5
     },
     {
       "rect": [
         26,
-        21,
+        18,
         29,
-        27
-      ],
-      "axis": 1,
-      "start": 27,
-      "end": 21,
-      "height": -2
-    },
-    {
-      "rect": [
-        20,
-        5,
-        25,
-        8
+        60
       ],
       "axis": 0,
-      "start": 20,
-      "end": 25,
-      "height": -2
+      "start": 24,
+      "end": 29,
+      "height": -5
     },
     {
       "rect": [
         0,
+        -10,
         8,
-        12,
-        24
+        60
+      ],
+      "height": 5.5
+    },
+    {
+      "rect": [
+        8,
+        -10,
+        11,
+        60
+      ],
+      "axis": 0,
+      "start": 13.5,
+      "end": 8,
+      "height": 5.5
+    },
+    {
+      "rect": [
+        11,
+        -10,
+        14,
+        60
       ],
       "height": 2.5
     },
     {
       "rect": [
-        25,
-        5,
-        36,
-        21
+        14,
+        -10,
+        18,
+        60
       ],
-      "height": -2
+      "axis": 0,
+      "start": 18.0,
+      "end": 14,
+      "height": 2.5
+    },
+    {
+      "rect": [
+        18,
+        -10,
+        22,
+        60
+      ],
+      "height": 0
+    },
+    {
+      "rect": [
+        22,
+        -10,
+        25,
+        60
+      ],
+      "axis": 0,
+      "start": 22.0,
+      "end": 25,
+      "height": -2.5
+    },
+    {
+      "rect": [
+        25,
+        -10,
+        27,
+        60
+      ],
+      "height": -2.5
+    },
+    {
+      "rect": [
+        27,
+        -10,
+        29,
+        60
+      ],
+      "axis": 0,
+      "start": 25.0,
+      "end": 29,
+      "height": -5
+    },
+    {
+      "rect": [
+        29,
+        -10,
+        50,
+        60
+      ],
+      "height": -5
     }
   ],
   "ceilings": [
@@ -311,7 +389,7 @@
           15
         ],
         [
-          6,
+          6.5,
           9
         ],
         [
@@ -361,8 +439,8 @@
           6
         ],
         [
-          19,
-          6
+          19.5,
+          5.5
         ],
         [
           19,
@@ -2236,5 +2314,6 @@
       "range": 22
     }
   ],
-  "mission": "RELEASE BOTH CLAMPS / RETURN TO THE UPPER RECOVERY BAY"
+  "mission": "RELEASE BOTH CLAMPS / RETURN TO THE UPPER RECOVERY BAY",
+  "floor_revision": 2
 }

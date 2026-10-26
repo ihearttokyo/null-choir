@@ -73,6 +73,14 @@ def check_catalog():
     ivory = next(a for a in baseline['assets'] if a['id'] == 'marker_ivorykey')
     assert ivory['source_sha256'] == '4d3e7facea51457a795e5f8ea12fe4b4ead410aba7ea00746facd92ac2326c60', 'normalized Ivory source pin'
     ivory['source_sha256'] = 'cba295230e53f347fb83b914b09d76ac84b4d22087b2d8710be4467bd0039487'
+    # The independently retained Nursery source was regenerated without changing
+    # geometry/runtime outputs; preserve its exact released lineage and project
+    # ONLY that reviewed entry back for this historical whole-catalog guard.
+    nursery = next(a for a in baseline['assets'] if a['id'] == 'nursery_gestation_engine')
+    assert digest(nursery) == 'e52830bed9ca0f735d94221357c33a4af56c8d6a60b807860004bb921843ccbe', 'accepted Nursery source lineage drift'
+    original = (ROOT / 'tests/fixtures/nursery-original-catalog-entry.json').read_bytes()
+    assert hashlib.sha256(original).hexdigest() == 'b778ba7a65e9e210e1ac487ec955b223ec4da92a9e669c74842e30f60b93dfcc', 'historical Nursery fixture changed'
+    baseline['assets'] = [json.loads(original) if a['id'] == 'nursery_gestation_engine' else a for a in baseline['assets']]
     assert len(baseline['assets']) == 118 and digest(baseline) == BASELINE, 'old catalog/build/palette changed'
     from tools.build_ossuary_buttress import design, preflight, assert_clean_source
     from tools.ossuary_buttress_contract import validate_entry

@@ -1,0 +1,116 @@
+{
+  "id": "nursery_gestation_engine",
+  "source": "source/art/nursery_gestation_engine_v2.blend",
+  "source_sha256": "83225ec33f7f9581123c0af72f5b8c3ad107c936ea7308dace9b64bc4a0be536",
+  "recipe_sha256": "21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883",
+  "outputs": [
+    {
+      "path": "game/assets/art/world/nursery_gestation_engine.glb",
+      "bytes": 1588276,
+      "sha256": "53088d099b14f1e3c7e43212993c5fbaa34699229170a44e60d66ba44bb3c258"
+    }
+  ],
+  "provenance": {
+    "method": "original Blender geometry and authored pixel textures",
+    "authoring_script": "tools/build_nursery_gestation_v2.py",
+    "imports": [],
+    "license": "Original NULL CHOIR project art",
+    "fiction": "Fictional controller commandeering worship systems; no real-community villains or historical claims",
+    "references": [
+      {
+        "path": "source/art/references/nursery-transparent-v2.png",
+        "sha256": "3c046b70ff27b05aba6b850a6c7f430af22feeb8028f010b6f2241af14235144"
+      },
+      {
+        "path": "source/art/references/nursery-membrane-wrap-v1.png",
+        "sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0"
+      },
+      {
+        "path": "source/art/references/nursery-material-atlas-v2.png",
+        "sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781"
+      }
+    ],
+    "image_derived": true,
+    "material_reference_sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781",
+    "geometry_reference_sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0",
+    "original_source": {
+      "path": "source/art/nursery_gestation_engine.blend",
+      "sha256": "e042b254881ae86118d5bf3243fde4093f584d602fa602a63bcb0a66cbcad6e0"
+    },
+    "source_metadata_repair": {
+      "from_source_sha256": "c825d3de76ee9b1ec6395723633b1da9d543582cfd462389e959e885b91ea1a7",
+      "method": "Blender RNA path-field sanitization; geometry, UVs, material assignments, transforms and packed image bytes verified unchanged after reopen",
+      "geometry_uv_material_matrix_sha256": "0e370b89af5efa01849cce4b0c3cd08c3b17b7c340e32cb52c19c73efa0c9e05"
+    }
+  },
+  "physical_bounds_m": {
+    "min": [
+      -1.925,
+      -1.575,
+      0
+    ],
+    "max": [
+      1.925,
+      1.575,
+      8.43
+    ],
+    "size": [
+      3.85,
+      3.15,
+      8.43
+    ],
+    "axes": "Blender XYZ, Z up; GLB/Godot Y up"
+  },
+  "origin": "ground-centered at Blender (0,0,0); GLB Y up",
+  "triangles": 17574,
+  "runtime_mesh_nodes": 5,
+  "material_count": 5,
+  "loop_id": "nursery_loop_gestation",
+  "source_mesh_count": 231,
+  "source_hierarchy_groups": 4,
+  "assembly_names": [
+    "Editable architecture",
+    "Editable vessel",
+    "Editable anatomy",
+    "Editable controls"
+  ],
+  "recipe_dependencies": {
+    "tools/build_art.py": "285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581",
+    "tools/art_recipe.py": "32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6"
+  },
+  "reference_images": [
+    {
+      "path": "source/art/references/religion-nursery-01.png",
+      "sha256": "ce876b7f9cd940c17222a836a82f9540fcdfb0124b00b7d7ecd7d4e30837c71f"
+    },
+    {
+      "path": "source/art/references/nursery-transparent-v2.png",
+      "sha256": "3c046b70ff27b05aba6b850a6c7f430af22feeb8028f010b6f2241af14235144"
+    },
+    {
+      "path": "source/art/references/nursery-membrane-wrap-v1.png",
+      "sha256": "bd32fcb9a7019745663536466fa16d5daa6b74b55a62829175962f219f8bdfe0"
+    },
+    {
+      "path": "source/art/references/nursery-material-atlas-v2.png",
+      "sha256": "4afbb96396d0de2006fc420746d58e1fcf7e47cc39418a3f6a6656ee13fae781"
+    }
+  ],
+  "level_id": "nursery",
+  "tradition_aesthetic": "Christian",
+  "machine_purpose": "Grows a new control body in an elongated pointed gestation chamber",
+  "loop_hero_candidate": true,
+  "loop_assignment": "parent map-owned; no loop ID invented",
+  "texture_dependencies": {},
+  "facing": "front Blender -Y; exported Godot +Z",
+  "collision": "none; parent authors explicit bases/solid cover",
+  "atlas": {
+    "embedded": true,
+    "size": [
+      512,
+      512
+    ],
+    "sha256": "8d82afdae9e1ee615f0c84ead5020858d12151f7a200d53344cb2dbf125d88f0",
+    "sampling": "nearest/no-mip"
+  }
+}

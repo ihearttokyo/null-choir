@@ -1,8 +1,8 @@
 extends "res://tests/test_ossuary_finale_preparation.gd"
 
 const Battle = preload("res://tests/ossuary_finale_battle_witness.gd")
-const BATTLE_WITNESS_SHA = "051b6324c32537773ed66ec56d9788f236a0fff7433a476b7d4f7b843772ad86"
-const BATTLE_PREPARATION_SHA = "b75816eda6e2433c67071379ddf2689bed7943693bf64873c76492f7bd235cc2"
+const BATTLE_WITNESS_SHA = "e262d58568e4c91501e80de816c859776970379599eab225e1799b7070147478"
+const BATTLE_PREPARATION_SHA = "3f7856994d2e83984fd487dfe25fca3e2922f7dce23eae0df28f9c23c25ea954"
 const BATTLE_NONPUBLISHING = ["--ossuary-battle-controls","--ossuary-battle-live-controls","--ossuary-battle-pin-rejection","--omit-ossuary-battle-fire"]
 
 class QuietBattle:

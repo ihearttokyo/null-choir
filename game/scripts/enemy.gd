@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+const Telegraph = preload("res://scripts/enemy_telegraph.gd")
 const Projectile = preload("res://scripts/projectile.gd")
 const WINDUPS = {"crawler":0.25,"worker":0.45,"caster":0.70,"brute":0.80,"guardian":0.75,"summoner":1.20,"nursery_warden":1.00,"choir_avatar":1.05}
 const LATE = {
@@ -89,7 +90,10 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	if kind == "summoner":
 		for number in range(1,7):
 			if "summon:"+id+":"+str(number) in game.state.removed or id+"_add_"+str(number) in game.state.removed: _summoned_total = number
-	position = game.level.layout.world_position(spec.cell) + Vector3(0,0.03,0)
+	position = game.level.layout.world_position(spec.cell)
+	# Fresh capsules need their whole lower sphere supported on sloped triangles.
+	# Main restores saved poses afterwards; never rewrite their signed clearance.
+	position.y = game.level.layout.capsule_floor_support(Vector2(position.x,position.z),capsule_radius(kind)) + 0.03
 	rotation.y = deg_to_rad(spec.yaw)
 	collision_layer = 4
 	collision_mask = 1 | 2 | 4
@@ -117,6 +121,17 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.pixel_size = _profile.get("scale",3.8 if kind == "crawler" else 3.65)/float(cell)
 	sprite.position.y = (cell/2.0-8)*sprite.pixel_size
 	add_child(sprite)
+	if kind in ["worker","brute","nursery_warden"]:
+		var tell = Telegraph.new()
+		tell.name = "CommittedShotTell"
+		add_child(tell)
+
+func visual_hit_sprite() -> Sprite3D:
+	# Visual occupancy queries are separate from movement/placement capsules.
+	if hp <= 0 or not _current_map() or not game.playing: return null
+	return sprite if is_instance_valid(sprite) else null
+
+var _floor_settle_failed: bool = false
 
 func _physics_process(delta: float) -> void:
 	if not _current_map() or not game.playing or not is_instance_valid(game.player) or game.player.is_queued_for_deletion(): return
@@ -207,6 +222,7 @@ func _physics_process(delta: float) -> void:
 		var facing: float = atan2(-heading.x,-heading.z)
 		rotation.y = rotate_toward(rotation.y,facing,delta*1.8) if kind == "guardian" else facing
 	move_and_slide()
+	_settle_live_floor_contact()
 	if arrived_waypoint and Vector2(global_position.x-waypoint.x,global_position.z-waypoint.z).length_squared() < .000001: path_time = 0
 	if _rush_time > 0 and not _rush_hit: _try_melee()
 	if not is_instance_valid(self): return
@@ -466,6 +482,11 @@ func _next_step(destination: Vector3) -> Vector3:
 	var size: float = layout.data.cell_size
 	var start: Vector3 = layout.world_position([global_position.x/size,global_position.z/size])+Vector3.UP*.03
 	var goal: Vector3 = layout.world_position([destination.x/size,destination.z/size])+Vector3.UP*.03
+	if layout.OssuarySurfaces.enabled(layout.data):
+		# Select the physical layer already occupied; never move the actor or project
+		# an unreachable endpoint. Native .25 start guard and route budget stay unchanged.
+		start = layout.surface_position_at_y([global_position.x/size,global_position.z/size],global_position.y)+Vector3.UP*.03
+		goal = layout.surface_position_at_y([destination.x/size,destination.z/size],destination.y+_target_capsule_foot_offset())+Vector3.UP*.03
 	# A player fits wall corners outside the larger actor's eroded navigation mesh.
 	var path: PackedVector3Array = routes.route(start,goal,kind,capsule_radius(kind)*sqrt(2.0)+.4)
 	var line := Vector2(goal.x-start.x,goal.z-start.z)
@@ -483,3 +504,58 @@ func _next_step(destination: Vector3) -> Vector3:
 		_routing = Vector2(point.x-destination.x,point.z-destination.z).length() > .15
 		return point
 	return global_position
+
+# Physical target foot relative to its origin; Player's .85 centre/1.65 height is +.025,
+# whereas normal Enemy capsules start at their origin. This is not endpoint projection.
+func _target_capsule_foot_offset() -> float:
+	if not is_instance_valid(target): return 0.0
+	for child in target.get_children():
+		if child is CollisionShape3D and child.shape is CapsuleShape3D and not child.disabled:
+			return child.global_position.y-child.shape.height*0.5*child.global_basis.y.length()-target.global_position.y
+	return 0.0
+
+# LIVE movement only. Restored snapshots never call this before strict trust checks.
+# CharacterBody slope solving can leave >safe_margin floor penetration (actual19).
+# Use native swept movement, not position/snapshot rewriting, and never repair hover.
+func _settle_live_floor_contact() -> bool:
+	_floor_settle_failed = false
+	if kind in ["caster","choir_avatar"] or hp <= 0 or not _current_map(): return true
+	var collider: CollisionShape3D = get_child(0)
+	var layout = game.level.layout
+	var radius: float = collider.shape.radius
+	var support: float = layout.capsule_floor_support_at_y(Vector2(position.x,position.z),radius,position.y,.08)
+	if not is_finite(support): return true # Airborne/falling, not a floor repair candidate.
+	var deficit: float = support-position.y
+	var allowance: float = minf(safe_margin,.001)
+	if deficit <= allowance: return true
+	_floor_settle_failed = true
+	if deficit > .08 or safe_margin <= 0: return false # Existing codec trust envelope, not new admission.
+	var space = get_world_3d().direct_space_state
+	var query = PhysicsShapeQueryParameters3D.new()
+	query.shape = collider.shape
+	query.transform = collider.global_transform
+	query.collision_mask = 1|4
+	query.exclude = [get_rid()]
+	var contacts = space.intersect_shape(query,32)
+	if contacts.is_empty() or contacts.size()==32: return false
+	for hit in contacts:
+		if not hit.collider is StaticBody3D or not hit.collider in game.level.floor_bodies or hit.collider.get_parent().get_parent()!=game.level: return false
+	var pairs = space.collide_shape(query,32)
+	if pairs.is_empty() or pairs.size()==64: return false
+	var sphere_y: float = collider.global_position.y-collider.shape.height*.5+radius
+	for index in range(0,pairs.size(),2):
+		var point: Vector3 = pairs[index+1]
+		# Lower sphere only; ceilings/side contacts never become floor settlement.
+		if point.y > sphere_y or Vector2(point.x-position.x,point.z-position.z).length()>radius: return false
+		var ray = space.intersect_ray(PhysicsRayQueryParameters3D.create(point+Vector3.UP*.05,point-Vector3.UP*.05,1))
+		if ray.is_empty() or ray.normal.y<.5 or not ray.collider in game.level.floor_bodies: return false
+		if absf(ray.position.y-point.y)>.001: return false
+	# Native motion performs its own depenetration; actual travel can include XZ drift.
+	var collision = move_and_collide(Vector3.UP*(deficit+safe_margin))
+	if collision!=null: return false
+	support = layout.capsule_floor_support_at_y(Vector2(position.x,position.z),radius,position.y,.08)
+	if not is_finite(support) or position.y < support-allowance: return false
+	query.transform = collider.global_transform
+	if not space.intersect_shape(query,1).is_empty(): return false
+	_floor_settle_failed = false
+	return true

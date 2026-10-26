@@ -1,6 +1,7 @@
 extends SceneTree
 
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
+const AudioDrainClock = preload("res://tests/wall_clock_wait.gd")
 
 const ROUTES = {
 	4: [[25.5,4.75],[35.5,4.75],[35.5,14.0],[25.5,14.0]],
@@ -244,8 +245,10 @@ func finish(status: int) -> void:
 	if is_instance_valid(game):
 		retire_level()
 		for node in [game,game.music,game.effects]: retired.append(weakref(node))
+		game.music.stop()
 	paused = false
 	await create_timer(0.1,true).timeout
+	await AudioDrainClock.seconds(self,0.15)
 	if is_instance_valid(game): game.free()
 	await process_frame
 	await process_frame

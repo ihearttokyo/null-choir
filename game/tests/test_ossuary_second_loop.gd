@@ -2,8 +2,8 @@ extends "res://tests/test_ossuary_transport_loop.gd"
 
 # Functions/constants only: no new Main/SceneTree fields enter the first-loop freeze.
 const Second = preload("res://tests/ossuary_second_loop_witness.gd")
-const SECOND_WITNESS_SHA = "6924ba8bc72588d497ab22625798ff7d1f09ed3de713c1ba3fbea19a181d2bfb"
-const FIRST_ADAPTER_SHA = "b021eb03bc52853860248da300d79d85bd97c084132afaf2215bcc4b854ed795"
+const SECOND_WITNESS_SHA = "f33c06668ec922862ffd405873dda421bd36c27600e5ba8ed621742157ab1b38"
+const FIRST_ADAPTER_SHA = "c2beb6d98c32eb4928ad99d76a859dbee87a0a2761e83b7d4045348d23cb11c9"
 const FIRST_GUARDS_SHA = "f0565c786674df1475c88de08e5e98ee471e058cdfce5ba2f978f89abdbea17a"
 
 func second_pins_match() -> bool:

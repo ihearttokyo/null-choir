@@ -1,0 +1,25 @@
+{
+  "scope": "Local Python import closure copied byte-exact, no standard library vendoring",
+  "files": [
+    {
+      "file": "glb_inputs.py",
+      "sha256": "7048299d0a171af62d4d909ea92695c4c828586265a67357f8136da3524cb421"
+    },
+    {
+      "file": "producer.py",
+      "sha256": "9c97d7e30ba434f7eb2f3e25354d67382d1f59e2f4a1efae88ea25ef1a55181f"
+    },
+    {
+      "file": "maw47.py",
+      "sha256": "c93372e32cf8b35d9244e6d0231a85ba969e0b2ff8f4ad44ca7964bcbe5fe2e3"
+    },
+    {
+      "file": "inspect_glb.py",
+      "sha256": "6c41ff1f8abc89972cae3e1254d89fcc69e24279e0fba1c0dc8e35218a99e79b"
+    },
+    {
+      "file": "ancestor26.py",
+      "sha256": "b5320d36f6a7566d3c699e267b676b94da80f739731b337c172a74e72100f7e9"
+    }
+  ]
+}

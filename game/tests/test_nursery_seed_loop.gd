@@ -1,7 +1,7 @@
 extends "res://tests/test_nursery_earned_campaign.gd"
 
-const NS_CAMPAIGN_SHA = "257661504d65ae51237d281cce41e1a16a46bce89262dd85167e5fa480ee13c6"
-const NS_CARRY = {"health":62,"armor":184,"ammo":[0,128,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
+const NS_CAMPAIGN_SHA = "71cbbd8bf3ca97e8c03356c45d782131d3fa60afb69b4801629f7fc1da25ec7c"
+const NS_CARRY = {"health":52,"armor":180,"ammo":[0,127,32,60,0,0],"owned_weapons":[0,1,2,3],"weapon":1}
 # New phase only: 203.481m XZ at 9m/s, 23 legs with 12 settling ticks, two bounded fights.
 const NS_LIMIT = 12000
 const NS_SECONDS = 600
@@ -165,7 +165,7 @@ class NurserySeedMain:
 		var spec: Dictionary = rows[0]
 		var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
 		var region: Array = spec.region
-		ns_ok = ns_ok and ns_current() and id in ["nursery_second_commit","nursery_second_return"] and not ns_activated.has(id) and h_stack("/main.gd","_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in ns_keys)
+		ns_ok = ns_ok and ns_current() and id in ["nursery_second_commit","nursery_second_return"] and not ns_activated.has(id) and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and not h_stack("/enemy.gd","take_damage") and cell.is_equal_approx(cell.clamp(Vector2(region[0],region[1]),Vector2(region[2],region[3]))) and spec.requires.all(func(key): return key in ns_keys)
 		super.activate_encounter(id)
 		ns_activated[id] = [Engine.get_physics_frames(),cell,state.keys.duplicate()]
 		ns_removed.append("encounter:"+id)
@@ -348,7 +348,7 @@ func walk_through_nursery_seeds(observer: NurserySeedMain, profile_prefix: Strin
 	actual.sort()
 	var declared: Array = NS_NC_FIELDS.duplicate()
 	declared.sort()
-	if not expect(actual == declared and game.nc_enabled and game.nc_ok and game.budget() == NS_CARRY and game.nc_deaths.size() == 11 and game.nc_births.size() == 2 and game.nc_contacts.size() == 1 and game.nc_summons.is_empty(),"Complete declared/reflected nc coverage and actual accepted62/184/128/32/60 boundary"): return false
+	if not expect(actual == declared and game.nc_enabled and game.nc_ok and game.budget() == NS_CARRY and game.nc_deaths.size() == 11 and game.nc_births.size() == 2 and game.nc_contacts.size() == 2 and game.nc_summons.is_empty(),"Complete declared/reflected nc coverage and actual earned52/180/127/32/60 boundary with exactly2 native projectile contacts"): return false
 	ns_frozen_fields = nc_frozen_fields+NS_NC_FIELDS
 	ns_frozen = observer_witness(ns_frozen_fields)
 	game.ns_ledger = NS_CARRY.duplicate(true)
@@ -377,8 +377,8 @@ func walk_through_nursery_seeds(observer: NurserySeedMain, profile_prefix: Strin
 	ns_started = true
 	game.ns_enabled = true
 	if not await nursery_seed_select_pistol(): return false
-	if not await nursery_seed_route(NS_APPROACH) or not await nursery_seed_route(NS_SEEDS): return false
-	if not await nursery_seed_fight("nursery_second_commit") or not await nursery_ivory_input(): return false
+	if not await nursery_seed_route(NS_APPROACH) or not await nursery_seed_route(NS_SEEDS.slice(0,2)): return false
+	if not await nursery_seed_fight("nursery_second_commit") or not await nursery_seed_route(NS_SEEDS.slice(2)) or not await nursery_ivory_input(): return false
 	if not await nursery_seed_route(NS_RETURN) or not await nursery_seed_fight("nursery_second_return") or not await nursery_seed_route(NS_JUNCTION): return false
 	return nursery_seed_result()
 

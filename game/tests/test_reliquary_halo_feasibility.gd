@@ -1,9 +1,9 @@
 extends "res://tests/test_reliquary_earned_entry.gd"
 
-const H_ENTRY_SHA = "6ed92c140d451aa20f5c10ed26025e9b2210e88c02e573f17c06121753328c21"
+const H_ENTRY_SHA = "74bbbce7a6a35693350da63e8b1008af10963bae952a5828c2c5120f338cbe0c"
 const H_ENTRY_FIELDS = ["r_ok","r_main_origin","r_campaign_origin","r_profile_origin","r_settings_origin","r_captures","r_capture_attempts","r_bindings","r_level_id","r_player_id","r_start","r_ticks","r_explored","r_last_cell"]
 const H_FLAGS = ["foundry_enabled","entry_enabled","organ_enabled","palanquin_enabled","exit_enabled"]
-const H_APPROACH = [[18.5,38.5],[18.5,37.5],[18.5,38.5],[19.5,38.5],[20.5,38.5],[20.5,37.5],[20.5,38.5],[19.5,38.5],[19.5,35.5],[19.5,32.5],[19.5,28.5],[15.5,28.5],[12.5,28.5],[10.5,28.5],[10.5,25.5],[9.5,25.5],[10.5,25.5],[10.5,22.4]]
+const H_APPROACH = [[18.5,38.5],[18.5,37.5],[18.5,38.5],[19.5,38.5],[20.5,38.5],[20.5,37.5],[20.5,38.5],[19.5,38.5],[19.5,35.5],[19.5,32.5],[19.5,28.5],[15.5,28.5],[12.5,28.5],[10.5,28.5],[10.5,25.5],[9.5,25.5],[10.5,25.5],[9.5,22.1]]
 const H_IDS = ["reliquary_enemy_00","reliquary_enemy_01","reliquary_enemy_02","reliquary_enemy_03","reliquary_enemy_04","reliquary_enemy_05","reliquary_enemy_06","reliquary_enemy_07"]
 # 32 perfect pistol hits need 31*12.6=390.6 inter-shot ticks; 360 cannot certify this group.
 const H_FIGHT_LIMIT = 480
@@ -164,7 +164,7 @@ class FourthMain:
 		h_ok = h_ok and h_current() and id == "reliquary_halo_commit"
 		if not prior:
 			var cell: Vector2 = Vector2(player.position.x,player.position.z)/4.0
-			h_ok = h_ok and cell.x >= 2.0 and cell.x <= 13.9 and cell.y >= 10.0 and cell.y <= 22.5 and h_stack("/main.gd","_process") and state.keys.is_empty()
+			h_ok = h_ok and cell.x >= 2.0 and cell.x <= 13.9 and cell.y >= 10.0 and cell.y <= 22.5 and Engine.is_in_physics_frame() and h_stack("/main.gd","update_encounter_triggers") and h_stack("/player.gd","_physics_process") and state.keys.is_empty()
 		super.activate_encounter(id)
 		if not prior:
 			h_activation += 1
@@ -225,6 +225,36 @@ class FourthMain:
 				h_removed.append(actor.id)
 				h_ok = h_ok and actor.hp == 0 and actor.collision_layer == 0 and actor.collision_mask == 0 and state.removed.count(actor.id) == 1 and h_deaths[actor.id] == 1 and (player_fire or infighting) and state.removed == h_removed
 		super.enemy_event(actor,event)
+	func h_visible_texel_contact(victim, hit: Dictionary, start: Vector3, end: Vector3) -> bool:
+		if not is_instance_valid(victim) or not victim._current_map() or victim.hp <= 0 or not is_instance_valid(player.camera): return false
+		var sprite: Sprite3D = victim.sprite
+		if not hit.get("sprite_frame") is int or hit.sprite_frame != sprite.frame or not hit.get("sprite_pixel") is Vector2i or not hit.get("frame_pixel") is Vector2i: return false
+		var image: Image = sprite.texture.get_image()
+		if image == null or (image.is_compressed() and image.decompress() != OK): return false
+		var frame_size := Vector2i(image.get_width()/sprite.hframes,image.get_height()/sprite.vframes)
+		if not Rect2i(Vector2i.ZERO,frame_size).has_point(hit.frame_pixel): return false
+		var expected_pixel: Vector2i = Vector2i(sprite.frame%sprite.hframes,sprite.frame/sprite.hframes)*frame_size+hit.frame_pixel
+		if expected_pixel != hit.sprite_pixel: return false
+		if image.get_pixelv(expected_pixel).a*sprite.modulate.a*(1.0-sprite.transparency) < sprite.alpha_scissor_threshold: return false
+		var segment := end-start
+		if not start.is_finite() or not end.is_finite() or segment.length_squared() <= 0: return false
+		var fraction: float = (hit.position-start).dot(segment)/segment.length_squared()
+		if fraction < 0 or fraction > 1 or not hit.position.is_equal_approx(start+segment*fraction): return false
+		var basis: Basis = player.camera.get_camera_transform().basis.orthonormalized()
+		if absf((hit.position-sprite.global_position).dot(basis.z)) > 0.0001: return false
+		# Recover actual atlas coordinates from the reported world contact, not
+		# from a guessed capsule point or a fabricated observation dictionary.
+		var offset: Vector2 = sprite.offset-Vector2(frame_size)*0.5 if sprite.centered else sprite.offset
+		var local: Vector3 = hit.position-sprite.global_position
+		var uv := Vector2((local.dot(basis.x)/(sprite.pixel_size*sprite.global_basis.x.length())-offset.x)/frame_size.x,1.0-(local.dot(basis.y)/(sprite.pixel_size*sprite.global_basis.y.length())-offset.y)/frame_size.y)
+		if sprite.flip_h: uv.x = 1.0-uv.x
+		if sprite.flip_v: uv.y = 1.0-uv.y
+		if uv.x < 0 or uv.x >= 1 or uv.y < 0 or uv.y >= 1 or Vector2i(floori(uv.x*frame_size.x),floori(uv.y*frame_size.y)) != hit.frame_pixel: return false
+		# Independent physical cover must never be behind an alleged earlier hit.
+		var cover := PhysicsRayQueryParameters3D.create(start,end,1)
+		cover.hit_from_inside = true
+		var wall: Dictionary = level.get_world_3d().direct_space_state.intersect_ray(cover)
+		return wall.is_empty() or start.distance_squared_to(wall.position) > start.distance_squared_to(hit.position)
 	func _debug_projectile_event(projectile: Node3D, event: String, data: Dictionary) -> void:
 		if not h_enabled:
 			# New enemy-contact observation does not rewrite historical prefix witnesses.
@@ -254,7 +284,15 @@ class FourthMain:
 		var query = PhysicsRayQueryParameters3D.create(data.ray_start,data.ray_end,1|2|4)
 		query.exclude = [source.get_rid()]
 		query.hit_from_inside = true
-		h_ok = h_ok and level.get_world_3d().direct_space_state.intersect_ray(query) == hit
+		if event == "queued_enemy_contact" and hit.get("coverage") == "visible_sprite":
+			# Enemy movement capsules are no longer the hit surface. Preserve exact
+			# shared first-visible contact AND independently verify rendered texel.
+			var exclusions: Array[RID] = [source.get_rid()]
+			var visible: Dictionary = preload("res://scripts/sprite_hit_query.gd").cast(level.get_world_3d().direct_space_state,data.ray_start,data.ray_end,player.camera,enemies,exclusions,1|2|4)
+			h_ok = h_ok and visible == hit and h_visible_texel_contact(victim,hit,data.ray_start,data.ray_end)
+		else:
+			# Physical Player/wall/native contact retains full native dictionary equality.
+			h_ok = h_ok and level.get_world_3d().direct_space_state.intersect_ray(query) == hit
 		if event == "queued_player_contact":
 			h_contacts[id] = data.duplicate(true)
 			h_pending = {"id":id,"data":data.duplicate(true)}
@@ -406,9 +444,9 @@ func clear_point(cell: Array):
 	if not h_started: return super.clear_point(cell)
 	var point = super.clear_point(cell)
 	if point == null: return null
-	# Scoped approach uses only the authored flat aisle and interior west ramp.
+	# Historical approach maths belongs to revision zero; super checks current native floor/capsule.
 	var floor_y: float = (float(cell[1])-26.0)*0.5 if cell[0] >= 8.0 and cell[0] <= 11.0 and cell[1] >= 22.0 and cell[1] <= 26.0 else 0.0
-	return point if absf(point.y-0.04-floor_y) <= 0.08 else null
+	return point if absf(route_level.layout.original_floor(3).world_position(cell).y-floor_y) <= 0.08 else null
 
 func live_route() -> bool:
 	if not h_started: return super.live_route()
