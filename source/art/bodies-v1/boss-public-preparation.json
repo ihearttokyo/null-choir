@@ -1,0 +1,104 @@
+{
+  "actors": [
+    {
+      "actual-context": {
+        "bytes": 9380,
+        "path": "source/art/bodies-v1/nursery_warden/proof/actual-context.json",
+        "sha256": "59e7fd8011a8c1866ac5a915952de79f2550f5342a4af8b58621c8c9af1b7f55"
+      },
+      "independent": {
+        "bytes": 5076,
+        "path": "source/art/bodies-v1/nursery_warden/proof/independent.json",
+        "sha256": "36a860f694ac76a050830ba4b2ca354dccbf8a5602ad352e14b39a29934dcfbd"
+      },
+      "kind": "nursery_warden",
+      "normal-import": {
+        "bytes": 4106,
+        "path": "source/art/bodies-v1/nursery_warden/proof/normal-import.json",
+        "sha256": "c0f1e5e85cd1fc0ba385c3ec06cc59fd90aeafecf468a52b0131c4dae34d42d3"
+      },
+      "original_rendered_frames_retained": 40,
+      "portable_generator": {
+        "bytes": 40148,
+        "path": "source/art/bodies-v1/nursery_warden/build_boss_bodies_v04.py",
+        "sha256": "b45ba5799b085f824ef16cdcaaaf0ecef79676f8e65b1c6d9c74091fdab61ea8"
+      },
+      "portable_generator_native_reproduction_performed": false,
+      "public_master_bridge": {
+        "bytes": 4777,
+        "path": "source/art/bodies-v1/nursery_warden/proof/public-master-bridge.json",
+        "sha256": "b2f3680031ad3c7c74d5b7004493442a7dcb4b3b4358c929509dec7f95b9a078"
+      },
+      "public_rendered_frames": 0,
+      "public_source": {
+        "bytes": 4739683,
+        "path": "source/art/bodies-v1/nursery_warden/nursery_warden.blend",
+        "sha256": "2cf72084dbb678722c803fd9eb7df31e6ade2243d3c78356efaaae20348a9d32"
+      },
+      "source-native": {
+        "bytes": 6191,
+        "path": "source/art/bodies-v1/nursery_warden/proof/source-native.json",
+        "sha256": "1d00b6b7a6262fcc199289d9fe362d894a78ab279f4da681e7352a24cc7530f2"
+      }
+    },
+    {
+      "actual-context": {
+        "bytes": 9294,
+        "path": "source/art/bodies-v1/choir_avatar/proof/actual-context.json",
+        "sha256": "fc2bb32e7e6e23ef7abe16cc1aae51428b3e9de2cba65161a03cefb1f56d5ec6"
+      },
+      "independent": {
+        "bytes": 5066,
+        "path": "source/art/bodies-v1/choir_avatar/proof/independent.json",
+        "sha256": "08832e6db96d1b41f19fc044118f5156046a6415f410fe51f91760461124de93"
+      },
+      "kind": "choir_avatar",
+      "normal-import": {
+        "bytes": 4099,
+        "path": "source/art/bodies-v1/choir_avatar/proof/normal-import.json",
+        "sha256": "1e9d52bd5f367461eb625880f6215b76a3c1c39fa11a40c2a448c934dad869ec"
+      },
+      "original_rendered_frames_retained": 40,
+      "portable_generator": {
+        "bytes": 40429,
+        "path": "source/art/bodies-v1/choir_avatar/build_boss_bodies_v05.py",
+        "sha256": "07a4567b4d19ee08023ede91d6bc5158b591a62b772bb2d5f355edfb62127784"
+      },
+      "portable_generator_native_reproduction_performed": false,
+      "public_master_bridge": {
+        "bytes": 4763,
+        "path": "source/art/bodies-v1/choir_avatar/proof/public-master-bridge.json",
+        "sha256": "38496ddfc1879252da1a1fd54ebfa12e013a4fe110ea375e5a8530477787110d"
+      },
+      "public_rendered_frames": 0,
+      "public_source": {
+        "bytes": 4279168,
+        "path": "source/art/bodies-v1/choir_avatar/choir_avatar.blend",
+        "sha256": "ab9a64e0d068cab86eaf54c5436f5f9160296a95e8c5f8450f3f506fcb922d67"
+      },
+      "source-native": {
+        "bytes": 6442,
+        "path": "source/art/bodies-v1/choir_avatar/proof/source-native.json",
+        "sha256": "aa70cf29fbbbbce3f0382c2ba5f21788a7bd34463d95bd296493e932e2362d88"
+      }
+    }
+  ],
+  "fragment": {
+    "bytes": 77778,
+    "path": "source/art/bodies-v1/packet-two-bosses.json",
+    "sha256": "ae03e2dafa9c4f16ac42863d8a7af02060a57a9498903c2bb03e36f7cc8f5156"
+  },
+  "future_eight_consumer_PCK_qualification": "PENDING",
+  "native_runs_total": 1,
+  "new_RGBA_renders": 0,
+  "new_native_runs_in_closure": 0,
+  "original_wrapper_failure_preserved": true,
+  "portable_generators_native_reproduced": false,
+  "schema": "null-choir-boss-public-preparation-v1",
+  "source_open_reconciled_qualification": {
+    "bytes": 1778,
+    "path": "source/art/bodies-v1/boss-source-open-reconciled-qualification.json",
+    "sha256": "2caeeff306da03ffaf31e07ce4de542901775780abc928a462f5087d6aa0895d"
+  },
+  "status": "TWO_PUBLIC_BOSS_PACKETS_READY_TYPED_FINAL_EIGHT_INTEGRATION_PENDING"
+}

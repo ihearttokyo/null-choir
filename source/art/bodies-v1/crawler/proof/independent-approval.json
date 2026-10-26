@@ -1,0 +1,21 @@
+{
+  "schema": "null-choir-independent-static-art-approval-v1",
+  "kind": "crawler",
+  "status": "PASS",
+  "review_record": "Parent-curated score-free extract of actual independent read-only intended-use review; not a new review",
+  "private_original_review_sha256": "026a5ae8da8f4bbe836e80c5705247cfccc4afc24438298d22a866d8e901c936",
+  "scope": "Actual static Level Sprite3D at640x360/6m/shaded/nearest unchanged map lighting and scale; all8directions and baseposes",
+  "frames": 40,
+  "atlas_sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56",
+  "source_blend_sha256": "4f57946fba3d49e969780c1d6c2aa74ebb122db4772a53bd2fa059e7dafba254",
+  "exporter_sha256": "0c16b632f381656b50b9fa46fcd6bb0d267687273bfa6aeb81b2a033565f7fd0",
+  "actual_context_report_sha256": "d58ef07996fdd40d3442ef9c36f4113e855d774fcde193f586cb702e3b66feef",
+  "material_blockers": [],
+  "freeze": "No optional art polish; exact accepted bytes",
+  "not_proven": [
+    "Normal import by this review",
+    "PCK distribution",
+    "Dynamic AI/timing",
+    "Human input/listening/FPS"
+  ]
+}

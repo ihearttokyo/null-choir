@@ -1,0 +1,23 @@
+{
+  "actor_kind": "nursery_warden",
+  "native_rendered_generator_sha256": "b25b13563358b71016019251674e14788393391a72c0a5b22f801d9485a99e6e",
+  "operation": {
+    "expected_original_line_sha256": "ff3685f8413d8d2a523c8f826ad1d8fb0a4d901ef247fd8135ef5c6291371a77",
+    "kind": "replace_one_complete_line",
+    "one_based_line": 18,
+    "replacement_utf8": "REFERENCE = OWNED / 'actor-animation-reference-v2.png'\n"
+  },
+  "original_generator_bytes": 40297,
+  "original_generator_sha256": "b25b13563358b71016019251674e14788393391a72c0a5b22f801d9485a99e6e",
+  "portable_generator": {
+    "bytes": 40148,
+    "path": "source/art/bodies-v1/nursery_warden/build_boss_bodies_v04.py",
+    "sha256": "b45ba5799b085f824ef16cdcaaaf0ecef79676f8e65b1c6d9c74091fdab61ea8"
+  },
+  "portable_generator_native_reproduction_performed": false,
+  "schema": "null-choir-portable-generator-reference-patch-v1",
+  "scope": "Only reference asset location changes; original geometry/export code bytes remain identical. Not a new render, approval, generic changed-source exception, or replacement of historical generator identity.",
+  "status": "PENDING_NATIVE_REPRODUCTION_NOT_PERFORMED",
+  "unchanged_prefix_sha256": "b42b33d40b8820d7e0544319be068c74da448426b05f701c0c0975bf3113c5c2",
+  "unchanged_suffix_sha256": "74d271c618dc848c772a92d4e6f19d495eb5df26e30729e6ca888c67537eeec7"
+}

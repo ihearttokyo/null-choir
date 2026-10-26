@@ -1,0 +1,3588 @@
+{
+  "actors": [
+    {
+      "actual-context": {
+        "bytes": 9033,
+        "path": "source/art/bodies-v1/caster/proof/actual-context.json",
+        "sha256": "8c64cd28163f979be39d74222065272a20f248bcdabb6f6c0d61fa41a0c77b0e"
+      },
+      "editable_surface_paint": {
+        "bytes": 2189,
+        "path": "source/art/bodies-v1/caster/caster-surface-paint.png",
+        "sha256": "f1034d20822d26c5a9b877ef8538d9d2d297f9b00a68269bf0ee83fa9ac38758"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "7384673d52a4bbad93c9f4b1cce3136e58915fb0b4fe6cad704a2bee58e933d1",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 18018,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-00.png",
+            "sha256": "e090da2048d7d23142af99e62e2ab8fe62dd930ba4075b507e53d143c9787f0c"
+          },
+          "raw_bbox": [
+            24,
+            20,
+            103,
+            118
+          ],
+          "raw_rgba_sha256": "50af16c5fc85fc968c3d8104884eef2996f9db20951f0f2b47a56350e5c92d44",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "ab90f3e084aeedc5086709bb0044c06471b1e61d5870459400c3365627a91eb8",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16799,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-01.png",
+            "sha256": "e52c0eec2369db05553ba09d3d844e77e8ea43bb5fb391561dff15f8263b2add"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            117
+          ],
+          "raw_rgba_sha256": "5904d3a4726d46421d624bfcbb36b6d1bef9c05935e2c3d2b7fe276ff6293ea3",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "7cf6749ae880bb16b0c232243736e4baba8a09b15e114208428da9de021a1817",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13994,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-02.png",
+            "sha256": "022b9793737dbee57745473ed02aba446e80b3493596fb3abd37548d0d664e24"
+          },
+          "raw_bbox": [
+            37,
+            17,
+            93,
+            116
+          ],
+          "raw_rgba_sha256": "f7fb0afbf5a17b8530f653c0df62e0be0d10bef45d58935aa9a2fcbd43c95c1c",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "1021f24ecfeab43366dde14ff385de037dacb60e3d4a5390f180f4bd8a253bed",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15212,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-03.png",
+            "sha256": "aa95545bfca3d72c82ecc6bc165f54cdd8027609ace7ba6d2678dbc9ae5c5184"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            116
+          ],
+          "raw_rgba_sha256": "7ce7ecce9399c657b2582d963aa1438d6753a647fb71ca0dabcfa09606cad997",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "2034db4b73d37c1de327e97e7dcdab1ff7c2e0663393fc198c6dac2b9ade3254",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15956,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-04.png",
+            "sha256": "cef43e2fa34b1c2b63f0592e1e3154f35fd6b6b91a1d2009039f74d831e0e432"
+          },
+          "raw_bbox": [
+            24,
+            19,
+            103,
+            117
+          ],
+          "raw_rgba_sha256": "791ca7d51fc2e28b97ae7cdecb014ed796b361ce37dcd8dfb74ed43767ce59e7",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "33ee9167073ba0a2ca8cc74442c9e6c46cbffd7d54068bc289397f5daed3a21a",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15090,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-05.png",
+            "sha256": "7de5ff62fdf474ee3885ae1077d8a40826fccac03f18560e4db0e01971e24167"
+          },
+          "raw_bbox": [
+            26,
+            18,
+            95,
+            118
+          ],
+          "raw_rgba_sha256": "cf78ecbb06129478a710f2cc7f3053ce57be37b28fd48fdbe6266835c05e4501",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "67f9b15fe415baf372503ceccdf9a93cc5dcf26b0c77dcde164600d1ce6cb177",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13687,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-06.png",
+            "sha256": "20509b9c28655a6a9e9262f19e170974b348f40ef4524213d330ca3019cd02d9"
+          },
+          "raw_bbox": [
+            34,
+            17,
+            90,
+            119
+          ],
+          "raw_rgba_sha256": "f1585f8832b3091df348e3901c255ca4c5d27de8e7a51fad98a8206e7df9b74d",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "6641c0d5baff04c7b255292e3d279294394e46b51ce93831bf491e29dd118c2f",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16508,
+            "path": "source/art/bodies-v1/caster/frames/raw-idle-07.png",
+            "sha256": "892d7b5b15ad1aa4d80c916a8fe6046087aba6b7ac082c68f4c526c01198e54c"
+          },
+          "raw_bbox": [
+            25,
+            18,
+            95,
+            119
+          ],
+          "raw_rgba_sha256": "63493bb233965fef2c5cf2252aab051b1234a01ed0ca6a2ddc7b1ee2f0d99fa2",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "0cfbe6edb3d0b313059916f24694f062ee7745b88cf656b2d988103fd57c97f3",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 17973,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-00.png",
+            "sha256": "ce49688758c94fd6fd15ee9bcd5cffc23392c244db1537f69986ac47c6d4cf78"
+          },
+          "raw_bbox": [
+            24,
+            20,
+            103,
+            118
+          ],
+          "raw_rgba_sha256": "9a87c549d8e12c6f1cf1e433e16b5c6d3662296b9e5957df0af8f561fd4e3ad7",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "60b8942079c0901b8b414470545ffd840600a2245393b5101c3cef6f4d42ee4a",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16746,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-01.png",
+            "sha256": "5ae67f6621d519017e112cdcd9724abe1a59aed3c8b2d04f7c70e444b090b33a"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            118
+          ],
+          "raw_rgba_sha256": "de7962eed219c0f58e22fb5a7186d38d2cb8941d6669e1cd1e2305813be45d83",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "e62fa72abf2e76f358a9b102c97d3214bf86bde3194c723000ff78594c1d7f15",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14018,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-02.png",
+            "sha256": "d05e4c7ca68e1dea415995f1d68cffdbe7891a9e2646278eb93a71dce6ca9907"
+          },
+          "raw_bbox": [
+            37,
+            17,
+            93,
+            117
+          ],
+          "raw_rgba_sha256": "991872771e2ee8e42478202133588bd18e7c7d188f66c2044b595ab8f3cd6705",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "7c0f8c95e996db853a6a2adbee0aa75f1e82b974f466cee0038ed8909d413e6d",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15297,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-03.png",
+            "sha256": "bfa5fc60dd5579a1a290650979230dc93a4d32db144161f9bf0ba4f297621028"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            117
+          ],
+          "raw_rgba_sha256": "fefba44dd6c133a15b5d31c7a4583c0b5b9701dda39b439429e8f6ccc6eacf80",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "10f06da57f45e7c8c381f43c7ed3f1f64f8817b47d16bd5bc259c1ef5b62c348",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15971,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-04.png",
+            "sha256": "361d3f9167ea8816b13cbee6ef30fb6ea080a73ca71ee3bd6a59b2ba7ef00c3b"
+          },
+          "raw_bbox": [
+            24,
+            19,
+            103,
+            117
+          ],
+          "raw_rgba_sha256": "449c5a497249d0a3395f783f85ee930daa53bc8679545f2142d436fa5512189f",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "e9fe4984da532237239dfc45df96e1bb9a288312d1f627156956306fbbca535f",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15080,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-05.png",
+            "sha256": "66fd0408e1664dba2f4288ab7287426dab11305468d69357f58daff67e6b2ead"
+          },
+          "raw_bbox": [
+            26,
+            18,
+            95,
+            118
+          ],
+          "raw_rgba_sha256": "3e335432b985353404f74510690a1e81740c0b9cc9a33b479b10ad79dd651481",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "76686c67d58cc7bed1db3f54e7de7388d5327cec3d44c758003834579acc72ef",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 13662,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-06.png",
+            "sha256": "d33605a2583caee79a87ad87956a44cecf75cb9a9a2f7fa23816bbd671c3bb06"
+          },
+          "raw_bbox": [
+            34,
+            17,
+            90,
+            119
+          ],
+          "raw_rgba_sha256": "34ece554ee00e8ca5e2fb0bad0998f5c081b76562f368dce502afddd764a05dd",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "ba4d340f3710bac5fd6f6c57d14d10c35ae75a2d8e2ac914f0239fd02237cdfe",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16552,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_a-07.png",
+            "sha256": "a98f27ccb043629e1c01dd3663b4b2691c78b0868cd938e189c4195694fc7106"
+          },
+          "raw_bbox": [
+            25,
+            18,
+            95,
+            119
+          ],
+          "raw_rgba_sha256": "1edeae555bbdb76a7fe89ff666afb8a41dee1ca280d2745e9bf67dd01c2ab5f3",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "40ff35a23433215a720634293e14140b3e9cdd49b2972cd788de6209f085dfa4",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 17986,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-00.png",
+            "sha256": "2d051c287de75e274d7d49bf425d0c9da830626674d22b30a4792d409989b22e"
+          },
+          "raw_bbox": [
+            24,
+            20,
+            103,
+            118
+          ],
+          "raw_rgba_sha256": "31f556d0fab1cf3481ce8b003fc581973cb24dd02d65f35ddf505fd047ad7e0a",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "50dfb48a8162ce75bbdb39b78667e181d10eed8ac221098d8ec77d92bdbf4bfe",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16839,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-01.png",
+            "sha256": "5ad95ab377a08530b2a77012fb271a332f16885312ec86dd9476eae5984d4556"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            117
+          ],
+          "raw_rgba_sha256": "6d9aba54732ab58e57c51ae4ce1344f5a7c529e8d61b685e0045a97144b616c6",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "74c76ad67cdcc7a5d7f93a001c8be3e745460cb3df3810b537bc35c4f151184e",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13959,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-02.png",
+            "sha256": "39eb49d3dda903cf8cb3010244c7c1436a67970af332c3f0ddabde1afcdb0abd"
+          },
+          "raw_bbox": [
+            37,
+            17,
+            93,
+            116
+          ],
+          "raw_rgba_sha256": "848b6defe8a03c6cc0d322d90f6f1fba9bae2873af164a953ff14142a0ea79b7",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "0620746e27cfa36286f482ce550b0dbb0b0bb3dc75266490ea89428bc21e3ddd",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15192,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-03.png",
+            "sha256": "c9de6514a5d98aee44211c4e055b73c95de13d9b6fea72b0ec272805033a8e95"
+          },
+          "raw_bbox": [
+            32,
+            18,
+            102,
+            116
+          ],
+          "raw_rgba_sha256": "b5f87e3077c9579d290cabb210eff04b41bde0bfc2af09e16c623f13659cbc22",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "ce4b7a27975b3f946a80e8448f4b4ea599f2708e9e73b5bb11c3ffb7de621096",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15968,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-04.png",
+            "sha256": "4cab2e825655522ee123ed6876dbf71464a72faf4054cedfe973138ef5c57b31"
+          },
+          "raw_bbox": [
+            24,
+            19,
+            103,
+            117
+          ],
+          "raw_rgba_sha256": "97577879e099c2ba9a14588e946e5292c0eb8da011df6646a3d862dc0a786472",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "8d46f68dfd75fbf156c14852bcf2321b0cf2bc05e64ddb6a73386c872747b224",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15162,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-05.png",
+            "sha256": "e4f822eef9d7d12bf2154cac8efb0d76296d9a05da8b7634e97cc4aa32555336"
+          },
+          "raw_bbox": [
+            26,
+            18,
+            95,
+            119
+          ],
+          "raw_rgba_sha256": "2c42b0ae627d4c7ac0991507de926c648ea884c911995354cd86770b71b13f5a",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "3fe63bb82292b618fd4a68a093e6b8631f70155b8daab57923b9b066f47218bd",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13722,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-06.png",
+            "sha256": "3b8ec561f3f3dc1a87bf14c542e3b399c3ae7ecfffc25b39f120c53c10c28724"
+          },
+          "raw_bbox": [
+            34,
+            17,
+            90,
+            120
+          ],
+          "raw_rgba_sha256": "774886462d30c53ef18615c340115248ead46f1deb316c13abca1d3f18f98fe5",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "39dce5451a59324c0d0198d6b4d059757abf54f6b51ca926676be869f0bd32a7",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16476,
+            "path": "source/art/bodies-v1/caster/frames/raw-walk_b-07.png",
+            "sha256": "fe1addfb7abb56a9f60c9f82fb424b12b64e97e83112fc5e6fcd64de2288fe49"
+          },
+          "raw_bbox": [
+            25,
+            18,
+            95,
+            120
+          ],
+          "raw_rgba_sha256": "950218f77868484851f9968c5760a29a6528a25af122fa5f74e37b1db7e602a9",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "59d5a5859faf7d1c410174c9a91bcfc74c35b053da24672601d3899d510535e7",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 19474,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-00.png",
+            "sha256": "46d33643e0f8039e7eb0697c43f3576727027b393cf4ed3a362aad62aad78731"
+          },
+          "raw_bbox": [
+            14,
+            20,
+            113,
+            117
+          ],
+          "raw_rgba_sha256": "37d3c7c1c484c20cc63857c591ef13607cd0be8f38d52779405df6a83e68e667",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "686be7d1aab641cf508b08296664e2a565adcc63103fcaba9f0d158dcdf3c876",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 18611,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-01.png",
+            "sha256": "3ac4f3d8b89f58043ead79b5341e846403740d5ca4bda9271841cd124b18dba7"
+          },
+          "raw_bbox": [
+            5,
+            19,
+            103,
+            116
+          ],
+          "raw_rgba_sha256": "2b4ca17530845eb1f42639a9067c4b9288194f83561ec775158fbc11bc573897",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "4c04d3790d6126d764e1712a23331b6e52103c06d2af0de20c78154b80537bc5",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15215,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-02.png",
+            "sha256": "4d2db4138d327f195786b807069b7994b4d2b55fb28e99f78e1b6f3b63f9c70b"
+          },
+          "raw_bbox": [
+            20,
+            14,
+            90,
+            116
+          ],
+          "raw_rgba_sha256": "64f8c81370e705d558e438f64adc3c32f941b35501ff249efd95513ff595c55f",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "d7f51d2af6638a4c7c9742a19e4c8ffb8f64e913badcf89c4db13d8bfce6f352",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17742,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-03.png",
+            "sha256": "8d76725d5fbd1ef4ca3a55130fbcfc7601c62b068e353086fa620b6fd1a49275"
+          },
+          "raw_bbox": [
+            5,
+            8,
+            103,
+            117
+          ],
+          "raw_rgba_sha256": "480d99d7c9758d3179656406ccfebf6c8fc7ca9bd41d1205d9720c6c894e0df6",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "f7481d2f557e1693ca62cd512ea56fdce68fab441cc824dd0f1c61763955b975",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 18182,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-04.png",
+            "sha256": "43f5d66f0a73f8bd83c78cc01f2e5f682721979816067681cf6195a25b2776d2"
+          },
+          "raw_bbox": [
+            14,
+            7,
+            113,
+            118
+          ],
+          "raw_rgba_sha256": "3f574804841a44d7059b8f07fee097c5aeb5bfcfae2a1392fe083c2349bf7034",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "8321e9531cf89e89d0db16a498314005aa7a31a014a619bca96eac6f591740f5",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17635,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-05.png",
+            "sha256": "fe8e7a4e7e414dea6cb227a76242e7d4f8122b9c46def60a262d1a836be18fee"
+          },
+          "raw_bbox": [
+            24,
+            10,
+            122,
+            119
+          ],
+          "raw_rgba_sha256": "38d26f27cae3f392dbd843c3b5583a3d5efdc53c25d0ef9fb489ada705f9e62d",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "b93329d4ace5e800e8dbe01c4802c0633d364850c14c10b6ea6943049aaf64fc",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15042,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-06.png",
+            "sha256": "2681abf18be7e73ef8da5f46187e70a65da93007e01b93f207e6bf815aa196cb"
+          },
+          "raw_bbox": [
+            37,
+            15,
+            107,
+            119
+          ],
+          "raw_rgba_sha256": "0cda240d77f323849db4db39d7c3ce2e76a4043a359c2d7c11a960106863fd3f",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "47614f352e95c56b5b036dbbb4122679ae191ad4da997816d9e16d226bf255f7",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 18132,
+            "path": "source/art/bodies-v1/caster/frames/raw-attack-07.png",
+            "sha256": "85eefb4f644f0787183ba8276e1d6d3fc8f9f830041bd86430da22f676f8adb4"
+          },
+          "raw_bbox": [
+            24,
+            19,
+            122,
+            118
+          ],
+          "raw_rgba_sha256": "b57178bf5c1c3feb7251b983d745bea1475e3b583780024430b6a642094fd66e",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "36e10feef6c790ec79ae65bca1648f50f95df139c3d9b221d8340ab426ea790c",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13289,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-00.png",
+            "sha256": "e43cd5b6e7b61f2b7bee9dea5b83b927e31662409e13a350340fd5b20a50e890"
+          },
+          "raw_bbox": [
+            24,
+            63,
+            103,
+            120
+          ],
+          "raw_rgba_sha256": "6b4c1db7682a0c40bd1840cd28fbed2f65b8f1c5fe19f9c2de303824491adbf5",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "611211dee2075f16b47b43653778ff08b23b6f8972f2728955d66053ef6911f7",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13646,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-01.png",
+            "sha256": "7b847b1bbfc0fd9855616dd0581d6d5553c7507f6dcfd736dcd049ee0d1b90fa"
+          },
+          "raw_bbox": [
+            11,
+            60,
+            103,
+            120
+          ],
+          "raw_rgba_sha256": "958638ebb33aa38bf053ebbfc7975f7f1886fa07c8de55ab5a1ef43ad0086357",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "855729542df1e40e6ab8ad168c0d9ed98952d0540bc915da453945f4f3eabc3e",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13799,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-02.png",
+            "sha256": "7671ea6f9a41d51f6d72eadabbadec4aa190b3bb78e232d91fddbdb2a65ccc6b"
+          },
+          "raw_bbox": [
+            14,
+            56,
+            113,
+            118
+          ],
+          "raw_rgba_sha256": "197c900f6ac663966aeca4488ac9061dd41aed648c1f4b05ff1d009b4fb46db4",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "b7d48fb6152974f8574244278bdc3cb4f32bff68a1e805a14b9efcccca0c4cf0",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14192,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-03.png",
+            "sha256": "bec870da361156f3069a93a7efcaf72fae511084f2ad0c817585f506d23796e1"
+          },
+          "raw_bbox": [
+            11,
+            55,
+            103,
+            120
+          ],
+          "raw_rgba_sha256": "b4cf625d736c89966761fbac7be85d24197bd0ebf4f030324d89105acc445c4f",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "60656c6c35fc7d1febf3501c8b926db388dbae8e883ad9db383bdfca6de73e81",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13446,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-04.png",
+            "sha256": "abe3e22afae3c6ef8509371bbf09649db2056bce51ea8a3d564a1c13d4df655c"
+          },
+          "raw_bbox": [
+            24,
+            57,
+            103,
+            118
+          ],
+          "raw_rgba_sha256": "2e15b312a9e94b0adb3a2c7e0792cecb03d8db4a81e4fd1f42861778434b71ea",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "53a78512d10ffa7cc46be93c56dac79f231b575b9cb3ecd4c9c91fbb8e10d44e",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13733,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-05.png",
+            "sha256": "d24d2334307fd3193d538563f536c82ea41c49ef7ab8694d44142c243cd57851"
+          },
+          "raw_bbox": [
+            24,
+            55,
+            116,
+            120
+          ],
+          "raw_rgba_sha256": "e068b737d732d932cd4069cbed5ed7c51a28237da844ad820076f582a6d8f1c7",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "2bf375d7d7b3cdbfbdfdaa3871ff793d03075b632d50e19393245d6a1481b922",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13237,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-06.png",
+            "sha256": "40e83da180f41c7a69f08b398719ffaa83326bfd93c2b304d70fcb092e865d3f"
+          },
+          "raw_bbox": [
+            14,
+            56,
+            113,
+            118
+          ],
+          "raw_rgba_sha256": "858bbc7fe749ae99e30968d0a06f2f6e38246931d1ff5ec64994aec9990358eb",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "165974ca71d34187ff40b6d31fff4c2476eda7b6acdae5c338e8696c06f03051",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13488,
+            "path": "source/art/bodies-v1/caster/frames/raw-dead-07.png",
+            "sha256": "692a1a80173eae6140c26e7571cb62df9c5bbe0777fc26eb082b346c0f148763"
+          },
+          "raw_bbox": [
+            24,
+            60,
+            116,
+            120
+          ],
+          "raw_rgba_sha256": "5fa753286dc5a2f0e0c10ae95b15eefbaab5dbcf58d361bdd565efcca8a27f23",
+          "vertical_shift": -1
+        }
+      ],
+      "generator": {
+        "bytes": 19701,
+        "path": "source/art/bodies-v1/caster/build_ritual_roles_v07.py",
+        "sha256": "85ac11ca6b7e455a6b8ebc5bdc4e481b3394d5f9a4cedd0a094c602532b49ce9"
+      },
+      "import_sidecar": {
+        "bytes": 951,
+        "path": "game/assets/art/sprites/bodies-v1/caster.png.import",
+        "sha256": "b8b330e06b6742c77f04425ff3b441dfe96032252bac313177e9a4230cc5d519"
+      },
+      "independent": {
+        "bytes": 4583,
+        "path": "source/art/bodies-v1/caster/proof/independent.json",
+        "sha256": "196045472b18952dc373cfd138e9e1700956241eda61d961b5ff6287e63c61b5"
+      },
+      "kind": "caster",
+      "lineage": {
+        "generator": {
+          "bytes": 34609,
+          "path": "tools/build_processional_art.py",
+          "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          }
+        },
+        "logical_generator": "tools/build_processional_art.py",
+        "output": {
+          "bytes": 189534,
+          "path": "game/assets/art/sprites/caster.png",
+          "sha256": "3c668e5e9d5c769ece8da8042a40b9830fbd59d659dd1dafb6940d20a50b4cc2"
+        },
+        "source": {
+          "bytes": 3624573,
+          "path": "source/art/caster.blend",
+          "sha256": "5d09aeea44c6c511ace11e8186b1212ab3b1ac0d7c5c2a2b200bc54a96051a45"
+        }
+      },
+      "normal-import": {
+        "bytes": 4080,
+        "path": "source/art/bodies-v1/caster/proof/normal-import.json",
+        "sha256": "401b1471cba5249e4b9f3b6aa0723a31088f565590b9df50bd466516286d8c7b"
+      },
+      "output": {
+        "bytes": 214723,
+        "cell_bbox": [
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            32,
+            20,
+            102,
+            119
+          ],
+          [
+            37,
+            20,
+            93,
+            119
+          ],
+          [
+            32,
+            21,
+            102,
+            119
+          ],
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            26,
+            19,
+            95,
+            119
+          ],
+          [
+            34,
+            17,
+            90,
+            119
+          ],
+          [
+            25,
+            18,
+            95,
+            119
+          ],
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            32,
+            19,
+            102,
+            119
+          ],
+          [
+            37,
+            19,
+            93,
+            119
+          ],
+          [
+            32,
+            20,
+            102,
+            119
+          ],
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            26,
+            19,
+            95,
+            119
+          ],
+          [
+            34,
+            17,
+            90,
+            119
+          ],
+          [
+            25,
+            18,
+            95,
+            119
+          ],
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            32,
+            20,
+            102,
+            119
+          ],
+          [
+            37,
+            20,
+            93,
+            119
+          ],
+          [
+            32,
+            21,
+            102,
+            119
+          ],
+          [
+            24,
+            21,
+            103,
+            119
+          ],
+          [
+            26,
+            18,
+            95,
+            119
+          ],
+          [
+            34,
+            16,
+            90,
+            119
+          ],
+          [
+            25,
+            17,
+            95,
+            119
+          ],
+          [
+            14,
+            22,
+            113,
+            119
+          ],
+          [
+            5,
+            22,
+            103,
+            119
+          ],
+          [
+            20,
+            17,
+            90,
+            119
+          ],
+          [
+            5,
+            10,
+            103,
+            119
+          ],
+          [
+            14,
+            8,
+            113,
+            119
+          ],
+          [
+            24,
+            10,
+            122,
+            119
+          ],
+          [
+            37,
+            15,
+            107,
+            119
+          ],
+          [
+            24,
+            20,
+            122,
+            119
+          ],
+          [
+            24,
+            62,
+            103,
+            119
+          ],
+          [
+            11,
+            59,
+            103,
+            119
+          ],
+          [
+            14,
+            57,
+            113,
+            119
+          ],
+          [
+            11,
+            54,
+            103,
+            119
+          ],
+          [
+            24,
+            58,
+            103,
+            119
+          ],
+          [
+            24,
+            54,
+            116,
+            119
+          ],
+          [
+            14,
+            57,
+            113,
+            119
+          ],
+          [
+            24,
+            59,
+            116,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "7384673d52a4bbad93c9f4b1cce3136e58915fb0b4fe6cad704a2bee58e933d1",
+          "ab90f3e084aeedc5086709bb0044c06471b1e61d5870459400c3365627a91eb8",
+          "7cf6749ae880bb16b0c232243736e4baba8a09b15e114208428da9de021a1817",
+          "1021f24ecfeab43366dde14ff385de037dacb60e3d4a5390f180f4bd8a253bed",
+          "2034db4b73d37c1de327e97e7dcdab1ff7c2e0663393fc198c6dac2b9ade3254",
+          "33ee9167073ba0a2ca8cc74442c9e6c46cbffd7d54068bc289397f5daed3a21a",
+          "67f9b15fe415baf372503ceccdf9a93cc5dcf26b0c77dcde164600d1ce6cb177",
+          "6641c0d5baff04c7b255292e3d279294394e46b51ce93831bf491e29dd118c2f",
+          "0cfbe6edb3d0b313059916f24694f062ee7745b88cf656b2d988103fd57c97f3",
+          "60b8942079c0901b8b414470545ffd840600a2245393b5101c3cef6f4d42ee4a",
+          "e62fa72abf2e76f358a9b102c97d3214bf86bde3194c723000ff78594c1d7f15",
+          "7c0f8c95e996db853a6a2adbee0aa75f1e82b974f466cee0038ed8909d413e6d",
+          "10f06da57f45e7c8c381f43c7ed3f1f64f8817b47d16bd5bc259c1ef5b62c348",
+          "e9fe4984da532237239dfc45df96e1bb9a288312d1f627156956306fbbca535f",
+          "76686c67d58cc7bed1db3f54e7de7388d5327cec3d44c758003834579acc72ef",
+          "ba4d340f3710bac5fd6f6c57d14d10c35ae75a2d8e2ac914f0239fd02237cdfe",
+          "40ff35a23433215a720634293e14140b3e9cdd49b2972cd788de6209f085dfa4",
+          "50dfb48a8162ce75bbdb39b78667e181d10eed8ac221098d8ec77d92bdbf4bfe",
+          "74c76ad67cdcc7a5d7f93a001c8be3e745460cb3df3810b537bc35c4f151184e",
+          "0620746e27cfa36286f482ce550b0dbb0b0bb3dc75266490ea89428bc21e3ddd",
+          "ce4b7a27975b3f946a80e8448f4b4ea599f2708e9e73b5bb11c3ffb7de621096",
+          "8d46f68dfd75fbf156c14852bcf2321b0cf2bc05e64ddb6a73386c872747b224",
+          "3fe63bb82292b618fd4a68a093e6b8631f70155b8daab57923b9b066f47218bd",
+          "39dce5451a59324c0d0198d6b4d059757abf54f6b51ca926676be869f0bd32a7",
+          "59d5a5859faf7d1c410174c9a91bcfc74c35b053da24672601d3899d510535e7",
+          "686be7d1aab641cf508b08296664e2a565adcc63103fcaba9f0d158dcdf3c876",
+          "4c04d3790d6126d764e1712a23331b6e52103c06d2af0de20c78154b80537bc5",
+          "d7f51d2af6638a4c7c9742a19e4c8ffb8f64e913badcf89c4db13d8bfce6f352",
+          "f7481d2f557e1693ca62cd512ea56fdce68fab441cc824dd0f1c61763955b975",
+          "8321e9531cf89e89d0db16a498314005aa7a31a014a619bca96eac6f591740f5",
+          "b93329d4ace5e800e8dbe01c4802c0633d364850c14c10b6ea6943049aaf64fc",
+          "47614f352e95c56b5b036dbbb4122679ae191ad4da997816d9e16d226bf255f7",
+          "36e10feef6c790ec79ae65bca1648f50f95df139c3d9b221d8340ab426ea790c",
+          "611211dee2075f16b47b43653778ff08b23b6f8972f2728955d66053ef6911f7",
+          "855729542df1e40e6ab8ad168c0d9ed98952d0540bc915da453945f4f3eabc3e",
+          "b7d48fb6152974f8574244278bdc3cb4f32bff68a1e805a14b9efcccca0c4cf0",
+          "60656c6c35fc7d1febf3501c8b926db388dbae8e883ad9db383bdfca6de73e81",
+          "53a78512d10ffa7cc46be93c56dac79f231b575b9cb3ecd4c9c91fbb8e10d44e",
+          "2bf375d7d7b3cdbfbdfdaa3871ff793d03075b632d50e19393245d6a1481b922",
+          "165974ca71d34187ff40b6d31fff4c2476eda7b6acdae5c338e8696c06f03051"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/caster.png",
+        "rgba_sha256": "2585b80242d260e139dd010eb75732ec6e4be90c53d2f1f29dec39e4e74e2f0e",
+        "sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6"
+      },
+      "public_master_bridge": {
+        "bytes": 4909,
+        "path": "source/art/bodies-v1/caster/proof/public-master-bridge.json",
+        "sha256": "45e24f47d4fda5955908e0291c05e544a7ab67babfe39c9725b72f4d37d9658b"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42143,
+        "path": "source/art/bodies-v1/caster/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "6035c95b6de28d050df1236734dee560126dbc6d687c0c6ba15d05db210d525c"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          640
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.028515625,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 1.596875
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/caster.png",
+      "source-native": {
+        "bytes": 7922,
+        "path": "source/art/bodies-v1/caster/proof/source-native.json",
+        "sha256": "3a81920b89e668b96e1c83c50c56d1d3b1adf6fd6c8f7fe54452340403404a54"
+      },
+      "source_blend": {
+        "bytes": 3354827,
+        "path": "source/art/bodies-v1/caster/caster.blend",
+        "sha256": "c57496a93ff0e55e847fdc92420a5bf34c49cbfc64bc9b3f7c045660a564ad75"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/ritual-shared/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        },
+        {
+          "bytes": 33299,
+          "path": "source/art/bodies-v1/caster/geometry_v07.py",
+          "sha256": "9208027a1a8c282d9a04323b7214ffff48c5850032d1ecae0ca12752f7cc84ec"
+        },
+        {
+          "bytes": 13682,
+          "path": "source/art/bodies-v1/caster/paint_ritual_roles_v07.py",
+          "sha256": "f84007d7402f9a7051661f0faa583185c4b49b2f0e03ac526386654dff2399ab"
+        }
+      ]
+    },
+    {
+      "actual-context": {
+        "bytes": 9119,
+        "path": "source/art/bodies-v1/guardian/proof/actual-context.json",
+        "sha256": "bdb67b7ca6a03913eab541d5e87777ed1d0d66387f6e93786d14385ff7c42936"
+      },
+      "editable_surface_paint": {
+        "bytes": 2136,
+        "path": "source/art/bodies-v1/guardian/guardian-surface-paint.png",
+        "sha256": "de2ea4b4956951620aa557f8faeec7ca2f7d109e7ac8d04b6d733189897e6d99"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "c03aef7e01d34ee7148cabfdb41414c7fe2ce065d71feae87a009f0deec3802c",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15791,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-00.png",
+            "sha256": "0ecb79185073ce1c944ecf071225eaef99568df12c29bb632b7e3e24b6010ff7"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            92,
+            116
+          ],
+          "raw_rgba_sha256": "b8495ef4d1565f5195d108c4a67d4aff8fc22ccedf83b64d0b52f328c018411e",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "d89f557b88c475bdbb58e7f04da693d20d07fb5194db7e4267d2aa0f2d716d10",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15736,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-01.png",
+            "sha256": "7eeba238d0e631d2ddf4907671803eeb0f447797b162a2ad9224fcbe65931ee9"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            88,
+            118
+          ],
+          "raw_rgba_sha256": "a1f1afcb444733a20ae98dc64ec753f615f49e0d49a7cccbadc1165c192b2e33",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "146c903d0464e90cbebb7ec269b335d6c40f4625e583ebea9fcbe2881c26863c",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13544,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-02.png",
+            "sha256": "243ad92436e39c185b4a9c4e5d7819c22bcdb24b87787830ebc23f9f0046bea0"
+          },
+          "raw_bbox": [
+            39,
+            13,
+            85,
+            119
+          ],
+          "raw_rgba_sha256": "1e7dd1bbc3152644dde33d7238f9fdc8743e7122d2fb68338eef1581289a7a9a",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "eaa969cb7e2715aca0efdc952ca1eba96fdc1a8368e492b5d379822f610d729e",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 14595,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-03.png",
+            "sha256": "f67f82c80b69b07b2dad9628cc53ad10c1d25b68bc3c45020644f9c90a0b6e28"
+          },
+          "raw_bbox": [
+            36,
+            15,
+            91,
+            117
+          ],
+          "raw_rgba_sha256": "b1e569a968f39b13f8e981591dc2fd8f2c25bb791ada349533905f605b086713",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "77696f446a121fabb7b4514deb8544e9cff3b3660c48836abcaae7a9dde18db5",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 14274,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-04.png",
+            "sha256": "c2dac16c0eb76faf2eff6adf04ec888c88b3d31872baf0e6c5426c2fcd045d6d"
+          },
+          "raw_bbox": [
+            35,
+            15,
+            97,
+            115
+          ],
+          "raw_rgba_sha256": "3a1cbe4c7b0ba72d0cd383af36016326cef4f668a2d29c1bed45ab2d9ed2ee20",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "9d2d4a9c5d81827433fbba1d2c702329521e2c90026193b15636375438510325",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 14759,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-05.png",
+            "sha256": "ad2e16c2f7a1f6ba98d52320788c8a863a9c1fe2ee5a1b8bea714cc539185c44"
+          },
+          "raw_bbox": [
+            39,
+            15,
+            97,
+            117
+          ],
+          "raw_rgba_sha256": "a8964026267bbccb34c0a44276e9eb77d34f84988e4996875e470141509f2df6",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "7e5d924472a769a295f73d183c7da6ca4c3019fda2e4c4322dddcc0c838a9d95",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13701,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-06.png",
+            "sha256": "63656caa3ad620adc7883f358f0887ff03e90cfb4b52876a65361c214c3a64f3"
+          },
+          "raw_bbox": [
+            42,
+            13,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "08eee39f6f8f5e0c4e5e1dcc341aa3e0c65ad645362a34dcb238beb60dc30f67",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "c5a75697dd5bf4b393dc55b886bfd1659281c02f33868fc3e47fcb497afbda97",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15762,
+            "path": "source/art/bodies-v1/guardian/frames/raw-idle-07.png",
+            "sha256": "e4a38a811654e6b0a453ea16e34af3754cc7de224bd278d343cb611e615a1dee"
+          },
+          "raw_bbox": [
+            36,
+            14,
+            91,
+            118
+          ],
+          "raw_rgba_sha256": "530cf8316d1d8216c96d73978e10b0d6ed09fdb22b8424f5a0f918dbc83707f2",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "fcce4d62139b2ea29d832372e1e844409401e00cb34197ed40ad14e28c2cf320",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15912,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-00.png",
+            "sha256": "0dd762af16e050d1f2d062fd4ab77c4184a99d80467a5892a90fddaa4a4463e3"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            92,
+            118
+          ],
+          "raw_rgba_sha256": "9507e49703e7ec2a81c2c553982bc463603a6f3ac070219dcb1f953fb2691980",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "58f77e5690ab1bd751e293f9f5ba013348f6eaf5720480dc526f60f4e7e73c11",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15865,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-01.png",
+            "sha256": "ba396d265c74a84d8faa5ac0dd6f6ee9adc1704ef01bcb138edf0125acf0e17b"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            88,
+            117
+          ],
+          "raw_rgba_sha256": "124e1f292f674b56d5bacc0e028f914a0067ec38374d8f823a791a50ed9e01d7",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "57d8840210ee32e7c3984aa87f72cbb43fce33ab326bd21024205e402aeb37d4",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14055,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-02.png",
+            "sha256": "b835ec819a4cf5bc8c4553a136a19d02e2e8ed9a07d1e3137542e67cb3cde353"
+          },
+          "raw_bbox": [
+            39,
+            13,
+            85,
+            119
+          ],
+          "raw_rgba_sha256": "3b74a533ba4e20d5d6441bfc112e24d88f8a7f485c8c869ccca339a1f80f3421",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "88d5834abb94a59eeec975a4595ee61a16f2fde4ba6bdddbd8649ffb6d154e3b",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14450,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-03.png",
+            "sha256": "f75aba238cab82cf2b31112c9dcf428acef1e5fc062187d6df6bb61976565f28"
+          },
+          "raw_bbox": [
+            36,
+            15,
+            91,
+            118
+          ],
+          "raw_rgba_sha256": "7be2ea6a65a932fa921407876068710efdf56742d2dedd074c00dd1e4107b582",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "21d94d40ca7b41315b9d415eea31b06e41b2df8caafd74595d7df80cea9d98a2",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14299,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-04.png",
+            "sha256": "bc7ec5748b499d2d89dccba1f0fdc6342f075c111e63880367f62f9264a866a7"
+          },
+          "raw_bbox": [
+            35,
+            15,
+            97,
+            116
+          ],
+          "raw_rgba_sha256": "87a12cbf8550eabcec19adf13b01c95d464a492fc657f5d57632593dd83a598c",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "62f8d3906224990880a5f6d2b9153ada21c57648ae8c9bd215105b842b6fd531",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14762,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-05.png",
+            "sha256": "f10671ee6887766b7ac3c43a8bb3dba86248e3d2cf78dd07a874cbd4bd559a5d"
+          },
+          "raw_bbox": [
+            39,
+            15,
+            97,
+            116
+          ],
+          "raw_rgba_sha256": "e66d9cd4b70f32d577e7f7482de2282c476482b039739ff757b8b22a92026c53",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "13ed58975e1fd571f14d6899c3fc3cf494e8c3c04464bd03da10f4c807592d65",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 13833,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-06.png",
+            "sha256": "4dd6528ac537588694a09e5af0baed05cc475092914c3029d310a26bb61cf8e3"
+          },
+          "raw_bbox": [
+            42,
+            13,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "7b32f65e55ff2d8f1bb96085a2f16c0b5232ed076faee3e0a7b0cb2a096bb4dd",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "bba2e125db6512b0b5cbdbb2f6dd6f3eaa9f344b1beddf074191da592965ecfd",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15662,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_a-07.png",
+            "sha256": "86479950d0da4df7435a8f31c40925ac7bd64a7d66c90aee441ab390b0e8cfd3"
+          },
+          "raw_bbox": [
+            36,
+            14,
+            91,
+            119
+          ],
+          "raw_rgba_sha256": "ec16f098e6d17b6bda0e4700313b62498ca3c808642a75a5c9d39a74d91468d2",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "e1ae7484900fea9f71c7d8067eafc2a258a4d2afb0b10e4ce674800aae249643",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15902,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-00.png",
+            "sha256": "63f1ac2d949d71a9a3f62113323730df135f13105cba42d4bb157943585c96e6"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            92,
+            118
+          ],
+          "raw_rgba_sha256": "024376021a7ec59b46394588c428f1d5a3c47aab4de2926fdf159d00d19a3976",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "d93d6312185f71b53b5a76fa5217ddcf5fed0c083bd84cfddbb07ed8167e9d42",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15653,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-01.png",
+            "sha256": "bcfab8033792b6a8a249e54cf707e36104039741e24166d6c576049189bedcaf"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "51a14b8fffb914946f8e3d69a3c88285fc56e46362927462142a711b2b082c5a",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "fa5ad6a9ddd025f890de702a93d9ad3cf19d032b3784cf69c4d1f3e267ce1e8d",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13874,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-02.png",
+            "sha256": "a204cc1f40e711f5e780b2eba29115f050a0807837fd556d597db8608572fbb2"
+          },
+          "raw_bbox": [
+            39,
+            13,
+            85,
+            119
+          ],
+          "raw_rgba_sha256": "73d30b50d9e71f240fa53c73bdef1a9c1e3acaaf8e1785a9880bd2d079b54d2b",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "a2c13e5573d1d020fb555e71c96d1f9437fb70a2d2abb3d34b7005e2c161a7de",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 14698,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-03.png",
+            "sha256": "75a4a95020e81c0a0ab10e6943a59b89b782a98f4caa8b334d233004e74512e4"
+          },
+          "raw_bbox": [
+            34,
+            15,
+            91,
+            116
+          ],
+          "raw_rgba_sha256": "fd580d098f1d9889cd58241e0c14b029fcc659d72e12449832ff8d06623f0bf0",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "fc438ab93866ae3da034bb490399d8dd1d6597ef8a3d584ab1fddc7412967909",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 14339,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-04.png",
+            "sha256": "52baa0a1ce487b22543ddb119649a7b2d8bf9bdd23e6f5e9e13910caf8e2168b"
+          },
+          "raw_bbox": [
+            35,
+            15,
+            97,
+            116
+          ],
+          "raw_rgba_sha256": "2d0ccf2221cef9c9657915bc88443fe2425742d6e40167ef8f30c4a0d035e2e9",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "2479c8927d1edc131e1727869e5d957cc2b41e0c05bc3c53141200ad94014df7",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 14518,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-05.png",
+            "sha256": "fda0bf4203e878ad54bcbb2bf598ba7d7632f8c7f89358032fc88f5a5327350f"
+          },
+          "raw_bbox": [
+            39,
+            15,
+            97,
+            118
+          ],
+          "raw_rgba_sha256": "79e6c3bd50415923c383701ab5a76c742c2785366b5c7c7b4a28b168430bddff",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "a4a12f87e54579c1d3b17cbe9e36d27e9ac648762cd4eaca208660d575a866cd",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13981,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-06.png",
+            "sha256": "864216b02d32b592b946dfeef60b377fa4d0fd7f8aefdf6b781b1912cc37da95"
+          },
+          "raw_bbox": [
+            42,
+            13,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "5365a2c5bf276ca35bda7a86faadebf1754551777b9463a33632041fafe2830f",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "15a92826eb7bf3ca63ac5891150d746f7bfa16aef3ddb7ea838f2ab203ccb3a5",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15754,
+            "path": "source/art/bodies-v1/guardian/frames/raw-walk_b-07.png",
+            "sha256": "f145a8def8e621a5cb534067a2614e6c58bf5b18ec57118c089c6808fb114440"
+          },
+          "raw_bbox": [
+            36,
+            14,
+            93,
+            117
+          ],
+          "raw_rgba_sha256": "81286561fc6f811c9928cf1f677440541f438d4304163d73c8f3a6ca765beb46",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "e09df24aae69e26bbb28b503584e7bc3e15132007a35ff2cbf56a329c487b42e",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17263,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-00.png",
+            "sha256": "dcd11f792fabb80ce4ece97096c91783a43af9fb0728a148be9399d589a96036"
+          },
+          "raw_bbox": [
+            30,
+            14,
+            95,
+            116
+          ],
+          "raw_rgba_sha256": "5a9e54481c75f6e72bb895a581129827dfc8eaf267225a421b618dc2574308a4",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "ff0b12694e482ae45f18abb4c3b3e690e22534fc91398233438c0fea81374a07",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16789,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-01.png",
+            "sha256": "bf27d42c3b35eb06293de7e3e9aaf5a537f5b98ce9e96f0870380fd9afe386fb"
+          },
+          "raw_bbox": [
+            21,
+            14,
+            88,
+            118
+          ],
+          "raw_rgba_sha256": "663a6d2e2f9a09bcd9b3ddc365c17303911b8ec8ee09e87f1bfbda73ce0ae111",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "029273b5005705549ee35ad60f5c941538bf2a12b93cdc94bca3e6b550ce3cfc",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 13744,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-02.png",
+            "sha256": "7fe07cdf3a394596cdee43216aaaf6c1dc0284a1843565b56f35e29535bc7502"
+          },
+          "raw_bbox": [
+            34,
+            13,
+            85,
+            119
+          ],
+          "raw_rgba_sha256": "12f99aba831393d9b29b57e29bb898597f8f8da773842b8ed7dcc2cbadcbb51e",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "c7f2701854f3c03754db49c0ce98405c2cf1cc97ec96fbacb6fcd6ed44135e88",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15094,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-03.png",
+            "sha256": "14a4b1e57f28d5b858e3797bd8c50e1c432a76134a2a84ac56fe3ae707f01504"
+          },
+          "raw_bbox": [
+            24,
+            15,
+            88,
+            117
+          ],
+          "raw_rgba_sha256": "d15a9e92f67eb89fa179b42d682a3e8171174bc9e67270194e9429d97815e24d",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "496a1fab8303ded32c468606168739c95966cb28cf2c8a32450d692cc1555f67",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 14964,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-04.png",
+            "sha256": "999e383011f9fa09a2b966fa1784b34770fe70e5d2814d6a6de393285ca56e01"
+          },
+          "raw_bbox": [
+            32,
+            15,
+            97,
+            115
+          ],
+          "raw_rgba_sha256": "0d59d087b6fa4bfdff99359574910f579ae9205573d8a80cf9c5841000c98b65",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "8ec80fe44f7d994bd48bdbea689fb94ff6671f68c30282767a2d3ea9977e7a5b",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15579,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-05.png",
+            "sha256": "0b4c3d006d40c3cd4bf812996947790620c8b1f68277bcfc93a5c9cf9805f26b"
+          },
+          "raw_bbox": [
+            39,
+            15,
+            106,
+            117
+          ],
+          "raw_rgba_sha256": "e5a715f8c785e860d2cb577d67aa9afef09d316ef6238c0377263cfc9707311b",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "b6773c47bc9f79cd3f177fe6b38bd0c281f941442e2751bc51f90f25d9b52004",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 13687,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-06.png",
+            "sha256": "6ea7f1139bd9603667bedb79a5a091a494827274f61e04ee332d8e978b75b507"
+          },
+          "raw_bbox": [
+            42,
+            13,
+            93,
+            119
+          ],
+          "raw_rgba_sha256": "4815b244fbde423b6c3d3612e613d8d84f8bda3ec5b4cdefc483d6d659ccba7f",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "94762cca19d78c297fcc2c4f5dd2e111a17db9eb9351e77eb74b774512ac9cfd",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16648,
+            "path": "source/art/bodies-v1/guardian/frames/raw-attack-07.png",
+            "sha256": "f7ba1d09292202160ac04c3d7215dfea3653a66253faec9e9087fe60f80ed045"
+          },
+          "raw_bbox": [
+            39,
+            14,
+            102,
+            118
+          ],
+          "raw_rgba_sha256": "696dd045756adb35ebe5d8359055d7a8349a1c6a7749db86552a82bee7f2d6a7",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "52baac2b1bf95231e26e15af5ae8742bbf933a4699acf1d84822402b93cc803e",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 11251,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-00.png",
+            "sha256": "a26c9ba2ad691b0ed96514f088fee9c1ca49beddab0a59f4173613db5ec77881"
+          },
+          "raw_bbox": [
+            32,
+            60,
+            95,
+            109
+          ],
+          "raw_rgba_sha256": "4d363d71e6895cfc6211d9d402f7f612626e5bf0c09c98c0c66713dd38d90d20",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "0ad3ee3b658133be600e0fffebe37b5cf0cd68e13df4fd39d8f07cc677298bf0",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12762,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-01.png",
+            "sha256": "1b7aff19a8980027dd04720a6f8cae485c4923557743c96146e564ce241a24cc"
+          },
+          "raw_bbox": [
+            16,
+            60,
+            118,
+            109
+          ],
+          "raw_rgba_sha256": "17ab040bc8b5b370e6f0c6b818bbe97ca6adc261639140f5c3e89d23f2addca5",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "15fb6bde5ab0c4841b4f787abebf10c89eb212a7038cfbfc850ed598f45b0f0f",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13059,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-02.png",
+            "sha256": "e3e306a183eb68de99e4fa14609fc3f9c5e427c8cfad0804e5edd5d4682767bf"
+          },
+          "raw_bbox": [
+            13,
+            57,
+            115,
+            111
+          ],
+          "raw_rgba_sha256": "94dcbf982adb94b7b98a68e823f435a4b44c102a8c37d2323dba2b5a26f9d6a9",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "40dda69cbec407b4af3e5c1dbf1c23ab4f6d1ff82a4a460bfeb60a8cb32c43ff",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12913,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-03.png",
+            "sha256": "fe6b9cbcd2418b45e2381f4304a41c75a6f8274d80b8ea3f3a1e529c44d71550"
+          },
+          "raw_bbox": [
+            13,
+            54,
+            112,
+            117
+          ],
+          "raw_rgba_sha256": "35b1172a4f777e44c46754e39cc195af78f4eaf4100d8d7935d69866b2a8bdcf",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "d0bd1e189be50f28f9c181e26a888f55c17db0b0b3d1a9189164778319f5073a",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12217,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-04.png",
+            "sha256": "fbbf9198d7a8fa3bde7a6f17de4e106fefa5b6777b4d37fdabfa39ccfc12f7b3"
+          },
+          "raw_bbox": [
+            32,
+            53,
+            95,
+            122
+          ],
+          "raw_rgba_sha256": "2c88acf37e367fe87b7c1af279c1bf49d4a5868a61fc42316909a25c4de331f7",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "93217430269a2906c3daafc737c43127e65f880ac3be0defc8b14e4d53e8613a",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13158,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-05.png",
+            "sha256": "a4cdef71de6cdd2b10a97412a7785e64439ca4c8e10c2e3257ff3315a320929d"
+          },
+          "raw_bbox": [
+            9,
+            54,
+            111,
+            122
+          ],
+          "raw_rgba_sha256": "b81c7a24b67870dd0d5bc77fe46ab197e18314b532f56d63c83c9e921b02e15a",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "2e96791746da27d1debcbcd8079b75a8fd52a7aa8dd3bb9ed24b9a82a7a88ab9",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13317,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-06.png",
+            "sha256": "27756db43091727fb2eb0eb103e99f052a9c0d4bac9e32cc54842a0f7acfc941"
+          },
+          "raw_bbox": [
+            12,
+            57,
+            115,
+            117
+          ],
+          "raw_rgba_sha256": "c66a9a76865e91a1ea24873585dd3708d4430d2dc5704c832e95f7e9f1cb55c0",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "841251637a6b036fed45c56d51859bbfba3f880e6edf8e9196fcafe4534acb04",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12724,
+            "path": "source/art/bodies-v1/guardian/frames/raw-dead-07.png",
+            "sha256": "2b626c9800ecbb72426ecaa1206c9e82dbdd8aaf5ec514586eb7d32081e1cce9"
+          },
+          "raw_bbox": [
+            15,
+            60,
+            114,
+            110
+          ],
+          "raw_rgba_sha256": "b462e8e4983bd423bcf37e4930423ce45f0f6e190626126db6f30b181827aa3c",
+          "vertical_shift": 9
+        }
+      ],
+      "generator": {
+        "bytes": 19701,
+        "path": "source/art/bodies-v1/guardian/build_ritual_roles_v07.py",
+        "sha256": "85ac11ca6b7e455a6b8ebc5bdc4e481b3394d5f9a4cedd0a094c602532b49ce9"
+      },
+      "import_sidecar": {
+        "bytes": 958,
+        "path": "game/assets/art/sprites/bodies-v1/guardian.png.import",
+        "sha256": "a477dfb74f9fc36a3a0710888179154fdd575c7dfde7146cc20c91c26ef31ccb"
+      },
+      "independent": {
+        "bytes": 4591,
+        "path": "source/art/bodies-v1/guardian/proof/independent.json",
+        "sha256": "b8e9aba6c29490659671ea9f6d6f5ad56116ceba6c7a67182a918d5d156540fa"
+      },
+      "kind": "guardian",
+      "lineage": {
+        "generator": {
+          "bytes": 53153,
+          "path": "tools/build_late_combat_art.py",
+          "sha256": "8dc582d4f7984c47aa2e7257ff7d8ebf3516e146a2b09bb9bba74bdbe2ea684e"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          },
+          "tools/build_processional_art.py": {
+            "bytes": 34609,
+            "path": "tools/build_processional_art.py",
+            "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+          },
+          "tools/build_religious_art.py": {
+            "bytes": 37332,
+            "path": "tools/build_religious_art.py",
+            "sha256": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde"
+          }
+        },
+        "logical_generator": "tools/build_late_combat_art.py",
+        "output": {
+          "bytes": 266406,
+          "path": "game/assets/art/sprites/guardian.png",
+          "sha256": "790dcec195ecefb478dda12684f57a52e806f38c52c1ba19609151f0aecfce50"
+        },
+        "source": {
+          "bytes": 6549214,
+          "path": "source/art/guardian.blend",
+          "sha256": "cb48e200d05f2d072a12063c4ce270fae36de38cf6017983c70fc76ad9e46dc5"
+        }
+      },
+      "normal-import": {
+        "bytes": 4087,
+        "path": "source/art/bodies-v1/guardian/proof/normal-import.json",
+        "sha256": "dfe33c3dfae26fcaa63f6ffa9db282ddc9c04369d59ce2795352b8ee3b7b195b"
+      },
+      "output": {
+        "bytes": 188104,
+        "cell_bbox": [
+          [
+            30,
+            17,
+            92,
+            119
+          ],
+          [
+            30,
+            15,
+            88,
+            119
+          ],
+          [
+            39,
+            13,
+            85,
+            119
+          ],
+          [
+            36,
+            17,
+            91,
+            119
+          ],
+          [
+            35,
+            19,
+            97,
+            119
+          ],
+          [
+            39,
+            17,
+            97,
+            119
+          ],
+          [
+            42,
+            13,
+            88,
+            119
+          ],
+          [
+            36,
+            15,
+            91,
+            119
+          ],
+          [
+            30,
+            15,
+            92,
+            119
+          ],
+          [
+            30,
+            16,
+            88,
+            119
+          ],
+          [
+            39,
+            13,
+            85,
+            119
+          ],
+          [
+            36,
+            16,
+            91,
+            119
+          ],
+          [
+            35,
+            18,
+            97,
+            119
+          ],
+          [
+            39,
+            18,
+            97,
+            119
+          ],
+          [
+            42,
+            13,
+            88,
+            119
+          ],
+          [
+            36,
+            14,
+            91,
+            119
+          ],
+          [
+            30,
+            15,
+            92,
+            119
+          ],
+          [
+            30,
+            14,
+            88,
+            119
+          ],
+          [
+            39,
+            13,
+            85,
+            119
+          ],
+          [
+            34,
+            18,
+            91,
+            119
+          ],
+          [
+            35,
+            18,
+            97,
+            119
+          ],
+          [
+            39,
+            16,
+            97,
+            119
+          ],
+          [
+            42,
+            13,
+            88,
+            119
+          ],
+          [
+            36,
+            16,
+            93,
+            119
+          ],
+          [
+            30,
+            17,
+            95,
+            119
+          ],
+          [
+            21,
+            15,
+            88,
+            119
+          ],
+          [
+            34,
+            13,
+            85,
+            119
+          ],
+          [
+            24,
+            17,
+            88,
+            119
+          ],
+          [
+            32,
+            19,
+            97,
+            119
+          ],
+          [
+            39,
+            17,
+            106,
+            119
+          ],
+          [
+            42,
+            13,
+            93,
+            119
+          ],
+          [
+            39,
+            15,
+            102,
+            119
+          ],
+          [
+            32,
+            70,
+            95,
+            119
+          ],
+          [
+            16,
+            70,
+            118,
+            119
+          ],
+          [
+            13,
+            65,
+            115,
+            119
+          ],
+          [
+            13,
+            56,
+            112,
+            119
+          ],
+          [
+            32,
+            50,
+            95,
+            119
+          ],
+          [
+            9,
+            51,
+            111,
+            119
+          ],
+          [
+            12,
+            59,
+            115,
+            119
+          ],
+          [
+            15,
+            69,
+            114,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "c03aef7e01d34ee7148cabfdb41414c7fe2ce065d71feae87a009f0deec3802c",
+          "d89f557b88c475bdbb58e7f04da693d20d07fb5194db7e4267d2aa0f2d716d10",
+          "146c903d0464e90cbebb7ec269b335d6c40f4625e583ebea9fcbe2881c26863c",
+          "eaa969cb7e2715aca0efdc952ca1eba96fdc1a8368e492b5d379822f610d729e",
+          "77696f446a121fabb7b4514deb8544e9cff3b3660c48836abcaae7a9dde18db5",
+          "9d2d4a9c5d81827433fbba1d2c702329521e2c90026193b15636375438510325",
+          "7e5d924472a769a295f73d183c7da6ca4c3019fda2e4c4322dddcc0c838a9d95",
+          "c5a75697dd5bf4b393dc55b886bfd1659281c02f33868fc3e47fcb497afbda97",
+          "fcce4d62139b2ea29d832372e1e844409401e00cb34197ed40ad14e28c2cf320",
+          "58f77e5690ab1bd751e293f9f5ba013348f6eaf5720480dc526f60f4e7e73c11",
+          "57d8840210ee32e7c3984aa87f72cbb43fce33ab326bd21024205e402aeb37d4",
+          "88d5834abb94a59eeec975a4595ee61a16f2fde4ba6bdddbd8649ffb6d154e3b",
+          "21d94d40ca7b41315b9d415eea31b06e41b2df8caafd74595d7df80cea9d98a2",
+          "62f8d3906224990880a5f6d2b9153ada21c57648ae8c9bd215105b842b6fd531",
+          "13ed58975e1fd571f14d6899c3fc3cf494e8c3c04464bd03da10f4c807592d65",
+          "bba2e125db6512b0b5cbdbb2f6dd6f3eaa9f344b1beddf074191da592965ecfd",
+          "e1ae7484900fea9f71c7d8067eafc2a258a4d2afb0b10e4ce674800aae249643",
+          "d93d6312185f71b53b5a76fa5217ddcf5fed0c083bd84cfddbb07ed8167e9d42",
+          "fa5ad6a9ddd025f890de702a93d9ad3cf19d032b3784cf69c4d1f3e267ce1e8d",
+          "a2c13e5573d1d020fb555e71c96d1f9437fb70a2d2abb3d34b7005e2c161a7de",
+          "fc438ab93866ae3da034bb490399d8dd1d6597ef8a3d584ab1fddc7412967909",
+          "2479c8927d1edc131e1727869e5d957cc2b41e0c05bc3c53141200ad94014df7",
+          "a4a12f87e54579c1d3b17cbe9e36d27e9ac648762cd4eaca208660d575a866cd",
+          "15a92826eb7bf3ca63ac5891150d746f7bfa16aef3ddb7ea838f2ab203ccb3a5",
+          "e09df24aae69e26bbb28b503584e7bc3e15132007a35ff2cbf56a329c487b42e",
+          "ff0b12694e482ae45f18abb4c3b3e690e22534fc91398233438c0fea81374a07",
+          "029273b5005705549ee35ad60f5c941538bf2a12b93cdc94bca3e6b550ce3cfc",
+          "c7f2701854f3c03754db49c0ce98405c2cf1cc97ec96fbacb6fcd6ed44135e88",
+          "496a1fab8303ded32c468606168739c95966cb28cf2c8a32450d692cc1555f67",
+          "8ec80fe44f7d994bd48bdbea689fb94ff6671f68c30282767a2d3ea9977e7a5b",
+          "b6773c47bc9f79cd3f177fe6b38bd0c281f941442e2751bc51f90f25d9b52004",
+          "94762cca19d78c297fcc2c4f5dd2e111a17db9eb9351e77eb74b774512ac9cfd",
+          "52baac2b1bf95231e26e15af5ae8742bbf933a4699acf1d84822402b93cc803e",
+          "0ad3ee3b658133be600e0fffebe37b5cf0cd68e13df4fd39d8f07cc677298bf0",
+          "15fb6bde5ab0c4841b4f787abebf10c89eb212a7038cfbfc850ed598f45b0f0f",
+          "40dda69cbec407b4af3e5c1dbf1c23ab4f6d1ff82a4a460bfeb60a8cb32c43ff",
+          "d0bd1e189be50f28f9c181e26a888f55c17db0b0b3d1a9189164778319f5073a",
+          "93217430269a2906c3daafc737c43127e65f880ac3be0defc8b14e4d53e8613a",
+          "2e96791746da27d1debcbcd8079b75a8fd52a7aa8dd3bb9ed24b9a82a7a88ab9",
+          "841251637a6b036fed45c56d51859bbfba3f880e6edf8e9196fcafe4534acb04"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/guardian.png",
+        "rgba_sha256": "2836788537fbd9972534ca60387a6689e7049342255a434ac70aea3129a3e537",
+        "sha256": "3b519f6b5557204a43bfb94e7b4df8543a6f3d0d7bb02e1e0748f33d6ab5a63a"
+      },
+      "public_master_bridge": {
+        "bytes": 4923,
+        "path": "source/art/bodies-v1/guardian/proof/public-master-bridge.json",
+        "sha256": "62b39f30c4ec8fa936fecd8c951bcefd3bdd1bdce07c83af0049869a1422067d"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42225,
+        "path": "source/art/bodies-v1/guardian/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "288f28aa6212407b4a61ba2d441e59dbcfe7f6af4df97e83f8bc6ac31ffef7b8"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          640
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.03671875,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 2.05625
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/guardian.png",
+      "source-native": {
+        "bytes": 7936,
+        "path": "source/art/bodies-v1/guardian/proof/source-native.json",
+        "sha256": "59615681e6d3b96ca36aff825959c38160d35b47a2158d347cc8fdc2693c7b89"
+      },
+      "source_blend": {
+        "bytes": 3865116,
+        "path": "source/art/bodies-v1/guardian/guardian.blend",
+        "sha256": "5dfb1a88e9344b35c9b6302d7e3b113c1b81bf27a5097e85aa527f7e73b25e64"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/ritual-shared/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        },
+        {
+          "bytes": 33299,
+          "path": "source/art/bodies-v1/guardian/geometry_v07.py",
+          "sha256": "9208027a1a8c282d9a04323b7214ffff48c5850032d1ecae0ca12752f7cc84ec"
+        },
+        {
+          "bytes": 13682,
+          "path": "source/art/bodies-v1/guardian/paint_ritual_roles_v07.py",
+          "sha256": "f84007d7402f9a7051661f0faa583185c4b49b2f0e03ac526386654dff2399ab"
+        }
+      ]
+    },
+    {
+      "actual-context": {
+        "bytes": 9119,
+        "path": "source/art/bodies-v1/summoner/proof/actual-context.json",
+        "sha256": "c217cdf3e71cf56f24f6e1ecab82706cb0814adea7ff1ba9840da93397c4c998"
+      },
+      "editable_surface_paint": {
+        "bytes": 2094,
+        "path": "source/art/bodies-v1/summoner/summoner-surface-paint.png",
+        "sha256": "01bedd26026dad1ff919c112c24897317ae21c7604889c842df1f179332d53d4"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "192787567aaf67ab5571a303461ff9186bc03bf1f91c567395dcfd0e1957378f",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16839,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-00.png",
+            "sha256": "874b1140fa29cced77c9ae8586862df190082f8f747b6807a58856bf0653875f"
+          },
+          "raw_bbox": [
+            30,
+            18,
+            98,
+            120
+          ],
+          "raw_rgba_sha256": "a2d5fbaacc0d5d682faac3b4e8f5df0c7ad710616b52852531f9ff15fac30d38",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "6e0c56478bd9d67ccc452465846e7ad43f1deb538bd0b0191b9bf6220d6d47c7",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16310,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-01.png",
+            "sha256": "f0cec42ec892302a5521a9d7c38c96843b88a5fae8cd55e76e003e12eb9d56c4"
+          },
+          "raw_bbox": [
+            34,
+            18,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "d3d0b677e7290505a51b15fdd01bfe5ebe50f517876f8b14ffb5ae0c8618de5d",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "5ec77e0f066693888c42b88c9ce2ec7d38578887132e393b3357ab718cff3e5a",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15065,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-02.png",
+            "sha256": "2d3c0b86b488f7245e1dc99a3bec70c84fa199176997fa3fbe6cd2970457d7b2"
+          },
+          "raw_bbox": [
+            24,
+            18,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "3143ff73f639a4aab878ed8770e5ca9a2106ef15331795b7425b3a55a6e6e14b",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "a23e0755275b3d5b800536db3749e6e499d00930db0e6a251b4aebaec98c7001",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 14565,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-03.png",
+            "sha256": "14f713014b919f1025aec618395f298378e2824d3eaf1e75cd8c1613db6f4f83"
+          },
+          "raw_bbox": [
+            34,
+            19,
+            101,
+            120
+          ],
+          "raw_rgba_sha256": "9ff4e30875c1e8900fee8fc1f08ad26d74ea01c169b6f977031ee400cce16685",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "2c36284c5626b1d6aadc640d5e79f9893ee288df888cdc3e3b2adcda001fb630",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 14170,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-04.png",
+            "sha256": "0b1eaa9b338131d7a7731f37cb1135a2fa0088cc969c7cc4aa5b072b50a6dc5a"
+          },
+          "raw_bbox": [
+            29,
+            21,
+            97,
+            117
+          ],
+          "raw_rgba_sha256": "b4b3231f145cfea0cb832d4b30a25407754b3cc631f56a6669f261ce84e3107e",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "6e45cbbd7ad2fdcd0935f336bc2b595070cbf5f58aa831fa1f75f4a4fb7b584f",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13831,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-05.png",
+            "sha256": "78ba6a595d63d5e8c3d008255d809337e9aa87b9d039455e57ef4c4cdbf36f9d"
+          },
+          "raw_bbox": [
+            26,
+            21,
+            93,
+            120
+          ],
+          "raw_rgba_sha256": "5ab1cc3da6a271081847acbdb458ebc30dd860ae1b6b9173d0d695192e2c4fb6",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "641fd1c0215b5c5153ca58646ab0d367c173faf6e38a48de104d2acf2ca298c5",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 13892,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-06.png",
+            "sha256": "9b27491fcee1d7279f191e28cc8227be0a6c16f838957d21714efeb5bf151376"
+          },
+          "raw_bbox": [
+            39,
+            21,
+            103,
+            119
+          ],
+          "raw_rgba_sha256": "391d21571461cb70f85b76459f511bb4c6704b783d68a2c2ce344fb8483afc86",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "78bfb4d4e4119d8ab900c7c3d5abde59948799ac20bed52bd8e9b1259a7ad442",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15612,
+            "path": "source/art/bodies-v1/summoner/frames/raw-idle-07.png",
+            "sha256": "6fdd69ede537a76b1040ef3bfd1a9f325780fed585df9c14ced6a044ed4e4e0b"
+          },
+          "raw_bbox": [
+            26,
+            20,
+            93,
+            118
+          ],
+          "raw_rgba_sha256": "a64027f0997e194a4327f88db1af20fe4d9825b08c1705bf7d4db834eaac1ef5",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "0526fde3acbcf10b682dfbbd5a08910a3310fa18ff56d006c9d8673171a88aca",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16677,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-00.png",
+            "sha256": "c8639883c1123e7ddf41d8ec639b55e8621ca79e5492b617e0254263bf280e04"
+          },
+          "raw_bbox": [
+            30,
+            19,
+            98,
+            120
+          ],
+          "raw_rgba_sha256": "8b0780bb74bd745dc39a31216acfeafe909ae71ad678db33a200dbf80ca10754",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "2a0e10f9c606729bdd319c6b0a3a43689075bd440085424ef7db6b1960dc6621",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16241,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-01.png",
+            "sha256": "86a82b91d0c13738e16ce1d4a0568a81ad7765354c4c5604de9b9cd5f48d7bc8"
+          },
+          "raw_bbox": [
+            34,
+            18,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "5aeae99cc79e2d098945e8a2e6269aa23cce0a42bc4f84e80ee5ed07c2484f6c",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "ab2465103513dd5e4fcc70bf642279c3ba2b2c410c488efcae55f35ff79be091",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15039,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-02.png",
+            "sha256": "afd08ad20774365e3b9cd705482814fd4513718332fd296b0d7469d4a6855888"
+          },
+          "raw_bbox": [
+            24,
+            19,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "0a1f994a8760c16f8e8398c98d2883fdb9583a768536ceeb2884c8a8764c5864",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "b9911e9bcbd71f2da3faba870a0d3aaca4999e558e4d0b9d20f02aad07797254",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14573,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-03.png",
+            "sha256": "00f9bba06249dbcc3f982ec842dfd3826f39f9f256cd3c24eb1c56c8888ae872"
+          },
+          "raw_bbox": [
+            34,
+            20,
+            101,
+            120
+          ],
+          "raw_rgba_sha256": "74642148030476be21bf8bdd0cc51181d87bbb10f0f0818e540ce3c2a3baeb67",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "8b33c02cd7ca7308b9f13893b27ad737984f557b8fecdaac95221a17c99f6336",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 14223,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-04.png",
+            "sha256": "e160dc732aafc6ae6a97031a5d7724b12280b0eb79c9e94724015cc13df9af67"
+          },
+          "raw_bbox": [
+            29,
+            21,
+            97,
+            117
+          ],
+          "raw_rgba_sha256": "e922e1a85dcfe5c55cd4199ce851897cab8be8de6c062107c9dd471acf89d808",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "379385028df867a339c08e46382ccfcb2b2c4f6e123dcd7dd63eef8dd6dd24b9",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 13782,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-05.png",
+            "sha256": "714556eccb6d8f074b4515281bf28e2ed72409a726c66e296b022bc970ed7c73"
+          },
+          "raw_bbox": [
+            26,
+            22,
+            93,
+            120
+          ],
+          "raw_rgba_sha256": "4bc6ea59b0e716945daa4d27df63198cfaf40d888dd33b8eb414ed32a700b92d",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "21e1ed9ef560a35afa1cfdcea2cad1a42c2332ffe437e5874b2462bc32e44ba0",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 13908,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-06.png",
+            "sha256": "bc0cfece5bc6998d3b0bb4c0c72c8d893170180f79065604108ff804b2f0984b"
+          },
+          "raw_bbox": [
+            39,
+            22,
+            103,
+            119
+          ],
+          "raw_rgba_sha256": "acfae0a968a9ff9a8235ea7efad93c39dddccafac7bc32524f3a4a02b22bc6d5",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "91f857c48c736ddafc2d8d07ec1ec0188187d8a874dbaf8cd5aba166c9423169",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15630,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_a-07.png",
+            "sha256": "cb2ae2eed6a880dc11d61f5cff58d19b8922c6f3a4fca4ef82ce1774ff2233cb"
+          },
+          "raw_bbox": [
+            26,
+            20,
+            93,
+            118
+          ],
+          "raw_rgba_sha256": "ace0af5f2bf7a3aff9286aa961beb17096ac9b17789ec002a96cf73cf21b7723",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "44b83bee10ad8a5ceedf5858988d942c3e1b0168f76a18651b3f86892137f807",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16810,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-00.png",
+            "sha256": "a00c4849f779f931116d0091ee04b926a028393861a030080efb56f04cf1771d"
+          },
+          "raw_bbox": [
+            30,
+            18,
+            98,
+            120
+          ],
+          "raw_rgba_sha256": "2f1ef2186d1a6a8017e6b704d6809e992bb0c6fefec08b4dd57922331f1f8695",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "051e2b134062555ecc9ac0c47eaef9e983c87ccf0b951739ecb8023ee195aaf8",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16284,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-01.png",
+            "sha256": "f21be25e9cc8d8f47d1b5f3646bcef0a719ebfd280e993fcf29f4341c1c76c8a"
+          },
+          "raw_bbox": [
+            34,
+            17,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "1549e49d3a45cdaee265a2e784d74732ccfdb17b5cfb97e7b997c8c571fa3466",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "83d02159af3971a34c26676519110dda34a584517495eb0204fcf870e21d76c2",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15010,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-02.png",
+            "sha256": "0271c95d3dd2250ef0b0d09f6bb0b0de964053805bdaa15259116b804f10cfa0"
+          },
+          "raw_bbox": [
+            24,
+            18,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "bfcb5182a5e825cce39180553f660bc194a2f976fb484962065672a03f28d5cd",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "eb783a2e1edf0fcfdc87d84f35a702fdc38704664bf5a5615ffe9e2bff917962",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 14589,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-03.png",
+            "sha256": "8e3945f52f1d328ca88105ffa7a0af5ffc846e31f57c63501091bcd3fb680d1b"
+          },
+          "raw_bbox": [
+            34,
+            19,
+            101,
+            120
+          ],
+          "raw_rgba_sha256": "e7020b8ecb2b5c4d11aa06ebfcef74ec6d13c35a98860c9c040b00a3e69f7044",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "ea667c95d78306057fbee6527ea7b38de59ed1bf5a18d34e262cbcb9ec302d1a",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 14201,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-04.png",
+            "sha256": "e719f3d8d7d1a65e844c2d5ec23df2280b350a34490d6438d0c876aeb1d97358"
+          },
+          "raw_bbox": [
+            29,
+            20,
+            97,
+            117
+          ],
+          "raw_rgba_sha256": "d6969878bf527b74995a1df30744d5b97b858d324b0a0e8a4590b3095138ed96",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "7d8ce3dcafb1362f148ed971164620ea92364ca4211ccf39b7db2024c4612f5d",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13846,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-05.png",
+            "sha256": "88c157ed763100816dcd15c4baf253d653d7baa765ed55edd050ea0bb4e0001a"
+          },
+          "raw_bbox": [
+            26,
+            21,
+            93,
+            120
+          ],
+          "raw_rgba_sha256": "9a917f8561110b7927aeb2187a23116f5f2722a5906ee28556f476b59f4036cd",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "feb17087062c703702dec83302d1076073448a40b7ece91b1f7230b857d73f94",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 13905,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-06.png",
+            "sha256": "74c021d4243df80da87ea9f60d6c8667dfdf5e99dc0e415f0b7ca47c7509a05a"
+          },
+          "raw_bbox": [
+            39,
+            21,
+            103,
+            119
+          ],
+          "raw_rgba_sha256": "ea00d41cb222a7e11ddefec5b2b23b84442a20b6d6337be6511be0e5964bb699",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "5a1b3ff4fe119c33615a5f840f8f71a2ab50e0b421be3217271dd91cbe1e8bf0",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15702,
+            "path": "source/art/bodies-v1/summoner/frames/raw-walk_b-07.png",
+            "sha256": "344e22a5cbcc7c9583565aabd5b925464917dff3df7cce70ce35693f4d01b809"
+          },
+          "raw_bbox": [
+            26,
+            19,
+            93,
+            118
+          ],
+          "raw_rgba_sha256": "4671f720955bb3ea211725c6ec95e8224827b8798eacf9bf32f111e1b8505dfd",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "684dfb43b434933dff86937f47fd202ef3e162cfbe0055d6470ac61459e43938",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17242,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-00.png",
+            "sha256": "87edaa2f4dcbfe46dbfc1ca1c26a1f928625f91d98c856bc7804c9167dae5787"
+          },
+          "raw_bbox": [
+            30,
+            23,
+            98,
+            120
+          ],
+          "raw_rgba_sha256": "35d10cd155fb14d792e4eb0abe8b5252214409ec77e0c7a4987c78b6d14e6217",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "a5e8b1fbb85fd995655f893611ddbb13769640560165c71ef64f21ece9a2387c",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16769,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-01.png",
+            "sha256": "075862545ed6d23518c16bdb7fa3115f6004dcfeb0ea4fe40459eec22c3ba57e"
+          },
+          "raw_bbox": [
+            26,
+            22,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "0bf3c4021910d39bb15dbcb9f8fbdbee95fe89a568ec742023399c66dd312cd3",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "585f6d8c0381a014b19aff33c9c8708416d9507d680e83e567d93c1a0ecd26a1",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15954,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-02.png",
+            "sha256": "94a282e942e4716571d777147668ba3b6ca8efa48de8f812029421ba2c790266"
+          },
+          "raw_bbox": [
+            24,
+            22,
+            88,
+            119
+          ],
+          "raw_rgba_sha256": "e55fa576c040c572f1722d465b59f413f8812dc89ca8a2edd767a5f8fa2004cd",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "f44f080574df81ff7ebda69024be02b180354dfaf94e590d5b4bfba2ddef85e4",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 14993,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-03.png",
+            "sha256": "294a8119677dcc6000a9858c0d7ae68c3447fae3528492ada40876fcaa8f7adf"
+          },
+          "raw_bbox": [
+            26,
+            22,
+            101,
+            120
+          ],
+          "raw_rgba_sha256": "852d5893851eecd59c509fa8cbe8b4a3d4246899117f922af35bed7901d0e51e",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "e692973cfa6045ccc8d7975aac79db388c141b21ce6a502ee2cc871f6d401456",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 14594,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-04.png",
+            "sha256": "fcc9ba1a414e8f25111f4dc5ef725204613ee5bd726ef38fcfd042a40aac40fa"
+          },
+          "raw_bbox": [
+            29,
+            23,
+            97,
+            117
+          ],
+          "raw_rgba_sha256": "2fbfbdbeda7bf57fbeebfd401506dea8224147dd6464fdde95b7b7e3d99effdb",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "0e8f2529a1fec35a94f046adc55070dbe1634aba87f17c90383d0f62d6559ba2",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 14255,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-05.png",
+            "sha256": "6bb95ee5c81459151aaf1580bb4b8daf1ac24780ad0f47cd9cee874343035a8e"
+          },
+          "raw_bbox": [
+            26,
+            24,
+            101,
+            120
+          ],
+          "raw_rgba_sha256": "97fcfce7ea2fd1d80437e462e6fd398cfc7c7dc7d88bf53e7cd0ff9c80793de0",
+          "vertical_shift": -1
+        },
+        {
+          "cell_rgba_sha256": "413f3cce9e0da564f852e28ef55084e713fef14d3d5cf9329dd2b69681e602d1",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 14559,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-06.png",
+            "sha256": "beae08fe425caba82c09455ad911ddd6da477ab8383535ac8882b061f008c579"
+          },
+          "raw_bbox": [
+            39,
+            25,
+            103,
+            119
+          ],
+          "raw_rgba_sha256": "0b57573549950433d81ea163429c34f92807b824de32581b7bb43b85eff78985",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "38a1647553077eb1fab53972b46f38b7df6671fab31f010d1ee49fa4b727314c",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16106,
+            "path": "source/art/bodies-v1/summoner/frames/raw-attack-07.png",
+            "sha256": "839d516c6fca26a669067fcdf5168d0aba135e76b65a921ab74c17148c88619c"
+          },
+          "raw_bbox": [
+            26,
+            24,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "4bfa30a6d05284a556b1931b753c2e7bd6bac161a92f619b56c13c7d381ebde7",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "2d5b345dea5143481aafb129e2d32b6b0f6e14f779ac11e31eb657c1134ba956",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12439,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-00.png",
+            "sha256": "a21acf69b71335045075463678a52b2d52b3afd3a8fa8014b0b61d7a20c1c3c5"
+          },
+          "raw_bbox": [
+            29,
+            44,
+            98,
+            105
+          ],
+          "raw_rgba_sha256": "449549b36bf316ef65e17cec2d634d90ac07cc2cc4e2d20c99039938f9c238d2",
+          "vertical_shift": 14
+        },
+        {
+          "cell_rgba_sha256": "36adac6cafdd8f844c278a4e436b3ba635bf1cd0c1bafdd48731f03f7faa8a9e",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13507,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-01.png",
+            "sha256": "f54c812d88b050cea547fd65502f10b7da2836a4c469596043ea5e34fb2ee9e2"
+          },
+          "raw_bbox": [
+            23,
+            43,
+            120,
+            108
+          ],
+          "raw_rgba_sha256": "10b762db592537672ef43942a9be79b524467db3ac5cf03c2be63fb0f5dc1655",
+          "vertical_shift": 11
+        },
+        {
+          "cell_rgba_sha256": "e8f6a600c215dcdadb89a811fb8c74248318dac19cbea47947d282fa0485e205",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14051,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-02.png",
+            "sha256": "eaa31612dae4480fb8b957ab775bb3df7dd6b069ec3dbdbe95120b2b6fff372f"
+          },
+          "raw_bbox": [
+            15,
+            46,
+            112,
+            113
+          ],
+          "raw_rgba_sha256": "1ad17d2aac2e2fec046584aff4e4b699908c2b158f881668aa1442d3ac0b36dc",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "bdb25087b5c7dfd1794724d82d5ec5a59f7bb14ea90faa93527dea5111f5aea8",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13290,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-03.png",
+            "sha256": "4ccd938688165396f327552d27e5920089489781f68dc0e9d2d4b081512bf13c"
+          },
+          "raw_bbox": [
+            34,
+            43,
+            121,
+            119
+          ],
+          "raw_rgba_sha256": "cb442b3e498773c5fca14befb81456de6c8b0c4fdc3bcfa82da6e0a0606cc7ca",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "81e90834d481db198203bf2029de0d158eb640531de43d6ad99a0b90377d9b71",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12156,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-04.png",
+            "sha256": "0802029c7fd7accce4f8ab1fdb8f215a6e9fb10037319a445b1d51b0c545bcd2"
+          },
+          "raw_bbox": [
+            29,
+            42,
+            98,
+            121
+          ],
+          "raw_rgba_sha256": "7b6fe9cad769865f18f64f922155271bf9e3a04aa04e8dd606b5bc53f5bcc085",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "ddabb1c1b05cb1b16a1ce066be85937b6f0056b4c705d9d7bfbe679fe9be17fc",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13276,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-05.png",
+            "sha256": "da1cde11b6954cdf2d5aebdee42b66bf46ebe14f5f856fbef01368ff395a23f0"
+          },
+          "raw_bbox": [
+            7,
+            44,
+            104,
+            119
+          ],
+          "raw_rgba_sha256": "5ce1c7ee112b4f7d71076f514744a5505d5e97154ae1d51b5e9a5d0426dd48b7",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "372545004a6e3173372868dc4a6a415be30d510c9662f52e4bc0b8f1c9304cba",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13037,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-06.png",
+            "sha256": "bc75365197093136c31985ad98c9fe8cfc1e509533473c3631c8764e8add38e3"
+          },
+          "raw_bbox": [
+            15,
+            46,
+            112,
+            113
+          ],
+          "raw_rgba_sha256": "e31e0b6e23597d0642c31b9347ca91d746bdf4b0a26018289d5a1b183603466a",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "a742140c4af96d78359892df7681a9c17de43f03ef1db8fe78bb13023e885cea",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 12700,
+            "path": "source/art/bodies-v1/summoner/frames/raw-dead-07.png",
+            "sha256": "70282065e77b09e576a3b03965c598cc97d85c755369fa603387d289ee82a354"
+          },
+          "raw_bbox": [
+            6,
+            43,
+            93,
+            108
+          ],
+          "raw_rgba_sha256": "49d496bb2b28c2d2a221a30aec097c87deabc64c8a1f9d513e150c063dac1b52",
+          "vertical_shift": 11
+        }
+      ],
+      "generator": {
+        "bytes": 19701,
+        "path": "source/art/bodies-v1/summoner/build_ritual_roles_v07.py",
+        "sha256": "85ac11ca6b7e455a6b8ebc5bdc4e481b3394d5f9a4cedd0a094c602532b49ce9"
+      },
+      "import_sidecar": {
+        "bytes": 957,
+        "path": "game/assets/art/sprites/bodies-v1/summoner.png.import",
+        "sha256": "9e247ed1891f6a18bb8da9b341419394f74b567daedef7ab4ec81b965a3f5ca0"
+      },
+      "independent": {
+        "bytes": 4591,
+        "path": "source/art/bodies-v1/summoner/proof/independent.json",
+        "sha256": "5b02fecdcaee39f50b30c1ea78d9c259d96e3adc1c46a8117d943c8c3a062f34"
+      },
+      "kind": "summoner",
+      "lineage": {
+        "generator": {
+          "bytes": 53153,
+          "path": "tools/build_late_combat_art.py",
+          "sha256": "8dc582d4f7984c47aa2e7257ff7d8ebf3516e146a2b09bb9bba74bdbe2ea684e"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          },
+          "tools/build_processional_art.py": {
+            "bytes": 34609,
+            "path": "tools/build_processional_art.py",
+            "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+          },
+          "tools/build_religious_art.py": {
+            "bytes": 37332,
+            "path": "tools/build_religious_art.py",
+            "sha256": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde"
+          }
+        },
+        "logical_generator": "tools/build_late_combat_art.py",
+        "output": {
+          "bytes": 148088,
+          "path": "game/assets/art/sprites/summoner.png",
+          "sha256": "cb290f1cfb10c6809cdde3c09e89e28b51c7ecf2944a21bb3f74a3226a3af8c9"
+        },
+        "source": {
+          "bytes": 6174385,
+          "path": "source/art/summoner.blend",
+          "sha256": "2f2005e8e4e78911adbffd213d0a99cbf473ffef6514168f98cd777e90a5e958"
+        }
+      },
+      "normal-import": {
+        "bytes": 4086,
+        "path": "source/art/bodies-v1/summoner/proof/normal-import.json",
+        "sha256": "1d409772b087e5a3241b8f226ce7901cf23b9b50746b90528f45f7793e6a9c14"
+      },
+      "output": {
+        "bytes": 201859,
+        "cell_bbox": [
+          [
+            30,
+            17,
+            98,
+            119
+          ],
+          [
+            34,
+            19,
+            101,
+            119
+          ],
+          [
+            24,
+            18,
+            88,
+            119
+          ],
+          [
+            34,
+            18,
+            101,
+            119
+          ],
+          [
+            29,
+            23,
+            97,
+            119
+          ],
+          [
+            26,
+            20,
+            93,
+            119
+          ],
+          [
+            39,
+            21,
+            103,
+            119
+          ],
+          [
+            26,
+            21,
+            93,
+            119
+          ],
+          [
+            30,
+            18,
+            98,
+            119
+          ],
+          [
+            34,
+            19,
+            101,
+            119
+          ],
+          [
+            24,
+            19,
+            88,
+            119
+          ],
+          [
+            34,
+            19,
+            101,
+            119
+          ],
+          [
+            29,
+            23,
+            97,
+            119
+          ],
+          [
+            26,
+            21,
+            93,
+            119
+          ],
+          [
+            39,
+            22,
+            103,
+            119
+          ],
+          [
+            26,
+            21,
+            93,
+            119
+          ],
+          [
+            30,
+            17,
+            98,
+            119
+          ],
+          [
+            34,
+            18,
+            101,
+            119
+          ],
+          [
+            24,
+            18,
+            88,
+            119
+          ],
+          [
+            34,
+            18,
+            101,
+            119
+          ],
+          [
+            29,
+            22,
+            97,
+            119
+          ],
+          [
+            26,
+            20,
+            93,
+            119
+          ],
+          [
+            39,
+            21,
+            103,
+            119
+          ],
+          [
+            26,
+            20,
+            93,
+            119
+          ],
+          [
+            30,
+            22,
+            98,
+            119
+          ],
+          [
+            26,
+            23,
+            101,
+            119
+          ],
+          [
+            24,
+            22,
+            88,
+            119
+          ],
+          [
+            26,
+            21,
+            101,
+            119
+          ],
+          [
+            29,
+            25,
+            97,
+            119
+          ],
+          [
+            26,
+            23,
+            101,
+            119
+          ],
+          [
+            39,
+            25,
+            103,
+            119
+          ],
+          [
+            26,
+            25,
+            101,
+            119
+          ],
+          [
+            29,
+            58,
+            98,
+            119
+          ],
+          [
+            23,
+            54,
+            120,
+            119
+          ],
+          [
+            15,
+            52,
+            112,
+            119
+          ],
+          [
+            34,
+            43,
+            121,
+            119
+          ],
+          [
+            29,
+            40,
+            98,
+            119
+          ],
+          [
+            7,
+            44,
+            104,
+            119
+          ],
+          [
+            15,
+            52,
+            112,
+            119
+          ],
+          [
+            6,
+            54,
+            93,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "192787567aaf67ab5571a303461ff9186bc03bf1f91c567395dcfd0e1957378f",
+          "6e0c56478bd9d67ccc452465846e7ad43f1deb538bd0b0191b9bf6220d6d47c7",
+          "5ec77e0f066693888c42b88c9ce2ec7d38578887132e393b3357ab718cff3e5a",
+          "a23e0755275b3d5b800536db3749e6e499d00930db0e6a251b4aebaec98c7001",
+          "2c36284c5626b1d6aadc640d5e79f9893ee288df888cdc3e3b2adcda001fb630",
+          "6e45cbbd7ad2fdcd0935f336bc2b595070cbf5f58aa831fa1f75f4a4fb7b584f",
+          "641fd1c0215b5c5153ca58646ab0d367c173faf6e38a48de104d2acf2ca298c5",
+          "78bfb4d4e4119d8ab900c7c3d5abde59948799ac20bed52bd8e9b1259a7ad442",
+          "0526fde3acbcf10b682dfbbd5a08910a3310fa18ff56d006c9d8673171a88aca",
+          "2a0e10f9c606729bdd319c6b0a3a43689075bd440085424ef7db6b1960dc6621",
+          "ab2465103513dd5e4fcc70bf642279c3ba2b2c410c488efcae55f35ff79be091",
+          "b9911e9bcbd71f2da3faba870a0d3aaca4999e558e4d0b9d20f02aad07797254",
+          "8b33c02cd7ca7308b9f13893b27ad737984f557b8fecdaac95221a17c99f6336",
+          "379385028df867a339c08e46382ccfcb2b2c4f6e123dcd7dd63eef8dd6dd24b9",
+          "21e1ed9ef560a35afa1cfdcea2cad1a42c2332ffe437e5874b2462bc32e44ba0",
+          "91f857c48c736ddafc2d8d07ec1ec0188187d8a874dbaf8cd5aba166c9423169",
+          "44b83bee10ad8a5ceedf5858988d942c3e1b0168f76a18651b3f86892137f807",
+          "051e2b134062555ecc9ac0c47eaef9e983c87ccf0b951739ecb8023ee195aaf8",
+          "83d02159af3971a34c26676519110dda34a584517495eb0204fcf870e21d76c2",
+          "eb783a2e1edf0fcfdc87d84f35a702fdc38704664bf5a5615ffe9e2bff917962",
+          "ea667c95d78306057fbee6527ea7b38de59ed1bf5a18d34e262cbcb9ec302d1a",
+          "7d8ce3dcafb1362f148ed971164620ea92364ca4211ccf39b7db2024c4612f5d",
+          "feb17087062c703702dec83302d1076073448a40b7ece91b1f7230b857d73f94",
+          "5a1b3ff4fe119c33615a5f840f8f71a2ab50e0b421be3217271dd91cbe1e8bf0",
+          "684dfb43b434933dff86937f47fd202ef3e162cfbe0055d6470ac61459e43938",
+          "a5e8b1fbb85fd995655f893611ddbb13769640560165c71ef64f21ece9a2387c",
+          "585f6d8c0381a014b19aff33c9c8708416d9507d680e83e567d93c1a0ecd26a1",
+          "f44f080574df81ff7ebda69024be02b180354dfaf94e590d5b4bfba2ddef85e4",
+          "e692973cfa6045ccc8d7975aac79db388c141b21ce6a502ee2cc871f6d401456",
+          "0e8f2529a1fec35a94f046adc55070dbe1634aba87f17c90383d0f62d6559ba2",
+          "413f3cce9e0da564f852e28ef55084e713fef14d3d5cf9329dd2b69681e602d1",
+          "38a1647553077eb1fab53972b46f38b7df6671fab31f010d1ee49fa4b727314c",
+          "2d5b345dea5143481aafb129e2d32b6b0f6e14f779ac11e31eb657c1134ba956",
+          "36adac6cafdd8f844c278a4e436b3ba635bf1cd0c1bafdd48731f03f7faa8a9e",
+          "e8f6a600c215dcdadb89a811fb8c74248318dac19cbea47947d282fa0485e205",
+          "bdb25087b5c7dfd1794724d82d5ec5a59f7bb14ea90faa93527dea5111f5aea8",
+          "81e90834d481db198203bf2029de0d158eb640531de43d6ad99a0b90377d9b71",
+          "ddabb1c1b05cb1b16a1ce066be85937b6f0056b4c705d9d7bfbe679fe9be17fc",
+          "372545004a6e3173372868dc4a6a415be30d510c9662f52e4bc0b8f1c9304cba",
+          "a742140c4af96d78359892df7681a9c17de43f03ef1db8fe78bb13023e885cea"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/summoner.png",
+        "rgba_sha256": "719d68c9c0d9b5ac12fb09b22cdd3e3c8b076e47a43f8dc1c534f49d9e78196c",
+        "sha256": "7499061d847bf8a4bd2bcf11ae4e62df01149ebed8c92740155d474079c84368"
+      },
+      "public_master_bridge": {
+        "bytes": 4923,
+        "path": "source/art/bodies-v1/summoner/proof/public-master-bridge.json",
+        "sha256": "f0dccc6f528c5abc9737ceb5c97c95fc8bbcf3762e36e8b3b88af1610e14ad13"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42225,
+        "path": "source/art/bodies-v1/summoner/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "2d0d83410d85cbc124c9e2bf5f904d7eab596ba50ccb9ced5418caa654516d60"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          640
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.04375,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 2.4499999999999997
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/summoner.png",
+      "source-native": {
+        "bytes": 7936,
+        "path": "source/art/bodies-v1/summoner/proof/source-native.json",
+        "sha256": "56b2fe39f4cff812b0c9c77fe464472ca1ed84e9251fe3bd7f9c6188e6fdcdc4"
+      },
+      "source_blend": {
+        "bytes": 4316926,
+        "path": "source/art/bodies-v1/summoner/summoner.blend",
+        "sha256": "f9db0a2888c9660f0f1906f52a38cf61fe33c4c95b02086b547ae9478982c920"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/ritual-shared/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        },
+        {
+          "bytes": 33299,
+          "path": "source/art/bodies-v1/summoner/geometry_v07.py",
+          "sha256": "9208027a1a8c282d9a04323b7214ffff48c5850032d1ecae0ca12752f7cc84ec"
+        },
+        {
+          "bytes": 13682,
+          "path": "source/art/bodies-v1/summoner/paint_ritual_roles_v07.py",
+          "sha256": "f84007d7402f9a7051661f0faa583185c4b49b2f0e03ac526386654dff2399ab"
+        }
+      ]
+    }
+  ],
+  "pending_fields": [
+    "Canonical exact8 Enemy BODY_ATLASES/current-context and independent acceptance",
+    "Strict typed source bridge support for ritual roles; no generic bypass"
+  ],
+  "pending_roles": [
+    "crawler",
+    "worker",
+    "brute",
+    "nursery_warden",
+    "choir_avatar"
+  ],
+  "schema": "null-choir-eight-actor-ledger-v1",
+  "scope": "Only three frozen ritual roles, now actual original/public readonly source-open qualified. Exact original full40 native art, actual normal imports, all40 context views and independent acceptance retained. PENDING whole eight-actor/current consumer integration, not a partial-cohort bypass.",
+  "status": "PENDING",
+  "version": 1
+}

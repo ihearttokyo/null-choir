@@ -1,0 +1,75 @@
+{
+  "actor_kind": "nursery_warden",
+  "atlas_sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506",
+  "backgrounds": [
+    {
+      "bytes": 125446,
+      "path": "source/art/bodies-v1/nursery_warden/proof/final-background-a.png",
+      "sha256": "844b6a43def582f279893be703d5117f65a3dcb3507ff25f35598e5d79f15b55"
+    },
+    {
+      "bytes": 125441,
+      "path": "source/art/bodies-v1/nursery_warden/proof/final-background-b.png",
+      "sha256": "a90fbf845e460afdbe2128e2284f2bae0a6f8f9342429b47ac13baa0b532fc6b"
+    }
+  ],
+  "configured_runtime_uri": "res://assets/art/sprites/bodies-v1/nursery_warden.png",
+  "consumer_sha256": "6463ec67fce42419da719825776811c4779996a6be07dc414390becb10161229",
+  "evidence_class": "actual-native",
+  "native_report": {
+    "bytes": 4528,
+    "path": "source/art/bodies-v1/nursery_warden/proof/final-context-native-report.json",
+    "sha256": "3c07df079a20c67dbe0defbe739323c2873d2c8c860f6074c730bdb27ea21518"
+  },
+  "native_wall_negative_control": true,
+  "new_fullmatrix_context_rendered": false,
+  "normal_import_sidecar_sha256": "5f3d7d5848e40d11b3fc0c8a3863d06756116f4a8764a48c36b9c7486ee65750",
+  "normal_import_uid": "uid://cmkak7dn6qmec",
+  "player_sha256": "d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff",
+  "resolution": [
+    640,
+    360
+  ],
+  "resource_class": "CompressedTexture2D",
+  "retained_source_art_qualification": {
+    "actual-context": {
+      "bytes": 9380,
+      "path": "source/art/bodies-v1/nursery_warden/proof/actual-context.json",
+      "sha256": "59e7fd8011a8c1866ac5a915952de79f2550f5342a4af8b58621c8c9af1b7f55"
+    },
+    "independent": {
+      "bytes": 5076,
+      "path": "source/art/bodies-v1/nursery_warden/proof/independent.json",
+      "sha256": "36a860f694ac76a050830ba4b2ca354dccbf8a5602ad352e14b39a29934dcfbd"
+    }
+  },
+  "rgba_sha256": "70f9746a80f8ec593541171fb3d95e32ca8476947424cb166fd19bdec1fe6694",
+  "sampled_Metal_RSS_bytes": null,
+  "sampled_Metal_RSS_status": "unavailable; not zero memory",
+  "schema": "null-choir-actor-actual-context-v1",
+  "scope": "Actual unchanged authored role map/spawn + final Enemy normal Texture2D; one manually selected idle0. No ImageTexture/scene-light/art/scale override, input/AI/gameplay/FPS claim",
+  "source_fixture": {
+    "bytes": 14671,
+    "path": "source/art/bodies-v1/final-cohort/static_visible_cohort.gd",
+    "sha256": "bb34ab6131d757d2839568f02c137d47ebb7b9e5c9f25bfc56e0079ba4366d16"
+  },
+  "stable_opaque_source_witnesses": 9,
+  "status": "PASS",
+  "tested_frames": [
+    0
+  ],
+  "views": [
+    {
+      "bytes": 148971,
+      "path": "source/art/bodies-v1/nursery_warden/proof/final-context-00.png",
+      "sha256": "2635a3a883a20595f4988b7f6a7ab4338247fb2fc8b8ca56167df6f5642a79e3"
+    }
+  ],
+  "visible_changed_pixels": 20248,
+  "visible_registry": {
+    "bytes": 7933,
+    "path": "source/art/bodies-v1/final-cohort/visible-registry.json",
+    "sha256": "b87f8603a221724c480c38dd33eaf2d559a4c02107dbd211a614dfd7b7a09530"
+  },
+  "worker_helper_sha256": "563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67"
+}

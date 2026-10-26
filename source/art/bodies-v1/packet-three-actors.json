@@ -1,0 +1,3770 @@
+{
+  "actors": [
+    {
+      "actual-context": {
+        "bytes": 10583,
+        "path": "source/art/bodies-v1/worker/proof/actual-context.json",
+        "sha256": "2e0d3b503697f14da766b20fb43e21f331e1382fe76e0658bcb5fc830d73218d"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "779f645d6e7d11393454106a0a7c15d7adc61a8c60ab0e329ad12e3e3385e119",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 17742,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-00.png",
+            "sha256": "7ef948374f6d4d78dee2e772aeb937875fac0ec4e585dcbc49072e34645a6847"
+          },
+          "raw_bbox": [
+            18,
+            7,
+            93,
+            121
+          ],
+          "raw_rgba_sha256": "59f58f5d8b2c253c18825d06fb162d69aa1bfe74e598a7748a32d5ac254a3d54",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "ac39b9e94bdf5bd1ef67a54e6485c20ee3e278277132d5a6409ba38baf4d9443",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 18275,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-01.png",
+            "sha256": "d3c0061b98a04eb79388c3bbdb62dc9a3ae1d21eb5089c8deddbadbf6ed263fe"
+          },
+          "raw_bbox": [
+            2,
+            7,
+            93,
+            122
+          ],
+          "raw_rgba_sha256": "d84045c0d067551e3b3eb939f95dcac619ce18adf46a92a97876c8907d7ce9b5",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "4c066b562e8bbec3b5c835ada97190ec8fd1492e2a1569f1312f25b2a2c34dbe",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15137,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-02.png",
+            "sha256": "2430c230f948df763e952c03c7dd00b2cdfeb945aad35501f855a7efc55d3972"
+          },
+          "raw_bbox": [
+            20,
+            6,
+            90,
+            122
+          ],
+          "raw_rgba_sha256": "6bb0b0f2d2fdfb2e42498e614791338dd2c6a6a59f6a8e4ccab22c0fcc709617",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "7639c4eda5275d93482bb55e315ee8273290a88a8b33bd716c2ed01b1049acfa",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16125,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-03.png",
+            "sha256": "4a2bc70dd9573fbd8b06aa25b61615ace17dbe78f781f0d0f21b761536e5aac2"
+          },
+          "raw_bbox": [
+            36,
+            5,
+            96,
+            121
+          ],
+          "raw_rgba_sha256": "cd9a151a78014fbb0002c1019c14d0469ef88132a5d78af9c642244c9f00ad03",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "b09e124883b8eafccba51bbb9279dd722b82d9a132e2e209c72e213198cdd9ef",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16534,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-04.png",
+            "sha256": "7fb471216ff450fd37bc5909ac54f9029588b05d4016b75bc0c6eac7bdf465ea"
+          },
+          "raw_bbox": [
+            34,
+            4,
+            109,
+            119
+          ],
+          "raw_rgba_sha256": "8fd895a32b40cafad933328dff9c27dcb591649755afefbb563381798f26c3b5",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "98ccd5f293682d9ac7459928787467d875e01cdf3956e5002f7fffe3f57d4c82",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 17204,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-05.png",
+            "sha256": "448bcc279d0b6ba0735860b41ea61393b74d0c9d4342467daf8fc283b3a74286"
+          },
+          "raw_bbox": [
+            34,
+            5,
+            125,
+            121
+          ],
+          "raw_rgba_sha256": "caf176f35ffdcb1f4a8930a5ab3c7c4e68ea3423f4c259b2becf17097441e40a",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "4dd2d34ca035cec111f9516281e1b2971c2d4d134b529469e3a53f0c37e81527",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15219,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-06.png",
+            "sha256": "eadce123210a294f908a05dfbe54d83aacdd09bed28d85ccdf5736111e38dc17"
+          },
+          "raw_bbox": [
+            37,
+            6,
+            107,
+            122
+          ],
+          "raw_rgba_sha256": "b0355bf557ea92a25e24b54090fcb0432d1fc410ede98d894654903ba76d3df9",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "996c5edbb9626c346e636a0aded2f16af6138610c01d61a7dc7d936cad4ef321",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 17058,
+            "path": "source/art/bodies-v1/worker/frames/raw-idle-07.png",
+            "sha256": "2950a3c8142a198670c64a29b7e27d2ad15377bef4a0e8161419dae691dd4313"
+          },
+          "raw_bbox": [
+            31,
+            7,
+            92,
+            123
+          ],
+          "raw_rgba_sha256": "819278411c49ffa2aa5f4df424f33d5627839c17fe24f2d31b92f3bad540938d",
+          "vertical_shift": -4
+        },
+        {
+          "cell_rgba_sha256": "27908b32b9bd513c1cf7b73349b88adf45f46852dd6726c7ee1a20a203933526",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 18001,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-00.png",
+            "sha256": "e62182ea3f16701ac86fac4f6f81a9ea2dfdf62c2644ffa3cad13a4855102f56"
+          },
+          "raw_bbox": [
+            18,
+            8,
+            95,
+            124
+          ],
+          "raw_rgba_sha256": "96a6c16da42055421751de9145c002b2d1041608bb02a4ce07391e1674faa843",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "d6e7c374ecb16bccb959cbfbae6dda0edff2a1a1361bf272b36a879f3230aed6",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 19067,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-01.png",
+            "sha256": "bbee5ff6f3a17cdc2d9dc23b6c4f7dade5ae52b13b45c37173c8f7244ecf2f59"
+          },
+          "raw_bbox": [
+            4,
+            9,
+            93,
+            121
+          ],
+          "raw_rgba_sha256": "dc89763c6573f77b07d6a2a118a4cdd2fa731ac46cd6857eb722b92b8f20a4c9",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "11aebd97f8c0c7b527a49b52907d589fa2c17efe5f25f372ef7aa3878cb9e5c6",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16185,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-02.png",
+            "sha256": "850812e6c95c5b00cfbef1014ed4e4975746e916ba63590d0f11a7f496980746"
+          },
+          "raw_bbox": [
+            22,
+            8,
+            89,
+            122
+          ],
+          "raw_rgba_sha256": "0d2e212a289c214c949d226e5a29ea9c275dcce7811d9e262031abeb3e90c819",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "6b1b7449a0204f5770f2b0d4e99dceee922114611899581abc2bfc21623296b5",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15435,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-03.png",
+            "sha256": "e391c6592cd1e8014f0003e6f60313bf51663c6a3efd9c142666a465370fe809"
+          },
+          "raw_bbox": [
+            37,
+            6,
+            94,
+            124
+          ],
+          "raw_rgba_sha256": "13b91cd7cbd0ff0afb35c7403ce7797d1aa679eaf89a0884e84802bfc9296f23",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "fc7442c30b51e04ba3c43dad74aa0fae0327ccdad77079013eba8780fb3663f8",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16603,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-04.png",
+            "sha256": "bac662df97ccb07e2e3fe6da8a6e1884454984db2ff83a021f8645797acd4bf7"
+          },
+          "raw_bbox": [
+            32,
+            5,
+            109,
+            122
+          ],
+          "raw_rgba_sha256": "5053fd1e4f4acfe9610425fe519f95c6f5f8a0a6f6ed80a3bbf5b723d3a06782",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "adee45f54ab6e76d4fe575acde2f6c41c4c8b0502df0c099c8a4655cdae003e7",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 17951,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-05.png",
+            "sha256": "54c76f69bdc66459289a77105c073de8c5764c274d3f890bddc5bbe8e4c2af44"
+          },
+          "raw_bbox": [
+            34,
+            6,
+            123,
+            119
+          ],
+          "raw_rgba_sha256": "dafb4786ece34ed11f1db24e8f7d6965d7f077ca23da2fc7cd6a2c3c721508f7",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "8f23a988ae45e8b940e4e8b2f891060ed6fac2da3682b8eaa90e6467100855b8",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16520,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-06.png",
+            "sha256": "83903006121496267eae130acef02f103188cc7c2b889a047135bbed3e2856ec"
+          },
+          "raw_bbox": [
+            38,
+            8,
+            105,
+            122
+          ],
+          "raw_rgba_sha256": "0ae5bc3ea8cc271108ebe78eee5006e8cabd28a0611d30d0288c510d1909b474",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "f6a3dec37e46b88256026c97b33f2ad30ccb19283adbdcb9c6ea72ea448aa974",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16287,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_a-07.png",
+            "sha256": "2cf55e4ce215ea8e48c0ef2bd12c256f5e5e983d8b78a18ff5834aad180807b7"
+          },
+          "raw_bbox": [
+            33,
+            8,
+            90,
+            125
+          ],
+          "raw_rgba_sha256": "6e18f416badb764c7734a4edd3f5628ee45905a7f5b27324b86b168677409da5",
+          "vertical_shift": -6
+        },
+        {
+          "cell_rgba_sha256": "c3d2a9b02a29c8fea1f926add8b9472cd8390f2f24d26f3bf897cb874bafb16f",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 17915,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-00.png",
+            "sha256": "40c321e1ba6502dc4dbcac69e85448451a47b87a6cc4a72fc269598152a743ff"
+          },
+          "raw_bbox": [
+            16,
+            8,
+            92,
+            124
+          ],
+          "raw_rgba_sha256": "8fe38aad8f6c03cab44a59ded9553027479d8f28d2f3807088e24a4eb0a6fb45",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "5cc318d26cb9c075ee823114dc8eeeaf7f1be74b81bf1ac86b953a48d68e290c",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 17508,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-01.png",
+            "sha256": "603374063f392ca12cab083ccdde8ea9a1acaeebb58bf13e4786958213146035"
+          },
+          "raw_bbox": [
+            3,
+            8,
+            91,
+            125
+          ],
+          "raw_rgba_sha256": "2da8d1d94b75a54f3a8719bcb31b5999fc363d99b71868bd4443649b11687885",
+          "vertical_shift": -6
+        },
+        {
+          "cell_rgba_sha256": "8d08257d7b15415ee8c0098c0e262ef55d5b32eca7991fe794cf937d5daf4496",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16260,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-02.png",
+            "sha256": "02e6b3660277028663d675c5bb25ab2098eac37b4da41356cfd8db28f45b8076"
+          },
+          "raw_bbox": [
+            23,
+            8,
+            89,
+            122
+          ],
+          "raw_rgba_sha256": "8b0e37f69e2291bd542d6dec8b129ea4033f32325eb24ae5d42ca2fe1148d1d3",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "4384967c336482ac603757735f8e2e26d71d41143917d7e6b1ba095037531739",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16436,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-03.png",
+            "sha256": "b0b4f33209056627455230fc254ce13eec30a98590ab59b8892227fd22a9c0c2"
+          },
+          "raw_bbox": [
+            28,
+            6,
+            95,
+            119
+          ],
+          "raw_rgba_sha256": "7a1f93f8918b221b8e0e71f8f2d869cac262fec4d6137e0d38325642f8616ea7",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "3c968250ca92fc02b0f7e3f1c16e5795a2ba8c34e6ca129bb9128c7bfeb6589f",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16532,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-04.png",
+            "sha256": "54ff122dbca2b2593d757dc7a4d3ce68fe678082d71271eaf614406de592a075"
+          },
+          "raw_bbox": [
+            35,
+            5,
+            111,
+            122
+          ],
+          "raw_rgba_sha256": "d2f3138a786b2cc6902b0a9a9edbab624a43560d0a086d72d422cfdfca0cb96f",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "31ed74d8918d41200536316e0210c58a3b69223877d994ac605f1814d7578890",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16646,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-05.png",
+            "sha256": "963e599237c3eaa925aeec11c793355a1936d3733405542ff23c315f80808403"
+          },
+          "raw_bbox": [
+            36,
+            6,
+            124,
+            124
+          ],
+          "raw_rgba_sha256": "8333de06790a3d4da0acae80fa9b43dfdcca7950fece5b5b4426f94f02b9f3dc",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "e43403bee4ff15fa01c7a031e9dca0a2e0e1f5b7108765d03798d22b51ea196a",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16677,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-06.png",
+            "sha256": "1a2dc44b2d7b4c94bb28f5f75746972608bdc878a1aaccb60ceccb91efa14ead"
+          },
+          "raw_bbox": [
+            38,
+            8,
+            104,
+            122
+          ],
+          "raw_rgba_sha256": "fafacb17ae841eb2959b8e01e801e19d51653a50e60fabeed4b2170b4395d25f",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "ea067a5bfc906d4691ce005d41d7ee38486f909c369d7a091317243b7341701c",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 17614,
+            "path": "source/art/bodies-v1/worker/frames/raw-walk_b-07.png",
+            "sha256": "9d23617012b8be64b9f5cc64c010f95d27f5d58ec78f66e7e0f19d00b5ee6e2c"
+          },
+          "raw_bbox": [
+            32,
+            9,
+            99,
+            121
+          ],
+          "raw_rgba_sha256": "96678ea961d3a08a4814e65dd702a8d65831b57e10af820e93b9d59ab50dd0db",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "ac5943bc583323892cc98581c1523c841e7a3a762366a207bb325f1ebae1e856",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17671,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-00.png",
+            "sha256": "9813ef2b7effdc99b1e240c7e846f8b55c2fa70a6efe0eb45b677c10142b3109"
+          },
+          "raw_bbox": [
+            11,
+            14,
+            97,
+            123
+          ],
+          "raw_rgba_sha256": "7e62e199b0193eb49e8bdf417aadcfe440432851def18de07911730280b41eee",
+          "vertical_shift": -4
+        },
+        {
+          "cell_rgba_sha256": "cb41f94a3a452d110ada2c966c69c82852dd5d6b699cf00fbc213d7db738d2df",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 18031,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-01.png",
+            "sha256": "7026193d4307032795fb891b55e1d48a0df793473a91fd62da4567044a0d8272"
+          },
+          "raw_bbox": [
+            7,
+            14,
+            98,
+            122
+          ],
+          "raw_rgba_sha256": "cfb20f9e1ef2cd26a79049080749696212724862de9e23651f716a53551ae135",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "4a01baf0e1ba15b2fbadd8108387add95727d30336057a7a3e79c539a311d8f3",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15605,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-02.png",
+            "sha256": "1d84971a60cf32b9c6fa53ba80f7c68650978ca7c9089b989c43cbb2aea62eaa"
+          },
+          "raw_bbox": [
+            30,
+            12,
+            84,
+            124
+          ],
+          "raw_rgba_sha256": "c3ed487f1fc0f30b8abb3bc77dca7c3a0f8539f298a067d46d375d2ad65088d9",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "14aae309ee8f0d4c76740ab3156cd2b5d25e5050bab836028b7b6f6a14ebff2c",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16325,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-03.png",
+            "sha256": "600d18ea54ab93f9c401a1ca9a21492b39fc99deb55ba7baedc6e5b700323097"
+          },
+          "raw_bbox": [
+            32,
+            10,
+            103,
+            125
+          ],
+          "raw_rgba_sha256": "5adb24dc2f67cdce370fb859e29d3aa7d5fdb8961d6e462bf327314dd9b207d4",
+          "vertical_shift": -6
+        },
+        {
+          "cell_rgba_sha256": "1eb30e144c7fee0db354760b0b7ff8a2dd122b414b0466c80b51fdbf55219390",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16473,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-04.png",
+            "sha256": "99ae60724d88cbcc93795029a2d78240b51c41d7a52aad9132986b5988564c6c"
+          },
+          "raw_bbox": [
+            30,
+            8,
+            116,
+            122
+          ],
+          "raw_rgba_sha256": "9d25654f1a2abf1701a9e55099e4f9539e0a55e9852c0caf8f671ce92e40b9bc",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "e8a66536d8b723329df3dae2b6e159acb180e8cbea2accde191b86329cfa650d",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 17218,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-05.png",
+            "sha256": "29d379260a1fab11677c3f566c890e6db417a831a1e83f2ae6544f458f736fc4"
+          },
+          "raw_bbox": [
+            29,
+            9,
+            120,
+            121
+          ],
+          "raw_rgba_sha256": "0b60ffc5e3b7b99abee4bfbacd37da2cbec5ed4dce33b61c6ff48e5d8ebfa59e",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "cd73a83d9f16039a974939dc2a72933e9126d0ae1a4afceb4f0bb8e409f8ead0",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15307,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-06.png",
+            "sha256": "5d7c8891963ec27bf559d551ecc0f5d194b025e6d2a39577b3dcff67942752f0"
+          },
+          "raw_bbox": [
+            43,
+            12,
+            97,
+            124
+          ],
+          "raw_rgba_sha256": "3958bbf90ac61446fdf39d83263fd119429d358116893664f7c8655817502738",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "e34e1bfb4d956eb7467521506b3980f4553e80d80894bbb792d645bd6745a2b5",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16581,
+            "path": "source/art/bodies-v1/worker/frames/raw-attack-07.png",
+            "sha256": "90f05a346af151ed028420d9d8678d08b5d7a22999c6b7a7ec08df8b7d965f28"
+          },
+          "raw_bbox": [
+            24,
+            13,
+            96,
+            126
+          ],
+          "raw_rgba_sha256": "9372884b094d17124ef47e67c856473b518e83db6928f6c668e07192232fe454",
+          "vertical_shift": -7
+        },
+        {
+          "cell_rgba_sha256": "6399214c9f32c2bec32ba4cf576ff5f75194d08b5b87bf0e7a9581f3e038e8fa",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13455,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-00.png",
+            "sha256": "067db078ff6c82f04ece239901fb5798c3e3ca9bb15d66eb54dc05e16a94392b"
+          },
+          "raw_bbox": [
+            11,
+            57,
+            108,
+            122
+          ],
+          "raw_rgba_sha256": "ba17815684f03e21f8d97945e1a333f733b7a5032ecbd8468613b40834916e66",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "4e22b4b814252ce79f653f03713151df4ee5e25770d15ee2c88bde693da25c4d",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14195,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-01.png",
+            "sha256": "73528558f73b066b1a910ca88bebcbef30054fe11aaab9b51a757f6fba7b2539"
+          },
+          "raw_bbox": [
+            22,
+            61,
+            115,
+            122
+          ],
+          "raw_rgba_sha256": "47a1e5f306ce2562ab1fcf9f764438c41e2eac444adb5f38f089a36e1e341c40",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "b3b92b286c2c1b79922ce121d5b5adb5717ddf8c2ecd23a898ec96c57311198b",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14274,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-02.png",
+            "sha256": "ac1cae5d19b24f58cf14f951e32cd36030f5001ba0d7258a81048659cad3c24c"
+          },
+          "raw_bbox": [
+            8,
+            66,
+            116,
+            119
+          ],
+          "raw_rgba_sha256": "15757c8c666eace1778e2ed64cd9853841641a1e0171f9d5a9663e3a4d26a789",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "5af6c5167625efaab296ad32e92adb7511dc3519735feaa6fbfc9d2b6f259bc0",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14091,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-03.png",
+            "sha256": "110ada87cdc1a6322db4c6bfa63f2a20aff744a47fb12dc0a373a87d46bdf2e8"
+          },
+          "raw_bbox": [
+            19,
+            63,
+            122,
+            117
+          ],
+          "raw_rgba_sha256": "bfec4dacbcc91fbbc282d10d93293c290aba305d0043f39701d785a228f4eb8b",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "f26a9aa6f3937d64e71b8db1c7094d20b9de1ec9300adbac672a9ffbfa397e31",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13223,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-04.png",
+            "sha256": "df2b5343277e5fe2ab47cf6ae53879aeaa0e94b3eb33b5488e69c55fac1e3964"
+          },
+          "raw_bbox": [
+            19,
+            63,
+            116,
+            123
+          ],
+          "raw_rgba_sha256": "4fd62a223889abbdf83c4580ec89231e2beff667d141f7d8df38d03f6d9c401e",
+          "vertical_shift": -4
+        },
+        {
+          "cell_rgba_sha256": "1b3717eee7b3f2e7e917cf058038410315912aa82f8f5fa8fecdd00d238db425",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13362,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-05.png",
+            "sha256": "5c3dc9a798e692a3521b11a0d35f7a16201ce6e1ee290747160bac541155fb54"
+          },
+          "raw_bbox": [
+            12,
+            64,
+            105,
+            124
+          ],
+          "raw_rgba_sha256": "9c40a051f2e19d0fb5448a830edcd9b3b9abbef075cc457bd173d99fc6560225",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "64df529c49f70c2eedef63fb59872f5b8f1f4985e2c24aaa54fae7656196d49c",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14555,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-06.png",
+            "sha256": "2bc6f50fc60b87ebef4160c01df1fff5ff3844048dde5fa698d204fc381d67bc"
+          },
+          "raw_bbox": [
+            11,
+            63,
+            119,
+            119
+          ],
+          "raw_rgba_sha256": "67a432c7bb4a10424282432789b3e19a4ffe8dc2a60d8d7a5c6f63e2a2d9356a",
+          "vertical_shift": 0
+        },
+        {
+          "cell_rgba_sha256": "5e1ca76e1bc4e18c1abc3e841295b25bb0034dd25002476b9bbce20308da008d",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14679,
+            "path": "source/art/bodies-v1/worker/frames/raw-dead-07.png",
+            "sha256": "841f086e7c783ca2f1b1e2157ca5b0c35323a04e12f2b86691bbad2738455969"
+          },
+          "raw_bbox": [
+            5,
+            57,
+            108,
+            121
+          ],
+          "raw_rgba_sha256": "d5e81b0c9c87d52a3beeafa3bb24340e2f666e992fbf577eaa59d288eb573f85",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "280c18a65bd962b679a28192a3f42f2e32de18786846aea9e02ffba8ef10aa2d",
+          "direction": 0,
+          "frame": 40,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 17874,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-00.png",
+            "sha256": "04945bcfd7720a1d1ecbc464e69e5ca84152e128fdefb49ae7bf85f07471113c"
+          },
+          "raw_bbox": [
+            21,
+            22,
+            107,
+            123
+          ],
+          "raw_rgba_sha256": "884dbf70b050f924bd00db640637d5c4a127465d72e9efcfd17b497a43b7e52d",
+          "vertical_shift": -4
+        },
+        {
+          "cell_rgba_sha256": "75a38313442113f8aa3646db6af91a17971b6ae58f29a01af03c67c238635641",
+          "direction": 1,
+          "frame": 41,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 18702,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-01.png",
+            "sha256": "b8fa7c4bfe8a17a447133eb031d2e0bd8e7e7431a1a5c10884689bcdcb37706a"
+          },
+          "raw_bbox": [
+            8,
+            21,
+            97,
+            122
+          ],
+          "raw_rgba_sha256": "7ed0bca96c54c79417f44bf51385961730971b657494511a0a7c1794cbeb8bd2",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "281b9366a614b93be58e064a0c5034a4d58c6b6cf99b42f51d0905c246a4e90b",
+          "direction": 2,
+          "frame": 42,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 15828,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-02.png",
+            "sha256": "5a03f2a5fe4323202448b42d32c655dca607bba5c6f2e8c85b7db321fc22ded3"
+          },
+          "raw_bbox": [
+            22,
+            19,
+            84,
+            124
+          ],
+          "raw_rgba_sha256": "da597e6ed2db0b20ecf5b730d96c9368be6f128acf83d3164a610cdc85b710a1",
+          "vertical_shift": -5
+        },
+        {
+          "cell_rgba_sha256": "ad13a4b32c56a9cd51c6700cbad4fdbdd63dd312ec0e799199a51483479fa1bc",
+          "direction": 3,
+          "frame": 43,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 15779,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-03.png",
+            "sha256": "fbe976c819bd08f679398053b5e14270e283566f70497843338e50f3fca0a9c9"
+          },
+          "raw_bbox": [
+            13,
+            17,
+            88,
+            125
+          ],
+          "raw_rgba_sha256": "1f5d758cc2da44226fbdd29bc45f7916414137727581cb9a0d94cecfc5bee9b3",
+          "vertical_shift": -6
+        },
+        {
+          "cell_rgba_sha256": "f8b888883738e2cac8cc7bb2dbf3de7108536ca483144afb23e08d509f0b30b1",
+          "direction": 4,
+          "frame": 44,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 16395,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-04.png",
+            "sha256": "bb57d076938d27d84ad0640d539d21c1e0af99484f4d28aea9a585eafe831eaa"
+          },
+          "raw_bbox": [
+            20,
+            16,
+            106,
+            122
+          ],
+          "raw_rgba_sha256": "a25fd2e6467aeadff159e02f336be78673ce630044d78bbd6c3c30a47838313d",
+          "vertical_shift": -3
+        },
+        {
+          "cell_rgba_sha256": "b18a7cb2887a3edb0636e2b9effff6ca3b826c3464b816bfecf3e1b0e475e3b8",
+          "direction": 5,
+          "frame": 45,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 17744,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-05.png",
+            "sha256": "7d096c111ec8dcd2b0cfb51730aa72db1caa57fb1325afdf05d79a742c483ad5"
+          },
+          "raw_bbox": [
+            30,
+            17,
+            120,
+            121
+          ],
+          "raw_rgba_sha256": "106c674cea2c7782bdd0baa4dabe205b026c1a4c4d7a261ee3276f7fac34f2cb",
+          "vertical_shift": -2
+        },
+        {
+          "cell_rgba_sha256": "b1b569a5b4b61060c4dda2d8098a18537fe7088e40b84a358dba3179ffe4b138",
+          "direction": 6,
+          "frame": 46,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 16301,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-06.png",
+            "sha256": "f3f29eb2d92b7965249e262c519d3ce3901d9dc6d4190a2af5861e5a53c01f6d"
+          },
+          "raw_bbox": [
+            43,
+            19,
+            105,
+            123
+          ],
+          "raw_rgba_sha256": "3e9b78f7f7f04be356ca93601875055ec40915684a19b71ac334115f9caefeb2",
+          "vertical_shift": -4
+        },
+        {
+          "cell_rgba_sha256": "fa653b700b7369252588161f67ebf2afd52e8abdf3ef02b9191d5091450300b5",
+          "direction": 7,
+          "frame": 47,
+          "pose": "clutch_vent",
+          "raw": {
+            "bytes": 16676,
+            "path": "source/art/bodies-v1/worker/frames/raw-clutch_vent-07.png",
+            "sha256": "9eb005e004df133686a50f5b00f7212c46db057695621b6ac61f9626c5d94fd1"
+          },
+          "raw_bbox": [
+            39,
+            21,
+            114,
+            125
+          ],
+          "raw_rgba_sha256": "210ad3b769f624bf95295581deee9a2733d10437a75ead6e1999b4546cffd8c8",
+          "vertical_shift": -6
+        }
+      ],
+      "generator": {
+        "bytes": 38374,
+        "path": "source/art/bodies-v1/worker/build_worker_pressure_clutch_v07.py",
+        "sha256": "0a4d74c1a0c7a1f309461e3978a37b81d6898669bba99a1eee0149c1fb3525d4"
+      },
+      "import_sidecar": {
+        "bytes": 951,
+        "path": "game/assets/art/sprites/bodies-v1/worker.png.import",
+        "sha256": "96a420cf8b92988d05f207e88474afa8c5be10e36a6e51805f122b2dbf812654"
+      },
+      "independent": {
+        "bytes": 5449,
+        "path": "source/art/bodies-v1/worker/proof/independent.json",
+        "sha256": "bcb95d93cb3cf5b27270a04683ea3b3c6504f4d354c5b5d0995a786024aabbcb"
+      },
+      "kind": "worker",
+      "lineage": {
+        "generator": {
+          "bytes": 44470,
+          "path": "source/art/recipe_history/ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776/tools/build_art.py.txt",
+          "sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
+        },
+        "generator_dependencies": {},
+        "logical_generator": "tools/build_art.py",
+        "output": {
+          "bytes": 191370,
+          "path": "game/assets/art/sprites/worker.png",
+          "sha256": "b32b6228fe77cbd5d16abca23984b34964e359ec0b972526cf741e0e3201f869"
+        },
+        "source": {
+          "bytes": 3447798,
+          "path": "source/art/worker.blend",
+          "sha256": "1605aa373c11d7ee745bc75dc7b3821f8f54294fe3950cd73062d36c44debed6"
+        }
+      },
+      "normal-import": {
+        "bytes": 4689,
+        "path": "source/art/bodies-v1/worker/proof/normal-import.json",
+        "sha256": "d6f1b94507b8e2ad3cd7a218c7276c739f0f47360a5f091f8a312b39004d528b"
+      },
+      "output": {
+        "bytes": 262272,
+        "cell_bbox": [
+          [
+            18,
+            5,
+            93,
+            119
+          ],
+          [
+            2,
+            4,
+            93,
+            119
+          ],
+          [
+            20,
+            3,
+            90,
+            119
+          ],
+          [
+            36,
+            3,
+            96,
+            119
+          ],
+          [
+            34,
+            4,
+            109,
+            119
+          ],
+          [
+            34,
+            3,
+            125,
+            119
+          ],
+          [
+            37,
+            3,
+            107,
+            119
+          ],
+          [
+            31,
+            3,
+            92,
+            119
+          ],
+          [
+            18,
+            3,
+            95,
+            119
+          ],
+          [
+            4,
+            7,
+            93,
+            119
+          ],
+          [
+            22,
+            5,
+            89,
+            119
+          ],
+          [
+            37,
+            1,
+            94,
+            119
+          ],
+          [
+            32,
+            2,
+            109,
+            119
+          ],
+          [
+            34,
+            6,
+            123,
+            119
+          ],
+          [
+            38,
+            5,
+            105,
+            119
+          ],
+          [
+            33,
+            2,
+            90,
+            119
+          ],
+          [
+            16,
+            3,
+            92,
+            119
+          ],
+          [
+            3,
+            2,
+            91,
+            119
+          ],
+          [
+            23,
+            5,
+            89,
+            119
+          ],
+          [
+            28,
+            6,
+            95,
+            119
+          ],
+          [
+            35,
+            2,
+            111,
+            119
+          ],
+          [
+            36,
+            1,
+            124,
+            119
+          ],
+          [
+            38,
+            5,
+            104,
+            119
+          ],
+          [
+            32,
+            7,
+            99,
+            119
+          ],
+          [
+            11,
+            10,
+            97,
+            119
+          ],
+          [
+            7,
+            11,
+            98,
+            119
+          ],
+          [
+            30,
+            7,
+            84,
+            119
+          ],
+          [
+            32,
+            4,
+            103,
+            119
+          ],
+          [
+            30,
+            5,
+            116,
+            119
+          ],
+          [
+            29,
+            7,
+            120,
+            119
+          ],
+          [
+            43,
+            7,
+            97,
+            119
+          ],
+          [
+            24,
+            6,
+            96,
+            119
+          ],
+          [
+            11,
+            54,
+            108,
+            119
+          ],
+          [
+            22,
+            58,
+            115,
+            119
+          ],
+          [
+            8,
+            66,
+            116,
+            119
+          ],
+          [
+            19,
+            65,
+            122,
+            119
+          ],
+          [
+            19,
+            59,
+            116,
+            119
+          ],
+          [
+            12,
+            59,
+            105,
+            119
+          ],
+          [
+            11,
+            63,
+            119,
+            119
+          ],
+          [
+            5,
+            55,
+            108,
+            119
+          ],
+          [
+            21,
+            18,
+            107,
+            119
+          ],
+          [
+            8,
+            18,
+            97,
+            119
+          ],
+          [
+            22,
+            14,
+            84,
+            119
+          ],
+          [
+            13,
+            11,
+            88,
+            119
+          ],
+          [
+            20,
+            13,
+            106,
+            119
+          ],
+          [
+            30,
+            15,
+            120,
+            119
+          ],
+          [
+            43,
+            15,
+            105,
+            119
+          ],
+          [
+            39,
+            15,
+            114,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "779f645d6e7d11393454106a0a7c15d7adc61a8c60ab0e329ad12e3e3385e119",
+          "ac39b9e94bdf5bd1ef67a54e6485c20ee3e278277132d5a6409ba38baf4d9443",
+          "4c066b562e8bbec3b5c835ada97190ec8fd1492e2a1569f1312f25b2a2c34dbe",
+          "7639c4eda5275d93482bb55e315ee8273290a88a8b33bd716c2ed01b1049acfa",
+          "b09e124883b8eafccba51bbb9279dd722b82d9a132e2e209c72e213198cdd9ef",
+          "98ccd5f293682d9ac7459928787467d875e01cdf3956e5002f7fffe3f57d4c82",
+          "4dd2d34ca035cec111f9516281e1b2971c2d4d134b529469e3a53f0c37e81527",
+          "996c5edbb9626c346e636a0aded2f16af6138610c01d61a7dc7d936cad4ef321",
+          "27908b32b9bd513c1cf7b73349b88adf45f46852dd6726c7ee1a20a203933526",
+          "d6e7c374ecb16bccb959cbfbae6dda0edff2a1a1361bf272b36a879f3230aed6",
+          "11aebd97f8c0c7b527a49b52907d589fa2c17efe5f25f372ef7aa3878cb9e5c6",
+          "6b1b7449a0204f5770f2b0d4e99dceee922114611899581abc2bfc21623296b5",
+          "fc7442c30b51e04ba3c43dad74aa0fae0327ccdad77079013eba8780fb3663f8",
+          "adee45f54ab6e76d4fe575acde2f6c41c4c8b0502df0c099c8a4655cdae003e7",
+          "8f23a988ae45e8b940e4e8b2f891060ed6fac2da3682b8eaa90e6467100855b8",
+          "f6a3dec37e46b88256026c97b33f2ad30ccb19283adbdcb9c6ea72ea448aa974",
+          "c3d2a9b02a29c8fea1f926add8b9472cd8390f2f24d26f3bf897cb874bafb16f",
+          "5cc318d26cb9c075ee823114dc8eeeaf7f1be74b81bf1ac86b953a48d68e290c",
+          "8d08257d7b15415ee8c0098c0e262ef55d5b32eca7991fe794cf937d5daf4496",
+          "4384967c336482ac603757735f8e2e26d71d41143917d7e6b1ba095037531739",
+          "3c968250ca92fc02b0f7e3f1c16e5795a2ba8c34e6ca129bb9128c7bfeb6589f",
+          "31ed74d8918d41200536316e0210c58a3b69223877d994ac605f1814d7578890",
+          "e43403bee4ff15fa01c7a031e9dca0a2e0e1f5b7108765d03798d22b51ea196a",
+          "ea067a5bfc906d4691ce005d41d7ee38486f909c369d7a091317243b7341701c",
+          "ac5943bc583323892cc98581c1523c841e7a3a762366a207bb325f1ebae1e856",
+          "cb41f94a3a452d110ada2c966c69c82852dd5d6b699cf00fbc213d7db738d2df",
+          "4a01baf0e1ba15b2fbadd8108387add95727d30336057a7a3e79c539a311d8f3",
+          "14aae309ee8f0d4c76740ab3156cd2b5d25e5050bab836028b7b6f6a14ebff2c",
+          "1eb30e144c7fee0db354760b0b7ff8a2dd122b414b0466c80b51fdbf55219390",
+          "e8a66536d8b723329df3dae2b6e159acb180e8cbea2accde191b86329cfa650d",
+          "cd73a83d9f16039a974939dc2a72933e9126d0ae1a4afceb4f0bb8e409f8ead0",
+          "e34e1bfb4d956eb7467521506b3980f4553e80d80894bbb792d645bd6745a2b5",
+          "6399214c9f32c2bec32ba4cf576ff5f75194d08b5b87bf0e7a9581f3e038e8fa",
+          "4e22b4b814252ce79f653f03713151df4ee5e25770d15ee2c88bde693da25c4d",
+          "b3b92b286c2c1b79922ce121d5b5adb5717ddf8c2ecd23a898ec96c57311198b",
+          "5af6c5167625efaab296ad32e92adb7511dc3519735feaa6fbfc9d2b6f259bc0",
+          "f26a9aa6f3937d64e71b8db1c7094d20b9de1ec9300adbac672a9ffbfa397e31",
+          "1b3717eee7b3f2e7e917cf058038410315912aa82f8f5fa8fecdd00d238db425",
+          "64df529c49f70c2eedef63fb59872f5b8f1f4985e2c24aaa54fae7656196d49c",
+          "5e1ca76e1bc4e18c1abc3e841295b25bb0034dd25002476b9bbce20308da008d",
+          "280c18a65bd962b679a28192a3f42f2e32de18786846aea9e02ffba8ef10aa2d",
+          "75a38313442113f8aa3646db6af91a17971b6ae58f29a01af03c67c238635641",
+          "281b9366a614b93be58e064a0c5034a4d58c6b6cf99b42f51d0905c246a4e90b",
+          "ad13a4b32c56a9cd51c6700cbad4fdbdd63dd312ec0e799199a51483479fa1bc",
+          "f8b888883738e2cac8cc7bb2dbf3de7108536ca483144afb23e08d509f0b30b1",
+          "b18a7cb2887a3edb0636e2b9effff6ca3b826c3464b816bfecf3e1b0e475e3b8",
+          "b1b569a5b4b61060c4dda2d8098a18537fe7088e40b84a358dba3179ffe4b138",
+          "fa653b700b7369252588161f67ebf2afd52e8abdf3ef02b9191d5091450300b5"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/worker.png",
+        "rgba_sha256": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+        "sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52"
+      },
+      "physiology": {
+        "helper": {
+          "bytes": 10504,
+          "path": "game/scripts/worker_hit_regions.gd",
+          "sha256": "563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67"
+        },
+        "manifest": {
+          "bytes": 14385,
+          "path": "game/assets/art/regions/worker-clutch-v1.json",
+          "sha256": "ec623c17e235b9641c5851d9dc2e46b7b107c9de54501b8a0705a0a33c00f648"
+        },
+        "mask": {
+          "bytes": 786432,
+          "path": "game/assets/art/regions/worker-clutch-v1.regions",
+          "sha256": "e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5"
+        },
+        "player": {
+          "bytes": 15851,
+          "path": "game/scripts/player.gd",
+          "sha256": "d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff"
+        }
+      },
+      "physiology_original_authored_source_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+      "physiology_public_source_bridge": {
+        "bytes": 4980,
+        "path": "source/art/bodies-v1/worker/proof/public-master-bridge.json",
+        "sha256": "2332ec7e300dad2e2968877b47202606929790bc009b43bc30f9134de7fe86fa"
+      },
+      "public_master_bridge": {
+        "bytes": 4980,
+        "path": "source/art/bodies-v1/worker/proof/public-master-bridge.json",
+        "sha256": "2332ec7e300dad2e2968877b47202606929790bc009b43bc30f9134de7fe86fa"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 50749,
+        "path": "source/art/bodies-v1/worker/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "7eb0f4dc8cec3554d7613c84fafbeb7597c84db581e6a364138170f48f9effd9"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          768
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.028515625,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead",
+          "clutch_vent"
+        ],
+        "rows": 6,
+        "shaded": true,
+        "sprite_offset_y": 1.596875
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/worker.png",
+      "source-native": {
+        "bytes": 6604,
+        "path": "source/art/bodies-v1/worker/proof/source-native.json",
+        "sha256": "2d8c1af0b9dcb66874524043e507cdf6c28089eb3a3302f7d797b5a899d39ab9"
+      },
+      "source_blend": {
+        "bytes": 4179167,
+        "path": "source/art/bodies-v1/worker/worker.blend",
+        "sha256": "26d1b3fddcc90bcb608ae1487147edb8654ea51283b8d0dcf9c162a7811d7cf0"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1869800,
+          "path": "source/art/bodies-v1/worker/worker-pressure-clutch-reference01.png",
+          "sha256": "5ca36c68dd5e662b90316484591629037d9380e4f2cca223277e23f1cc29b52f"
+        }
+      ]
+    },
+    {
+      "actual-context": {
+        "bytes": 9082,
+        "path": "source/art/bodies-v1/crawler/proof/actual-context.json",
+        "sha256": "f2703670ee1e5829122179651d0ef004062607e92122df3742ca3058e0e0f4c4"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "a699f59816d8a3e7127fb8b7bbf04ffe13e5c25fde885cf7c27180c4e7ff2c65",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 10646,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-00.png",
+            "sha256": "82e86e1761907eb88b163b4ecca1adc36c441e2fe07e799d6125dc5e1b45acb0"
+          },
+          "raw_bbox": [
+            34,
+            60,
+            93,
+            110
+          ],
+          "raw_rgba_sha256": "447b4dd8785f2aa491fd9e94d1f5975f03540a128a6b28f8f91f11aea2d8625b",
+          "vertical_shift": 9
+        },
+        {
+          "cell_rgba_sha256": "3ee4a8f7bafd1cba64a56bc2f980190af5591715aae804d00cff53c8f48aa65a",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 12252,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-01.png",
+            "sha256": "95d802a7ce7ade4629f2adb29feb6ee395a998a573d5576ee8bd446b9bf044a4"
+          },
+          "raw_bbox": [
+            16,
+            63,
+            108,
+            111
+          ],
+          "raw_rgba_sha256": "ee73e3c4ec923dd9ba754415770e6aebbbe6bd4e4a5b7aad087651478a08c9d0",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "7e6566f8826a5f04231c3b17719e15620e9c851ed819d2cef907f3b1499be331",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 12249,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-02.png",
+            "sha256": "69b8ec5763e22ffaa77bd634969a903c8cf2ff44c93a9de436eb8e101250e421"
+          },
+          "raw_bbox": [
+            17,
+            63,
+            104,
+            109
+          ],
+          "raw_rgba_sha256": "767ca548859cd708fbef99c2c5110b62a45bad67b5bd2629514381ca9e61bd39",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "59a9882b28b579d78a6e0ac01c632c306e59073faa2eda5fbc67d577cc3ffebc",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 11531,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-03.png",
+            "sha256": "76827a3e69955211f7805f773fb2c0b11620175d53e72b26302c02963845351b"
+          },
+          "raw_bbox": [
+            21,
+            61,
+            103,
+            112
+          ],
+          "raw_rgba_sha256": "dd7eb545d91d9054839a373ce70b6924df5e7b210d669956a0206917b63faa2a",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "40c8c826c157875e84018f5a445cae19fbfc2cc3c409da9269ab841cdbda33ce",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 9693,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-04.png",
+            "sha256": "9af3955059d02c003f7a22c61ca64192caf0311a61de7ae96c54aa8a0379dc1d"
+          },
+          "raw_bbox": [
+            34,
+            61,
+            93,
+            110
+          ],
+          "raw_rgba_sha256": "9e040cb4a975c0d650db7c7309eb3111974efa3fc709c3b9dd60ea1753eaca1f",
+          "vertical_shift": 9
+        },
+        {
+          "cell_rgba_sha256": "3368dabf2a2960cb77d6e120e5b4536332f181ee89318a8ec2956396f30235c5",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 11645,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-05.png",
+            "sha256": "f41751796d4c31bc1f0c0fa782ba58b727b177eb1c16d589e901186028fce0c6"
+          },
+          "raw_bbox": [
+            19,
+            61,
+            111,
+            111
+          ],
+          "raw_rgba_sha256": "950b37cf807a7ffad66f5fb50fcc87f1e96dc4eba63e24d976a2c3b5fdb96b95",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "8544fabb136ad9d316e3709f9ca43c36966dba258d7112d1c164b77593415f19",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 11894,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-06.png",
+            "sha256": "efcc8c279cb7913f89b55e94911081fac27b764a7f56df185c24b544d722fbdb"
+          },
+          "raw_bbox": [
+            23,
+            63,
+            110,
+            109
+          ],
+          "raw_rgba_sha256": "3680a2ed7a48bc55bfa72ce87781f2726bbb92dd6c0c5d637da2fee5544bf87f",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "8c80763aed90987eb4152b6508e0dc0c7cd3fa96311737f7e6dc6ccc09e806c8",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 12083,
+            "path": "source/art/bodies-v1/crawler/frames/raw-idle-07.png",
+            "sha256": "f3b7f43efbde300cd9d86672382f424adf9bdc22b9934e7e9f329abb44ae896d"
+          },
+          "raw_bbox": [
+            24,
+            62,
+            106,
+            112
+          ],
+          "raw_rgba_sha256": "f34cfcbf291fabbf4f1005a446facc057149b928bd61488ffca0dfbb1dee7c7a",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "6f4444a3bf1f749062890336010f32268a2e63e0444af971a365a4dfe7489f78",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 10810,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-00.png",
+            "sha256": "d437c9eafe6349bdaefcd1ebbe0647a7da0f9112ca8729daf72a498cee444b53"
+          },
+          "raw_bbox": [
+            34,
+            58,
+            93,
+            112
+          ],
+          "raw_rgba_sha256": "5b0dd1b574af2c2252364924accf6b18888e0b47335ed104b6c433a0df63825a",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "ffe9199ae4ca9c5e9164ec20aab720e648619178dc8b67a04471d55bd6b9194a",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 12271,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-01.png",
+            "sha256": "7d8ef5bfb6ee553b55e95e2d0a3056a5e6893555b7d2e4e25ed1bf037cdf5f19"
+          },
+          "raw_bbox": [
+            12,
+            61,
+            112,
+            108
+          ],
+          "raw_rgba_sha256": "836669b68b03156257a90d616f80cbd542039687963c199c56f7f4fd3f5be72a",
+          "vertical_shift": 11
+        },
+        {
+          "cell_rgba_sha256": "74e3f77e26fa09aac57d7a0f0d6b391e51ed43081dbd846e122969c86818b6f2",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 12473,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-02.png",
+            "sha256": "22ce05fbab88df01d4f1042328e0223bf6988702f433626a0453aa10c4b6b8be"
+          },
+          "raw_bbox": [
+            16,
+            62,
+            107,
+            109
+          ],
+          "raw_rgba_sha256": "832e9661c7f814f7ec243a7fd9f67a747cbcf0ce0bcd4a0a12988c473e0dfa4d",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "e4c4cc9cff645c8db24b197cb9160f1e55dee2231f69ce00f1e98f4e38b29558",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 11605,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-03.png",
+            "sha256": "61b3aefa8320a753a38c6ab4b4a6fc9e036375332863fda9eb29769adaa8d53e"
+          },
+          "raw_bbox": [
+            21,
+            61,
+            99,
+            111
+          ],
+          "raw_rgba_sha256": "a8dac064d8981a02b0e7ba5b79459ace49f5ddf79a15597f73a4bccf3c04bbca",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "79489e9fdbc930b12f4f03cd11d59ac3d5dcfa26901daaa0e203ff2613ec860f",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 9567,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-04.png",
+            "sha256": "cbe0a9e4cf20b5cf7658c2641f6440e1f45aa9b77fee497fab283e9dece22db2"
+          },
+          "raw_bbox": [
+            34,
+            61,
+            93,
+            109
+          ],
+          "raw_rgba_sha256": "85223f9fc5897c876b59042e9c504b557e743218b54daa75f0bf51c8ae06fb41",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "7ee6924e06f89545a9679f2f4a360dd51c7218ab22fa9750740305efa0aadcd2",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 11675,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-05.png",
+            "sha256": "f4efef3e1c177d69d4e331bd896ad6bf4a62b8909381e9baef3c60607ef270b0"
+          },
+          "raw_bbox": [
+            15,
+            61,
+            115,
+            110
+          ],
+          "raw_rgba_sha256": "664b690a31069864a25e895f167c40ec8e870311dcf0af7208abb80335e13e9b",
+          "vertical_shift": 9
+        },
+        {
+          "cell_rgba_sha256": "5679850e7c073c51161b15cb1a72a706a1180bbaa2760ddc58cd20d12b5466f7",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 12295,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-06.png",
+            "sha256": "4e936e04cb20dd4c231f106521332d181cc105d2bcfc069131927e422359ff74"
+          },
+          "raw_bbox": [
+            20,
+            62,
+            111,
+            108
+          ],
+          "raw_rgba_sha256": "084e619ce8808e4a74a535c3166fd4f646853a88e42df6b58bcdb10d84387320",
+          "vertical_shift": 11
+        },
+        {
+          "cell_rgba_sha256": "e1516ef4502fa557bfebf4abb334e23a86160cdde7e3a92c0cd6bacc996b04c1",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 12066,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_a-07.png",
+            "sha256": "2a0c0e5c2a819abcdb19467a4f371d38db8f291be4279759195ccca4fe72998f"
+          },
+          "raw_bbox": [
+            28,
+            60,
+            106,
+            113
+          ],
+          "raw_rgba_sha256": "c10dc4e625d7959d960334179053cff41650def548d75d7d0d7c41cc37a7a51f",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "92a5f20d3823f89962ceb263ddb2bb9ec9eb2e11659fb5d90807e64f59144689",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 10359,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-00.png",
+            "sha256": "73566430dac7e147ccda357ef3c243b3f907f1566635de5ba791185a8b26e6c7"
+          },
+          "raw_bbox": [
+            34,
+            64,
+            93,
+            110
+          ],
+          "raw_rgba_sha256": "7639c65fd3532fd8c4ded3e7873d49cf204fffa050308616208f34004c29ff3a",
+          "vertical_shift": 9
+        },
+        {
+          "cell_rgba_sha256": "b66ea5852b60da3c3ff80b55a5cbff1e089e86bdd698c43275ce738f77b00614",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11693,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-01.png",
+            "sha256": "b72c2ee2546815327e6b24d941195e4a8efd809a875ead55ebef691edc95936a"
+          },
+          "raw_bbox": [
+            20,
+            64,
+            104,
+            112
+          ],
+          "raw_rgba_sha256": "eb6cbcaf84c57184dfb209f2bd8f65dca90b39ba8dfd9c5b7c181ef17945b12e",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "603c2fd213ffc74c9779f720abc156749565567dacd3e40d78c294a290ee1c94",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11814,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-02.png",
+            "sha256": "79332c0cebaec5c2aa12ac36021d9c266bf9826f4b810efc377951d7d463fa4c"
+          },
+          "raw_bbox": [
+            18,
+            64,
+            105,
+            108
+          ],
+          "raw_rgba_sha256": "d246d76fddcea8200bf97336d8c5dde447ff853966a0b4a53aea35a4a4f0cea3",
+          "vertical_shift": 11
+        },
+        {
+          "cell_rgba_sha256": "dfdf9929d59e818dd89de715cd071976a8faece8e6af32d7cbbc5583012ab3b0",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11421,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-03.png",
+            "sha256": "cd8e3789fd604552c8e42c16b6726031124a149f95e98ba9241d2b0cde232e9f"
+          },
+          "raw_bbox": [
+            17,
+            61,
+            108,
+            111
+          ],
+          "raw_rgba_sha256": "4fc468a040d1d876dbbef223310713e47ad81d0ab8a87c1bfd6e75b6df7343a4",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "0b0f784c4b1322f7a148e689f761dadd17c1a6db45a52232fa054a85cde99075",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 9784,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-04.png",
+            "sha256": "b962a95cb781a745ef8f64756df7cd44e0626f2b548e791a4e82a2d404ba173d"
+          },
+          "raw_bbox": [
+            34,
+            61,
+            93,
+            109
+          ],
+          "raw_rgba_sha256": "5e8775e958e9cca88bdd2a99927b8252fb6ee2f13ce837703f6bf6150e7608f8",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "7f1b424775c56971e8f700705d3ffa8c3ee08b84e2acaf094ce862581bfaa3a6",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11730,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-05.png",
+            "sha256": "8063619143e7868719aafe8d62ad2dc48d3ebeb5d9c88e24aabcfe5bce7a5ed7"
+          },
+          "raw_bbox": [
+            23,
+            61,
+            107,
+            109
+          ],
+          "raw_rgba_sha256": "6bc01441f6f2d40dad56810f22f64b51be618dcbf5d69536be6cc4a3573e572c",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "85a87cd9169f130ab0525bbe45ddf1f5a03beac9a183c02fb9fa5bef9ad02aff",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11666,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-06.png",
+            "sha256": "26483f717bbfc5b93661638f6e4e399f079871e9b0eaf614f1554472d876c87a"
+          },
+          "raw_bbox": [
+            22,
+            64,
+            109,
+            109
+          ],
+          "raw_rgba_sha256": "8da9b9765e8eccf3176d75b4b7a81f84c83fcd4d330e2850c07c31dda473b6eb",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "816bfdf99568071f35b4f38d2e4ace086421d5619d5a4425e0482bfe124f1f93",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 11740,
+            "path": "source/art/bodies-v1/crawler/frames/raw-walk_b-07.png",
+            "sha256": "b7760da467f7bda9bd6f38a3e1f5d650e972f6eb084465a49ab582f14bfeea2c"
+          },
+          "raw_bbox": [
+            19,
+            64,
+            110,
+            109
+          ],
+          "raw_rgba_sha256": "435d78d6fccfbd35678de8c3be1c405923fa7a2e0396de4e097b4407ddf111e9",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "6484f617f1da9e83a8557bd544909decb5d47aa44d70ea2a943e6f6094a30421",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 10987,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-00.png",
+            "sha256": "ab499d8f61f52be4064c702897ab1805b028d129d1419f1d70da5d894c82f6c8"
+          },
+          "raw_bbox": [
+            34,
+            64,
+            93,
+            113
+          ],
+          "raw_rgba_sha256": "18cddc3535948827f647f11af3388b43bb03f82d3cf44d4e91371bece1de480c",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "62eb2af663952b94436e1448ffbd54558148ab95371701ef33c511209744949a",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11949,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-01.png",
+            "sha256": "7804e04c3a4a395705f4c61ee8a8cc24cae8a0c71ff14b5151bb8ee7789dbea1"
+          },
+          "raw_bbox": [
+            13,
+            65,
+            104,
+            111
+          ],
+          "raw_rgba_sha256": "1211e9dfa296bb071c339f8f86f7f3f3845d2a01fca5110d23d49adc4920d741",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "2ce246f37e8f1d6089466e5abf7af12bf1f53c02eb7c7f52aacfdde987231e83",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11880,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-02.png",
+            "sha256": "66f10f155ae0cd6841be42751941a00739738ed6db2ee04ec071dcb26a856b5a"
+          },
+          "raw_bbox": [
+            5,
+            68,
+            96,
+            109
+          ],
+          "raw_rgba_sha256": "43f54577c201a908b7100fb5e893c760987af2d0b27c124a8960f8de2b03b92d",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "e7efab86fb0ba473fe7c87eb4e52a3a8b1291bffebca2448a2521b7f3a982e74",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11320,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-03.png",
+            "sha256": "17573af00f77a7baa3b7ef9efefa19023dd0a826b3558dd3344f686bf71b467e"
+          },
+          "raw_bbox": [
+            13,
+            67,
+            99,
+            111
+          ],
+          "raw_rgba_sha256": "8dfe9be73271489cfeb610afb0ef6485cc3db3a5f19e465e58061497181313df",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "466cd3297723f33911824938442a21d1944384e64ccd162a55d8cac49597cee2",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 9217,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-04.png",
+            "sha256": "9b461a47bef97d96be287c75b9f8010b1cc4e58e7eee4d63ec7bd4909b0c81dd"
+          },
+          "raw_bbox": [
+            34,
+            66,
+            93,
+            109
+          ],
+          "raw_rgba_sha256": "9519da8dbce4845bb2ec5770962b779e3359674e5d5bd137b774ced02acfd77d",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "44318076906e30328255c4d7b74beb35757e231d7793478ebff550be7c4f1e39",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11234,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-05.png",
+            "sha256": "2080ea60ccfa6be0dc62c1d22aa953e59f2cb559319bee821c7d0ae5fbea69fb"
+          },
+          "raw_bbox": [
+            23,
+            67,
+            114,
+            110
+          ],
+          "raw_rgba_sha256": "5adb4945a3830bd4bfa776da58f1a37a4b2d711901fb795338dd27ef7a9f3929",
+          "vertical_shift": 9
+        },
+        {
+          "cell_rgba_sha256": "48bc3f300d5a0679b97d42557d9ac44607b25a29b734d13ccdbda42dda07487d",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11893,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-06.png",
+            "sha256": "41c758adacfb469a97d037abe96f80b386a7e82aea06500107540664086464c5"
+          },
+          "raw_bbox": [
+            31,
+            67,
+            122,
+            109
+          ],
+          "raw_rgba_sha256": "69a5dd98b3980cb4115717bc81b762733c9872bb61433d3b35b6d8a34ccb039f",
+          "vertical_shift": 10
+        },
+        {
+          "cell_rgba_sha256": "3407b8d34a207bec342fd431abe0af3fb01494965d6845aca16003b32c7e876f",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 11835,
+            "path": "source/art/bodies-v1/crawler/frames/raw-attack-07.png",
+            "sha256": "46bfe33848abd41b3198456cad493465e18409599d4d3c9152b21a07e2339805"
+          },
+          "raw_bbox": [
+            28,
+            64,
+            114,
+            112
+          ],
+          "raw_rgba_sha256": "24adcc1b56f049a5fc0f7b2bf696bb80344efa36d93e2481b9d0afab9d9e5c3e",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "3a4def3cca337457b4b29f87988a0face15ff33e2ee3d4e0f2032a595c4edec7",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 8021,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-00.png",
+            "sha256": "87f5e7fb5303a79080fed948e35060e4a3410ec030d7f9c5100c0261f3921009"
+          },
+          "raw_bbox": [
+            42,
+            75,
+            85,
+            105
+          ],
+          "raw_rgba_sha256": "e914bca90ff3270c4422d77c6f48670ae46680a0c3f233254da795fa94e401be",
+          "vertical_shift": 14
+        },
+        {
+          "cell_rgba_sha256": "b36ece71fe15600d4e197df9b9deea1676de5a9dcc36cb49aa45cd54bb4f4615",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 9720,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-01.png",
+            "sha256": "a25c7a446e6ea9d04e0db2370e0b4c2df27c51e088a04623b3d24df906076246"
+          },
+          "raw_bbox": [
+            26,
+            75,
+            98,
+            107
+          ],
+          "raw_rgba_sha256": "b96d56369571a8e81cc69c7e29160f79ca281a7805a23398320bf88fb1a300d5",
+          "vertical_shift": 12
+        },
+        {
+          "cell_rgba_sha256": "2b75c9926ee2d69e495dcb53473dad41b838d1af5910441e47162c0b2d94a1f8",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 10306,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-02.png",
+            "sha256": "117be2e1d7babb6ef14ab5ae8c5ef66070d65c14ed621743064ac373ce4c9ecc"
+          },
+          "raw_bbox": [
+            18,
+            74,
+            109,
+            105
+          ],
+          "raw_rgba_sha256": "9ea180ba4d04f78c70f38ed411cc320f6efa06ea4f3eae27d86d6cd670bc4439",
+          "vertical_shift": 14
+        },
+        {
+          "cell_rgba_sha256": "da5f0b6cb7ea65c5a35c7c1296b90b199bba01d34cab2a8d7bf1cdb9cde092c9",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 10066,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-03.png",
+            "sha256": "042abbfca908300cfacd724b65078bc02b7940a18f56ff4fa9d42db0d835b0b7"
+          },
+          "raw_bbox": [
+            20,
+            71,
+            96,
+            107
+          ],
+          "raw_rgba_sha256": "8a68d89f22c396de79d79126c2f692e64215486d240986c4f24adf04985a380f",
+          "vertical_shift": 12
+        },
+        {
+          "cell_rgba_sha256": "52c256f72c190ceb4116d1d3923e27bc316b4ab01fa746e6b9d7905953f72595",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 8651,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-04.png",
+            "sha256": "8c552a858bbc8a0e946f2523007125e26e71f050ed69cec3bb52b892422ff96a"
+          },
+          "raw_bbox": [
+            42,
+            70,
+            85,
+            107
+          ],
+          "raw_rgba_sha256": "d7496ab9f73dfe32962289704db15a94b4d08ace8749437152913af0ce36e89b",
+          "vertical_shift": 12
+        },
+        {
+          "cell_rgba_sha256": "884acc9817df785302f2117a29ebe67dcb4c81262c86ba7ccc5aeaf0925f02a1",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 9454,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-05.png",
+            "sha256": "368d633ab9b94d55aa926c6359adebcda7966503e4e350d878a136e931de3fa9"
+          },
+          "raw_bbox": [
+            28,
+            72,
+            101,
+            105
+          ],
+          "raw_rgba_sha256": "4b04d804990a399a962c2df5e7fca2508098d5165a5636ef0055f5c46a2c5dae",
+          "vertical_shift": 14
+        },
+        {
+          "cell_rgba_sha256": "4056cd13bb84a3a3deef80d81152132940dedb1abe04c663983362d826a3cece",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 9778,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-06.png",
+            "sha256": "9d5675d3e444311a254696ddc5e090f755c33bd1b8a0537f387f2acbd2c6f0dc"
+          },
+          "raw_bbox": [
+            18,
+            74,
+            109,
+            102
+          ],
+          "raw_rgba_sha256": "0fa68b335332981c5c7618e9bd788cc4c869f85649d8791365dbf3deade35b87",
+          "vertical_shift": 17
+        },
+        {
+          "cell_rgba_sha256": "bcb74fdf20cc573b7e42cdfd7cf973dc77f868035a68d7e346f67fce8a79cdc3",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 9506,
+            "path": "source/art/bodies-v1/crawler/frames/raw-dead-07.png",
+            "sha256": "da9c64d8462c30635199cc22e0f669ceb65cc0808790fe07d01c5efb9b98bc41"
+          },
+          "raw_bbox": [
+            31,
+            75,
+            107,
+            104
+          ],
+          "raw_rgba_sha256": "59af6a6af5e9134f3fcd138ca421ab1d54392aeeaeddafaf9f2aad34706a9348",
+          "vertical_shift": 15
+        }
+      ],
+      "generator": {
+        "bytes": 16827,
+        "path": "source/art/bodies-v1/crawler/build_pair_v04.py",
+        "sha256": "0c16b632f381656b50b9fa46fcd6bb0d267687273bfa6aeb81b2a033565f7fd0"
+      },
+      "import_sidecar": {
+        "bytes": 955,
+        "path": "game/assets/art/sprites/bodies-v1/crawler.png.import",
+        "sha256": "cbaad65919b6dbb91a83f3c387686a7711be091e4915f2266b747a8734a67118"
+      },
+      "independent": {
+        "bytes": 4877,
+        "path": "source/art/bodies-v1/crawler/proof/independent.json",
+        "sha256": "0f280730912bc9116e4b0daf29adc67066316c5632dd5f9a59485b226b97054d"
+      },
+      "kind": "crawler",
+      "lineage": {
+        "generator": {
+          "bytes": 44470,
+          "path": "source/art/recipe_history/ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776/tools/build_art.py.txt",
+          "sha256": "ba3f8b0414f669b82ca017f28c437085c938447bdf98036c7507f725aaf25776"
+        },
+        "generator_dependencies": {},
+        "logical_generator": "tools/build_art.py",
+        "output": {
+          "bytes": 187591,
+          "path": "game/assets/art/sprites/crawler.png",
+          "sha256": "15ffb89c68e4f2e65fc5083d774656785da409a1364b6d69507dd20863577315"
+        },
+        "source": {
+          "bytes": 4306670,
+          "path": "source/art/crawler.blend",
+          "sha256": "9a42c5332ee16dc714a1444d357a332c014aabaef2668a7a3be22799e78dc8ec"
+        }
+      },
+      "normal-import": {
+        "bytes": 4117,
+        "path": "source/art/bodies-v1/crawler/proof/normal-import.json",
+        "sha256": "0885903c7af545f65bf0c7cb3c7e64ffd9e457210f8c734cd8c8bf2688d89185"
+      },
+      "output": {
+        "bytes": 121328,
+        "cell_bbox": [
+          [
+            34,
+            69,
+            93,
+            119
+          ],
+          [
+            16,
+            71,
+            108,
+            119
+          ],
+          [
+            17,
+            73,
+            104,
+            119
+          ],
+          [
+            21,
+            68,
+            103,
+            119
+          ],
+          [
+            34,
+            70,
+            93,
+            119
+          ],
+          [
+            19,
+            69,
+            111,
+            119
+          ],
+          [
+            23,
+            73,
+            110,
+            119
+          ],
+          [
+            24,
+            69,
+            106,
+            119
+          ],
+          [
+            34,
+            65,
+            93,
+            119
+          ],
+          [
+            12,
+            72,
+            112,
+            119
+          ],
+          [
+            16,
+            72,
+            107,
+            119
+          ],
+          [
+            21,
+            69,
+            99,
+            119
+          ],
+          [
+            34,
+            71,
+            93,
+            119
+          ],
+          [
+            15,
+            70,
+            115,
+            119
+          ],
+          [
+            20,
+            73,
+            111,
+            119
+          ],
+          [
+            28,
+            66,
+            106,
+            119
+          ],
+          [
+            34,
+            73,
+            93,
+            119
+          ],
+          [
+            20,
+            71,
+            104,
+            119
+          ],
+          [
+            18,
+            75,
+            105,
+            119
+          ],
+          [
+            17,
+            69,
+            108,
+            119
+          ],
+          [
+            34,
+            71,
+            93,
+            119
+          ],
+          [
+            23,
+            71,
+            107,
+            119
+          ],
+          [
+            22,
+            74,
+            109,
+            119
+          ],
+          [
+            19,
+            74,
+            110,
+            119
+          ],
+          [
+            34,
+            70,
+            93,
+            119
+          ],
+          [
+            13,
+            73,
+            104,
+            119
+          ],
+          [
+            5,
+            78,
+            96,
+            119
+          ],
+          [
+            13,
+            75,
+            99,
+            119
+          ],
+          [
+            34,
+            76,
+            93,
+            119
+          ],
+          [
+            23,
+            76,
+            114,
+            119
+          ],
+          [
+            31,
+            77,
+            122,
+            119
+          ],
+          [
+            28,
+            71,
+            114,
+            119
+          ],
+          [
+            42,
+            89,
+            85,
+            119
+          ],
+          [
+            26,
+            87,
+            98,
+            119
+          ],
+          [
+            18,
+            88,
+            109,
+            119
+          ],
+          [
+            20,
+            83,
+            96,
+            119
+          ],
+          [
+            42,
+            82,
+            85,
+            119
+          ],
+          [
+            28,
+            86,
+            101,
+            119
+          ],
+          [
+            18,
+            91,
+            109,
+            119
+          ],
+          [
+            31,
+            90,
+            107,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "a699f59816d8a3e7127fb8b7bbf04ffe13e5c25fde885cf7c27180c4e7ff2c65",
+          "3ee4a8f7bafd1cba64a56bc2f980190af5591715aae804d00cff53c8f48aa65a",
+          "7e6566f8826a5f04231c3b17719e15620e9c851ed819d2cef907f3b1499be331",
+          "59a9882b28b579d78a6e0ac01c632c306e59073faa2eda5fbc67d577cc3ffebc",
+          "40c8c826c157875e84018f5a445cae19fbfc2cc3c409da9269ab841cdbda33ce",
+          "3368dabf2a2960cb77d6e120e5b4536332f181ee89318a8ec2956396f30235c5",
+          "8544fabb136ad9d316e3709f9ca43c36966dba258d7112d1c164b77593415f19",
+          "8c80763aed90987eb4152b6508e0dc0c7cd3fa96311737f7e6dc6ccc09e806c8",
+          "6f4444a3bf1f749062890336010f32268a2e63e0444af971a365a4dfe7489f78",
+          "ffe9199ae4ca9c5e9164ec20aab720e648619178dc8b67a04471d55bd6b9194a",
+          "74e3f77e26fa09aac57d7a0f0d6b391e51ed43081dbd846e122969c86818b6f2",
+          "e4c4cc9cff645c8db24b197cb9160f1e55dee2231f69ce00f1e98f4e38b29558",
+          "79489e9fdbc930b12f4f03cd11d59ac3d5dcfa26901daaa0e203ff2613ec860f",
+          "7ee6924e06f89545a9679f2f4a360dd51c7218ab22fa9750740305efa0aadcd2",
+          "5679850e7c073c51161b15cb1a72a706a1180bbaa2760ddc58cd20d12b5466f7",
+          "e1516ef4502fa557bfebf4abb334e23a86160cdde7e3a92c0cd6bacc996b04c1",
+          "92a5f20d3823f89962ceb263ddb2bb9ec9eb2e11659fb5d90807e64f59144689",
+          "b66ea5852b60da3c3ff80b55a5cbff1e089e86bdd698c43275ce738f77b00614",
+          "603c2fd213ffc74c9779f720abc156749565567dacd3e40d78c294a290ee1c94",
+          "dfdf9929d59e818dd89de715cd071976a8faece8e6af32d7cbbc5583012ab3b0",
+          "0b0f784c4b1322f7a148e689f761dadd17c1a6db45a52232fa054a85cde99075",
+          "7f1b424775c56971e8f700705d3ffa8c3ee08b84e2acaf094ce862581bfaa3a6",
+          "85a87cd9169f130ab0525bbe45ddf1f5a03beac9a183c02fb9fa5bef9ad02aff",
+          "816bfdf99568071f35b4f38d2e4ace086421d5619d5a4425e0482bfe124f1f93",
+          "6484f617f1da9e83a8557bd544909decb5d47aa44d70ea2a943e6f6094a30421",
+          "62eb2af663952b94436e1448ffbd54558148ab95371701ef33c511209744949a",
+          "2ce246f37e8f1d6089466e5abf7af12bf1f53c02eb7c7f52aacfdde987231e83",
+          "e7efab86fb0ba473fe7c87eb4e52a3a8b1291bffebca2448a2521b7f3a982e74",
+          "466cd3297723f33911824938442a21d1944384e64ccd162a55d8cac49597cee2",
+          "44318076906e30328255c4d7b74beb35757e231d7793478ebff550be7c4f1e39",
+          "48bc3f300d5a0679b97d42557d9ac44607b25a29b734d13ccdbda42dda07487d",
+          "3407b8d34a207bec342fd431abe0af3fb01494965d6845aca16003b32c7e876f",
+          "3a4def3cca337457b4b29f87988a0face15ff33e2ee3d4e0f2032a595c4edec7",
+          "b36ece71fe15600d4e197df9b9deea1676de5a9dcc36cb49aa45cd54bb4f4615",
+          "2b75c9926ee2d69e495dcb53473dad41b838d1af5910441e47162c0b2d94a1f8",
+          "da5f0b6cb7ea65c5a35c7c1296b90b199bba01d34cab2a8d7bf1cdb9cde092c9",
+          "52c256f72c190ceb4116d1d3923e27bc316b4ab01fa746e6b9d7905953f72595",
+          "884acc9817df785302f2117a29ebe67dcb4c81262c86ba7ccc5aeaf0925f02a1",
+          "4056cd13bb84a3a3deef80d81152132940dedb1abe04c663983362d826a3cece",
+          "bcb74fdf20cc573b7e42cdfd7cf973dc77f868035a68d7e346f67fce8a79cdc3"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/crawler.png",
+        "rgba_sha256": "3aedc249a859302f11064a44ac7d0b4063f354a80594f1e8ccb44e6cc72e8bfa",
+        "sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56"
+      },
+      "public_master_bridge": {
+        "bytes": 4989,
+        "path": "source/art/bodies-v1/crawler/proof/public-master-bridge.json",
+        "sha256": "1a42c3b174fda19fef82d24be54724e1e43b3f76e0a135b54af3031333ba7b8d"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42441,
+        "path": "source/art/bodies-v1/crawler/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "6ede0cbbb83030f62cea65a1a932beafea30f3808eca3d4345289fbe17ecb1fe"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          640
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.0296875,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 1.6624999999999999
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/crawler.png",
+      "source-native": {
+        "bytes": 5890,
+        "path": "source/art/bodies-v1/crawler/proof/source-native.json",
+        "sha256": "d1a395c341511003d7ff9da0c52e36bd86d6363d12398cf1e960e7ec2820914d"
+      },
+      "source_blend": {
+        "bytes": 4885723,
+        "path": "source/art/bodies-v1/crawler/crawler.blend",
+        "sha256": "001d76d6b58c42add608bccff1d81e73b88611f9defbcaee204a6bf53825c50d"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/crawler/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        },
+        {
+          "bytes": 18329,
+          "path": "source/art/bodies-v1/crawler/actor_geometry_v02.py",
+          "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+        },
+        {
+          "bytes": 925700,
+          "path": "source/art/bodies-v1/crawler/portable-source.json",
+          "sha256": "d9b81efc64793625a1124a2434796f6118837f5f4ae2e8c398510b0347658dae"
+        }
+      ]
+    },
+    {
+      "actual-context": {
+        "bytes": 8996,
+        "path": "source/art/bodies-v1/brute/proof/actual-context.json",
+        "sha256": "b43d7e6ce9ac7e460551b25b9185a7b23df464afddcd6822e51fb074f3090245"
+      },
+      "frames": [
+        {
+          "cell_rgba_sha256": "ef2765cfcdc099ad149fec61aa898dc1087bd08ed36bbaf2aa823af75a472259",
+          "direction": 0,
+          "frame": 0,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16699,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-00.png",
+            "sha256": "f905da3c74517b346cd93b92c6ea5f1e6c88ef8be4ae764cf3267b96b1cc97a4"
+          },
+          "raw_bbox": [
+            26,
+            25,
+            106,
+            116
+          ],
+          "raw_rgba_sha256": "651eaca798a5e5b1501146a6f11d093f1690ee69efe24bf04202d7491ff40738",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "b8fef5d3ebcf4d488407f35760386a91b193f69c7fbaab19659b0a21db509a8a",
+          "direction": 1,
+          "frame": 1,
+          "pose": "idle",
+          "raw": {
+            "bytes": 17164,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-01.png",
+            "sha256": "77da47552f64d7aea5a42f05b42cbd66549f659c0ed9639e7c5d48d21ca197fd"
+          },
+          "raw_bbox": [
+            10,
+            21,
+            95,
+            117
+          ],
+          "raw_rgba_sha256": "41260b4a0aa3d55d6ca90dd094e8875f1961fb39f5751b8117cfc86a40b5fd48",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "420fb6cf6087bb3ee554d97e064938228a0c4fcfd707db28690f9befebb2c78a",
+          "direction": 2,
+          "frame": 2,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16166,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-02.png",
+            "sha256": "4802108c8126bbbdc77f23ce2d4a282c29a5d79a23175f976b63c1469203cc84"
+          },
+          "raw_bbox": [
+            22,
+            17,
+            92,
+            115
+          ],
+          "raw_rgba_sha256": "1c8feff287d5c6224a3d14e847f1c85ffdec07bc4f31cc6bd42f03f716571215",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "101f8afda54064d75bba14934d49a9500f3bbebac78f6db7ee2dc0bbaceaa917",
+          "direction": 3,
+          "frame": 3,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15939,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-03.png",
+            "sha256": "6d76837f0c7b2839ac5b23d1744a444444d7b86ee7f6e4f3708b2a77ce311a45"
+          },
+          "raw_bbox": [
+            23,
+            15,
+            92,
+            113
+          ],
+          "raw_rgba_sha256": "d13b029decf69d6b1a470c32f7de0e2396064fbab0451d6b0da93a34adda2f6c",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "36dc7e869becb9600399b0023d87dc6eddfec511b131e34ec5aba20b041fae1a",
+          "direction": 4,
+          "frame": 4,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16718,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-04.png",
+            "sha256": "5fddee0f46150151ffc100aa94b3750f20437637936e747490a3ea04df06c14c"
+          },
+          "raw_bbox": [
+            21,
+            15,
+            101,
+            115
+          ],
+          "raw_rgba_sha256": "35069f019a652057c857f73ee1dc3937017bcb0e6d921002e348246b6796625a",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "4e6b2136b7d521783d9378fedf153a37f340519d8e44f71b6e8382703e3291f9",
+          "direction": 5,
+          "frame": 5,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16356,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-05.png",
+            "sha256": "978f2bbfea847442df312df029c2cd1668a3fc0b1f6b5d5041803a4e345b3130"
+          },
+          "raw_bbox": [
+            32,
+            15,
+            117,
+            116
+          ],
+          "raw_rgba_sha256": "d3ae224cdd7eee71e56b74796ac6e29e9fb60cc8ff8b1aa41ccef5d21afa3358",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "31c82210f6cf598a69058ba1bcf97f8f71efc9f82209caa3755e1b9cf9692124",
+          "direction": 6,
+          "frame": 6,
+          "pose": "idle",
+          "raw": {
+            "bytes": 15973,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-06.png",
+            "sha256": "8ccc38cbeaccbdc6f093815a2703500324208a94a8d5d105460fba90b19f5979"
+          },
+          "raw_bbox": [
+            35,
+            17,
+            105,
+            115
+          ],
+          "raw_rgba_sha256": "17ce507fe61c610c2cce5c7b77d76cc72d8009fd014b93ff1193622c4de568b4",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "4741dfba8aacb414ffbb93e4b0feb19a6cf79a73778e3a2eb9168ae0030743c1",
+          "direction": 7,
+          "frame": 7,
+          "pose": "idle",
+          "raw": {
+            "bytes": 16444,
+            "path": "source/art/bodies-v1/brute/frames/raw-idle-07.png",
+            "sha256": "b6859c00bd4151383824f99e4866663d35d241a53984df31986dfaa2e1a66eb5"
+          },
+          "raw_bbox": [
+            35,
+            21,
+            104,
+            114
+          ],
+          "raw_rgba_sha256": "af01007b651894032e2ca95bab399e4db7e3ddb595672ea63ba29f4d0bbaa84f",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "fc04961674a3351814157f1f822b001f7b3797d1d7a059e78b6126c7502f6bd5",
+          "direction": 0,
+          "frame": 8,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16348,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-00.png",
+            "sha256": "3bc49fe91556672bd6966d4bde49f63a8b67d668e954ed94afb53b6788611d2a"
+          },
+          "raw_bbox": [
+            27,
+            27,
+            108,
+            113
+          ],
+          "raw_rgba_sha256": "58006b622e90bfcb1418672018cb78b11b1d0bb6d3d64c9b70ab009bbf82ba68",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "99eb70981f4a4a5d721b65629aa72bec7eeeb39ff54dbe3d7f04f4ce606fbb9b",
+          "direction": 1,
+          "frame": 9,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 17129,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-01.png",
+            "sha256": "75ed4f93cb3f884c4cae029faa4c5073e69b7a080ef395da00bdc146f49b6b7f"
+          },
+          "raw_bbox": [
+            8,
+            24,
+            97,
+            114
+          ],
+          "raw_rgba_sha256": "edc963c1e8dbe61016fccd0243d0e3944f53357f8c77735c802b3158e71fa1a9",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "4b979ed7158d283053293ea0b9ac69daabca1f1aa41a4fabe2674c741c9216c1",
+          "direction": 2,
+          "frame": 10,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16104,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-02.png",
+            "sha256": "1af4ff76b283772f1efce14cf56de62f9a57d3e6e155ded86586a3d70527a7c6"
+          },
+          "raw_bbox": [
+            17,
+            20,
+            91,
+            113
+          ],
+          "raw_rgba_sha256": "04aa15c5005d385fb9dc25d61ce66101b7e9ec0027130054c2cf50203711e6fd",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "aec2da5bba12de83f877bf79a51ddfb6b8b3dcecddb7a7544dc76e462e9439b5",
+          "direction": 3,
+          "frame": 11,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 15809,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-03.png",
+            "sha256": "88ea37f54a64a0362a077e270b398e00b783bfed113f44258c979f89d4d66af2"
+          },
+          "raw_bbox": [
+            25,
+            17,
+            92,
+            113
+          ],
+          "raw_rgba_sha256": "d67d41b6d31a0246b1b73bf8820f0598996f74a05fa8f09cab1625b11b1d918b",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "aa21aaefe758df6da6a5ac7d02a9ad0819025a7746c9661e1c4333571a665a3a",
+          "direction": 4,
+          "frame": 12,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16613,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-04.png",
+            "sha256": "1cc989e43dee1e14f7ebb2ab9bea97b1d2a6e721997df3e9c9c7d25fc90d03e7"
+          },
+          "raw_bbox": [
+            19,
+            17,
+            100,
+            114
+          ],
+          "raw_rgba_sha256": "e5f5eed5550fe2b3b5440c98da99b3e716d8903f51fc8c7166d74ed66b7f4ddc",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "24e3a4b1ba75793bc45c0c54da7c9871c65a5398b92b5e6851eea9f41396e4eb",
+          "direction": 5,
+          "frame": 13,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16738,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-05.png",
+            "sha256": "ea6e4d4add8f1d0f977f9ac49a879e0d183776a16942fecb7c657031187af603"
+          },
+          "raw_bbox": [
+            30,
+            17,
+            119,
+            116
+          ],
+          "raw_rgba_sha256": "af1703547ad155d7658beca73b873635537b6033398ae85061d5b48156155ba0",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "2de21b795df310958bc86a4310373e526d7d1ec1c8935377083c1063dbb14cc7",
+          "direction": 6,
+          "frame": 14,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16003,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-06.png",
+            "sha256": "7a3d61f10e0e293a5ee45ad6234e95ab64a2e9f45b4f121762d94c4ae70100b2"
+          },
+          "raw_bbox": [
+            36,
+            19,
+            110,
+            115
+          ],
+          "raw_rgba_sha256": "04cc77100be2babebd5b7e8d52e878740896832f88d4800292d8247db59ef293",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "5389e28cb40384145fad18e36fb7ae98b3ef06ae1d0f9f1d419866580a65af64",
+          "direction": 7,
+          "frame": 15,
+          "pose": "walk_a",
+          "raw": {
+            "bytes": 16014,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_a-07.png",
+            "sha256": "24b3f58f5518cb4ad4b95ad6c5fe135788d4829fac1873bef04b516f6eae74cf"
+          },
+          "raw_bbox": [
+            35,
+            23,
+            102,
+            114
+          ],
+          "raw_rgba_sha256": "388b099cdc1c134c853272a8d4d7d87dbebe6114f8e3cdca1180657b1b948d98",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "8dfa747ba0e8596e6438fe5c7c2b713bb2e54cc89f0a780b4421473aae65b992",
+          "direction": 0,
+          "frame": 16,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16764,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-00.png",
+            "sha256": "4c9b10616b6db3a77f1c5d0545eb342136c5be16c8c9b432dc04e512af3f6d2d"
+          },
+          "raw_bbox": [
+            24,
+            25,
+            105,
+            117
+          ],
+          "raw_rgba_sha256": "a064c1993714463c1618a032a8fe592a992879f7324f8a63a99267f71ba536c0",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "df73228be2caa9fb1c93e8ed29f6f5c99cfebfa29cf5adb87b07753bd296aca3",
+          "direction": 1,
+          "frame": 17,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16786,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-01.png",
+            "sha256": "a2c8ad533f0089684b62e1895dad760d99b7fe50620280b5bbeca98439813b66"
+          },
+          "raw_bbox": [
+            12,
+            22,
+            93,
+            117
+          ],
+          "raw_rgba_sha256": "e32c92dd57a8c282e638c81805a4734d5c15fa7be15076da4917216ddc705026",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "b7c20cf77e97ac9a50163871baae1266686be855c9091fa7466d3eee2cc36766",
+          "direction": 2,
+          "frame": 18,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16171,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-02.png",
+            "sha256": "1fdd1d6ea2627e1e89dc9a2a547f36c0dfe68e394f6345013e327bf11c384921"
+          },
+          "raw_bbox": [
+            26,
+            18,
+            93,
+            115
+          ],
+          "raw_rgba_sha256": "65b326fd1b7800d7b6c6c2c7876298f13b6b596882b5b35a5444f61bb50a28af",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "c69ea135c4a24d03b819056d5caf68dfe4a0f57a2934d1adac19421c65d6b96f",
+          "direction": 3,
+          "frame": 19,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15894,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-03.png",
+            "sha256": "578e7c1a81c3db8bc45be043ed39d31da25def10fd59da57adb1e5fee8e38c74"
+          },
+          "raw_bbox": [
+            20,
+            16,
+            92,
+            112
+          ],
+          "raw_rgba_sha256": "afda9dacb53465b66d76159350ccefd27e19a9a7ae7db4966048a01a5e572444",
+          "vertical_shift": 7
+        },
+        {
+          "cell_rgba_sha256": "dcdc2b7f1d68fc46fa5d9ba66a59d1860f954c1b1c7240bd9bee8489dc9a6f09",
+          "direction": 4,
+          "frame": 20,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16571,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-04.png",
+            "sha256": "fa277da95d131ceb92f15ea9507f0d429758435d524ede7c05f53e8d43adf5e9"
+          },
+          "raw_bbox": [
+            22,
+            16,
+            103,
+            114
+          ],
+          "raw_rgba_sha256": "bda37351400e5c88ba054fd32415b2a9dd6a5add8c5210dd343f1299a8d63ad6",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "bd0e3583c8faa84246eca33e07704c1c41d4592b377e3767dc6f00a5156cacbe",
+          "direction": 5,
+          "frame": 21,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16043,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-05.png",
+            "sha256": "ed2c5088a802cbfe656ee9d730d091d130b559a5ab65d82914d858f40830719a"
+          },
+          "raw_bbox": [
+            34,
+            16,
+            115,
+            115
+          ],
+          "raw_rgba_sha256": "2fe2ef02eddd745990fb30317900598516ef2fb4307e565710c59f4daa7bd79d",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "f6d8e563756094555c7e527069f3a2976ccc8801decdc844c7abcec7dbe78470",
+          "direction": 6,
+          "frame": 22,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 15794,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-06.png",
+            "sha256": "bee8e84798257bcbaca2b1ae4b8697e8e6a344a0359a0af7fec008be021be834"
+          },
+          "raw_bbox": [
+            34,
+            19,
+            101,
+            113
+          ],
+          "raw_rgba_sha256": "0d63b1b2cce79eaf4a4f6db303b595beb4cdbfe26ce4fe2c3649cb7abde33741",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "27829bfe1d89d3cdecc5c7735e510549f4dc72d3d50a1be20126e7c7d8b9935e",
+          "direction": 7,
+          "frame": 23,
+          "pose": "walk_b",
+          "raw": {
+            "bytes": 16480,
+            "path": "source/art/bodies-v1/brute/frames/raw-walk_b-07.png",
+            "sha256": "21f4a370eb06e57a5699e273b029e875e774baf82f4c051612b34180105eae7e"
+          },
+          "raw_bbox": [
+            35,
+            23,
+            106,
+            114
+          ],
+          "raw_rgba_sha256": "75ea1618b3dd721438ef71732d0977f60baab1a05852f04210e70b271bd06ba8",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "8bfa0e6812dd3916b497a3163fcfbdf68495620033f7dfbf65e9a3489a9cc475",
+          "direction": 0,
+          "frame": 24,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15602,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-00.png",
+            "sha256": "0588397fd0fc6c197fd96605aa894852d57e4d2d0113e70de0bc588d4cc404df"
+          },
+          "raw_bbox": [
+            28,
+            37,
+            101,
+            118
+          ],
+          "raw_rgba_sha256": "4df99a89c66b43f6e0145a688492508023d3118c66a53144b644b369ca9fd0e4",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "2e8706e230a50a177a88f627cf22edbac8b918ee3c5dd25339a6ce8cc7719a54",
+          "direction": 1,
+          "frame": 25,
+          "pose": "attack",
+          "raw": {
+            "bytes": 16018,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-01.png",
+            "sha256": "644f0e7f0d9394f6cf4731f6ec649ac663ee39042955180669944830f343c242"
+          },
+          "raw_bbox": [
+            5,
+            36,
+            87,
+            118
+          ],
+          "raw_rgba_sha256": "52f144b76b053f95382521fce781e871849be1e43029f5cf8dc92f4b7cbf3b88",
+          "vertical_shift": 1
+        },
+        {
+          "cell_rgba_sha256": "966a449a846742ffe72209b3bedb48693b267ff67d7275b3e743a78d6102edb7",
+          "direction": 2,
+          "frame": 26,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15765,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-02.png",
+            "sha256": "bcad2b516627022ade19a97eff746abfce5268d55bd0857500410afb133a70cd"
+          },
+          "raw_bbox": [
+            14,
+            37,
+            90,
+            115
+          ],
+          "raw_rgba_sha256": "dd57af1af028065fe0b8c5add8efb5b1f03cd7efd4c37fd55a9d26ce1b8fc8b6",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "4a8b4086043eb57e483f16722a10339d19b3ab1a55b915f5bc58cd0260ddbb4b",
+          "direction": 3,
+          "frame": 27,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15211,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-03.png",
+            "sha256": "9eee0824a6849e3eb454fbd223dab87ae28e4b53ef2f0d5b33e8b59f4722b1be"
+          },
+          "raw_bbox": [
+            19,
+            35,
+            93,
+            114
+          ],
+          "raw_rgba_sha256": "9911ef21a2ad5919c3536cb433ee521d8b7dfd27df433ee5830d9c003a4dcc6a",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "4ba2fc242fe3057ef50013118ec45796197b52dd4d4f1ec76c513d1e540788a2",
+          "direction": 4,
+          "frame": 28,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15361,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-04.png",
+            "sha256": "00f3a3e445eabc6ea5a9577bc68e26c645518e66241b547ffb6fd7419548064e"
+          },
+          "raw_bbox": [
+            26,
+            35,
+            99,
+            116
+          ],
+          "raw_rgba_sha256": "32eb54966f27b97da81c5e2cc01178221ec8044007a12a2c2bfa04427ac60a98",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "5c3017a6a208aa2de1031b9249ffb138ddfcbd7aff57f9a668629af6e13b4452",
+          "direction": 5,
+          "frame": 29,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15313,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-05.png",
+            "sha256": "567423f25a64e442ee6764244e5ecf22df273b70dbb220cd2eff883b0709cf76"
+          },
+          "raw_bbox": [
+            40,
+            35,
+            122,
+            117
+          ],
+          "raw_rgba_sha256": "fd1f3aba42f966847647941b87f840a00fe3c5dcc5dfe73804220ab961cb6892",
+          "vertical_shift": 2
+        },
+        {
+          "cell_rgba_sha256": "6aa61be8c6794feff9db6d449b12564d539871703b89025f8682df7d1af61933",
+          "direction": 6,
+          "frame": 30,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15256,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-06.png",
+            "sha256": "f678c304d3b5c3e243626db4f6686f9bc8147e49aa159db2cd205b7c393228fb"
+          },
+          "raw_bbox": [
+            37,
+            37,
+            113,
+            115
+          ],
+          "raw_rgba_sha256": "b2a467fb1cde5f470b7f8fbdefc565ccd0d8d47805c92d9e7015e808f368eb1d",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "393fa8b06bb78667338f249cc2524a94b7abf0659fa42cf12ba07c174a4a9387",
+          "direction": 7,
+          "frame": 31,
+          "pose": "attack",
+          "raw": {
+            "bytes": 15755,
+            "path": "source/art/bodies-v1/brute/frames/raw-attack-07.png",
+            "sha256": "99aaf54aee3a374c896a5f4666bd4e8cfe30f6b96170f5370606c40bc18f62a3"
+          },
+          "raw_bbox": [
+            34,
+            36,
+            108,
+            115
+          ],
+          "raw_rgba_sha256": "bd56bd125a5ab06e0f9c5cf80266ea26166ef78b8cf6c48dceb0eb33ae2fdd81",
+          "vertical_shift": 4
+        },
+        {
+          "cell_rgba_sha256": "d164782bf3450cedc0de2eadb884f678f6a401ef80a81993eef7af6c16268c68",
+          "direction": 0,
+          "frame": 32,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14219,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-00.png",
+            "sha256": "2261dcad50e8178d455d5cb4090f72001b157f86bb96532b94756c243aedec7c"
+          },
+          "raw_bbox": [
+            20,
+            52,
+            107,
+            116
+          ],
+          "raw_rgba_sha256": "be45024f08fc07fed3825c6c6d8dce3c93f7f8aaaa6a390f81db23cfb6e345fc",
+          "vertical_shift": 3
+        },
+        {
+          "cell_rgba_sha256": "c0fdfc59eb514bfd3d08d0e959f4b1989f4a1c838437e9dd7baea7e55da248c5",
+          "direction": 1,
+          "frame": 33,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14761,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-01.png",
+            "sha256": "280b60fa37f83c499ffcd0d9a4e095c196b6089d9675103ac288f1817969ae22"
+          },
+          "raw_bbox": [
+            21,
+            49,
+            101,
+            114
+          ],
+          "raw_rgba_sha256": "bd415fb11cc72c638abd4aad61a062fd0db7f43dee59b8d6b214f4c7c12f6798",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "da3fecd8c862b23e0723cd4deffe30e9be2d7cccc4139de8364363dfd152b585",
+          "direction": 2,
+          "frame": 34,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13383,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-02.png",
+            "sha256": "7344c02655b0d32c149b2db16e17d6c4036f048f20fbc0c482ea418f753a8d7c"
+          },
+          "raw_bbox": [
+            31,
+            48,
+            96,
+            114
+          ],
+          "raw_rgba_sha256": "8743344bff0a9ff97ce9cc4db79b257293fa235605eca093b91e729ebd6367f1",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "222a8ad7194cd7700a10ed0727572f62e12e015793492f264db35050536bd687",
+          "direction": 3,
+          "frame": 35,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14234,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-03.png",
+            "sha256": "5b48bbc62b4e22319b6748da421df1b02196cf8cfe33f01f060ddaa20784301c"
+          },
+          "raw_bbox": [
+            19,
+            49,
+            102,
+            113
+          ],
+          "raw_rgba_sha256": "25595b5a2245acba234bede0d89f46a377239644e45259cf1754764c5ef8f30d",
+          "vertical_shift": 6
+        },
+        {
+          "cell_rgba_sha256": "d6cb3c8bb7890f1e36190786737ff47bd95f4d09a27736ddee4abae56e3b7f9b",
+          "direction": 4,
+          "frame": 36,
+          "pose": "dead",
+          "raw": {
+            "bytes": 14045,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-04.png",
+            "sha256": "846259be55512d4cb7c3b7b23be2f2703f722d3278306aaa2348b93616f8f95f"
+          },
+          "raw_bbox": [
+            20,
+            52,
+            107,
+            111
+          ],
+          "raw_rgba_sha256": "256f76e474fec8fe8bf15e0c8a3372bc39ee52b215958a72909df9972a919851",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "fa54b7ca32e24e647c6dfaec02abba428d323c576c81216bf5d418d02980cb3a",
+          "direction": 5,
+          "frame": 37,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13527,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-05.png",
+            "sha256": "78dcbaef9e31d5dcaabf2f1bc5000c9eb82e1cc02ab98945fead7ad8a971bb20"
+          },
+          "raw_bbox": [
+            26,
+            55,
+            106,
+            111
+          ],
+          "raw_rgba_sha256": "ddf607b70e10d1d5b2079f76f340041f851d18bbf1834976c13b211feed6472d",
+          "vertical_shift": 8
+        },
+        {
+          "cell_rgba_sha256": "444ba9dcff541478159e80f149d88c7ad0c7d164a9b86357fc2c490f4a268de0",
+          "direction": 6,
+          "frame": 38,
+          "pose": "dead",
+          "raw": {
+            "bytes": 11990,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-06.png",
+            "sha256": "acc9de6f75806aecd0d0dcf40c382a0cfe8fce13ad5f8eba52be65cd7d2bd583"
+          },
+          "raw_bbox": [
+            31,
+            56,
+            96,
+            114
+          ],
+          "raw_rgba_sha256": "225944d5e59944297b807db94372c8c23961cdc9fef0d532c274a3e1629e89e0",
+          "vertical_shift": 5
+        },
+        {
+          "cell_rgba_sha256": "c83f5327181cc9b046cbf138b3c1af0292aabcd11fbd3aee95d5825fb9541f2e",
+          "direction": 7,
+          "frame": 39,
+          "pose": "dead",
+          "raw": {
+            "bytes": 13722,
+            "path": "source/art/bodies-v1/brute/frames/raw-dead-07.png",
+            "sha256": "65b76083eb17b7f6f05fe5d71ed60e546bdfb123a2a6d375aada9101f21148f5"
+          },
+          "raw_bbox": [
+            25,
+            55,
+            108,
+            116
+          ],
+          "raw_rgba_sha256": "eefaf6e67f4cf5234983647580623a29541496b658552e7eb034ce101d658e16",
+          "vertical_shift": 3
+        }
+      ],
+      "generator": {
+        "bytes": 16827,
+        "path": "source/art/bodies-v1/brute/build_pair_v04.py",
+        "sha256": "0c16b632f381656b50b9fa46fcd6bb0d267687273bfa6aeb81b2a033565f7fd0"
+      },
+      "import_sidecar": {
+        "bytes": 948,
+        "path": "game/assets/art/sprites/bodies-v1/brute.png.import",
+        "sha256": "f1640582b68b5258ff524658f1728369e819a26b3443e31d14b9c844b941c4ea"
+      },
+      "independent": {
+        "bytes": 4869,
+        "path": "source/art/bodies-v1/brute/proof/independent.json",
+        "sha256": "59c88edd5afeef6bb0ebfe8f8db47786d38d1b39b8cfc2f318b75f7e1de6234f"
+      },
+      "kind": "brute",
+      "lineage": {
+        "generator": {
+          "bytes": 53153,
+          "path": "tools/build_late_combat_art.py",
+          "sha256": "8dc582d4f7984c47aa2e7257ff7d8ebf3516e146a2b09bb9bba74bdbe2ea684e"
+        },
+        "generator_dependencies": {
+          "tools/build_art.py": {
+            "bytes": 61816,
+            "path": "source/art/recipe_history/25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95/tools/build_art.py.txt",
+            "sha256": "25c9dca4239b0de3929baaa53a4efee7ee7fbedfe0d0085bf6f1d30b158c2d95"
+          },
+          "tools/build_foundry_art.py": {
+            "bytes": 22451,
+            "path": "tools/build_foundry_art.py",
+            "sha256": "c7aba73849a97e2a94e47b3e5c8829b6f6ed4bf4c225521d67d1aded15988587"
+          },
+          "tools/build_processional_art.py": {
+            "bytes": 34609,
+            "path": "tools/build_processional_art.py",
+            "sha256": "c447de68a3d81fc984c8554d4632c74649f77095bc61673df444ea5d645d138a"
+          },
+          "tools/build_religious_art.py": {
+            "bytes": 37332,
+            "path": "tools/build_religious_art.py",
+            "sha256": "746bb93b42d8a3aa46bf302edf8f28b5fedfd6d18207064e2ae1d92bff56bbde"
+          }
+        },
+        "logical_generator": "tools/build_late_combat_art.py",
+        "output": {
+          "bytes": 260164,
+          "path": "game/assets/art/sprites/brute.png",
+          "sha256": "21cde000b8d36237cbe929ef87c39e2d0524b61f93ba36715745194fed4c51e0"
+        },
+        "source": {
+          "bytes": 5103004,
+          "path": "source/art/brute.blend",
+          "sha256": "6203229536fa739da78fed9945d775c1be02bc7b7da232b14cafd4d2f2c32f44"
+        }
+      },
+      "normal-import": {
+        "bytes": 4110,
+        "path": "source/art/bodies-v1/brute/proof/normal-import.json",
+        "sha256": "fd97b4f358bc5d386dfda368576cb717de994efbce798bff85427a620a1b0d01"
+      },
+      "output": {
+        "bytes": 207292,
+        "cell_bbox": [
+          [
+            26,
+            28,
+            106,
+            119
+          ],
+          [
+            10,
+            23,
+            95,
+            119
+          ],
+          [
+            22,
+            21,
+            92,
+            119
+          ],
+          [
+            23,
+            21,
+            92,
+            119
+          ],
+          [
+            21,
+            19,
+            101,
+            119
+          ],
+          [
+            32,
+            18,
+            117,
+            119
+          ],
+          [
+            35,
+            21,
+            105,
+            119
+          ],
+          [
+            35,
+            26,
+            104,
+            119
+          ],
+          [
+            27,
+            33,
+            108,
+            119
+          ],
+          [
+            8,
+            29,
+            97,
+            119
+          ],
+          [
+            17,
+            26,
+            91,
+            119
+          ],
+          [
+            25,
+            23,
+            92,
+            119
+          ],
+          [
+            19,
+            22,
+            100,
+            119
+          ],
+          [
+            30,
+            20,
+            119,
+            119
+          ],
+          [
+            36,
+            23,
+            110,
+            119
+          ],
+          [
+            35,
+            28,
+            102,
+            119
+          ],
+          [
+            24,
+            27,
+            105,
+            119
+          ],
+          [
+            12,
+            24,
+            93,
+            119
+          ],
+          [
+            26,
+            22,
+            93,
+            119
+          ],
+          [
+            20,
+            23,
+            92,
+            119
+          ],
+          [
+            22,
+            21,
+            103,
+            119
+          ],
+          [
+            34,
+            20,
+            115,
+            119
+          ],
+          [
+            34,
+            25,
+            101,
+            119
+          ],
+          [
+            35,
+            28,
+            106,
+            119
+          ],
+          [
+            28,
+            38,
+            101,
+            119
+          ],
+          [
+            5,
+            37,
+            87,
+            119
+          ],
+          [
+            14,
+            41,
+            90,
+            119
+          ],
+          [
+            19,
+            40,
+            93,
+            119
+          ],
+          [
+            26,
+            38,
+            99,
+            119
+          ],
+          [
+            40,
+            37,
+            122,
+            119
+          ],
+          [
+            37,
+            41,
+            113,
+            119
+          ],
+          [
+            34,
+            40,
+            108,
+            119
+          ],
+          [
+            20,
+            55,
+            107,
+            119
+          ],
+          [
+            21,
+            54,
+            101,
+            119
+          ],
+          [
+            31,
+            53,
+            96,
+            119
+          ],
+          [
+            19,
+            55,
+            102,
+            119
+          ],
+          [
+            20,
+            60,
+            107,
+            119
+          ],
+          [
+            26,
+            63,
+            106,
+            119
+          ],
+          [
+            31,
+            61,
+            96,
+            119
+          ],
+          [
+            25,
+            58,
+            108,
+            119
+          ]
+        ],
+        "cell_rgba_sha256": [
+          "ef2765cfcdc099ad149fec61aa898dc1087bd08ed36bbaf2aa823af75a472259",
+          "b8fef5d3ebcf4d488407f35760386a91b193f69c7fbaab19659b0a21db509a8a",
+          "420fb6cf6087bb3ee554d97e064938228a0c4fcfd707db28690f9befebb2c78a",
+          "101f8afda54064d75bba14934d49a9500f3bbebac78f6db7ee2dc0bbaceaa917",
+          "36dc7e869becb9600399b0023d87dc6eddfec511b131e34ec5aba20b041fae1a",
+          "4e6b2136b7d521783d9378fedf153a37f340519d8e44f71b6e8382703e3291f9",
+          "31c82210f6cf598a69058ba1bcf97f8f71efc9f82209caa3755e1b9cf9692124",
+          "4741dfba8aacb414ffbb93e4b0feb19a6cf79a73778e3a2eb9168ae0030743c1",
+          "fc04961674a3351814157f1f822b001f7b3797d1d7a059e78b6126c7502f6bd5",
+          "99eb70981f4a4a5d721b65629aa72bec7eeeb39ff54dbe3d7f04f4ce606fbb9b",
+          "4b979ed7158d283053293ea0b9ac69daabca1f1aa41a4fabe2674c741c9216c1",
+          "aec2da5bba12de83f877bf79a51ddfb6b8b3dcecddb7a7544dc76e462e9439b5",
+          "aa21aaefe758df6da6a5ac7d02a9ad0819025a7746c9661e1c4333571a665a3a",
+          "24e3a4b1ba75793bc45c0c54da7c9871c65a5398b92b5e6851eea9f41396e4eb",
+          "2de21b795df310958bc86a4310373e526d7d1ec1c8935377083c1063dbb14cc7",
+          "5389e28cb40384145fad18e36fb7ae98b3ef06ae1d0f9f1d419866580a65af64",
+          "8dfa747ba0e8596e6438fe5c7c2b713bb2e54cc89f0a780b4421473aae65b992",
+          "df73228be2caa9fb1c93e8ed29f6f5c99cfebfa29cf5adb87b07753bd296aca3",
+          "b7c20cf77e97ac9a50163871baae1266686be855c9091fa7466d3eee2cc36766",
+          "c69ea135c4a24d03b819056d5caf68dfe4a0f57a2934d1adac19421c65d6b96f",
+          "dcdc2b7f1d68fc46fa5d9ba66a59d1860f954c1b1c7240bd9bee8489dc9a6f09",
+          "bd0e3583c8faa84246eca33e07704c1c41d4592b377e3767dc6f00a5156cacbe",
+          "f6d8e563756094555c7e527069f3a2976ccc8801decdc844c7abcec7dbe78470",
+          "27829bfe1d89d3cdecc5c7735e510549f4dc72d3d50a1be20126e7c7d8b9935e",
+          "8bfa0e6812dd3916b497a3163fcfbdf68495620033f7dfbf65e9a3489a9cc475",
+          "2e8706e230a50a177a88f627cf22edbac8b918ee3c5dd25339a6ce8cc7719a54",
+          "966a449a846742ffe72209b3bedb48693b267ff67d7275b3e743a78d6102edb7",
+          "4a8b4086043eb57e483f16722a10339d19b3ab1a55b915f5bc58cd0260ddbb4b",
+          "4ba2fc242fe3057ef50013118ec45796197b52dd4d4f1ec76c513d1e540788a2",
+          "5c3017a6a208aa2de1031b9249ffb138ddfcbd7aff57f9a668629af6e13b4452",
+          "6aa61be8c6794feff9db6d449b12564d539871703b89025f8682df7d1af61933",
+          "393fa8b06bb78667338f249cc2524a94b7abf0659fa42cf12ba07c174a4a9387",
+          "d164782bf3450cedc0de2eadb884f678f6a401ef80a81993eef7af6c16268c68",
+          "c0fdfc59eb514bfd3d08d0e959f4b1989f4a1c838437e9dd7baea7e55da248c5",
+          "da3fecd8c862b23e0723cd4deffe30e9be2d7cccc4139de8364363dfd152b585",
+          "222a8ad7194cd7700a10ed0727572f62e12e015793492f264db35050536bd687",
+          "d6cb3c8bb7890f1e36190786737ff47bd95f4d09a27736ddee4abae56e3b7f9b",
+          "fa54b7ca32e24e647c6dfaec02abba428d323c576c81216bf5d418d02980cb3a",
+          "444ba9dcff541478159e80f149d88c7ad0c7d164a9b86357fc2c490f4a268de0",
+          "c83f5327181cc9b046cbf138b3c1af0292aabcd11fbd3aee95d5825fb9541f2e"
+        ],
+        "path": "game/assets/art/sprites/bodies-v1/brute.png",
+        "rgba_sha256": "b57c94c718c335fd2d27b5c031622945a5649418456c49d2b257271c3fa1e0a3",
+        "sha256": "dea9b732adf116b8201d0f9d9ec62238109790a87f6a7f8b01b383978e567e21"
+      },
+      "public_master_bridge": {
+        "bytes": 4975,
+        "path": "source/art/bodies-v1/brute/proof/public-master-bridge.json",
+        "sha256": "bd4bc89b0dc0d0bfe17ae6a2659c4737b43f7771aa889628569eb4eb4075f744"
+      },
+      "raw_png_metadata_bridge": {
+        "bytes": 42387,
+        "path": "source/art/bodies-v1/brute/proof/raw-PNG-File-metadata-bridge.json",
+        "sha256": "808aa9ef9ad88543fa2a7e478b015dad8754985919de2e77c14bbb77c5fdf0d6"
+      },
+      "runtime_contract": {
+        "alpha_cut": "discard",
+        "billboard": "enabled",
+        "cell_size": [
+          128,
+          128
+        ],
+        "columns": 8,
+        "dimensions": [
+          1024,
+          640
+        ],
+        "filter": "nearest",
+        "occupied_bottom": 119,
+        "origin_px": [
+          64,
+          120
+        ],
+        "pixel_size": 0.034375,
+        "poses": [
+          "idle",
+          "walk_a",
+          "walk_b",
+          "attack",
+          "dead"
+        ],
+        "rows": 5,
+        "shaded": true,
+        "sprite_offset_y": 1.9250000000000003
+      },
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/brute.png",
+      "source-native": {
+        "bytes": 5876,
+        "path": "source/art/bodies-v1/brute/proof/source-native.json",
+        "sha256": "963727bd299bd7f48c6d1db6a242385b3b43fdfeb9755cd31c33afa03cd3d318"
+      },
+      "source_blend": {
+        "bytes": 3911210,
+        "path": "source/art/bodies-v1/brute/brute.blend",
+        "sha256": "5f9e599d6fcee3cccd7b8da1d73223f937ab8e51df2ae82752d4f35b9aed6b26"
+      },
+      "source_inputs": [
+        {
+          "bytes": 1972429,
+          "path": "source/art/bodies-v1/brute/actor-animation-reference-v2.png",
+          "sha256": "c2a9b71f2b6c005be50e1797e428138e2872e2708c886b79aca96148ccd5e6ca"
+        },
+        {
+          "bytes": 18329,
+          "path": "source/art/bodies-v1/brute/actor_geometry_v02.py",
+          "sha256": "77f45c9adcb7a3168d855890c29f8a628aba2e9482c448d8f26da5e1868c5c60"
+        },
+        {
+          "bytes": 684749,
+          "path": "source/art/bodies-v1/brute/portable-source.json",
+          "sha256": "1e4c9caba72f06b896d469a2a4c69429d69fe3cb1921764ba5a1afa2acfb728e"
+        }
+      ]
+    }
+  ],
+  "pending_fields": [
+    "Five remaining actor packets",
+    "Exact final active eight-entry Enemy BODY_ATLASES source identity and matching actual context qualification",
+    "Bridge-aware strict ledger validation of exact original-authored/public UI-only source relationship; no blind source pin substitution",
+    "Canonical integration/retained legacy119 and140 guards; PCK/dynamic/human/FPS outside scope"
+  ],
+  "pending_roles": [
+    "caster",
+    "guardian",
+    "summoner",
+    "nursery_warden",
+    "choir_avatar"
+  ],
+  "schema": "null-choir-eight-actor-ledger-v1",
+  "scope": "Three integration-ready public source/asset packets. Actual original-to-public native source-data parity closed; final eight-actor consumer/cohort remains PENDING. Source references distinguish public metadata-only copies from original authored art qualification.",
+  "status": "PENDING",
+  "version": 1
+}

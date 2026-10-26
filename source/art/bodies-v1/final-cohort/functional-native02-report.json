@@ -1,0 +1,2839 @@
+{
+  "actual_JSON_types": {
+    "component_type": "float",
+    "internal_literal_component_type": "int",
+    "normalized_array_equals_internal": true,
+    "raw_array_equals_internal": false,
+    "raw_scalar_equals_internal": true
+  },
+  "checks": [
+    {
+      "message": "Actual current Intake Level builds unchanged authored geometry/lighting",
+      "passed": true
+    },
+    {
+      "message": "Navigation callbacks disabled before any frame",
+      "passed": true
+    },
+    {
+      "message": "Original authored Worker placement/yaw retained",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: crawler",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: crawler",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: crawler",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: crawler",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: crawler",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: crawler",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell crawler:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: crawler",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: crawler",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: worker",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: worker",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: worker",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: worker",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: worker",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: worker",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:39",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:40",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:41",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:42",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:43",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:44",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:45",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:46",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell worker:47",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: worker",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: worker",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: caster",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: caster",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: caster",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: caster",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: caster",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: caster",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell caster:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: caster",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: caster",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: brute",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: brute",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: brute",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: brute",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: brute",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: brute",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell brute:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: brute",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: brute",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: guardian",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: guardian",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: guardian",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: guardian",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: guardian",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: guardian",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell guardian:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: guardian",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: guardian",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: summoner",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: summoner",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: summoner",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: summoner",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: summoner",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: summoner",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell summoner:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: summoner",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: summoner",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell nursery_warden:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: nursery_warden",
+      "passed": true
+    },
+    {
+      "message": "Cohort normal CompressedTexture2D resource: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Exact cohort atlas dimensions: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Exact full normal-import RGBA: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual strict import metadata present: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual existing engine-generated UID: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Lossless/mipsfalse/alphaborderfalse: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual Enemy.configure exact BODY_ATLASES dimensions/resource: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Preserved actual size/origin: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Authored Worker binding is role-only: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:0",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:1",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:2",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:3",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:4",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:5",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:6",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:7",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:8",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:9",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:10",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:11",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:12",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:13",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:14",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:15",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:16",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:17",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:18",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:19",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:20",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:21",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:22",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:23",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:24",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:25",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:26",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:27",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:28",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:29",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:30",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:31",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:32",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:33",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:34",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:35",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:36",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:37",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:38",
+      "passed": true
+    },
+    {
+      "message": "Exact normal-import cell choir_avatar:39",
+      "passed": true
+    },
+    {
+      "message": "Actual final-source cohort context saved: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts final cohort Sprite3D: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual cohort front contains opaque query target: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query opaque hit: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-alpha query transparent rejection: choir_avatar",
+      "passed": true
+    },
+    {
+      "message": "Real ResourceLoader normal-import CompressedTexture2D, no Image.load/ImageTexture replacement",
+      "passed": true
+    },
+    {
+      "message": "Normal imported texture exact1024x768",
+      "passed": true
+    },
+    {
+      "message": "ACTUAL imported Texture2D RGBA exactly4ee502; no alpha-border/color/compression mutation",
+      "passed": true
+    },
+    {
+      "message": "Actual Godot-generated .import exists",
+      "passed": true
+    },
+    {
+      "message": "Actual engine-generated UID preserved through strict import; no fabricated UID",
+      "passed": true
+    },
+    {
+      "message": "Strict actual importer lossless/no mipmaps/no alpha-border rewrite",
+      "passed": true
+    },
+    {
+      "message": "Production JSONdecode boundary accepts exact integral actual metadata",
+      "passed": true
+    },
+    {
+      "message": "Real portable binding explicitly targets new resource, exact1395-label mask",
+      "passed": true
+    },
+    {
+      "message": "Actual configure uses normal-import resource, never ImageTexture/replacement/legacy fallback",
+      "passed": true
+    },
+    {
+      "message": "Actual six-row Worker config binds real portable manifest+mask",
+      "passed": true
+    },
+    {
+      "message": "Actual JSONnumeric FLOAT array reproduces old strict-array reject while scalar value is128",
+      "passed": true
+    },
+    {
+      "message": "Unchanged internal strict validator still rejects unnormalized rawJSON array",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary normalized numeric representations are exact INT fields",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: true",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: false",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: 128",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: 128.5",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: -1",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: 129",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: inf",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: -inf",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects bool/string/nonfinite/fractional/outofrange cell field: nan",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: true",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: 1",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: 1.5",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: -1",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: 16385",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: inf",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects invalid bounded frame label: nan",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: width",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: height",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: hframes",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: vframes",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: vent_pose",
+      "passed": true
+    },
+    {
+      "message": "Decode-boundary rejects nonexact dimension/atlas value: alpha_min_byte",
+      "passed": true
+    },
+    {
+      "message": "Actual disabled-callback Worker capsule remains registered in static PhysicsServer",
+      "passed": true
+    },
+    {
+      "message": "Automatic physics/AI disabled without removing actual body",
+      "passed": true
+    },
+    {
+      "message": "Actual configured actor holds full real mask and binding",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 0 frame0",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: -1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Real transparent pixel is not hittable; no movement capsule fallback",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Real ordinary opaque contact remains region0",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Actual source-Player forwarded ordinary contact does exact7 HP damage",
+      "passed": true
+    },
+    {
+      "message": "Ordinary committed interruption remains exact with real imported art",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-import static viewport saved: normalimport-idle-front-arranged",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-import Query contact routes genuine chamber geometry region1",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Clutch effect does not multiply ordinary HP damage",
+      "passed": true
+    },
+    {
+      "message": "First nonlethal real direct chamber contact starts once/life1.1second vent",
+      "passed": true
+    },
+    {
+      "message": "Distinct live pressurelost phase has normalized0 progress",
+      "passed": true
+    },
+    {
+      "message": "Actual committed tell hides during real vent",
+      "passed": true
+    },
+    {
+      "message": "Controlled actual timer/frame prefix executes without movement/AI tail",
+      "passed": true
+    },
+    {
+      "message": "Actual timer prefix selects genuine6throw5 and normalizedhalf progress; no movement/shot",
+      "passed": true
+    },
+    {
+      "message": "Actual normal-import static viewport saved: normalimport-vent-natural-bearing",
+      "passed": true
+    },
+    {
+      "message": "Controlled actual timer/frame prefix executes without movement/AI tail",
+      "passed": true
+    },
+    {
+      "message": "Paused source state does not consume vent",
+      "passed": true
+    },
+    {
+      "message": "Controlled actual timer/frame prefix executes without movement/AI tail",
+      "passed": true
+    },
+    {
+      "message": "Actual timer recovers after total1.1 controlled seconds",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Fresh actual second chamber contact does ordinary damage but cannot restart spent vent",
+      "passed": true
+    },
+    {
+      "message": "Transient consequence adds no save fields",
+      "passed": true
+    },
+    {
+      "message": "Actual configure uses normal-import resource, never ImageTexture/replacement/legacy fallback",
+      "passed": true
+    },
+    {
+      "message": "Actual six-row Worker config binds real portable manifest+mask",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Real chamber contact tagged blast remains ordinary; no region upgrade",
+      "passed": true
+    },
+    {
+      "message": "Actual rear frame has no visible chamber labels",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 0 frame4",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Rear opaque actual contact cannot invent a hidden clutch",
+      "passed": true
+    },
+    {
+      "message": "Actual configure uses normal-import resource, never ImageTexture/replacement/legacy fallback",
+      "passed": true
+    },
+    {
+      "message": "Actual six-row Worker config binds real portable manifest+mask",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Actual normal texture manual query-cache invalidation retires held anatomy failclosed",
+      "passed": true
+    },
+    {
+      "message": "Actual normal texture replacement cache has equal RGBA but different generation",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "New real contact with stale held mask generation remains ordinary",
+      "passed": true
+    },
+    {
+      "message": "Real imported RGBA fails a mismatching source binding",
+      "passed": true
+    },
+    {
+      "message": "Actual binding rejects corrupted mask bytes failclosed",
+      "passed": true
+    },
+    {
+      "message": "Explicit full setup validation can bind actual new query generation",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Newly fully validated real binding enables controlled direct melee consequence",
+      "passed": true
+    },
+    {
+      "message": "Actual configure uses normal-import resource, never ImageTexture/replacement/legacy fallback",
+      "passed": true
+    },
+    {
+      "message": "Actual six-row Worker config binds real portable manifest+mask",
+      "passed": true
+    },
+    {
+      "message": "Real atlas contains requested explicit region/alpha pixel: 1 frame0",
+      "passed": true
+    },
+    {
+      "message": "Actual query accepts configured normal-import Sprite3D geometry",
+      "passed": true
+    },
+    {
+      "message": "Actual ray returns exact actor/frame/local/atlas pixel, not movement capsule",
+      "passed": true
+    },
+    {
+      "message": "Damage context comes from an actual Query.cast result",
+      "passed": true
+    },
+    {
+      "message": "Actual lethal direct chamber hit dies normally without consuming vent",
+      "passed": true
+    },
+    {
+      "message": "Controlled actual timer/frame prefix executes without movement/AI tail",
+      "passed": true
+    },
+    {
+      "message": "Actual lethal state selects original row4 and retires visible-hit target",
+      "passed": true
+    }
+  ],
+  "cohort": [
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "a699f59816d8a3e7127fb8b7bbf04ffe13e5c25fde885cf7c27180c4e7ff2c65",
+        "3ee4a8f7bafd1cba64a56bc2f980190af5591715aae804d00cff53c8f48aa65a",
+        "7e6566f8826a5f04231c3b17719e15620e9c851ed819d2cef907f3b1499be331",
+        "59a9882b28b579d78a6e0ac01c632c306e59073faa2eda5fbc67d577cc3ffebc",
+        "40c8c826c157875e84018f5a445cae19fbfc2cc3c409da9269ab841cdbda33ce",
+        "3368dabf2a2960cb77d6e120e5b4536332f181ee89318a8ec2956396f30235c5",
+        "8544fabb136ad9d316e3709f9ca43c36966dba258d7112d1c164b77593415f19",
+        "8c80763aed90987eb4152b6508e0dc0c7cd3fa96311737f7e6dc6ccc09e806c8",
+        "6f4444a3bf1f749062890336010f32268a2e63e0444af971a365a4dfe7489f78",
+        "ffe9199ae4ca9c5e9164ec20aab720e648619178dc8b67a04471d55bd6b9194a",
+        "74e3f77e26fa09aac57d7a0f0d6b391e51ed43081dbd846e122969c86818b6f2",
+        "e4c4cc9cff645c8db24b197cb9160f1e55dee2231f69ce00f1e98f4e38b29558",
+        "79489e9fdbc930b12f4f03cd11d59ac3d5dcfa26901daaa0e203ff2613ec860f",
+        "7ee6924e06f89545a9679f2f4a360dd51c7218ab22fa9750740305efa0aadcd2",
+        "5679850e7c073c51161b15cb1a72a706a1180bbaa2760ddc58cd20d12b5466f7",
+        "e1516ef4502fa557bfebf4abb334e23a86160cdde7e3a92c0cd6bacc996b04c1",
+        "92a5f20d3823f89962ceb263ddb2bb9ec9eb2e11659fb5d90807e64f59144689",
+        "b66ea5852b60da3c3ff80b55a5cbff1e089e86bdd698c43275ce738f77b00614",
+        "603c2fd213ffc74c9779f720abc156749565567dacd3e40d78c294a290ee1c94",
+        "dfdf9929d59e818dd89de715cd071976a8faece8e6af32d7cbbc5583012ab3b0",
+        "0b0f784c4b1322f7a148e689f761dadd17c1a6db45a52232fa054a85cde99075",
+        "7f1b424775c56971e8f700705d3ffa8c3ee08b84e2acaf094ce862581bfaa3a6",
+        "85a87cd9169f130ab0525bbe45ddf1f5a03beac9a183c02fb9fa5bef9ad02aff",
+        "816bfdf99568071f35b4f38d2e4ace086421d5619d5a4425e0482bfe124f1f93",
+        "6484f617f1da9e83a8557bd544909decb5d47aa44d70ea2a943e6f6094a30421",
+        "62eb2af663952b94436e1448ffbd54558148ab95371701ef33c511209744949a",
+        "2ce246f37e8f1d6089466e5abf7af12bf1f53c02eb7c7f52aacfdde987231e83",
+        "e7efab86fb0ba473fe7c87eb4e52a3a8b1291bffebca2448a2521b7f3a982e74",
+        "466cd3297723f33911824938442a21d1944384e64ccd162a55d8cac49597cee2",
+        "44318076906e30328255c4d7b74beb35757e231d7793478ebff550be7c4f1e39",
+        "48bc3f300d5a0679b97d42557d9ac44607b25a29b734d13ccdbda42dda07487d",
+        "3407b8d34a207bec342fd431abe0af3fb01494965d6845aca16003b32c7e876f",
+        "3a4def3cca337457b4b29f87988a0face15ff33e2ee3d4e0f2032a595c4edec7",
+        "b36ece71fe15600d4e197df9b9deea1676de5a9dcc36cb49aa45cd54bb4f4615",
+        "2b75c9926ee2d69e495dcb53473dad41b838d1af5910441e47162c0b2d94a1f8",
+        "da5f0b6cb7ea65c5a35c7c1296b90b199bba01d34cab2a8d7bf1cdb9cde092c9",
+        "52c256f72c190ceb4116d1d3923e27bc316b4ab01fa746e6b9d7905953f72595",
+        "884acc9817df785302f2117a29ebe67dcb4c81262c86ba7ccc5aeaf0925f02a1",
+        "4056cd13bb84a3a3deef80d81152132940dedb1abe04c663983362d826a3cece",
+        "bcb74fdf20cc573b7e42cdfd7cf973dc77f868035a68d7e346f67fce8a79cdc3"
+      ],
+      "hframes": 8,
+      "kind": "crawler",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "3aedc249a859302f11064a44ac7d0b4063f354a80594f1e8ccb44e6cc72e8bfa",
+      "pixel_size": 0.029687499627471,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/crawler.png",
+      "sprite_offset_y": 1.66250002384186,
+      "tested_frame": 0,
+      "uid": "uid://c7f3mxj8tv56i",
+      "vframes": 5,
+      "view": "normalimport-crawler-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "779f645d6e7d11393454106a0a7c15d7adc61a8c60ab0e329ad12e3e3385e119",
+        "ac39b9e94bdf5bd1ef67a54e6485c20ee3e278277132d5a6409ba38baf4d9443",
+        "4c066b562e8bbec3b5c835ada97190ec8fd1492e2a1569f1312f25b2a2c34dbe",
+        "7639c4eda5275d93482bb55e315ee8273290a88a8b33bd716c2ed01b1049acfa",
+        "b09e124883b8eafccba51bbb9279dd722b82d9a132e2e209c72e213198cdd9ef",
+        "98ccd5f293682d9ac7459928787467d875e01cdf3956e5002f7fffe3f57d4c82",
+        "4dd2d34ca035cec111f9516281e1b2971c2d4d134b529469e3a53f0c37e81527",
+        "996c5edbb9626c346e636a0aded2f16af6138610c01d61a7dc7d936cad4ef321",
+        "27908b32b9bd513c1cf7b73349b88adf45f46852dd6726c7ee1a20a203933526",
+        "d6e7c374ecb16bccb959cbfbae6dda0edff2a1a1361bf272b36a879f3230aed6",
+        "11aebd97f8c0c7b527a49b52907d589fa2c17efe5f25f372ef7aa3878cb9e5c6",
+        "6b1b7449a0204f5770f2b0d4e99dceee922114611899581abc2bfc21623296b5",
+        "fc7442c30b51e04ba3c43dad74aa0fae0327ccdad77079013eba8780fb3663f8",
+        "adee45f54ab6e76d4fe575acde2f6c41c4c8b0502df0c099c8a4655cdae003e7",
+        "8f23a988ae45e8b940e4e8b2f891060ed6fac2da3682b8eaa90e6467100855b8",
+        "f6a3dec37e46b88256026c97b33f2ad30ccb19283adbdcb9c6ea72ea448aa974",
+        "c3d2a9b02a29c8fea1f926add8b9472cd8390f2f24d26f3bf897cb874bafb16f",
+        "5cc318d26cb9c075ee823114dc8eeeaf7f1be74b81bf1ac86b953a48d68e290c",
+        "8d08257d7b15415ee8c0098c0e262ef55d5b32eca7991fe794cf937d5daf4496",
+        "4384967c336482ac603757735f8e2e26d71d41143917d7e6b1ba095037531739",
+        "3c968250ca92fc02b0f7e3f1c16e5795a2ba8c34e6ca129bb9128c7bfeb6589f",
+        "31ed74d8918d41200536316e0210c58a3b69223877d994ac605f1814d7578890",
+        "e43403bee4ff15fa01c7a031e9dca0a2e0e1f5b7108765d03798d22b51ea196a",
+        "ea067a5bfc906d4691ce005d41d7ee38486f909c369d7a091317243b7341701c",
+        "ac5943bc583323892cc98581c1523c841e7a3a762366a207bb325f1ebae1e856",
+        "cb41f94a3a452d110ada2c966c69c82852dd5d6b699cf00fbc213d7db738d2df",
+        "4a01baf0e1ba15b2fbadd8108387add95727d30336057a7a3e79c539a311d8f3",
+        "14aae309ee8f0d4c76740ab3156cd2b5d25e5050bab836028b7b6f6a14ebff2c",
+        "1eb30e144c7fee0db354760b0b7ff8a2dd122b414b0466c80b51fdbf55219390",
+        "e8a66536d8b723329df3dae2b6e159acb180e8cbea2accde191b86329cfa650d",
+        "cd73a83d9f16039a974939dc2a72933e9126d0ae1a4afceb4f0bb8e409f8ead0",
+        "e34e1bfb4d956eb7467521506b3980f4553e80d80894bbb792d645bd6745a2b5",
+        "6399214c9f32c2bec32ba4cf576ff5f75194d08b5b87bf0e7a9581f3e038e8fa",
+        "4e22b4b814252ce79f653f03713151df4ee5e25770d15ee2c88bde693da25c4d",
+        "b3b92b286c2c1b79922ce121d5b5adb5717ddf8c2ecd23a898ec96c57311198b",
+        "5af6c5167625efaab296ad32e92adb7511dc3519735feaa6fbfc9d2b6f259bc0",
+        "f26a9aa6f3937d64e71b8db1c7094d20b9de1ec9300adbac672a9ffbfa397e31",
+        "1b3717eee7b3f2e7e917cf058038410315912aa82f8f5fa8fecdd00d238db425",
+        "64df529c49f70c2eedef63fb59872f5b8f1f4985e2c24aaa54fae7656196d49c",
+        "5e1ca76e1bc4e18c1abc3e841295b25bb0034dd25002476b9bbce20308da008d",
+        "280c18a65bd962b679a28192a3f42f2e32de18786846aea9e02ffba8ef10aa2d",
+        "75a38313442113f8aa3646db6af91a17971b6ae58f29a01af03c67c238635641",
+        "281b9366a614b93be58e064a0c5034a4d58c6b6cf99b42f51d0905c246a4e90b",
+        "ad13a4b32c56a9cd51c6700cbad4fdbdd63dd312ec0e799199a51483479fa1bc",
+        "f8b888883738e2cac8cc7bb2dbf3de7108536ca483144afb23e08d509f0b30b1",
+        "b18a7cb2887a3edb0636e2b9effff6ca3b826c3464b816bfecf3e1b0e475e3b8",
+        "b1b569a5b4b61060c4dda2d8098a18537fe7088e40b84a358dba3179ffe4b138",
+        "fa653b700b7369252588161f67ebf2afd52e8abdf3ef02b9191d5091450300b5"
+      ],
+      "hframes": 8,
+      "kind": "worker",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+      "pixel_size": 0.0285156257450581,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/worker.png",
+      "sprite_offset_y": 1.59687507152557,
+      "tested_frame": 0,
+      "uid": "uid://ukojibuco801",
+      "vframes": 6,
+      "view": "normalimport-worker-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "7384673d52a4bbad93c9f4b1cce3136e58915fb0b4fe6cad704a2bee58e933d1",
+        "ab90f3e084aeedc5086709bb0044c06471b1e61d5870459400c3365627a91eb8",
+        "7cf6749ae880bb16b0c232243736e4baba8a09b15e114208428da9de021a1817",
+        "1021f24ecfeab43366dde14ff385de037dacb60e3d4a5390f180f4bd8a253bed",
+        "2034db4b73d37c1de327e97e7dcdab1ff7c2e0663393fc198c6dac2b9ade3254",
+        "33ee9167073ba0a2ca8cc74442c9e6c46cbffd7d54068bc289397f5daed3a21a",
+        "67f9b15fe415baf372503ceccdf9a93cc5dcf26b0c77dcde164600d1ce6cb177",
+        "6641c0d5baff04c7b255292e3d279294394e46b51ce93831bf491e29dd118c2f",
+        "0cfbe6edb3d0b313059916f24694f062ee7745b88cf656b2d988103fd57c97f3",
+        "60b8942079c0901b8b414470545ffd840600a2245393b5101c3cef6f4d42ee4a",
+        "e62fa72abf2e76f358a9b102c97d3214bf86bde3194c723000ff78594c1d7f15",
+        "7c0f8c95e996db853a6a2adbee0aa75f1e82b974f466cee0038ed8909d413e6d",
+        "10f06da57f45e7c8c381f43c7ed3f1f64f8817b47d16bd5bc259c1ef5b62c348",
+        "e9fe4984da532237239dfc45df96e1bb9a288312d1f627156956306fbbca535f",
+        "76686c67d58cc7bed1db3f54e7de7388d5327cec3d44c758003834579acc72ef",
+        "ba4d340f3710bac5fd6f6c57d14d10c35ae75a2d8e2ac914f0239fd02237cdfe",
+        "40ff35a23433215a720634293e14140b3e9cdd49b2972cd788de6209f085dfa4",
+        "50dfb48a8162ce75bbdb39b78667e181d10eed8ac221098d8ec77d92bdbf4bfe",
+        "74c76ad67cdcc7a5d7f93a001c8be3e745460cb3df3810b537bc35c4f151184e",
+        "0620746e27cfa36286f482ce550b0dbb0b0bb3dc75266490ea89428bc21e3ddd",
+        "ce4b7a27975b3f946a80e8448f4b4ea599f2708e9e73b5bb11c3ffb7de621096",
+        "8d46f68dfd75fbf156c14852bcf2321b0cf2bc05e64ddb6a73386c872747b224",
+        "3fe63bb82292b618fd4a68a093e6b8631f70155b8daab57923b9b066f47218bd",
+        "39dce5451a59324c0d0198d6b4d059757abf54f6b51ca926676be869f0bd32a7",
+        "59d5a5859faf7d1c410174c9a91bcfc74c35b053da24672601d3899d510535e7",
+        "686be7d1aab641cf508b08296664e2a565adcc63103fcaba9f0d158dcdf3c876",
+        "4c04d3790d6126d764e1712a23331b6e52103c06d2af0de20c78154b80537bc5",
+        "d7f51d2af6638a4c7c9742a19e4c8ffb8f64e913badcf89c4db13d8bfce6f352",
+        "f7481d2f557e1693ca62cd512ea56fdce68fab441cc824dd0f1c61763955b975",
+        "8321e9531cf89e89d0db16a498314005aa7a31a014a619bca96eac6f591740f5",
+        "b93329d4ace5e800e8dbe01c4802c0633d364850c14c10b6ea6943049aaf64fc",
+        "47614f352e95c56b5b036dbbb4122679ae191ad4da997816d9e16d226bf255f7",
+        "36e10feef6c790ec79ae65bca1648f50f95df139c3d9b221d8340ab426ea790c",
+        "611211dee2075f16b47b43653778ff08b23b6f8972f2728955d66053ef6911f7",
+        "855729542df1e40e6ab8ad168c0d9ed98952d0540bc915da453945f4f3eabc3e",
+        "b7d48fb6152974f8574244278bdc3cb4f32bff68a1e805a14b9efcccca0c4cf0",
+        "60656c6c35fc7d1febf3501c8b926db388dbae8e883ad9db383bdfca6de73e81",
+        "53a78512d10ffa7cc46be93c56dac79f231b575b9cb3ecd4c9c91fbb8e10d44e",
+        "2bf375d7d7b3cdbfbdfdaa3871ff793d03075b632d50e19393245d6a1481b922",
+        "165974ca71d34187ff40b6d31fff4c2476eda7b6acdae5c338e8696c06f03051"
+      ],
+      "hframes": 8,
+      "kind": "caster",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "2585b80242d260e139dd010eb75732ec6e4be90c53d2f1f29dec39e4e74e2f0e",
+      "pixel_size": 0.0285156257450581,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/caster.png",
+      "sprite_offset_y": 1.59687507152557,
+      "tested_frame": 0,
+      "uid": "uid://n8fsbarh6y8k",
+      "vframes": 5,
+      "view": "normalimport-caster-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "ef2765cfcdc099ad149fec61aa898dc1087bd08ed36bbaf2aa823af75a472259",
+        "b8fef5d3ebcf4d488407f35760386a91b193f69c7fbaab19659b0a21db509a8a",
+        "420fb6cf6087bb3ee554d97e064938228a0c4fcfd707db28690f9befebb2c78a",
+        "101f8afda54064d75bba14934d49a9500f3bbebac78f6db7ee2dc0bbaceaa917",
+        "36dc7e869becb9600399b0023d87dc6eddfec511b131e34ec5aba20b041fae1a",
+        "4e6b2136b7d521783d9378fedf153a37f340519d8e44f71b6e8382703e3291f9",
+        "31c82210f6cf598a69058ba1bcf97f8f71efc9f82209caa3755e1b9cf9692124",
+        "4741dfba8aacb414ffbb93e4b0feb19a6cf79a73778e3a2eb9168ae0030743c1",
+        "fc04961674a3351814157f1f822b001f7b3797d1d7a059e78b6126c7502f6bd5",
+        "99eb70981f4a4a5d721b65629aa72bec7eeeb39ff54dbe3d7f04f4ce606fbb9b",
+        "4b979ed7158d283053293ea0b9ac69daabca1f1aa41a4fabe2674c741c9216c1",
+        "aec2da5bba12de83f877bf79a51ddfb6b8b3dcecddb7a7544dc76e462e9439b5",
+        "aa21aaefe758df6da6a5ac7d02a9ad0819025a7746c9661e1c4333571a665a3a",
+        "24e3a4b1ba75793bc45c0c54da7c9871c65a5398b92b5e6851eea9f41396e4eb",
+        "2de21b795df310958bc86a4310373e526d7d1ec1c8935377083c1063dbb14cc7",
+        "5389e28cb40384145fad18e36fb7ae98b3ef06ae1d0f9f1d419866580a65af64",
+        "8dfa747ba0e8596e6438fe5c7c2b713bb2e54cc89f0a780b4421473aae65b992",
+        "df73228be2caa9fb1c93e8ed29f6f5c99cfebfa29cf5adb87b07753bd296aca3",
+        "b7c20cf77e97ac9a50163871baae1266686be855c9091fa7466d3eee2cc36766",
+        "c69ea135c4a24d03b819056d5caf68dfe4a0f57a2934d1adac19421c65d6b96f",
+        "dcdc2b7f1d68fc46fa5d9ba66a59d1860f954c1b1c7240bd9bee8489dc9a6f09",
+        "bd0e3583c8faa84246eca33e07704c1c41d4592b377e3767dc6f00a5156cacbe",
+        "f6d8e563756094555c7e527069f3a2976ccc8801decdc844c7abcec7dbe78470",
+        "27829bfe1d89d3cdecc5c7735e510549f4dc72d3d50a1be20126e7c7d8b9935e",
+        "8bfa0e6812dd3916b497a3163fcfbdf68495620033f7dfbf65e9a3489a9cc475",
+        "2e8706e230a50a177a88f627cf22edbac8b918ee3c5dd25339a6ce8cc7719a54",
+        "966a449a846742ffe72209b3bedb48693b267ff67d7275b3e743a78d6102edb7",
+        "4a8b4086043eb57e483f16722a10339d19b3ab1a55b915f5bc58cd0260ddbb4b",
+        "4ba2fc242fe3057ef50013118ec45796197b52dd4d4f1ec76c513d1e540788a2",
+        "5c3017a6a208aa2de1031b9249ffb138ddfcbd7aff57f9a668629af6e13b4452",
+        "6aa61be8c6794feff9db6d449b12564d539871703b89025f8682df7d1af61933",
+        "393fa8b06bb78667338f249cc2524a94b7abf0659fa42cf12ba07c174a4a9387",
+        "d164782bf3450cedc0de2eadb884f678f6a401ef80a81993eef7af6c16268c68",
+        "c0fdfc59eb514bfd3d08d0e959f4b1989f4a1c838437e9dd7baea7e55da248c5",
+        "da3fecd8c862b23e0723cd4deffe30e9be2d7cccc4139de8364363dfd152b585",
+        "222a8ad7194cd7700a10ed0727572f62e12e015793492f264db35050536bd687",
+        "d6cb3c8bb7890f1e36190786737ff47bd95f4d09a27736ddee4abae56e3b7f9b",
+        "fa54b7ca32e24e647c6dfaec02abba428d323c576c81216bf5d418d02980cb3a",
+        "444ba9dcff541478159e80f149d88c7ad0c7d164a9b86357fc2c490f4a268de0",
+        "c83f5327181cc9b046cbf138b3c1af0292aabcd11fbd3aee95d5825fb9541f2e"
+      ],
+      "hframes": 8,
+      "kind": "brute",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "b57c94c718c335fd2d27b5c031622945a5649418456c49d2b257271c3fa1e0a3",
+      "pixel_size": 0.0343750007450581,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/brute.png",
+      "sprite_offset_y": 1.92500007152557,
+      "tested_frame": 0,
+      "uid": "uid://stwgqu51ftsa",
+      "vframes": 5,
+      "view": "normalimport-brute-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "c03aef7e01d34ee7148cabfdb41414c7fe2ce065d71feae87a009f0deec3802c",
+        "d89f557b88c475bdbb58e7f04da693d20d07fb5194db7e4267d2aa0f2d716d10",
+        "146c903d0464e90cbebb7ec269b335d6c40f4625e583ebea9fcbe2881c26863c",
+        "eaa969cb7e2715aca0efdc952ca1eba96fdc1a8368e492b5d379822f610d729e",
+        "77696f446a121fabb7b4514deb8544e9cff3b3660c48836abcaae7a9dde18db5",
+        "9d2d4a9c5d81827433fbba1d2c702329521e2c90026193b15636375438510325",
+        "7e5d924472a769a295f73d183c7da6ca4c3019fda2e4c4322dddcc0c838a9d95",
+        "c5a75697dd5bf4b393dc55b886bfd1659281c02f33868fc3e47fcb497afbda97",
+        "fcce4d62139b2ea29d832372e1e844409401e00cb34197ed40ad14e28c2cf320",
+        "58f77e5690ab1bd751e293f9f5ba013348f6eaf5720480dc526f60f4e7e73c11",
+        "57d8840210ee32e7c3984aa87f72cbb43fce33ab326bd21024205e402aeb37d4",
+        "88d5834abb94a59eeec975a4595ee61a16f2fde4ba6bdddbd8649ffb6d154e3b",
+        "21d94d40ca7b41315b9d415eea31b06e41b2df8caafd74595d7df80cea9d98a2",
+        "62f8d3906224990880a5f6d2b9153ada21c57648ae8c9bd215105b842b6fd531",
+        "13ed58975e1fd571f14d6899c3fc3cf494e8c3c04464bd03da10f4c807592d65",
+        "bba2e125db6512b0b5cbdbb2f6dd6f3eaa9f344b1beddf074191da592965ecfd",
+        "e1ae7484900fea9f71c7d8067eafc2a258a4d2afb0b10e4ce674800aae249643",
+        "d93d6312185f71b53b5a76fa5217ddcf5fed0c083bd84cfddbb07ed8167e9d42",
+        "fa5ad6a9ddd025f890de702a93d9ad3cf19d032b3784cf69c4d1f3e267ce1e8d",
+        "a2c13e5573d1d020fb555e71c96d1f9437fb70a2d2abb3d34b7005e2c161a7de",
+        "fc438ab93866ae3da034bb490399d8dd1d6597ef8a3d584ab1fddc7412967909",
+        "2479c8927d1edc131e1727869e5d957cc2b41e0c05bc3c53141200ad94014df7",
+        "a4a12f87e54579c1d3b17cbe9e36d27e9ac648762cd4eaca208660d575a866cd",
+        "15a92826eb7bf3ca63ac5891150d746f7bfa16aef3ddb7ea838f2ab203ccb3a5",
+        "e09df24aae69e26bbb28b503584e7bc3e15132007a35ff2cbf56a329c487b42e",
+        "ff0b12694e482ae45f18abb4c3b3e690e22534fc91398233438c0fea81374a07",
+        "029273b5005705549ee35ad60f5c941538bf2a12b93cdc94bca3e6b550ce3cfc",
+        "c7f2701854f3c03754db49c0ce98405c2cf1cc97ec96fbacb6fcd6ed44135e88",
+        "496a1fab8303ded32c468606168739c95966cb28cf2c8a32450d692cc1555f67",
+        "8ec80fe44f7d994bd48bdbea689fb94ff6671f68c30282767a2d3ea9977e7a5b",
+        "b6773c47bc9f79cd3f177fe6b38bd0c281f941442e2751bc51f90f25d9b52004",
+        "94762cca19d78c297fcc2c4f5dd2e111a17db9eb9351e77eb74b774512ac9cfd",
+        "52baac2b1bf95231e26e15af5ae8742bbf933a4699acf1d84822402b93cc803e",
+        "0ad3ee3b658133be600e0fffebe37b5cf0cd68e13df4fd39d8f07cc677298bf0",
+        "15fb6bde5ab0c4841b4f787abebf10c89eb212a7038cfbfc850ed598f45b0f0f",
+        "40dda69cbec407b4af3e5c1dbf1c23ab4f6d1ff82a4a460bfeb60a8cb32c43ff",
+        "d0bd1e189be50f28f9c181e26a888f55c17db0b0b3d1a9189164778319f5073a",
+        "93217430269a2906c3daafc737c43127e65f880ac3be0defc8b14e4d53e8613a",
+        "2e96791746da27d1debcbcd8079b75a8fd52a7aa8dd3bb9ed24b9a82a7a88ab9",
+        "841251637a6b036fed45c56d51859bbfba3f880e6edf8e9196fcafe4534acb04"
+      ],
+      "hframes": 8,
+      "kind": "guardian",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "2836788537fbd9972534ca60387a6689e7049342255a434ac70aea3129a3e537",
+      "pixel_size": 0.0367187485098839,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/guardian.png",
+      "sprite_offset_y": 2.05624985694885,
+      "tested_frame": 0,
+      "uid": "uid://bf1ihevxc6djb",
+      "vframes": 5,
+      "view": "normalimport-guardian-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "192787567aaf67ab5571a303461ff9186bc03bf1f91c567395dcfd0e1957378f",
+        "6e0c56478bd9d67ccc452465846e7ad43f1deb538bd0b0191b9bf6220d6d47c7",
+        "5ec77e0f066693888c42b88c9ce2ec7d38578887132e393b3357ab718cff3e5a",
+        "a23e0755275b3d5b800536db3749e6e499d00930db0e6a251b4aebaec98c7001",
+        "2c36284c5626b1d6aadc640d5e79f9893ee288df888cdc3e3b2adcda001fb630",
+        "6e45cbbd7ad2fdcd0935f336bc2b595070cbf5f58aa831fa1f75f4a4fb7b584f",
+        "641fd1c0215b5c5153ca58646ab0d367c173faf6e38a48de104d2acf2ca298c5",
+        "78bfb4d4e4119d8ab900c7c3d5abde59948799ac20bed52bd8e9b1259a7ad442",
+        "0526fde3acbcf10b682dfbbd5a08910a3310fa18ff56d006c9d8673171a88aca",
+        "2a0e10f9c606729bdd319c6b0a3a43689075bd440085424ef7db6b1960dc6621",
+        "ab2465103513dd5e4fcc70bf642279c3ba2b2c410c488efcae55f35ff79be091",
+        "b9911e9bcbd71f2da3faba870a0d3aaca4999e558e4d0b9d20f02aad07797254",
+        "8b33c02cd7ca7308b9f13893b27ad737984f557b8fecdaac95221a17c99f6336",
+        "379385028df867a339c08e46382ccfcb2b2c4f6e123dcd7dd63eef8dd6dd24b9",
+        "21e1ed9ef560a35afa1cfdcea2cad1a42c2332ffe437e5874b2462bc32e44ba0",
+        "91f857c48c736ddafc2d8d07ec1ec0188187d8a874dbaf8cd5aba166c9423169",
+        "44b83bee10ad8a5ceedf5858988d942c3e1b0168f76a18651b3f86892137f807",
+        "051e2b134062555ecc9ac0c47eaef9e983c87ccf0b951739ecb8023ee195aaf8",
+        "83d02159af3971a34c26676519110dda34a584517495eb0204fcf870e21d76c2",
+        "eb783a2e1edf0fcfdc87d84f35a702fdc38704664bf5a5615ffe9e2bff917962",
+        "ea667c95d78306057fbee6527ea7b38de59ed1bf5a18d34e262cbcb9ec302d1a",
+        "7d8ce3dcafb1362f148ed971164620ea92364ca4211ccf39b7db2024c4612f5d",
+        "feb17087062c703702dec83302d1076073448a40b7ece91b1f7230b857d73f94",
+        "5a1b3ff4fe119c33615a5f840f8f71a2ab50e0b421be3217271dd91cbe1e8bf0",
+        "684dfb43b434933dff86937f47fd202ef3e162cfbe0055d6470ac61459e43938",
+        "a5e8b1fbb85fd995655f893611ddbb13769640560165c71ef64f21ece9a2387c",
+        "585f6d8c0381a014b19aff33c9c8708416d9507d680e83e567d93c1a0ecd26a1",
+        "f44f080574df81ff7ebda69024be02b180354dfaf94e590d5b4bfba2ddef85e4",
+        "e692973cfa6045ccc8d7975aac79db388c141b21ce6a502ee2cc871f6d401456",
+        "0e8f2529a1fec35a94f046adc55070dbe1634aba87f17c90383d0f62d6559ba2",
+        "413f3cce9e0da564f852e28ef55084e713fef14d3d5cf9329dd2b69681e602d1",
+        "38a1647553077eb1fab53972b46f38b7df6671fab31f010d1ee49fa4b727314c",
+        "2d5b345dea5143481aafb129e2d32b6b0f6e14f779ac11e31eb657c1134ba956",
+        "36adac6cafdd8f844c278a4e436b3ba635bf1cd0c1bafdd48731f03f7faa8a9e",
+        "e8f6a600c215dcdadb89a811fb8c74248318dac19cbea47947d282fa0485e205",
+        "bdb25087b5c7dfd1794724d82d5ec5a59f7bb14ea90faa93527dea5111f5aea8",
+        "81e90834d481db198203bf2029de0d158eb640531de43d6ad99a0b90377d9b71",
+        "ddabb1c1b05cb1b16a1ce066be85937b6f0056b4c705d9d7bfbe679fe9be17fc",
+        "372545004a6e3173372868dc4a6a415be30d510c9662f52e4bc0b8f1c9304cba",
+        "a742140c4af96d78359892df7681a9c17de43f03ef1db8fe78bb13023e885cea"
+      ],
+      "hframes": 8,
+      "kind": "summoner",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "719d68c9c0d9b5ac12fb09b22cdd3e3c8b076e47a43f8dc1c534f49d9e78196c",
+      "pixel_size": 0.0437499992549419,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/summoner.png",
+      "sprite_offset_y": 2.45000004768372,
+      "tested_frame": 0,
+      "uid": "uid://7sfowrp4ai75",
+      "vframes": 5,
+      "view": "normalimport-summoner-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "d368f050f8d62dbe2cef651d69a924768b432b5d2ed5f80d7dbef6067a0e2380",
+        "ea551246a0cdbb84d8ffbd9f702b3c2f04483150909736c145010c71fe1e1a47",
+        "603d3f720c4dd5a3c0c0f9116747613a5bd1bf88751521b796a0b4c571b34eb9",
+        "d127d8b911cf1d6f04fcd8c2e2b1eec8db21f5258c8cf948bc7c36b334033a39",
+        "f159db6f4a7f1b684b365e1417b7ffc730384b672cb90a9d2a1846c414e06bdd",
+        "dfb59ae1664ea87ef2d94d74dfb798b6e32148fc909be96e9acd747946fc3022",
+        "dcc52d9bd55d2c66b2200c5b7f4b3bdc437896b457f8ec08398d5a00f2e01366",
+        "5bab9602c2f07ab04a30c86eb3504a6703e52cca1bfec9835a1e5ce76e45d86d",
+        "316cf3c090f150db6a9d5c9ed90025355672a2a3730295f469ab004ab40153a7",
+        "e069d00383f71eaaf2e4ca4f661d91cd52648eb1a78949fd210f978218b8d593",
+        "e64ec6184021d715c8a6c695033f2fac92fe8743b94ea9c498ff1931fcae37c0",
+        "fa7c9d1f5689308e7ad465e1692ca8a8578100b71e8370ec2f5223285c60d61c",
+        "655e71fa564085e5648f04acd0cceeda22bde4fb0218600d286d38e41bcea4fc",
+        "7ef05805d42102ea94b639e69107140a12f611c6afa686eb6bd9125bd6ee9908",
+        "a5f47c70b551069cabba8ace7c79947bb52b73d9328c2393950722c21d65524d",
+        "cadf41d3f5526fba4e9e952e7be437559940f8db38b816937ceee507c85c6d96",
+        "97bfd49bb77fbcafd583254fe01cf23d431435c4a57a79f322c238b2c6bdf579",
+        "f694a16d3ba252231f2c163a01af83c16fff86ce03e93094be1b6d857cf5e1ae",
+        "613e269b29ad7ba09c6b8a0324dbb010f625504285473b402b57a06ba9fb10d7",
+        "6989067fb7450a00c3177372629d886ef0d67189ad993ab95993c2a77bd6b112",
+        "c908db8d202f65782fda7f1c36e3712540de0b13ec19ad36641e0e5984ec5d8d",
+        "52db41c4b95a85262e8e09600f8a2233a01c57f618c1a0602b8652281838fd5a",
+        "2cd1ada5c7e695e52ff0cd50b5a863591e68e9db06fe2f72fbb0f29dee83184f",
+        "66b00f2328defefddc732760bd11e1d6fa2038f178b90dd1a5897eb963016c4f",
+        "2fee90a87e3950d085c71dd02ea68d9444af29507abc0407c4b80820603ed161",
+        "43c1ced8c34090fc71952ebb3f95789e0b3f5e434c7af436eb80bbdd1d0b0d1d",
+        "418603ec18f2ee0c6f4a18f1a7288c132fe4cb9603ddd8eaf7756e6f49e61f74",
+        "266b2cb75eccac5de0f6c27d9de1186fad44e0f8207776161e9defd3986e89dc",
+        "7b606c2392aa4ff6c38e92ed32fb1f64c39a0a286bdf8dce8340070a8997aca5",
+        "1c0ec691b054b1434a7f72955392558e9f00d79caa1afb21bfd466f953b64ca9",
+        "db083fec7d99d3ba0db80da88adcc38543d6ac4ef1fe958c312d633e88d7c9d5",
+        "f86bf40ccd643c2c497cad91fc45b5b8889008239ed74de5c339a193a07ccec7",
+        "571205b45a993bac5ad18ae9c3e543c87b0231c96b07a248ccf93020a19e6c78",
+        "515e2db4198196c0ce9fa63f1dbbcbdce220370cb61868254409237519bcf289",
+        "124381b17fb5f4620805336bbec025e399cbc260fad4729f414438fedc34883f",
+        "f9f60eb37e6a1d237618e2fc1d971adc29800a8b36df2abbcb5b489e9831b76f",
+        "e1bbf03b228ff9f25d11a7273ecca35ecfeac71b2b30cde40f22107f3dc0fe34",
+        "fb4ce4fd1a64f7c0b2068a7434e1e415aa5207ea6c038f00bd7c5d6d2554e0a9",
+        "ba22e6acc43c80efbd0e785cfb1d7d6ccb921f178a17214d0b9d8b93489faf5f",
+        "63d362955dd6ef4ce6eb2b4d50cfabf0fae2d212ee701fc57dfab61fb18a71e3"
+      ],
+      "hframes": 8,
+      "kind": "nursery_warden",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "70f9746a80f8ec593541171fb3d95e32ca8476947424cb166fd19bdec1fe6694",
+      "pixel_size": 0.0285156257450581,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/nursery_warden.png",
+      "sprite_offset_y": 3.421875,
+      "tested_frame": 0,
+      "uid": "uid://cmkak7dn6qmec",
+      "vframes": 5,
+      "view": "normalimport-nursery_warden-front.png"
+    },
+    {
+      "actual_alpha_query_mask": 4,
+      "cell_rgba_sha256": [
+        "6d49ed72007f6c316875c769482d4a09665b01e734df8d70ce28a855bf6ade58",
+        "a88845cce75e2c6feb7f0ce1755ee3434406d94560f8ebd3b9371140ebd24a46",
+        "436302322b74ed67a5e500c048abaf9f387713790781b169035e2d4a05a2575e",
+        "ef84201d456f25288b08beeb95bd9a236e6fc5d9cd591966949d777a14c65e43",
+        "3588598111333bbe2ad426e65312c2671837defbfb73ae16e1e137f0c3743cce",
+        "6c7830be34c5dabeabc1643de812cede7cdb66ffd168abe158d68ac4f4248d62",
+        "dfc1132afd9562ee22dd1f5d98dd1a50cfdc8ad6ea7b43054ce983f027f240b2",
+        "2bdbe437a7fbb0586762b07f3467d78b0d74f8dd4567c338e6f39b8693d8f987",
+        "bbc63caaea45c0fe19c71a01c7d5864396c9bfa86997542f3002aacbcedacb01",
+        "2f4cfbaee08af2dea80a020c5836ee3dfbd29479073eef943d59c75ead09240f",
+        "c07fcf8eb8a9c5db4c0885a28c735299e1c52ca33fd56ac038535cb3d22b3751",
+        "afda904606590ed53ea8123ebd7157160820c68cb0e7f5bf33ab1eafa71ccb62",
+        "9d8ebb50aa70b589b5638cd0dcba1edf62a8399f972210c630a5c7f0dc4aa655",
+        "a9415dffcfcf8e9fe57eff0a0c4c99ecb4e711cdee526e4ef8b22a9e6008b6be",
+        "0f5ed39bce0f2018f82b06895b97a533fe8e03c0463805dd8f1152c265f539f9",
+        "cb087e02daae9364d16e1c872d7672a8231879332dc63ca9b5931fc3ace56d19",
+        "7b1afbaabf7a1bc5fc0d5bf46ef9217002dc08051b7b41266082de992fa06430",
+        "fc5354745a169193c94444a9a6f8661b36a70b05e075b9252f5412ee6eaff750",
+        "bf7eed4b879900a2788db22a92c8be245b75e76be951260ede285a94dfa6286e",
+        "51a74e4a263e2d16e2ee8dcb208655cd133b201ce2da71cf1087283d2684f0de",
+        "35b936b5194c97d1a0794eda257547e1dab81298cd469fe8af6fe8a604320f40",
+        "c3bacea49e8e894f4a5115a7eae2d13fd9eab934f7a52a75dca9d6b5ec901348",
+        "dfbf8fbc74eaac568ed33bb5871d8e4a7057ff9efa72c975788b629c0d10d6ba",
+        "28b9c3091d84cbf2df10838fe6d2f6f587513ef78a2b58d7e05bc3adadac7eb4",
+        "74c3c8e384d487453a76d3cbf6cf146188eab5dca5806e1a77dc2da98c9cfe70",
+        "4bd4daef7ce23b91f29233a9ca0f670132cff814c89850ceff8ba44976b20362",
+        "d630d512f66a74583beb50436aad527dfb6a41252d3796dc589a7b90e8c4a265",
+        "7a55eee63a89a31a5ed73815114fe044210207417f386765ce0b9fc7d08e4166",
+        "1984778ef819cfe235beaf9f41bd905854bc81d2bb2042ea6e5f00e29e75d373",
+        "ad80ee743f5a253b79bc490e00081a3f07543672736ac6fccb3cbd931d7d8606",
+        "880c9fbe61baf457d7d5a2f31085b545acc7b34c84f5c81fc4e4b32318bb1c74",
+        "4e47dab0d49115cd6c1ef70dbfa7ecd68247a434ec85953c2ef2f2a2ca363d4e",
+        "54b05a69f44560f3b383e40cb513c9d86b75bf5ed68261f3bff24dd75874484f",
+        "ab66837f7cbf6dbd7f6165b8dbf0d4a67bea1e8fbdce14e0540988dc087607ba",
+        "fae2ee8b6fc854e284c6acdb21c19254cac71e06cc85123e2ecceb3bd9b58237",
+        "b018cfeebb46cac61b7681f0ad0fed09fa910e41b253cd2dadeba8abaa9c62de",
+        "d133a5986776bc0ec22ef81ebb42e4d639d6cd59252c49ee5529c754632e67ad",
+        "4360f8b79ad927c4eb6c3bf999990cbb2ed2b0526b2e407f6277cc7436ff1b37",
+        "ff27b6e29a17ce42f2b8aa5ddbb9d3588271291a39a6665cda73dc9e055788eb",
+        "58f95426f80d1575e4a2617d65634a7098df5ed5c34789d6cc3cc3713c8d28b4"
+      ],
+      "hframes": 8,
+      "kind": "choir_avatar",
+      "manual_static_frame": true,
+      "no_ImageTexture_override": true,
+      "normal_rgba_sha256": "56353ec096401bc9c3a8c6be8e3dc3ceda25879cd5174f3ae6c77f95f8b7bc32",
+      "pixel_size": 0.029687499627471,
+      "resource_class": "CompressedTexture2D",
+      "runtime_uri": "res://assets/art/sprites/bodies-v1/choir_avatar.png",
+      "sprite_offset_y": 3.5625,
+      "tested_frame": 0,
+      "uid": "uid://x6ygbxd8ln2w",
+      "vframes": 5,
+      "view": "normalimport-choir_avatar-front.png"
+    }
+  ],
+  "contacts": [
+    {
+      "atlas": [
+        64,
+        78
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        78
+      ],
+      "region": 0
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    },
+    {
+      "atlas": [
+        576,
+        80
+      ],
+      "coverage": "visible_sprite",
+      "frame": 4,
+      "local": [
+        64,
+        80
+      ],
+      "region": 0
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 0
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    },
+    {
+      "atlas": [
+        64,
+        50
+      ],
+      "coverage": "visible_sprite",
+      "frame": 0,
+      "local": [
+        64,
+        50
+      ],
+      "region": 1
+    }
+  ],
+  "failures": 0,
+  "normal_import": {
+    "mask_sha256": "e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5",
+    "resource_class": "CompressedTexture2D",
+    "resource_path": "res://assets/art/sprites/bodies-v1/worker.png",
+    "rgba_sha256": "4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98",
+    "source_blend_sha256": "ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906",
+    "source_png_sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52",
+    "uid": "uid://ukojibuco801"
+  },
+  "scope": "REAL authored worker normal-import Texture2D + actual Level/Player/Enemy/Query contacts; callback-disabled static PhysicsServer bodies, no human/AI/gameplay/performance/package proof",
+  "views": [
+    "normalimport-idle-front-arranged.png",
+    "normalimport-vent-natural-bearing.png"
+  ]
+}

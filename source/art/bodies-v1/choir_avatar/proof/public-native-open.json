@@ -1,0 +1,109 @@
+{
+  "actor_kind": "choir_avatar",
+  "actual_source_data": {
+    "UV_layer_count": 0,
+    "UV_lights_worlds_sha256": "f1cbe061b53f6935716ab6a0bacdb7cd864382a1a6d44f20ce85533e9290d4f0",
+    "base_source_data_sha256": "cecd5dcdeeba8eb38d280974240a0467999ee0cf0f082be58778649c34f103cb",
+    "editable_joint_empties": 100,
+    "image_count": 0,
+    "internal_texts": [],
+    "library_count": 0,
+    "material_count": 8,
+    "mesh_objects": 405,
+    "pose_collections": [
+      "idle",
+      "walk_a",
+      "walk_b",
+      "attack",
+      "dead"
+    ],
+    "settings": {
+      "camera": "Fixed legacy boss camera",
+      "color_type": "MATERIAL",
+      "engine": "BLENDER_WORKBENCH",
+      "initial_pose_states": [
+        {
+          "hide_render": false,
+          "hide_viewport": false,
+          "joint_empties": 20,
+          "mesh_objects": 81,
+          "polygons": 2863,
+          "pose": "idle",
+          "vertices": 2964
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 20,
+          "mesh_objects": 81,
+          "polygons": 2863,
+          "pose": "walk_a",
+          "vertices": 2964
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 20,
+          "mesh_objects": 81,
+          "polygons": 2863,
+          "pose": "walk_b",
+          "vertices": 2964
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 20,
+          "mesh_objects": 81,
+          "polygons": 2863,
+          "pose": "attack",
+          "vertices": 2964
+        },
+        {
+          "hide_render": true,
+          "hide_viewport": true,
+          "joint_empties": 20,
+          "mesh_objects": 81,
+          "polygons": 2863,
+          "pose": "dead",
+          "vertices": 2964
+        }
+      ],
+      "light": "STUDIO",
+      "look": "None",
+      "render_aa": "OFF",
+      "resolution": [
+        256,
+        256,
+        100
+      ],
+      "studio_light": "paint.sl",
+      "threads": 2,
+      "threads_mode": "FIXED",
+      "transparent": true,
+      "view_transform": "Standard"
+    },
+    "source_data_sha256": "89e4d404597cd599bb07ca63a941f045ed9d6d9c3ca1a7eb9b628bf7e8b1917c"
+  },
+  "decoded_non_UI_bytes_identical": true,
+  "decoded_non_UI_sha256": "1ecc5fe9bb6b53697925943b613d9ff0a15d5278d021c1d3d48e04e464c906d1",
+  "evidence_class": "actual-native",
+  "external_dependencies": false,
+  "geometry_material_camera_reconstruction": false,
+  "non_UI_identity_authority": "Hash-bound pure original-decoded/public byte comparison prepared before native run",
+  "opened_original_source": true,
+  "opened_public_source": true,
+  "original_source_native_proof_sha256": "889d268965035b6de90c4c0f195f7d3bac46562275e02ea1d064c7deea6a8c76",
+  "original_source_sha256": "ade72ce2487972742db9e034561c040445a7ae6d900f835cc96de1eba0734e15",
+  "own_loaded_filepath_excluded": true,
+  "portable_generator_native_reproduction_performed": false,
+  "public_RGBA_reproduction_performed": false,
+  "public_source_sha256": "ab9a64e0d068cab86eaf54c5436f5f9160296a95e8c5f8450f3f506fcb922d67",
+  "rendered_frame_count": 0,
+  "residual_home_in_source_data": false,
+  "schema": "null-choir-public-master-native-open-v1",
+  "scope": "Actual read-only saved original/public opening and complete source-data+UV/light/world parity only; no generator execution, render, source save, PCK/gameplay/FPS or final8 qualification.",
+  "source_data_identical_to_original": true,
+  "source_resaved": false,
+  "status": "PASS_PUBLIC_COPY_NATIVE_OPEN_SOURCE_DATA_MATCH_ORIGINAL",
+  "ui_bridge_sha256": "ed90c8bce969ed4b19b5aa2dfaef0c2f06ec6f105e8ed2f74474424a848ca46a"
+}

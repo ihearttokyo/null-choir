@@ -1,0 +1,17 @@
+{
+  "actor_kind": "worker",
+  "actual_checks": 115,
+  "actual_contacts": 9,
+  "atlas_sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52",
+  "consumer_sha256": "afd072804c3b91901763f0321f25a93d04f4bcb1917aea4262713daf428b70b7",
+  "evidence_class": "actual-native",
+  "final_consumer_qualification": "PENDING",
+  "mask_sha256": "e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5",
+  "native_receipt": {
+    "bytes": 3663,
+    "sha256": "66244a112e8f20a09b72785c8cc8566471600b342ea5cce0fcadf0e092aa0b65"
+  },
+  "schema": "null-choir-actor-controlled-runtime-v1",
+  "scope": "Actual normalimport Texture2D +actual staticLevel/Query/Player-forwarded contacts +controlled vent state; not packedapp/human/gameplay/FPS/publication",
+  "status": "PASS"
+}

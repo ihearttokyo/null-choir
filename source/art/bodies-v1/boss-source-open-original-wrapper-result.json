@@ -1,0 +1,18 @@
+{
+  "status": "FAIL_PRESERVED_STOP_NO_AUTOMATIC_RETRY",
+  "roles": [
+    "nursery_warden",
+    "choir_avatar"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.3249,
+  "sampled_peak_process_group_rss_bytes": 303595520,
+  "maximum_observed_output_bytes": 10507,
+  "final_output_bytes_before_result": 23348,
+  "diagnostics": [],
+  "stop_reason": null,
+  "all_inputs_unchanged": false,
+  "public_RGBA_renders": 0,
+  "native_receipts": [],
+  "scope": "Actual public/original source opening and source-data parity only; existing original render evidence retained, no new publicRGBA/PCK/gameplay/FPS claim"
+}

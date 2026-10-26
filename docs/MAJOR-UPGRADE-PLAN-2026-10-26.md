@@ -10,6 +10,14 @@ Plan dated 26 October 2026; status updated 27 October 2026. Public baseline: Maj
 - All six production-directed raster weapon atlases shipped in Preview05 with matching editable Blender design companions and remain retained. Preview06.1 makes one narrow, accepted exception: a genuine native-rendered forward-aiming Rivet Pistol replaces only the index1 runtime asset binding. The other five weapon designs remain frozen; numeric combat profiles, cadence and original lineage are unchanged.
 - Retained Preview06 keeps the earlier SoundTest. Preview06.1 ships an original live, cute 16-color pixel garden on the same transport with real owned-playback motion and measured Music bands. Earlier cathedral-room experiments remain separate rejected history, not the shipped pixel artwork. Standalone qualification/publication must still match the frozen candidate.
 
+## Preview07 source candidate — Bodies and Consequences
+
+The next source candidate now contains eight independently accepted production atlases: eight directions, five base poses per role, plus an authored sixth pressure-vent pose for Worker (328 cells total). The final Enemy constructor selects these normal imported resources; legacy artwork and editable originals remain retained. The Worker pressure clutch uses visible geometry-authored hit regions: a qualifying direct hit opens a once-per-life vent/interruption, without a damage bonus or shortened attack cooldown. This is not a general anatomical/headshot system for every enemy.
+
+Qualification includes all-frame source/import identity, the existing full static-art matrices, 555 functional checks with real Worker contacts, and eight visible final-source idle contexts with independently verified hidden/visible pixel contribution. The first added eight-camera fixture produced wall-only images and was rejected; its functional results are retained separately, not relabeled as visible-context evidence. These checks do not establish a packed release, human gameplay/listening, new campaign balance or sustained performance. Matching signed/notarized Preview07 packaging, merge and public delivery remain pending.
+
+The subsequent pistol-angle report also remains open: a corrected source assembly passed a shape-only review, but its final PBR render and runtime integration are not shipped. Preview06.1 remains the public build until a matching successor is verified.
+
 ## Actual remaining gaps
 
 1. **World presentation beyond the delivered gates.** Preview06 replaced all eight interactive burgundy-box gates with distinct authored assemblies. Wider room construction, identity and meaningful return-route variation remain; gate delivery does not complete the surrounding maps.
