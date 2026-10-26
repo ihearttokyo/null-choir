@@ -3,12 +3,12 @@ extends CharacterBody3D
 const Projectile = preload("res://scripts/projectile.gd")
 const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
 const WEAPONS = [
-	{"name":"IMPACT TOOL","asset":"impact_tool","damage":28,"interval":0.36,"range":2.7,"pellets":1,"max_ammo":0,"low_ammo":0,"useful_range":2.7},
-	{"name":"RIVET PISTOL","asset":"rivet_pistol","damage":22,"interval":0.21,"range":140.0,"pellets":1,"max_ammo":180,"low_ammo":20,"useful_range":140.0},
-	{"name":"SCATTERGUN","asset":"scattergun","damage":15,"interval":0.7,"range":32.0,"pellets":7,"max_ammo":32,"low_ammo":4,"useful_range":8.0},
-	{"name":"SAWTOOTH REPEATER","asset":"sawtooth_repeater","damage":16,"interval":0.085,"range":140.0,"pellets":1,"max_ammo":240,"low_ammo":30,"useful_range":24.0},
-	{"name":"MARROW LAUNCHER","asset":"marrow_launcher","damage":110,"interval":0.8,"range":96.0,"pellets":1,"max_ammo":24,"low_ammo":3,"useful_range":48.0},
-	{"name":"CHOIR DISRUPTOR","asset":"choir_disruptor","damage":40,"interval":0.16,"range":24.0,"pellets":3,"max_ammo":120,"low_ammo":12,"useful_range":16.0}]
+	{"name":"IMPACT TOOL","asset":"painted-v3/impact_tool","damage":28,"interval":0.36,"range":2.7,"pellets":1,"max_ammo":0,"low_ammo":0,"useful_range":2.7},
+	{"name":"RIVET PISTOL","asset":"painted-v3/rivet_pistol","damage":22,"interval":0.21,"range":140.0,"pellets":1,"max_ammo":180,"low_ammo":20,"useful_range":140.0},
+	{"name":"SCATTERGUN","asset":"painted-v3/scattergun","damage":15,"interval":0.7,"range":32.0,"pellets":7,"max_ammo":32,"low_ammo":4,"useful_range":8.0},
+	{"name":"SAWTOOTH REPEATER","asset":"painted-v3/sawtooth_repeater","damage":16,"interval":0.085,"range":140.0,"pellets":1,"max_ammo":240,"low_ammo":30,"useful_range":24.0},
+	{"name":"MARROW LAUNCHER","asset":"painted-v3/marrow_launcher","damage":110,"interval":0.8,"range":96.0,"pellets":1,"max_ammo":24,"low_ammo":3,"useful_range":48.0},
+	{"name":"CHOIR DISRUPTOR","asset":"painted-v3/choir_disruptor","damage":40,"interval":0.16,"range":24.0,"pellets":3,"max_ammo":120,"low_ammo":12,"useful_range":16.0}]
 const SPREAD = [Vector2.ZERO,Vector2(-0.065,0),Vector2(0.065,0),Vector2(-0.0325,-0.039),Vector2(0.0325,-0.039),Vector2(-0.0325,0.039),Vector2(0.0325,0.039)]
 var game: Node
 var camera: Camera3D

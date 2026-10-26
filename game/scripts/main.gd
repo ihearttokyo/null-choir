@@ -1352,7 +1352,7 @@ func _verify_export() -> void:
 	player.position = level.layout.world_position([20.5,25.5])
 	await _verify_passive_tick()
 	_process(0)
-	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/scattergun.png")
+	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/"+Player.WEAPONS[2].asset+".png")
 	checks["scattergun_fire"] = await _verify_fire_tick() and state.ammo[2] == 15
 	player.position = level.layout.world_position([16.5,16.5])
 	await get_tree().physics_frame
@@ -1379,14 +1379,15 @@ func _verify_export() -> void:
 			if spec.kind != "weapon" or int(spec.weapon) < 3 or int(spec.weapon) in state.owned_weapons: continue
 			var weapon = int(spec.weapon)
 			var profile = Player.WEAPONS[weapon]
+			var asset_id: String = String(profile.asset).get_file()
 			var before = state.ammo[weapon]
 			player.position = level.layout.world_position(spec.cell)
 			await _verify_passive_tick()
 			_process(0)
-			checks[profile.asset+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
+			checks[asset_id+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
 			before = state.ammo[weapon]
 			player.camera.rotation.x = 0.6
-			checks[profile.asset+"_fire"] = await _verify_fire_tick() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
+			checks[asset_id+"_fire"] = await _verify_fire_tick() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
 			if weapon == 4:
 				checks["marrow_launcher_projectile"] = level.get_children().filter(func(node): return node.get_script() == Player.Projectile).size() == 1
 			acquired_late_weapons.append(weapon)
@@ -1399,7 +1400,8 @@ func _verify_export() -> void:
 		checks["texture_"+art] = texture is Texture2D and texture.get_width() > 0 and texture.get_height() > 0
 	for weapon in Player.WEAPONS:
 		var texture = load("res://assets/art/weapons/"+weapon.asset+".png")
-		checks["weapon_art_"+weapon.asset] = texture is Texture2D and texture.get_width() == 960 and texture.get_height() == 200
+		var asset_id: String = String(weapon.asset).get_file()
+		checks["weapon_art_"+asset_id] = texture is Texture2D and texture.get_width() == 960 and texture.get_height() == 200
 	show_title()
 	music.stop()
 	get_tree().paused = false

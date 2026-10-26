@@ -1,0 +1,110 @@
+{
+  "schema": 2,
+  "weapon_id": "sawtooth_repeater",
+  "status": "NONSHIPPING_MANUALLY_REGISTERED_NEW_PRODUCTION_RASTER_NOT_BLENDER",
+  "generator": "Codex builtin image_gen production-directed new3pose raster; references priorProconceptandacceptedRivetmaterialstandard",
+  "source_file": "production-source-v1.png",
+  "source_sha256": "0f23b51fb9dc5ba4084dc86f179a5c38d0567aa82c23a615baebbb0ef8fcda21",
+  "source_dimensions": [
+    2170,
+    725
+  ],
+  "source_cell_rects": [
+    [
+      0,
+      0,
+      723,
+      725
+    ],
+    [
+      723,
+      0,
+      724,
+      725
+    ],
+    [
+      1447,
+      0,
+      723,
+      725
+    ]
+  ],
+  "uniform_scale": 0.3,
+  "native_anchor_px": [
+    140,
+    62
+  ],
+  "native_origin": [
+    160,
+    200
+  ],
+  "registration_basis": "Actual forward barrel/iron-endcap tip just below top sight; measured topalpha241/240/241. Uses unequal explicitsourcecells723/724/723 on actual2170x725, no source-size coercion.",
+  "alpha_cutoff_byte": 128,
+  "native_output": "candidate-v2/sawtooth_repeater-registered-v2.png",
+  "poses": [
+    {
+      "id": "idle",
+      "source_cell": 0,
+      "source_anchor_local": [
+        386,
+        256
+      ],
+      "extraction_local": [
+        0,
+        0,
+        700,
+        725
+      ]
+    },
+    {
+      "id": "fire",
+      "source_cell": 1,
+      "source_anchor_local": [
+        365,
+        255
+      ],
+      "extraction_local": [
+        0,
+        0,
+        680,
+        725
+      ]
+    },
+    {
+      "id": "recover",
+      "source_cell": 2,
+      "source_anchor_local": [
+        337,
+        256
+      ],
+      "extraction_local": [
+        0,
+        0,
+        723,
+        725
+      ]
+    }
+  ],
+  "reference_inputs": [
+    {
+      "role": "prior Pro concept visual reference only",
+      "sha256": "edaedcf5147285af5b3bec5c58e9730c93f5393cc9346656530641013fa01b1c"
+    },
+    {
+      "role": "frozen accepted Rivet material-craft reference",
+      "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+    }
+  ],
+  "manual_measurement": "Visual/source-pixel landmarks; explicit different source-cell coordinates registered with one uniform scale perweapon; no perpose scale or repaint. Actual runtime640canvas/HUDrect/native320cells unchanged.",
+  "source_original_retained": "work/runtime-art-next-20261026/sawtooth_repeater-generated-production-source-v1.png",
+  "provenance_receipt": "work/runtime-art-next-20261026/five-generated-production-sources-v1.json",
+  "pixel_operations_only": [
+    "explicit source-cell extraction",
+    "uniformscale/registeredtranslation",
+    "nearestpixel sampling",
+    "alpha>=128hardthreshold"
+  ],
+  "baked_external_fx_added": false,
+  "shipping_promoted": false,
+  "crop_revision_reason": "Native v1 bottomrow exposes disconnected next-posearm at x240 /239..247. Source rightedges700/680 remove ONLYforeignneighbor fragments; mainarms endnear source650/622. Explicit measured extraction, no repaint/scale/sourcechange."
+}

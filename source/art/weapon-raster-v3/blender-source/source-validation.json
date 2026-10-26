@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "scope": "CPU-only source authoring and actual Blender reopen, NOT render/appearance acceptance; raster ancestry unchanged",
+  "assets": [
+    {
+      "weapon": "impact_tool",
+      "source": "impact_tool.blend",
+      "sha256": "14e2b6864a995ce0d42532d0440b11d7fa6a14eabeb5175f6ef840443e55572c",
+      "original": "impact_tool.blend",
+      "original_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "reference_sha256": "4ee9c4c990e9a8a84d56ee7631a3ee8ae8235069cfca95d1b56a32ac048ee3a0",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 23,
+        "V3_fire": 23,
+        "V3_recover": 23
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 23,
+          "vertices": 840
+        },
+        "fire": {
+          "objects": 23,
+          "vertices": 840
+        },
+        "recover": {
+          "objects": 23,
+          "vertices": 840
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    },
+    {
+      "weapon": "rivet_pistol",
+      "source": "rivet_pistol.blend",
+      "sha256": "5368be3aeb8a584f180b32d1f285f676798049896e3562357337719e09e3fd1f",
+      "original": "rivet_pistol.blend",
+      "original_sha256": "54e2b5d31822b88c0b1a0d366da311785f5b143ec7471714c4a83345fc435624",
+      "reference_sha256": "0f611f1c800c12b3ccb84ccef4670bf0ff5923d8a80d9fe7890055386b5a0a9a",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 25,
+        "V3_fire": 25,
+        "V3_recover": 25
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 25,
+          "vertices": 988
+        },
+        "fire": {
+          "objects": 25,
+          "vertices": 988
+        },
+        "recover": {
+          "objects": 25,
+          "vertices": 988
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    },
+    {
+      "weapon": "scattergun",
+      "source": "scattergun.blend",
+      "sha256": "e88b472b2c9ee6a79fcd1fa5102c32987c57573dd5606a526bd9ef3944d00aee",
+      "original": "scattergun.blend",
+      "original_sha256": "2c8390694560fb0a914ec0f27e57edbb32b9c2cf6c61e21a862c97616324169e",
+      "reference_sha256": "6f34dc85cc11a0b648210ad728353f24df286bb8ca7b951dd6528a43fc070bd2",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 29,
+        "V3_fire": 29,
+        "V3_recover": 29
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 29,
+          "vertices": 1144
+        },
+        "fire": {
+          "objects": 29,
+          "vertices": 1144
+        },
+        "recover": {
+          "objects": 29,
+          "vertices": 1144
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    },
+    {
+      "weapon": "sawtooth_repeater",
+      "source": "sawtooth_repeater.blend",
+      "sha256": "1da00618528ab4e304892a23826012826cfb97da31ff983d5a308cc7fb8b989e",
+      "original": "sawtooth_repeater.blend",
+      "original_sha256": "32b88e3c10620f9327aca0cae8497e3bc688394a2f1289edc7053b147a18a088",
+      "reference_sha256": "0f23b51fb9dc5ba4084dc86f179a5c38d0567aa82c23a615baebbb0ef8fcda21",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 34,
+        "V3_fire": 34,
+        "V3_recover": 34
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 34,
+          "vertices": 780
+        },
+        "fire": {
+          "objects": 34,
+          "vertices": 780
+        },
+        "recover": {
+          "objects": 34,
+          "vertices": 780
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    },
+    {
+      "weapon": "marrow_launcher",
+      "source": "marrow_launcher.blend",
+      "sha256": "203e7e74d2596be801f67fb52e906faf29d9af75eb5c51a4782b035194a8a451",
+      "original": "marrow_launcher.blend",
+      "original_sha256": "2e8350e460d9a7586626efbde14c45b9bde0529cf734abe6918e263f66f02f98",
+      "reference_sha256": "cd55da94e32545fc172aebf88d782b8280b4ccb3e0e4d070b2d796402eb86a27",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 23,
+        "V3_fire": 22,
+        "V3_recover": 22
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 23,
+          "vertices": 1272
+        },
+        "fire": {
+          "objects": 22,
+          "vertices": 1128
+        },
+        "recover": {
+          "objects": 22,
+          "vertices": 1128
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    },
+    {
+      "weapon": "choir_disruptor",
+      "source": "choir_disruptor.blend",
+      "sha256": "d34051a4312dbe8afa326437a8017fba1c4a5f4cc493654e543e0a35a9d85d9b",
+      "original": "choir_disruptor.blend",
+      "original_sha256": "7c760c98b985745b2abaf9cb2cc1e52f0d5cd8d092f5dedfb8047927f0a81acf",
+      "reference_sha256": "37585f2a18c0e6a4deb4ce5372db7ab1a87dc497abfada6082ce2e95383f93d2",
+      "retained_original_hand_meshes": 96,
+      "hand_template": "source/art/impact_tool.blend",
+      "hand_template_sha256": "286a823ac32fd6077ec440b81fec384a6376045724d0cdf9e61b9de1f13fd54d",
+      "new_pose_mesh_counts": {
+        "V3_idle": 43,
+        "V3_fire": 43,
+        "V3_recover": 43
+      },
+      "rendered": false,
+      "reopen_validation": {
+        "idle": {
+          "objects": 43,
+          "vertices": 3872
+        },
+        "fire": {
+          "objects": 43,
+          "vertices": 3872
+        },
+        "recover": {
+          "objects": 43,
+          "vertices": 3872
+        }
+      },
+      "no_image_textures": true,
+      "reopened_path_privacy": {
+        "checked_actual_rna_fields": 2,
+        "custom_string_properties": 202,
+        "images": 0,
+        "private_absolute_paths": 0,
+        "render_paths": [
+          "//",
+          "//"
+        ],
+        "helper": "tools/build_art.py:sanitize_source_paths",
+        "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a"
+      }
+    }
+  ]
+}

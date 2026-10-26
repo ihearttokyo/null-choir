@@ -1,0 +1,628 @@
+{
+  "schema_version": 1,
+  "kind": "six-production-directed-registered-raster-weapon-atlases",
+  "provenance": "Builtin image_gen new sources, referenced prior project Pro concepts and accepted Rivet material standard; originalrasters retained. Registration/export uses actualGodotCPU extraction, NOT newBlender/3D/native8K. No ratings included.",
+  "runtime_contract": {
+    "atlas": [
+      960,
+      200
+    ],
+    "cell_size": [
+      320,
+      200
+    ],
+    "columns": 3,
+    "frames": [
+      "idle",
+      "fire",
+      "recover"
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "origin_px": [
+      160,
+      200
+    ],
+    "hud_destination": [
+      180,
+      143,
+      320,
+      200
+    ],
+    "ranged_flash_native_center": [
+      140,
+      62
+    ],
+    "impact_flash": false,
+    "animation": "Existing unmodified Player accepted-shot age intervals/halves; no gameplay/stats/aim/hit changes"
+  },
+  "legacy_catalog": {
+    "path": "source/art/manifest.json",
+    "sha256_unchanged": "c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928",
+    "ownership": "All119 Blender catalog assets/legacy6atlases remain unchanged; this separateledger owns ONLY6painted-v3 outputs"
+  },
+  "assets": [
+    {
+      "id": "impact_tool",
+      "weapon_index": 0,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/impact_tool.png",
+      "player_asset_path": "painted-v3/impact_tool",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/impact_tool.png",
+        "sha256": "b23cdf22e843b0b8be0075ce09859737fbb36263011da0cf368469ade9924b8c",
+        "bytes": 123879,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "5ec00f75bb093f8503f3c7749b3d1d773ab08cfdb6d71f1f2ee6684a405c617c"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/impact_tool/production-source-v1.png",
+        "sha256": "4ee9c4c990e9a8a84d56ee7631a3ee8ae8235069cfca95d1b56a32ac048ee3a0",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/impact_tool/registration-v1.json",
+        "sha256": "d7635c78856cf8cac7cb20e843e1a24030c6fbac453fc472431dd158de074b88",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.3,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          160,
+          140
+        ],
+        "basis": "Visible rear ram collar/grip-axis crossing at sourceY500; shared grip registration, not muzzle. Head top176\u2192231\u2192184 naturally travels on compression; actual HUD weapon0 has NO separate flash."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/compile_weapon_atlas.gd",
+        "sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/impact_tool/candidate-v1/compile-proof.json",
+        "sha256": "83bdb5940e79300a83e64b9f307ef5a7a071176ec5bc8f47dc55b78078c13c8e",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/impact_tool/candidate-v1/impact_tool-registered-v1.png",
+        "sha256": "b23cdf22e843b0b8be0075ce09859737fbb36263011da0cf368469ade9924b8c"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/impact_tool.png",
+        "sha256": "0a566362f4436f1814203fa76ce21e43ca3db59f4f31ded676cd3a85f3c056f7",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/impact_tool.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://dimmkwdyxdwor",
+        "sidecar_sha256": "a22802d03aebb866cf1b897442f2db1cd95cff486fdadb415806d1cd9e8de2b0"
+      },
+      "reference_identities": [
+        {
+          "role": "prior Pro concept visual reference only",
+          "sha256": "027fcbe3cee9de5937d16c01ba8f2b42210f265ec53e8c61b12ddf68a2a6e8f3"
+        },
+        {
+          "role": "frozen accepted Rivet material-craft reference",
+          "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+        }
+      ]
+    },
+    {
+      "id": "rivet_pistol",
+      "weapon_index": 1,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/rivet_pistol.png",
+      "player_asset_path": "painted-v3/rivet_pistol",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/rivet_pistol.png",
+        "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417",
+        "bytes": 93595,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "e75faaea4380b6c6d16ffefd555f6ba036975be3267875ba6c28715dc0121223"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/rivet_pistol/production-source-v1.png",
+        "sha256": "0f611f1c800c12b3ccb84ccef4670bf0ff5923d8a80d9fe7890055386b5a0a9a",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/rivet_pistol/registration-v1.json",
+        "sha256": "b299a089f9fa3441de7d6ca59640a55d89ee55c6a1e0ce1df9badf65ab2dc442",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.34,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          140,
+          62
+        ],
+        "basis": "Visual outer barrel-mouth rim/axis registration corroborated by source alpha>=128 leftedge row samples. Poses show ~15px then31px sourceX drift; sharedY238. This is registration of visible prop artwork, not anatomy or a gameplay ray/hit origin."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/rivet_compile_registered_atlas.gd",
+        "sha256": "3ed3d6a44c97f8c6d38ad908842ee2d897f761d4ffd64ac812f88a3a2bc5a1f9",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/rivet_pistol/candidate-v1/compile-proof.json",
+        "sha256": "baaa90ea23fa3a7ed3ab053c926217f145a4fba0de9c67d2fd81f24ef1d6ba58",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/rivet_pistol/candidate-v1/rivet_pistol-registered-v1.png",
+        "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/rivet_pistol.png",
+        "sha256": "e774365b70615e5e1efeff1cb0b3264100fc9ed43735a8d389f1048329d47a17",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/rivet_pistol.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://b7nilrrmfq6wr",
+        "sidecar_sha256": "401591a0dd9e94b4acb13194f5d88916333f76c56a53901addfde777744c83bd"
+      },
+      "reference_identities": [
+        {
+          "role": "existing runtime rivet atlas registration reference",
+          "sha256": "e774365b70615e5e1efeff1cb0b3264100fc9ed43735a8d389f1048329d47a17"
+        },
+        {
+          "role": "existing Pro concept visual reference only",
+          "sha256": "097008cea4e6d4d5dc6438278051b83bd0985eac293ba1a7ce17178ecd5da16b"
+        }
+      ]
+    },
+    {
+      "id": "scattergun",
+      "weapon_index": 2,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/scattergun.png",
+      "player_asset_path": "painted-v3/scattergun",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/scattergun.png",
+        "sha256": "bdb98c9d3574185647968b3b6a8679c255d5bbd29e872a718dab66a43398b798",
+        "bytes": 157349,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "db6ac31eb19c74eafcbc699c45454f1e367fe24f30147e2662611b2c4f23349c"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/scattergun/production-source-v1.png",
+        "sha256": "6f34dc85cc11a0b648210ad728353f24df286bb8ca7b951dd6528a43fc070bd2",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/scattergun/registration-v1.json",
+        "sha256": "6c049ce765cf6aabdb3187205992535ce06e0b6001ebbe6e5652c3aa2fbe7565",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.37,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          140,
+          62
+        ],
+        "basis": "Midpoint between the two actual FORWARD barrel-mouth rims,20sourcepx below their measured top328/219/278; barrel pair symmetry axis sourceX365. Rear amber feed gauge is NOT emission origin."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/compile_weapon_atlas.gd",
+        "sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/scattergun/candidate-v1/compile-proof.json",
+        "sha256": "eff3bcf5b4a61c851d5d62c05aa54f6c2a6342144717c4b8abeedb1de7b8aeb3",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/scattergun/candidate-v1/scattergun-registered-v1.png",
+        "sha256": "bdb98c9d3574185647968b3b6a8679c255d5bbd29e872a718dab66a43398b798"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/scattergun.png",
+        "sha256": "78177df17e91aca29057858fc7f73f54cd634c97361d7714b82993fdf24bb1b6",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/scattergun.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://d138s0nxdge72",
+        "sidecar_sha256": "25ecb5da09513deffe8c4e012e0d6c4eb001aeba3c3f1ed163a7abb18dd11167"
+      },
+      "reference_identities": [
+        {
+          "role": "prior Pro concept visual reference only",
+          "sha256": "a67968ee053b960dddd319465b0f6748079fc158426d1718b5806b8d48052ee5"
+        },
+        {
+          "role": "frozen accepted Rivet material-craft reference",
+          "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+        }
+      ]
+    },
+    {
+      "id": "sawtooth_repeater",
+      "weapon_index": 3,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/sawtooth_repeater.png",
+      "player_asset_path": "painted-v3/sawtooth_repeater",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/sawtooth_repeater.png",
+        "sha256": "a998012594b6509197bd3645c1a2bc73a2ec643bfc47bbad11c7a8da7980a6d4",
+        "bytes": 119935,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "02b0a12472037295882e590209b1cbd14786a245745f6d48454da44e59582386"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/sawtooth_repeater/production-source-v1.png",
+        "sha256": "0f23b51fb9dc5ba4084dc86f179a5c38d0567aa82c23a615baebbb0ef8fcda21",
+        "dimensions": [
+          2170,
+          725
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/sawtooth_repeater/registration-v2.json",
+        "sha256": "396a7eb5d16427e73a28dad7d2f1125234f1cdb6aec6554c7b0eeed930f2d846",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.3,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          140,
+          62
+        ],
+        "basis": "Actual forward barrel/iron-endcap tip just below top sight; measured topalpha241/240/241. Uses unequal explicitsourcecells723/724/723 on actual2170x725, no source-size coercion."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/compile_weapon_atlas.gd",
+        "sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/sawtooth_repeater/candidate-v2/compile-proof.json",
+        "sha256": "80f1aa061196a079b7351b7b1d9e99eac63bdf30140d4710ec59c1e84081c0d8",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/sawtooth_repeater/candidate-v2/sawtooth_repeater-registered-v2.png",
+        "sha256": "a998012594b6509197bd3645c1a2bc73a2ec643bfc47bbad11c7a8da7980a6d4"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/sawtooth_repeater.png",
+        "sha256": "c73ffea95cc61d77d6148b2bc8c76154150c5ed307a03560376d098c37b2a233",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/sawtooth_repeater.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://f2at70n2iiih",
+        "sidecar_sha256": "b4834ee30ed53bb0d48141cc5624e71d1d4ebd84ffc44de95fa925eeb316c96e"
+      },
+      "reference_identities": [
+        {
+          "role": "prior Pro concept visual reference only",
+          "sha256": "edaedcf5147285af5b3bec5c58e9730c93f5393cc9346656530641013fa01b1c"
+        },
+        {
+          "role": "frozen accepted Rivet material-craft reference",
+          "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+        }
+      ]
+    },
+    {
+      "id": "marrow_launcher",
+      "weapon_index": 4,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/marrow_launcher.png",
+      "player_asset_path": "painted-v3/marrow_launcher",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/marrow_launcher.png",
+        "sha256": "46687d1d52efa42effb5687ba2d0edaaf4349dee980f9183e5e0a3e05682ea2d",
+        "bytes": 169288,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "6a8bbd28c26cb19f712448e34761f127741bdb8ea7153f353da91cb50418a0d1"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/marrow_launcher/production-source-v1.png",
+        "sha256": "cd55da94e32545fc172aebf88d782b8280b4ccb3e0e4d070b2d796402eb86a27",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/marrow_launcher/registration-v1.json",
+        "sha256": "3a2e3118019881661cc10ebb59080766d878ec8392ea70e54b0d24f26c965861",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.33,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          140,
+          62
+        ],
+        "basis": "Actual forward axial brass endcap/front stem (visible in front of rear loading chamber). Rear white round/amber feed chamber is NOT muzzle. Opened petal tips213remain visible; uniformscale preserves full mechanical opening."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/compile_weapon_atlas.gd",
+        "sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/marrow_launcher/candidate-v1/compile-proof.json",
+        "sha256": "18eedc8053420674a85b688e93271d3979854be7592589896446d3182014418d",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/marrow_launcher/candidate-v1/marrow_launcher-registered-v1.png",
+        "sha256": "46687d1d52efa42effb5687ba2d0edaaf4349dee980f9183e5e0a3e05682ea2d"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/marrow_launcher.png",
+        "sha256": "b097be18884c2a6f3b8ceceed3f9e7b0f68b335fecfa72896d076ded31497d59",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/marrow_launcher.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://cs1ohe1dkfqxb",
+        "sidecar_sha256": "c73fe11ffc93b97a87ccfe77544ba3ce7c5281c8a274d42a05a42e84764d0750"
+      },
+      "reference_identities": [
+        {
+          "role": "prior Pro concept visual reference only",
+          "sha256": "4e4f037bfbb0be97b6dfc701a9ba73cfa428020ddb2e09decf26ea1aea8751f5"
+        },
+        {
+          "role": "frozen accepted Rivet material-craft reference",
+          "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+        }
+      ]
+    },
+    {
+      "id": "choir_disruptor",
+      "weapon_index": 5,
+      "runtime_uri": "res://assets/art/weapons/painted-v3/choir_disruptor.png",
+      "player_asset_path": "painted-v3/choir_disruptor",
+      "output": {
+        "path": "game/assets/art/weapons/painted-v3/choir_disruptor.png",
+        "sha256": "f3ddc8d03ef74a9fd8766d9dcb08290c89da94960a5cf5519715a6d95020b6a2",
+        "bytes": 153229,
+        "dimensions": [
+          960,
+          200
+        ],
+        "rgba8_pixel_sha256": "3618ee4f66a93ddd65708463aee805fb2aa7fbdb6e4513fd9d7269f3dc1d02ad"
+      },
+      "source": {
+        "path": "source/art/weapon-raster-v3/choir_disruptor/production-source-v1.png",
+        "sha256": "37585f2a18c0e6a4deb4ce5372db7ab1a87dc497abfada6082ce2e95383f93d2",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "generator": "Codex builtin image_gen production-directed new raster; NOT Blender, NOT native8K",
+        "fully_retained_original": true
+      },
+      "registration": {
+        "path": "source/art/weapon-raster-v3/choir_disruptor/registration-v1.json",
+        "sha256": "2a5e457beb97ef3d63b9dd4a20b4fc4b6171556dfff7d7d53db94e22d936c955",
+        "accepted_exact_copy": true,
+        "uniform_scale": 0.33,
+        "native_origin": [
+          160,
+          200
+        ],
+        "native_anchor": [
+          140,
+          62
+        ],
+        "basis": "Actual FORWARD central resonator endcap/white cap on weapon axis. Purple rear glowing feed/resonance chamber nearY430 is NOT emissionpoint. Outer horn tips239 remain visible."
+      },
+      "compiler": {
+        "path": "source/art/weapon-raster-v3/compilers/compile_weapon_atlas.gd",
+        "sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+        "method": "Godot native CPU nearest extraction + exactmanualregistration + binaryalpha128 threshold; no repaint/creativeediting"
+      },
+      "compile_proof": {
+        "path": "source/art/weapon-raster-v3/choir_disruptor/candidate-v1/compile-proof.json",
+        "sha256": "bdf709b308f462b8f299002fe17e3f9ae2587e2d9d5d6889eda99e94277f53aa",
+        "failures": 0
+      },
+      "accepted_atlas_copy": {
+        "path": "source/art/weapon-raster-v3/choir_disruptor/candidate-v1/choir_disruptor-registered-v1.png",
+        "sha256": "f3ddc8d03ef74a9fd8766d9dcb08290c89da94960a5cf5519715a6d95020b6a2"
+      },
+      "legacy_catalog_output": {
+        "path": "game/assets/art/weapons/choir_disruptor.png",
+        "sha256": "f702ba423035c1a2cdeee3f928368861bea281adaae1aaf6e2b1c857780d98f3",
+        "unchanged": true
+      },
+      "frames": [
+        "idle",
+        "fire",
+        "recover"
+      ],
+      "cell_size": [
+        320,
+        200
+      ],
+      "columns": 3,
+      "alpha": [
+        0,
+        255
+      ],
+      "filter": "nearest",
+      "import": {
+        "compress_mode": 0,
+        "mipmaps": false,
+        "premult_alpha": false,
+        "fix_alpha_border": true,
+        "sidecar_path": "game/assets/art/weapons/painted-v3/choir_disruptor.png.import",
+        "new_uid": "Native-assigned independent UID, not legacy UID reuse",
+        "uid": "uid://wq8yww0qhrfa",
+        "sidecar_sha256": "0a7a2fad85d331d5cfaabd46c06731a196c63e5424bac999350c453ade403fb8"
+      },
+      "reference_identities": [
+        {
+          "role": "prior Pro concept visual reference only",
+          "sha256": "8c742653ff6b5e6100bd7d778dc769426ad761986d91638454f28940768203ce"
+        },
+        {
+          "role": "frozen accepted Rivet material-craft reference",
+          "sha256": "67a47dfd915feaadbe5cf0602aa723f2a1048c368fabf72f7055d20edfbc3417"
+        }
+      ]
+    }
+  ],
+  "native_import_qualification": {
+    "path": "source/art/weapon-raster-v3/native-import-proof.json",
+    "sha256": "bf1fc2c85938c4070085c6de6eb845fc1eda86612cebde293e368e2ba13bbb5d",
+    "status": "PASS actual six cookedtextures alpha+opaqueRGB, currentHUDactualResourceLoader18poses and unchanged nativefireintentcadence; artifact05PCK stillpending"
+  },
+  "editable_blender_designs": {
+    "path": "source/art/weapon-raster-v3/blender-source/matching-review.json",
+    "sha256": "ab3b5b61ec9a893bd422a583d9d142ce88404621f68ef79c32ca616eb537df31",
+    "kind": "Matching original editable3D design companions; not the generator of the separately sourced raster PNGs"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "alpha": [
+    0,
+    255
+  ],
+  "cell": [
+    320,
+    200
+  ],
+  "compiler_sha256": "ebeeb06c643d24953622dc8e62b5ef0acbc6d9d8baf9c7820df26a0b5fc9f863",
+  "dimensions": [
+    960,
+    200
+  ],
+  "failures": 0,
+  "output_png_sha256": "a998012594b6509197bd3645c1a2bc73a2ec643bfc47bbad11c7a8da7980a6d4",
+  "output_rgba8_sha256": "02b0a12472037295882e590209b1cbd14786a245745f6d48454da44e59582386",
+  "poses": [
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        28,
+        58,
+        219,
+        199
+      ],
+      "opaque_pixels": 14641,
+      "pose": "idle",
+      "rgba8_sha256": "1a200b4f6a6f695b0c19a9482f48b8fcfd003961974e8b6752e34582f1ac0df8",
+      "source_anchor_local": [
+        386.0,
+        256.0
+      ],
+      "source_cell_rect": [
+        0.0,
+        0.0,
+        723.0,
+        725.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        700.0,
+        725.0
+      ],
+      "uniform_scale": 0.3
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        31,
+        58,
+        217,
+        199
+      ],
+      "opaque_pixels": 14691,
+      "pose": "fire",
+      "rgba8_sha256": "b91eae7d6f89b7b60fc4503e4d1e37286f34baf7e8c93445c5e6387e70b36eaf",
+      "source_anchor_local": [
+        365.0,
+        255.0
+      ],
+      "source_cell_rect": [
+        723.0,
+        0.0,
+        724.0,
+        725.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        680.0,
+        725.0
+      ],
+      "uniform_scale": 0.3
+    },
+    {
+      "native_anchor": [
+        140.0,
+        62.0
+      ],
+      "opaque_bounds_inclusive": [
+        39,
+        58,
+        218,
+        199
+      ],
+      "opaque_pixels": 14352,
+      "pose": "recover",
+      "rgba8_sha256": "0310bea978c5f2dd5933ffdfaec9e7f4378a65fb4c41012511f4f0a91af910a2",
+      "source_anchor_local": [
+        337.0,
+        256.0
+      ],
+      "source_cell_rect": [
+        1447.0,
+        0.0,
+        723.0,
+        725.0
+      ],
+      "source_crop": [
+        0.0,
+        0.0,
+        723.0,
+        725.0
+      ],
+      "uniform_scale": 0.3
+    }
+  ],
+  "registration_sha256": "396a7eb5d16427e73a28dad7d2f1125234f1cdb6aec6554c7b0eeed930f2d846",
+  "scope": "NONSHIPPING nativeCPU measured source extraction, no repaint/newBlender/creativepixel edits/quality/gameplay acceptance",
+  "source_sha256": "0f23b51fb9dc5ba4084dc86f179a5c38d0567aa82c23a615baebbb0ef8fcda21",
+  "weapon_id": "sawtooth_repeater"
+}
