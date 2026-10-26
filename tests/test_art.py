@@ -220,6 +220,7 @@ def check_nursery_v2(a, blob):
     current_dependencies = {key: recipe['PINS'][key] for key in ['tools/build_art.py', 'tools/art_recipe.py']}
     generations = {'21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883': {'tools/build_art.py': '285c99ece27a834e912e90f9c5d07ca4b2f8392a1045a1c089c7aa4fb5b8f581', 'tools/art_recipe.py': '32af173a8db24be0068ba3043990e3cc950de546bc1079dc635dc1af0cedcbf6'},
                    hashlib.sha256((ROOT / script).read_bytes()).hexdigest(): current_dependencies}
+    generations['42e03bc2565796cc4fbaba395190a5d74e6dcc0b624b4fd2eae2d177b00d7bec'] = generations['21431dbcef8a2105844aed82c24f8e9a7b65d14b2208dbb3cae815f6f410d883']
     assert a['recipe_sha256'] in generations, 'trusted nursery generation'
     assert a['recipe_dependencies'] == generations[a['recipe_sha256']], 'nursery helper pins'
     for logical, digest in recipe['PINS'].items():

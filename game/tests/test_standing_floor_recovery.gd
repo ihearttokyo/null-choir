@@ -92,14 +92,23 @@ func freeze() -> void:
 	game.music.stop()
 
 func finish() -> void:
-	game.show_title()
+	# Teardown is not a title transition: show_title() starts a NEW MP3 owner.
+	# Track/stop the actual current owned recording before freeing Main, including
+	# the title stream created by the intentionally rejected deep-recovery case.
+	if is_instance_valid(game):
+		if is_instance_valid(game.music) and is_instance_valid(game.music.player):
+			if game.music.player.stream != null: recordings.append(weakref(game.music.player.stream))
+			game.music.stop()
+		game.playing = false
+		game.queue_free()
 	paused = false
-	await create_timer(.1).timeout
-	await process_frame
-	game.free()
-	paused = false
-	# Reuse recorded_audio_release's wall-clock wait: headless frames outrun mixer callbacks.
 	var deadline = Time.get_ticks_usec()+2000000
+	while is_instance_valid(game) and Time.get_ticks_usec()<deadline:
+		await process_frame
+	check(not is_instance_valid(game),"Owned Main retires before mixer drain")
+	game = null
+	# Headless process frames outrun native mixer callbacks: use bounded REAL time.
+	deadline = Time.get_ticks_usec()+2000000
 	while recordings.any(func(recording): return recording.get_ref()!=null) and Time.get_ticks_usec()<deadline:
 		OS.delay_msec(2)
 		await process_frame
