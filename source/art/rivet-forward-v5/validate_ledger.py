@@ -102,7 +102,12 @@ def validate(root,h):
  need(hud.get("actual_production_draw") is True and hud.get("full_instrument_chrome") is True and hud.get("actual_world_context") is True and c.same(hud.get("resolution"),[640,360]) and hud.get("runtime_uri")==new_uri and hud.get("fixture_overrides")==[],"Full production HUD/world, no suppressed chrome or ImageTexture override")
  code={"res://scripts/main.gd":"cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0","res://scripts/player.gd":NEW_PLAYER,"res://scripts/hud.gd":"44e466410c46d72431228923082318eb65618b283b5ae86106d02ae981a587f7"}
  need(hud.get("code_sha256")==code,"Actual exact current Main/Player/HUD receipts")
- for path,pin in code.items():need(c.sha((root/("game/"+path[6:])).read_bytes())==pin,"Current source drift")
+ for path,pin in code.items():
+  if c.sha((root/("game/"+path[6:])).read_bytes())!=pin:
+   # Old fullHUD/ABA receipt is NOT relabeled current. A separate exact later
+   # generation proves only arranged current idle-HUD/context consumption.
+   historical=h["consumer_compatibility"](root)["historical"](root,"game/"+path[6:],pin)
+   need(c.sha(historical)==pin,"Historical receipt source differs")
  need(len(hud.get("views",[]))==3 and [x.get("pose") for x in hud["views"]]==list(c.POSES),"All three fullHUD poses")
  for row in hud["views"]:
   need(type(row.get("visible_weapon_pixels")) is int and row["visible_weapon_pixels"]>20 and row.get("full_chrome_changed_pixels",0)>1000 and row.get("stable_world_pixels",0)>20000,"Actual visible pixels/chrome/ABA world controls")

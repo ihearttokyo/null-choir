@@ -94,7 +94,11 @@ class NativeRivetTests(unittest.TestCase):
         root=self.lineage_fixture()
         paths={r['path'] for r in self.doc['public_inputs']}
         paths.update(['game/scripts/player.gd','game/scripts/hud.gd',v['OUTPUT']+'.import',v['FAMILY']+'native-import.json'])
-        for relative in paths:write(root,relative,self.player.encode() if relative=='game/scripts/player.gd' else (ROOT/relative).read_bytes())
+        historical_hud=(ROOT/'source/art/consumer-qualification-v0094/provenance/hud-before-v0094.gd').read_bytes()
+        assert hashlib.sha256(historical_hud).hexdigest()==v['HUD_SHA']
+        for relative in paths:
+            data=self.player.encode() if relative=='game/scripts/player.gd' else historical_hud if relative=='game/scripts/hud.gd' else (ROOT/relative).read_bytes()
+            write(root,relative,data)
         sidecar=root/(v['OUTPUT']+'.import')
         sidecar.write_text(sidecar_mutator(sidecar.read_text()))
         sidecar_sha=hashlib.sha256(sidecar.read_bytes()).hexdigest()

@@ -3,7 +3,11 @@ extends "res://tests/test_actor_snapshot_trust.gd"
 func run() -> void:
     var fixture = OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_ROOT")
     var home = fixture.get_base_dir().get_base_dir()+"/home"
-    if fixture.is_empty() or ProjectSettings.globalize_path("res://").trim_suffix("/")!=fixture or OS.get_environment("HOME")!=home or not OS.get_user_data_dir().begins_with(home+"/"):
+    var home_override: String = OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_HOME")
+    var user: String = OS.get_environment("USER")
+    var override_safe: bool = home_override.is_empty() or (home_override.is_absolute_path() and home_override == home_override.simplify_path() and home_override.get_file() in ["home","validation-home"] and home_override.get_base_dir() != "/" and not home_override in ["/root","/var/root","/Users/"+user,"/home/"+user])
+    if not home_override.is_empty(): home = home_override
+    if not override_safe or fixture.is_empty() or ProjectSettings.globalize_path("res://").trim_suffix("/")!=fixture or OS.get_environment("HOME")!=home or not OS.get_user_data_dir().begins_with(home+"/"):
         print("REFUSED TERRAIN SCALE FIXTURE: disposable project and private HOME required")
         quit(2)
         return
@@ -27,6 +31,16 @@ func run() -> void:
         kept.position = [point.x,point.y,point.z]
         document.actors = [kept]
         document.removed = old_layout.data.enemies.filter(func(spec): return spec.id!=kept.id).map(func(spec): return spec.id)
+        # Genuine legacy actor/floor fixture: both original floor seals were
+        # collected before the rescale. Do not create unreachable pending seal
+        # drops on deliberately shrunken geometry or weaken their modern guard.
+        document.erase("seal_drops")
+        document.erase("legacy_exit_wardens")
+        document.keys = []
+        for key in old_layout.data.interactions:
+            if key.kind == "key":
+                document.keys.append(key.key)
+                document.removed.append(key.id)
         var state = Campaign.new()
         expect(state.from_dict(document),"Legacy actor-bearing staged document is valid before scale edit")
         state.position = old_layout.world_position([18.25,8.75])+Vector3.UP*.04

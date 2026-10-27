@@ -41,6 +41,8 @@ jobs:
           python -B tests/test_seal_guardian_fixture_contract.py
           python -B tests/test_wall_architecture.py
           python -B tests/test_floor_wall_contact_contract.py
+          python -B tests/test_terrain_legacy_fixture_contract.py
+          python -B tests/test_art_consumer_compatibility.py
           python -B tests/test_actor_raw_metadata_privacy.py
           python -B tests/test_worker_regions.py
           python -B tests/test_weapon_raster_ledger.py

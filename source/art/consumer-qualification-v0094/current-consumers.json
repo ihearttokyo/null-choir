@@ -1,0 +1,726 @@
+{
+  "schema": "null-choir-exact-current-art-consumers-v0094-v1",
+  "status": "ACTUAL_ARRANGED_CURRENT_CONTEXT_OBSERVED",
+  "source_generation": "v0.094-wardens-and-dimensional-walls",
+  "historical_sources": {
+    "game/scripts/main.gd": {
+      "path": "source/art/consumer-qualification-v0094/provenance/main-before-v0094.gd",
+      "sha256": "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0",
+      "bytes": 76052
+    },
+    "game/scripts/hud.gd": {
+      "path": "source/art/consumer-qualification-v0094/provenance/hud-before-v0094.gd",
+      "sha256": "44e466410c46d72431228923082318eb65618b283b5ae86106d02ae981a587f7",
+      "bytes": 19729
+    },
+    "game/scripts/enemy.gd": {
+      "path": "source/art/consumer-qualification-v0094/provenance/enemy-before-v0094.gd",
+      "sha256": "6463ec67fce42419da719825776811c4779996a6be07dc414390becb10161229",
+      "bytes": 29804
+    },
+    "game/scripts/level.gd": {
+      "path": "source/art/consumer-qualification-v0094/provenance/level-before-v0094.gd",
+      "sha256": "a901c991a9d85df2ffa25969db0bb9d48f7bfed25616104b4375299a230d9b3e",
+      "bytes": 16178
+    }
+  },
+  "current_sources": {
+    "game/scripts/main.gd": {
+      "path": "game/scripts/main.gd",
+      "sha256": "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1",
+      "bytes": 77875
+    },
+    "game/scripts/hud.gd": {
+      "path": "game/scripts/hud.gd",
+      "sha256": "d4e39d84397dc55de947f4a784a2a119e5735c58bd43c4dce6442d78e5419ab7",
+      "bytes": 19836
+    },
+    "game/scripts/enemy.gd": {
+      "path": "game/scripts/enemy.gd",
+      "sha256": "ac3dc261bea00207419b7ff3b23892e0c6a9f1eb474525adaf23b7a78e9cadb3",
+      "bytes": 30649
+    },
+    "game/scripts/level.gd": {
+      "path": "game/scripts/level.gd",
+      "sha256": "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871",
+      "bytes": 15072
+    },
+    "game/scripts/seal_guardians.gd": {
+      "path": "game/scripts/seal_guardians.gd",
+      "sha256": "605ef7497da036b1df175b47361a666820934afbbb5e772ae947d20d30cabd47",
+      "bytes": 4973
+    },
+    "game/scripts/survey.gd": {
+      "path": "game/scripts/survey.gd",
+      "sha256": "464f6574418058530ef623640a7d53f3ed99be3392246d1307c06937f1c976fc",
+      "bytes": 7967
+    },
+    "game/scripts/campaign.gd": {
+      "path": "game/scripts/campaign.gd",
+      "sha256": "733754e2e26c50ffecc4522b429daa5127b8b01317726e372309dcdf0a823182",
+      "bytes": 26238
+    },
+    "game/scripts/level_schema.gd": {
+      "path": "game/scripts/level_schema.gd",
+      "sha256": "ca53997bd447ef6a4d81642eb2cce99701cef025c764f7863338d5d4d2e38be0",
+      "bytes": 23276
+    },
+    "game/scripts/wall_architecture.gd": {
+      "path": "game/scripts/wall_architecture.gd",
+      "sha256": "e73c1d1b067f5a49ae9543f80ab65ac06949b1e9a9d1852dabdc0a6626495844",
+      "bytes": 11008
+    },
+    "game/scripts/build_info.gd": {
+      "path": "game/scripts/build_info.gd",
+      "sha256": "975a517fd3ca0db925124f63ded119c6e6f6747bd5a0f09a0dabea67ba041b48",
+      "bytes": 404
+    },
+    "game/scripts/player.gd": {
+      "path": "game/scripts/player.gd",
+      "sha256": "0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7",
+      "bytes": 15851
+    },
+    "game/scripts/worker_hit_regions.gd": {
+      "path": "game/scripts/worker_hit_regions.gd",
+      "sha256": "563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67",
+      "bytes": 10504
+    },
+    "game/scripts/gate_art.gd": {
+      "path": "game/scripts/gate_art.gd",
+      "sha256": "6271f88a1c7e301b7e983cc47aa2052f03de220e10ab6829e02ae87d77aaf753",
+      "bytes": 8504
+    },
+    "game/scripts/gate_visual.gd": {
+      "path": "game/scripts/gate_visual.gd",
+      "sha256": "cfdd15d22e012e6794669a46038bbf5fd3b1cf708e22018a4058f75f327fe53f",
+      "bytes": 1488
+    },
+    "game/scripts/level_data.gd": {
+      "path": "game/scripts/level_data.gd",
+      "sha256": "f3fdf8ca58cb12e2dd32ef372bc3e62ea20c270baeb5b67ac56488c4a3be5339",
+      "bytes": 17264
+    },
+    "game/data/01_intake.json": {
+      "path": "game/data/01_intake.json",
+      "sha256": "1f8d22f438f18b5c62b2a8d7a07d833b9c670368021d9254ab4cae07a2175627",
+      "bytes": 42527
+    },
+    "game/data/02_foundry.json": {
+      "path": "game/data/02_foundry.json",
+      "sha256": "a462957fc24c6026d0803ea81951c1fc179933fdb5cf47fccbb9e2065fb9c6b2",
+      "bytes": 30632
+    },
+    "game/data/03_processional.json": {
+      "path": "game/data/03_processional.json",
+      "sha256": "641a54b8ea5acb52defd8b6e44a092c9f38ee64fe3780a737035848c49c3496a",
+      "bytes": 32793
+    },
+    "game/data/04_reliquary.json": {
+      "path": "game/data/04_reliquary.json",
+      "sha256": "5da6b5c0be92b684d83d05cb9d05eac100ce7b341c4fe42fa32c21d22eb9f6f0",
+      "bytes": 34343
+    },
+    "game/data/05_nursery.json": {
+      "path": "game/data/05_nursery.json",
+      "sha256": "1046f2641ce3c4bc22784b7c34160fc1f588c99b4fc6452a2c1c58cda3ac7789",
+      "bytes": 33312
+    },
+    "game/data/06_ossuary.json": {
+      "path": "game/data/06_ossuary.json",
+      "sha256": "801186bf7b08c0643c7a252b8ae4ae0a62274c3e828638d5e1a13d7b9487ef22",
+      "bytes": 33800
+    },
+    "game/data/07_inversion.json": {
+      "path": "game/data/07_inversion.json",
+      "sha256": "5715a4fff50fb2729ddc38fab661dfe17d5d0a66b87916609b1aa3bf116ff5ee",
+      "bytes": 35068
+    },
+    "game/data/08_heart.json": {
+      "path": "game/data/08_heart.json",
+      "sha256": "10b550af12c7c8973445c54e63d10667201258a90c5f8decb9d40b392887092a",
+      "bytes": 36091
+    }
+  },
+  "unchanged_runtime_assets": {
+    "game/assets/art/weapons/native-v5/rivet_pistol.png": {
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png",
+      "sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+      "bytes": 32743
+    },
+    "game/assets/art/weapons/native-v5/rivet_pistol.png.import": {
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png.import",
+      "sha256": "6ff9a7e4cf594b18f88de5f68c1ea6ca1d1aeb173524a0918e5312fc98a37a37",
+      "bytes": 970
+    },
+    "game/assets/art/sprites/bodies-v1/brute.png": {
+      "path": "game/assets/art/sprites/bodies-v1/brute.png",
+      "sha256": "dea9b732adf116b8201d0f9d9ec62238109790a87f6a7f8b01b383978e567e21",
+      "bytes": 207292
+    },
+    "game/assets/art/sprites/bodies-v1/brute.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/brute.png.import",
+      "sha256": "f1640582b68b5258ff524658f1728369e819a26b3443e31d14b9c844b941c4ea",
+      "bytes": 948
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png": {
+      "path": "game/assets/art/sprites/bodies-v1/caster.png",
+      "sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6",
+      "bytes": 214723
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/caster.png.import",
+      "sha256": "b8b330e06b6742c77f04425ff3b441dfe96032252bac313177e9a4230cc5d519",
+      "bytes": 951
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png": {
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png",
+      "sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902",
+      "bytes": 564352
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png.import",
+      "sha256": "82a33c2b1749e6fd5a7c1bc565260361202f10ef628d539dd868b5b2b11e4279",
+      "bytes": 969
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png": {
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png",
+      "sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56",
+      "bytes": 121328
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png.import",
+      "sha256": "cbaad65919b6dbb91a83f3c387686a7711be091e4915f2266b747a8734a67118",
+      "bytes": 955
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png": {
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png",
+      "sha256": "3b519f6b5557204a43bfb94e7b4df8543a6f3d0d7bb02e1e0748f33d6ab5a63a",
+      "bytes": 188104
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png.import",
+      "sha256": "a477dfb74f9fc36a3a0710888179154fdd575c7dfde7146cc20c91c26ef31ccb",
+      "bytes": 958
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png": {
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png",
+      "sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506",
+      "bytes": 767835
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png.import",
+      "sha256": "5f3d7d5848e40d11b3fc0c8a3863d06756116f4a8764a48c36b9c7486ee65750",
+      "bytes": 976
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png": {
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png",
+      "sha256": "7499061d847bf8a4bd2bcf11ae4e62df01149ebed8c92740155d474079c84368",
+      "bytes": 201859
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png.import",
+      "sha256": "9e247ed1891f6a18bb8da9b341419394f74b567daedef7ab4ec81b965a3f5ca0",
+      "bytes": 957
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png": {
+      "path": "game/assets/art/sprites/bodies-v1/worker.png",
+      "sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52",
+      "bytes": 262272
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png.import": {
+      "path": "game/assets/art/sprites/bodies-v1/worker.png.import",
+      "sha256": "96a420cf8b92988d05f207e88474afa8c5be10e36a6e51805f122b2dbf812654",
+      "bytes": 951
+    }
+  },
+  "native_observation": {
+    "fixture_sha256": "a9c3bac7a35b58dcef19d1172662349a54e7698ce71a5347ec94f575b39de384",
+    "source_input_contract_sha256": "733df00908e501c649bffe3f1d88a1a6d609fa0221f8326fdcedff4374911a93",
+    "serial_terminal_sha256": "7b257502adebbfdc508742ab3a66d72b8121d84a3851fa4f30fa395c7fff7923",
+    "resolution": [
+      640,
+      360
+    ],
+    "chapter_count": 8,
+    "frame_count": 48,
+    "chapters": [
+      {
+        "chapter": 0,
+        "chapter_id": "intake",
+        "strict_supervision": "PASS",
+        "result_sha256": "6861ac6c5c3abbd03ebc11976ad9557ab799938f0f0114ac74ecd252bba7ff23",
+        "guard_sha256": "e2e14a14c487c4a894f370bb3055451d7a9b46df90ca6ae75ab4838754b5b221",
+        "context_sha256": "2f7df82788b38bd372159bc1566d052c09bf1b70dc787bbcba7d4415e51d05df",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "intake",
+            "phase": "physical chapter architecture",
+            "bytes": 154405,
+            "png_sha256": "5ebcb49dbebc91728514e94e7132f0750480ebc34415b0dfefe98680c11ffb44",
+            "rgba_sha256": "7ea858438c59c037210fe40b92083d2d2e1c71964c0c862642add1973bab7dcb"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "intake_enemy_19",
+            "phase": "production committed windup",
+            "bytes": 204277,
+            "png_sha256": "05dad4e7e42c75e6e3b5740218a3c44edcf3f5929abcea281aeb7f8c85bc9988",
+            "rgba_sha256": "eb195e706607563aa90611d2f916fa9f52e03555f03058b3afa492d426991d9e"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "intake_enemy_03",
+            "phase": "production committed windup",
+            "bytes": 188490,
+            "png_sha256": "f61e76a99c543358eca82c8a188b278e7b5e866b49c34d3f53481cee689488c5",
+            "rgba_sha256": "aac9dd4a02a574a20ce321c62d4fb646ad6a43a311feab116bca0197e4cfd231"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "intake_enemy_03",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 186497,
+            "png_sha256": "f16c46d566c515db72c91205d417e2a1ab8b1aa5a6a30e07bf33e0647b6cc2c1",
+            "rgba_sha256": "e815df9ab591fbe97fe60d950cc063fddeec42f1a10d190b8ec1f6fd1d08cd4f"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "intake_enemy_15",
+            "phase": "production committed windup",
+            "bytes": 158954,
+            "png_sha256": "40ac3092a98cba82344ae7984e8ebe1845051170b888f17e5690df39cdf810cb",
+            "rgba_sha256": "ba8cefcff4e361a15572dc38038298de8842cc69519f515f95dabb3e479054a5"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "intake_enemy_15",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 155920,
+            "png_sha256": "eb28b4d3ea20aa43dd54a3d15d68a2600d34887565741682f212e96f68ebedcc",
+            "rgba_sha256": "1a5d7ce821a80f1ccd161f3227115b5d01736075d86a2a4bdb0db2f93ead3a42"
+          }
+        ]
+      },
+      {
+        "chapter": 1,
+        "chapter_id": "foundry",
+        "strict_supervision": "PASS",
+        "result_sha256": "957d7820de3a2af182a44e90af74b3c7013a35c8f4d5f4e3301b8cb46f6a4196",
+        "guard_sha256": "ed9342c1f3fb215431021783e9145ef0a9c00d19e96ac3b23f6e060d8ba25c08",
+        "context_sha256": "db09b9c85e061adddf6ae0c8d08e1774c815255c1a814015b34b973ec9e45b79",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "foundry",
+            "phase": "physical chapter architecture",
+            "bytes": 109292,
+            "png_sha256": "35739eddf676ab8e64581eed0c8697488feb2c09a7bd97471a675843ac5c4cfd",
+            "rgba_sha256": "87391dbab7b9b4daa381a1127687de6f7a8232dbda742ddd9f7b8f3c56e3d11e"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "foundry_enemy_17",
+            "phase": "production committed windup",
+            "bytes": 183319,
+            "png_sha256": "d0f0437291530414fc411ffb7ce435509e3fd6e447734266eef348577c11eb58",
+            "rgba_sha256": "2fea740264dd2fc8619ee9094160125c588869a92991a9ca5e3fe2215fbddf7a"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "foundry_enemy_03",
+            "phase": "production committed windup",
+            "bytes": 104523,
+            "png_sha256": "07231ea4eb8d4948081bbb4be98263eec7130cfde4b26675ce0ab679cab80731",
+            "rgba_sha256": "41fea14cdf69e449db7a3b4b70cc7581410022d6dc6f241bdeb0c0aa2854d730"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "foundry_enemy_03",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 108732,
+            "png_sha256": "0a004de4aa151cf549d282c1f75111c82b38bc28ce362ac3ec8d9b48ae7c7fa3",
+            "rgba_sha256": "d2896a1165b09535f44bab84d568825f3e5d42e19edeaec9d45b6e66a75e0ce5"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "foundry_enemy_13",
+            "phase": "production committed windup",
+            "bytes": 154329,
+            "png_sha256": "33888e7d74fe6c77ab0391be811de3e073d744befc967ae8c8051173ef0f9d41",
+            "rgba_sha256": "53c30f569d63489cc28144456a1001dd0f7fc6539cff53cec9868ca8cd1fc693"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "foundry_enemy_13",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 148663,
+            "png_sha256": "89ec3196ae1fc60350b5ce3588f431b8c075b8d6491316488132904870929af2",
+            "rgba_sha256": "f4f27a0b03f9b28d538371fe608b0fd5bb6e829026d71de651524ea0e9c4779b"
+          }
+        ]
+      },
+      {
+        "chapter": 2,
+        "chapter_id": "processional",
+        "strict_supervision": "PASS",
+        "result_sha256": "c4438f3d0a96aedfe5606e2571ef97fb2d884e1dc3456f955f6c51a8c9de4e26",
+        "guard_sha256": "1191ab0ca27c19c70840e161737b9196401fcde47687acb5ae9598236ff5aef7",
+        "context_sha256": "6d64c276c1c78df045c616d072c6fdc1910d89160d4a27bd756e3999c8c0f3c1",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "processional",
+            "phase": "physical chapter architecture",
+            "bytes": 134629,
+            "png_sha256": "402e67e3e895e134736ea18dd55ef0e67959b87586e87631ab3da50da0eaa07d",
+            "rgba_sha256": "b102041be820bf6eb66e9a0ff1f0cfb2d5111516ff70e7a54da6fee5c3e01976"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "processional_enemy_23",
+            "phase": "production committed windup",
+            "bytes": 149587,
+            "png_sha256": "3ba0710c8323c328f6b3fbc428feb8b300f7fb75b818bfa8a6654a10538ba42f",
+            "rgba_sha256": "173401f8916382cedab785f39412c0b6ffd73abb4e72b4f1eec08aeba132fa94"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "processional_enemy_05",
+            "phase": "production committed windup",
+            "bytes": 153082,
+            "png_sha256": "187455aeb941a9c735ccca683b310b41989648d96e33fe4ade8c18f4d817098f",
+            "rgba_sha256": "f2b8f67faf3c8f5b793fad8b3e74d265d593f11bd11cfc0b3842855dde994160"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "processional_enemy_05",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 151352,
+            "png_sha256": "16d400dc75d5b655e95efca4b50968f6982a3902e6caa65b44eb0219a12ea6b2",
+            "rgba_sha256": "70f85d35b159a819d48639e9165f31cd317b0a04491a9213a7dfb815b63fd31b"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "processional_enemy_18",
+            "phase": "production committed windup",
+            "bytes": 171298,
+            "png_sha256": "80d9c7dea6579cdb68e80a1eb7a70c12e0b0152fffb1b456dd37939d5a79f270",
+            "rgba_sha256": "16ffbf47d90d7dbb9dd8ad47568fa752cc932ecaa3852fbf6486801b2f24b30e"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "processional_enemy_18",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 167424,
+            "png_sha256": "ca0af114d6b73183e11656dd2f88717d37cb790efb82db42b430dc257571e5d9",
+            "rgba_sha256": "7b63c3fb07dc24ce1a7825802916c69b10feeef7bb27756a5df6f0a3490dead9"
+          }
+        ]
+      },
+      {
+        "chapter": 3,
+        "chapter_id": "reliquary",
+        "strict_supervision": "PASS",
+        "result_sha256": "ac18253d78d640420e46176e6e8e57385d60d694d7b6bd0308123231b9aa9c56",
+        "guard_sha256": "74d3377db9e3f5a210aeb3dbd7e70a01de0f00cf0ed6e54ee64cde132c9733b6",
+        "context_sha256": "22146f9d1339bb2f1e6af91aedea652c73705bae96e50e43be87f785a8353af8",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "reliquary",
+            "phase": "physical chapter architecture",
+            "bytes": 86829,
+            "png_sha256": "8f3e9d6d19ffacbe649a9237ce3c1f03d84cf41fc21b9e2998ba056f5cb1e718",
+            "rgba_sha256": "452b8eb53fc823df27c91186be58a5685c96cca2aa00137810fd440c1661ae7d"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "reliquary_enemy_28",
+            "phase": "production committed windup",
+            "bytes": 154800,
+            "png_sha256": "d0224a8943deb324aca1a44e8e7982112dbfc5d8394b4394dd2915cdde67635f",
+            "rgba_sha256": "c0439999ba93d167a0c3e1b9547a2164a56bf888e9496cd67b371af7eaa34d75"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "reliquary_enemy_04",
+            "phase": "production committed windup",
+            "bytes": 186598,
+            "png_sha256": "6bd357ca1729087e7596ca1d8b7b3a7f7692d3971a90aa810567bb5db46f4884",
+            "rgba_sha256": "f25cb3764d3cd6f9f72e6108c1df0f837a239278d4a81d4f4724b655710e6247"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "reliquary_enemy_04",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 189647,
+            "png_sha256": "58f65a3522771b402d5d3d9bd3aba2b2169f8787b3047326652d7f4ce0383914",
+            "rgba_sha256": "f89bfff8d1507f0ee6957b4de6734b8066f149683fd1e5615d44e1524b1278eb"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "reliquary_enemy_12",
+            "phase": "production committed windup",
+            "bytes": 179834,
+            "png_sha256": "c9e4ac705ee98c0b244b2b572896ecd22582be5a175331484e8ea3277375aa94",
+            "rgba_sha256": "a6ba1215990d9816514c23ef0594248b3ff4ee5837c6c54fc7a4f59e34db935f"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "reliquary_enemy_12",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 175794,
+            "png_sha256": "036f36cc72cd7b304c0b42faad60460df5bb05b02f4ee3349316fb94d8a93358",
+            "rgba_sha256": "ca003d452e7a5668bc860df01464ebe410bb02d0facacdde5578d1f5a77640dd"
+          }
+        ]
+      },
+      {
+        "chapter": 4,
+        "chapter_id": "nursery",
+        "strict_supervision": "PASS",
+        "result_sha256": "ee70939daaccac924bc57ef03a00d670234c82c26434f20d54fcc29342b9d055",
+        "guard_sha256": "d254c8135c263b20668404bd69b1383a52f40f240569d8140a85cac5cca080d7",
+        "context_sha256": "c6be39c919e0d8a864c5793c4f14352c9e3a9315410f15f6a28156b2400b0e1f",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "nursery",
+            "phase": "physical chapter architecture",
+            "bytes": 84956,
+            "png_sha256": "540193c9b58cd742c00c696994bb3a4e12dc5312e5093c015d922629f1732155",
+            "rgba_sha256": "73b18e67c92f39cdda8243964df28d606829b8bc6e7d0c2b52d8f2c3cef1b985"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "nursery_warden",
+            "phase": "production committed windup",
+            "bytes": 167110,
+            "png_sha256": "0caa46d582d89ea0c4cb41782c5a86d0ac5adaf48e2c4a607e7b9aecda5fed72",
+            "rgba_sha256": "70db91239cbb95006ec086ebe9c4bee5a3b0bf63451385abd0fbcf1bb740b081"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "nursery_enemy_04",
+            "phase": "production committed windup",
+            "bytes": 164734,
+            "png_sha256": "e3db54aeb57c0631657c39eb6bd226fe7b0185d2b621c1a4310adcf3dc7004a9",
+            "rgba_sha256": "06fcc24c826b131a347efe59481cc50c0033c4a08175c809e2dd051db49d5b47"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "nursery_enemy_04",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 163072,
+            "png_sha256": "b3d09fab8fbf0f5baedf8073c38b1da0a31b364531695f16acf8df935c1c6da4",
+            "rgba_sha256": "e380f920f0ab6d942ccb908095f18fd3f6f6e1e85f34551ac7bcdab0347801e3"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "nursery_enemy_12",
+            "phase": "production committed windup",
+            "bytes": 198365,
+            "png_sha256": "42f65776cae6d2100d303d5337c95586a7bd9d46d7e8b5be0218ddfd6dfd6103",
+            "rgba_sha256": "aa77e4ccfe83a1e74ed856424e89afad5a5e50c8d72478cbb64007bb3d530aa0"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "nursery_enemy_12",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 200078,
+            "png_sha256": "29f55effb290c9e662373e6a67b32495d4caceb2beef65bef732126654d8c133",
+            "rgba_sha256": "6ce77cce01489268ddab009c56ee9fca60f2626fa9ad7513172ea19f453165ef"
+          }
+        ]
+      },
+      {
+        "chapter": 5,
+        "chapter_id": "ossuary",
+        "strict_supervision": "PASS",
+        "result_sha256": "987d342a5c8e09929de12fabea81375b593e71c18d421b487ca7c742e7e89eb5",
+        "guard_sha256": "bbb5b3c58d8fb191b7e617977a3e0d9481cb4269af23046abb8d07e012245cf0",
+        "context_sha256": "884bcd7c1352f8251485b7b8d7379ed7b0d04e1052f3f792b9e8c68c9c4601d4",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "ossuary",
+            "phase": "physical chapter architecture",
+            "bytes": 117609,
+            "png_sha256": "c62b8c5e05c0f88af4e3733b821a964cece97bc53ea0ddfa4b92fcbe3e0ecba9",
+            "rgba_sha256": "68df97b87ce68b4458ec760a7bc8f4bf33bf6c44cb7c738ae93fa719d6d2f4be"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "ossuary_enemy_25",
+            "phase": "production committed windup",
+            "bytes": 106188,
+            "png_sha256": "9a50acc539c952035aefb07c1246ee0b944ae6ddefa1030bc9968bc4649c0a7e",
+            "rgba_sha256": "65d9330eb7e0220b5cbf52ace9f5628f8799dacbc0cb9b276e1b1c4da1668940"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "ossuary_enemy_04",
+            "phase": "production committed windup",
+            "bytes": 216853,
+            "png_sha256": "0acc714fe71cae82f6cc279ac78c7c6c5a5ca619174b787f03636de2182b831e",
+            "rgba_sha256": "c84646511c6fddf537a3a80975ff29b88808c5dd3d8c58c072a2499fda6c2363"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "ossuary_enemy_04",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 206854,
+            "png_sha256": "e7002c3b4131b39e39a3025d183fbc180505cdd723d452a454f74999d96df5ec",
+            "rgba_sha256": "9dc315d7012f08c144bb16727f77a87de54bd0093cdd6b89942a630d54e8b328"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "ossuary_enemy_10",
+            "phase": "production committed windup",
+            "bytes": 233159,
+            "png_sha256": "0f0cece5363d6743418355b96b0e7136e86dff1a0df9c048d60917d3cd06acd7",
+            "rgba_sha256": "b336f6d25f43d098da2df1f6ade7ea920fdab330c23dbcd72de01a09a9209687"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "ossuary_enemy_10",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 220938,
+            "png_sha256": "adb94e8cb7144c86b8ee7f7c0a3ab0ca8e84955e692ca55cab2a035de15fc801",
+            "rgba_sha256": "87f2bce89c9c16d9ab3ab3d6a735c45a26d65e44d5d38d0a308effdbfc39acb4"
+          }
+        ]
+      },
+      {
+        "chapter": 6,
+        "chapter_id": "inversion",
+        "strict_supervision": "PASS",
+        "result_sha256": "805405b95a02f95249869ae66f3e44883d5688e1fe6a7a7dafb7a100f2705da9",
+        "guard_sha256": "476b404cbc8030b8616e84517c2ed2b4f3422d81b700d15c17fdb9d9220f0faa",
+        "context_sha256": "2937b9a09a75aa17bea6782deebfe6cf4cbacf1330dd774f8cb6f6c27abf62c2",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "inversion",
+            "phase": "physical chapter architecture",
+            "bytes": 83091,
+            "png_sha256": "14204702c2c8dd6a86e2dde2ac63e1d1f0c731d7e96d8bfde6f9c799805019e6",
+            "rgba_sha256": "c87a06c489278b70948f1567b362a34fe3d8eb79dc9af1b5289038ad0b8fabb9"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "inversion_enemy_26",
+            "phase": "production committed windup",
+            "bytes": 106033,
+            "png_sha256": "b69943ea8b472b5f759e854b36b3a8667c5ebe7288740be74678d19c2538d797",
+            "rgba_sha256": "71684e15a0577f1f5b80fae8e8480c917cf1c3784096dc9b84ba315d28416c31"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "inversion_enemy_02",
+            "phase": "production committed windup",
+            "bytes": 170341,
+            "png_sha256": "307457928e38190fbc36e5460ac0ed65e7f7bbaf7bbd62022597aba49adb21ab",
+            "rgba_sha256": "e64278afde8eb1a1c5390d09f862aa84397b9c1d9faa909822b40d92adda817a"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "inversion_enemy_02",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 182700,
+            "png_sha256": "328827050073ea906ee0ea373d6ae7d5a88ea62cb9f5a50d81fe198657ac050d",
+            "rgba_sha256": "5b00a4b81b627b1adaecb46fb4f816b644327bdaa8760c8b00f0d0bedb8d779d"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "inversion_enemy_17",
+            "phase": "production committed windup",
+            "bytes": 179012,
+            "png_sha256": "4790d9a6a0e0dafaffbb1161c054357e9f5417a54562887793ff3f28a9c86ce8",
+            "rgba_sha256": "b67027dcd36f455431258873d8d1ab3e5164d6d76f6d944bd20404d921cfb5a4"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "inversion_enemy_17",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 178839,
+            "png_sha256": "0d162b2f05f046238efe773601e7e27bc195a362c9cd95ea2017adc5666d783a",
+            "rgba_sha256": "4bd73a4c568ae1975ee48c98a64041c0d6c6341f34cd94c5625dda76a2b5f9a8"
+          }
+        ]
+      },
+      {
+        "chapter": 7,
+        "chapter_id": "heart",
+        "strict_supervision": "PASS",
+        "result_sha256": "23b41c8a3fa265a5c1570f76a26ba5d460bb68b028217ffe1ebb8830420fb5a6",
+        "guard_sha256": "be891af11ef810eb08e193ea772ff56aa736ae4dfe83957690e413620564b210",
+        "context_sha256": "8b788db1a3285f48f4a53ed1e49b6da6009d79bcda7a17f188a6d10abe440681",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "heart",
+            "phase": "physical chapter architecture",
+            "bytes": 77109,
+            "png_sha256": "0ee5ab5c8f23726693abe4e1229ad42b50ef31776e824d5a96476361e19ead6b",
+            "rgba_sha256": "da0f640861e768432d76e2ec404c3d0d0e74e44ad18523413201fb31ca501f00"
+          },
+          {
+            "file": "exit-warden-tell.png",
+            "subject": "heart_choir_avatar",
+            "phase": "production committed windup",
+            "bytes": 170076,
+            "png_sha256": "fe5c0007d7233b76d696417e485e2de7571505c0cf97fdc4b8c1efc0fee0ec49",
+            "rgba_sha256": "822084eb4b1ac33101fe5a10c8b9af1d413cdb6320d70e2f042335df38fb59a4"
+          },
+          {
+            "file": "blood-live.png",
+            "subject": "heart_enemy_00",
+            "phase": "production committed windup",
+            "bytes": 196905,
+            "png_sha256": "7aa77471edd95369676a192df8e88e6381eb45493631d296e35499f3b47fef1c",
+            "rgba_sha256": "900ad0cc97722f99dc39d60e65b352bd01dbba6f2b6f6e2d4d0eed00fe5d0949"
+          },
+          {
+            "file": "blood-corpse-drop.png",
+            "subject": "heart_enemy_00",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 200959,
+            "png_sha256": "f1eb1bf789239f7c6991402ddcece636da1d74474e243d28314b7b01f5b6b80e",
+            "rgba_sha256": "2634b810aa0e88b40d0d942184ac1a650e9a8fc4d284928b0440071b1807c9aa"
+          },
+          {
+            "file": "ivory-live.png",
+            "subject": "heart_enemy_10",
+            "phase": "production committed windup",
+            "bytes": 163503,
+            "png_sha256": "a02f4bcd170246e8892da4a992a8171e108c182ce21739f415fee3aef102ecb9",
+            "rgba_sha256": "b4ef3a22d2e9bbebfb1e18235ee7f42504f40329184da59173326c33a63f4931"
+          },
+          {
+            "file": "ivory-corpse-drop.png",
+            "subject": "heart_enemy_10",
+            "phase": "actual defeated bearer + available seal marker",
+            "bytes": 142528,
+            "png_sha256": "f38bf0791b5e8fd7afd4d97db1e74e523a13457d303858bc43283c70c0b9f7af",
+            "rgba_sha256": "6118f9e867da640c417afaaddbdf83e6e51b9332465a0777245bae161d95f95d"
+          }
+        ]
+      }
+    ],
+    "public_image_payload_included": false
+  },
+  "scope": {
+    "current_normal_constructor_and_hud_observed": true,
+    "pistol_pose_observed": "idle only; production weapon/HUD retained",
+    "occlusion_limits": "Three source-context camera views require visual correction; original48 remain source-functional evidence, not final intended-use/art acceptance.",
+    "historical_art_sources_imports_and_evidence_unchanged": true,
+    "new_three_pose_pistol_ABA_qualification": false,
+    "new_body_fullmatrix_or_555_qualification": false,
+    "new_gate_opening_or_fullview_qualification": false,
+    "new_art_grade_or_final_visual_acceptance": false,
+    "earned_combat_or_performance_or_package_qualification": false,
+    "evidence_is_execution_authentication": false
+  }
+}

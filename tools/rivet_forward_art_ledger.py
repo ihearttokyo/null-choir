@@ -89,7 +89,13 @@ def validate_atlas(data):
     return {'dimensions':list(dims),'rgba8_pixel_sha256':sha(pixels),'pose_rgba8_sha256':cells}
 
 
-V5_GUARD_SHA = "f4ec3720560cd47c2ed8c2ca4df30297618b0aef31154dacb8c85a57aa9dbded"
+CONSUMER_COMPAT_SHA = "67c6fc8f8e1a36cd458bd8aaa8d5cb4335d1f3975e6592131178c1c7ab169cd4"
+def consumer_compatibility(root):
+    path=safe_rel(Path(root),"tools/art_consumer_compatibility.py",label="exact current consumer helper",allowed_roots={"tools"})
+    if path.is_symlink() or sha(path.read_bytes())!=CONSUMER_COMPAT_SHA: fail("exact reviewed consumer compatibility helper required")
+    return runpy.run_path(str(path))
+
+V5_GUARD_SHA = "daa45fbde4c065e72a1a5ff8fca1a852c59fc922bb3b54bc5ab8cbc4b2cb5cf4"
 def v5_guard(root):
     path=Path(root)/"source/art/rivet-forward-v5/validate_ledger.py"
     if path.is_symlink() or sha(path.read_bytes())!=V5_GUARD_SHA: fail("exact reviewed v5 validator required")
@@ -256,7 +262,14 @@ def validate_ledger(root: Path, ledger_path=LEDGER):
         player_data=validate_pistol_player_compatibility(root,player_data)
         replacement_outputs=["game/assets/art/weapons/native-v5/rivet_pistol.png"]
     validate_player(player_data.decode('utf-8'))
-    hud_path,hud=checked(root,doc.get('hud'), 'game/scripts/hud.gd',HUD_SHA)
+    # Frozen v4 receipts still describe their historical HUD. Separately prove
+    # the exact current generation before consulting its retained Git snapshot.
+    current_hud=safe_rel(root,'game/scripts/hud.gd',label='actual HUD').read_bytes()
+    if sha(current_hud)==HUD_SHA:
+        hud_path,hud=checked(root,doc.get('hud'), 'game/scripts/hud.gd',HUD_SHA)
+    else:
+        if not same(doc.get('hud'),{'path':'game/scripts/hud.gd','sha256':HUD_SHA}): fail('unchanged historical HUD reference required')
+        hud=consumer_compatibility(root)['historical'](root,'game/scripts/hud.gd',HUD_SHA)
     hud_text=hud.decode('utf-8')
     if HELPERS['HUD_NEAREST'] not in hud_text or HELPERS['HUD_ASSET_CONSUMER'] not in hud_text or 'Vector2(180,143)' not in hud_text or 'Rect2(frame*320,0,320,200)' not in hud_text:
         fail('actual nearest HUD/profile/three-frame destination consumer mismatch')

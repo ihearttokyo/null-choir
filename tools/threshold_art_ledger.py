@@ -272,6 +272,16 @@ def _check_glb(data: bytes, *, label: str) -> dict:
     return {"glb_json": document, "embedded_images": embedded, "embedded_image_buffer_views": sorted(image_views)}
 
 
+CURRENT_MAIN_SHA = "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1"
+CURRENT_LEVEL_SHA = "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871"
+CURRENT_CONSUMER_HELPER_SHA = "67c6fc8f8e1a36cd458bd8aaa8d5cb4335d1f3975e6592131178c1c7ab169cd4"
+def _current_consumer_compatibility(root):
+    import runpy
+    path = safe_rel(root, "tools/art_consumer_compatibility.py", label="current consumer helper", roots={"tools"})
+    if sha(path.read_bytes()) != CURRENT_CONSUMER_HELPER_SHA:
+        fail("Exact reviewed current consumer helper required")
+    return runpy.run_path(str(path))
+
 MAIN_SOURCE = "game/scripts/main.gd"
 HISTORICAL_MAIN_SHA = "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6372f531"
 SELFTEST_MAIN_SHA = "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0"
@@ -298,7 +308,15 @@ def _main_selftest_compatibility(root: Path, record, owned: set[str]) -> dict | 
             or current != {"path": MAIN_SOURCE, "sha256": SELFTEST_MAIN_SHA}):
         fail("Main compatibility must bind the one exact historical/current Main pair")
     _, original = checked_file(root, historical, label="Historical Main snapshot", roots={"source"}, owned=owned)
-    _, current_bytes = checked_file(root, current, label="Compatible current Main", roots={"game"})
+    actual_main = safe_rel(root, MAIN_SOURCE, label="Actual Main", roots={"game"}).read_bytes()
+    if sha(actual_main) == SELFTEST_MAIN_SHA:
+        _, current_bytes = checked_file(root, current, label="Compatible current Main", roots={"game"})
+    elif sha(actual_main) == CURRENT_MAIN_SHA:
+        # Reconstruct the OLD two-site selftest bridge against its historical
+        # Git snapshot; qualify the current generation in a separate receipt.
+        current_bytes = _current_consumer_compatibility(root)['historical'](root, MAIN_SOURCE, SELFTEST_MAIN_SHA)
+    else:
+        fail("Main compatibility reconstruction differs: unrelated source changes are forbidden")
     reconstructed = original
     for edit in MAIN_SELFTEST_REPLACEMENTS:
         before, after = edit["before"].encode(), edit["after"].encode()
@@ -357,6 +375,16 @@ def _native_receipt(root: Path, entry: dict, *, asset_id: str, source_dir: str,
                 and main_compatibility.get("historical_sha256") == HISTORICAL_MAIN_SHA
                 and main_compatibility.get("current_sha256") == SELFTEST_MAIN_SHA):
             continue  # Explicit static source compatibility; receipt remains historical.
+        if ((path_text == MAIN_SOURCE and current_hash == CURRENT_MAIN_SHA)
+                or (path_text == "game/scripts/level.gd" and current_hash == CURRENT_LEVEL_SHA)):
+            compat = _current_consumer_compatibility(root)
+            expected = SELFTEST_MAIN_SHA if path_text == MAIN_SOURCE else code_hashes.get(path_text)
+            historical = compat['historical'](root, path_text, expected)
+            if sha(historical) == code_hashes.get(path_text):
+                continue
+            if (path_text == MAIN_SOURCE and code_hashes.get(path_text) == HISTORICAL_MAIN_SHA
+                    and main_compatibility is not None):
+                continue  # Exact original two-site bridge already reconstructed above.
         fail(f"{asset_id}: native receipt source hash is stale at {path_text}")
 
 

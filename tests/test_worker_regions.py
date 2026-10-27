@@ -13,6 +13,17 @@ regions = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(regions)
 
 
+def ordinary_transaction_with_exact_death_hook(text):
+    body = text.split('func take_damage(', 1)[1].split('\n\t# Leave the complete ordinary-hit', 1)[0]
+    hook = '\n\t\tif game.has_method("guardian_defeated"): game.guardian_defeated(self)'
+    if body.count(hook) != 1:
+        raise AssertionError('Exactly one named seal-death hook required')
+    death = body.split('\n\tif hp == 0:', 1)[1].split('\n\telif telegraph_time', 1)[0]
+    if hook not in death or not death.index('game.state.removed.append(id)') < death.index(hook) < death.index('_event("death")'):
+        raise AssertionError('Seal hook must follow recorded death, before notification, never live/nonlethal')
+    return body.replace(hook, '', 1).replace('\n\t\tclutch_vent_time = 0', '')
+
+
 class WorkerRegionContract(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -120,9 +131,19 @@ class WorkerRegionContract(unittest.TestCase):
         self.assertNotIn('get_image(', check)
 
     def test_ordinary_damage_transaction_preserved(self):
-        modified = (ROOT/'game/scripts/enemy.gd').read_text().split('func take_damage(', 1)[1].split('\n\t# Leave the complete ordinary-hit', 1)[0]
-        modified = modified.replace('\n\t\tclutch_vent_time = 0', '')
+        modified = ordinary_transaction_with_exact_death_hook((ROOT/'game/scripts/enemy.gd').read_text())
         self.assertEqual(regions.digest(modified.rstrip().encode()), "c6daf26f01abfee086a8abe10e65a8e63148048f0630c0a8e3144e9e48915b9c")
+
+    def test_only_exact_recorded_death_hook_is_compatible(self):
+        source = (ROOT/'game/scripts/enemy.gd').read_text()
+        hook = '\n\t\tif game.has_method("guardian_defeated"): game.guardian_defeated(self)'
+        moved = source.replace(hook, '', 1).replace('\n\t\t_event("death")', '\n\t\t_event("death")'+hook, 1)
+        nonlethal = source.replace(hook, '', 1).replace('\n\telif telegraph_time > 0 and _counter_time <= 0:', '\n\telif telegraph_time > 0 and _counter_time <= 0:'+hook, 1)
+        live = source.replace(hook, '', 1).replace('\n\tif hp == 0:', '\n\tif hp > 0:'+hook+'\n\tif hp == 0:', 1)
+        early = source.replace(hook, '', 1).replace('\n\t\tif not id in game.state.removed:', hook+'\n\t\tif not id in game.state.removed:', 1)
+        for bad in [source.replace(hook, '', 1), source.replace(hook, hook+hook, 1),
+                    source.replace('game.guardian_defeated(self)', 'game.guardian_defeated(null)', 1), moved, nonlethal, live, early]:
+            with self.assertRaises(AssertionError): ordinary_transaction_with_exact_death_hook(bad)
 
     def test_consequence_is_not_damage_multiplier_blast_or_new_save(self):
         source = (ROOT/'game/scripts/enemy.gd').read_text()
