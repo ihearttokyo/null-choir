@@ -25,6 +25,11 @@ def check_notice_isolation(build):
     for interrupted in (True, False):
         with tempfile.TemporaryDirectory(prefix='null-choir-notice-test-') as directory:
             root = Path(directory)
+            # Real current-ordinal preflight remains enabled in this isolated
+            # orchestration fixture; only external engine writes are simulated.
+            ledger = root / 'docs/build-iterations.json'
+            ledger.parent.mkdir()
+            ledger.write_bytes((ROOT / 'docs/build-iterations.json').read_bytes())
             files = ('project.godot', 'export_presets.cfg', 'scripts/main.gd', 'licenses/Godot-Third-Party.txt')
             for name in files:
                 path = root / 'game' / name

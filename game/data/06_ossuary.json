@@ -504,7 +504,11 @@
         9.5,
         14.5
       ],
-      "text": "RIB CARRIER BLOOD SEAL RECOVERED"
+      "text": "RIB CARRIER BLOOD SEAL RECOVERED",
+      "seal_bearer": "ossuary_enemy_04",
+      "requires_defeated": [
+        "ossuary_enemy_04"
+      ]
     },
     {
       "id": "ossuary_ivory",
@@ -514,7 +518,11 @@
         33.5,
         13.5
       ],
-      "text": "BONE INDEX IVORY SEAL RECOVERED"
+      "text": "BONE INDEX IVORY SEAL RECOVERED",
+      "seal_bearer": "ossuary_enemy_10",
+      "requires_defeated": [
+        "ossuary_enemy_10"
+      ]
     },
     {
       "id": "ossuary_checkpoint",
@@ -548,6 +556,9 @@
       "requires": [
         "blood",
         "ivory"
+      ],
+      "requires_defeated": [
+        "ossuary_enemy_25"
       ]
     }
   ],
@@ -791,7 +802,16 @@
         9.5,
         16.5
       ],
-      "yaw": 124
+      "yaw": 124,
+      "seal_guardian": {
+        "name": "The Marrow Collector",
+        "seal": "blood",
+        "key_id": "ossuary_blood",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "ossuary_enemy_05",
@@ -845,7 +865,16 @@
         33.5,
         11.5
       ],
-      "yaw": 149
+      "yaw": 149,
+      "seal_guardian": {
+        "name": "The Ribbridge Sexton",
+        "seal": "ivory",
+        "key_id": "ossuary_ivory",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "ossuary_enemy_11",
@@ -980,7 +1009,13 @@
         18.5,
         37.5
       ],
-      "yaw": 315
+      "yaw": 315,
+      "door_warden": {
+        "name": "The Ossuary Tollkeeper",
+        "health_multiplier": 1.6,
+        "attack_windup": 0.95,
+        "recovery": 1.2
+      }
     },
     {
       "id": "ossuary_enemy_26",
@@ -1013,7 +1048,7 @@
         "ossuary_enemy_07"
       ],
       "cue": {
-        "text": "THE RIB CARRIER OPENS ITS TRANSPORT PASSAGE",
+        "text": "THE MARROW COLLECTOR / BLOOD SEAL BEARER",
         "light_ids": [
           "ossuary_bridge_feed",
           "ossuary_bridge_core"
@@ -1041,7 +1076,7 @@
         "ossuary_enemy_15"
       ],
       "cue": {
-        "text": "THE BONE INDEX RECEIVES YOUR SIGNATURE",
+        "text": "THE RIBBRIDGE SEXTON / IVORY SEAL BEARER",
         "light_ids": [
           "ossuary_mandala_feed",
           "ossuary_mandala_core"
@@ -1117,7 +1152,7 @@
         "ossuary_enemy_26"
       ],
       "cue": {
-        "text": "ALL CONTAINED CARRIERS ARE NOW IN TRANSIT",
+        "text": "THE OSSUARY TOLLKEEPER HOLDS THE DESCENT",
         "light_ids": [
           "ossuary_transfer_feed"
         ],

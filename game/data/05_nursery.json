@@ -471,7 +471,11 @@
         9.5,
         12.5
       ],
-      "text": "GESTATION BLOOD SEAL RECOVERED"
+      "text": "GESTATION BLOOD SEAL RECOVERED",
+      "seal_bearer": "nursery_enemy_04",
+      "requires_defeated": [
+        "nursery_enemy_04"
+      ]
     },
     {
       "id": "nursery_ivory",
@@ -481,7 +485,11 @@
         22.5,
         30.5
       ],
-      "text": "SEED RECEIVER IVORY SEAL RECOVERED"
+      "text": "SEED RECEIVER IVORY SEAL RECOVERED",
+      "seal_bearer": "nursery_enemy_12",
+      "requires_defeated": [
+        "nursery_enemy_12"
+      ]
     },
     {
       "id": "nursery_checkpoint",
@@ -781,7 +789,16 @@
         9.5,
         11.5
       ],
-      "yaw": 144.4623
+      "yaw": 144.4623,
+      "seal_guardian": {
+        "name": "The Gestation Marshal",
+        "seal": "blood",
+        "key_id": "nursery_blood",
+        "health_multiplier": 1.35,
+        "attack_windup": 1.05,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "nursery_enemy_05",
@@ -853,7 +870,16 @@
         22.5,
         26.5
       ],
-      "yaw": 59.0362
+      "yaw": 59.0362,
+      "seal_guardian": {
+        "name": "The Seed Receiver",
+        "seal": "ivory",
+        "key_id": "nursery_ivory",
+        "health_multiplier": 1.35,
+        "attack_windup": 1.05,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "nursery_enemy_13",
@@ -997,7 +1023,13 @@
         30.5,
         9.5
       ],
-      "yaw": 180
+      "yaw": 180,
+      "door_warden": {
+        "name": "The Nursery Warden",
+        "health_multiplier": 1.0,
+        "attack_windup": 1.2,
+        "recovery": 1.2
+      }
     }
   ],
   "encounters": [
@@ -1021,7 +1053,7 @@
         "nursery_enemy_07"
       ],
       "cue": {
-        "text": "THE GLASS ROOTS BEGIN TO FEED",
+        "text": "THE GESTATION MARSHAL / BLOOD SEAL BEARER",
         "light_ids": [
           "nursery_gestation_feed",
           "nursery_gestation_core"
@@ -1049,7 +1081,7 @@
         "nursery_enemy_15"
       ],
       "cue": {
-        "text": "THE SEED RECEIVER CHOOSES A BODY",
+        "text": "THE SEED RECEIVER / IVORY SEAL BEARER",
         "light_ids": [
           "nursery_seed_feed",
           "nursery_seed_core"
@@ -1127,7 +1159,7 @@
         "nursery_warden"
       ],
       "cue": {
-        "text": "THE DELIVERY CHAMBER ACCEPTS YOUR REPAIR",
+        "text": "THE NURSERY WARDEN HOLDS THE DESCENT",
         "light_ids": [
           "nursery_delivery_feed"
         ],

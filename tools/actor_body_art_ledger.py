@@ -19,7 +19,7 @@ LATE={'brute':{'hp':210,'speed':3.1,'radius':.62,'height':3.3,'scale':4.4,'coold
 LEGACY_SHA='c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928'
 PINSET_SHA='500bcebfb8ceb3720b159d26d18f96ec331ce0a10bf2fc905b6a0a6f8f6812ae'
 WORKER={'atlas':'b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52','rgba':'4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98','source':'ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906','generator':'0a4d74c1a0c7a1f309461e3978a37b81d6898669bba99a1eee0149c1fb3525d4','mask':'e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5','helper':'563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67','player':'d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff'}
-HELPER_PINS={'tools/rivet_forward_art_ledger.py': 'a03ef352c490876aab367f29f5388c9093d963b199b073e0b5f065b303a29a4a', 'source/art/weapon-raster-v3/validate_ledger.py': 'e72faeb597885d927374c73100e8608d2c9d8511730d2c909fee2f4e4d1fcf00'}
+HELPER_PINS={'tools/rivet_forward_art_ledger.py': '5e67ddae230d292b252ca284e82920dba220b067d3c1c341413fb8d4ff722196', 'source/art/weapon-raster-v3/validate_ledger.py': 'e72faeb597885d927374c73100e8608d2c9d8511730d2c909fee2f4e4d1fcf00'}
 class ContractError(ValueError):pass
 def fail(s):raise ContractError(s)
 def require(ok,s):
@@ -529,7 +529,17 @@ def validate_ledger(root,ledger_path=LEDGER):
  require(len(pin['files'])==140 and len({r['path'] for r in pin['files']})==140,'all140 legacy exports owned')
  for row in pin['files']:checked(root,row,row['path'],h)
  legacy={a['id']:a for a in catalog['assets']}
- _,consumer=checked(root,value.get('consumer'),'game/scripts/enemy.gd',h);consumer_contract(consumer.decode(),h)
+ actual_path=h['safe_rel'](root,'game/scripts/enemy.gd',label='actual body consumer',allowed_roots={'game'})
+ info=actual_path.lstat();require(stat.S_ISREG(info.st_mode) and not getattr(info,'st_flags',0)&0x40000000,'regular resident current body consumer')
+ actual_consumer=actual_path.read_bytes()
+ if sha(actual_consumer)==FINAL_CONSUMER_SHA:
+  _,consumer=checked(root,value.get('consumer'),'game/scripts/enemy.gd',h)
+ else:
+  require(same(value.get('consumer'),{'path':'game/scripts/enemy.gd','bytes':29804,'sha256':FINAL_CONSUMER_SHA}),'unchanged historical body consumer record')
+  consumer=h['consumer_compatibility'](root)['historical'](root,'game/scripts/enemy.gd',FINAL_CONSUMER_SHA)
+ # Active constructor contracts still run on CURRENT bytes, while the original
+ # context receipts below continue to join their exact historical source bytes.
+ consumer_contract(actual_consumer.decode(),h)
  outputs=[];seen_uids=set();seen_imports=set()
  for kind in KINDS:
   e=entries[kind];con=contract(kind);uri='res://assets/art/sprites/bodies-v1/'+kind+'.png'

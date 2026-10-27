@@ -2,6 +2,71 @@
 
 Plan dated 26 October 2026; status updated 27 October 2026. Public baseline: Major Features Preview06.1; immediate rollback: Preview06. Preview06.1: the matching signed/notarized/stapled Apple Silicon archive is publicly available and locally installed; the broader major-feature goal remains in progress. This plan preserves the full major-feature goal, distinguishes shipped work from working/prototype work, and prioritizes changes a player will actually notice.
 
+## Current goal update — 27 October 2026
+
+These user-directed requirements supersede the old naming of future previews. They are major release requirements, not optional polish. The previously stated campaign, music, artwork/master-source, world-identity and delivery goals remain in scope.
+
+### One release identity
+
+- Name every **new** release **Null Choir v0.xxx** throughout the game display, macOS app/version metadata, archive, README and existing live Site. Do not add Alpha/Major Features/Preview suffixes to new release names.
+- The retained Git audit establishes **93 distinct committed production-source states**, including branch development, through `3a3c353`. This is not a provable lifetime count of uncommitted work or 93 exported builds. The committed production state at `4b437a8` issued **v0.094**, which was not released and is retained as failed after a verified wall-face winding defect. The corrected next production-source iteration is **Null Choir v0.095**; validation/test-only commit `ebb5a0b` did not advance the production counter. `docs/build-iterations.json` governs subsequent allocation. Never reuse failed issued ordinals or inflate the number with PRs, duplicated tags, test runs or source-identical packaging retries.
+- Preserve old release names, URLs, source history and rollback packages. Preserve the internal save-data namespace and bundle identifier; display-name cleanup must not lose Continue progress.
+
+### Seal-bearing wardens on every level
+
+- Blood and Ivory seals must come from stronger characters, not unguarded floor pickups. Preserve independent seal-route choices with two identifiable seal bearers per chapter; every exit must also have an actual strong door guardian, using an existing suitable boss/actor where possible rather than adding unnecessary spawns.
+- Give these fights names, clear attack preparation/recovery and visible seal identity. Strength must not mean only a large HP increase. Balance against the chapter's existing ammunition, health and difficulties.
+- Defeating a bearer produces a reachable seal from its corpse. A living bearer cannot be bypassed through the old key interaction. Defeat, dropped-but-uncollected, one-seal and both-seal states must survive checkpoint/save/Continue without duplication or lost drops.
+- Validate backward-compatible typed drop state/migration. Grandfather legitimate old collected seals and old legal exit clearance; do not reset campaigns or turn formerly valid saves into softlocks.
+
+### Walls as architecture, not single planes
+
+- Give all eight chapters genuine three-dimensional wall families: deep bays/niches, layered returns, buttresses/ribs, frames and distinct structural silhouettes appropriate to each place. Texture swaps or tint-only variants do not satisfy this requirement.
+- Rendered volume, collision and occlusion must agree. Preserve door/gate openings, both loops, spawn/actor clearance and discoveries. Deep recesses must not create unsupported/out-of-mask standing or save positions, including falls from elevated Foundry/Ossuary surfaces and sloped edges. Use real visible structural barriers or an explicit supported geometry/migration change, never an invisible front wall.
+- Batch/reuse geometry/materials where appropriate. Qualify actual player-height output at640×360 and relevant traversal/physics, not just static mesh counts.
+
+### Arsenal, earned supplies, movement and horror lighting — user expansion, 27 October 2026
+
+These are unfinished **major features**, not optional polish or claims about the currently shipped build. Carry them through the next v0.xxx increments without dropping the existing wardens/walls/campaign/art/music scope. Integrate coherent increments; do not hold an otherwise qualified release for endless unrelated bug checks.
+
+#### Exciting, differentiated weapon behavior
+
+- Author an explicit capability/ballistics matrix for every weapon: projectile or hitscan model, travel speed where applicable, effective range, spread growth with distance, bounded per-shot direction/velocity/pattern variation, cadence, impact/stagger, penetration or splash where intentionally supported, ammunition cost and tactical strengths/limitations. Do not make every gun the same ray with a different damage number or invent arbitrary travel time for intentional hitscan weapons.
+- Make discharge and flight/impact artwork exciting and visibly different: varied muzzle frames, projectile silhouettes/trails, impact material responses and constrained per-shot visual variation. Maintain legible aiming, truthful collision/hit coverage, the corrected pistol alignment and accessible flash/reduced-effects settings. Cosmetic variation must not falsely advertise damage or hit coverage.
+- Judge meaningful capabilities through actual encounters at near/mid/far distances, not only a numeric table or effect screenshots. Exercise deterministic seeded combat controls and bounded variability separately; save/reload must not reroll rewards or enable resource farming.
+
+#### Earned supplies and a deliberate ammunition economy
+
+- Remove arbitrary freestanding ammunition, weapon and health pickups from authored levels. **Monsters are the source of dropped items**, including the existing seal bearers; no universal identical loot table. Use authored enemy-role/chapter/difficulty loot profiles with visibly plausible rewards. Not every kill must drop an item, and not every monster carries every ammunition type, weapon or healing item.
+- Make available ammunition inversely related to effective weapon power: powerful weapons have rarer supplies and meaningful opportunity costs, while weaker/core tools remain sustainably useful. Measure expected effective damage/capability supplied per encounter and chapter, plus guaranteed critical-route minimums, rather than correlating raw bullet counts across incomparable weapons. Balance both seal-route orders, all difficulties, missed shots and checkpoint/Continue. Avoid an unlucky-drop ammunition softlock; guarantee necessary earned supplies on designated encounters and retain a viable fallback attack.
+- Prefer **healing exclusively from identifiable in-world assets activated with Space** for the first implementation: clinical stations, organic reservoirs or other chapter-specific fixtures with an understandable source and depletion state. No routine health-potion confetti from monsters. Any exception must be explicit, narratively justified and evaluated rather than silently restoring random floor potions. Persist usage; checkpoint/save/load must not duplicate loot or refill depleted assets unexpectedly.
+- Dropped items are collected by **walking over them, never requiring E or another use press**. Automatically collect useful available quantities, with clear feedback; do not consume an unusable full-capacity reward. Cover fast movement/swept contact, vertical floors, walls/closed gates, corpse reachability, inventory limits, duplicate events and save/Continue. Do not magnetically collect through walls or between stacked floors.
+- Space operates contextual assets and other deliberate use actions, with controller/remapping equivalents and accurate prompts. Audit existing jump/use bindings before changing defaults so one Space press cannot both jump and drain a healing station; keep pickup collection wholly independent of contextual use. Existing input-provenance protections remain meaningful for deliberate use, not an excuse to retain press-to-pick-up loot.
+
+#### Doom 1-inspired movement architecture
+
+- Rework movement pace, acceleration, momentum, friction/deceleration, turning and collision/slide response to closely mirror Doom 1's feel, not merely increase top speed. Inspect the original released source as the reference and explicitly document world-unit/timestep conversion and any deliberate vertical-level adaptations; do not claim exact Doom parity from intuition.
+- Establish reproducible start/stop, turn, strafe/diagonal, wall-slide and narrow-door traversal traces at several render rates with stable physics. Test both slow exploration and fast combat, stairs/slopes/upper decks, keyboard/controller input, safe save positions and the new volumetric walls. Distinguish automated traces from physical human feel evidence; do not claim human acceptance under a held input test.
+
+#### Localized, moody horror illumination
+
+- Remove global ambient/directional fill and uniformly lit enemies/rooms. Use non-ray-traced, chapter-authored local accents: practical lamps, emissive apertures with actual local illumination, machinery, ritual fixtures and restrained transient weapon/impact lights. Darkness and partial creature silhouettes must be intentional; not every space or monster should be perfectly revealed.
+- Author light placement, falloff, color and shadow budgets together with routes/architecture. Preserve readable threats/telegraphs, required paths, seals, doors, healing fixtures and accessible brightness/contrast controls without restoring blanket global fill. Do not count an emissive texture alone as a light source or claim ray tracing.
+- Validate actual player-height moving output in all eight chapters and combat at the intended low resolution, including dark enemies against dark backgrounds, muzzle flashes, reduced-effects settings and overlapping local lights. Measure bounded native resource use; sustained performance/listening/heavy-production holds remain separate and unclaimed.
+
+#### Implementation order and acceptance evidence
+
+Implementation packet: `docs/EARNED-ARSENAL-IMPLEMENTATION.md` records the measured current eight-chapter supply baseline, six-weapon matrix, proposed earned-supply budgets and explicit legacy-save migration. Proposed budgets are untested, not a balance acceptance claim.
+
+1. Finish the already implemented wardens/walls candidate's affected native validation; retain exact accepted art and source history. Do not silently call its old pickup or lighting behavior compliant with this expansion.
+2. Inspect current weapon, pickup, input, movement, save and lighting seams; establish the existing behavior and a concrete capability/economy matrix. Batch ownership around these coupled systems rather than competing writers in Main/Player/level data.
+3. Implement weapons plus monster loot/walk-over collection/contextual healing as a coherent gameplay increment with backward-compatible persistence. Follow with movement and authored local lighting, or combine when evidence and ownership make that more efficient. Allocate v0.xxx numbers through the existing ledger; no speculative release numbering.
+4. Independent adversarial review uses the existing private unrounded9.2 stopping bar, with concrete intended-use evidence for combat distinction, supply sustainability, collection/recovery, movement and horror/readability. Authors receive defects/PASS only. A score cannot average away a softlock or false hit/lighting claim. Freeze passing features; publish matching qualified build, README and current Site per delivered major upgrade.
+
+### Acceptance and delivery
+
+The accepted Bodies artwork and corrected pistol are retained foundations, not reasons to reopen art polish. Their old source-context receipts remain historical when gameplay/level sources change; qualify the affected new composite honestly. Independent adversarial intended-use review retains the9.2/10 unrounded stopping rule, with scores hidden from authors. Merge coherent source increments with required checks, then deliver the matching signed/notarized **v0.xxx** app/archive and update README/live Site. The old unpublished Preview07 packaging attempts are held as history, not the new release target. Heavy-work holds and established cost/storage safeguards remain in force.
+
 ## What is already established
 
 - The eight-map campaign, two authored loops per map, seals, discoveries, checkpoint/Continue and two endings exist. Retained fresh earned runs cover a current default Blood-first recordless normal ending and a separate earlier Nightmare Ivory-first all-records revelation. This is not six current campaign combinations, human play or a performance certification. Do not reopen that matrix for cosmetic changes.
@@ -16,7 +81,7 @@ The next source candidate now contains eight independently accepted production a
 
 Qualification includes all-frame source/import identity, the existing full static-art matrices, 555 functional checks with real Worker contacts, and eight visible final-source idle contexts with independently verified hidden/visible pixel contribution. The first added eight-camera fixture produced wall-only images and was rejected; its functional results are retained separately, not relabeled as visible-context evidence. These checks do not establish a packed release, human gameplay/listening, new campaign balance or sustained performance. The Bodies source and release self-test corrections are merged through PR112. Matching signed/notarized Preview07 packaging and public delivery remain pending.
 
-The subsequent pistol-angle report remains open in the installed build. The corrected native assembly has now completed its three-pose CPU PBR renders, normal import and a real full-HUD/world fixture (65 functional checks; all three poses). Independent intended-use review has passed on the actual imported full-HUD/world output. Canonical integration and matching release delivery remain pending. It is not yet shipped. Preview06.1 remains the public build until a matching successor is verified.
+The subsequent pistol-angle report remains open in the installed build. The corrected native assembly has now completed its three-pose CPU PBR renders, normal import and a real full-HUD/world fixture (65 functional checks; all three poses). Independent intended-use review has passed on the actual imported full-HUD/world output. Canonical integration is merged in PR113; matching release delivery remains pending. It is not yet shipped. Preview06.1 remains the public build until a matching successor is verified.
 
 ## Actual remaining gaps
 

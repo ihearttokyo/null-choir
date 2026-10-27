@@ -28,11 +28,13 @@ class PackedAppImportTests(unittest.TestCase):
         class ExtractionStopped(Exception):
             pass
 
-        default = str(SCRIPT.resolve().parents[1] / 'builds/macos/NULL CHOIR-arm64.zip')
+        namespace = runpy.run_path(str(SCRIPT), run_name='packed_app_selection_identity')
+        default = str(SCRIPT.resolve().parents[1] / 'builds/macos' / namespace['build_identity']()['archive_name'])
         for argv, expected in (([str(SCRIPT)], default),
                                ([str(SCRIPT), '/private/tmp/explicit-app.zip'], '/private/tmp/explicit-app.zip')):
             with self.subTest(argv=argv), patch.object(sys, 'argv', argv), \
                  patch.object(tempfile, 'TemporaryDirectory') as directory, \
+                 patch.object(Path, 'is_file', autospec=True, side_effect=lambda path: str(path) == expected), \
                  patch.object(subprocess, 'run', side_effect=ExtractionStopped) as run, \
                  patch.object(subprocess, 'check_output', side_effect=AssertionError('Native execution forbidden')), \
                  redirect_stdout(io.StringIO()):

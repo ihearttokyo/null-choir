@@ -386,7 +386,11 @@
         4.5,
         11.5
       ],
-      "text": "FURNACE BLOOD SEAL RECOVERED"
+      "text": "FURNACE BLOOD SEAL RECOVERED",
+      "seal_bearer": "foundry_enemy_03",
+      "requires_defeated": [
+        "foundry_enemy_03"
+      ]
     },
     {
       "id": "foundry_ivory",
@@ -396,7 +400,11 @@
         27.5,
         9.5
       ],
-      "text": "CRUCIBLE IVORY SEAL RECOVERED"
+      "text": "CRUCIBLE IVORY SEAL RECOVERED",
+      "seal_bearer": "foundry_enemy_13",
+      "requires_defeated": [
+        "foundry_enemy_13"
+      ]
     },
     {
       "id": "foundry_checkpoint",
@@ -431,7 +439,10 @@
         "blood",
         "ivory"
       ],
-      "text": "TEMPERING COMPLETE / DESCEND"
+      "text": "TEMPERING COMPLETE / DESCEND",
+      "requires_defeated": [
+        "foundry_enemy_17"
+      ]
     }
   ],
   "mission": "RECOVERY ORDER 02: temper both restraint seals. Ignore the heat beneath the vertebrae.",
@@ -586,7 +597,16 @@
         4.25,
         13
       ],
-      "yaw": 237
+      "yaw": 237,
+      "seal_guardian": {
+        "name": "The Furnace Tithekeeper",
+        "seal": "blood",
+        "key_id": "foundry_blood",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "foundry_enemy_04",
@@ -676,7 +696,16 @@
         27,
         9.8
       ],
-      "yaw": 307
+      "yaw": 307,
+      "seal_guardian": {
+        "name": "The Crucible Receiver",
+        "seal": "ivory",
+        "key_id": "foundry_ivory",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "foundry_enemy_14",
@@ -712,7 +741,13 @@
         10.5,
         1.5
       ],
-      "yaw": 263
+      "yaw": 263,
+      "door_warden": {
+        "name": "The Last Cast",
+        "health_multiplier": 1.6,
+        "attack_windup": 0.95,
+        "recovery": 1.2
+      }
     },
     {
       "id": "foundry_enemy_18",
@@ -1936,7 +1971,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE VERTEBRAL FEED OPENS ACROSS THE FLOOR",
+        "text": "THE FURNACE TITHEKEEPER / BLOOD SEAL BEARER",
         "light_ids": [
           "furnace_feed",
           "furnace_core"
@@ -1961,7 +1996,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE CRUCIBLE RECEIVES THE NEXT CAST",
+        "text": "THE CRUCIBLE RECEIVER / IVORY SEAL BEARER",
         "light_ids": [
           "crucible_feed",
           "crucible_core"
@@ -2058,7 +2093,7 @@
         "ivory"
       ],
       "cue": {
-        "text": "THE LAST CAST IS STILL MOVING",
+        "text": "THE LAST CAST HOLDS THE DESCENT",
         "light_ids": [
           "foundry_gate_feed"
         ],

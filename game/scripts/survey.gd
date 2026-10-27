@@ -1,6 +1,7 @@
 extends Node2D
 
 # Native editable instrument derived from inspected source/art/references/survey-02.png.
+const SealGuardians = preload("res://scripts/seal_guardians.gd")
 const MARKER_ATLAS = preload("res://assets/art/hud/marker_glyphs.png")
 const LEGEND = [["","GATE",52],["seal_blood","BLOOD",126],["seal_ivory","IVORY",212],["story","RECORD",298],["checkpoint","RECOVERY",388],["exit","DESCENT",498]]
 const MAP_FRAME = Rect2(52,62,536,192)
@@ -70,7 +71,9 @@ func draw_state() -> Dictionary:
 		if game.level.layout.is_walkable(cell): cells.append(cell)
 	var icons: Array = []
 	for spec in game.level.layout.data.interactions+game.level.layout.data.doors:
-		var cell = Vector2i(spec.cell[0],spec.cell[1])
+		if not SealGuardians.available(game.state,spec): continue
+		var location: Vector3 = SealGuardians.interaction_position(game,spec)
+		var cell = Vector2i((Vector2(location.x,location.z)/game.level.layout.data.cell_size).floor())
 		if not cell in cells or spec.id in game.state.removed: continue
 		var symbol = "G" if spec.has("size") else {"key":"S","story":"R","checkpoint":"C","exit":">"}.get(spec.kind,"")
 		if not symbol.is_empty():

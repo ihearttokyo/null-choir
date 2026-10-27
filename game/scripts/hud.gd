@@ -1,5 +1,6 @@
 extends Node2D
 
+const SealGuardians = preload("res://scripts/seal_guardians.gd")
 const Survey = preload("res://scripts/survey.gd")
 const AMMO_ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
 const HUD_ATLAS = preload("res://assets/art/hud/hud_kit.png")
@@ -97,7 +98,7 @@ func draw_state() -> Dictionary:
 		for key in spec.get("requires",[]):
 			if not key in required: required.append(key)
 		for id in spec.get("requires_defeated",[]):
-			if not id in state.removed: pending_manifestation = true
+			if SealGuardians.exit_warden_required(state,id): pending_manifestation = true
 	var seals: Array = []
 	var seal_text: PackedStringArray = []
 	var recovered: int = 0
@@ -132,7 +133,7 @@ func draw_state() -> Dictionary:
 				"exit":
 					prompt = "DESCEND"
 					for id in interaction.get("requires_defeated",[]):
-						if not id in state.removed: prompt = "MANIFESTATION STILL LIVING"
+						if SealGuardians.exit_warden_required(state,id): prompt = "MANIFESTATION STILL LIVING"
 	var empty: bool = arsenal[state.weapon].empty
 	var low: bool = arsenal[state.weapon].low
 	var capacity: int = profile.get("max_ammo",0)

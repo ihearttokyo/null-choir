@@ -1,9 +1,19 @@
 extends "res://tests/test_actor_snapshot_trust.gd"
 
+# Independent fixture expectation, not a call to the production migrator.
+# Only these six exit requirements are newly mandatory; old bosses stay required.
+const LEGACY_CODEC_EXIT_WARDENS = {
+	0:"intake_enemy_19", 1:"foundry_enemy_17", 2:"processional_enemy_23",
+	3:"reliquary_enemy_28", 5:"ossuary_enemy_25", 6:"inversion_enemy_26"}
+
 func run() -> void:
 	var fixture: String = OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_ROOT")
 	var private_home: String = fixture.get_base_dir().get_base_dir()+"/home"
-	if fixture.is_empty() or ProjectSettings.globalize_path("res://").trim_suffix("/") != fixture or OS.get_environment("HOME") != private_home or not OS.get_user_data_dir().begins_with(private_home+"/"):
+	var home_override: String = OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_HOME")
+	var user: String = OS.get_environment("USER")
+	var override_safe: bool = home_override.is_empty() or (home_override.is_absolute_path() and home_override == home_override.simplify_path() and home_override.get_file() in ["home","validation-home"] and home_override.get_base_dir() != "/" and not home_override in ["/root","/var/root","/Users/"+user,"/home/"+user])
+	if not home_override.is_empty(): private_home = home_override
+	if not override_safe or fixture.is_empty() or ProjectSettings.globalize_path("res://").trim_suffix("/") != fixture or OS.get_environment("HOME") != private_home or not OS.get_user_data_dir().begins_with(private_home+"/"):
 		print("REFUSED TERRAIN FIXTURE: explicit disposable project and private HOME required")
 		quit(2)
 		return
@@ -35,7 +45,14 @@ func run() -> void:
 		for mode in range(3):
 			var document = staged_document(index,mode)
 			var baseline = Campaign.new()
-			expect(baseline.from_dict(document) and JSON.stringify(baseline.to_dict(),"",true,true) == JSON.stringify(document,"",true,true),"Unchanged map version1 byte-codec parity")
+			var input_image: PackedByteArray = var_to_bytes(document)
+			var accepted: bool = baseline.from_dict(document)
+			var expected: Dictionary = expected_legacy_codec(document,index)
+			expect(not expected.is_empty() and accepted and canonical_codec_equal(baseline.to_dict(),expected),"Unchanged map version1 preserves complete legacy image plus exact typed seal migration")
+			expect(var_to_bytes(document) == input_image,"Unchanged-map legacy migration leaves every input envelope untouched")
+			if accepted:
+				check_canonical_parity_negatives(expected)
+				check_modern_seal_negatives(expected)
 			documents.append(document)
 		var changed: Dictionary = JSON.parse_string(original)
 		changed["floor_revision"] = 1
@@ -69,6 +86,8 @@ func run() -> void:
 				var old: Dictionary = before if envelope == "current" else before[envelope]
 				var new: Dictionary = migrated if envelope == "current" else migrated[envelope]
 				expect(new.floor_revision == 1,"Every envelope records current floor")
+				expect(new.seal_drops == [],"Collected legacy seals do not acquire drops during terrain migration")
+				expect(new.legacy_exit_wardens == ([LEGACY_CODEC_EXIT_WARDENS[index]] if LEGACY_CODEC_EXIT_WARDENS.has(index) else []),"Only six exact new exit conditions are grandfathered")
 				for field in old:
 					if not field in ["position","actors","checkpoint","level_start","version"]: expect(new[field] == old[field],"Resources and IDs preserved: "+field)
 				var old_point = Vector3(old.position[0],old.position[1],old.position[2])
@@ -160,6 +179,49 @@ func run() -> void:
 	if failures == 0: print("PASS terrain save migration narrow production codec fixture; not traversal/GPU/packed acceptance")
 	quit(0 if failures == 0 else 1)
 
+func expected_legacy_codec(document: Dictionary, index: int) -> Dictionary:
+	var expected = document.duplicate(true)
+	for snapshot in [expected,expected.checkpoint,expected.level_start]:
+		if snapshot.has("seal_drops") or snapshot.has("legacy_exit_wardens"): return {}
+		# Every authored bearer is living in this input. Both old floor seals were
+		# collected, so no pending corpse is invented or enemy death fabricated.
+		snapshot["seal_drops"] = []
+		snapshot["legacy_exit_wardens"] = [LEGACY_CODEC_EXIT_WARDENS[index]] if LEGACY_CODEC_EXIT_WARDENS.has(index) else []
+	return expected
+
+func canonical_codec_equal(actual: Dictionary, expected: Dictionary) -> bool:
+	return JSON.stringify(actual,"",true,true) == JSON.stringify(expected,"",true,true)
+
+func check_canonical_parity_negatives(expected: Dictionary) -> void:
+	for envelope in ["current","checkpoint","level_start"]:
+		for defect in ["health","ammo","actor","seal_drops","legacy_exit_wardens","foreign-field"]:
+			var bad = expected.duplicate(true)
+			var target: Dictionary = bad if envelope == "current" else bad[envelope]
+			match defect:
+				"health": target.health -= 1
+				"ammo": target.ammo[1] -= 1
+				"actor": target.actors[0].hp -= 1
+				"seal_drops": target.seal_drops = [{"guardian":"foreign","position":[0,0,0]}]
+				"legacy_exit_wardens": target.legacy_exit_wardens = ["foreign"]
+				"foreign-field": target["unapproved"] = true
+			expect(not canonical_codec_equal(bad,expected),"Complete canonical parity rejects "+envelope+" "+defect)
+
+func check_modern_seal_negatives(expected: Dictionary) -> void:
+	var layout = Layout.new()
+	if not layout.load_level(int(expected.level_index)):
+		expect(false,"Canonical negative setup loads current fixture map")
+		return
+	var key: Dictionary = layout.data.interactions.filter(func(spec): return spec.kind == "key" and spec.key == "blood")[0]
+	for envelope in ["current","checkpoint","level_start"]:
+		for defect in ["owned-without-retired","retired-without-owned"]:
+			var bad = expected.duplicate(true)
+			var target: Dictionary = bad if envelope == "current" else bad[envelope]
+			if defect == "owned-without-retired": target.removed.erase(key.id)
+			else: target.keys.erase(key.key)
+			var destination = Campaign.new()
+			var before: Dictionary = destination.to_dict()
+			expect(not destination.from_dict(bad) and destination.to_dict() == before,"Modern XOR remains atomic and rejected "+envelope+" "+defect)
+
 func staged_document(index: int, mode: int) -> Dictionary:
 	var document = fresh_document(index,mode)
 	var layout = Layout.new()
@@ -186,7 +248,13 @@ func staged_document(index: int, mode: int) -> Dictionary:
 		snapshot["pitch"] = Vector3(0.29,0,0).x
 		var keys = layout.data.interactions.filter(func(spec): return spec.kind == "key").map(func(spec): return spec.key)
 		if mode == 2: keys.reverse()
+		# This fixture is truly pre-feature, not a malformed authoritative modern
+		# image. The old collector recorded both ownership and pickup retirement.
+		snapshot.erase("seal_drops")
+		snapshot.erase("legacy_exit_wardens")
 		snapshot.keys = keys
+		for key in layout.data.interactions:
+			if key.kind == "key" and not key.id in snapshot.removed: snapshot.removed.append(key.id)
 		var specs = Campaign.actor_specs(layout)
 		for record in snapshot.actors:
 			if specs[record.id].kind == "crawler":

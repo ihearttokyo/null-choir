@@ -346,7 +346,11 @@ class MainSelftestCompatibilityTests(unittest.TestCase):
         self.descriptor = json.loads((repository / self.compat_rel).read_text())
         original_rel = self.descriptor["historical_source"]["path"]
         write(self.root / original_rel, (repository / original_rel).read_bytes())
-        write(self.root / validator.MAIN_SOURCE, (repository / validator.MAIN_SOURCE).read_bytes())
+        # This unit fixture exercises the retained two-site selftest bridge,
+        # not the separately qualified v0.094 source generation.
+        historical_main = (repository / "source/art/consumer-qualification-v0094/provenance/main-before-v0094.gd").read_bytes()
+        assert digest(historical_main) == validator.SELFTEST_MAIN_SHA
+        write(self.root / validator.MAIN_SOURCE, historical_main)
         for path in validator.NATIVE_CODE_SOURCES:
             if path != validator.MAIN_SOURCE:
                 write(self.root / path, ("independent fixture " + path).encode())

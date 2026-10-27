@@ -4,6 +4,7 @@ const Layout = preload("res://scripts/level_data.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
 const Landmarks = preload("res://scripts/level_landmarks.gd")
 const GateArt = preload("res://scripts/gate_art.gd")
+const WallArchitecture = preload("res://scripts/wall_architecture.gd")
 const PURPOSE_ART = {
 	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
 	"key":"marker_key", "weapon":"marker_weapon", "story":"marker_story",
@@ -186,25 +187,12 @@ func _build_geometry() -> void:
 		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
 			var point = Vector2(cell)+Vector2(0.5,0.5)+Vector2(direction)*0.5
 			var tall = _roof_height(cell)
-			if not layout.is_walkable(cell+direction):
-				var tangent = Vector2(-direction.y,direction.x)*0.5
-				var a = layout.height_at(point-tangent)
-				var b = layout.height_at(point+tangent)
-				# Cover the whole sloped edge with the same opaque mesh, collider and occluder.
-				var bottom = minf(a,b)
-				var height = tall+absf(a-b)
-				var dimensions = Vector3(0.28,height,size+0.28) if direction.x else Vector3(size+0.28,height,0.28)
-				var wall = _box(dimensions,Vector3(point.x*size,bottom+height/2,point.y*size),wall_material,true)
-				var occluder = OccluderInstance3D.new()
-				occluder.occluder = BoxOccluder3D.new()
-				# Only opaque static walls occlude. Insets keep openings and scenery edges visible.
-				occluder.occluder.size = dimensions-Vector3.ONE*0.04
-				wall.add_child(occluder)
-			elif tall > _roof_height(cell+direction):
+			if layout.is_walkable(cell+direction) and tall > _roof_height(cell+direction):
 				var h = layout.height_at(point)
 				var drop = tall-_roof_height(cell+direction)
 				var dimensions = Vector3(0.28,drop,size) if direction.x else Vector3(size,drop,0.28)
 				_box(dimensions,Vector3(point.x*size,h+tall-drop/2,point.y*size),wall_material,false)
+	WallArchitecture.build(self,layout,wall_material)
 	if layout.OssuarySurfaces.enabled(layout.data):
 		_build_surface_patch(floor_material)
 	for chunk in chunks:
@@ -264,14 +252,7 @@ func _place_model(id: String, position_world: Vector3, yaw: float = 0.0, scale_m
 	return model
 
 func _build_scenery() -> void:
-	var size = float(layout.data.cell_size)
-	for cell in layout.tiles:
-		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
-			if layout.is_walkable(cell+direction): continue
-			var point = Vector2(cell)+Vector2(0.5,0.5)+Vector2(direction)*0.5
-			var wall = Vector3(point.x*size,layout.height_at(point),point.y*size)-Vector3(direction.x,0,direction.y)*0.18
-			_place_model("ribbed_wall",wall+Vector3.UP*0.3,rad_to_deg(atan2(direction.x,direction.y))+180)
-			_place_model("conduit",wall+Vector3.UP*4.4,0 if direction.x else 90)
+	# Boundary ribs are now actual chapter wall volumes, not repeated front overlays.
 	for spec in layout.data.scenery:
 		var position_world = layout.world_position(spec.cell)+Vector3.UP*spec.get("height",0.0)
 		_place_model(spec.art,position_world,spec.get("yaw",0),spec.get("scale",[1,1,1]))

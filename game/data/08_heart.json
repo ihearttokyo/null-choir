@@ -539,7 +539,11 @@
         3.5,
         14.5
       ],
-      "text": "RESTRAINT BLOOD SEAL RECOVERED"
+      "text": "RESTRAINT BLOOD SEAL RECOVERED",
+      "seal_bearer": "heart_enemy_00",
+      "requires_defeated": [
+        "heart_enemy_00"
+      ]
     },
     {
       "id": "heart_ivory",
@@ -549,7 +553,11 @@
         24.5,
         35.5
       ],
-      "text": "PULSE ENGINE IVORY SEAL RECOVERED"
+      "text": "PULSE ENGINE IVORY SEAL RECOVERED",
+      "seal_bearer": "heart_enemy_10",
+      "requires_defeated": [
+        "heart_enemy_10"
+      ]
     },
     {
       "id": "heart_checkpoint",
@@ -813,7 +821,16 @@
         10.5,
         18.5
       ],
-      "yaw": 315
+      "yaw": 315,
+      "seal_guardian": {
+        "name": "The Throat Restraint",
+        "seal": "blood",
+        "key_id": "heart_blood",
+        "health_multiplier": 1.35,
+        "attack_windup": 1.05,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "heart_enemy_01",
@@ -903,7 +920,16 @@
         24.5,
         28.5
       ],
-      "yaw": 27
+      "yaw": 27,
+      "seal_guardian": {
+        "name": "The Pulse Custodian",
+        "seal": "ivory",
+        "key_id": "heart_ivory",
+        "health_multiplier": 1.35,
+        "attack_windup": 1.05,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "heart_enemy_11",
@@ -1101,7 +1127,13 @@
         34.0,
         10.0
       ],
-      "yaw": 180
+      "yaw": 180,
+      "door_warden": {
+        "name": "The Choir Avatar",
+        "health_multiplier": 1.0,
+        "attack_windup": 1.2,
+        "recovery": 1.2
+      }
     }
   ],
   "encounters": [
@@ -1127,7 +1159,7 @@
         "heart_enemy_09"
       ],
       "cue": {
-        "text": "THE MOUTH RESTRAINT DRAWS POWER FROM YOUR REPAIR",
+        "text": "THE THROAT RESTRAINT / BLOOD SEAL BEARER",
         "light_ids": [
           "heart_restraint_feed",
           "heart_restraint_core"
@@ -1157,7 +1189,7 @@
         "heart_enemy_19"
       ],
       "cue": {
-        "text": "THE EXPOSED PULSE ACCEPTS THE REPAIR CHANNEL",
+        "text": "THE PULSE CUSTODIAN / IVORY SEAL BEARER",
         "light_ids": [
           "heart_pulse_feed",
           "heart_pulse_core"
@@ -1235,7 +1267,7 @@
         "heart_choir_avatar"
       ],
       "cue": {
-        "text": "THE FINAL REPAIR CHANNEL IS OPEN",
+        "text": "THE CHOIR AVATAR HOLDS THE DESCENT",
         "light_ids": [
           "heart_final_feed"
         ],

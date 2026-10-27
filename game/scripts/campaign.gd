@@ -5,6 +5,13 @@ const TERRAIN_VERSION = 2
 const SAVE_PATH = "user://campaign.json"
 const Layout = preload("res://scripts/level_data.gd")
 const Enemy = preload("res://scripts/enemy.gd")
+# These six existing actors acquire a NEW exit condition in this release. The
+# Nursery Warden and Choir Avatar were already mandatory and are never waived.
+const LEGACY_NEW_EXIT_WARDENS = {
+	"intake":"intake_enemy_19", "foundry":"foundry_enemy_17",
+	"processional":"processional_enemy_23", "reliquary":"reliquary_enemy_28",
+	"ossuary":"ossuary_enemy_25", "inversion":"inversion_enemy_26"}
+
 
 var floor_revision: int = 0
 var difficulty: int = 1
@@ -27,6 +34,9 @@ var checkpoint: Dictionary = {}
 var level_start: Dictionary = {}
 # null is legacy/unknown; [] is an authoritative empty living set.
 var actors: Variant = null
+# Pending seal pickups retain the actual defeated bearer origin across every recovery envelope.
+var seal_drops: Array = []
+var legacy_exit_wardens: Array = []
 var level_load_error: String = ""
 
 func new_campaign(mode: int) -> void:
@@ -44,6 +54,8 @@ func new_campaign(mode: int) -> void:
 	removed = []
 	explored = []
 	actors = null
+	seal_drops = []
+	legacy_exit_wardens = []
 	yaw = null
 	pitch = null
 	mark_checkpoint("entry", Vector3.ZERO)
@@ -92,6 +104,8 @@ func complete_level() -> void:
 	removed = []
 	explored = []
 	actors = null
+	seal_drops = []
+	legacy_exit_wardens = []
 	yaw = null
 	pitch = null
 	mark_checkpoint("entry", Vector3.ZERO)
@@ -105,7 +119,7 @@ func _label_floor() -> void:
 func _resources() -> Dictionary:
 	var data = {"health": health, "armor": armor, "ammo": ammo.duplicate(),
 		"owned_weapons": owned_weapons.duplicate(), "weapon": weapon,
-		"keys": keys.duplicate(), "removed": removed.duplicate(),
+		"keys": keys.duplicate(), "removed": removed.duplicate(), "seal_drops": seal_drops.duplicate(true), "legacy_exit_wardens": legacy_exit_wardens.duplicate(),
 		"checkpoint_id": checkpoint_id, "position": [position.x, position.y, position.z]}
 	if floor_revision > 0: data["floor_revision"] = floor_revision
 	if actors != null: data["actors"] = actors.duplicate(true)
@@ -144,6 +158,10 @@ func from_dict(data: Dictionary) -> bool:
 	var saved_start = data.get("level_start")
 	if not saved_start is Dictionary or not _valid_resources(saved_start):
 		return false
+	# Migration must never mutate the caller or its checkpoint dictionaries.
+	data = data.duplicate(true)
+	saved_checkpoint = data.checkpoint
+	saved_start = data.level_start
 	var snapshots = [data,saved_checkpoint,saved_start]
 	var revision: int = 0
 	if int(data.version) == VERSION:
@@ -164,6 +182,7 @@ func from_dict(data: Dictionary) -> bool:
 	if old_layout == null: return false
 	for snapshot in snapshots:
 		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
+		if not _valid_seal_resources(snapshot,old_layout): return false
 	if revision == 3:
 		var current_specs = actor_specs(layout)
 		for snapshot in snapshots:
@@ -176,12 +195,17 @@ func from_dict(data: Dictionary) -> bool:
 			if snapshot.has("actors"):
 				for actor in snapshot.actors:
 					actor.position = _shift_floor(actor.position,old_layout,layout,false,Enemy.capsule_radius(specs[actor.id].kind))
+			for drop in snapshot.get("seal_drops",[]):
+				drop.position = _shift_floor(drop.position,old_layout,layout,false)
 			if current_revision == 3:
 				if not _trench_migration_clearance(snapshot,layout,specs): return false
 			snapshot["floor_revision"] = current_revision
-			if not _valid_resources(snapshot) or not _valid_actor_resources(snapshot,layout,int(data.difficulty)): return false
+			if not _valid_resources(snapshot) or not _valid_actor_resources(snapshot,layout,int(data.difficulty)) or not _valid_seal_resources(snapshot,layout): return false
 		saved_checkpoint = data.checkpoint
 		saved_start = data.level_start
+	for snapshot in [data,saved_checkpoint,saved_start]:
+		_migrate_legacy_seal_drops(snapshot,layout)
+		if not _valid_seal_resources(snapshot,layout): return false
 	floor_revision = current_revision
 	difficulty = int(data.difficulty)
 	level_index = int(data.level_index)
@@ -247,6 +271,8 @@ func _apply_resources(data: Dictionary) -> void:
 	yaw = Enemy.canonical_yaw(data.yaw) if data.has("yaw") else null
 	pitch = _native_pitch(float(data.pitch)) if data.has("pitch") else null
 	actors = _normalized_resources(data).actors if data.has("actors") else null
+	seal_drops = data.get("seal_drops",[]).duplicate(true)
+	legacy_exit_wardens = data.get("legacy_exit_wardens",[]).duplicate()
 
 static func actor_specs(layout) -> Dictionary:
 	var specs = {}
@@ -292,7 +318,7 @@ func _valid_actor_resources(data: Dictionary, layout, mode: int, allow_missing_a
 			if not record.has(field): return false
 		if not record.id is String or not specs.has(record.id) or living.has(record.id) or record.id in data.removed: return false
 		var spec: Dictionary = specs[record.id]
-		if not _integer(record.hp,1,Enemy.health_cap(spec.kind,mode)) or not record.alerted is bool: return false
+		if not _integer(record.hp,1,Enemy.health_cap(spec.kind,mode,float(spec.get("seal_guardian",spec.get("door_warden",{})).get("health_multiplier",1.0)))) or not record.alerted is bool: return false
 		if not spec.encounter.is_empty() and not "encounter:"+spec.encounter in data.removed and record.alerted: return false
 		if not _valid_actor_pose(record,spec,layout): return false
 		living[record.id] = true
@@ -317,6 +343,95 @@ func _valid_actor_resources(data: Dictionary, layout, mode: int, allow_missing_a
 				if not encounter.is_empty() and not "encounter:"+encounter in data.removed: return false
 				if not dead and not living.has(id) and not allow_missing_adds: return false
 	return true
+
+# Absence is the only legacy marker. Old saves knew defeat/collection, but never
+# recorded corpse coordinates; retain earned seals and reconstruct only pending
+# drops at the original authored seal anchor. New saves never use this fallback.
+func _migrate_legacy_seal_drops(data: Dictionary, layout) -> void:
+	var legacy: bool = not data.has("seal_drops")
+	if not data.has("legacy_exit_wardens"): data["legacy_exit_wardens"] = []
+	if not legacy: return
+	# A legacy owned key is authoritative earned progress. Retire only its
+	# matching original pickup ID if that bookkeeping was absent; never grant a
+	# key from removal alone and never invent an enemy defeat.
+	for key in layout.data.get("interactions",[]):
+		if key.get("kind") == "key" and key.get("key") in data.keys and not key.id in data.removed:
+			data.removed.append(key.id)
+	# Preserve already-earned access, not a new victory: the live actor remains
+	# alive and absent from removed. Only pre-feature envelopes get this grant.
+	var inherited: String = _legacy_new_exit_warden(layout)
+	if not inherited.is_empty() and _both_seals_collected(data,layout):
+		data.legacy_exit_wardens = [inherited]
+	data["seal_drops"] = []
+	for key in layout.data.get("interactions",[]):
+		var bearer: String = key.get("seal_bearer","")
+		if bearer.is_empty() or not bearer in data.removed or key.key in data.keys or key.id in data.removed: continue
+		var point: Vector3 = layout.world_position(key.cell)+Vector3.UP*0.2
+		data.seal_drops.append({"guardian":bearer,"position":[point.x,point.y,point.z]})
+
+func _valid_seal_resources(data: Dictionary, layout) -> bool:
+	var exemptions: Variant = data.get("legacy_exit_wardens",[])
+	if not exemptions is Array or exemptions.size() > 1: return false
+	if not exemptions.is_empty():
+		var inherited: String = _legacy_new_exit_warden(layout)
+		if inherited.is_empty() or exemptions != [inherited] or not _both_seals_collected(data,layout): return false
+	if not data.has("seal_drops"): return true # Explicit legacy migration follows full validation.
+	var pending: Variant = data.seal_drops
+	if not pending is Array or pending.size() > 2: return false
+	var keys_by_bearer: Dictionary = {}
+	for key in layout.data.get("interactions",[]):
+		if key.has("seal_bearer"): keys_by_bearer[key.seal_bearer] = key
+	var seen: Dictionary = {}
+	for drop in pending:
+		if not drop is Dictionary or drop.size() != 2 or not drop.has("guardian") or not drop.has("position"): return false
+		if not drop.guardian is String or not keys_by_bearer.has(drop.guardian) or seen.has(drop.guardian): return false
+		var key: Dictionary = keys_by_bearer[drop.guardian]
+		if not drop.guardian in data.removed or key.key in data.keys or key.id in data.removed: return false
+		if not _valid_seal_drop_position(drop.position,layout): return false
+		seen[drop.guardian] = true
+	for bearer in keys_by_bearer:
+		var key: Dictionary = keys_by_bearer[bearer]
+		# Authoritative typed envelopes cannot retire their only pickup without
+		# owning the seal, or own a seal while leaving its pickup collectible.
+		if (key.key in data.keys) != (key.id in data.removed): return false
+		var collected: bool = key.key in data.keys and key.id in data.removed
+		# Collected legacy seals are grandfathered even when their bearer lived.
+		# A modern pending defeat, however, cannot silently lose its only pickup.
+		if bearer in data.removed and not collected and not seen.has(bearer): return false
+	return true
+
+func _both_seals_collected(data: Dictionary, layout) -> bool:
+	var earned: Dictionary = {}
+	for key in layout.data.get("interactions",[]):
+		if key.get("kind") == "key" and key.get("key") in ["blood","ivory"] and key.key in data.keys and key.id in data.removed:
+			earned[key.key] = true
+	return earned.has("blood") and earned.has("ivory")
+
+func _legacy_new_exit_warden(layout) -> String:
+	var id: String = LEGACY_NEW_EXIT_WARDENS.get(layout.data.get("id",""),"")
+	if id.is_empty(): return ""
+	var declared: bool = false
+	for enemy in layout.data.get("enemies",[]):
+		if enemy.id == id and enemy.has("door_warden"): declared = true
+	if not declared: return ""
+	for interaction in layout.data.get("interactions",[]):
+		if interaction.get("kind") == "exit" and id in interaction.get("requires_defeated",[]): return id
+	return ""
+
+func _valid_seal_drop_position(values: Variant, layout) -> bool:
+	if not values is Array or values.size() != 3: return false
+	for value in values:
+		if not (value is int or value is float) or not is_finite(float(value)) or absf(value) > 100000: return false
+	var point = Vector3(values[0],values[1],values[2])
+	var cell = Vector2(point.x,point.z)/float(layout.data.cell_size)
+	var inside: bool = false
+	for rect in layout.data.rects:
+		if cell.x >= rect[0] and cell.y >= rect[1] and cell.x < rect[2]+1 and cell.y < rect[3]+1:
+			inside = true
+			break
+	if not inside or not layout.is_walkable(Vector2i(cell.floor())): return false
+	var support: Vector3 = layout.surface_position_at_y([cell.x,cell.y],point.y)
+	return support.is_finite() and point.y >= support.y-0.08 and point.y <= support.y+0.75
 
 func _valid_actor_pose(record: Dictionary, spec: Dictionary, layout) -> bool:
 	var values = record.position
@@ -359,6 +474,11 @@ func _valid_resources(data: Dictionary) -> bool:
 		return false
 	if not _strings(data.get("keys"), 8) or not _strings(data.get("removed"), 1024):
 		return false
+	if not _strings(data.get("legacy_exit_wardens",[]),1): return false
+	if data.has("seal_drops"):
+		if not data.seal_drops is Array or data.seal_drops.size() > 2: return false
+		for drop in data.seal_drops:
+			if not drop is Dictionary or drop.size() != 2 or not drop.get("guardian") is String or not drop.get("position") is Array: return false
 	if not data.get("checkpoint_id") is String or data.checkpoint_id.length() > 128:
 		return false
 	var pos = data.get("position")

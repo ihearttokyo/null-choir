@@ -1,0 +1,235 @@
+{
+  "schema": "null-choir-exact-current-art-consumers-v0095-v1",
+  "status": "ACTUAL_CURRENT95_CORRECTED_WALLS_WITH_HISTORICAL_UNCHANGED_ART",
+  "source_generation": "v0.095-corrected-frontfaces",
+  "parent_qualification": {
+    "path": "source/art/consumer-qualification-v0094/current-consumers.json",
+    "bytes": 32920,
+    "sha256": "dad9f63a2c5eb0c73b139186deb9a74990b118f8b38b85cda1f2ac97642060d4"
+  },
+  "current_source_overrides": {
+    "game/scripts/build_info.gd": {
+      "path": "game/scripts/build_info.gd",
+      "bytes": 404,
+      "sha256": "bb9d56fef20341fe93f7a8c463032215f64ecaec64ea71fb6537385b72f568e6"
+    },
+    "game/scripts/wall_architecture.gd": {
+      "path": "game/scripts/wall_architecture.gd",
+      "bytes": 11149,
+      "sha256": "b91cbd6883867b348ceaa1a7d179f47716ac2b41041a58317d7b27e866457177"
+    }
+  },
+  "runtime_project": {
+    "path": "game/project.godot",
+    "bytes": 714,
+    "sha256": "0d80b4a00621957e85e22ed998ba8fffa9b7c42481bd42cccd1b637a1dd879ba"
+  },
+  "export_metadata_bridge": {
+    "path": "game/export_presets.cfg",
+    "before_sha256": "021a7ebee996bf8342432cc6b6e77b8749a3f9bc304bb2bccadb76e9576d8656",
+    "before_bytes": 608,
+    "after": {
+      "path": "game/export_presets.cfg",
+      "bytes": 571,
+      "sha256": "ca495ea638fa51f0c6b3b88b36986eadfbf9b8410d0aee1265fcb495ebcb40e0"
+    },
+    "operation": "remove_exact_unsupported_application_name_line",
+    "removed_utf8": "application/name=\"Null Choir v0.095\"\n",
+    "following_utf8": "application/short_version=\"0.095\"",
+    "effect_on_runtime_wall_observation": "none; export preset is not used by this source-context fixture",
+    "native_rerun_claimed": false,
+    "exporter_boundary_reference": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/platform/macos/export/export_plugin.cpp"
+  },
+  "native_observation": {
+    "source_stage_sha256": "580e9ef7143789829918b4a44f408284081dd24d1c10053f7b76af7b2c08d9bb",
+    "fixture_stage_sha256": "5507846674ff44ff4a0a92a98b650188c11204b7d0b75605391e39ca67a74def",
+    "fixture_sha256": "0645deb45237154494bd7e1a2a07ef0b551f260f2c9fd9db79949fce9c2b138e",
+    "serial_terminal_sha256": "bba0979ea14d2cb58e6cfeba36aaf9a0f1165babe9c8cfcd4680ab92bf625907",
+    "outward_triangles_and_all8physics_result_sha256": "fcd051bb83f2b3e6800f3f5a71115b9d94749cf6eab17844bdca36b56c75b53d",
+    "independent_wall_review_sha256": "d14d64fcb10fbb4e874edfd914dfbbfa7420ad0d4c55c659ac73fc3d355d71e6",
+    "resolution": [
+      640,
+      360
+    ],
+    "chapter_count": 8,
+    "frame_count": 8,
+    "chapters": [
+      {
+        "chapter": 0,
+        "chapter_id": "intake",
+        "strict_supervision": "PASS",
+        "result_sha256": "1e13183510c14b957e292ef8eaecc9fd53f0ac1facdf25f7f504bb115492bb5f",
+        "guard_sha256": "5f1e829be29ea9b7047b2b67128c93d1c7b572f4bde911bb0e8c5b682dd8903d",
+        "context_sha256": "da1d6ed6f002cda88f19f4696469c49fe536e47d4aaac8ea20e07610c6324e47",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "intake",
+            "phase": "physical chapter architecture",
+            "bytes": 161055,
+            "png_sha256": "695d768b60c85071954502e677ef751b2aef9bcd5cec91aa49efe4f89b923e94",
+            "rgba_sha256": "bf236f68fd6ecbe01a6034bc2d2fb095a815b4f31d10303f2eb0e6b3396bc2dc"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 1,
+        "chapter_id": "foundry",
+        "strict_supervision": "PASS",
+        "result_sha256": "a2a3730ebea9fab51d59e2a59aeea78e2de22d3fa925a7274345cb583ab5fced",
+        "guard_sha256": "dea94cd3b014613d64acd7d76c3b80e611f2082ecae017532cc925c0bd35e8ad",
+        "context_sha256": "ad8e9aebe57848bb359456e24f0fc5a2288267f12e89c7f61cd77025612a9f6b",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "foundry",
+            "phase": "physical chapter architecture",
+            "bytes": 118473,
+            "png_sha256": "5d370616fcde6cedd396583b1538f7fba744c846b774892d8aa454a61d76fb26",
+            "rgba_sha256": "8e9d5c260728d3e5cfaa9ef6dd5b87475484c17749639ea7de56cb5005d86973"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 2,
+        "chapter_id": "processional",
+        "strict_supervision": "PASS",
+        "result_sha256": "31bffed44fcdc275dcb2d98b090c9c73d2ca522faa9ff9792e5cd91980cb5aaa",
+        "guard_sha256": "36249eed149a3d33a908d1bf3bcea235cdb994cb946f32989f7d33070b36a697",
+        "context_sha256": "cf4d996f74e12a79869d63d1deb21ed50e795661dc4e29edfd8437dd0b06ed71",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "processional",
+            "phase": "physical chapter architecture",
+            "bytes": 146210,
+            "png_sha256": "ffb79333a2cf3da188d412d357e6752665da8063271850685fdf23501f1be233",
+            "rgba_sha256": "eaf4797ec61e0cba2f1b8656d59fc1fca313e3281d528a31e2b507c86a563bbf"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 3,
+        "chapter_id": "reliquary",
+        "strict_supervision": "PASS",
+        "result_sha256": "439cb7f40914b3248a91f5886ee918402817806f351a4849e52e407ad8f11fa4",
+        "guard_sha256": "924ea1772ee9ca3ae2235763fe0bf36b24e16ccfdb80486b328b3afcde79f553",
+        "context_sha256": "33a61f5a0fa3f44917c41c9840d50c58b428dd12e350a665556ece25bd335ddb",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "reliquary",
+            "phase": "physical chapter architecture",
+            "bytes": 101424,
+            "png_sha256": "21be662c4151951e41cde1fd1614df81feba2003a7a9047b44072aa4943d9fdc",
+            "rgba_sha256": "db2a97fa368ea9cd3f6db6d745e41a3e59ccd90531a4760c101580bc442df0cf"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 4,
+        "chapter_id": "nursery",
+        "strict_supervision": "PASS",
+        "result_sha256": "5bf4b7d463b16fa5c8518a3f14776aca026933711afa9a3c708a97d51f822c52",
+        "guard_sha256": "920ba9c0545f8479354d6bb7d331eb7e9118e0f27f8940049598ed4c43e479d9",
+        "context_sha256": "446b43fd22c9c2003bc1fe2b2b05ccfb282ab38116e5ade3f69ca4c862e12500",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "nursery",
+            "phase": "physical chapter architecture",
+            "bytes": 98879,
+            "png_sha256": "9c62edb2bb8f979223df714b8c079b900902dbda7403e4f87c2e9b4fac23fd05",
+            "rgba_sha256": "d3e1994cf31b4d66342ef678939433f41a0e9ef8e3fc778685a620a00d3b53ec"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 5,
+        "chapter_id": "ossuary",
+        "strict_supervision": "PASS",
+        "result_sha256": "d644f1e7e6efeca33a2585b087899b0c2d78976e667a7cd7ae773bfb2df28284",
+        "guard_sha256": "3205f2de66205a211c2e55bc65c0704370efbf3de2ddeebdc8bf1173bbbb24ae",
+        "context_sha256": "c11261108eebdad50c5204a596b5419a9c382b4e183b188074cccbc6e7296130",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "ossuary",
+            "phase": "physical chapter architecture",
+            "bytes": 129257,
+            "png_sha256": "69e1cd4a1997b6637bbbf77272e86a030972b1343c535484635fad2d21a17548",
+            "rgba_sha256": "970b722af8fbe5bb4dfc8f5e3264edf38b934f51f98ab4f40a6e2f099426471f"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 6,
+        "chapter_id": "inversion",
+        "strict_supervision": "PASS",
+        "result_sha256": "c5d6cd658c1513fbabbb1b9535fb4d05803e540296d688525fc9f53f0c63cd03",
+        "guard_sha256": "6c6fff6890a9696bb76b19792e8a57b9d976e03441a8733a46350da3dfe85ec0",
+        "context_sha256": "6d7c3e3f5f52f6e925c75eb08a5f978ed54ffd502118133d7af31c80f90bc8e5",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "inversion",
+            "phase": "physical chapter architecture",
+            "bytes": 94631,
+            "png_sha256": "18d07d404ab9acffb3677f502d29889f408bfcd1cec40e2e0bf69e549c98d3b0",
+            "rgba_sha256": "9ab73c010518455982ba673ed706b808bc613c81df08815cae672309d027073e"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      },
+      {
+        "chapter": 7,
+        "chapter_id": "heart",
+        "strict_supervision": "PASS",
+        "result_sha256": "4d13a1e502d2ff747f53654738d2212d4b10ecb3af6a925d4a423a09bab2f1b7",
+        "guard_sha256": "948329f474db84a0135b5c3b201135c39b318f09fc85c70f7b5ec80cb9c5527d",
+        "context_sha256": "753c7105cddf7c7e61b5ce96417594957e32bc3c5f522f4ba42aabebf4cd8cf2",
+        "frames": [
+          {
+            "file": "wall-oblique.png",
+            "subject": "heart",
+            "phase": "physical chapter architecture",
+            "bytes": 84418,
+            "png_sha256": "d3c64a817a9df8ad0345f005f6b7c960e54aa39c1bf992673d632904d3975244",
+            "rgba_sha256": "1660896420e8d3037bce23e110a4444fe6f0463cbc2f1afa3aff627ec2deadff"
+          }
+        ],
+        "display_label_actual": "Null Choir v0.095",
+        "display_label_visible": true
+      }
+    ],
+    "public_image_payload_included": false
+  },
+  "scope": {
+    "current_normal_constructor_and_hud_observed": true,
+    "pistol_pose_observed": "Inherited historical idle only; unchanged production Player/HUD and atlas, not a new95 three-pose run",
+    "occlusion_limits": "Historical48 source contexts retain their original visual correction limits; ONLY new8 current95 wall contexts qualify corrected wall rendering. Old94 wall observations superseded, never relabeled95.",
+    "historical_art_sources_imports_and_evidence_unchanged": true,
+    "historical_48_reused_for_unaffected_idle_hud_and_actor_art_only": true,
+    "old94_wall_rendering_reused_as_current95": false,
+    "current95_corrected_wall_contexts": 8,
+    "new_three_pose_pistol_ABA_qualification": false,
+    "new_body_fullmatrix_or_555_qualification": false,
+    "new_gate_opening_or_fullview_qualification": false,
+    "new_art_grade_or_final_visual_acceptance": false,
+    "earned_combat_or_performance_or_package_qualification": false,
+    "evidence_is_execution_authentication": false
+  }
+}
