@@ -1,0 +1,400 @@
+{
+  "actual_production_draw": true,
+  "actual_world_context": true,
+  "atlas_sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+  "checks": [
+    {
+      "message": "Fresh explicit owned output directory",
+      "passed": true
+    },
+    {
+      "message": "Exact current staged Main/Player/HUD: res://scripts/main.gd",
+      "passed": true
+    },
+    {
+      "message": "Exact current staged Main/Player/HUD: res://scripts/player.gd",
+      "passed": true
+    },
+    {
+      "message": "Exact current staged Main/Player/HUD: res://scripts/hud.gd",
+      "passed": true
+    },
+    {
+      "message": "Normal CompressedTexture2D resource, no injected ImageTexture",
+      "passed": true
+    },
+    {
+      "message": "Exact accepted atlas dimensions/RGBA",
+      "passed": true
+    },
+    {
+      "message": "Exact accepted poseRGBA 0",
+      "passed": true
+    },
+    {
+      "message": "Exact accepted poseRGBA 1",
+      "passed": true
+    },
+    {
+      "message": "Exact accepted poseRGBA 2",
+      "passed": true
+    },
+    {
+      "message": "Actual native resource UID exists",
+      "passed": true
+    },
+    {
+      "message": "New actual UID, never the oldv4 UID",
+      "passed": true
+    },
+    {
+      "message": "Owned report opened",
+      "passed": true
+    },
+    {
+      "message": "Actual authored Intake Level builds",
+      "passed": true
+    },
+    {
+      "message": "Unmodified production HUD instance",
+      "passed": true
+    },
+    {
+      "message": "Actual staged Player selects v5 at index1",
+      "passed": true
+    },
+    {
+      "message": "Real authored world/camera, not a flat placeholder",
+      "passed": true
+    },
+    {
+      "message": "Production clock selects idle",
+      "passed": true
+    },
+    {
+      "message": "HUD itself normally loads exact v5 texture idle",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: WeaponName",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoCapacity",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: RecoveryProgress",
+      "passed": true
+    },
+    {
+      "message": "Full actual instrument chrome contributes opaque pixels",
+      "passed": true
+    },
+    {
+      "message": "Hidden-visible-hidden world control stable",
+      "passed": true
+    },
+    {
+      "message": "Actual normal weapon pixels visible in full HUD/world idle",
+      "passed": true
+    },
+    {
+      "message": "Saved actual full frame idle",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol A",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol B",
+      "passed": true
+    },
+    {
+      "message": "Production clock selects fire",
+      "passed": true
+    },
+    {
+      "message": "HUD itself normally loads exact v5 texture fire",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: WeaponName",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoCapacity",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: RecoveryProgress",
+      "passed": true
+    },
+    {
+      "message": "Full actual instrument chrome contributes opaque pixels",
+      "passed": true
+    },
+    {
+      "message": "Hidden-visible-hidden world control stable",
+      "passed": true
+    },
+    {
+      "message": "Actual normal weapon pixels visible in full HUD/world fire",
+      "passed": true
+    },
+    {
+      "message": "Saved actual full frame fire",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol A",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol B",
+      "passed": true
+    },
+    {
+      "message": "Production clock selects recover",
+      "passed": true
+    },
+    {
+      "message": "HUD itself normally loads exact v5 texture recover",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: VitalValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorCaption",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: ArmorValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: WeaponName",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoValue",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: AmmoCapacity",
+      "passed": true
+    },
+    {
+      "message": "Full instrument label remains visible: RecoveryProgress",
+      "passed": true
+    },
+    {
+      "message": "Full actual instrument chrome contributes opaque pixels",
+      "passed": true
+    },
+    {
+      "message": "Hidden-visible-hidden world control stable",
+      "passed": true
+    },
+    {
+      "message": "Actual normal weapon pixels visible in full HUD/world recover",
+      "passed": true
+    },
+    {
+      "message": "Saved actual full frame recover",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol A",
+      "passed": true
+    },
+    {
+      "message": "Saved ABA worldcontrol B",
+      "passed": true
+    },
+    {
+      "message": "Owned report opened",
+      "passed": true
+    }
+  ],
+  "code_sha256": {
+    "res://scripts/hud.gd": "44e466410c46d72431228923082318eb65618b283b5ae86106d02ae981a587f7",
+    "res://scripts/main.gd": "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0",
+    "res://scripts/player.gd": "0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7"
+  },
+  "failures": 0,
+  "fixture_overrides": [],
+  "full_instrument_chrome": true,
+  "independent_review": "PENDING",
+  "normal_uid": "uid://bsr8h130f1wnc",
+  "pose_rgba_sha256": [
+    "75757c934f92f4b049ddf5ea0c3b4fbfb0bdbd61bc17991cb0c95c98057f865f",
+    "858a35ef7bce835a2047bf9a3c7624abca2553c0b8653ef921b85c8127c68d65",
+    "81eea1909a8fcb89a6edb5b3fe2d911dcba45948142a5dbee3ffe855985efd76"
+  ],
+  "resolution": [
+    640,
+    360
+  ],
+  "rgba_sha256": "5f7b1cd06c7df68b9af7fb5a74e5bbedc0ab08a23880aca3e2a29ff9a23e6fca",
+  "runtime_uri": "res://assets/art/weapons/native-v5/rivet_pistol.png",
+  "scope": "Static authored Intake world/full production HUD with three manually clocked pistol poses; no input/listening/gameplay/performance or shipped acceptance",
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "static_controls": [
+    "all callbacks disabled",
+    "manual shot clocks",
+    "headbob/camera-shake disabled",
+    "audio muted"
+  ],
+  "status": "PASS",
+  "views": [
+    {
+      "actual_shot_age": 0.24,
+      "eligible_weapon_samples": 553,
+      "frame": 0,
+      "full_chrome_changed_pixels": 28265,
+      "image": "hud-world-idle.png",
+      "pose": "idle",
+      "stable_world_pixels": 24000,
+      "visible_weapon_pixels": 553,
+      "images": {
+        "hud-world-": {
+          "path": "source/art/rivet-forward-v5/proof/hud-world-idle.png",
+          "bytes": 228851,
+          "sha256": "a58d02f55dc92389476daa9167c2e71c66cf38247119fa084c31308315bd2099"
+        },
+        "background-a-": {
+          "path": "source/art/rivet-forward-v5/proof/background-a-idle.png",
+          "bytes": 197374,
+          "sha256": "b1e5372479fbb803b6ff0c5d939c610ef6b86f2de059ea502105641c719cb540"
+        },
+        "background-b-": {
+          "path": "source/art/rivet-forward-v5/proof/background-b-idle.png",
+          "bytes": 197378,
+          "sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9"
+        }
+      }
+    },
+    {
+      "actual_shot_age": 0.0299999999999994,
+      "eligible_weapon_samples": 540,
+      "frame": 1,
+      "full_chrome_changed_pixels": 28252,
+      "image": "hud-world-fire.png",
+      "pose": "fire",
+      "stable_world_pixels": 24000,
+      "visible_weapon_pixels": 540,
+      "images": {
+        "hud-world-": {
+          "path": "source/art/rivet-forward-v5/proof/hud-world-fire.png",
+          "bytes": 228577,
+          "sha256": "058bdb080ec580c81aa5f81ba82ba4521343695af47519ffac395528b27968f1"
+        },
+        "background-a-": {
+          "path": "source/art/rivet-forward-v5/proof/background-a-fire.png",
+          "bytes": 197378,
+          "sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9"
+        },
+        "background-b-": {
+          "path": "source/art/rivet-forward-v5/proof/background-b-fire.png",
+          "bytes": 197378,
+          "sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9"
+        }
+      }
+    },
+    {
+      "actual_shot_age": 0.157500000000001,
+      "eligible_weapon_samples": 565,
+      "frame": 2,
+      "full_chrome_changed_pixels": 28269,
+      "image": "hud-world-recover.png",
+      "pose": "recover",
+      "stable_world_pixels": 24000,
+      "visible_weapon_pixels": 565,
+      "images": {
+        "hud-world-": {
+          "path": "source/art/rivet-forward-v5/proof/hud-world-recover.png",
+          "bytes": 227649,
+          "sha256": "058c2b149d3c0b03fa263f693ed5fa42c02143f9f1048b80471e92cec8592a99"
+        },
+        "background-a-": {
+          "path": "source/art/rivet-forward-v5/proof/background-a-recover.png",
+          "bytes": 197378,
+          "sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9"
+        },
+        "background-b-": {
+          "path": "source/art/rivet-forward-v5/proof/background-b-recover.png",
+          "bytes": 197378,
+          "sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9"
+        }
+      }
+    }
+  ],
+  "actual_process_supervision": {
+    "raw_private_receipt_sha256": "fd1903cc45a6b3a69a9529a1109ecff75a6abd50a0bd6acadbbe9be371a0c57b",
+    "wrapper_exit": 0,
+    "native_exit": "UNKNOWN_LAUNCHSERVICES_NOT_DIRECT_CHILD",
+    "native_exit_observed": false,
+    "strict_resource_guard": true,
+    "fresh_owned_closure": true,
+    "seconds": 2.1515386670362204,
+    "sampled_aggregate_RSS_bytes": 564199424,
+    "sample_count": 22,
+    "max_sample_interval_seconds": 0.10942870797589421,
+    "planned_sample_seconds": 0.1,
+    "deadline_seconds": 8,
+    "RSS_cap_bytes": 1073741824,
+    "sampling_limit": "Fresh verified current-row samples only; not continuous peak or hardOSquota"
+  },
+  "actual_raw_observed_receipt_sha256": "87aca4d73b754099a0e00a5bb65f50c9a7bb8b193b4d39e950dbd5c67ddd2273",
+  "actual_transaction_receipt_sha256": "2f2fbe556c49df714a18980501eab722e6c251fae443c017aa806d2aadb034f5",
+  "current_source1022_cache672_full_SHA_stat_restored": true,
+  "original_source979_cache623_baseline_rebased": false
+}

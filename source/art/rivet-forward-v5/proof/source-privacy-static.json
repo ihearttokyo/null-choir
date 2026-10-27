@@ -1,0 +1,9 @@
+{
+  "status": "PASS_BOUNDED_DECODED_BYTE_PRIVACY_ONLY",
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "decoded_sha256": "acfa91287fc20947c441e23d710118037ef561ce0cc8f675c829947102427531",
+  "decoded_bytes": 2294215,
+  "private_absolute_marker_count": 0,
+  "new_native_audit": false,
+  "original_actual_PBR_source_open_images_and_libraries_empty": true
+}

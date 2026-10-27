@@ -348,7 +348,8 @@ def validate_ledger(root: Path, ledger_path: str | Path) -> dict:
     order=("impact_tool","rivet_pistol","scattergun","sawtooth_repeater","marrow_launcher","choir_disruptor")
     expected_player=["painted-v3/"+asset_id for asset_id in order]
     native_player=expected_player.copy(); native_player[1]="native-v4/rivet_pistol"
-    if records == native_player:
+    replacement_player=native_player.copy(); replacement_player[1]="native-v5/rivet_pistol"
+    if records == native_player or records == replacement_player:
         # Exact index-1 supersession only. The native validator never calls this
         # function; all six old rasters/sources/imports remain validated below.
         native_guard=runpy.run_path(str(root/"tools/rivet_forward_art_ledger.py"))

@@ -1,0 +1,94 @@
+{
+  "schema": "null-choir-rivet-native-v5-v1",
+  "status": "QUALIFIED",
+  "source": {
+    "path": "source/art/rivet-forward-v5/rivet_pistol.blend",
+    "sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+    "bytes": 220879
+  },
+  "output": {
+    "path": "game/assets/art/weapons/native-v5/rivet_pistol.png",
+    "bytes": 32743,
+    "sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001"
+  },
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "atlas_sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+  "rgba_sha256": "5f7b1cd06c7df68b9af7fb5a74e5bbedc0ab08a23880aca3e2a29ff9a23e6fca",
+  "pose_rgba_sha256": [
+    "75757c934f92f4b049ddf5ea0c3b4fbfb0bdbd61bc17991cb0c95c98057f865f",
+    "858a35ef7bce835a2047bf9a3c7624abca2553c0b8653ef921b85c8127c68d65",
+    "81eea1909a8fcb89a6edb5b3fe2d911dcba45948142a5dbee3ffe855985efd76"
+  ],
+  "runtime_contract": {
+    "atlas": [
+      960,
+      200
+    ],
+    "cell_size": [
+      320,
+      200
+    ],
+    "columns": 3,
+    "frames": [
+      "idle",
+      "fire",
+      "recover"
+    ],
+    "alpha": [
+      0,
+      255
+    ],
+    "origin_px": [
+      160,
+      200
+    ],
+    "muzzle_px": [
+      140,
+      62
+    ],
+    "neutral_vanishing_point_px": [
+      140,
+      37
+    ],
+    "hud_destination": [
+      180,
+      143,
+      320,
+      200
+    ],
+    "filter": "nearest"
+  },
+  "qualification": {
+    "source-pbr": {
+      "path": "source/art/rivet-forward-v5/proof/source-pbr.json",
+      "bytes": 2164,
+      "sha256": "a2e44bb23ae92e1f7374b66d10b422e5500e6eaf13a1c1b322df512510caa3fe"
+    },
+    "normal-import": {
+      "path": "source/art/rivet-forward-v5/proof/normal-import.json",
+      "bytes": 2086,
+      "sha256": "304127f58caff9916719796015ac811663afe254d5740f277d1ee13c7846d9f4"
+    },
+    "full-hud": {
+      "path": "source/art/rivet-forward-v5/proof/full-hud.json",
+      "bytes": 11882,
+      "sha256": "943394a38a6dce9e5818569c4dd6d31639e1a5468aae4f51da84c006e78b236d"
+    },
+    "independent": {
+      "path": "source/art/rivet-forward-v5/proof/independent.json",
+      "bytes": 3582,
+      "sha256": "fd9df2183bc3d66fed60073d4b8b138d69a23fccfb6f5a8d80d004e993c7fdf0"
+    }
+  },
+  "player_compatibility": {
+    "path": "source/art/rivet-forward-v5/proof/player-uri-only-compatibility.json",
+    "bytes": 637,
+    "sha256": "fcd75908c1754758bd70bf4e824296f846db7975c605c5688ba09661041faad9"
+  },
+  "uid": "uid://bsr8h130f1wnc",
+  "raw_png_metadata_bridge": {
+    "path": "source/art/rivet-forward-v5/proof/raw-PNG-File-metadata-bridge.json",
+    "sha256": "269bfe871808e1eaeb6281ca2c78af1e7e6baaf16c93e49e915a1c1f0c1d7b27",
+    "bytes": 2821
+  }
+}

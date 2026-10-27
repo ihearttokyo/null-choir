@@ -19,7 +19,7 @@ LATE={'brute':{'hp':210,'speed':3.1,'radius':.62,'height':3.3,'scale':4.4,'coold
 LEGACY_SHA='c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928'
 PINSET_SHA='500bcebfb8ceb3720b159d26d18f96ec331ce0a10bf2fc905b6a0a6f8f6812ae'
 WORKER={'atlas':'b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52','rgba':'4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98','source':'ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906','generator':'0a4d74c1a0c7a1f309461e3978a37b81d6898669bba99a1eee0149c1fb3525d4','mask':'e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5','helper':'563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67','player':'d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff'}
-HELPER_PINS={'tools/rivet_forward_art_ledger.py': '087a6bd6a89f26e7dc5c50534cfdc1f62434e003f074c11a82974fed4fc7fd07', 'source/art/weapon-raster-v3/validate_ledger.py': '518594a27a4f302887f60fd66a8059e855ea7f3cc91ffd25f01fa683fba60c1d'}
+HELPER_PINS={'tools/rivet_forward_art_ledger.py': 'a03ef352c490876aab367f29f5388c9093d963b199b073e0b5f065b303a29a4a', 'source/art/weapon-raster-v3/validate_ledger.py': 'e72faeb597885d927374c73100e8608d2c9d8511730d2c909fee2f4e4d1fcf00'}
 class ContractError(ValueError):pass
 def fail(s):raise ContractError(s)
 def require(ok,s):
@@ -196,13 +196,28 @@ def receipt(root,entry,key,kind,h):
  require(r.get('schema')=='null-choir-actor-'+key+'-v1' and r.get('status')=='PASS' and r.get('evidence_class')==('independent-review-of-actual-native' if key=='independent' else 'actual-native') and r.get('actor_kind')==kind,'actual qualified '+key+' receipt required (synthetics are not cohort proof)')
  return r
 
+def resident_player_bytes(root,h):
+ p=h['safe_rel'](Path(root),'game/scripts/player.gd',label='actual Worker Player forwarding',allowed_roots={'game'})
+ info=p.lstat();require(stat.S_ISREG(info.st_mode) and not getattr(info,'st_flags',0)&0x40000000,'regular resident actual Player required; no hydration')
+ return p.read_bytes()
+
 def validate_worker_binding(root,record,rgba,source_sha,h):
  require(isinstance(record,dict) and set(record)=={'manifest','mask','helper','player'},'Worker exact actual physiology records required')
  require(source_sha==WORKER['source'] and sha(rgba)==WORKER['rgba'],'frozen actual Worker source/beauty RGBA')
  m=doc(root,record['manifest'],'game/assets/art/regions/worker-clutch-v1.json',h)
  _,mask=checked(root,record['mask'],'game/assets/art/regions/worker-clutch-v1.regions',h)
  _,helper=checked(root,record['helper'],'game/scripts/worker_hit_regions.gd',h)
- _,player=checked(root,record['player'],'game/scripts/player.gd',h)
+ player_current=resident_player_bytes(root,h)
+ if sha(player_current)=='0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7':
+  # Historical Worker/body native receipts remain pinned to d3ff; only the
+  # exact qualified v5 weaponURI pair can normalize back to those bytes.
+  require(same(record['player'],{'path':'game/scripts/player.gd','sha256':WORKER['player'],'bytes':15851}),'unchanged historical Player record')
+  descriptor=h['read_json'](Path(root)/LEDGER).get('current_player_source_compatibility')
+  require(isinstance(descriptor,dict),'explicit body-ledger one-pair compatibility descriptor required')
+  player=h['validate_pistol_player_compatibility'](root,player_current,descriptor)
+ else:
+  require(same(record['player'],{'path':'game/scripts/player.gd','sha256':sha(player_current),'bytes':len(player_current)}),'exact historical Player path/SHA/bytes record')
+  player=player_current
  require(sha(helper)==WORKER['helper'] and sha(player)==WORKER['player'],'actual qualified helper JSON-int/cache guards and Player forwarding must be preserved')
  expected={'schema':'null-choir-worker-regions-v1','kind':'worker','width':1024,'height':768,'hframes':8,'vframes':6,'vent_pose':5,'cell_size':[128,128],'alpha_min_byte':128,'regions':{'0':'ordinary','1':'pressure_clutch'},'beauty_path':'res://assets/art/sprites/bodies-v1/worker.png','mask_path':'res://assets/art/regions/worker-clutch-v1.regions','beauty_source_sha256':WORKER['atlas'],'source_blend_sha256':source_sha,'beauty_rgba_sha256':sha(rgba),'mask_sha256':sha(mask)}
  require(all(same(m.get(k),v) for k,v in expected.items()),'real worker binding schema/source/path/hash mismatch')

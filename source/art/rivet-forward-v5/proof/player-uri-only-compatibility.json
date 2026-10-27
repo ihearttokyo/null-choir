@@ -1,0 +1,12 @@
+{
+  "schema": "exact-player-rivet-uri-compatibility-v1",
+  "scope": "Historical Worker forwarding/body evidence reuse ONLY; NOT fresh current weapon/HUD/native qualification",
+  "source_path": "game/scripts/player.gd",
+  "historical_sha256": "d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff",
+  "current_sha256": "0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7",
+  "snapshot": "source/art/rivet-forward-v5/provenance/player-before-v5.gd",
+  "exact_old_utf8": "\"asset\":\"native-v4/rivet_pistol\"",
+  "exact_new_utf8": "\"asset\":\"native-v5/rivet_pistol\"",
+  "occurrences": 1,
+  "changed_bytes": 1
+}

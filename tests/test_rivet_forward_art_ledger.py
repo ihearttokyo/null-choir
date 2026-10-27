@@ -33,7 +33,11 @@ class NativeRivetTests(unittest.TestCase):
     def setUpClass(cls):
         cls.atlas=(ROOT/v['OUTPUT']).read_bytes()
         cls.doc=json.loads((ROOT/v['LEDGER']).read_text())
-        cls.player=(ROOT/'game/scripts/player.gd').read_text()
+        # Historical v4 fixtures retain the exact d3ff Player, never current v5
+        # without its qualified dependency packet.
+        old=(ROOT/'source/art/rivet-forward-v5/provenance/player-before-v5.gd').read_bytes()
+        assert hashlib.sha256(old).hexdigest()=='d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff'
+        cls.player=old.decode()
 
     def temporary(self):
         # Resolved temporary root avoids macOS /var -> /private/var aliases.
@@ -42,17 +46,24 @@ class NativeRivetTests(unittest.TestCase):
         return Path(t.name)
 
     def validate_json_overlay(self, relative, mutate):
-        """Change decoded JSON in memory, never qualified public artifact bytes."""
+        """Mutate complete historical v4 evidence, not the current v5 packet.
+
+        The actual current-v5 alias has its own full positive/foreign negative.
+        Old metadata type checks must not revalidate its nine context images.
+        """
+        root=self.qualified_private_fixture()
+        self.assertEqual(hashlib.sha256((root/'game/scripts/player.gd').read_bytes()).hexdigest(),
+                         'd3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff')
         function=v['validate_ledger']
         original=function.__globals__['read_json']
         def altered(path):
             value=original(path)
-            if path==ROOT/relative:
+            if path==root/relative:
                 value=copy.deepcopy(value)
                 mutate(value)
             return value
         with patch.dict(function.__globals__,{'read_json':altered}):
-            return function(ROOT)
+            return function(root)
 
     def test_schema_bool_and_float_are_not_integer_version(self):
         for bad in [True,1.0]:
@@ -83,7 +94,7 @@ class NativeRivetTests(unittest.TestCase):
         root=self.lineage_fixture()
         paths={r['path'] for r in self.doc['public_inputs']}
         paths.update(['game/scripts/player.gd','game/scripts/hud.gd',v['OUTPUT']+'.import',v['FAMILY']+'native-import.json'])
-        for relative in paths:write(root,relative,(ROOT/relative).read_bytes())
+        for relative in paths:write(root,relative,self.player.encode() if relative=='game/scripts/player.gd' else (ROOT/relative).read_bytes())
         sidecar=root/(v['OUTPUT']+'.import')
         sidecar.write_text(sidecar_mutator(sidecar.read_text()))
         sidecar_sha=hashlib.sha256(sidecar.read_bytes()).hexdigest()
@@ -168,6 +179,13 @@ class NativeRivetTests(unittest.TestCase):
             doc=copy.deepcopy(self.doc);mutate(doc);root=self.temporary()
             write(root,v['LEDGER'],json.dumps(doc).encode())
             with self.assertRaises(Error):v['validate_ledger'](root)
+
+    def test_current_qualified_v5_alias_and_foreign_URI_negative(self):
+        current=(ROOT/'game/scripts/player.gd').read_bytes()
+        self.assertEqual(hashlib.sha256(current).hexdigest(),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
+        self.assertEqual(v['validate_pistol_player_compatibility'](ROOT,current),self.player.encode())
+        foreign=current.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol')
+        with self.assertRaises(ValueError):v['validate_pistol_player_compatibility'](ROOT,foreign)
 
     def test_only_index1_runtime_alternate(self):
         v['validate_player'](self.player)
