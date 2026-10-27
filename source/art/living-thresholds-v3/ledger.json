@@ -427,6 +427,10 @@
   ],
   "kind": "eight-authored-threshold-assets",
   "legacy_catalog_unchanged_sha256": "c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928",
+  "native_code_compatibility": {
+    "path": "source/art/living-thresholds-v3/compatibility/main-worker-selftest-compatibility-v1.json",
+    "sha256": "ba554a414a7f9a43ba400a357ff4d0a3e50203a0b5f19c5b92ad89f0beec117f"
+  },
   "original_legacy_catalog": "source/art/manifest.json",
   "qualification_scope": "Complete exact-eight source/runtime/normal-import consumer bindings and independent intended-use decisions. Not a standalone build, public release, campaign, human-input, disk-Continue or performance acceptance.",
   "schema": "null-choir.threshold-art-ledger",

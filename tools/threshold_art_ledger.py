@@ -272,9 +272,54 @@ def _check_glb(data: bytes, *, label: str) -> dict:
     return {"glb_json": document, "embedded_images": embedded, "embedded_image_buffer_views": sorted(image_views)}
 
 
+MAIN_SOURCE = "game/scripts/main.gd"
+HISTORICAL_MAIN_SHA = "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6372f531"
+SELFTEST_MAIN_SHA = "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0"
+MAIN_COMPATIBILITY_SCOPE = "historical-gate-evidence-reuse-only-not-current-native-qualification"
+MAIN_SELFTEST_REPLACEMENTS = [{'function': '_verify_export', 'before': '\t\t\tchecks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5', 'after': '\t\t\t# Fixed qualified body contract: Worker has six physiology rows; other roles retain five.\n\t\t\tvar expected_rows = 6 if actor.kind == "worker" else 5\n\t\t\tchecks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*expected_rows'}, {'function': '_verify_sprite_hit_export', 'before': '\t_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/worker.png")', 'after': '\t# Pin the approved production body URI independently of Enemy selection; legacy is not a fallback.\n\t_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/bodies-v1/worker.png")'}]
+
+def _main_selftest_compatibility(root: Path, record, owned: set[str]) -> dict | None:
+    if record is None:
+        return None
+    descriptor_path, raw = checked_file(root, record, label="Main selftest compatibility", roots={"source"}, owned=owned)
+    if not descriptor_path.relative_to(root).as_posix().startswith(SOURCE_ROOT + "/compatibility/"):
+        fail("Main compatibility descriptor must be retained under threshold compatibility source")
+    value = _json_bytes(raw, "Main selftest compatibility")
+    _reject_private_strings(value, "Main compatibility")
+    if (not isinstance(value, dict) or value.get("schema") != "null-choir.threshold-main-selftest-compatibility"
+            or value.get("schema_version") != 1 or value.get("kind") != "exact-main-selftest-two-site-v1"
+            or value.get("claim_scope") != MAIN_COMPATIBILITY_SCOPE
+            or value.get("fresh_native_qualification") is not False
+            or value.get("replacements") != MAIN_SELFTEST_REPLACEMENTS):
+        fail("Main compatibility requires the exact two selftest-only replacement records/scope")
+    historical = value.get("historical_source")
+    current = value.get("current_source")
+    if (historical != {"path": SOURCE_ROOT + "/compatibility/main-before-worker-selftest-fix.gd", "sha256": HISTORICAL_MAIN_SHA}
+            or current != {"path": MAIN_SOURCE, "sha256": SELFTEST_MAIN_SHA}):
+        fail("Main compatibility must bind the one exact historical/current Main pair")
+    _, original = checked_file(root, historical, label="Historical Main snapshot", roots={"source"}, owned=owned)
+    _, current_bytes = checked_file(root, current, label="Compatible current Main", roots={"game"})
+    reconstructed = original
+    for edit in MAIN_SELFTEST_REPLACEMENTS:
+        before, after = edit["before"].encode(), edit["after"].encode()
+        marker = ("\nfunc " + edit["function"] + "(").encode()
+        start = original.find(marker)
+        end = original.find(b"\nfunc ", start + 1) if start >= 0 else -1
+        if end < 0:
+            end = len(original)
+        position = original.find(before)
+        if original.count(before) != 1 or start < 0 or not start < position < end:
+            fail("Main compatibility replacement must occur once in its exact selftest function")
+        reconstructed = reconstructed.replace(before, after, 1)
+    if reconstructed != current_bytes:
+        fail("Main compatibility reconstruction differs: unrelated source changes are forbidden")
+    return {"historical_sha256": HISTORICAL_MAIN_SHA, "current_sha256": SELFTEST_MAIN_SHA,
+            "scope": MAIN_COMPATIBILITY_SCOPE, "descriptor_sha256": sha(raw)}
+
+
 def _native_receipt(root: Path, entry: dict, *, asset_id: str, source_dir: str,
                     runtime_sha: str, source_sha: str, source_proof_sha: str,
-                    owned: set[str]) -> None:
+                    owned: set[str], main_compatibility: dict | None = None) -> None:
     receipt_path, raw = checked_file(root, entry.get("native_qualification"), label=f"{asset_id} native qualification receipt", roots={"source"}, owned=owned)
     if not receipt_path.relative_to(root).as_posix().startswith(source_dir + "/"):
         fail(f"{asset_id}: native receipt outside per-gate source folder")
@@ -303,8 +348,16 @@ def _native_receipt(root: Path, entry: dict, *, asset_id: str, source_dir: str,
         fail(f"{asset_id}: native receipt must bind all six current integration/fixture sources")
     for path_text in NATIVE_CODE_SOURCES:
         path = safe_rel(root, path_text, label=f"{asset_id} native source binding", roots={"game"})
-        if not path.is_file() or code_hashes.get(path_text) != sha(path.read_bytes()):
-            fail(f"{asset_id}: native receipt source hash is stale at {path_text}")
+        current_hash = sha(path.read_bytes()) if path.is_file() else None
+        if code_hashes.get(path_text) == current_hash and current_hash is not None:
+            continue
+        if (path_text == MAIN_SOURCE and main_compatibility is not None
+                and code_hashes.get(path_text) == HISTORICAL_MAIN_SHA
+                and current_hash == SELFTEST_MAIN_SHA
+                and main_compatibility.get("historical_sha256") == HISTORICAL_MAIN_SHA
+                and main_compatibility.get("current_sha256") == SELFTEST_MAIN_SHA):
+            continue  # Explicit static source compatibility; receipt remains historical.
+        fail(f"{asset_id}: native receipt source hash is stale at {path_text}")
 
 
 def _independent_pass(root: Path, entry: dict, *, asset_id: str, source_dir: str,
@@ -366,6 +419,7 @@ def validate_ledger(root: Path, ledger_path: str | Path, *, allow_partial: bool 
         fail("partial candidate must be a strict subset of the eight IDs")
 
     owned: set[str] = set()
+    main_compatibility = _main_selftest_compatibility(root, ledger.get("native_code_compatibility"), owned)
     runtime_paths: set[str] = set()
     normalized = []
     for entry in entries:
@@ -490,7 +544,7 @@ def validate_ledger(root: Path, ledger_path: str | Path, *, allow_partial: bool 
             fail(f"{asset_id}: GLB embedded image bytes differ from Blender packed-source proof")
 
         _native_receipt(root, entry, asset_id=asset_id, source_dir=source_dir, runtime_sha=runtime_sha,
-                        source_sha=source_sha, source_proof_sha=source_proof_sha, owned=owned)
+                        source_sha=source_sha, source_proof_sha=source_proof_sha, owned=owned, main_compatibility=main_compatibility)
         _independent_pass(root, entry, asset_id=asset_id, source_dir=source_dir, runtime_sha=runtime_sha, owned=owned)
         normalized.append({"id": asset_id, "runtime_path": runtime["path"], "runtime_sha256": runtime_sha,
                            "source_sha256": source_sha, "embedded_images": len(glb["embedded_images"])})
@@ -500,6 +554,7 @@ def validate_ledger(root: Path, ledger_path: str | Path, *, allow_partial: bool 
         "status": "STRUCTURAL_EIGHT_THRESHOLD_LEDGER_VALID" if complete else "INCOMPLETE_CANDIDATE_NOT_RELEASE_VALID",
         "assets": len(entries), "complete_registry": complete,
         "runtime_assets": sorted(normalized, key=lambda row: row["id"]),
+        "native_main_source_compatibility": main_compatibility,
         "note": "Structural source/binding/container/import checks only. Validator does not authenticate native execution, score art, or make publication/release decisions."
     }
 
