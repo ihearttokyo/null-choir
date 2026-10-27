@@ -1,0 +1,40 @@
+{
+  "actual_engine_generated_uid": true,
+  "atlas_sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+  "bit_exact": true,
+  "pose_rgba_sha256": [
+    "75757c934f92f4b049ddf5ea0c3b4fbfb0bdbd61bc17991cb0c95c98057f865f",
+    "858a35ef7bce835a2047bf9a3c7624abca2553c0b8653ef921b85c8127c68d65",
+    "81eea1909a8fcb89a6edb5b3fe2d911dcba45948142a5dbee3ffe855985efd76"
+  ],
+  "resource_class": "CompressedTexture2D",
+  "rgba_sha256": "5f7b1cd06c7df68b9af7fb5a74e5bbedc0ab08a23880aca3e2a29ff9a23e6fca",
+  "scope": "Actual ResourceLoader result only; sidecar+ctex+global UID uniqueness must join afterward",
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "status": "PASS",
+  "uid": "uid://bsr8h130f1wnc",
+  "actual_process_supervision": {
+    "raw_private_receipt_sha256": "f896f4fd87ca521f13705df827fe403b7ce08a42deea95d358938356aeff47cf",
+    "wrapper_exit": 0,
+    "native_exit": "UNKNOWN_LAUNCHSERVICES_NOT_DIRECT_CHILD",
+    "native_exit_observed": false,
+    "strict_resource_guard": true,
+    "fresh_owned_closure": true,
+    "seconds": 3.278547166963108,
+    "sampled_aggregate_RSS_bytes": 966852608,
+    "sample_count": 17,
+    "max_sample_interval_seconds": 0.21095099998638034,
+    "planned_sample_seconds": 0.2,
+    "deadline_seconds": 30,
+    "RSS_cap_bytes": 1073741824,
+    "sampling_limit": "Fresh verified current-row samples only; not continuous peak or hardOSquota"
+  },
+  "actual_raw_observed_receipt_sha256": "7df9ac7fae37d97761f0016cb4171adb1729488edb31fe693a5422e8d9c57f5c",
+  "actual_transaction_receipt_sha256": "2f2fbe556c49df714a18980501eab722e6c251fae443c017aa806d2aadb034f5",
+  "current_source1022_cache672_full_SHA_stat_restored": true,
+  "original_source979_cache623_baseline_rebased": false,
+  "sidecar_sha256": "6ff9a7e4cf594b18f88de5f68c1ea6ca1d1aeb173524a0918e5312fc98a37a37",
+  "imported_path": "res://.godot/imported/rivet_pistol.png-b9cb2e7357757a42aed3c44111453361.ctex",
+  "imported_bytes": 24730,
+  "imported_sha256": "6263adacf5d7673733d90632baf5d87172124c45c4bec1becdbbadb122ac76dd"
+}

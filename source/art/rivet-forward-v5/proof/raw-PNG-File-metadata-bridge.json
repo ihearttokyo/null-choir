@@ -1,0 +1,56 @@
+{
+  "schema": "rivet-v5-exact-raw-File-metadata-bridge-v1",
+  "status": "PASS_PURE_COPY_NOT_NEW_NATIVE",
+  "new_native_runs": 0,
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "frames": [
+    {
+      "original_encoded_sha256": "1a8d8e4dc7c3ac58cc8146adbd1ae374a8259d2fa535bd09cdd9b0083651cba5",
+      "public_encoded_sha256": "72705363ee267e9523832ec804faab500f7862d5510c4c4ef4c595e9c6215e97",
+      "same_RGBA_sha256": "2c24d1cb2d728b9ae91d6f2be6501dc3d3dbfb27bbb6fb67b87251e99659f13f",
+      "removed_chunk_sha256": "b931f75b475044131e64fb8043b940ac270dc29a3b3ea79614c01e1883ab0f7f",
+      "removed_payload_sha256": "30bfeb6a069d15d4a5af49bf36856e52d65dd8a7bde76862250b26b3074fe6fb",
+      "IDAT_byte_identical": true,
+      "other_chunks_and_order_byte_identical": true,
+      "pixel_reencoded": false,
+      "pose": "idle",
+      "public": {
+        "path": "source/art/rivet-forward-v5/masters/idle-native-render.png",
+        "bytes": 49139,
+        "sha256": "72705363ee267e9523832ec804faab500f7862d5510c4c4ef4c595e9c6215e97"
+      }
+    },
+    {
+      "original_encoded_sha256": "7b93e19e0378ad7c38453df98c9cd2d94a9c737c3afaf8245806cd73d752e857",
+      "public_encoded_sha256": "9b16a241fa47a2955fb82fa6b658203858eccedcd974fbde9d2ae273d9c63464",
+      "same_RGBA_sha256": "59facdacdcb3243253fc2c96f3ceba8e93385a33d4b4a37288841ab8de327884",
+      "removed_chunk_sha256": "b931f75b475044131e64fb8043b940ac270dc29a3b3ea79614c01e1883ab0f7f",
+      "removed_payload_sha256": "30bfeb6a069d15d4a5af49bf36856e52d65dd8a7bde76862250b26b3074fe6fb",
+      "IDAT_byte_identical": true,
+      "other_chunks_and_order_byte_identical": true,
+      "pixel_reencoded": false,
+      "pose": "fire",
+      "public": {
+        "path": "source/art/rivet-forward-v5/masters/fire-native-render.png",
+        "bytes": 48804,
+        "sha256": "9b16a241fa47a2955fb82fa6b658203858eccedcd974fbde9d2ae273d9c63464"
+      }
+    },
+    {
+      "original_encoded_sha256": "a9a668461190cd0c63d316487c29ccab25db2c6b55f28c9cb298307047c3a0ad",
+      "public_encoded_sha256": "f7749e5452e47bafb1d3761ad598c1e3980633a6806415eb83e7a2d7b3d381df",
+      "same_RGBA_sha256": "aa040900c48a3bcc4214306d77d74747224386e350dac7394f5b1c4965888cad",
+      "removed_chunk_sha256": "b931f75b475044131e64fb8043b940ac270dc29a3b3ea79614c01e1883ab0f7f",
+      "removed_payload_sha256": "30bfeb6a069d15d4a5af49bf36856e52d65dd8a7bde76862250b26b3074fe6fb",
+      "IDAT_byte_identical": true,
+      "other_chunks_and_order_byte_identical": true,
+      "pixel_reencoded": false,
+      "pose": "recover",
+      "public": {
+        "path": "source/art/rivet-forward-v5/masters/recover-native-render.png",
+        "bytes": 49250,
+        "sha256": "f7749e5452e47bafb1d3761ad598c1e3980633a6806415eb83e7a2d7b3d381df"
+      }
+    }
+  ]
+}

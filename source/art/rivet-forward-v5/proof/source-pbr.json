@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "atlas_sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+  "rgba_sha256": "5f7b1cd06c7df68b9af7fb5a74e5bbedc0ab08a23880aca3e2a29ff9a23e6fca",
+  "pose_rgba_sha256": [
+    "75757c934f92f4b049ddf5ea0c3b4fbfb0bdbd61bc17991cb0c95c98057f865f",
+    "858a35ef7bce835a2047bf9a3c7624abca2553c0b8653ef921b85c8127c68d65",
+    "81eea1909a8fcb89a6edb5b3fe2d911dcba45948142a5dbee3ffe855985efd76"
+  ],
+  "engine": "CYCLES",
+  "device": "CPU",
+  "samples": 64,
+  "threads": 2,
+  "denoising": false,
+  "helper_sha256": "07c35732461226ee786f7f3f50b0617c5acf90368b8cd8668b6c996e13b45c5a",
+  "rendered_poses": [
+    "idle",
+    "fire",
+    "recover"
+  ],
+  "actual_exporter_sha256": "3ac677d7a69db2199c33960f3377f9115b49ec96a08de5746ef41fa5d79c1c7a",
+  "actual_common_sha256": "9368ce25e3a4cee9144a7a9defce08770a090ec4eba6e623d0f07531e50f5837",
+  "source_proof_sha256": "0f7647473dfc96fb9c9b188a31afd05389ab47cef2df1b50ce6500d77233ad34",
+  "actual_private_result_sha256": "764c66a50753e8e14e119b40b7d53dad3c04aae16f8daa58d843aa7b380803d9",
+  "scope": "Actual3 source CPU renders only; public raw PNG File-metadata derivatives preserve actual IDAT/RGBA; not normal-import/HUD/world/independent acceptance",
+  "original_actual_raw_pngs": [
+    {
+      "pose": "idle",
+      "original_encoded_sha256": "1a8d8e4dc7c3ac58cc8146adbd1ae374a8259d2fa535bd09cdd9b0083651cba5",
+      "original_encoded_bytes": 49436,
+      "raw_RGBA_sha256": "2c24d1cb2d728b9ae91d6f2be6501dc3d3dbfb27bbb6fb67b87251e99659f13f"
+    },
+    {
+      "pose": "fire",
+      "original_encoded_sha256": "7b93e19e0378ad7c38453df98c9cd2d94a9c737c3afaf8245806cd73d752e857",
+      "original_encoded_bytes": 49101,
+      "raw_RGBA_sha256": "59facdacdcb3243253fc2c96f3ceba8e93385a33d4b4a37288841ab8de327884"
+    },
+    {
+      "pose": "recover",
+      "original_encoded_sha256": "a9a668461190cd0c63d316487c29ccab25db2c6b55f28c9cb298307047c3a0ad",
+      "original_encoded_bytes": 49547,
+      "raw_RGBA_sha256": "aa040900c48a3bcc4214306d77d74747224386e350dac7394f5b1c4965888cad"
+    }
+  ]
+}

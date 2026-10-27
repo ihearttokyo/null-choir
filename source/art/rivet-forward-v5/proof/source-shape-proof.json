@@ -1,0 +1,825 @@
+{
+  "status": "SAVED_CANDIDATE_SHAPE_PROOF_NOT_ART_ACCEPTANCE",
+  "source_sha256": "99b0882a1b1b9bd1952668cfe645ad3c3a46327fe3d0fb4664341bf683420b56",
+  "candidate_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "actual_idle_receiver_yaw_correction_degrees": -19.218667547984417,
+  "rigid_mount": [
+    0.003314279019832611,
+    -0.8299003839492798,
+    -0.01267546322196722
+  ],
+  "before": [
+    {
+      "pose": "idle",
+      "actual_barrel_axis": [
+        -3.340943521834561e-08,
+        1.0,
+        -5.983764594930108e-09
+      ],
+      "muzzle": [
+        140.0,
+        62.00001239776611,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        140.4041576385498,
+        70.30404806137085,
+        3.061491012573242
+      ],
+      "receiver_center": [
+        158.17378044128418,
+        80.06869554519653,
+        2.7817063331604004
+      ],
+      "rearcap_center": [
+        185.38978576660156,
+        94.49880123138428,
+        2.2820751667022705
+      ],
+      "closed_breech_center": [
+        185.9421730041504,
+        95.19857168197632,
+        2.25463604927063
+      ],
+      "axis_vanishing": [
+        139.99998092651367,
+        37.000107765197754,
+        997769.3125
+      ],
+      "gun_bounds": [
+        101.3730239868164,
+        40.996623039245605,
+        214.23763275146484,
+        169.33280527591705
+      ]
+    },
+    {
+      "pose": "fire",
+      "actual_barrel_axis": [
+        0.005580869968980551,
+        0.9996629357337952,
+        0.025354521349072456
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00002431869507,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        139.82364654541016,
+        72.8560209274292,
+        3.0634818077087402
+      ],
+      "receiver_center": [
+        157.23617553710938,
+        83.99821519851685,
+        2.7848706245422363
+      ],
+      "rearcap_center": [
+        183.67691040039062,
+        101.56137347221375,
+        2.286377191543579
+      ],
+      "closed_breech_center": [
+        184.18096542358398,
+        102.45944261550903,
+        2.2589945793151855
+      ],
+      "axis_vanishing": [
+        142.09243774414062,
+        27.472615242004395,
+        995738.9375
+      ],
+      "gun_bounds": [
+        100.84800720214844,
+        41.38458967208862,
+        211.48670196533203,
+        175.3431737422943
+      ]
+    },
+    {
+      "pose": "recover",
+      "actual_barrel_axis": [
+        -0.0021927731577306986,
+        0.9999444484710693,
+        -0.010317528620362282
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00003623962402,
+        3.888690233230591
+      ],
+      "barrel_mount": [
+        140.6326389312744,
+        69.26263570785522,
+        3.0608415603637695
+      ],
+      "receiver_center": [
+        158.54223251342773,
+        78.46286296844482,
+        2.7806434631347656
+      ],
+      "rearcap_center": [
+        186.05987548828125,
+        91.60815477371216,
+        2.2806577682495117
+      ],
+      "closed_breech_center": [
+        186.6311264038086,
+        92.22644567489624,
+        2.253201961517334
+      ],
+      "axis_vanishing": [
+        139.1800594329834,
+        40.866780281066895,
+        998403.25
+      ],
+      "gun_bounds": [
+        101.5818977355957,
+        40.843772888183594,
+        215.33153533935547,
+        166.82696640491486
+      ]
+    }
+  ],
+  "after": [
+    {
+      "pose": "idle",
+      "actual_barrel_axis": [
+        -3.340943521834561e-08,
+        1.0,
+        -5.983764594930108e-09
+      ],
+      "muzzle": [
+        140.0,
+        62.00001239776611,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        140.4041576385498,
+        70.30404806137085,
+        3.061491012573242
+      ],
+      "receiver_center": [
+        144.7031021118164,
+        80.5005431175232,
+        2.754089832305908
+      ],
+      "rearcap_center": [
+        140.5533504486084,
+        95.68976163864136,
+        2.2357656955718994
+      ],
+      "closed_breech_center": [
+        139.03054237365723,
+        96.37787342071533,
+        2.2098560333251953
+      ],
+      "axis_vanishing": [
+        139.99998092651367,
+        37.000107765197754,
+        997769.3125
+      ],
+      "gun_bounds": [
+        76.30361080169678,
+        40.996623039245605,
+        172.77074813842773,
+        172.66837358474731
+      ]
+    },
+    {
+      "pose": "fire",
+      "actual_barrel_axis": [
+        0.005580869968980551,
+        0.9996629357337952,
+        0.025354521349072456
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00002431869507,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        139.82364654541016,
+        72.8560209274292,
+        3.0634818077087402
+      ],
+      "receiver_center": [
+        143.75089645385742,
+        84.41376686096191,
+        2.7577760219573975
+      ],
+      "rearcap_center": [
+        138.85181427001953,
+        102.57897973060608,
+        2.2414278984069824
+      ],
+      "closed_breech_center": [
+        137.28880882263184,
+        103.43843698501587,
+        2.2156128883361816
+      ],
+      "axis_vanishing": [
+        142.09243774414062,
+        27.472615242004395,
+        995738.9375
+      ],
+      "gun_bounds": [
+        74.80795860290527,
+        41.38458967208862,
+        171.72237396240234,
+        178.50475758314133
+      ]
+    },
+    {
+      "pose": "recover",
+      "actual_barrel_axis": [
+        -0.0021927731577306986,
+        0.9999444484710693,
+        -0.010317528620362282
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00003623962402,
+        3.888690233230591
+      ],
+      "barrel_mount": [
+        140.6326389312744,
+        69.26263570785522,
+        3.0608415603637695
+      ],
+      "receiver_center": [
+        145.07890701293945,
+        78.90024185180664,
+        2.7528138160705566
+      ],
+      "rearcap_center": [
+        141.226806640625,
+        92.86508560180664,
+        2.233783483505249
+      ],
+      "closed_breech_center": [
+        139.72018241882324,
+        93.48251819610596,
+        2.2078399658203125
+      ],
+      "axis_vanishing": [
+        139.1800594329834,
+        40.866780281066895,
+        998403.25
+      ],
+      "gun_bounds": [
+        76.9106912612915,
+        40.843772888183594,
+        173.19969177246094,
+        170.22845149040222
+      ]
+    }
+  ],
+  "actual_saved_reopen": [
+    {
+      "pose": "idle",
+      "actual_barrel_axis": [
+        -3.340943521834561e-08,
+        1.0,
+        -5.983764594930108e-09
+      ],
+      "muzzle": [
+        140.0,
+        62.00001239776611,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        140.4041576385498,
+        70.30404806137085,
+        3.061491012573242
+      ],
+      "receiver_center": [
+        144.7031021118164,
+        80.5005431175232,
+        2.754089832305908
+      ],
+      "rearcap_center": [
+        140.5533504486084,
+        95.68976163864136,
+        2.2357656955718994
+      ],
+      "closed_breech_center": [
+        139.03054237365723,
+        96.37787342071533,
+        2.2098560333251953
+      ],
+      "axis_vanishing": [
+        139.99998092651367,
+        37.000107765197754,
+        997769.3125
+      ],
+      "gun_bounds": [
+        76.30361080169678,
+        40.996623039245605,
+        172.77074813842773,
+        172.66837358474731
+      ]
+    },
+    {
+      "pose": "fire",
+      "actual_barrel_axis": [
+        0.005580869968980551,
+        0.9996629357337952,
+        0.025354521349072456
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00002431869507,
+        3.8886899948120117
+      ],
+      "barrel_mount": [
+        139.82364654541016,
+        72.8560209274292,
+        3.0634818077087402
+      ],
+      "receiver_center": [
+        143.75089645385742,
+        84.41376686096191,
+        2.7577760219573975
+      ],
+      "rearcap_center": [
+        138.85181427001953,
+        102.57897973060608,
+        2.2414278984069824
+      ],
+      "closed_breech_center": [
+        137.28880882263184,
+        103.43843698501587,
+        2.2156128883361816
+      ],
+      "axis_vanishing": [
+        142.09243774414062,
+        27.472615242004395,
+        995738.9375
+      ],
+      "gun_bounds": [
+        74.80795860290527,
+        41.38458967208862,
+        171.72237396240234,
+        178.50475758314133
+      ]
+    },
+    {
+      "pose": "recover",
+      "actual_barrel_axis": [
+        -0.0021927731577306986,
+        0.9999444484710693,
+        -0.010317528620362282
+      ],
+      "muzzle": [
+        139.99998092651367,
+        62.00003623962402,
+        3.888690233230591
+      ],
+      "barrel_mount": [
+        140.6326389312744,
+        69.26263570785522,
+        3.0608415603637695
+      ],
+      "receiver_center": [
+        145.07890701293945,
+        78.90024185180664,
+        2.7528138160705566
+      ],
+      "rearcap_center": [
+        141.226806640625,
+        92.86508560180664,
+        2.233783483505249
+      ],
+      "closed_breech_center": [
+        139.72018241882324,
+        93.48251819610596,
+        2.2078399658203125
+      ],
+      "axis_vanishing": [
+        139.1800594329834,
+        40.866780281066895,
+        998403.25
+      ],
+      "gun_bounds": [
+        76.9106912612915,
+        40.843772888183594,
+        173.19969177246094,
+        170.22845149040222
+      ]
+    }
+  ],
+  "source_subassemblies": [
+    {
+      "pose": "idle",
+      "fixed_front_parts": [
+        "Forward dorsal sight rib support",
+        "Low bone sight",
+        "Muzzle black steel barrel",
+        "Muzzle receiver band 0",
+        "Muzzle receiver band 1",
+        "Muzzle receiver band 2",
+        "Muzzle receiver band 3",
+        "Muzzle recessed bore",
+        "Worn band edge 0",
+        "Worn band edge 1",
+        "Worn band edge 2",
+        "Worn band edge 3"
+      ],
+      "rear_rigid_parts": [
+        "Bolt cut 0",
+        "Bolt cut 1",
+        "Bolt cut 2",
+        "Bolt cut 3",
+        "Bolt cut 4",
+        "Brass rib rivet 0",
+        "Brass rib rivet 1",
+        "Brass rib rivet 2",
+        "Brass rib rivet 3",
+        "Brass rib rivet 4",
+        "Brass rib rivet 5",
+        "Breech fastener lower",
+        "Breech fastener upper",
+        "Breech planar lock seam",
+        "Carved bone cheek plate",
+        "Carved cheek groove 0",
+        "Carved cheek groove 1",
+        "Carved cheek groove 2",
+        "Closed octagonal breech backplate",
+        "Dark pistol grip",
+        "Forearm broad wrap 0",
+        "Forearm broad wrap 1",
+        "Forearm broad wrap 2",
+        "Forearm broad wrap 3",
+        "Forearm broad wrap 4",
+        "Forearm broad wrap 5",
+        "Forearm broad wrap 6",
+        "Forearm broad wrap 7",
+        "Forearm broad wrap 8",
+        "Forearm dark wrapped mass",
+        "Glove curled finger 0",
+        "Glove curled finger 1",
+        "Glove curled finger 2",
+        "Glove curled finger 3",
+        "Glove knuckle seam 0",
+        "Glove knuckle seam 1",
+        "Glove knuckle seam 2",
+        "Glove knuckle seam 3",
+        "Glove palm",
+        "Glove thumb",
+        "Glove wrist brass medallion",
+        "Medallion ivory stud",
+        "Receiver bolt 0",
+        "Receiver bolt 1",
+        "Receiver bolt 2",
+        "Receiver bolt 3",
+        "Receiver bolt 4",
+        "Receiver brass cage collar front",
+        "Receiver brass cage collar rear",
+        "Receiver dark mass",
+        "Receiver lower bone strut",
+        "Receiver open vertebral spine",
+        "Receiver oxblood inner recess",
+        "Receiver patina patch",
+        "Receiver vent dark slot 0",
+        "Receiver vent dark slot 1",
+        "Receiver vent dark slot 2",
+        "Receiver vent oxblood inset 0",
+        "Receiver vent oxblood inset 1",
+        "Receiver vent oxblood inset 2",
+        "Receiver vent raised rim 0",
+        "Receiver vent raised rim 1",
+        "Receiver vent raised rim 2",
+        "Receiver worn collar edge front",
+        "Receiver worn collar edge rear",
+        "Reliquary brass surround",
+        "Reliquary draped relief",
+        "Reliquary incised border 0",
+        "Reliquary incised border 1",
+        "Reliquary recessed tablet",
+        "Reliquary relief head",
+        "Shallow breech locking bar",
+        "Short rear brass cap",
+        "Under-grip open guard",
+        "Vertebral rib 0",
+        "Vertebral rib 1",
+        "Vertebral rib 2",
+        "Vertebral rib 3",
+        "Vertebral rib 4",
+        "Vertebral rib 5",
+        "Vertebral root 0",
+        "Vertebral root 1",
+        "Vertebral root 2",
+        "Vertebral root 3",
+        "Vertebral root 4",
+        "Vertebral root 5"
+      ],
+      "connected_grip_hand_forearm_one_rigid_transform": true,
+      "source_pose_matrix_preserved": [
+        [
+          1.0,
+          1.6949300629676145e-08,
+          -9.336662998293832e-09,
+          8.678529184180661e-08
+        ],
+        [
+          2.2821245337922846e-08,
+          1.0,
+          1.4901161193847656e-08,
+          -2.9802322387695312e-08
+        ],
+        [
+          1.7364669702146784e-09,
+          -1.4901161193847656e-08,
+          1.0000001192092896,
+          2.60770320892334e-08
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose": "fire",
+      "fixed_front_parts": [
+        "Forward dorsal sight rib support",
+        "Low bone sight",
+        "Muzzle black steel barrel",
+        "Muzzle receiver band 0",
+        "Muzzle receiver band 1",
+        "Muzzle receiver band 2",
+        "Muzzle receiver band 3",
+        "Muzzle recessed bore",
+        "Worn band edge 0",
+        "Worn band edge 1",
+        "Worn band edge 2",
+        "Worn band edge 3"
+      ],
+      "rear_rigid_parts": [
+        "Bolt cut 0",
+        "Bolt cut 1",
+        "Bolt cut 2",
+        "Bolt cut 3",
+        "Bolt cut 4",
+        "Brass rib rivet 0",
+        "Brass rib rivet 1",
+        "Brass rib rivet 2",
+        "Brass rib rivet 3",
+        "Brass rib rivet 4",
+        "Brass rib rivet 5",
+        "Breech fastener lower",
+        "Breech fastener upper",
+        "Breech planar lock seam",
+        "Carved bone cheek plate",
+        "Carved cheek groove 0",
+        "Carved cheek groove 1",
+        "Carved cheek groove 2",
+        "Closed octagonal breech backplate",
+        "Dark pistol grip",
+        "Forearm broad wrap 0",
+        "Forearm broad wrap 1",
+        "Forearm broad wrap 2",
+        "Forearm broad wrap 3",
+        "Forearm broad wrap 4",
+        "Forearm broad wrap 5",
+        "Forearm broad wrap 6",
+        "Forearm broad wrap 7",
+        "Forearm broad wrap 8",
+        "Forearm dark wrapped mass",
+        "Glove curled finger 0",
+        "Glove curled finger 1",
+        "Glove curled finger 2",
+        "Glove curled finger 3",
+        "Glove knuckle seam 0",
+        "Glove knuckle seam 1",
+        "Glove knuckle seam 2",
+        "Glove knuckle seam 3",
+        "Glove palm",
+        "Glove thumb",
+        "Glove wrist brass medallion",
+        "Medallion ivory stud",
+        "Receiver bolt 0",
+        "Receiver bolt 1",
+        "Receiver bolt 2",
+        "Receiver bolt 3",
+        "Receiver bolt 4",
+        "Receiver brass cage collar front",
+        "Receiver brass cage collar rear",
+        "Receiver dark mass",
+        "Receiver lower bone strut",
+        "Receiver open vertebral spine",
+        "Receiver oxblood inner recess",
+        "Receiver patina patch",
+        "Receiver vent dark slot 0",
+        "Receiver vent dark slot 1",
+        "Receiver vent dark slot 2",
+        "Receiver vent oxblood inset 0",
+        "Receiver vent oxblood inset 1",
+        "Receiver vent oxblood inset 2",
+        "Receiver vent raised rim 0",
+        "Receiver vent raised rim 1",
+        "Receiver vent raised rim 2",
+        "Receiver worn collar edge front",
+        "Receiver worn collar edge rear",
+        "Reliquary brass surround",
+        "Reliquary draped relief",
+        "Reliquary incised border 0",
+        "Reliquary incised border 1",
+        "Reliquary recessed tablet",
+        "Reliquary relief head",
+        "Shallow breech locking bar",
+        "Short rear brass cap",
+        "Under-grip open guard",
+        "Vertebral rib 0",
+        "Vertebral rib 1",
+        "Vertebral rib 2",
+        "Vertebral rib 3",
+        "Vertebral rib 4",
+        "Vertebral rib 5",
+        "Vertebral root 0",
+        "Vertebral root 1",
+        "Vertebral root 2",
+        "Vertebral root 3",
+        "Vertebral root 4",
+        "Vertebral root 5"
+      ],
+      "connected_grip_hand_forearm_one_rigid_transform": true,
+      "source_pose_matrix_preserved": [
+        [
+          0.9999323487281799,
+          0.00558093236759305,
+          0.010208775289356709,
+          -8.009374141693115e-08
+        ],
+        [
+          -0.005319989286363125,
+          0.9996629953384399,
+          -0.025410450994968414,
+          -2.2351741790771484e-08
+        ],
+        [
+          -0.010347126051783562,
+          0.025354459881782532,
+          0.999625027179718,
+          -3.3527612686157227e-08
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose": "recover",
+      "fixed_front_parts": [
+        "Forward dorsal sight rib support",
+        "Low bone sight",
+        "Muzzle black steel barrel",
+        "Muzzle receiver band 0",
+        "Muzzle receiver band 1",
+        "Muzzle receiver band 2",
+        "Muzzle receiver band 3",
+        "Muzzle recessed bore",
+        "Worn band edge 0",
+        "Worn band edge 1",
+        "Worn band edge 2",
+        "Worn band edge 3"
+      ],
+      "rear_rigid_parts": [
+        "Bolt cut 0",
+        "Bolt cut 1",
+        "Bolt cut 2",
+        "Bolt cut 3",
+        "Bolt cut 4",
+        "Brass rib rivet 0",
+        "Brass rib rivet 1",
+        "Brass rib rivet 2",
+        "Brass rib rivet 3",
+        "Brass rib rivet 4",
+        "Brass rib rivet 5",
+        "Breech fastener lower",
+        "Breech fastener upper",
+        "Breech planar lock seam",
+        "Carved bone cheek plate",
+        "Carved cheek groove 0",
+        "Carved cheek groove 1",
+        "Carved cheek groove 2",
+        "Closed octagonal breech backplate",
+        "Dark pistol grip",
+        "Forearm broad wrap 0",
+        "Forearm broad wrap 1",
+        "Forearm broad wrap 2",
+        "Forearm broad wrap 3",
+        "Forearm broad wrap 4",
+        "Forearm broad wrap 5",
+        "Forearm broad wrap 6",
+        "Forearm broad wrap 7",
+        "Forearm broad wrap 8",
+        "Forearm dark wrapped mass",
+        "Glove curled finger 0",
+        "Glove curled finger 1",
+        "Glove curled finger 2",
+        "Glove curled finger 3",
+        "Glove knuckle seam 0",
+        "Glove knuckle seam 1",
+        "Glove knuckle seam 2",
+        "Glove knuckle seam 3",
+        "Glove palm",
+        "Glove thumb",
+        "Glove wrist brass medallion",
+        "Medallion ivory stud",
+        "Receiver bolt 0",
+        "Receiver bolt 1",
+        "Receiver bolt 2",
+        "Receiver bolt 3",
+        "Receiver bolt 4",
+        "Receiver brass cage collar front",
+        "Receiver brass cage collar rear",
+        "Receiver dark mass",
+        "Receiver lower bone strut",
+        "Receiver open vertebral spine",
+        "Receiver oxblood inner recess",
+        "Receiver patina patch",
+        "Receiver vent dark slot 0",
+        "Receiver vent dark slot 1",
+        "Receiver vent dark slot 2",
+        "Receiver vent oxblood inset 0",
+        "Receiver vent oxblood inset 1",
+        "Receiver vent oxblood inset 2",
+        "Receiver vent raised rim 0",
+        "Receiver vent raised rim 1",
+        "Receiver vent raised rim 2",
+        "Receiver worn collar edge front",
+        "Receiver worn collar edge rear",
+        "Reliquary brass surround",
+        "Reliquary draped relief",
+        "Reliquary incised border 0",
+        "Reliquary incised border 1",
+        "Reliquary recessed tablet",
+        "Reliquary relief head",
+        "Shallow breech locking bar",
+        "Short rear brass cap",
+        "Under-grip open guard",
+        "Vertebral rib 0",
+        "Vertebral rib 1",
+        "Vertebral rib 2",
+        "Vertebral rib 3",
+        "Vertebral rib 4",
+        "Vertebral rib 5",
+        "Vertebral root 0",
+        "Vertebral root 1",
+        "Vertebral root 2",
+        "Vertebral root 3",
+        "Vertebral root 4",
+        "Vertebral root 5"
+      ],
+      "connected_grip_hand_forearm_one_rigid_transform": true,
+      "source_pose_matrix_preserved": [
+        [
+          0.999988853931427,
+          -0.002192691434174776,
+          -0.004187381826341152,
+          -1.3224780559539795e-07
+        ],
+        [
+          0.0022358822170645,
+          0.9999443292617798,
+          0.010308310389518738,
+          1.043081283569336e-07
+        ],
+        [
+          0.004164488986134529,
+          -0.010317549109458923,
+          0.9999380111694336,
+          -1.5273690223693848e-07
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "only_mesh_local_edit": "Continuous slender dorsal sight rib ring reattachment between actual fixed front/moved rear supports",
+  "materials_unchanged": true,
+  "original_source_unchanged": true,
+  "original_camera_HUD_muzzle_reticle_unchanged": true,
+  "idle_shape_image": "idle-workbench-shape-only.png",
+  "proof_engine": "Workbench studio MATERIAL noAA320x200",
+  "new_render_count": 1,
+  "not_evidence_for": [
+    "PBR material/raster parity",
+    "User/independent apparent-angle acceptance",
+    "Actual game/HUD chrome/world/input/gameplay",
+    "New reload pose: runtime remains idle/fire/recover",
+    "Production import/app/publication"
+  ]
+}

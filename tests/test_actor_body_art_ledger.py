@@ -8,6 +8,11 @@ P=Path(__file__).resolve().parents[1]
 W=P
 spec=importlib.util.spec_from_file_location('actor_ledger',P/'tools/actor_body_art_ledger.py');v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
 H=v.helpers(W)
+def historical_player_bytes():
+ path=P/'source/art/rivet-forward-v5/provenance/player-before-v5.gd'
+ data=path.read_bytes()
+ if v.sha(data)!=v.WORKER['player']:raise AssertionError('Exact historical d3ff Player snapshot required')
+ return data
 def png(w,h,data):
  def chunk(k,d):return struct.pack('>I',len(d))+k+d+struct.pack('>I',zlib.crc32(k+d)&0xffffffff)
  raw=b''.join(b'\0'+data[y*w*4:(y+1)*w*4] for y in range(h))
@@ -109,14 +114,14 @@ class Contract(unittest.TestCase):
   if not self.worker_available:self.skipTest('Actual Worker payload absent; no fabricated qualification')
   root=self.worker_root;records={}
   for name,rel in {'manifest':'game/assets/art/regions/worker-clutch-v1.json','mask':'game/assets/art/regions/worker-clutch-v1.regions','helper':'game/scripts/worker_hit_regions.gd','player':'game/scripts/player.gd'}.items():
-   target=root/rel;records[name]={'path':rel,'sha256':v.sha(target.read_bytes()),'bytes':target.stat().st_size}
+   target=root/rel;data=historical_player_bytes() if name=='player' else target.read_bytes();records[name]={'path':rel,'sha256':v.sha(data),'bytes':len(data)}
   _,rgba=H['png_rgba']((root/'game/assets/art/sprites/bodies-v1/worker.png').read_bytes())
   self.assertEqual(len(v.validate_worker_binding(root,records,rgba,v.WORKER['source'],H)),2)
  def test_worker_typed_schema_address_objects_and_source_negatives(self):
   self.test_exact_worker_real_mask_binding()
   root=self.worker_root;records={}
   for name,rel in {'manifest':'game/assets/art/regions/worker-clutch-v1.json','mask':'game/assets/art/regions/worker-clutch-v1.regions','helper':'game/scripts/worker_hit_regions.gd','player':'game/scripts/player.gd'}.items():
-   p=root/rel;records[name]={'path':rel,'sha256':v.sha(p.read_bytes()),'bytes':p.stat().st_size}
+   p=root/rel;data=historical_player_bytes() if name=='player' else p.read_bytes();records[name]={'path':rel,'sha256':v.sha(data),'bytes':len(data)}
   original=json.loads((root/'game/assets/art/regions/worker-clutch-v1.json').read_text())
   _,rgba=H['png_rgba']((self.worker_root/'game/assets/art/sprites/bodies-v1/worker.png').read_bytes())
   mutations=[]
@@ -133,7 +138,15 @@ class Contract(unittest.TestCase):
  def test_worker_public_guard_hashes_preserve_typed_negative_checks(self):
   if not self.worker_available:self.skipTest('Actual Worker helper/Player qualification absent')
   self.assertEqual(v.sha((self.worker_root/'game/scripts/worker_hit_regions.gd').read_bytes()),v.WORKER['helper'])
-  self.assertEqual(v.sha((self.worker_root/'game/scripts/player.gd').read_bytes()),v.WORKER['player'])
+  old=historical_player_bytes();self.assertEqual(v.sha(old),v.WORKER['player'])
+  current=(self.worker_root/'game/scripts/player.gd').read_bytes()
+  self.assertEqual(H['validate_pistol_player_compatibility'](self.worker_root,current),old)
+ def test_current_v5_Player_forwarding_exact_alias_foreign_negative(self):
+  current=(P/'game/scripts/player.gd').read_bytes()
+  self.assertEqual(v.sha(current),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
+  self.assertEqual(H['validate_pistol_player_compatibility'](P,current),historical_player_bytes())
+  foreign=current.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol')
+  with self.assertRaises(ValueError):H['validate_pistol_player_compatibility'](P,foreign)
  def actual_worker_raw_case(self,f=0):
   if not self.worker_available:self.skipTest('Actual Worker payload absent; no synthetic source qualification')
   con=v.contract('worker');pose=con['poses'][f//8];name='raw-'+pose+'-'+str(f%8).zfill(2)+'.png'
@@ -222,7 +235,7 @@ class Contract(unittest.TestCase):
   if not self.worker_available:self.skipTest('Actual mask unavailable, not fabricated')
   records={}
   for name,rel in {'manifest':'game/assets/art/regions/worker-clutch-v1.json','mask':'game/assets/art/regions/worker-clutch-v1.regions','helper':'game/scripts/worker_hit_regions.gd','player':'game/scripts/player.gd'}.items():
-   p=self.worker_root/rel;records[name]={'path':rel,'sha256':v.sha(p.read_bytes()),'bytes':p.stat().st_size}
+   p=self.worker_root/rel;data=historical_player_bytes() if name=='player' else p.read_bytes();records[name]={'path':rel,'sha256':v.sha(data),'bytes':len(data)}
   self.assertEqual(len(v.validate_worker_binding(self.worker_root,records,self.worker_rgba,authored,H)),2)
   with self.assertRaises(ValueError):v.validate_worker_binding(self.worker_root,records,self.worker_rgba,v.sha(source),H)
  def test_public_UI_payload_and_layout_corruption_rejected(self):

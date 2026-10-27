@@ -1,0 +1,76 @@
+{
+  "schema": "null-choir-rivet-v5-independent-context-v1",
+  "status": "PASS",
+  "review_role": "independent",
+  "evidence_class": "independent-review-of-actual-native",
+  "numeric_rating_included": false,
+  "source_sha256": "39f4b3c4d9298f4c923de72b248fbceca76b0020bb1885cb6bbb2646342e17b4",
+  "atlas_sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001",
+  "rgba_sha256": "5f7b1cd06c7df68b9af7fb5a74e5bbedc0ab08a23880aca3e2a29ff9a23e6fca",
+  "pose_rgba_sha256": [
+    "75757c934f92f4b049ddf5ea0c3b4fbfb0bdbd61bc17991cb0c95c98057f865f",
+    "858a35ef7bce835a2047bf9a3c7624abca2553c0b8653ef921b85c8127c68d65",
+    "81eea1909a8fcb89a6edb5b3fe2d911dcba45948142a5dbee3ffe855985efd76"
+  ],
+  "full_hud_receipt_sha256": "943394a38a6dce9e5818569c4dd6d31639e1a5468aae4f51da84c006e78b236d",
+  "normal_import_receipt_sha256": "304127f58caff9916719796015ac811663afe254d5740f277d1ee13c7846d9f4",
+  "actual_raw_full_hud_report_sha256": "87aca4d73b754099a0e00a5bb65f50c9a7bb8b193b4d39e950dbd5c67ddd2273",
+  "actual_transaction_receipt_sha256": "2f2fbe556c49df714a18980501eab722e6c251fae443c017aa806d2aadb034f5",
+  "runtime_uri": "res://assets/art/weapons/native-v5/rivet_pistol.png",
+  "uid": "uid://bsr8h130f1wnc",
+  "resolution": [
+    640,
+    360
+  ],
+  "tested_poses": [
+    "idle",
+    "fire",
+    "recover"
+  ],
+  "actual_images_reviewed": 9,
+  "actual_production_full_HUD_chrome_and_authored_world_reviewed": true,
+  "normal_CompressedTexture2D_consumption_verified": true,
+  "whole_assembly_forward_read_coherent": true,
+  "no_material_context_defect_found": true,
+  "fixture_controls": [
+    "static callbacks",
+    "manual shot clocks",
+    "headbob/camera-shake disabled",
+    "audio muted"
+  ],
+  "scope": "Independent review of the exact actual03 static normal-import/fullHUD/authored-Intake-world case. Source-art assessment reused; no new source-art variant, interactive input/listening/gameplay/sustained-performance or installed/package acceptance. Current production/installed v4 is not relabeled fixed.",
+  "native_exit": "UNKNOWN_LAUNCHSERVICES_NOT_DIRECT_CHILD",
+  "native_exit_observed": false,
+  "independent_recomputed_views": [
+    {
+      "pose": "idle",
+      "view_sha256": "a58d02f55dc92389476daa9167c2e71c66cf38247119fa084c31308315bd2099",
+      "background_a_sha256": "b1e5372479fbb803b6ff0c5d939c610ef6b86f2de059ea502105641c719cb540",
+      "background_b_sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9",
+      "eligible_weapon_samples": 553,
+      "visible_weapon_pixels": 553,
+      "full_chrome_changed_pixels": 28265,
+      "stable_world_pixels": 24000
+    },
+    {
+      "pose": "fire",
+      "view_sha256": "058bdb080ec580c81aa5f81ba82ba4521343695af47519ffac395528b27968f1",
+      "background_a_sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9",
+      "background_b_sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9",
+      "eligible_weapon_samples": 540,
+      "visible_weapon_pixels": 540,
+      "full_chrome_changed_pixels": 28252,
+      "stable_world_pixels": 24000
+    },
+    {
+      "pose": "recover",
+      "view_sha256": "058c2b149d3c0b03fa263f693ed5fa42c02143f9f1048b80471e92cec8592a99",
+      "background_a_sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9",
+      "background_b_sha256": "ec33823faf52c442105d6da6e0e0f5c4c67ddfa3068d379caa24dd04d8fc13c9",
+      "eligible_weapon_samples": 565,
+      "visible_weapon_pixels": 565,
+      "full_chrome_changed_pixels": 28269,
+      "stable_world_pixels": 24000
+    }
+  ]
+}

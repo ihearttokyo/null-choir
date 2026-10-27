@@ -9730,5 +9730,10 @@
   "schema": "null-choir-eight-actor-ledger-v1",
   "scope": "Strict source/art/actualnormalimport/retainedfullmatrix acceptance + exact finalEnemy runtime555 and separate8visibleidle0contexts. No gameplay/PCK/publication claim.",
   "status": "QUALIFIED",
-  "version": 1
+  "version": 1,
+  "current_player_source_compatibility": {
+    "path": "source/art/rivet-forward-v5/proof/player-uri-only-compatibility.json",
+    "bytes": 637,
+    "sha256": "fcd75908c1754758bd70bf4e824296f846db7975c605c5688ba09661041faad9"
+  }
 }

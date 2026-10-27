@@ -88,6 +88,20 @@ def validate_atlas(data):
     if sha(data)!=OUTPUT_SHA or len(data)!=41941: fail('accepted native atlas bytes/hash mismatch')
     return {'dimensions':list(dims),'rgba8_pixel_sha256':sha(pixels),'pose_rgba8_sha256':cells}
 
+
+V5_GUARD_SHA = "f4ec3720560cd47c2ed8c2ca4df30297618b0aef31154dacb8c85a57aa9dbded"
+def v5_guard(root):
+    path=Path(root)/"source/art/rivet-forward-v5/validate_ledger.py"
+    if path.is_symlink() or sha(path.read_bytes())!=V5_GUARD_SHA: fail("exact reviewed v5 validator required")
+    return runpy.run_path(str(path))
+def validate_pistol_player_compatibility(root,current,descriptor=None):
+    v5=v5_guard(root)
+    v5["validate"](root,globals())
+    doc=read_json(Path(root)/"source/art/rivet-forward-v5/ledger.json")
+    declared=doc["player_compatibility"]
+    if descriptor is not None and not same(descriptor,declared): fail("exact shared Player compatibility descriptor required")
+    return v5["normalize_player"](root,current,declared)
+
 def validate_player(text, *, native=True):
     records=re.findall(r'\{"name":"[^"]+","asset":"([^"]+)"[^}]*\}',text)
     expected=['painted-v3/'+name for name in IDS]
@@ -237,7 +251,11 @@ def validate_ledger(root: Path, ledger_path=LEDGER):
     if not same(asset['output'],{'path':OUTPUT,'sha256':OUTPUT_SHA,'bytes':len(data),**pixels}): fail('output byte/pixel/pose binding mismatch')
     check_native_directory(root)
     player_path=safe_rel(root,'game/scripts/player.gd',label='actual Player')
-    validate_player(player_path.read_text(encoding='utf-8'))
+    player_data=player_path.read_bytes(); replacement_outputs=[]
+    if sha(player_data)=="0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7":
+        player_data=validate_pistol_player_compatibility(root,player_data)
+        replacement_outputs=["game/assets/art/weapons/native-v5/rivet_pistol.png"]
+    validate_player(player_data.decode('utf-8'))
     hud_path,hud=checked(root,doc.get('hud'), 'game/scripts/hud.gd',HUD_SHA)
     hud_text=hud.decode('utf-8')
     if HELPERS['HUD_NEAREST'] not in hud_text or HELPERS['HUD_ASSET_CONSUMER'] not in hud_text or 'Vector2(180,143)' not in hud_text or 'Rect2(frame*320,0,320,200)' not in hud_text:
@@ -278,7 +296,7 @@ def validate_ledger(root: Path, ledger_path=LEDGER):
     if not isinstance(imp.get('godot_version'),str) or not imp['godot_version'].startswith('4.') or type(imp.get('imported_bytes')) is not int or imp['imported_bytes']<=0 or not re.fullmatch('[0-9a-f]{64}',str(imp.get('imported_sha256',''))):
         fail('actual native Godot version/imported resource byte proof missing')
     if doc.get('status')!='QUALIFIED': fail('PENDING native source/qualification/import; no production acceptance')
-    return {'status':'STRUCTURAL_SINGLE_NATIVE_RIVET_VALID','entries':1,'runtime_outputs':[OUTPUT],
+    return {'status':'STRUCTURAL_SINGLE_NATIVE_RIVET_VALID','entries':1,'runtime_outputs':[OUTPUT]+replacement_outputs,
             'retained_raster_outputs':6,'legacy_catalog_entries':119,'native_receipt_bound':True,
             'note':'Structural exact-file/native-receipt bindings only; not artwork, human input, performance or packed-app authentication.'}
 
