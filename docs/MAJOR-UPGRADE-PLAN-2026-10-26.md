@@ -9,7 +9,7 @@ These user-directed requirements supersede the old naming of future previews. Th
 ### One release identity
 
 - Name every **new** release **Null Choir v0.xxx** throughout the game display, macOS app/version metadata, archive, README and existing live Site. Do not add Alpha/Major Features/Preview suffixes to new release names.
-- The retained Git audit establishes **93 distinct committed production-source states**, including branch development, through `3a3c353`. This is not a provable lifetime count of uncommitted work or 93 exported builds. Seed the reproducible iteration ledger at93; the next reserved candidate is **Null Choir v0.094**. `docs/build-iterations.json` governs subsequent allocation. Never use PR numbers, duplicated tags, test runs or identical-source packaging retries to inflate the number.
+- The retained Git audit establishes **93 distinct committed production-source states**, including branch development, through `3a3c353`. This is not a provable lifetime count of uncommitted work or 93 exported builds. The committed production state at `4b437a8` issued **v0.094**, which was not released and is retained as failed after a verified wall-face winding defect. The corrected next production-source iteration is **Null Choir v0.095**; validation/test-only commit `ebb5a0b` did not advance the production counter. `docs/build-iterations.json` governs subsequent allocation. Never reuse failed issued ordinals or inflate the number with PRs, duplicated tags, test runs or source-identical packaging retries.
 - Preserve old release names, URLs, source history and rollback packages. Preserve the internal save-data namespace and bundle identifier; display-name cleanup must not lose Continue progress.
 
 ### Seal-bearing wardens on every level

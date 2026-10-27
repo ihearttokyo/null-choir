@@ -36,6 +36,9 @@ jobs:
           python -B tests/test_actor_body_art_ledger.py
           python -B tests/test_main_body_selftest_contract.py
           python -B tests/test_build_iterations.py
+          python -B tests/test_macos_archive_identity.py
+          python -B tests/test_macos_import.py
+          python -B tests/test_macos_recorded_audio.py
           python -B tests/test_seal_guardians.py
           python -B tests/test_seal_guardian_save_contract.py
           python -B tests/test_seal_guardian_fixture_contract.py

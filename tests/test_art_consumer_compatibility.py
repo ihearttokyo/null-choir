@@ -16,9 +16,11 @@ spec.loader.exec_module(c)
 class CurrentConsumers(unittest.TestCase):
     def test_actual_exact_generation_and_honest_scope(self):
         v = c.qualify(ROOT)
-        self.assertEqual(v['native_observation']['frame_count'], 48)
+        self.assertEqual(v['native_observation']['frame_count'], 8)
+        self.assertEqual(v['historical_native_observation']['frame_count'], 48)
+        self.assertIs(v['scope']['old94_wall_rendering_reused_as_current95'], False)
         self.assertEqual([r['chapter'] for r in v['native_observation']['chapters']], list(range(8)))
-        self.assertTrue(all(len(r['frames']) == 6 and r['strict_supervision'] == 'PASS'
+        self.assertTrue(all(len(r['frames']) == 1 and r['strict_supervision'] == 'PASS'
                             for r in v['native_observation']['chapters']))
         for key in ['new_three_pose_pistol_ABA_qualification', 'new_body_fullmatrix_or_555_qualification',
                     'new_gate_opening_or_fullview_qualification', 'new_art_grade_or_final_visual_acceptance',
@@ -41,15 +43,15 @@ class CurrentConsumers(unittest.TestCase):
 
     def test_missing_or_rehashed_current_receipt_refuses(self):
         read = c.read_resident
-        doc = json.loads(read(ROOT, c.RECEIPT))
+        doc = json.loads(read(ROOT, c.RECEIPT95))
         for change in ['missing', 'source', 'frame', 'scope']:
             value = copy.deepcopy(doc)
-            if change == 'source': value['current_sources']['game/scripts/main.gd']['sha256'] = '0' * 64
+            if change == 'source': value['current_source_overrides']['game/scripts/wall_architecture.gd']['sha256'] = '0' * 64
             elif change == 'frame': value['native_observation']['chapters'][0]['frames'].pop()
             elif change == 'scope': value['scope']['new_three_pose_pistol_ABA_qualification'] = True
             data = json.dumps(value).encode()
             def altered(root, relative):
-                if relative != c.RECEIPT: return read(root, relative)
+                if relative != c.RECEIPT95: return read(root, relative)
                 if change == 'missing': raise FileNotFoundError('missing current receipt')
                 return data
             with self.subTest(change=change), patch.object(c, 'read_resident', side_effect=altered):
@@ -76,8 +78,23 @@ class CurrentConsumers(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'symlink'): c.read_resident(ROOT, c.RECEIPT)
             read.assert_not_called()
 
+    def test_parent94_is_immutable_and_missing_or_changed_parent_refuses(self):
+        raw = (ROOT / c.RECEIPT).read_bytes()
+        self.assertEqual(c.sha(raw), c.RECEIPT_SHA)
+        read = c.read_resident
+        with patch.object(c, 'read_resident', side_effect=lambda r,p: read(r,p)+b'changed' if p==c.RECEIPT else read(r,p)):
+            with self.assertRaises(ValueError): c.qualify(ROOT)
+
+    def test95_override_and_export_only_bridge_remain_narrow(self):
+        v = json.loads((ROOT / c.RECEIPT95).read_text())
+        self.assertEqual(set(v['current_source_overrides']), {'game/scripts/build_info.gd','game/scripts/wall_architecture.gd'})
+        self.assertEqual(v['native_observation']['frame_count'], 8)
+        self.assertFalse(v['export_metadata_bridge']['native_rerun_claimed'])
+        self.assertEqual(v['export_metadata_bridge']['after']['path'], 'game/export_presets.cfg')
+        self.assertTrue(all(r['display_label_actual']=='Null Choir v0.095' and r['display_label_visible'] is True for r in v['native_observation']['chapters']))
+
     def test_public_receipt_has_no_private_paths_or_quality_numbers(self):
-        text = (ROOT / c.RECEIPT).read_text().lower()
+        text = (ROOT / c.RECEIPT).read_text().lower() + (ROOT / c.RECEIPT95).read_text().lower()
         for token in ['/users/', '/private/', '/tmp/', '/home/', 'argv', 'home=', 'rating', 'rubric', 'score']:
             self.assertNotIn(token, text)
 

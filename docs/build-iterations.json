@@ -18,6 +18,12 @@
     {
       "ordinal": 94,
       "candidate": "seal-wardens-and-dimensional-walls",
+      "status": "failed",
+      "failure_reason": "Committed production state 4b437a8: verified P1 wall front-face winding defect; ordinal94 retired, no release."
+    },
+    {
+      "ordinal": 95,
+      "candidate": "seal-wardens-dimensional-walls-frontfaces",
       "status": "reserved"
     }
   ]

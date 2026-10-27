@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check display metadata or explicitly reserve an integer development ordinal.
 
-Default operation is read-only. --reserve updates only the allocation ledger;
+Default operation is read-only. --fail/--reserve update only the allocation ledger;
 then --sync updates owned display metadata, and --check verifies the join.
 No export, Git mutation, release publication or final source-hash claim occurs.
 """
@@ -38,11 +38,18 @@ def validate(data):
         raise ValueError('Retain every issued ordinal, including initial94')
     seen = set()
     for ordinal, row in enumerate(data['allocations'], 94):
-        if (not isinstance(row, dict) or set(row) != {'ordinal', 'candidate', 'status'}
+        fields = {'ordinal', 'candidate', 'status'}
+        if isinstance(row, dict) and row.get('status') == 'failed':
+            fields.add('failure_reason')
+        if (not isinstance(row, dict) or set(row) != fields
                 or type(row['ordinal']) is not int or row['ordinal'] != ordinal
                 or not isinstance(row['candidate'], str) or not KEY.fullmatch(row['candidate'])
                 or row['candidate'] in seen or row['status'] not in ('reserved', 'failed')):
             raise ValueError('Invalid, duplicate or reused allocation')
+        if row['status'] == 'failed' and (not isinstance(row['failure_reason'], str)
+                                         or not row['failure_reason'].strip()
+                                         or len(row['failure_reason']) > 512):
+            raise ValueError('Failed issued ordinal requires a retained reason')
         seen.add(row['candidate'])
     if data['allocations'][0]['candidate'] != 'seal-wardens-and-dimensional-walls':
         raise ValueError('Initial94 candidate identity changed')
@@ -57,6 +64,14 @@ def identity(ordinal):
     return {'ordinal': ordinal, 'version': version, 'display_name': name,
             'app_name': name + '.app', 'archive_name': f'Null-Choir-v{version}.zip',
             'cfbundle_version': str(ordinal)}
+
+
+def active_identity(data):
+    """Validate all history, but never export or qualify a retired last ordinal."""
+    ordinal = validate(data)
+    if data['allocations'][-1]['status'] != 'reserved':
+        raise ValueError('Failed ordinal is retired, not active display/export metadata')
+    return identity(ordinal)
 
 
 def reserve(data, candidate, expected):
@@ -76,6 +91,23 @@ def reserve(data, candidate, expected):
     return result
 
 
+def mark_failed(data, candidate, expected, reason):
+    last = validate(data)
+    if type(expected) is not int or expected != last:
+        raise ValueError('Stale expected ordinal; reread before marking failed')
+    row = data['allocations'][-1]
+    if candidate != row['candidate']:
+        raise ValueError('Only the current exact candidate may be marked failed')
+    if not isinstance(reason, str) or not reason.strip() or len(reason) > 512:
+        raise ValueError('Explicit short failure reason required')
+    if row['status'] == 'failed' and row['failure_reason'] != reason:
+        raise ValueError('Retain the original failure reason; do not overwrite history')
+    result = copy.deepcopy(data)
+    result['allocations'][-1].update(status='failed', failure_reason=reason)
+    validate(result)
+    return result
+
+
 def replace_field(text, name, value):
     pattern = r'(?m)^' + re.escape(name) + r'=.*$'
     result, count = re.subn(pattern, lambda _: name + '=' + json.dumps(value), text)
@@ -85,7 +117,7 @@ def replace_field(text, name, value):
 
 
 def metadata(root, data):
-    info = identity(validate(data))
+    info = active_identity(data)
     gd = root / 'game/scripts/build_info.gd'
     project = root / 'game/project.godot'
     preset = root / 'game/export_presets.cfg'
@@ -102,7 +134,12 @@ def metadata(root, data):
         if count != 1:
             raise ValueError(f'Expected exactly one BuildInfo constant: {key}')
     project_text = replace_field(project_text, 'config/version', info['version'])
-    for key, value in {'application/name': info['display_name'], 'application/short_version': info['version'],
+    # Godot4.7.2 has no application/name export option. The fresh builder alone
+    # normalizes the exported app's display/folder names before signing.
+    preset_text, obsolete = re.subn(r'(?m)^application/name=.*\n?', '', preset_text)
+    if obsolete > 1:
+        raise ValueError('Duplicate unsupported application/name setting')
+    for key, value in {'application/short_version': info['version'],
                        'application/version': info['cfbundle_version'],
                        'export_path': '../builds/macos/' + info['archive_name']}.items():
         preset_text = replace_field(preset_text, key, value)
@@ -128,21 +165,26 @@ def main():
     action = parser.add_mutually_exclusive_group()
     action.add_argument('--check', action='store_true')
     action.add_argument('--reserve', metavar='CANDIDATE')
+    action.add_argument('--fail', metavar='CANDIDATE')
     action.add_argument('--sync', action='store_true')
     parser.add_argument('--expect-last', type=int)
+    parser.add_argument('--reason')
     args = parser.parse_args()
     # Exclusive lock prevents concurrent writers from reserving the same number.
     # Failed sync leaves its already-issued number reserved; rerun --sync, never rewind.
     lock = ROOT / (str(LEDGER) + '.lock')
     fd = None
     try:
-        if args.reserve is not None or args.sync:
+        if args.reserve is not None or args.fail is not None or args.sync:
             if args.expect_last is None:
                 parser.error('Writes require --expect-last')
             fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
         data = json.loads((ROOT / LEDGER).read_text())
         last = validate(data)
-        if args.reserve is not None:
+        if args.fail is not None:
+            data = mark_failed(data, args.fail, args.expect_last, args.reason)
+            atomic_write(ROOT / LEDGER, json.dumps(data, indent=2) + '\n')
+        elif args.reserve is not None:
             updated = reserve(data, args.reserve, args.expect_last)
             atomic_write(ROOT / LEDGER, json.dumps(updated, indent=2) + '\n')
             data = updated

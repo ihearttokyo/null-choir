@@ -7,12 +7,18 @@ func _initialize() -> void:
 	call_deferred("_run")
 
 func _run() -> void:
+	if not check_face_orientation(): return
 	var sloped_samples: int = 0
 	for index in range(8):
 		var level = Level.new()
 		root.add_child(level)
 		if not check(level.layout.load_level(index),"load chapter"): return
 		level._build_geometry()
+		for wall: Node in level.get_children():
+			if not str(wall.name).begins_with("WallArchitecture_"): continue
+			for mesh: Node in wall.get_children():
+				if mesh is MeshInstance3D and mesh.material_override is BaseMaterial3D:
+					if not check(mesh.material_override.cull_mode==BaseMaterial3D.CULL_BACK,"default backface culling retained"): return
 		await physics_frame
 		await physics_frame
 		var shape := CapsuleShape3D.new()
@@ -86,3 +92,35 @@ func check(ok: bool, reason: String) -> bool:
 		push_error("Wall architecture: "+reason)
 		quit(1)
 	return ok
+
+# Actual production SurfaceTool arrays, independent clockwise-front test.
+func outward_triangle(a: Vector3, b: Vector3, c: Vector3, normal: Vector3, center: Vector3) -> bool:
+	var front: Vector3 = (c-a).cross(b-a).normalized()
+	var away: Vector3 = (a+b+c)/3.0-center
+	return front.dot(away)>0.00001 and normal.dot(away)>0.00001 and normal.dot(front)>0.9999
+
+func check_face_orientation() -> bool:
+	var checked: int = 0
+	for chapter: String in Walls.FAMILIES:
+		for variant: int in [0,1]:
+			for direction: Vector2i in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+				for part: Array in Walls.profile(chapter,4.0,6.0,variant):
+					var points: PackedVector3Array = Walls._vertices(part,Vector3.ZERO,Vector3(-direction.y,0,direction.x),Vector3(direction.x,0,direction.y))
+					var center: Vector3 = Vector3.ZERO
+					for point: Vector3 in points: center += point/8.0
+					var tool := SurfaceTool.new(); tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+					var collision: PackedVector3Array = Walls._append(tool,points,PackedVector3Array())
+					var arrays: Array = tool.commit_to_arrays()
+					var draw: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+					var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+					if not check(draw==collision and draw.size()==36 and normals.size()==36,"actual rendered/collider triangles and normals"): return false
+					for i: int in range(0,draw.size(),3):
+						var a: Vector3 = draw[i]; var b: Vector3 = draw[i+1]; var c: Vector3 = draw[i+2]
+						for normal: Vector3 in [normals[i],normals[i+1],normals[i+2]]:
+							if not check(outward_triangle(a,b,c,normal,center),"outward clockwise front and explicit normal"): return false
+						if not check(not outward_triangle(a,c,b,normals[i],center),"inverted winding negative control"): return false
+						if not check(not outward_triangle(a,b,c,-normals[i],center),"inverted normal negative control"): return false
+						if not check(not outward_triangle(a,c,b,-normals[i],center),"original inside-out pair negative control"): return false
+						checked += 1
+	print("WALL_OUTWARD_FACE_RESULT triangles=",checked," orientations=4 families=8 default_backface_cull=true")
+	return check(checked>0,"actual orientation coverage")

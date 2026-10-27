@@ -97,8 +97,10 @@ static func _vertices(part: Array, point: Vector3, tangent: Vector3, outward: Ve
 
 static func _append(tool: SurfaceTool, vertices: PackedVector3Array, triangles: PackedVector3Array) -> PackedVector3Array:
 	for face in FACES:
-		var normal: Vector3 = (vertices[face[2]]-vertices[face[0]]).cross(vertices[face[1]]-vertices[face[0]]).normalized()
-		for index in [face[0],face[1],face[2],face[0],face[2],face[3]]:
+		# The build frame [tangent,UP,outward] has determinant -1. Reverse
+		# the local face order AND normal so Godot clockwise fronts face air.
+		var normal: Vector3 = (vertices[face[1]]-vertices[face[0]]).cross(vertices[face[2]]-vertices[face[0]]).normalized()
+		for index in [face[0],face[2],face[1],face[0],face[3],face[2]]:
 			tool.set_normal(normal)
 			tool.set_uv(Vector2(vertices[index].x+vertices[index].z,vertices[index].y)/2.0)
 			tool.add_vertex(vertices[index])

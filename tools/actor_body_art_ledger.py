@@ -19,7 +19,7 @@ LATE={'brute':{'hp':210,'speed':3.1,'radius':.62,'height':3.3,'scale':4.4,'coold
 LEGACY_SHA='c9d03e761c85cb24cf2aeb711e04d255201ce85fb08e546e0184834cd8c3a928'
 PINSET_SHA='500bcebfb8ceb3720b159d26d18f96ec331ce0a10bf2fc905b6a0a6f8f6812ae'
 WORKER={'atlas':'b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52','rgba':'4ee502539f3f3a98de2022e5904100468bd53eaa5884cbacc0005575fb7aff98','source':'ff045773eeb053e030f17bd6007e63ec09afb9329d2ed4e40cb6c60f277ad906','generator':'0a4d74c1a0c7a1f309461e3978a37b81d6898669bba99a1eee0149c1fb3525d4','mask':'e9cc92283fde8ec89340e9f3107c03ee10b32fe38fb5df8ccaf146afab53d1d5','helper':'563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67','player':'d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff'}
-HELPER_PINS={'tools/rivet_forward_art_ledger.py': 'febcb401de4fbd40366462d7da979d4279c6297e3ecfb35c8a9fcd48d38897f1', 'source/art/weapon-raster-v3/validate_ledger.py': 'e72faeb597885d927374c73100e8608d2c9d8511730d2c909fee2f4e4d1fcf00'}
+HELPER_PINS={'tools/rivet_forward_art_ledger.py': '5e67ddae230d292b252ca284e82920dba220b067d3c1c341413fb8d4ff722196', 'source/art/weapon-raster-v3/validate_ledger.py': 'e72faeb597885d927374c73100e8608d2c9d8511730d2c909fee2f4e4d1fcf00'}
 class ContractError(ValueError):pass
 def fail(s):raise ContractError(s)
 def require(ok,s):

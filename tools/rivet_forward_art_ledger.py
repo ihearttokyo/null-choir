@@ -89,7 +89,7 @@ def validate_atlas(data):
     return {'dimensions':list(dims),'rgba8_pixel_sha256':sha(pixels),'pose_rgba8_sha256':cells}
 
 
-CONSUMER_COMPAT_SHA = "67c6fc8f8e1a36cd458bd8aaa8d5cb4335d1f3975e6592131178c1c7ab169cd4"
+CONSUMER_COMPAT_SHA = "08143d9ae922e4e9c09022d7fb26050e46dcbe0070ed19a12797419607fe7e17"
 def consumer_compatibility(root):
     path=safe_rel(Path(root),"tools/art_consumer_compatibility.py",label="exact current consumer helper",allowed_roots={"tools"})
     if path.is_symlink() or sha(path.read_bytes())!=CONSUMER_COMPAT_SHA: fail("exact reviewed consumer compatibility helper required")

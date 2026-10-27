@@ -274,7 +274,7 @@ def _check_glb(data: bytes, *, label: str) -> dict:
 
 CURRENT_MAIN_SHA = "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1"
 CURRENT_LEVEL_SHA = "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871"
-CURRENT_CONSUMER_HELPER_SHA = "67c6fc8f8e1a36cd458bd8aaa8d5cb4335d1f3975e6592131178c1c7ab169cd4"
+CURRENT_CONSUMER_HELPER_SHA = "08143d9ae922e4e9c09022d7fb26050e46dcbe0070ed19a12797419607fe7e17"
 def _current_consumer_compatibility(root):
     import runpy
     path = safe_rel(root, "tools/art_consumer_compatibility.py", label="current consumer helper", roots={"tools"})
