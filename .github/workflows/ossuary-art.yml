@@ -35,6 +35,12 @@ jobs:
           python -B tests/test_art.py
           python -B tests/test_actor_body_art_ledger.py
           python -B tests/test_main_body_selftest_contract.py
+          python -B tests/test_build_iterations.py
+          python -B tests/test_seal_guardians.py
+          python -B tests/test_seal_guardian_save_contract.py
+          python -B tests/test_seal_guardian_fixture_contract.py
+          python -B tests/test_wall_architecture.py
+          python -B tests/test_floor_wall_contact_contract.py
           python -B tests/test_actor_raw_metadata_privacy.py
           python -B tests/test_worker_regions.py
           python -B tests/test_weapon_raster_ledger.py

@@ -271,7 +271,11 @@
         3.5,
         13.5
       ],
-      "text": "BLOOD SEAL RECOVERED"
+      "text": "BLOOD SEAL RECOVERED",
+      "seal_bearer": "intake_enemy_03",
+      "requires_defeated": [
+        "intake_enemy_03"
+      ]
     },
     {
       "id": "ivory_key",
@@ -281,7 +285,11 @@
         25,
         12.5
       ],
-      "text": "IVORY SEAL RECOVERED"
+      "text": "IVORY SEAL RECOVERED",
+      "seal_bearer": "intake_enemy_15",
+      "requires_defeated": [
+        "intake_enemy_15"
+      ]
     },
     {
       "id": "bell_checkpoint",
@@ -316,7 +324,10 @@
         "blood",
         "ivory"
       ],
-      "text": "CONTAINMENT RESTORED / DESCEND"
+      "text": "CONTAINMENT RESTORED / DESCEND",
+      "requires_defeated": [
+        "intake_enemy_19"
+      ]
     }
   ],
   "pickups": [
@@ -441,7 +452,16 @@
         6.5,
         13.75
       ],
-      "yaw": 219
+      "yaw": 219,
+      "seal_guardian": {
+        "name": "The Bell Custodian",
+        "seal": "blood",
+        "key_id": "blood_key",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "intake_enemy_04",
@@ -549,7 +569,16 @@
         25,
         11.75
       ],
-      "yaw": 15
+      "yaw": 15,
+      "seal_guardian": {
+        "name": "The Siphon Bailiff",
+        "seal": "ivory",
+        "key_id": "ivory_key",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "intake_enemy_16",
@@ -585,7 +614,13 @@
         12,
         2
       ],
-      "yaw": 307
+      "yaw": 307,
+      "door_warden": {
+        "name": "The Containment Lockkeeper",
+        "health_multiplier": 1.6,
+        "attack_windup": 0.95,
+        "recovery": 1.2
+      }
     },
     {
       "id": "intake_enemy_20",
@@ -2768,7 +2803,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE MEMBRANE HAS LOST PRESSURE",
+        "text": "THE BELL CUSTODIAN / BLOOD SEAL BEARER",
         "light_ids": [
           "bell_feed"
         ],
@@ -2791,7 +2826,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE SIPHON DRAWS FROM THE UPPER GALLERY",
+        "text": "THE SIPHON BAILIFF / IVORY SEAL BEARER",
         "light_ids": [
           "siphon_feed"
         ],
@@ -2887,7 +2922,7 @@
         "ivory"
       ],
       "cue": {
-        "text": "THE CONTAINMENT TEETH ARE UNLATCHED",
+        "text": "THE CONTAINMENT LOCKKEEPER HOLDS THE DESCENT",
         "light_ids": [
           "intake_gate_feed"
         ],

@@ -1,5 +1,7 @@
 extends Node3D
 
+const BuildInfo = preload("res://scripts/build_info.gd")
+const SealGuardians = preload("res://scripts/seal_guardians.gd")
 const Campaign = preload("res://scripts/campaign.gd")
 const Narrative = preload("res://scripts/narrative.gd")
 const Level = preload("res://scripts/level.gd")
@@ -94,6 +96,7 @@ func _cancel_interaction_input(observer: CharacterBody3D) -> void:
 	if _interaction_pending_player == observer.get_instance_id(): _interaction_pending_player = 0
 
 func _ready() -> void:
+	get_window().title = BuildInfo.DISPLAY_NAME
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().auto_accept_quit = false
 	var sprite_export_probe: bool = "--verify-sprite-hit-export" in OS.get_cmdline_user_args()
@@ -133,6 +136,14 @@ func _ready() -> void:
 	menu.add_theme_constant_override("separation",9)
 	menu_scroll.add_child(menu)
 	canvas.add_child(menu_scroll)
+	var build_label = Label.new()
+	build_label.name = "BuildVersion"
+	build_label.text = BuildInfo.DISPLAY_NAME
+	build_label.position = Vector2(8,306)
+	build_label.add_theme_font_size_override("font_size",8)
+	build_label.modulate = Color(.82,.77,.67,.8)
+	build_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	canvas.add_child(build_label)
 	show_title()
 	if sprite_export_probe: call_deferred("_verify_sprite_hit_export")
 	elif "--verify-export" in OS.get_cmdline_user_args(): call_deferred("_verify_export")
@@ -256,6 +267,7 @@ func start_level() -> void:
 		actor.configure(self,specs[record.id])
 		if state.actors != null: actor.restore_snapshot(record)
 		enemies.append(actor)
+	SealGuardians.refresh_markers(self,true)
 	if fresh_entry:
 		if not _capture_actor_state():
 			show_title()
@@ -354,7 +366,8 @@ func _capture_actor_state() -> bool:
 	if not is_finite(raw_pitch) or absf(raw_pitch) > Vector3(1.35,0,0).x: return false
 	var captured_pitch: float = clampf(raw_pitch,-1.35,1.35)
 	if not is_finite(captured_yaw) or not is_finite(captured_pitch): return false
-	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"actors":[]}
+	var snapshot: Dictionary = {"removed":state.removed.duplicate(),"keys":state.keys.duplicate(),"seal_drops":state.seal_drops.duplicate(true),"legacy_exit_wardens":state.legacy_exit_wardens.duplicate(),"actors":[]}
+	if not state._valid_seal_resources(snapshot,level.layout): return false
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0:
 			# A failed LIVE native floor settlement must never become a new saved image.
@@ -535,12 +548,21 @@ func _has_keys(required: Array) -> bool:
 		if not key in state.keys: return false
 	return true
 
+func guardian_defeated(actor) -> void:
+	if not playing or not is_instance_valid(actor) or not actor._current_map(): return
+	SealGuardians.defeated(self,actor)
+
 func collect_key(id: String) -> void:
 	if id in state.removed: return
 	for spec in level.layout.data.interactions:
 		if spec.id == id and spec.kind == "key":
+			if not SealGuardians.available(state,spec): return
+			for guardian in spec.get("requires_defeated",[]):
+				if not guardian in state.removed: return
 			if not spec.key in state.keys: state.keys.append(spec.key)
 			state.removed.append(id)
+			if spec.has("seal_bearer"):
+				state.seal_drops = state.seal_drops.filter(func(drop): return drop.guardian != spec.seal_bearer)
 			level.remove_marker(id)
 			level.refresh_machine_lights()
 			level.refresh_gate_presentations()
@@ -591,7 +613,8 @@ func nearest_interaction() -> Dictionary:
 	var distance = 4.5
 	for spec in level.layout.data.interactions + level.layout.data.doors:
 		if spec.id in state.removed or spec.get("kind") == "checkpoint": continue
-		var location = level.layout.world_position(spec.cell)
+		if not SealGuardians.available(state,spec): continue
+		var location = SealGuardians.interaction_position(self,spec)
 		var d = player.position.distance_to(location)
 		if d >= distance: continue
 		var aim = location+Vector3(0,spec.size[1]/2 if spec.has("size") else 0.7,0)
@@ -619,7 +642,7 @@ func interact() -> void:
 		"exit":
 			if not _has_keys(spec.get("requires",[])): return
 			for id in spec.get("requires_defeated",[]):
-				if not id in state.removed:
+				if SealGuardians.exit_warden_required(state,id):
 					notify("THE MANIFESTATION HOLDS THE RESTRAINT")
 					return
 			if not _capture_actor_state():
@@ -728,7 +751,7 @@ func show_title() -> void:
 		if quitting: music.stop()
 		else: music.play_title()
 	if effects != null: effects.stop()
-	_show_menu("NULL CHOIR",[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Sound test",show_sound_test],["Quit",quit_game]])
+	_show_menu(BuildInfo.DISPLAY_NAME,[["New campaign",show_difficulty],["Continue",continue_campaign],["Settings",show_settings],["Sound test",show_sound_test],["Quit",quit_game]])
 	# The title illustration reserves its quiet left third for these controls.
 	# Other screens retain _show_menu's centered layout and default type size.
 	menu_scroll.position = Vector2(18, 45)
@@ -1242,7 +1265,7 @@ func _export_art_checks() -> Dictionary:
 		if art.begins_with("marker_"):
 			var nodes = [node]+node.find_children("*","",true,false)
 			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
-			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.is_visible_in_tree() and part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
+			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
 				marker_models[node.get_instance_id()] = art
 	var checks = {}
 	var marker_ids = []
@@ -1258,7 +1281,13 @@ func _export_art_checks() -> Dictionary:
 		var valid = is_instance_valid(marker) and marker is Node3D
 		if valid:
 			valid = marker.get_parent() == level and marker.scene_file_path == "res://assets/art/world/"+art+".glb" and marker_models.get(marker.get_instance_id(),"") == art and not marker.get_instance_id() in marker_ids
-			valid = valid and marker.is_visible_in_tree() and marker.position.is_equal_approx(level.layout.world_position(spec.cell)+Vector3.UP*0.06) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
+			var dropped_seal: bool = spec.get("kind") == "key" and spec.has("seal_bearer")
+			var expected_visible: bool = SealGuardians.available(state,spec)
+			var expected_position: Vector3 = SealGuardians.interaction_position(self,spec) if dropped_seal and expected_visible else level.layout.world_position(spec.cell)+Vector3.UP*.06
+			valid = valid and marker.is_visible_in_tree() == expected_visible and marker.position.is_equal_approx(expected_position) and marker.scale.is_equal_approx(Vector3.ONE) and is_equal_approx(marker.rotation.y,deg_to_rad(180))
+			if expected_visible:
+				var marker_meshes = ([marker]+marker.find_children("*","MeshInstance3D",true,false)).filter(func(part): return part is MeshInstance3D)
+				valid = valid and marker_meshes.all(func(part): return part.is_visible_in_tree())
 			marker_ids.append(marker.get_instance_id())
 		checks["marker_"+spec.id] = valid
 	checks["marker_count"] = level.markers.size() == remaining

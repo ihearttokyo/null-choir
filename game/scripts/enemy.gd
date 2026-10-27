@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+const SealGuardians = preload("res://scripts/seal_guardians.gd")
 const WorkerHitRegions = preload("res://scripts/worker_hit_regions.gd")
 const BODY_ATLASES := {
     "crawler": "res://assets/art/sprites/bodies-v1/crawler.png",
@@ -54,6 +55,8 @@ var waypoint: Vector3
 var sprite: Sprite3D
 var speed: float = 4.0
 var max_hp: int
+var champion: Dictionary = {}
+var champion_identity: Label3D
 var phase: int = 0
 var _profile: Dictionary = {}
 var _attack_variant: int = 0
@@ -69,8 +72,8 @@ var _worker_clutch_spent := false
 var _worker_regions: Dictionary = {}
 var _worker_atlas_valid := true
 
-static func health_cap(role: String, difficulty: int) -> int:
-	return int(LATE.get(role,{}).get("hp",50 if role == "crawler" else 90)*[0.85,1.0,1.3][difficulty])
+static func health_cap(role: String, difficulty: int, multiplier: float = 1.0) -> int:
+	return int(LATE.get(role,{}).get("hp",50 if role == "crawler" else 90)*[0.85,1.0,1.3][difficulty]*multiplier)
 
 static func capsule_radius(role: String) -> float:
 	return LATE.get(role,{}).get("radius",0.42 if role == "crawler" else 0.34)
@@ -105,7 +108,8 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	alerted = active and not encounter_id.is_empty()
 	_strafe_sign = 1 if id.hash()%2 == 0 else -1
 	_profile = LATE.get(kind,{})
-	hp = health_cap(kind,game.state.difficulty)
+	champion = SealGuardians.profile(spec)
+	hp = health_cap(kind,game.state.difficulty,champion.get("health_multiplier",1.0))
 	max_hp = hp
 	speed = _profile.get("speed",5.4 if kind == "crawler" else 3.1)
 	if kind == "summoner":
@@ -147,6 +151,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.pixel_size = _profile.get("scale",3.8 if kind == "crawler" else 3.65)/float(cell)
 	sprite.position.y = (cell/2.0-8)*sprite.pixel_size
 	add_child(sprite)
+	if not champion.is_empty(): champion_identity = SealGuardians.attach_identity(self,champion)
 	if kind == "worker": _worker_regions = WorkerHitRegions.bind(sprite,WORKER_REGION_MANIFEST)
 	if kind in ["worker","brute","nursery_warden"]:
 		var tell = Telegraph.new()
@@ -177,6 +182,7 @@ func _physics_process(delta: float) -> void:
 	var frame = 4 if hp <= 0 else WorkerHitRegions.VENT_POSE if clutch_vent_time > 0 else 3 if telegraph_time > 0 or pose_time > 0 or (not _profile.is_empty() and (recovery_time > 0 or _rush_time > 0)) else 1+int(age*6)%2 if active and alerted else 0
 	sprite.frame = frame*8+direction_index
 	sprite.modulate = Color(1.7,0.7,0.6) if hurt_time > 0 else Color.WHITE
+	if is_instance_valid(champion_identity): SealGuardians.present_identity(self,champion_identity)
 	if hp <= 0: return
 	if kind in ["nursery_warden","choir_avatar"] and hp < max_hp/2.0: phase = 1
 	if not active:
@@ -273,7 +279,7 @@ func combat_visual_state() -> Dictionary:
 		progress = 1.0-stagger_time/.25
 	elif telegraph_time > 0:
 		stage = "windup"
-		progress = 1.0-telegraph_time/float(WINDUPS[kind])
+		progress = 1.0-telegraph_time/_windup_seconds()
 	elif _rush_time > 0 or _released:
 		stage = "release"
 		progress = 1.0-_rush_time/_rush_duration if _rush_duration > 0 and _rush_time > 0 else 1.0
@@ -296,12 +302,15 @@ func _valid_target(candidate) -> bool:
 func _event(event: String) -> void:
 	if game.has_method("enemy_event"): game.enemy_event(self,event)
 
+func _windup_seconds() -> float:
+	return maxf(WINDUPS[kind],champion.get("attack_windup",0.0))
+
 func _begin_attack(aim: Vector3) -> void:
 	_committed_target = target
 	_committed_variant = _attack_variant
 	_released = false
 	_committed_aim = aim
-	telegraph_time = WINDUPS[kind]
+	telegraph_time = _windup_seconds()
 	velocity.x = 0
 	velocity.z = 0
 	_event("windup")
@@ -311,6 +320,7 @@ func _release_attack() -> void:
 	_released = true
 	attack_time = _profile.get("cooldown",0.8 if kind == "crawler" else 1.7 if kind == "worker" else 2.2)*(0.8 if phase > 0 else 1.0)
 	recovery_time = _profile.get("recovery",0.45 if kind == "crawler" else 0.65 if kind == "worker" else 0.9)
+	recovery_time = maxf(recovery_time,champion.get("recovery",0.0))
 	_recovery_duration = recovery_time
 	pose_time = (0.4 if kind == "caster" else 0.22) if _profile.is_empty() else recovery_time
 	_event("attack")
@@ -366,7 +376,7 @@ func _finish_charge() -> void:
 	_rush_time = 0
 	velocity.x = 0
 	velocity.z = 0
-	recovery_time = maxf(recovery_time,_profile.recovery)
+	recovery_time = maxf(recovery_time,maxf(_profile.recovery,champion.get("recovery",0.0)))
 	pose_time = maxf(pose_time,recovery_time)
 	_recovery_duration = maxf(recovery_time,pose_time)
 
@@ -453,6 +463,8 @@ func _try_melee() -> void:
 func _attack(victim: Node, amount: int, context: Dictionary = {}) -> void:
 	if not _current_map() or not game.playing or hp <= 0 or not active or not is_instance_valid(victim) or victim.is_queued_for_deletion(): return
 	pose_time = 0.22
+	# Named seal/door champions punish a missed readable commitment, not faster fire.
+	if not champion.is_empty(): amount = int(ceil(amount*1.15))
 	if victim == game.player:
 		game.hurt_player(int(amount*[0.7,1.0,1.4][game.state.difficulty]))
 	elif victim.has_method("take_damage"):
@@ -491,6 +503,7 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 		collision_mask = 0
 		velocity = Vector3.ZERO
 		if not id in game.state.removed: game.state.removed.append(id)
+		if game.has_method("guardian_defeated"): game.guardian_defeated(self)
 		_event("death")
 	elif telegraph_time > 0 and _counter_time <= 0:
 		_committed_variant = -1

@@ -517,7 +517,11 @@
         10.5,
         21.5
       ],
-      "text": "SURGICAL CLAMP BLOOD SEAL RECOVERED"
+      "text": "SURGICAL CLAMP BLOOD SEAL RECOVERED",
+      "seal_bearer": "inversion_enemy_02",
+      "requires_defeated": [
+        "inversion_enemy_02"
+      ]
     },
     {
       "id": "inversion_ivory",
@@ -527,7 +531,11 @@
         34.5,
         14.5
       ],
-      "text": "GYROSCOPE IVORY SEAL RECOVERED"
+      "text": "GYROSCOPE IVORY SEAL RECOVERED",
+      "seal_bearer": "inversion_enemy_17",
+      "requires_defeated": [
+        "inversion_enemy_17"
+      ]
     },
     {
       "id": "inversion_checkpoint",
@@ -561,6 +569,9 @@
       "requires": [
         "blood",
         "ivory"
+      ],
+      "requires_defeated": [
+        "inversion_enemy_26"
       ]
     }
   ],
@@ -796,7 +807,16 @@
         10.5,
         19.5
       ],
-      "yaw": 124
+      "yaw": 124,
+      "seal_guardian": {
+        "name": "The Inverted Surgeon",
+        "seal": "blood",
+        "key_id": "inversion_blood",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "inversion_enemy_03",
@@ -931,7 +951,16 @@
         35.5,
         14.5
       ],
-      "yaw": 117
+      "yaw": 117,
+      "seal_guardian": {
+        "name": "The Pale Witness",
+        "seal": "ivory",
+        "key_id": "inversion_ivory",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "inversion_enemy_18",
@@ -1012,7 +1041,13 @@
         38.5,
         31.5
       ],
-      "yaw": 342
+      "yaw": 342,
+      "door_warden": {
+        "name": "The Upside-Down Prior",
+        "health_multiplier": 1.6,
+        "attack_windup": 0.95,
+        "recovery": 1.2
+      }
     },
     {
       "id": "inversion_enemy_27",
@@ -1064,7 +1099,7 @@
         "inversion_enemy_08"
       ],
       "cue": {
-        "text": "THE SURGICAL CLAMPS RECEIVE THE ALIGNMENT ORDER",
+        "text": "THE INVERTED SURGEON / BLOOD SEAL BEARER",
         "light_ids": [
           "inversion_clamp_feed",
           "inversion_clamp_core"
@@ -1093,7 +1128,7 @@
         "inversion_enemy_17"
       ],
       "cue": {
-        "text": "THE GYROSCOPE TURNS ITS INDEX TOWARD THE SURFACE",
+        "text": "THE PALE WITNESS / IVORY SEAL BEARER",
         "light_ids": [
           "inversion_gyro_feed",
           "inversion_gyro_core"
@@ -1170,7 +1205,7 @@
         "inversion_enemy_29"
       ],
       "cue": {
-        "text": "THE ARCHIVE NOW LISTS EVERY RESTRAINT AS OPEN",
+        "text": "THE UPSIDE-DOWN PRIOR HOLDS THE DESCENT",
         "light_ids": [
           "inversion_alignment_feed"
         ],

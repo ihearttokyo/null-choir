@@ -1,0 +1,24 @@
+{
+  "schema": "null-choir-build-iterations-v1",
+  "seed": {
+    "ordinal": 93,
+    "source_commit": "3a3c3538cf030dd8c80ba8ea5b355cb2fd4aa36b",
+    "reachable_commits": 289,
+    "empty_states": 1,
+    "distinct_production_states": 93,
+    "first_parent_states": 59,
+    "additional_branch_states": 34,
+    "missing_trees": 0,
+    "projection": "All HEAD-reachable commits; sorted git ls-tree -r COMMIT -- game records excluding game/tests/; omit empty states; globally collapse identical projected trees. No lazy fetching or blob reads.",
+    "projection_identity_set_sha256": "ca18c62864ebee9c7d28fc9b8f6ec898be486f815179aa00faa11d9c61e1d7e0",
+    "scope": "Committed production-source states, including branch development. Not an exact lifetime/uncommitted iteration count, exported-build count, PR number, test count or monitor-attempt count."
+  },
+  "policy": "Advance once for a new admitted production-source candidate. Aliases and source-identical packaging, signing, notarization or monitoring retries reuse that candidate's reserved ordinal. Issued failed ordinals remain recorded and are never reused. Do not advance for documentation/test-only changes. Minimum three decimal digits; no Alpha, Major Features or Preview suffix for new public identities. Final source commit and exact artifacts are bound in the external release ledger after commit, avoiding a self-referential source hash.",
+  "allocations": [
+    {
+      "ordinal": 94,
+      "candidate": "seal-wardens-and-dimensional-walls",
+      "status": "reserved"
+    }
+  ]
+}

@@ -3,6 +3,8 @@
 from pathlib import Path
 import argparse
 import hashlib
+import importlib.util
+import json
 import os
 import plistlib
 import shutil
@@ -11,7 +13,25 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / 'builds/macos/NULL CHOIR-arm64.zip'
+_version_spec = importlib.util.spec_from_file_location('null_choir_build_iterations', ROOT / 'tools/build_iterations.py')
+_versions = importlib.util.module_from_spec(_version_spec)
+_version_spec.loader.exec_module(_versions)
+_build_identity = _versions.identity(_versions.validate(json.loads((ROOT / _versions.LEDGER).read_text())))
+OUTPUT = ROOT / 'builds/macos' / _build_identity['archive_name']
+
+
+def check_build_identity(app, info):
+    """Refuse a mismatched newly exported name/version before signing/archiving."""
+    expected = {
+        'CFBundleName': _build_identity['display_name'],
+        'CFBundleIdentifier': 'com.ihearttokyo.nullchoir',
+        'CFBundleShortVersionString': _build_identity['version'],
+        'CFBundleVersion': _build_identity['cfbundle_version'],
+    }
+    if app.name != _build_identity['app_name'] or any(info.get(k) != v for k, v in expected.items()):
+        raise ValueError('Exported app identity does not match the reserved development iteration')
+    if info.get('CFBundleDisplayName', _build_identity['display_name']) != _build_identity['display_name']:
+        raise ValueError('Exported display name does not match the reserved iteration')
 
 
 def file_sha256(path):
@@ -63,6 +83,7 @@ def main(*, allow_window=False):
         run('ditto', '-x', '-k', str(export), str(tmp))
         app, = tmp.glob('*.app')
         info = plistlib.loads((app / 'Contents/Info.plist').read_bytes())
+        check_build_identity(app, info)
         binary = app / 'Contents/MacOS' / info['CFBundleExecutable']
         thin = binary.with_suffix('.arm64')
         run('lipo', str(binary), '-thin', 'arm64', '-output', str(thin))

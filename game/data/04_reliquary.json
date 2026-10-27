@@ -454,7 +454,11 @@
         11.5,
         17.5
       ],
-      "text": "FACE REGISTER BLOOD SEAL RECOVERED"
+      "text": "FACE REGISTER BLOOD SEAL RECOVERED",
+      "seal_bearer": "reliquary_enemy_04",
+      "requires_defeated": [
+        "reliquary_enemy_04"
+      ]
     },
     {
       "id": "reliquary_ivory",
@@ -464,7 +468,11 @@
         35.5,
         17.5
       ],
-      "text": "MEMORY DRUM IVORY SEAL RECOVERED"
+      "text": "MEMORY DRUM IVORY SEAL RECOVERED",
+      "seal_bearer": "reliquary_enemy_12",
+      "requires_defeated": [
+        "reliquary_enemy_12"
+      ]
     },
     {
       "id": "reliquary_checkpoint",
@@ -499,7 +507,10 @@
         "blood",
         "ivory"
       ],
-      "text": "MEMORY INDEX RESTORED / DESCEND"
+      "text": "MEMORY INDEX RESTORED / DESCEND",
+      "requires_defeated": [
+        "reliquary_enemy_28"
+      ]
     }
   ],
   "mission": "RECOVER BOTH REGISTERS / RETURN TO THE CATALOGUE",
@@ -788,7 +799,16 @@
         11.5,
         14.5
       ],
-      "yaw": 167.471
+      "yaw": 167.471,
+      "seal_guardian": {
+        "name": "The Keeper of Faces",
+        "seal": "blood",
+        "key_id": "reliquary_blood",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "reliquary_enemy_05",
@@ -860,7 +880,16 @@
         35.5,
         16.5
       ],
-      "yaw": 139.399
+      "yaw": 139.399,
+      "seal_guardian": {
+        "name": "The Ivory Archivist",
+        "seal": "ivory",
+        "key_id": "reliquary_ivory",
+        "health_multiplier": 1.8,
+        "attack_windup": 0.8,
+        "recovery": 1.1,
+        "door_guardian": false
+      }
     },
     {
       "id": "reliquary_enemy_13",
@@ -1004,7 +1033,13 @@
         18.5,
         4.5
       ],
-      "yaw": -158.199
+      "yaw": -158.199,
+      "door_warden": {
+        "name": "The Last Reliquary",
+        "health_multiplier": 1.6,
+        "attack_windup": 0.95,
+        "recovery": 1.2
+      }
     },
     {
       "id": "reliquary_enemy_29",
@@ -2100,7 +2135,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE FACE REGISTER OPENS ITS MOUTHS",
+        "text": "THE KEEPER OF FACES / BLOOD SEAL BEARER",
         "light_ids": [
           "reliquary_halo_feed",
           "reliquary_halo_core"
@@ -2128,7 +2163,7 @@
       ],
       "requires": [],
       "cue": {
-        "text": "THE MEMORY DRUM ANSWERS OUT OF ORDER",
+        "text": "THE IVORY ARCHIVIST / IVORY SEAL BEARER",
         "light_ids": [
           "reliquary_wheel_feed",
           "reliquary_wheel_core"
@@ -2230,7 +2265,7 @@
         "ivory"
       ],
       "cue": {
-        "text": "THE ARCHIVE HAS FILED YOUR ARRIVAL",
+        "text": "THE LAST RELIQUARY HOLDS THE DESCENT",
         "light_ids": [
           "reliquary_exit_feed"
         ],

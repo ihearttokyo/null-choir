@@ -208,11 +208,72 @@ static func validate(content: Variant, art_exists: Callable) -> String:
 			if not error.is_empty(): return error
 			cells[Vector2(loop.route[j][0],loop.route[j][1])] = true
 		if loop.route[0] != loop.route[-1] or cells.size() < 3: return path+".route: expected closure and at least three distinct cells"
+	error = _seal_guardians(content)
+	if not error.is_empty(): return error
 	for enemy in content.enemies:
 		if enemy.kind == "summoner":
 			for number in range(1,7):
 				var id: String = enemy.id+"_add_"+str(number)
 				if removed.has(id): return "enemies: authored ID collides with reserved summoned actor "+id
+	return ""
+
+# Campaign seal carriers are declarative, not free floor keys with a cosmetic name.
+# Synthetic/legacy authoring fixtures outside the eight chapter IDs may omit this
+# feature; once either side declares it, the complete two-sided contract applies.
+static func _seal_guardians(content: Dictionary) -> String:
+	var chapters = ["intake","foundry","processional","reliquary","nursery","ossuary","inversion","heart"]
+	var bearers: Dictionary = {}
+	var seals: Dictionary = {}
+	var door_guardians: Dictionary = {}
+	for enemy in content.enemies:
+		if not enemy.has("seal_guardian"): continue
+		var profile: Variant = enemy.seal_guardian
+		if not profile is Dictionary or profile.size() != 7: return "seal_guardian: expected exactly seven profile fields"
+		for field in ["name","seal","key_id","health_multiplier","attack_windup","recovery","door_guardian"]:
+			if not profile.has(field): return "seal_guardian: missing "+field
+		if not _text(profile.name) or profile.name.length() > MAX_PERSISTED_ID: return "seal_guardian.name: expected a short named character"
+		if profile.seal not in ["blood","ivory"] or seals.has(profile.seal): return "seal_guardian.seal: require distinct Blood and Ivory bearers"
+		if not _text(profile.key_id) or profile.key_id.length() > MAX_PERSISTED_ID: return "seal_guardian.key_id: expected a stable key interaction ID"
+		if not _number(profile.health_multiplier) or profile.health_multiplier < 1.0 or profile.health_multiplier > 4.0: return "seal_guardian.health_multiplier: expected 1..4"
+		if not _number(profile.attack_windup) or profile.attack_windup < 0.35 or profile.attack_windup > 2.0: return "seal_guardian.attack_windup: expected .35..2 seconds"
+		if not _number(profile.recovery) or profile.recovery < 0.2 or profile.recovery > 3.0: return "seal_guardian.recovery: expected .2..3 seconds"
+		if not profile.door_guardian is bool: return "seal_guardian.door_guardian: expected a boolean"
+		if profile.door_guardian: door_guardians[enemy.id] = true
+		bearers[enemy.id] = profile
+		seals[profile.seal] = true
+	for enemy in content.enemies:
+		if not enemy.has("door_warden"): continue
+		if enemy.has("seal_guardian"): return "door_warden: use seal_guardian.door_guardian for a combined role"
+		var profile: Variant = enemy.door_warden
+		if not profile is Dictionary or profile.size() != 4: return "door_warden: expected exactly four profile fields"
+		for field in ["name","health_multiplier","attack_windup","recovery"]:
+			if not profile.has(field): return "door_warden: missing "+field
+		if not _text(profile.name) or profile.name.length() > MAX_PERSISTED_ID: return "door_warden.name: expected a short named character"
+		if not _number(profile.health_multiplier) or profile.health_multiplier < 1.0 or profile.health_multiplier > 4.0: return "door_warden.health_multiplier: expected 1..4"
+		if not _number(profile.attack_windup) or profile.attack_windup < 0.35 or profile.attack_windup > 2.0: return "door_warden.attack_windup: expected .35..2 seconds"
+		if not _number(profile.recovery) or profile.recovery < 0.2 or profile.recovery > 3.0: return "door_warden.recovery: expected .2..3 seconds"
+		door_guardians[enemy.id] = true
+	var exit_guarded: bool = false
+	for interaction in content.interactions:
+		if interaction.kind == "exit":
+			for defeated in interaction.get("requires_defeated",[]):
+				if door_guardians.has(defeated): exit_guarded = true
+	var declared_keys: int = 0
+	for key in content.interactions:
+		if not key.has("seal_bearer"): continue
+		declared_keys += 1
+		if key.kind != "key" or not key.seal_bearer is String or not bearers.has(key.seal_bearer): return "seal_bearer: unknown guardian or non-key interaction"
+		var profile: Dictionary = bearers[key.seal_bearer]
+		if key.id != profile.key_id or key.key != profile.seal: return "seal_bearer: key ID/seal must match its guardian"
+		if key.get("requires_defeated",[]) != [key.seal_bearer]: return "seal_bearer: require exactly its defeated guardian"
+		if not key.get("requires",[]).is_empty(): return "seal_bearer: seal routes must remain independently available"
+	if bearers.is_empty() and declared_keys == 0 and door_guardians.is_empty() and not content.id in chapters: return ""
+	if bearers.size() != 2 or declared_keys != 2 or not seals.has("blood") or not seals.has("ivory") or not exit_guarded: return "seal_guardians: require two distinct named Blood/Ivory bearers and an exit-linked named door guardian"
+	for bearer in bearers:
+		var matching: int = 0
+		for key in content.interactions:
+			if key.get("seal_bearer","") == bearer: matching += 1
+		if matching != 1: return "seal_guardian: every bearer must own exactly one seal interaction"
 	return ""
 
 static func _number(value: Variant) -> bool:
