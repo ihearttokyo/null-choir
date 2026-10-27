@@ -1318,7 +1318,9 @@ func _verify_export() -> void:
 		for actor in enemies:
 			actor.set_physics_process(false)
 			var cell = 256 if actor.kind in ["nursery_warden","choir_avatar"] else 128
-			checks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5
+			# Fixed qualified body contract: Worker has six physiology rows; other roles retain five.
+			var expected_rows = 6 if actor.kind == "worker" else 5
+			checks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*expected_rows
 			if not actor.kind in loaded_roles: loaded_roles.append(actor.kind)
 		checks[id+"_decoded_pcm"] = await ExportAudio.decoded_pcm(get_tree(), music.player)
 	await verify_level.call()
@@ -1523,7 +1525,8 @@ func _verify_sprite_hit_export() -> void:
 	var atlas: Image = sprite.texture.get_image()
 	var valid: bool = atlas != null and not atlas.is_empty()
 	if valid and atlas.is_compressed(): valid = atlas.decompress()==OK
-	_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/worker.png")
+	# Pin the approved production body URI independently of Enemy selection; legacy is not a fallback.
+	_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/bodies-v1/worker.png")
 	if valid:
 		atlas.convert(Image.FORMAT_RGBA8)
 		var size = Vector2i(atlas.get_width()/sprite.hframes,atlas.get_height()/sprite.vframes)
