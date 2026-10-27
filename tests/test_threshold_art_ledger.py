@@ -335,5 +335,94 @@ class ThresholdLedgerTests(unittest.TestCase):
             validator.validate_ledger(self.root, self.ledger_path)
 
 
+
+class MainSelftestCompatibilityTests(unittest.TestCase):
+    """Exact historical/current Main pair, tiny synthetic native receipts only."""
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.compat_rel = "source/art/living-thresholds-v3/compatibility/main-worker-selftest-compatibility-v1.json"
+        repository = Path(__file__).resolve().parents[1]
+        self.descriptor = json.loads((repository / self.compat_rel).read_text())
+        original_rel = self.descriptor["historical_source"]["path"]
+        write(self.root / original_rel, (repository / original_rel).read_bytes())
+        write(self.root / validator.MAIN_SOURCE, (repository / validator.MAIN_SOURCE).read_bytes())
+        for path in validator.NATIVE_CODE_SOURCES:
+            if path != validator.MAIN_SOURCE:
+                write(self.root / path, ("independent fixture " + path).encode())
+        self.receipt = {
+            "schema": "null-choir.threshold-native-qualification", "asset_id": "containment_gate",
+            "runtime_sha256": "a"*64, "source_blend_sha256": "b"*64, "source_proof_sha256": "c"*64,
+            "exit_code": 0, "strict": True, "diagnostics": [], "engine_version": "test",
+            "run_id": "historical-fixture", "claim_scope": "normal-import-and-runtime-consumer",
+            "code_source_hashes": {path: digest((self.root/path).read_bytes()) for path in validator.NATIVE_CODE_SOURCES},
+        }
+        self.receipt["code_source_hashes"][validator.MAIN_SOURCE] = validator.HISTORICAL_MAIN_SHA
+        self.native_rel = "source/art/living-thresholds-v3/intake/native-qualification.json"
+        self.entry = {"native_qualification": {"path": self.native_rel, "sha256": write(self.root/self.native_rel,json_bytes(self.receipt))}}
+    def tearDown(self):
+        self.temp.cleanup()
+    def compatibility(self):
+        ref = {"path": self.compat_rel, "sha256": write(self.root/self.compat_rel,json_bytes(self.descriptor))}
+        return validator._main_selftest_compatibility(self.root, ref, set())
+    def native(self, compatibility=None):
+        return validator._native_receipt(self.root,self.entry,asset_id="containment_gate",
+            source_dir="source/art/living-thresholds-v3/intake",runtime_sha="a"*64,
+            source_sha="b"*64,source_proof_sha="c"*64,owned=set(),main_compatibility=compatibility)
+    def test_exact_pair_reconstructs_and_reuses_historical_receipt_without_rewrite(self):
+        before=(self.root/self.native_rel).read_bytes()
+        compatibility=self.compatibility()
+        self.native(compatibility)
+        self.assertEqual((self.root/self.native_rel).read_bytes(),before)
+        self.assertEqual(compatibility["scope"],"historical-gate-evidence-reuse-only-not-current-native-qualification")
+    def test_old_strict_path_unchanged_and_missing_bridge_fails_new_Main(self):
+        self.assertIsNone(validator._main_selftest_compatibility(self.root,None,set()))
+        with self.assertRaisesRegex(validator.ContractError,"stale at game/scripts/main.gd"):
+            self.native()
+        old=(self.root/self.descriptor["historical_source"]["path"]).read_bytes()
+        write(self.root/validator.MAIN_SOURCE,old)
+        self.native()
+    def test_wrong_old_or_current_hash_rejected(self):
+        for key in ["historical_source","current_source"]:
+            old=self.descriptor[key]["sha256"]
+            self.descriptor[key]["sha256"]="0"*64
+            with self.subTest(key=key),self.assertRaises(validator.ContractError):
+                self.compatibility()
+            self.descriptor[key]["sha256"]=old
+    def test_foreign_source_path_and_arbitrary_replacement_rejected(self):
+        self.descriptor["current_source"]["path"]="game/scripts/level.gd"
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+        self.descriptor["current_source"]["path"]=validator.MAIN_SOURCE
+        self.descriptor["replacements"][0]["function"]="unlock_door"
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+    def test_unrelated_Main_runtime_change_and_changed_snapshot_rejected(self):
+        write(self.root/validator.MAIN_SOURCE,(self.root/validator.MAIN_SOURCE).read_bytes()+b"\\n# unrelated runtime edit\\n")
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+        historical=self.root/self.descriptor["historical_source"]["path"]
+        write(historical,historical.read_bytes()+b"\\n# changed original\\n")
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+    def test_all_other_five_code_source_pins_remain_strict(self):
+        compatibility=self.compatibility()
+        for path in validator.NATIVE_CODE_SOURCES:
+            if path == validator.MAIN_SOURCE:
+                continue
+            original=(self.root/path).read_bytes()
+            write(self.root/path,original+b" changed")
+            with self.subTest(path=path),self.assertRaisesRegex(validator.ContractError,"stale at "+path):
+                self.native(compatibility)
+            write(self.root/path,original)
+    def test_malformed_descriptor_or_false_native_scope_rejected(self):
+        self.descriptor["fresh_native_qualification"]=True
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+        self.descriptor["fresh_native_qualification"]=False
+        self.descriptor["replacements"].pop()
+        with self.assertRaises(validator.ContractError):
+            self.compatibility()
+
 if __name__ == "__main__":
     unittest.main()

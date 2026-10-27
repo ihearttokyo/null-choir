@@ -1,0 +1,28 @@
+{
+  "schema": "null-choir.threshold-main-selftest-compatibility",
+  "schema_version": 1,
+  "kind": "exact-main-selftest-two-site-v1",
+  "historical_source": {
+    "path": "source/art/living-thresholds-v3/compatibility/main-before-worker-selftest-fix.gd",
+    "sha256": "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6372f531"
+  },
+  "current_source": {
+    "path": "game/scripts/main.gd",
+    "sha256": "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0"
+  },
+  "replacements": [
+    {
+      "function": "_verify_export",
+      "before": "\t\t\tchecks[id+\"_actor_\"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5",
+      "after": "\t\t\t# Fixed qualified body contract: Worker has six physiology rows; other roles retain five.\n\t\t\tvar expected_rows = 6 if actor.kind == \"worker\" else 5\n\t\t\tchecks[id+\"_actor_\"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*expected_rows"
+    },
+    {
+      "function": "_verify_sprite_hit_export",
+      "before": "\t_sprite_export_check(checks,\"original_worker_atlas\",valid and sprite.texture.resource_path==\"res://assets/art/sprites/worker.png\")",
+      "after": "\t# Pin the approved production body URI independently of Enemy selection; legacy is not a fallback.\n\t_sprite_export_check(checks,\"original_worker_atlas\",valid and sprite.texture.resource_path==\"res://assets/art/sprites/bodies-v1/worker.png\")"
+    }
+  ],
+  "claim_scope": "historical-gate-evidence-reuse-only-not-current-native-qualification",
+  "fresh_native_qualification": false,
+  "reason": "Only two opt-in shipped self-verification expectations changed: fixed production Worker URI and six physiology rows. Main gate/key/door lifecycle functions and the other five source-bound integration/fixture files are unchanged. Original eight native receipts retain their exact historical Main hash; this descriptor is static compatibility evidence, not a new native run."
+}
