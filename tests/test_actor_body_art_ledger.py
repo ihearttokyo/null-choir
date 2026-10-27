@@ -131,7 +131,9 @@ class Contract(unittest.TestCase):
   bad=copy.deepcopy(original);bad['authored_objects']=['headbox'];mutations.append(bad)
   bad=copy.deepcopy(original);bad['beauty_path']='res://assets/art/sprites/worker.png';mutations.append(bad)
   for bad in mutations:
-   with patch.object(v,'doc',return_value=bad),self.assertRaises(ValueError):v.validate_worker_binding(root,records,rgba,v.WORKER['source'],H)
+   # These are historical Worker schema mutations, not a fresh v5-weapon audit.
+   # The unchanged positive above still checks the ACTUAL current Player bridge.
+   with patch.object(v,'resident_player_bytes',return_value=historical_player_bytes()),patch.object(v,'doc',return_value=bad),self.assertRaises(ValueError):v.validate_worker_binding(root,records,rgba,v.WORKER['source'],H)
   changed=bytearray(rgba);changed[0]^=1
   with self.assertRaises(ValueError):v.validate_worker_binding(root,records,bytes(changed),v.WORKER['source'],H)
   with self.assertRaises(ValueError):v.validate_worker_binding(root,records,rgba,'0'*64,H)
@@ -236,8 +238,11 @@ class Contract(unittest.TestCase):
   records={}
   for name,rel in {'manifest':'game/assets/art/regions/worker-clutch-v1.json','mask':'game/assets/art/regions/worker-clutch-v1.regions','helper':'game/scripts/worker_hit_regions.gd','player':'game/scripts/player.gd'}.items():
    p=self.worker_root/rel;data=historical_player_bytes() if name=='player' else p.read_bytes();records[name]={'path':rel,'sha256':v.sha(data),'bytes':len(data)}
-  self.assertEqual(len(v.validate_worker_binding(self.worker_root,records,self.worker_rgba,authored,H)),2)
-  with self.assertRaises(ValueError):v.validate_worker_binding(self.worker_root,records,self.worker_rgba,v.sha(source),H)
+  # The mask's original/private-versus-public source identity is independent
+  # of the later pistol-only URI. Bind its exact historical Player snapshot.
+  with patch.object(v,'resident_player_bytes',return_value=historical_player_bytes()):
+   self.assertEqual(len(v.validate_worker_binding(self.worker_root,records,self.worker_rgba,authored,H)),2)
+   with self.assertRaises(ValueError):v.validate_worker_binding(self.worker_root,records,self.worker_rgba,v.sha(source),H)
  def test_public_UI_payload_and_layout_corruption_rejected(self):
   _,_,source,_,_,_=self.public_bridge_case();fields,_=v.public_ui_field(source);start,end=fields['absolute_field_range_half_open']
   for index,value in [(start,ord('x')),(end-1,1),(0,ord('X'))]:

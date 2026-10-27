@@ -46,17 +46,24 @@ class NativeRivetTests(unittest.TestCase):
         return Path(t.name)
 
     def validate_json_overlay(self, relative, mutate):
-        """Change decoded JSON in memory, never qualified public artifact bytes."""
+        """Mutate complete historical v4 evidence, not the current v5 packet.
+
+        The actual current-v5 alias has its own full positive/foreign negative.
+        Old metadata type checks must not revalidate its nine context images.
+        """
+        root=self.qualified_private_fixture()
+        self.assertEqual(hashlib.sha256((root/'game/scripts/player.gd').read_bytes()).hexdigest(),
+                         'd3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff')
         function=v['validate_ledger']
         original=function.__globals__['read_json']
         def altered(path):
             value=original(path)
-            if path==ROOT/relative:
+            if path==root/relative:
                 value=copy.deepcopy(value)
                 mutate(value)
             return value
         with patch.dict(function.__globals__,{'read_json':altered}):
-            return function(ROOT)
+            return function(root)
 
     def test_schema_bool_and_float_are_not_integer_version(self):
         for bad in [True,1.0]:
