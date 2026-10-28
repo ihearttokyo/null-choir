@@ -33,7 +33,7 @@ class LegacyFixtureContract(unittest.TestCase):
   self.assertIn('var input_image: PackedByteArray = var_to_bytes(document)',self.save)
   self.assertIn('var_to_bytes(document) == input_image',self.save)
  def test_canonical_expectation_adds_only_two_explicit_fields(self):
-  body=self.save.split('func expected_legacy_codec(',1)[1].split('func canonical_codec_equal',1)[0]
+  body=self.save.split('func expected_legacy_codec(',1)[1].split('\nfunc ',1)[0]
   self.assertIn('document.duplicate(true)',body)
   self.assertNotIn('.erase(',body)
   self.assertNotIn('Campaign.',body)
@@ -79,6 +79,92 @@ class LegacyFixtureContract(unittest.TestCase):
    self.assertIn('"'+defect+'"',self.save)
   self.assertIn('not state.from_dict(bad) and state.to_dict() == migrated and var_to_bytes(bad) == untouched',self.save)
   self.assertIn('Unsafe transformed headroom rejects atomically AFTER legacy geometry validation',self.save)
+ def test_removed_carrier_setup_is_explicit_and_never_repairs_negative_inputs(self):
+  actor=(ROOT/'game/tests/test_actor_snapshot_trust.gd').read_text()
+  helper=actor.split('func arrange_collected_removed_equipment(',1)[1].split('func expected_actor_disk_codec',1)[0]
+  for term in ['if not grant.carrier in snapshot.removed: continue','snapshot.earned_supply.loot_drops.is_empty()','book.loot_claimed.append(grant.id)','grant.kind == "unlock"','snapshot.owned_weapons.append(int(grant.weapon))','supply.valid(book,snapshot,layout,difficulty)']:
+   self.assertIn(term,helper)
+  for forbidden in ['.ammo','.health','.armor','loot_drops = []','healing_remaining =']:
+   self.assertNotIn(forbidden,helper)
+  fresh=actor.split('func fresh_document(',1)[1].split('func check_births',1)[0]
+  self.assertNotIn('arrange_collected_removed_equipment(',fresh)
+  self.assertEqual(actor.count('arrange_collected_removed_equipment('),3) # definition +2 positive builders
+  setup=self.scale.split('document.removed =',1)[1].split('documents.append(document)',1)[0]
+  self.assertIn('arrange_collected_removed_equipment(document,old_layout,mode)',setup)
+  self.assertIn('if not prepared:',setup);self.assertIn('if not prepared_envelopes:',setup)
+  self.assertGreaterEqual(setup.count('write_map(path,source_text)'),3)
+  self.assertIn('snapshot.actors.size()==1 and snapshot.earned_supply==document.earned_supply',setup)
+
+ def test_pure_finite_collected_entitlements_model_and_negatives(self):
+  registry=json.loads((ROOT/'game/data/earned_supplies.json').read_text())['chapters']
+  def valid(snapshot,content):
+   book=snapshot['earned_supply'];grants={g['id']:g for g in content['grants']};claimed=book['loot_claimed']
+   return (not book['loot_drops'] and len(claimed)==len(set(claimed))
+    and all(i in grants and (grants[i]['carrier']in snapshot['removed']or grants[i]['legacy_alias']in snapshot['removed']) and (grants[i]['kind']!='unlock'or grants[i]['weapon']in snapshot['owned_weapons'])for i in claimed)
+    and all(g['carrier']not in snapshot['removed']or g['id']in claimed for g in grants.values())
+    and all(0<=book['healing_remaining'][row['id']]<=row['capacity']for row in content['stations']))
+  def arrange(snapshot,content):
+   out=copy.deepcopy(snapshot)
+   for g in content['grants']:
+    if g['carrier']not in out['removed']:continue
+    if g['id']not in out['earned_supply']['loot_claimed']:out['earned_supply']['loot_claimed'].append(g['id'])
+    if g['kind']=='unlock'and g['weapon']not in out['owned_weapons']:out['owned_weapons'].append(g['weapon'])
+   out['owned_weapons'].sort();return out
+  for chapter in ['intake','nursery']:
+   content=registry[chapter];carriers={g['carrier']for g in content['grants']};kept='intake_enemy_00'if chapter=='intake'else ''
+   old={'removed':sorted(carriers-{kept}),'owned_weapons':[0,1],'ammo':[0,90,0,0,0,0],'health':73,'earned_supply':{'version':1,'revision':1,'loot_drops':[],'loot_claimed':[],'healing_remaining':{row['id']:row['capacity']for row in content['stations']}}}
+   self.assertFalse(valid(old,content));new=arrange(old,content);self.assertTrue(valid(new,content))
+   self.assertEqual(new['ammo'],old['ammo']);self.assertEqual(new['health'],old['health']);self.assertEqual(new['earned_supply']['healing_remaining'],old['earned_supply']['healing_remaining']);self.assertFalse(new['earned_supply']['loot_drops'])
+   for mode in range(3):
+    image={**copy.deepcopy(new),'checkpoint':copy.deepcopy(new),'level_start':copy.deepcopy(new)}
+    for envelope in [image,image['checkpoint'],image['level_start']]:self.assertTrue(valid(envelope,content))
+   for defect in ['missing','duplicate','foreign','stock']:
+    bad=copy.deepcopy(new)
+    if defect=='missing':bad['earned_supply']['loot_claimed'].pop()
+    if defect=='duplicate':bad['earned_supply']['loot_claimed'].append(bad['earned_supply']['loot_claimed'][0])
+    if defect=='foreign':bad['earned_supply']['loot_claimed'].append('foreign')
+    if defect=='stock':bad['earned_supply']['healing_remaining'][content['stations'][0]['id']]=-1
+    self.assertFalse(valid(bad,content),defect)
+   if chapter=='nursery':
+    bad=copy.deepcopy(new);bad['owned_weapons']=[0,1];self.assertFalse(valid(bad,content))
+
+ def test_empty_living_positive_collects_exact_modern_seal_pairs(self):
+  actor=(ROOT/'game/tests/test_actor_snapshot_trust.gd').read_text()
+  positive=actor.split('var empty = document.duplicate(true)',1)[1].split('state.restore_level_start()',1)[0]
+  for term in ['key.get("seal_bearer","") in empty.removed','empty.keys.append(key.key)','empty.removed.append(key.id)','arrange_collected_removed_equipment(empty,empty_layout,difficulty)']:
+   self.assertIn(term,positive)
+  self.assertNotIn('erase("seal_drops")',positive)
+  for row in json.loads((ROOT/'game/data/01_intake.json').read_text())['interactions']:
+   if row.get('kind')!='key':continue
+   for owned,retired in [(False,False),(True,False),(False,True),(True,True)]:
+    keys=[row['key']] if owned else [];removed=[row['seal_bearer']]+([row['id']] if retired else [])
+    valid=(row['key'] in keys)==(row['id'] in removed) and (row['seal_bearer'] not in removed or row['key'] in keys)
+    self.assertEqual(valid,owned and retired,'A defeated bearer needs BOTH ownership and pickup retirement')
+
+ def test_actual_contact_scenes_use_existing_selected_chapter_constructor(self):
+  for name in ['test_floor_door_contacts.gd','test_hero_floor_contacts.gd']:
+   text=(ROOT/'game/tests'/name).read_text()
+   for term in ['StaticSelectedLevel.fresh_selected(index,1)','if selected == null:','game.state=selected','await game.start_level()','not game.playing','game._scene_level_index!=index','quit(1)']:
+    self.assertIn(term,text)
+   self.assertNotIn('game.state.level_index=index',text)
+  self.assertIn('rows.size()==40',(ROOT/'game/tests/test_floor_door_contacts.gd').read_text())
+  hero=(ROOT/'game/tests/test_hero_floor_contacts.gd').read_text()
+  self.assertIn('rows.size()==15 and queries==255',hero)
+  helper=(ROOT/'game/tests/fixtures/static_selected_level.gd').read_text()
+  for term in ['state.floor_revision = layout.floor_revision()','state.earned_supply = Supply.fresh(layout)','state.mark_checkpoint("entry",layout.world_position(layout.data.spawn))']:
+   self.assertIn(term,helper)
+
+ def test_shared_actor_disk_oracle_changes_only_earned_JSON_representation(self):
+  actor=(ROOT/'game/tests/test_actor_snapshot_trust.gd').read_text()
+  helper=actor.split('func expected_actor_disk_codec(',1)[1].split('func fresh_document',1)[0]
+  self.assertIn('native_image.duplicate(true)',helper)
+  self.assertIn('for snapshot in [expected,expected.checkpoint,expected.level_start]:',helper)
+  self.assertIn('JSON.parse_string(JSON.stringify(snapshot.earned_supply,"",true,true))',helper)
+  self.assertNotIn('.erase(',helper)
+  self.assertIn('restored.to_dict() == expected_actor_disk_codec(before)',actor)
+  # No tolerance/subset/whole-resource canonicalization replaces the actual comparison.
+  self.assertNotIn('is_equal_approx',helper);self.assertNotIn('JSON.stringify(expected,',helper)
+
  def test_optional_home_override_preserves_exact_disposable_guards(self):
   for source,home_var in [(self.save,'private_home'),(self.scale,'home')]:
    for term in ['OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_HOME")','home_override.is_empty() or (home_override.is_absolute_path()','home_override == home_override.simplify_path()','home_override.get_file() in ["home","validation-home"]','not home_override in ["/root","/var/root","/Users/"+user,"/home/"+user]','if not override_safe or fixture.is_empty()','OS.get_environment("HOME")','OS.get_user_data_dir().begins_with('+home_var+'+"/")']:
