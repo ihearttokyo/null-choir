@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 ## Cold production navigation endpoint evidence, not earned/physical traversal.
 const Level = preload("res://scripts/level.gd")
 const Campaign = preload("res://scripts/campaign.gd")
@@ -14,8 +15,7 @@ func expect(ok: bool, message: String) -> void:
 func run() -> void:
 	var host = Host.new()
 	root.add_child(host)
-	host.state.new_campaign(1)
-	host.state.level_index = 7
+	host.state = StaticSelectedLevel.fresh_selected(7,1)
 	var level = Level.new()
 	host.level = level
 	host.add_child(level)

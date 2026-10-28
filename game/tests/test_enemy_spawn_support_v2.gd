@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 ## Focused constructor/real native overlap regression, not an earned encounter.
 const Level = preload("res://scripts/level.gd")
 const Enemy = preload("res://scripts/enemy.gd")
@@ -17,8 +18,7 @@ func run() -> void:
 	AudioServer.set_bus_mute(0,true)
 	var host = Host.new()
 	root.add_child(host)
-	host.state.new_campaign(1)
-	host.state.level_index = 7
+	host.state = StaticSelectedLevel.fresh_selected(7,1)
 	host.level = Level.new()
 	host.add_child(host.level)
 	if not host.level.build(host,7):

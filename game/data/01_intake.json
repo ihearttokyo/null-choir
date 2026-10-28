@@ -330,93 +330,7 @@
       ]
     }
   ],
-  "pickups": [
-    {
-      "id": "entry_ammo",
-      "kind": "ammo",
-      "amount": 35,
-      "weapon": 1,
-      "cell": [
-        12,
-        27
-      ]
-    },
-    {
-      "id": "west_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        7.5,
-        23.5
-      ]
-    },
-    {
-      "id": "bell_armor",
-      "kind": "armor",
-      "amount": 40,
-      "cell": [
-        8.5,
-        13.5
-      ]
-    },
-    {
-      "id": "upper_ammo",
-      "kind": "ammo",
-      "amount": 45,
-      "weapon": 1,
-      "cell": [
-        5.5,
-        20.5
-      ]
-    },
-    {
-      "id": "nave_health",
-      "kind": "health",
-      "amount": 30,
-      "cell": [
-        12,
-        16
-      ]
-    },
-    {
-      "id": "siphon_ammo",
-      "kind": "ammo",
-      "amount": 40,
-      "weapon": 1,
-      "cell": [
-        23,
-        20.5
-      ]
-    },
-    {
-      "id": "siphon_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        21,
-        13
-      ]
-    },
-    {
-      "id": "gate_ammo",
-      "kind": "ammo",
-      "amount": 50,
-      "weapon": 1,
-      "cell": [
-        12.5,
-        10.5
-      ]
-    },
-    {
-      "id": "gate_health",
-      "kind": "health",
-      "amount": 40,
-      "cell": [
-        17,
-        3
-      ]
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "intake_enemy_00",
@@ -2291,18 +2205,26 @@
     },
     {
       "cell": [
-        5.15,
-        10.5
+        5.9804,
+        13.45
       ],
-      "height": 3.1,
+      "height": 2.9,
       "color": [
-        1,
-        0.59,
-        0.3
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.4,
-      "range": 14,
-      "fixture_yaw": 90
+      "energy": 1.45,
+      "range": 8.0,
+      "fixture_yaw": 270,
+      "threat_for": "intake_enemy_03",
+      "threat_role": "seal_blood",
+      "target": [
+        6.5,
+        13.75
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2384,18 +2306,26 @@
     },
     {
       "cell": [
-        20.15,
-        12.5
+        24.4804,
+        11.45
       ],
-      "height": 3.1,
+      "height": 2.9,
       "color": [
-        1,
-        0.59,
-        0.3
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.4,
-      "range": 14,
-      "fixture_yaw": 90
+      "energy": 1.45,
+      "range": 8.0,
+      "fixture_yaw": 270,
+      "threat_for": "intake_enemy_15",
+      "threat_role": "seal_ivory",
+      "target": [
+        25,
+        11.75
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2414,18 +2344,26 @@
     },
     {
       "cell": [
-        10.15,
-        1.5
+        11.4804,
+        2.3
       ],
-      "height": 3.1,
+      "height": 2.9,
       "color": [
-        1,
-        0.59,
-        0.3
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 3.4,
-      "range": 14,
-      "fixture_yaw": 90
+      "energy": 1.45,
+      "range": 8.0,
+      "fixture_yaw": 270,
+      "threat_for": "intake_enemy_19",
+      "threat_role": "exit_warden",
+      "target": [
+        12,
+        2
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [

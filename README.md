@@ -8,13 +8,25 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot presents 
 
 [![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download the Alpha 4 Major Features Preview 06.1 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-06-1-Apple-Silicon.zip). **Incremental playable preview; Alpha 4 remains in progress.** Requires macOS 14 or newer. The 64-bit Apple Silicon archive is Developer ID-signed, Apple-notarized and stapled; macOS Gatekeeper and isolated muted launch checks passed for this exact package. Keep system security protections enabled.
+[Download Null Choir v0.096 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.096/Null-Choir-v0.096.zip). **A work-in-progress update, not a completed campaign.** Requires macOS 14 or newer. Developer ID-signed and Apple-notarized; stapled, packed-resource qualified and verified by codesign, stapler and Gatekeeper on the release Mac. Keep system security protections enabled.
 
-Archive size: **289,931,781 bytes**
+Archive size: **295,933,561 bytes**
 
-SHA-256: `b65e081ea4d81c8a49728d8f465990c0aa2318b3d7a778084f4f6d699fc8a95a`
+SHA-256: `c2870e2d5720b5670d75d03726772883f246b29d15687c326fb6bca24c0648e5`
 
-[Export source commit](https://github.com/ihearttokyo/null-choir/tree/4a5268e5b80bf937f5e2b0a0f8ce4ac6363ced4a/game) · [Merged source with the exact same tree](https://github.com/ihearttokyo/null-choir/tree/5e3032b0204809e994281ce7ede09f44424b6ee2/game) · [Preview 06.1 release details](docs/releases/major-features-preview-06-1.md) · [All Alpha 4 builds](https://github.com/ihearttokyo/null-choir/releases/tag/v0.2.3-alpha.4).
+[Shipping source snapshot (exported)](https://github.com/ihearttokyo/null-choir/tree/94be1cd0ec80339c16b583e352b4b30222623b7f/game) · [v0.096 release details and PCK identity](docs/releases/v0.096.md) · [Earlier builds](https://github.com/ihearttokyo/null-choir/releases).
+
+### What changed in v0.096
+
+- **Eight directional enemy and boss bodies:** original runtime atlases and role-specific attack tells distinguish the cathedral's creatures. Blood and Ivory seal bearers guard progression, and each chapter has an exit warden. Eight volumetric wall families add deep bays, ribs and returns to the existing routes.
+- **Six weapons with distinct shot effects:** the Impact Tool, Rivet Pistol, Scattergun, Sawtooth Repeater, Marrow Launcher and Choir Disruptor keep their own firing character rather than sharing one generic effect. Defeat equipment carriers, then walk over their finite weapon, ammunition and armor drops. Full capacity leaves the unused remainder in the world for later; pending drops survive Save→Continue.
+- **Eight healing-machine families, 32 service points:** floor-bolted textured 3D apparatus replaces loose healing pickups across the eight chapters. Face a usable nearby machine and press **Space** to draw from its finite stock; its live gauge tracks what remains. A machine is not an unlimited health reset.
+- **Two specific precision opportunities:** the Worker's authored pressure clutch can trigger a finite vent response; the Nursery Warden briefly exposes its recessed pressure node for precise fire. These are scoped mechanics, not a general headshot or anatomical-damage system.
+- **Momentum and moody practical light:** Doom-inspired movement and localized apparatus, critical-carrier and drop lighting sharpen the descent without turning the dark cathedral into a uniformly bright room. No Doom maps, sprites or songs are copied.
+
+This release consolidates the earlier body/telegraph, seal-warden and volumetric-wall work with the earned-supply, healing, shot-effect and movement increment. Scoped arranged runtime/pixel evidence passed across 22 contexts and 244 frames, plus 12 shot-effect checks and 44 pending-drop/full-capacity/recovery checks. That is not a played eight-chapter campaign or a human-input, listening, balance or sustained-FPS certification. [Exact evidence and limits](docs/releases/v0.096.md#evidence-and-limits).
+
+[Preview 06.1 immediate rollback](https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-06-1-Apple-Silicon.zip) — 289,931,781 bytes; SHA-256 `b65e081ea4d81c8a49728d8f465990c0aa2318b3d7a778084f4f6d699fc8a95a`. [Verified Preview 06.1 details](docs/releases/major-features-preview-06-1.md) remain unchanged. Earlier release descriptions below are historical, not claims that their old packages contain v0.096 features.
 
 ### What changed in Major Features Preview 06.1
 
@@ -71,7 +83,7 @@ Preview 02’s terrain, six title/chapter paintings, illustrated progression/int
 
 ### Still unfinished and known limits
 
-This is an incremental early playable preview, not a completed Alpha 4 or full-goal release. Further campaign and visual work remains. Physical keyboard/mouse/gamepad play, human listening, full played pacing and sustained FPS are not certified by automated checks. Gamepad support and fullscreen performance remain under development. Historical cathedral-style SoundTest experiments and enemy concept studies are not shipped runtime upgrades in this preview.
+This is a work-in-progress update, not a completed Alpha 4 or full-goal release. Further campaign and visual work remains. Physical keyboard/mouse/gamepad play, human listening, full played pacing and sustained FPS are not certified by automated checks. Gamepad support and fullscreen performance remain under development. Historical cathedral-style SoundTest experiments and unqualified concept studies remain separate from the runtime bodies and features described above.
 
 ### Previous downloads and rollback
 
@@ -82,7 +94,9 @@ This is an incremental early playable preview, not a completed Alpha 4 or full-g
 
 ## Development status
 
-The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. Preview 06.1 adds the forward-aiming native Rivet Pistol and live Pixel Music Garden while retaining Preview 06’s eight gate assemblies, the other five weapon atlases, chapter art and Ossuary crossing. Original authoring sources and earlier assets remain retained; the broader campaign and art roadmap remain in progress.
+**Current release: Null Choir v0.096.** The exact package and shipping source snapshot are linked above. Source and feature-evidence details are in the release notes; matching package qualification is recorded separately. This remains a work-in-progress game: full-campaign balance, human play and sustained performance are not certified.
+
+The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. The retained Preview 06.1 release introduced the forward-aiming native Rivet Pistol and live Pixel Music Garden; v0.096 retains them, Preview 06's eight gate assemblies, chapter art and the Ossuary crossing. Original authoring sources and earlier assets remain preserved; the broader campaign and art roadmap remain in progress.
 
 The new Rivet atlas consists of actual native Blender renders with its matching editable source. The other five refreshed weapon atlases retain their separate raster provenance and editable design companions; they are not relabeled as Blender renders. Earlier cathedral-style SoundTest work stays preserved in `source/prototypes/resonance-20261026/`, separate from the original procedural pixel garden. [DESIGN.md](DESIGN.md) remains the full project brief.
 
@@ -96,7 +110,7 @@ Open `game/project.godot` in Godot 4.7.2, or run:
 godot --path game
 ```
 
-WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
+WASD moves, mouse looks, left click fires, **E** opens doors and other contextual interactables, Q/Tab cycles acquired weapons, 1–6 selects them, and Escape pauses. **Walk over defeated enemies' equipment drops and earned seals to collect them; E is not item collection. Press Space at a usable nearby healing machine** to spend its finite stock. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons; X uses healing machinery. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
 With Python 3.11 or newer, matching Godot 4.7.2 Mac export templates, Xcode and Apple's Metal Toolchain installed:
 
@@ -106,7 +120,7 @@ python3 tests/test_build_source.py --allow-window
 python3 tests/test_macos.py
 ```
 
-Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The build and native source-preservation test refuse by default before creating outputs or launching Godot. Use `--allow-window` only when opening and activating a Godot graphics window is intended; license generation and import remain headless. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
+Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The build and native source-preservation test refuse by default before creating outputs or launching Godot. Use `--allow-window` only when opening and activating a Godot graphics window is intended; license generation and import remain headless. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes the ledger-named archive under `builds/macos/` (currently `Null-Choir-v0.096.zip`). It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
 
 Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 

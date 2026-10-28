@@ -16,7 +16,10 @@ spec.loader.exec_module(build)
 
 class BuildIterations(unittest.TestCase):
     def setUp(self):
+        # Fixed historical allocator fixture; real current identity is tested separately.
         self.data = json.loads((ROOT / build.LEDGER).read_text())
+        self.data['allocations'] = self.data['allocations'][:2]
+        self.assertEqual(build.validate(self.data), 95)
 
     def fixture(self, directory):
         root = Path(directory)
@@ -24,15 +27,22 @@ class BuildIterations(unittest.TestCase):
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes((ROOT / relative).read_bytes())
+        (root / build.LEDGER).write_text(json.dumps(self.data))
+        for path, text in build.metadata(root, self.data).items():
+            path.write_text(text)
         return root
 
-    def test_current95_metadata_exact(self):
-        self.assertEqual(build.validate(self.data), 95)
-        self.assertEqual(build.identity(95), {
-            'ordinal': 95, 'version': '0.095', 'display_name': 'Null Choir v0.095',
-            'app_name': 'Null Choir v0.095.app', 'archive_name': 'Null-Choir-v0.095.zip',
-            'cfbundle_version': '95'})
-        for path, expected in build.metadata(ROOT, self.data).items():
+    def test_current96_metadata_exact(self):
+        current = json.loads((ROOT / build.LEDGER).read_text())
+        self.assertEqual(build.validate(current), 96)
+        self.assertEqual(current['allocations'][:-1], self.data['allocations'])
+        self.assertEqual(current['allocations'][-1], {
+            'ordinal': 96, 'candidate': 'earned-arsenal-momentum-local-horror', 'status': 'reserved'})
+        self.assertEqual(build.identity(96), {
+            'ordinal': 96, 'version': '0.096', 'display_name': 'Null Choir v0.096',
+            'app_name': 'Null Choir v0.096.app', 'archive_name': 'Null-Choir-v0.096.zip',
+            'cfbundle_version': '96'})
+        for path, expected in build.metadata(ROOT, current).items():
             self.assertEqual(path.read_text(), expected, str(path))
 
     def test_audited_seed_is_not_an_export_or_lifetime_count(self):
@@ -233,16 +243,16 @@ class BuildIterations(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('null_choir_macos_version_test', ROOT / 'tools/build_macos.py')
         mac = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mac)
-        self.assertEqual(mac.OUTPUT.name, 'Null-Choir-v0.095.zip')
-        app = Path('/synthetic/Null Choir v0.095.app')
-        info = {'CFBundleName': 'Null Choir v0.095', 'CFBundleIdentifier': 'com.ihearttokyo.nullchoir',
-                'CFBundleDisplayName': 'Null Choir v0.095',
-                'CFBundleShortVersionString': '0.095', 'CFBundleVersion': '95'}
+        self.assertEqual(mac.OUTPUT.name, 'Null-Choir-v0.096.zip')
+        app = Path('/synthetic/Null Choir v0.096.app')
+        info = {'CFBundleName': 'Null Choir v0.096', 'CFBundleIdentifier': 'com.ihearttokyo.nullchoir',
+                'CFBundleDisplayName': 'Null Choir v0.096',
+                'CFBundleShortVersionString': '0.096', 'CFBundleVersion': '96'}
         mac.check_build_identity(app, info)
         with self.assertRaises(ValueError): mac.check_build_identity(Path('/synthetic/Alpha4.app'), info)
         for key, value in (('CFBundleName', 'NULL CHOIR'), ('CFBundleDisplayName', 'Preview07'),
                            ('CFBundleIdentifier', 'com.foreign.nullchoir'),
-                           ('CFBundleShortVersionString', '0.2.3'), ('CFBundleVersion', '0.095')):
+                           ('CFBundleShortVersionString', '0.2.3'), ('CFBundleVersion', '0.096')):
             changed = {**info, key: value}
             with self.subTest(key=key), self.assertRaises(ValueError): mac.check_build_identity(app, changed)
 
@@ -291,9 +301,9 @@ class FreshExportNormalization(unittest.TestCase):
                   if p.is_file() and p.name != 'Info.plist'}
         normalized, info = self.mac.normalize_exported_app(app)
         self.assertFalse(app.exists())
-        self.assertEqual(normalized.name, 'Null Choir v0.095.app')
+        self.assertEqual(normalized.name, 'Null Choir v0.096.app')
         self.mac.check_build_identity(normalized, info)
-        self.assertEqual(info['CFBundleDisplayName'], 'Null Choir v0.095')
+        self.assertEqual(info['CFBundleDisplayName'], 'Null Choir v0.096')
         self.assertEqual(info['CFBundleExecutable'], 'NULL CHOIR')
         self.assertEqual(before, {p.relative_to(normalized): (p.read_bytes(), p.stat().st_ino)
                                  for p in normalized.rglob('*') if p.is_file() and p.name != 'Info.plist'})
@@ -308,7 +318,7 @@ class FreshExportNormalization(unittest.TestCase):
 
     def test_direct_app_export_raw_plist_friendly_folder_never_renames(self):
         raw = self.fixture(self.temporary())
-        app = raw.with_name('Null Choir v0.095.app')
+        app = raw.with_name('Null Choir v0.096.app')
         raw.rename(app)  # Model Godot's explicit .app destination, raw pkg_name plist.
         payload = {p.relative_to(app): (p.read_bytes(), p.stat().st_ino) for p in app.rglob('*')
                    if p.is_file() and p.name != 'Info.plist'}
@@ -323,7 +333,7 @@ class FreshExportNormalization(unittest.TestCase):
     def test_foreign_stale_missing_metadata_refused_before_mutation(self):
         for key, value in [('CFBundleIdentifier', 'com.foreign.game'), ('CFBundleName', 'FOREIGN'),
                            ('CFBundleDisplayName', 'FOREIGN'), ('CFBundleShortVersionString', '0.094'),
-                           ('CFBundleVersion', '94'), ('CFBundleVersion', '96'),
+                           ('CFBundleVersion', '94'), ('CFBundleVersion', '97'),
                            ('CFBundleExecutable', '../outside'), ('CFBundleExecutable', 'missing')]:
             with self.subTest(key=key, value=value):
                 app = self.fixture(self.temporary())
@@ -332,7 +342,7 @@ class FreshExportNormalization(unittest.TestCase):
                 p.write_bytes(plistlib.dumps(info)); before = p.read_bytes()
                 with self.assertRaises(ValueError): self.mac.normalize_exported_app(app)
                 self.assertEqual(p.read_bytes(), before)
-                self.assertFalse(app.with_name('Null Choir v0.095.app').exists())
+                self.assertFalse(app.with_name('Null Choir v0.096.app').exists())
         for key in ['CFBundleName', 'CFBundleIdentifier', 'CFBundleVersion', 'CFBundleShortVersionString', 'CFBundleExecutable']:
             app = self.fixture(self.temporary()); p = app / 'Contents/Info.plist'
             info = plistlib.loads(p.read_bytes()); info.pop(key); p.write_bytes(plistlib.dumps(info))
@@ -341,7 +351,7 @@ class FreshExportNormalization(unittest.TestCase):
 
     def test_existing_and_raced_empty_target_are_never_overwritten(self):
         for raced in [False, True]:
-            app = self.fixture(self.temporary()); target = app.with_name('Null Choir v0.095.app')
+            app = self.fixture(self.temporary()); target = app.with_name('Null Choir v0.096.app')
             before = (app / 'Contents/Info.plist').read_bytes()
             rename = self.mac._rename_no_replace
             def collision(source, dest):
@@ -369,7 +379,7 @@ class FreshExportNormalization(unittest.TestCase):
                 with self.subTest(defect=defect), self.assertRaises(ValueError): self.mac.normalize_exported_app(app)
                 self.assertTrue(app.exists())
                 self.assertEqual((app / 'Contents/Info.plist').read_bytes(), before)
-                self.assertFalse(app.with_name('Null Choir v0.095.app').exists())
+                self.assertFalse(app.with_name('Null Choir v0.096.app').exists())
                 if defect == 'symlink': self.assertEqual(target.read_bytes(), b'owned target, never touched')
             finally:
                 if pck.is_symlink(): pck.unlink()  # Exact own synthetic leaf; never its target.
@@ -377,7 +387,7 @@ class FreshExportNormalization(unittest.TestCase):
     def test_failed_last_after_builder_import_refuses_before_patch(self):
         root = self.temporary(); app = self.fixture(root)
         ledger = json.loads((ROOT / build.LEDGER).read_text())
-        failed = build.mark_failed(ledger, ledger['allocations'][-1]['candidate'], 95, 'fixture failure')
+        failed = build.mark_failed(ledger, ledger['allocations'][-1]['candidate'], 96, 'fixture failure')
         (root / build.LEDGER).parent.mkdir(parents=True)
         (root / build.LEDGER).write_text(json.dumps(failed))
         before = (app / 'Contents/Info.plist').read_bytes()
@@ -394,7 +404,7 @@ class FreshExportNormalization(unittest.TestCase):
             with self.assertRaises(OSError): self.mac.normalize_exported_app(app)
         self.assertTrue(app.exists())
         self.assertEqual((app / 'Contents/Info.plist').read_bytes(), before)
-        self.assertFalse(app.with_name('Null Choir v0.095.app').exists())
+        self.assertFalse(app.with_name('Null Choir v0.096.app').exists())
         self.assertFalse(list((app / 'Contents').glob('Info.plist.*.tmp')))
 
 

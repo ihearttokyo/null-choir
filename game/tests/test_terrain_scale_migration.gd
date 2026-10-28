@@ -31,9 +31,9 @@ func run() -> void:
         kept.position = [point.x,point.y,point.z]
         document.actors = [kept]
         document.removed = old_layout.data.enemies.filter(func(spec): return spec.id!=kept.id).map(func(spec): return spec.id)
-        # Genuine legacy actor/floor fixture: both original floor seals were
-        # collected before the rescale. Do not create unreachable pending seal
-        # drops on deliberately shrunken geometry or weaken their modern guard.
+        # Old seal/floor format, with explicitly already-collected equipment
+        # from the removed carriers. Never leave a fresh living-carrier book
+        # beside authored deaths or create drops on deliberately shrunken geometry.
         document.erase("seal_drops")
         document.erase("legacy_exit_wardens")
         document.keys = []
@@ -41,8 +41,17 @@ func run() -> void:
             if key.kind == "key":
                 document.keys.append(key.key)
                 document.removed.append(key.id)
+        if not arrange_collected_removed_equipment(document,old_layout,mode):
+            write_map(path,source_text)
+            quit(1)
+            return
         var state = Campaign.new()
-        expect(state.from_dict(document),"Legacy actor-bearing staged document is valid before scale edit")
+        var prepared: bool = state.from_dict(document)
+        expect(prepared,"Legacy actor-bearing staged document is valid before scale edit")
+        if not prepared:
+            write_map(path,source_text)
+            quit(1)
+            return
         state.position = old_layout.world_position([18.25,8.75])+Vector3.UP*.04
         state.health = 73
         state.ammo[1] = 37
@@ -56,7 +65,14 @@ func run() -> void:
         document.checkpoint.position = [point.x,point.y,point.z]
         point = old_layout.world_position([18.75,8.75])+Vector3.UP*.04
         document.level_start.position = [point.x,point.y,point.z]
-        expect(Campaign.new().from_dict(document),"All three native old-floor envelopes validate")
+        var prepared_envelopes: bool = Campaign.new().from_dict(document)
+        expect(prepared_envelopes,"All three native old-floor envelopes validate")
+        if not prepared_envelopes:
+            write_map(path,source_text)
+            quit(1)
+            return
+        for snapshot in [document,document.checkpoint,document.level_start]:
+            expect(snapshot.actors.size()==1 and snapshot.earned_supply==document.earned_supply and snapshot.earned_supply.loot_drops.is_empty(),"Every scale envelope owns one actor and the exact already-collected equipment book")
         documents.append(document)
     var changed: Dictionary = JSON.parse_string(original)
     changed.floor_revision = 1

@@ -75,6 +75,14 @@ func run() -> void:
 			var empty = document.duplicate(true)
 			empty.removed = empty.actors.map(func(actor): return actor.id)
 			empty.actors = []
+			var empty_layout = layout_for_fixture(index)
+			# This positive has defeated every bearer and already collected both
+			# seals. Keep modern owned-key/retired-pickup pairs exact; no pending drop.
+			for key in empty_layout.data.interactions:
+				if key.get("kind") != "key" or not key.get("seal_bearer","") in empty.removed: continue
+				if not key.key in empty.keys: empty.keys.append(key.key)
+				if not key.id in empty.removed: empty.removed.append(key.id)
+			arrange_collected_removed_equipment(empty,empty_layout,difficulty)
 			expect(state.from_dict(empty) and state.actors == [] and state.to_dict().has("actors"),"Explicit empty living set is preserved with authored deaths")
 			state.restore_level_start()
 			expect(state.actors == document.level_start.actors,"Entry restoration owns its actor records")
@@ -136,9 +144,46 @@ func check_codec_roundtrip() -> void:
 		if saved != OK: continue
 		var restored = Campaign.new()
 		expect(restored.load_progress(path),"Actual Campaign disk load accepts native yaw "+str(yaw))
-		expect(restored.to_dict() == before,"Exact Campaign disk roundtrip preserves ALL current/checkpoint/entry fields for native yaw "+str(yaw))
+		expect(restored.to_dict() == expected_actor_disk_codec(before),"Exact Campaign disk roundtrip preserves ALL current/checkpoint/entry fields for native yaw "+str(yaw))
 	for candidate in [path,path+".tmp"]:
 		if FileAccess.file_exists(candidate): expect(DirAccess.remove_absolute(candidate) == OK,"Remove only the isolated actor codec fixture file")
+
+func layout_for_fixture(index: int):
+	var layout = Layout.new()
+	expect(layout.load_level(index),"Selected fixture equipment registry loads")
+	return layout
+
+func arrange_collected_removed_equipment(snapshot: Dictionary, layout, difficulty: int) -> bool:
+	# Explicit synthetic setup ONLY: these removed carriers' finite entitlements
+	# were already collected/spent. Never repair malformed/negative inputs or
+	# create pending drops on counterfactually shrunken geometry; no refill.
+	var supply = Campaign.EarnedSupplies
+	if not snapshot.get("earned_supply") is Dictionary or not snapshot.earned_supply.get("loot_drops") is Array or not snapshot.earned_supply.get("loot_claimed") is Array:
+		expect(false,"Arranged removed-carrier fixture requires its existing modern equipment book")
+		return false
+	if not snapshot.earned_supply.loot_drops.is_empty():
+		expect(false,"Arranged collected-carrier fixture must not discard pending drops")
+		return false
+	var book: Dictionary = snapshot.earned_supply.duplicate(true)
+	for grant in supply.chapter(layout).grants:
+		if not grant.carrier in snapshot.removed: continue
+		if not grant.id in book.loot_claimed: book.loot_claimed.append(grant.id)
+		if grant.kind == "unlock" and not int(grant.weapon) in snapshot.owned_weapons:
+			snapshot.owned_weapons.append(int(grant.weapon))
+	snapshot.owned_weapons.sort()
+	snapshot.earned_supply = book
+	var valid: bool = supply.valid(book,snapshot,layout,difficulty)
+	expect(valid,"Explicit already-collected removed carriers retain exact finite equipment accounting")
+	return valid
+
+func expected_actor_disk_codec(native_image: Dictionary) -> Dictionary:
+	# Match Campaign's full-precision JSON representation for earned books ONLY;
+	# preserve strict equality of every other native resource/actor field.
+	var expected = native_image.duplicate(true)
+	for snapshot in [expected,expected.checkpoint,expected.level_start]:
+		if snapshot.has("earned_supply"):
+			snapshot.earned_supply = JSON.parse_string(JSON.stringify(snapshot.earned_supply,"",true,true))
+	return expected
 
 func fresh_document(index: int, difficulty: int) -> Dictionary:
 	var state = Campaign.new()
@@ -147,6 +192,7 @@ func fresh_document(index: int, difficulty: int) -> Dictionary:
 	var layout = Layout.new()
 	expect(layout.load_level(index),"Actual layout loads")
 	state.floor_revision = layout.floor_revision()
+	state._reset_earned_supply() # Match the selected chapter, not initial Intake.
 	state.actors = []
 	# Unattached real Main/Level instances provide the production configure inputs;
 	# no scene, physics, music or GUI startup is claimed by this codec/trust fixture.
@@ -203,6 +249,7 @@ func check_births() -> void:
 		expect(not state.from_dict(invalid) and state.to_dict() == before,"Atomic owner/birth rejection: "+defect)
 	document.removed.append(owner)
 	document.actors = document.actors.filter(func(actor): return actor.id != owner)
+	arrange_collected_removed_equipment(document,layout,1)
 	expect(state.from_dict(document),"Living children remain valid after their actual authored owner's death")
 	var ambiguous = document.duplicate(true)
 	ambiguous.erase("actors")

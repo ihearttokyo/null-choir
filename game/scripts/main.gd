@@ -2,6 +2,7 @@ extends Node3D
 
 const BuildInfo = preload("res://scripts/build_info.gd")
 const SealGuardians = preload("res://scripts/seal_guardians.gd")
+const EarnedRuntime = preload("res://scripts/earned_supply_runtime.gd")
 const Campaign = preload("res://scripts/campaign.gd")
 const Narrative = preload("res://scripts/narrative.gd")
 const Level = preload("res://scripts/level.gd")
@@ -15,6 +16,8 @@ const Preferences = preload("res://scripts/preferences.gd")
 const AmmoVisuals = preload("res://scripts/ammo_visuals.gd")
 const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
 var state = Campaign.new()
+var earned_runtime = EarnedRuntime.new()
+var earned_recovery_only: bool = false
 var playing: bool = false
 var loaded_positions: bool = false
 var placement_pending: bool = false
@@ -51,7 +54,58 @@ var _interaction_axis_held: Dictionary = {}
 
 func _enter_tree() -> void:
 	get_window().window_input.connect(_record_interaction_input)
+	get_window().window_input.connect(_record_supply_input)
 	Input.joy_connection_changed.connect(_interaction_device_changed)
+
+func fail_earned_transaction(detail: String) -> void:
+	# Lethal preparation failed. This scene is POISONED, not a resumable pause.
+	# Keep the last good save/checkpoint envelopes; never publish partial defeat.
+	earned_recovery_only=true
+	playing=false
+	placement_pending=false
+	_scene_level_index=-1
+	if is_instance_valid(player):
+		player.cancel_actions()
+		player.set_physics_process(false)
+		player.collision_layer=0
+		player.collision_mask=0
+	for actor in enemies:
+		if not is_instance_valid(actor): continue
+		actor.set_physics_process(false)
+		actor.collision_layer=0
+		actor.collision_mask=0
+	get_tree().paused=true
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	if music != null: music.set_paused(true)
+	if effects != null: effects.set_paused(true)
+	_show_earned_recovery()
+	notify(detail,10)
+
+func _show_earned_recovery() -> void:
+	var choices: Array = []
+	if state.checkpoint.get("health",0)>0: choices.append(["Restore checkpoint",restore_checkpoint])
+	if state.level_start.get("health",0)>0: choices.append(["Restart level",restart_level])
+	choices.append(["Return without saving",show_title])
+	choices.append(["Quit without saving",_finish_quit])
+	_show_menu("SUPPLY TRANSACTION FAILED / RECOVERY REQUIRED",choices)
+
+func _record_supply_input(event: InputEvent) -> void:
+	if InputMap.has_action("use_asset"): earned_runtime.record_input(self,event)
+
+func queue_use_asset_input(observer: CharacterBody3D, event: InputEvent) -> bool:
+	return earned_runtime.queue_use(self,observer,event)
+
+func cancel_supply_input() -> void:
+	if InputMap.has_action("use_asset"): earned_runtime.cancel(self)
+
+func reset_supply_sweep() -> void:
+	if InputMap.has_action("use_asset"): earned_runtime.reset(self)
+
+func supply_display() -> Dictionary:
+	return earned_runtime.display(self)
+
+func earned_defeated(actor) -> bool:
+	return earned_runtime.commit_defeat(self,actor)
 
 func _record_interaction_input(event: InputEvent) -> void:
 	_interaction_incoming_eligible = false
@@ -75,6 +129,7 @@ func _record_interaction_input(event: InputEvent) -> void:
 	_interaction_edges.append([event,tick+1])
 
 func _interaction_device_changed(device: int, connected: bool) -> void:
+	earned_runtime.device_changed()
 	if connected: return
 	for key in _interaction_axis_held.keys():
 		if key.x == device: _interaction_axis_held.erase(key)
@@ -268,6 +323,8 @@ func start_level() -> void:
 		if state.actors != null: actor.restore_snapshot(record)
 		enemies.append(actor)
 	SealGuardians.refresh_markers(self,true)
+	reset_supply_sweep()
+	earned_runtime.refresh(self)
 	if fresh_entry:
 		if not _capture_actor_state():
 			show_title()
@@ -306,6 +363,7 @@ func start_level() -> void:
 			return
 	menu_scroll.hide()
 	player.cancel_actions()
+	earned_recovery_only=false # Clear ONLY after a validated replacement scene.
 	playing = true
 	_capture_game_mouse()
 	if music != null:
@@ -409,12 +467,14 @@ func _repair_loaded_position() -> bool:
 		if not _valid_saved_position(point): continue
 		state.position = point
 		player.position = point+Vector3.UP*0.04
+		reset_supply_sweep()
 		notify("RECOVERY POSITION REPAIRED: HEALTHY SNAPSHOT",8)
 		return true
 	var entry: Vector3 = level.layout.world_position(level.layout.data.spawn)
 	if not _valid_saved_position(entry): return false
 	state.position = entry
 	player.position = entry+Vector3.UP*0.04
+	reset_supply_sweep()
 	notify("RECOVERY POSITION REPAIRED: LEVEL ENTRY",8)
 	return true
 
@@ -449,6 +509,8 @@ func update_passive_triggers(observer: CharacterBody3D) -> void:
 	if not _passive_scan_current(observer,scene) or _passive_scan_tick == Engine.get_physics_frames(): return
 	# Latch before mutations: callbacks may reenter or retire this player/map.
 	_passive_scan_tick = Engine.get_physics_frames()
+	earned_runtime.tick(self,observer)
+	if not _passive_scan_current(observer,scene): return
 	for spec in scene.layout.data.pickups:
 		if not _passive_scan_current(observer,scene): return
 		if not spec.id in state.removed and observer.position.distance_to(scene.layout.world_position(spec.cell)) < 1.4 and _passive_trigger_visible(spec):
@@ -694,6 +756,9 @@ func restart_level() -> void:
 	await start_level()
 
 func pause_game() -> void:
+	if earned_recovery_only:
+		_show_earned_recovery()
+		return
 	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending:
 		show_title()
@@ -710,6 +775,7 @@ func pause_game() -> void:
 	_button("Descent map",func(): show_descent_map(pause_game))
 
 func resume_game() -> void:
+	if earned_recovery_only: return
 	if is_instance_valid(player): player.cancel_actions()
 	if placement_pending or state.health <= 0 or not is_instance_valid(level) or level.is_queued_for_deletion(): return
 	get_tree().paused = false
@@ -720,6 +786,7 @@ func resume_game() -> void:
 	if effects != null: effects.set_paused(false)
 
 func _save() -> Error:
+	if earned_recovery_only: return ERR_INVALID_DATA
 	if not _capture_actor_state():
 		notify("SAVE FAILED: INVALID ACTOR IMAGE",8)
 		return ERR_INVALID_DATA
@@ -728,6 +795,9 @@ func _save() -> Error:
 	return result
 
 func save_and_title() -> void:
+	if earned_recovery_only:
+		_show_earned_recovery()
+		return
 	if state.health > 0 and _save() != OK:
 		_show_menu("SAVE FAILED",[["Retry save",save_and_title],["Return without saving",show_title],["Back",pause_game]])
 		return
@@ -1064,7 +1134,7 @@ func shot(weapon: int) -> void:
 	if effects != null: effects.play(["tool","rivet","scatter","rivet","scatter","caster_charge"][clampi(weapon,0,5)])
 	if weapon in [1,2,3]:
 		var visuals = ammo_visuals()
-		if visuals != null and is_instance_valid(player): visuals.casing(player)
+		if visuals != null and is_instance_valid(player): visuals.casing(player,weapon,player.last_shot_sequence(weapon))
 	for actor in enemies:
 		if is_instance_valid(actor) and actor._current_map() and actor.hp > 0 and actor.active and actor.position.distance_to(player.position) < 34:
 			actor.alerted = true
@@ -1082,6 +1152,14 @@ func ammo_visuals() -> Node3D:
 		visuals.game = self
 		level.add_child(visuals)
 	return visuals
+
+func weapon_impact(point: Vector3, weapon: int, sequence: int, surface: String) -> void:
+	var scene = level
+	if not playing or not is_instance_valid(scene) or scene.is_queued_for_deletion(): return
+	if effects != null: effects.play("impact",-12)
+	if not playing or level != scene or not is_instance_valid(scene) or scene.is_queued_for_deletion(): return
+	var visuals = ammo_visuals()
+	if visuals != null: visuals.impact(point,weapon,sequence,surface)
 
 func impact(point: Vector3) -> void:
 	if effects != null: effects.play("impact",-12)
@@ -1173,6 +1251,9 @@ func autoaim_target(origin: Vector3, direction: Vector3, max_range: float) -> No
 	return solution.contact.get("collider") if not solution.actor_id.is_empty() else null
 
 func quit_game() -> bool:
+	if earned_recovery_only:
+		_show_earned_recovery()
+		return false
 	if quitting: return true
 	if level != null and state.health > 0 and _save() != OK:
 		pause_game()
@@ -1248,8 +1329,294 @@ func _verify_fire_tick() -> bool:
 	driver.free()
 	return fired
 
+# Registered ownership replaces only obsolete FLOOR supply assumptions.
+# These are arranged packed-resource transactions, NOT played route/balance proof.
+func _export_earned_checks() -> Dictionary:
+	var supply = Campaign.EarnedSupplies
+	var content: Dictionary = supply.chapter(level.layout)
+	var checks := {"earned_registry":not content.is_empty(),"no_floor_supplies":level.layout.data.pickups.is_empty()}
+	if content.is_empty(): return checks
+	checks["earned_typed_state"]=supply.valid(state.earned_supply,state._resources(),level.layout,state.difficulty)
+	checks["retired_floor_markers_absent"]=content.legacy_pickups.all(func(row): return not level.markers.has(row.id))
+	var expected: Dictionary = {}
+	for station in content.stations:
+		var remaining: int = int(state.earned_supply.healing_remaining[station.id])
+		expected[station.id]={"parent":level,"point":level.healing_machinery.root_point(station.id),
+			"text":"","reservoir":true,"available":remaining>0,"station_id":station.id,"chapter":level.layout.data.id,"stock":remaining,"capacity":int(station.capacity)}
+	var grants: Dictionary = supply.grant_map(content)
+	for drop in state.earned_supply.loot_drops:
+		var grant: Dictionary = grants[drop.grant_id]
+		var label: String = "ARMOR" if grant.kind=="armor" else Player.WEAPONS[int(grant.weapon)].name
+		expected[drop.grant_id]={"parent":level,"point":Vector3(drop.position[0],drop.position[1],drop.position[2]),
+			"text":label+(" UNLOCK" if grant.kind=="unlock" else " x"+str(drop.remaining)),"reservoir":false,"available":true}
+	for grant in grants.values():
+		if grant.id in state.earned_supply.loot_claimed or expected.has("carrier:"+grant.carrier): continue
+		for actor in enemies:
+			if not is_instance_valid(actor) or actor.id!=grant.carrier or actor.hp<=0 or not actor._current_map(): continue
+			var label: String = "CARRIED RESONATOR" if actor.kind=="caster" else "RITUAL CACHE" if actor.kind=="summoner" else "CARRIED EQUIPMENT"
+			expected["carrier:"+actor.id]={"parent":actor,"point":Vector3(.4,1.0,.15),"text":label,"reservoir":false,"available":true}
+	var actual: Dictionary = earned_runtime._markers
+	checks["earned_marker_count"]=actual.size()==expected.size() and actual.keys().all(func(id): return expected.has(id)) and expected.keys().all(func(id): return actual.has(id))
+	var seen: Array = []
+	var owned: bool = bool(checks.earned_marker_count)
+	for id in expected:
+		var row: Dictionary = expected[id]
+		var marker = actual.get(id)
+		if not is_instance_valid(marker) or not marker is Node3D or marker.is_queued_for_deletion(): owned=false;continue
+		if marker.get_instance_id() in seen or marker.get_parent()!=row.parent or not marker.position.is_equal_approx(row.point): owned=false
+		seen.append(marker.get_instance_id())
+		if not marker.visible or marker is CollisionObject3D: owned=false
+		if row.reservoir:
+			if level.healing_stations.get(id,{}).get("root")!=marker or not level.healing_machinery.validate_station(id,true): owned=false
+			if earned_runtime.station_use_target(self,{"id":id,"capacity":row.capacity})==null: owned=false
+			continue
+		if not marker.find_children("*","CollisionShape3D",true,false).is_empty(): owned=false
+		var meshes: Array = marker.get_children().filter(func(child): return child is MeshInstance3D)
+		var labels: Array = marker.get_children().filter(func(child): return child is Label3D)
+		var lights: Array = marker.get_children().filter(func(child): return child is Light3D)
+		if marker.find_children("*","Light3D",true,false).size()!=lights.size(): owned=false
+		if not row.reservoir:
+			var drop_practical: bool=row.parent==level
+			if meshes.size()!=1 or labels.size()!=1 or lights.size()!=(1 if drop_practical else 0): owned=false;continue
+			if drop_practical:
+				var practical: Light3D=lights[0]
+				if earned_runtime._drop_practicals.get(marker.get_instance_id())!=practical: owned=false
+				if not practical is OmniLight3D or practical.name!="EarnedDropPractical" or not practical.visible or not practical.position.is_equal_approx(Vector3(0,.32,0)) or not is_equal_approx(practical.omni_range,2.0) or not is_equal_approx(practical.light_energy,1.0) or not practical.shadow_enabled or not practical.light_color.is_equal_approx(Color(.95,.8,.6)) or practical.get_meta("practical_source","")!="earned_drop_case" or practical.get_meta("source_role","")!="earned_equipment_drop": owned=false
+			var drop_mesh: MeshInstance3D=meshes[0]
+			if not drop_mesh.mesh is BoxMesh or not drop_mesh.mesh.size.is_equal_approx(Vector3(.34,.12,.22)) or not drop_mesh.material_override is StandardMaterial3D: owned=false
+			else:
+				var case_material := drop_mesh.material_override as StandardMaterial3D
+				if not case_material.emission_enabled or not case_material.emission.is_equal_approx(Color(.56,.36,.18)) or not is_equal_approx(case_material.emission_energy_multiplier,.18): owned=false
+			if labels[0].text!=row.text or labels[0].billboard!=BaseMaterial3D.BILLBOARD_ENABLED: owned=false
+			continue
+	if earned_runtime._drop_practicals.size()!=state.earned_supply.loot_drops.size(): owned=false
+	checks["earned_fixed_machine_geometry"]=level.healing_machinery.validate_book(state.earned_supply,true)
+	checks["earned_marker_ownership"]=owned and checks.earned_fixed_machine_geometry
+	return checks
+
+func _export_earned_negative_controls() -> bool:
+	# No state/file writes and no await while the visible marker book is overlaid.
+	# Missing/foreign/duplicate-node controls must fail, then restore exact objects.
+	var original: Dictionary = earned_runtime._markers
+	if original.size()<2: return false
+	var keys: Array = original.keys()
+	var missing: Dictionary = original.duplicate()
+	missing.erase(keys[0]);earned_runtime._markers=missing
+	var missing_rejected: bool = not _export_earned_checks().get("earned_marker_count",true)
+	var foreign: Dictionary = original.duplicate()
+	foreign["foreign:unregistered"]=original[keys[0]];earned_runtime._markers=foreign
+	var foreign_rejected: bool = not _export_earned_checks().get("earned_marker_count",true)
+	var duplicate: Dictionary = original.duplicate()
+	duplicate[keys[1]]=duplicate[keys[0]];earned_runtime._markers=duplicate
+	var duplicate_rejected: bool = not _export_earned_checks().get("earned_marker_ownership",true)
+	earned_runtime._markers=original
+	var restored: Dictionary = _export_earned_checks()
+	return missing_rejected and foreign_rejected and duplicate_rejected and restored.get("earned_marker_count",false) and restored.get("earned_marker_ownership",false) and _export_earned_machine_negative_controls() and _export_earned_drop_practical_negative_controls()
+
+func _export_earned_drop_practical_negative_controls() -> bool:
+	# Only existing actual drops; no grant/death/save construction for this probe.
+	for marker in earned_runtime._markers.values():
+		if not earned_runtime._drop_practicals.has(marker.get_instance_id()): continue
+		var practical: OmniLight3D=earned_runtime._drop_practicals[marker.get_instance_id()]
+		practical.hide()
+		var hidden: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+		practical.show()
+		var replacement: Node=practical.duplicate()
+		marker.remove_child(practical);marker.add_child(replacement)
+		var substituted: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+		marker.remove_child(replacement);replacement.free();marker.add_child(practical)
+		var foreign := OmniLight3D.new();marker.add_child(foreign)
+		var foreign_rejected: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+		foreign.free()
+		var holder := Node3D.new();marker.add_child(holder)
+		marker.remove_child(practical);holder.add_child(practical)
+		var nested: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+		holder.remove_child(practical);marker.add_child(practical);holder.free()
+		return hidden and substituted and foreign_rejected and nested and _export_earned_checks().get("earned_marker_ownership",false)
+	return true # No uncollected drop exists in this current primitive state.
+
+func _export_earned_machine_negative_controls() -> bool:
+	# No await, supply mutation or file writes while geometry is temporarily invalid.
+	var ids: Array=level.healing_stations.keys()
+	if ids.is_empty(): return false
+	var row: Dictionary=level.healing_stations[ids[0]]
+	var control: MeshInstance3D=row.nodes.DialFace
+	var needle: MeshInstance3D=row.nodes.StockNeedle
+	var fluid: MeshInstance3D=row.nodes.StockVolume
+	var machine: Node3D=row.root
+	var anchor: Node3D=row.nodes.UseTarget
+	control.hide()
+	var hidden: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	control.show()
+	var original: Transform3D=machine.transform
+	machine.position.x+=.01
+	var moved: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	machine.transform=original
+	var control_mesh: Mesh=control.mesh
+	control.mesh=SphereMesh.new()
+	var substituted: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	control.mesh=control_mesh
+	var fake := StandardMaterial3D.new()
+	fake.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;fake.albedo_color.a=.1
+	control.material_override=fake
+	var transparent: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	control.material_override=null
+	var anchor_transform: Transform3D=anchor.transform
+	anchor.position.z+=.01
+	var anchor_lie: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	anchor.transform=anchor_transform
+	var needle_transform: Transform3D=needle.transform
+	needle.rotation.z+=.1
+	var gauge_lie: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	needle.transform=needle_transform
+	var stock_transform: Transform3D=fluid.transform
+	fluid.scale.y=0.0
+	var stock_lie: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	fluid.transform=stock_transform
+	var original_id: String=row.id
+	row.id="foreign"
+	var foreign: bool=not _export_earned_checks().get("earned_marker_ownership",true)
+	row.id=original_id
+	return hidden and moved and substituted and transparent and anchor_lie and gauge_lie and stock_lie and foreign and _export_earned_checks().get("earned_marker_ownership",false)
+
+class ExportEarnedDeathTick:
+	extends Node
+	var game
+	var observer
+	var carrier
+	var completed: bool = false
+	var defeated: bool = false
+	func _physics_process(_delta: float) -> void:
+		if is_instance_valid(observer) and observer==game.player and is_instance_valid(carrier) and carrier._current_map() and carrier.hp>0:
+			# Controlled production damage/death hook, not an ammo/balance claim.
+			# Guardian front armor is still applied by take_damage itself.
+			carrier.take_damage(carrier.hp*4,observer,{"attack_kind":"export_fixture","origin":observer.global_position})
+			defeated=carrier.hp==0 and carrier.id in game.state.removed and not game.earned_recovery_only
+		completed=true
+		set_physics_process(false)
+
+func _verify_registered_weapon(weapon: int, checks: Dictionary, key: String) -> bool:
+	var supply = Campaign.EarnedSupplies
+	var content: Dictionary = supply.chapter(level.layout)
+	var unlock: Dictionary = {}
+	for row in content.get("grants",[]):
+		if row.kind=="unlock" and int(row.weapon)==weapon:
+			unlock=row;break
+	checks[key+"_registered_unlock"]=not unlock.is_empty()
+	if unlock.is_empty(): return false
+	var carrier
+	for actor in enemies:
+		if is_instance_valid(actor) and actor.id==unlock.carrier: carrier=actor;break
+	checks[key+"_living_registered_carrier"]=is_instance_valid(carrier) and carrier.hp>0 and not carrier.id in state.removed
+	if not checks[key+"_living_registered_carrier"]: return false
+	var old_inventory: Array = state.owned_weapons.duplicate()
+	var old_ammo: Array = state.ammo.duplicate()
+	var old_weapon: int = state.weapon
+	var quantity: int = 0
+	for row in content.grants:
+		if row.carrier==carrier.id and row.kind=="ammo" and int(row.weapon)==weapon: quantity+=supply.amount(row,state.difficulty)
+	var driver = ExportEarnedDeathTick.new()
+	driver.game=self;driver.observer=player;driver.carrier=carrier
+	driver.process_mode=Node.PROCESS_MODE_ALWAYS
+	add_child(driver)
+	while not driver.completed: await get_tree().physics_frame
+	var defeated: bool = driver.defeated
+	driver.free()
+	checks[key+"_carrier_death"]=defeated
+	checks[key+"_death_did_not_grant_inventory"]=state.ammo==old_ammo and state.owned_weapons==old_inventory and state.weapon==old_weapon
+	if not defeated: return false
+	var drop: Dictionary = {}
+	for row in state.earned_supply.loot_drops:
+		if row.grant_id==unlock.id: drop=row;break
+	checks[key+"_finite_unlock_drop"]=not drop.is_empty() and int(drop.get("remaining",0))==1
+	if drop.is_empty(): return false
+	# Arrangement chooses the ACTUAL recorded corpse/recovery drop, never its
+	# retired floor cell. Reset prevents teleport segments collecting other loot.
+	player.position=Vector3(drop.position[0],drop.position[1]-.16,drop.position[2])
+	reset_supply_sweep()
+	await _verify_passive_tick()
+	_process(0)
+	var expected_ammo: int = mini(Player.WEAPONS[weapon].max_ammo,int(old_ammo[weapon])+quantity)
+	var remainder: int = 0
+	var grants: Dictionary = supply.grant_map(content)
+	for row in state.earned_supply.loot_drops:
+		var grant: Dictionary = grants[row.grant_id]
+		if grant.carrier==carrier.id and grant.kind=="ammo" and int(grant.weapon)==weapon: remainder+=int(row.remaining)
+	checks[key+"_pickup"]=weapon in state.owned_weapons and state.weapon==weapon and unlock.id in state.earned_supply.loot_claimed and state.ammo[weapon]==expected_ammo
+	checks[key+"_finite_ammo_conservation"]=int(state.ammo[weapon])-int(old_ammo[weapon])+remainder==quantity
+	checks[key+"_retired_floor_not_claimed"]=not unlock.legacy_alias in state.removed
+	checks[key+"_typed_snapshot"]=_capture_actor_state() and Campaign.new().from_dict(state.to_dict())
+	var owned_checks: Dictionary = _export_earned_checks()
+	for name in owned_checks: checks[key+"_"+name]=owned_checks[name]
+	return checks[key+"_pickup"] and checks[key+"_finite_ammo_conservation"] and checks[key+"_typed_snapshot"] and ResourceLoader.exists("res://assets/art/weapons/"+Player.WEAPONS[weapon].asset+".png")
+
+func _export_wall_architecture_checks() -> Dictionary:
+	# Source-profile presence/ownership check, not a new wall-art or physics grade.
+	# Existing wall-native contracts own detailed winding/contact qualification.
+	var checks := {"wall_family":false,"wall_chunks":false,"wall_draw_geometry":false,"wall_collision":false}
+	var walls = Level.WallArchitecture
+	var layout = level.layout
+	var chapter: String = layout.data.id
+	if not walls.FAMILIES.has(chapter): return checks
+	checks.wall_family = true
+	var size: float = layout.data.cell_size
+	var closure_top: float = walls._highest_support(layout)+3.0
+	var expected: Dictionary = {}
+	for cell in layout.tiles:
+		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+			if layout.is_walkable(cell+direction): continue
+			var point := Vector2(cell)+Vector2(0.5,0.5)+Vector2(direction)*0.5
+			var edge := Vector2(-direction.y,direction.x)*0.5
+			var a: float = layout.height_at(point-edge)
+			var b: float = layout.height_at(point+edge)
+			var bottom: float = minf(a,b)
+			var height: float = maxf(layout.roof_height(cell)+absf(a-b),closure_top-bottom)
+			var key := Vector2i(floori(cell.x/float(walls.CHUNK_CELLS)),floori(cell.y/float(walls.CHUNK_CELLS)))
+			var name: String = "WallArchitecture_"+str(key.x)+"_"+str(key.y)
+			if not expected.has(name): expected[name] = {"counts":[0,0,0],"bounds":[null,null,null]}
+			var chunk: Dictionary = expected[name]
+			for part in walls.profile(chapter,size,height,absi(cell.x*17+cell.y*31+direction.x+direction.y)):
+				var material: int = int(part[6])
+				chunk.counts[material] += 36
+				var vertices: PackedVector3Array = walls._vertices(part,Vector3(point.x*size,bottom,point.y*size),Vector3(-direction.y,0,direction.x),Vector3(direction.x,0,direction.y))
+				for vertex in vertices:
+					chunk.bounds[material] = AABB(vertex,Vector3.ZERO) if chunk.bounds[material] == null else chunk.bounds[material].expand(vertex)
+	var actual: Dictionary = {}
+	for node in level.get_children():
+		if str(node.name).begins_with("WallArchitecture_"): actual[str(node.name)] = node
+	checks.wall_chunks = not expected.is_empty() and actual.size()==expected.size() and expected.keys().all(func(name): return actual.has(name))
+	if not checks.wall_chunks: return checks
+	var draw_valid: bool = true
+	var collision_valid: bool = true
+	for name in expected:
+		var root = actual[name]
+		var chunk: Dictionary = expected[name]
+		if not root is StaticBody3D or root.get_parent()!=level or root.transform!=Transform3D.IDENTITY:
+			draw_valid=false;collision_valid=false;continue
+		var meshes: Array = root.get_children().filter(func(node): return node is MeshInstance3D)
+		var colliders: Array = root.get_children().filter(func(node): return node is CollisionShape3D)
+		if not root.is_visible_in_tree() or meshes.size()!=3 or root.get_child_count()!=4: draw_valid=false
+		if meshes.size()==3:
+			for index in range(3):
+				var mesh: MeshInstance3D = meshes[index]
+				if not mesh.is_visible_in_tree() or mesh.transform!=Transform3D.IDENTITY or not mesh.mesh is ArrayMesh or mesh.mesh.get_surface_count()!=1 or not mesh.material_override is StandardMaterial3D:
+					draw_valid=false;continue
+				var arrays: Array = mesh.mesh.surface_get_arrays(0)
+				var bounds: AABB = mesh.mesh.get_aabb()
+				var wanted: AABB = chunk.bounds[index]
+				if arrays[Mesh.ARRAY_VERTEX].size()!=chunk.counts[index] or arrays[Mesh.ARRAY_NORMAL].size()!=chunk.counts[index] or arrays[Mesh.ARRAY_TEX_UV].size()!=chunk.counts[index] or not bounds.position.is_equal_approx(wanted.position) or not bounds.size.is_equal_approx(wanted.size) or mesh.material_override.cull_mode!=BaseMaterial3D.CULL_BACK or mesh.material_override.transparency!=BaseMaterial3D.TRANSPARENCY_DISABLED: draw_valid=false
+		var expected_faces: int = int(chunk.counts[0])+int(chunk.counts[1])+int(chunk.counts[2])
+		if root.collision_layer!=1 or colliders.size()!=1:
+			collision_valid=false
+		else:
+			var collider: CollisionShape3D = colliders[0]
+			if collider.disabled or collider.transform!=Transform3D.IDENTITY or not collider.shape is ConcavePolygonShape3D or not collider.shape.backface_collision or collider.shape.get_faces().size()!=expected_faces: collision_valid=false
+	checks.wall_draw_geometry=draw_valid
+	checks.wall_collision=collision_valid
+	return checks
+
 func _export_art_checks() -> Dictionary:
-	var expected_art = {"ribbed_wall":1,"conduit":1}
+	var expected_art = {}
 	for art in Level.PURPOSE_ART.values()+Level.AMMO_ART+["marker_ivorykey"]: expected_art[art] = 0
 	for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
 	for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
@@ -1267,7 +1634,17 @@ func _export_art_checks() -> Dictionary:
 			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
 			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
 				marker_models[node.get_instance_id()] = art
-	var checks = {}
+	var checks = _export_wall_architecture_checks()
+	# Retired boundary kit remains a real loadable asset, not a required world placement.
+	for legacy in ["ribbed_wall","conduit"]:
+		var resource = load("res://assets/art/world/"+legacy+".glb")
+		var valid: bool = resource is PackedScene
+		if valid:
+			var instance = resource.instantiate()
+			var legacy_meshes: Array = ([instance]+instance.find_children("*","MeshInstance3D",true,false)).filter(func(node): return node is MeshInstance3D)
+			valid = not legacy_meshes.is_empty() and legacy_meshes.any(func(node): return node.mesh != null and node.mesh.get_surface_count()>0)
+			instance.free()
+		checks["retained_asset_"+legacy] = valid
 	var marker_ids = []
 	var remaining = 0
 	for spec in level.layout.data.pickups+level.layout.data.interactions:
@@ -1290,7 +1667,11 @@ func _export_art_checks() -> Dictionary:
 				valid = valid and marker_meshes.all(func(part): return part.is_visible_in_tree())
 			marker_ids.append(marker.get_instance_id())
 		checks["marker_"+spec.id] = valid
-	checks["marker_count"] = level.markers.size() == remaining
+	# Keep exact GLB interaction-marker ownership AND the separate finite book.
+	var earned: Dictionary = _export_earned_checks()
+	checks.merge(earned)
+	checks["marker_count"] = level.markers.size() == remaining and earned.get("earned_marker_count",false) and earned.get("earned_marker_ownership",false)
+	checks["earned_marker_negative_controls"] = _export_earned_negative_controls()
 	for art in expected_art:
 		checks["art_"+art] = models.get(art,0) == expected_art[art] if art.begins_with("marker_") else models.get(art,0) >= expected_art[art]
 	return checks
@@ -1381,12 +1762,16 @@ func _verify_export() -> void:
 			caster_count += 1
 			if actor.id == "processional_enemy_11": caster = actor
 	checks["caster_art"] = caster_count == 4
-	player.position = level.layout.world_position([20.5,25.5])
-	await _verify_passive_tick()
-	_process(0)
-	checks["scattergun"] = state.owned_weapons == [0,1,2] and state.weapon == 2 and state.ammo[2] == 16 and ResourceLoader.exists("res://assets/art/weapons/"+Player.WEAPONS[2].asset+".png")
+	# Registered Worker13 now owns the original Scatter unlock/bundle; no floor gun.
+	checks["scattergun"] = await _verify_registered_weapon(2,checks,"scattergun")
+	if not checks["scattergun"]:
+		push_error("Export workflow failed: registered Scatter carrier transaction")
+		get_tree().quit(1)
+		return
+	checks["scattergun"] = checks["scattergun"] and state.owned_weapons==[0,1,2] and state.weapon==2 and state.ammo[2]==16
 	checks["scattergun_fire"] = await _verify_fire_tick() and state.ammo[2] == 15
 	player.position = level.layout.world_position([16.5,16.5])
+	reset_supply_sweep()
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	if caster != null:
@@ -1399,7 +1784,8 @@ func _verify_export() -> void:
 	for node in level.get_children():
 		if node.get_script() == Enemy.Projectile: projectiles += 1
 	checks["caster_flight"] = projectiles == 1
-	# Continue the actual campaign inventory; acquire late weapons at their authored pickup cells.
+	# Continue actual inventory; the first registered new capability is earned
+	# by production carrier death then real passive finite collection.
 	set_process(false)
 	for _index in range(3,8):
 		state.complete_level()
@@ -1407,22 +1793,24 @@ func _verify_export() -> void:
 		await verify_level.call()
 		await get_tree().physics_frame
 		await get_tree().physics_frame
-		for spec in level.layout.data.pickups:
-			if spec.kind != "weapon" or int(spec.weapon) < 3 or int(spec.weapon) in state.owned_weapons: continue
-			var weapon = int(spec.weapon)
-			var profile = Player.WEAPONS[weapon]
+		for weapon in [3,4,5]:
+			if weapon in state.owned_weapons: continue
+			var content: Dictionary = Campaign.EarnedSupplies.chapter(level.layout)
+			if not content.grants.any(func(row): return row.kind=="unlock" and int(row.weapon)==weapon): continue
+			var profile: Dictionary = Player.WEAPONS[weapon]
 			var asset_id: String = String(profile.asset).get_file()
-			var before = state.ammo[weapon]
-			player.position = level.layout.world_position(spec.cell)
-			await _verify_passive_tick()
-			_process(0)
-			checks[asset_id+"_pickup"] = weapon in state.owned_weapons and state.weapon == weapon and spec.id in state.removed and state.ammo[weapon] == mini(profile.max_ammo,before+int(spec.amount))
-			before = state.ammo[weapon]
+			checks[asset_id+"_pickup"] = await _verify_registered_weapon(weapon,checks,asset_id)
+			if not checks[asset_id+"_pickup"]:
+				push_error("Export workflow failed: registered carrier "+asset_id)
+				get_tree().quit(1)
+				return
+			var before: int = int(state.ammo[weapon])
 			player.camera.rotation.x = 0.6
 			checks[asset_id+"_fire"] = await _verify_fire_tick() and state.ammo[weapon] == before-1 and player.cooldown > 0 and player.shot_flash > 0
 			if weapon == 4:
 				checks["marrow_launcher_projectile"] = level.get_children().filter(func(node): return node.get_script() == Player.Projectile).size() == 1
 			acquired_late_weapons.append(weapon)
+
 	checks["full8"] = verified_maps == map_ids
 	checks["late_weapons"] = acquired_late_weapons == [3,4,5] and state.owned_weapons == [0,1,2,3,4,5]
 	for kind in ["crawler","worker","caster","brute","guardian","summoner","nursery_warden","choir_avatar"]:
@@ -1441,16 +1829,20 @@ func _verify_export() -> void:
 	await get_tree().create_timer(0.1).timeout
 	await get_tree().process_frame
 	await get_tree().process_frame
+	var export_failed: bool = false
 	for check in checks:
 		if not checks[check]:
+			export_failed = true
 			push_error("Export workflow failed: "+check)
-			get_tree().quit(1)
-			return
+	if export_failed:
+		get_tree().quit(1)
+		return
 	print("PASS packaged title Ogg resource/transport/decoded PCM; audible-loop approval pending")
 	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices")
 	print("PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged retained MIDI sources: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")
 	print("PASS packaged late weapon pickups/fire/ammo: sawtooth_repeater,marrow_launcher,choir_disruptor; actor/boss imports: brute,guardian,summoner,nursery_warden,choir_avatar")
+	print("PASS packaged finite carrier death/unlock/ammo conservation, no floor supplies and exact reservoir/corpse ownership")
 	print("PASS packaged native Metal shader caches")
 	print("PASS packaged isolated userdata")
 	get_tree().quit()

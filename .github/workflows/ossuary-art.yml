@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - .github/workflows/ossuary-art.yml
+      - .github/requirements-art-ci.txt
       - source/art/**
       - game/assets/art/**
       - game/data/05_nursery.json
@@ -17,7 +18,7 @@ permissions:
 jobs:
   contract:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
     strategy:
       fail-fast: false
       matrix:
@@ -30,6 +31,10 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python }}
+      - name: Install exact reviewed PNG decoder binaries
+        run: |
+          python -m pip --isolated install --disable-pip-version-check --no-input --only-binary=:all: --require-hashes --no-deps --index-url https://pypi.org/simple -r .github/requirements-art-ci.txt
+          python -c "import PIL; assert PIL.__version__ == '12.2.0'"
       - run: |
           python -B tests/test_ossuary_buttress.py
           python -B tests/test_art.py

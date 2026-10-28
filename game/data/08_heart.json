@@ -597,222 +597,7 @@
       ]
     }
   ],
-  "pickups": [
-    {
-      "id": "heart_entry_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 80,
-      "cell": [
-        5.5,
-        5.5
-      ]
-    },
-    {
-      "id": "heart_entry_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 16,
-      "cell": [
-        6.5,
-        5.5
-      ]
-    },
-    {
-      "id": "heart_entry_health",
-      "kind": "health",
-      "amount": 35,
-      "cell": [
-        5.5,
-        6.5
-      ]
-    },
-    {
-      "id": "heart_entry_armor",
-      "kind": "armor",
-      "amount": 40,
-      "cell": [
-        6.5,
-        6.5
-      ]
-    },
-    {
-      "id": "heart_scattergun",
-      "kind": "weapon",
-      "weapon": 2,
-      "amount": 0,
-      "cell": [
-        6.5,
-        4.5
-      ]
-    },
-    {
-      "id": "heart_first_approach_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 60,
-      "cell": [
-        14.5,
-        18.5
-      ]
-    },
-    {
-      "id": "heart_first_approach_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 8,
-      "cell": [
-        15.5,
-        18.5
-      ]
-    },
-    {
-      "id": "heart_first_return_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 50,
-      "cell": [
-        14.5,
-        10.5
-      ]
-    },
-    {
-      "id": "heart_first_return_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        13.5,
-        9.5
-      ]
-    },
-    {
-      "id": "heart_second_approach_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 60,
-      "cell": [
-        23.5,
-        24.5
-      ]
-    },
-    {
-      "id": "heart_second_approach_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 8,
-      "cell": [
-        24.5,
-        24.5
-      ]
-    },
-    {
-      "id": "heart_second_return_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 50,
-      "cell": [
-        14.5,
-        32.5
-      ]
-    },
-    {
-      "id": "heart_second_return_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        13.5,
-        31.5
-      ]
-    },
-    {
-      "id": "heart_repeater_ammo",
-      "kind": "ammo",
-      "weapon": 3,
-      "amount": 90,
-      "cell": [
-        22.5,
-        13.5
-      ]
-    },
-    {
-      "id": "heart_launcher_ammo",
-      "kind": "ammo",
-      "weapon": 4,
-      "amount": 10,
-      "cell": [
-        22.5,
-        14.5
-      ]
-    },
-    {
-      "id": "heart_disruptor_ammo",
-      "kind": "ammo",
-      "weapon": 5,
-      "amount": 45,
-      "cell": [
-        22.5,
-        15.5
-      ]
-    },
-    {
-      "id": "heart_finale_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 80,
-      "cell": [
-        28.5,
-        19.5
-      ]
-    },
-    {
-      "id": "heart_finale_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 16,
-      "cell": [
-        29.5,
-        19.5
-      ]
-    },
-    {
-      "id": "heart_finale_health",
-      "kind": "health",
-      "amount": 40,
-      "cell": [
-        28.5,
-        18.5
-      ]
-    },
-    {
-      "id": "heart_finale_armor",
-      "kind": "armor",
-      "amount": 40,
-      "cell": [
-        29.5,
-        18.5
-      ]
-    },
-    {
-      "id": "heart_finale_launcher",
-      "kind": "weapon",
-      "weapon": 4,
-      "amount": 8,
-      "cell": [
-        30.5,
-        18.5
-      ]
-    },
-    {
-      "id": "heart_finale_disruptor",
-      "kind": "ammo",
-      "weapon": 5,
-      "amount": 30,
-      "cell": [
-        30.5,
-        19.5
-      ]
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "heart_enemy_00",
@@ -1983,18 +1768,26 @@
     },
     {
       "cell": [
-        11.85,
-        20.5
+        10.3447,
+        19.0796
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.84,
-        0.36,
-        0.16
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "heart_enemy_00",
+      "threat_role": "seal_blood",
+      "target": [
+        10.5,
+        18.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2088,18 +1881,26 @@
     },
     {
       "cell": [
-        24.85,
-        24.5
+        24.2,
+        27.9804
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 180,
       "color": [
-        0.84,
-        0.36,
-        0.16
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "heart_enemy_10",
+      "threat_role": "seal_ivory",
+      "target": [
+        24.5,
+        28.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2270,18 +2071,26 @@
     },
     {
       "cell": [
-        33.5,
-        3.15
+        33.4804,
+        9.7
       ],
-      "height": 3.1,
-      "fixture_yaw": 0,
+      "height": 2.9,
+      "fixture_yaw": 270,
       "color": [
-        0.3,
-        0.65,
-        0.85
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 4.2,
-      "range": 20
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "heart_choir_avatar",
+      "threat_role": "exit_warden",
+      "target": [
+        34.0,
+        10.0
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [

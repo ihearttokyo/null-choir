@@ -274,7 +274,7 @@ def _check_glb(data: bytes, *, label: str) -> dict:
 
 CURRENT_MAIN_SHA = "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1"
 CURRENT_LEVEL_SHA = "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871"
-CURRENT_CONSUMER_HELPER_SHA = "08143d9ae922e4e9c09022d7fb26050e46dcbe0070ed19a12797419607fe7e17"
+CURRENT_CONSUMER_HELPER_SHA = "25a8648955c1406180e4e753ae96a5c1a2bd404ec71a5af48e8fe48b9b5ed5ad"
 def _current_consumer_compatibility(root):
     import runpy
     path = safe_rel(root, "tools/art_consumer_compatibility.py", label="current consumer helper", roots={"tools"})
@@ -287,6 +287,64 @@ HISTORICAL_MAIN_SHA = "ee987812f4ac985ed9c3ecc6f980d3fb0876507895e1e8b6156cf20c6
 SELFTEST_MAIN_SHA = "cf4624fa56bb0ecd634e63c0c2ca15b98f4298b4f05365e3a55cdc85d6d52bb0"
 MAIN_COMPATIBILITY_SCOPE = "historical-gate-evidence-reuse-only-not-current-native-qualification"
 MAIN_SELFTEST_REPLACEMENTS = [{'function': '_verify_export', 'before': '\t\t\tchecks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*5', 'after': '\t\t\t# Fixed qualified body contract: Worker has six physiology rows; other roles retain five.\n\t\t\tvar expected_rows = 6 if actor.kind == "worker" else 5\n\t\t\tchecks[id+"_actor_"+actor.id] = actor._current_map() and actor.hp > 0 and actor.sprite.texture is Texture2D and actor.sprite.texture.get_width() == cell*8 and actor.sprite.texture.get_height() == cell*expected_rows'}, {'function': '_verify_sprite_hit_export', 'before': '\t_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/worker.png")', 'after': '\t# Pin the approved production body URI independently of Enemy selection; legacy is not a fallback.\n\t_sprite_export_check(checks,"original_worker_atlas",valid and sprite.texture.resource_path=="res://assets/art/sprites/bodies-v1/worker.png")'}]
+
+def _qualified96_generation(root):
+    compat = _current_consumer_compatibility(root)
+    value = compat['qualify'](root)
+    if (not isinstance(value, dict)
+            or value.get('schema') != 'null-choir-exact-current-art-consumers-v0096-v1'
+            or not compat['qualified96_generation96'](value)):
+        fail("Full exact actual96 qualification required before historical threshold reuse")
+    return compat, value
+
+
+def _qualified96_threshold_source(root, relative, supplied, expected_sha):
+    """No source alias: current supplied=resident=receipt, then exact history."""
+    if relative not in (MAIN_SOURCE, "game/scripts/level.gd"):
+        fail("Only Main/Level may consume the qualified96 threshold source bridge")
+    compat, value = _qualified96_generation(root)
+    row = value.get('current_sources', {}).get(relative)
+    if (not isinstance(row, dict) or row.get('path') != relative
+            or type(supplied) is not bytes or supplied != compat['record'](root, row)):
+        fail("Supplied threshold source differs from exact resident/final96 receipt")
+    historical = value.get('historical_sources', {}).get(relative)
+    if not isinstance(historical, dict) or historical.get('sha256') != expected_sha:
+        fail("Only the exact retained historical threshold source is supported")
+    data = compat['record'](root, historical)
+    if sha(data) != expected_sha:
+        fail("Historical threshold source hash mismatch")
+    return data
+
+
+GATE_FIXTURE_SOURCE = "game/tests/test_gate_integration.gd"
+GATE_FIXTURE_CURRENT_SHA = "c64d80008ffc4114b4e1f4601733f092647e41bba2d105793129030a25676522"
+GATE_FIXTURE_HISTORICAL_SHA = "9f651471dd0b9537fe6aa35efa34e457b3a2a67933de54045bae9cb00b257237"
+GATE_FIXTURE_INVERSE_EDITS = (
+    ("_level", 1,
+     b'\tif not level.build(main,index):\n\t\tcheck(false,"Actual current Level builds")\n\t\tmain.level = null\n\t\tlevel.free()\n\t\treturn null',
+     b'\tcheck(level.build(main,index),"Actual current Level builds")'),
+    ("run", 3, b'\tif level == null: main.free();quit(1);return\n', b''),
+)
+
+
+def _gate_fixture_source_compatibility(current):
+    """Source-only fail-fast inverse proof, NOT current native qualification."""
+    if type(current) is not bytes or sha(current) != GATE_FIXTURE_CURRENT_SHA:
+        fail("Exact current fail-fast gate integration fixture required")
+    reconstructed = current
+    for function, count, before, after in GATE_FIXTURE_INVERSE_EDITS:
+        marker = ("\nfunc " + function + "(").encode()
+        start = current.find(marker)
+        end = current.find(b"\nfunc ", start + 1) if start >= 0 else -1
+        if end < 0: end = len(current)
+        if (current.count(marker) != 1 or current.count(before) != count
+                or start < 0 or current[start:end].count(before) != count):
+            fail("Exact gate fixture inverse count/function seam required")
+        reconstructed = reconstructed.replace(before, after, count)
+    if sha(reconstructed) != GATE_FIXTURE_HISTORICAL_SHA:
+        fail("Gate fixture inverse differs from exact historical successful-path source")
+    return reconstructed
+
 
 def _main_selftest_compatibility(root: Path, record, owned: set[str]) -> dict | None:
     if record is None:
@@ -316,7 +374,10 @@ def _main_selftest_compatibility(root: Path, record, owned: set[str]) -> dict | 
         # Git snapshot; qualify the current generation in a separate receipt.
         current_bytes = _current_consumer_compatibility(root)['historical'](root, MAIN_SOURCE, SELFTEST_MAIN_SHA)
     else:
-        fail("Main compatibility reconstruction differs: unrelated source changes are forbidden")
+        try:
+            current_bytes = _qualified96_threshold_source(root, MAIN_SOURCE, actual_main, SELFTEST_MAIN_SHA)
+        except (ValueError, OSError) as exc:
+            fail("Main compatibility reconstruction requires exact qualified96 source: " + str(exc))
     reconstructed = original
     for edit in MAIN_SELFTEST_REPLACEMENTS:
         before, after = edit["before"].encode(), edit["after"].encode()
@@ -385,6 +446,25 @@ def _native_receipt(root: Path, entry: dict, *, asset_id: str, source_dir: str,
             if (path_text == MAIN_SOURCE and code_hashes.get(path_text) == HISTORICAL_MAIN_SHA
                     and main_compatibility is not None):
                 continue  # Exact original two-site bridge already reconstructed above.
+        if path_text in (MAIN_SOURCE, "game/scripts/level.gd"):
+            try:
+                expected = SELFTEST_MAIN_SHA if path_text == MAIN_SOURCE else code_hashes.get(path_text)
+                historical = _qualified96_threshold_source(root, path_text, path.read_bytes(), expected)
+                if sha(historical) == code_hashes.get(path_text):
+                    continue
+                if (path_text == MAIN_SOURCE and code_hashes.get(path_text) == HISTORICAL_MAIN_SHA
+                        and main_compatibility is not None
+                        and main_compatibility.get("historical_sha256") == HISTORICAL_MAIN_SHA
+                        and main_compatibility.get("current_sha256") == SELFTEST_MAIN_SHA
+                        and main_compatibility.get("scope") == MAIN_COMPATIBILITY_SCOPE):
+                    continue  # Unchanged exact two-site inverse bridge above; old receipt stays old.
+            except (ValueError, OSError) as exc:
+                fail(f"{asset_id}: native receipt source hash is stale at {path_text}: {exc}")
+        if (path_text == GATE_FIXTURE_SOURCE and current_hash == GATE_FIXTURE_CURRENT_SHA
+                and code_hashes.get(path_text) == GATE_FIXTURE_HISTORICAL_SHA):
+            _qualified96_generation(root)
+            _gate_fixture_source_compatibility(path.read_bytes())
+            continue  # Source-only failure-stop cleanup; no new native fixture qualification.
         fail(f"{asset_id}: native receipt source hash is stale at {path_text}")
 
 

@@ -36,7 +36,8 @@ Target roughly 8–12 minutes per level and 75–100 minutes for a first playthr
 ## Combat and controls
 
 - Fast strafing and modern mouse look; optional classic auto-aim; no mandatory jumping or platforming.
-- Pickup-based health, armor, and ammunition; no health regeneration or reloading. Strong impact feedback and enemy infighting.
+- The 2026-10-27 expansion supersedes arbitrary floor supplies: authored monsters carry finite, differentiated ammunition/weapons/armor; useful drops and seals collect by walking over them. Healing primarily/exclusively uses finite, identifiable environmental assets operated with Space/remapped use. Preserve legacy progress and partial stock; no health regeneration or reloading. Strong impact feedback and enemy infighting.
+- Distinguish weapon speed/range/spread, bounded per-shot variation, capabilities and exciting truthful discharge/impact effects; powerful ammunition is scarce. Movement should closely follow Doom-inspired acceleration, friction and momentum. Source-local horror illumination replaces global fill while retaining readable threats and accessibility.
 - Six weapons, introduced gradually: impact tool, rivet pistol, scattergun, sawtooth repeater, marrow launcher, choir disruptor. Industrial designs become increasingly biological.
 - Six regular enemy roles with distinct silhouettes: rushing crawler, ranged worker, floating projectile caster, charging brute, armored guardian, summoner.
 - Two bosses represent manifestations of the buried organism, not its entirety.
@@ -55,7 +56,7 @@ Keep authoring sources outside the Godot runtime project. Generate sprite atlase
 ## Implementation and evidence gates
 
 1. Prove the intended failing assertion before deterministic logic changes, then implement the smallest passing change. Keep relevant unit/integration checks and representative end-to-end campaign coverage.
-2. After the first passing nontrivial code change, run correctness and Ponytail reviews before broader validation. Fix findings and rerun affected checks.
+2. After the first passing nontrivial code change, obtain independent correctness and intended-use reviews under the current AGENTS.md authority before broader validation. Fix material findings and rerun affected checks. Ponytail is not authorized; do not recreate that retired review route.
 3. Verify self-contained offline recorded playback in the Mac export: all eight selected tracks, repeat boundaries, volume/mute, pause/resume and level switching. Preserve the retained MIDI regression checks as legacy synthesis coverage. Reject audible seams or a runtime dependency on host conversion tools.
 4. Deliver a finished first level with original art and music, then the full playable campaign, then the final art/music pass and optimized release. Continue autonomously after brief approval; report milestones and ask only for material decisions or blockers.
 5. Accepted performance targets on the verified M4 Mac: 60 FPS during normal combat at the chosen internal resolution, a usable main menu within three seconds of cold application launch, and ordinary level transitions within two seconds. Measure and profile before claiming these pass or changing the targets.
@@ -70,4 +71,4 @@ The parent owns integration. Give children bounded missions and nonoverlapping f
 
 Preserve unrelated projects, apps, credentials, global settings, and existing repositories. Prepare and verify concrete external targets/payloads before mutation. Keep secrets and disposable validation output out of Git. Use explicit staged paths, inspect diffs, check whitespace, and scan for secrets before authorized commits.
 
-Keep source assets and generated runtime assets traceable. Pin selected runtime dependencies for reproducibility. Record a verified commit/asset restoration point before subsequent changes; restore the last verified state if a change regresses accepted behavior, without resetting unrelated work. Do not reduce the eight-level scope or replace live MIDI to make checks easier.
+Keep source assets and generated runtime assets traceable. Pin selected runtime dependencies for reproducibility. Record a verified commit/asset restoration point before subsequent changes; restore the last verified state if a change regresses accepted behavior, without resetting unrelated work. Do not reduce the eight-level scope or substitute a different soundtrack to make checks easier. The authorized offline Suno playback supersedes live MIDI playback; preserve the original MIDI compositions and editable sources.

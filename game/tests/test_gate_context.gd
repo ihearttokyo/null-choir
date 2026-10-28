@@ -81,7 +81,9 @@ func run():
  var host=Host.new();view.add_child(host);host.state.new_campaign(1)
  for step in range(map_index):host.state.complete_level()
  var level=LevelSource.new();host.add_child(level);host.level=level
- check(level.build(host,map_index),"Actual current selected Level builds all static geometry/scenery/environment")
+ if not level.build(host,map_index):
+  check(false,"Actual current selected Level builds all static geometry/scenery/environment")
+  level.free();host.free();view.free();quit(1);return
  # No navigation acceptance here; prevent unrelated asynchronous role bakes in a static-art fixture.
  var navigation=level.get_node_or_null("NavigationRoutes")
  if navigation!=null:navigation.set_process(false);navigation.set_physics_process(false)

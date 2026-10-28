@@ -1,0 +1,76 @@
+{
+  "grid": [
+    4,
+    4
+  ],
+  "indexOrigin": "top-left",
+  "uri": "../raw/texture-atlas.png",
+  "tiles": [
+    {
+      "index": 0,
+      "name": "dark_iron"
+    },
+    {
+      "index": 1,
+      "name": "ivory"
+    },
+    {
+      "index": 2,
+      "name": "brass"
+    },
+    {
+      "index": 3,
+      "name": "crimson_glass"
+    },
+    {
+      "index": 4,
+      "name": "blue_glass"
+    },
+    {
+      "index": 5,
+      "name": "green_glass"
+    },
+    {
+      "index": 6,
+      "name": "amber_glass"
+    },
+    {
+      "index": 7,
+      "name": "dark_cavity"
+    },
+    {
+      "index": 8,
+      "name": "oxidized_steel"
+    },
+    {
+      "index": 9,
+      "name": "parchment"
+    },
+    {
+      "index": 10,
+      "name": "control_markings"
+    },
+    {
+      "index": 11,
+      "name": "bone"
+    },
+    {
+      "index": 12,
+      "name": "red_fluid"
+    },
+    {
+      "index": 13,
+      "name": "pale_fluid"
+    },
+    {
+      "index": 14,
+      "name": "gasket"
+    },
+    {
+      "index": 15,
+      "name": "hazard_stripe"
+    }
+  ],
+  "sampling": "4 percent inset within tile; no mipmap requested",
+  "facetShading": "vertex COLOR_0 authored directional value, unlit material; no physical illumination claim"
+}

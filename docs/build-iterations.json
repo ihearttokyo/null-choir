@@ -25,6 +25,11 @@
       "ordinal": 95,
       "candidate": "seal-wardens-dimensional-walls-frontfaces",
       "status": "reserved"
+    },
+    {
+      "ordinal": 96,
+      "candidate": "earned-arsenal-momentum-local-horror",
+      "status": "reserved"
     }
   ]
 }

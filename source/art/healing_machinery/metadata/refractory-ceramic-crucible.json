@@ -1,0 +1,1595 @@
+{
+  "family": "refractory-ceramic-crucible",
+  "units": "meters",
+  "front": "-Z",
+  "parts": [
+    {
+      "name": "FloorPlinth",
+      "role": "base",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.415,
+          0.0,
+          -0.25999999999999995
+        ],
+        "max": [
+          0.415,
+          0.09,
+          0.31
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          0.39,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          0.342,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          0.39,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          0.342,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          0.165,
+          0.08499999999999999
+        ],
+        "max": [
+          0.0,
+          0.23500000000000001,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.28500000000000003,
+          0.12,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.215,
+          0.2,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_2",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          0.08499999999999999,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.25,
+          0.155,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_-0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3625,
+          0.14,
+          0.125
+        ],
+        "max": [
+          -0.2775,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_-0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3375,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          -0.3025,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.18,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.2775,
+          0.14,
+          0.125
+        ],
+        "max": [
+          0.3625,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.3025,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          0.3375,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.18,
+          0.035
+        ],
+        "max": [
+          0.39,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          0.39,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Header",
+      "role": "cap",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          1.16,
+          0.06999999999999999
+        ],
+        "max": [
+          0.38,
+          1.26,
+          0.22999999999999998
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "HeaderIvoryInlay",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          1.1875,
+          0.042499999999999996
+        ],
+        "max": [
+          0.25,
+          1.2425000000000002,
+          0.0675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.035,
+          0.37,
+          -0.035
+        ],
+        "max": [
+          0.035,
+          0.38,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.0,
+          0.345,
+          -0.035
+        ],
+        "max": [
+          0.27,
+          0.41500000000000004,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.23500000000000001,
+          0.345,
+          -0.19
+        ],
+        "max": [
+          0.30500000000000005,
+          0.41500000000000004,
+          0.0
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveHousing",
+      "role": "valve",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.19867076127786348,
+          0.305,
+          -0.27
+        ],
+        "max": [
+          0.34132923872213655,
+          0.455,
+          -0.12
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_00",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.34354600252416284,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.39238666487320323,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_01",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.30977207793864214,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.37366058945872394,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_02",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.26534125718815466,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.32715874281184537,
+          0.5023866648732032,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_03",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.21284125718815466,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2746587428118454,
+          0.5023866648732032,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_04",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1663394105412761,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2302279220613579,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_05",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1476133351267968,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.1964539974758372,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_06",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1476133351267968,
+          0.32284125718815465,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.19645399747583717,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_07",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.16633941054127607,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.23022792206135784,
+          0.3402279220613579,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_08",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2128412571881546,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2746587428118454,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_09",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.26534125718815466,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.32715874281184537,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_10",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.30977207793864214,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.37366058945872394,
+          0.3402279220613578,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_11",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.34354600252416284,
+          0.3228412571881546,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.39238666487320323,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.27,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.36,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.258,
+          0.38,
+          -0.307
+        ],
+        "max": [
+          0.28200000000000003,
+          0.47,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.18000000000000002,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.27,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_3",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.258,
+          0.29000000000000004,
+          -0.307
+        ],
+        "max": [
+          0.28200000000000003,
+          0.38,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "DialFace",
+      "role": "control",
+      "tileIndex": 10,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          0.22600000000000003,
+          0.336,
+          -0.31
+        ],
+        "max": [
+          0.314,
+          0.424,
+          -0.3
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockNeedle",
+      "role": "stock_indicator",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.004,
+          -0.0020000000000000018,
+          -0.0045
+        ],
+        "max": [
+          0.004,
+          0.046,
+          0.0045
+        ]
+      },
+      "translation": [
+        0.27,
+        0.38,
+        -0.317
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockVolume",
+      "role": "stock",
+      "tileIndex": 6,
+      "triangles": 92,
+      "boundsLocal": {
+        "min": [
+          -0.2,
+          0,
+          -0.2
+        ],
+        "max": [
+          0.2,
+          1,
+          0.2
+        ]
+      },
+      "translation": [
+        0,
+        0.43,
+        0
+      ],
+      "scale": [
+        1,
+        0.58,
+        1
+      ]
+    },
+    {
+      "name": "CeramicStave0",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.19749999999999998,
+          0.47500000000000003,
+          -0.0375
+        ],
+        "max": [
+          0.27249999999999996,
+          1.045,
+          0.0375
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CeramicStave1.5707963267948966",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.037499999999999985,
+          0.47500000000000003,
+          0.19749999999999998
+        ],
+        "max": [
+          0.03750000000000001,
+          1.045,
+          0.27249999999999996
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CeramicStave3.141592653589793",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.27249999999999996,
+          0.47500000000000003,
+          -0.03749999999999997
+        ],
+        "max": [
+          -0.19749999999999998,
+          1.045,
+          0.037500000000000026
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CeramicStave4.71238898038469",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.03750000000000004,
+          0.47500000000000003,
+          -0.27249999999999996
+        ],
+        "max": [
+          0.03749999999999996,
+          1.045,
+          -0.19749999999999998
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CrucibleCollar0.43",
+      "role": "cap",
+      "tileIndex": 1,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.26,
+          0.43,
+          -0.26
+        ],
+        "max": [
+          0.26,
+          0.52,
+          0.26
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CrucibleCollar1.03",
+      "role": "cap",
+      "tileIndex": 1,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.26,
+          1.03,
+          -0.26
+        ],
+        "max": [
+          0.26,
+          1.12,
+          0.26
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CrucibleFoot",
+      "role": "vessel",
+      "tileIndex": 1,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.22,
+          0.32,
+          -0.22
+        ],
+        "max": [
+          0.22,
+          0.43,
+          0.22
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CrucibleCrown",
+      "role": "vessel",
+      "tileIndex": 2,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.13,
+          1.12,
+          -0.13
+        ],
+        "max": [
+          0.13,
+          1.16,
+          0.13
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          0.25,
+          0.122
+        ],
+        "max": [
+          0.028,
+          1.13,
+          0.178
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          1.1019999999999999,
+          0.0
+        ],
+        "max": [
+          0.028,
+          1.158,
+          0.15
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "TopCoupling",
+      "role": "cap",
+      "tileIndex": 2,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.06,
+          1.11,
+          -0.06
+        ],
+        "max": [
+          0.06,
+          1.18,
+          0.06
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "useTarget": [
+    0.27,
+    0.38,
+    -0.33
+  ],
+  "stock": {
+    "bottomMeters": 0.43,
+    "fullHeightMeters": 0.58,
+    "localBottom": 0,
+    "localTop": 1,
+    "emptyState": {
+      "visible": false,
+      "scalePolicy": "preserve-full-authored-scale",
+      "scaleY": 0.58,
+      "renderedVolume": 0,
+      "geometricVolumeRemains": true
+    },
+    "partialFraction": 0.5,
+    "axis": "Y"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "if_any_placement_missing": "fail current 22 case contract; only a separately versioned additive contract may add cases; never drop/relabel a base case",
+  "original_case_ids_unchanged": [
+    "chapter-0-routes",
+    "chapter-0-transactions",
+    "chapter-1-routes",
+    "chapter-1-transactions",
+    "chapter-2-routes",
+    "chapter-2-transactions",
+    "chapter-3-routes",
+    "chapter-3-transactions",
+    "chapter-4-routes",
+    "chapter-4-transactions",
+    "chapter-5-routes",
+    "chapter-5-transactions",
+    "chapter-6-routes",
+    "chapter-6-transactions",
+    "chapter-7-routes",
+    "chapter-7-transactions",
+    "weapon-0-roles",
+    "weapon-1-roles",
+    "weapon-2-roles",
+    "weapon-3-roles",
+    "weapon-4-roles",
+    "weapon-5-roles"
+  ],
+  "placement_count": 32,
+  "placements": [
+    {
+      "chapter": "foundry",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "refractory-ceramic-crucible",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-1-routes",
+      "station_id": "foundry_reservoir_blood"
+    },
+    {
+      "chapter": "foundry",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "refractory-ceramic-crucible",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-1-routes",
+      "station_id": "foundry_reservoir_entry"
+    },
+    {
+      "chapter": "foundry",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "refractory-ceramic-crucible",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-1-routes",
+      "station_id": "foundry_reservoir_final"
+    },
+    {
+      "chapter": "foundry",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "refractory-ceramic-crucible",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-1-routes",
+      "station_id": "foundry_reservoir_ivory"
+    },
+    {
+      "chapter": "heart",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "organic-valve-cage",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-7-routes",
+      "station_id": "heart_reservoir_blood"
+    },
+    {
+      "chapter": "heart",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "organic-valve-cage",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-7-routes",
+      "station_id": "heart_reservoir_entry"
+    },
+    {
+      "chapter": "heart",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "organic-valve-cage",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-7-routes",
+      "station_id": "heart_reservoir_final"
+    },
+    {
+      "chapter": "heart",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "organic-valve-cage",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-7-routes",
+      "station_id": "heart_reservoir_ivory"
+    },
+    {
+      "chapter": "intake",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "hanging-pressure-bulb",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-0-routes",
+      "station_id": "intake_reservoir_blood"
+    },
+    {
+      "chapter": "intake",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "hanging-pressure-bulb",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-0-routes",
+      "station_id": "intake_reservoir_entry"
+    },
+    {
+      "chapter": "intake",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "hanging-pressure-bulb",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-0-routes",
+      "station_id": "intake_reservoir_final"
+    },
+    {
+      "chapter": "intake",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "hanging-pressure-bulb",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-0-routes",
+      "station_id": "intake_reservoir_ivory"
+    },
+    {
+      "chapter": "inversion",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "canted-supported-orbit-core",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-6-routes",
+      "station_id": "inversion_reservoir_blood"
+    },
+    {
+      "chapter": "inversion",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "canted-supported-orbit-core",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-6-routes",
+      "station_id": "inversion_reservoir_entry"
+    },
+    {
+      "chapter": "inversion",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "canted-supported-orbit-core",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-6-routes",
+      "station_id": "inversion_reservoir_final"
+    },
+    {
+      "chapter": "inversion",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "canted-supported-orbit-core",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-6-routes",
+      "station_id": "inversion_reservoir_ivory"
+    },
+    {
+      "chapter": "nursery",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "clinical-abstract-capsule",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-4-routes",
+      "station_id": "nursery_reservoir_blood"
+    },
+    {
+      "chapter": "nursery",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "clinical-abstract-capsule",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-4-routes",
+      "station_id": "nursery_reservoir_entry"
+    },
+    {
+      "chapter": "nursery",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "clinical-abstract-capsule",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-4-routes",
+      "station_id": "nursery_reservoir_final"
+    },
+    {
+      "chapter": "nursery",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "clinical-abstract-capsule",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-4-routes",
+      "station_id": "nursery_reservoir_ivory"
+    },
+    {
+      "chapter": "ossuary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ribbed-marrow-tank",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-5-routes",
+      "station_id": "ossuary_reservoir_blood"
+    },
+    {
+      "chapter": "ossuary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ribbed-marrow-tank",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-5-routes",
+      "station_id": "ossuary_reservoir_entry"
+    },
+    {
+      "chapter": "ossuary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ribbed-marrow-tank",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-5-routes",
+      "station_id": "ossuary_reservoir_final"
+    },
+    {
+      "chapter": "ossuary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ribbed-marrow-tank",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-5-routes",
+      "station_id": "ossuary_reservoir_ivory"
+    },
+    {
+      "chapter": "processional",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "capillary-organ",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-2-routes",
+      "station_id": "processional_reservoir_blood"
+    },
+    {
+      "chapter": "processional",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "capillary-organ",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-2-routes",
+      "station_id": "processional_reservoir_entry"
+    },
+    {
+      "chapter": "processional",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "capillary-organ",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-2-routes",
+      "station_id": "processional_reservoir_final"
+    },
+    {
+      "chapter": "processional",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "capillary-organ",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-2-routes",
+      "station_id": "processional_reservoir_ivory"
+    },
+    {
+      "chapter": "reliquary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ivory-archive-vessel",
+      "frame_label": "reservoir-blood",
+      "route_case": "chapter-3-routes",
+      "station_id": "reliquary_reservoir_blood"
+    },
+    {
+      "chapter": "reliquary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ivory-archive-vessel",
+      "frame_label": "reservoir-entry",
+      "route_case": "chapter-3-routes",
+      "station_id": "reliquary_reservoir_entry"
+    },
+    {
+      "chapter": "reliquary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ivory-archive-vessel",
+      "frame_label": "reservoir-final",
+      "route_case": "chapter-3-routes",
+      "station_id": "reliquary_reservoir_final"
+    },
+    {
+      "chapter": "reliquary",
+      "claim": "required current visible-control frame; no new route case replaces any of the original 22",
+      "family": "ivory-archive-vessel",
+      "frame_label": "reservoir-ivory",
+      "route_case": "chapter-3-routes",
+      "station_id": "reliquary_reservoir_ivory"
+    }
+  ],
+  "requires_exact_frame_label_subject_family_anchor_and_finite_stock_validation": true,
+  "route_jobs_retain_4_existing_reservoir_frames_per_chapter": true,
+  "schema": "null-choir-v096-machine-visible-view-map-v1",
+  "status": "PROPOSAL_ONLY"
+}

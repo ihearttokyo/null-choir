@@ -89,13 +89,13 @@ def validate_atlas(data):
     return {'dimensions':list(dims),'rgba8_pixel_sha256':sha(pixels),'pose_rgba8_sha256':cells}
 
 
-CONSUMER_COMPAT_SHA = "08143d9ae922e4e9c09022d7fb26050e46dcbe0070ed19a12797419607fe7e17"
+CONSUMER_COMPAT_SHA = "25a8648955c1406180e4e753ae96a5c1a2bd404ec71a5af48e8fe48b9b5ed5ad"
 def consumer_compatibility(root):
     path=safe_rel(Path(root),"tools/art_consumer_compatibility.py",label="exact current consumer helper",allowed_roots={"tools"})
     if path.is_symlink() or sha(path.read_bytes())!=CONSUMER_COMPAT_SHA: fail("exact reviewed consumer compatibility helper required")
     return runpy.run_path(str(path))
 
-V5_GUARD_SHA = "daa45fbde4c065e72a1a5ff8fca1a852c59fc922bb3b54bc5ab8cbc4b2cb5cf4"
+V5_GUARD_SHA = "da3d3de947ef6735b6aefc0835502a01d811ba41edc8c367ab4b1db18d68ebc8"
 def v5_guard(root):
     path=Path(root)/"source/art/rivet-forward-v5/validate_ledger.py"
     if path.is_symlink() or sha(path.read_bytes())!=V5_GUARD_SHA: fail("exact reviewed v5 validator required")
@@ -106,7 +106,7 @@ def validate_pistol_player_compatibility(root,current,descriptor=None):
     doc=read_json(Path(root)/"source/art/rivet-forward-v5/ledger.json")
     declared=doc["player_compatibility"]
     if descriptor is not None and not same(descriptor,declared): fail("exact shared Player compatibility descriptor required")
-    return v5["normalize_player"](root,current,declared)
+    return v5["normalize_consuming_player"](root,current,declared,globals())
 
 def validate_player(text, *, native=True):
     records=re.findall(r'\{"name":"[^"]+","asset":"([^"]+)"[^}]*\}',text)
@@ -114,6 +114,23 @@ def validate_player(text, *, native=True):
     if native: expected[1]='native-v4/rivet_pistol'
     if records!=expected:
         fail('only weapon index1 may use native-v4/rivet_pistol; other five positions must remain exact')
+
+def validate_v4_player_consumption(root,current):
+    """Preserve v4 layout; later v5 consumers must qualify before normalization.
+
+    The layout selects an audit route, never authorizes the supplied bytes.
+    validate_pistol_player_compatibility retains all v5 art/receipt checks and
+    its normalize_consuming_player requires exact qualified96 consumption before
+    calling the frozen historical one-byte normalize_player.
+    """
+    records=re.findall(r'\{"name":"[^\"]+","asset":"([^\"]+)"[^}]*\}',current.decode('utf-8'))
+    later=['painted-v3/'+name for name in IDS];later[1]='native-v5/rivet_pistol'
+    replacement_outputs=[]
+    if sha(current)=="0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7" or records==later:
+        current=validate_pistol_player_compatibility(root,current)
+        replacement_outputs=["game/assets/art/weapons/native-v5/rivet_pistol.png"]
+    validate_player(current.decode('utf-8'))
+    return replacement_outputs
 
 def validate_lineage(root, value):
     if not same(value,LINEAGE): fail('exact retained original/legacy/raster lineage required')
@@ -257,11 +274,7 @@ def validate_ledger(root: Path, ledger_path=LEDGER):
     if not same(asset['output'],{'path':OUTPUT,'sha256':OUTPUT_SHA,'bytes':len(data),**pixels}): fail('output byte/pixel/pose binding mismatch')
     check_native_directory(root)
     player_path=safe_rel(root,'game/scripts/player.gd',label='actual Player')
-    player_data=player_path.read_bytes(); replacement_outputs=[]
-    if sha(player_data)=="0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7":
-        player_data=validate_pistol_player_compatibility(root,player_data)
-        replacement_outputs=["game/assets/art/weapons/native-v5/rivet_pistol.png"]
-    validate_player(player_data.decode('utf-8'))
+    replacement_outputs=validate_v4_player_consumption(root,player_path.read_bytes())
     # Frozen v4 receipts still describe their historical HUD. Separately prove
     # the exact current generation before consulting its retained Git snapshot.
     current_hud=safe_rel(root,'game/scripts/hud.gd',label='actual HUD').read_bytes()

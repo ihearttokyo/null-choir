@@ -1,0 +1,363 @@
+{
+  "status": "SOURCE_PROPOSAL_ONLY_NOT_NATIVE_ADMISSION",
+  "prospective_selection": "Root selected a NEW full Reliquary fixture only after source review and future native admission; no old Ossuary frame adopted",
+  "proposals": [
+    {
+      "id": "reliquary-spine-A",
+      "chapter_index": 3,
+      "chapter": "reliquary",
+      "actor": "reliquary_enemy_05",
+      "normal_worker_no_champion": true,
+      "original_worker_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "proposed_worker_foot": [
+        86,
+        0.03,
+        114
+      ],
+      "preserved_worker_yaw_degrees": -155.556,
+      "near": {
+        "foot": [
+          86,
+          0.04,
+          108
+        ],
+        "eye_to_pixel": 6.0000794324067375
+      },
+      "mid": {
+        "foot": [
+          86,
+          0.04,
+          90
+        ],
+        "eye_to_pixel": 24.000019858224913
+      },
+      "far": {
+        "foot": [
+          85.99999999999999,
+          0.04,
+          44.0
+        ],
+        "eye_to_pixel": 70.00000680853674
+      },
+      "opaque_source_texture_pixel": [
+        703,
+        63
+      ],
+      "row": 0,
+      "frame": 5,
+      "alpha": 255,
+      "closest_original_lights": [
+        {
+          "cell": [
+            24.85,
+            26.5
+          ],
+          "world_source_position": [
+            99.4,
+            5.000000000000001,
+            106.0
+          ],
+          "distance_to_sprite_center": 15.966777140851724,
+          "authored_range": 15,
+          "inside_nominal_range": false,
+          "no_visibility_or_illumination_claim": true
+        },
+        {
+          "cell": [
+            20.85,
+            32.5
+          ],
+          "world_source_position": [
+            83.4,
+            3.1,
+            130.0
+          ],
+          "distance_to_sprite_center": 16.276673409073027,
+          "authored_range": 15,
+          "inside_nominal_range": false,
+          "no_visibility_or_illumination_claim": true
+        }
+      ]
+    },
+    {
+      "id": "reliquary-spine-B",
+      "chapter_index": 3,
+      "chapter": "reliquary",
+      "actor": "reliquary_enemy_05",
+      "normal_worker_no_champion": true,
+      "original_worker_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "proposed_worker_foot": [
+        86,
+        0.03,
+        118
+      ],
+      "preserved_worker_yaw_degrees": -155.556,
+      "near": {
+        "foot": [
+          86,
+          0.04,
+          112
+        ],
+        "eye_to_pixel": 6.0000794324067375
+      },
+      "mid": {
+        "foot": [
+          86,
+          0.04,
+          94
+        ],
+        "eye_to_pixel": 24.000019858224913
+      },
+      "far": {
+        "foot": [
+          85.99999999999999,
+          0.04,
+          48.0
+        ],
+        "eye_to_pixel": 70.00000680853674
+      },
+      "opaque_source_texture_pixel": [
+        703,
+        63
+      ],
+      "row": 0,
+      "frame": 5,
+      "alpha": 255,
+      "closest_original_lights": [
+        {
+          "cell": [
+            20.85,
+            32.5
+          ],
+          "world_source_position": [
+            83.4,
+            3.1,
+            130.0
+          ],
+          "distance_to_sprite_center": 12.366490903470757,
+          "authored_range": 15,
+          "inside_nominal_range": true,
+          "no_visibility_or_illumination_claim": true
+        },
+        {
+          "cell": [
+            24.85,
+            26.5
+          ],
+          "world_source_position": [
+            99.4,
+            5.000000000000001,
+            106.0
+          ],
+          "distance_to_sprite_center": 18.30131067070403,
+          "authored_range": 15,
+          "inside_nominal_range": false,
+          "no_visibility_or_illumination_claim": true
+        }
+      ]
+    }
+  ],
+  "spine_cell_trace": [
+    {
+      "cell": [
+        21,
+        11
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        12
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        13
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        14
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        15
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        16
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        17
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        18
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        19
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        20
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        21
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        22
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        23
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        24
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        25
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 8
+    },
+    {
+      "cell": [
+        21,
+        26
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 12
+    },
+    {
+      "cell": [
+        21,
+        27
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 12
+    },
+    {
+      "cell": [
+        21,
+        28
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 12
+    },
+    {
+      "cell": [
+        21,
+        29
+      ],
+      "floor_at_center": 0.0,
+      "roof_above_floor": 12
+    }
+  ],
+  "range_bar": {
+    "rivet_production_cap": 140,
+    "preferred_test_bins": [
+      6,
+      24,
+      70
+    ],
+    "numeric70_evidence": "CAPTURE-CASES proposal + retained fixture testselection; no numeric70 rule found in inspected DESIGN/ARCHITECTURE/AMMO brief; original user chat not inferred",
+    "unchanged": true
+  },
+  "old_case": {
+    "chapter": 5,
+    "chapter_id": "ossuary",
+    "actual_frames": 2,
+    "near_mid_only": true,
+    "context_sha256": "42dc17c28d006cffa2e09521ceb3ae4ea589319489aad83d6c94f492a19b14fe",
+    "far_admission": "failed before far fire; NOT a weapon range failure",
+    "locator_limit": "unchanged worker positions, cellcenter candidates, 128attempt cap, \u00b115%distance/height<=1; latest typed-fixture only repaired Array signatures"
+  },
+  "model": {
+    "existing_closed_proxy_OBBs": 24,
+    "actual_world_GLB_permesh_conservative_bounds": 316,
+    "installed_healing_stations_in_chapter": 4,
+    "all_current_campaign_healing_stations_checked_across_fixed_scan": 32,
+    "player_capsule": "conservative radius.32,height1.70 enclosing retained test query1.65 at center+.85",
+    "worker_capsule": "production radius.34,height2.7; floor support+.03; layer4",
+    "floor": "all ordinary Level triangle intersections + source lower-sphere endpoint support; Ossuary patch excluded",
+    "walls": "actual walkable union with.13m inward envelope for source.12m architecture; candidate outline stays cellX21 with>=.40m beyond envelope",
+    "scene_art": "all retained permesh GLB min/max bounds transformed at actual scene placement, conservative AABBs; these are VISUAL source obstacles separately from collision proxies",
+    "ray_sampling": "center+9silhouette rays at<=.125m terrain/roof samples plus exact floor/roof triangle intersections and exact fixed healing triangle hits",
+    "other_actors": "original configured source positions including floatingcaster+1m, capsule+conservative billboard-square blockers; prospective native current poses still authoritative"
+  },
+  "limits": [
+    "Not a drop-in result for unchanged chapter5 choose_crosshair_actor: this prospectively relocates existing normal Worker05 in chapter3",
+    "Fixed-worker 72angle search across8layouts found no candidate in its bounded domain; NOT a global absence claim",
+    "Arrange-worker search covered Processional all444cellcenters\u00d772angles and Reliquary only prefix through2found; no other arrange-worker maps searched",
+    "No native Godot import/physics/render/cachedmask/actualcamera/standing/navigation/fire/HP/ammo/cooldown/fx evidence collected",
+    "No controlled arena, opaque replacement texture, wall/door/map/light/collider/hitbox alteration or range adjustment",
+    "Source lighting range is not proof of visible low-light640 art; preserve actual lights and judge native pictures",
+    "No earned travel/combat/economy or physical-input/performance claim"
+  ]
+}

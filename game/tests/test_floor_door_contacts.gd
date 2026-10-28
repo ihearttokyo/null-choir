@@ -1,6 +1,7 @@
 extends SceneTree
 
 const WallClock = preload("res://tests/wall_clock_wait.gd")
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 
 func _initialize(): call_deferred("run")
 
@@ -24,10 +25,21 @@ func run():
     var rows=[]
     var misses=0
     for index in range(8):
-        game.start_campaign(1)
-        game.state.new_campaign(1)
-        game.state.level_index=index
+        # Selected current/checkpoint/entry books and floor belong to THIS map,
+        # not an Intake new_campaign with only its level_index overwritten.
+        var selected = StaticSelectedLevel.fresh_selected(index,1)
+        if selected == null:
+            push_error("Selected contact fixture has no valid current chapter image")
+            game.free()
+            quit(1)
+            return
+        game.state=selected
         await game.start_level()
+        if not game.playing or not is_instance_valid(game.level) or not is_instance_valid(game.player) or game.state.level_index!=index or game._scene_level_index!=index:
+            push_error("Actual selected contact world failed to build; no default-map proxy")
+            game.free()
+            quit(1)
+            return
         game.set_process(false)
         game.player.set_physics_process(false)
         for actor in game.enemies:actor.set_physics_process(false)

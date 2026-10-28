@@ -5,6 +5,7 @@ const TERRAIN_VERSION = 2
 const SAVE_PATH = "user://campaign.json"
 const Layout = preload("res://scripts/level_data.gd")
 const Enemy = preload("res://scripts/enemy.gd")
+const EarnedSupplies = preload("res://scripts/earned_supplies.gd")
 # These six existing actors acquire a NEW exit condition in this release. The
 # Nursery Warden and Choir Avatar were already mandatory and are never waived.
 const LEGACY_NEW_EXIT_WARDENS = {
@@ -20,7 +21,10 @@ var health: int = 100
 var armor: int = 0
 var ammo: Array = [0, 90, 0, 0, 0, 0]
 var owned_weapons: Array = [0, 1]
+var repeater_heat: float = 0.0
 var weapon: int = 1
+# Next accepted-shot index per weapon; restored with its owning resource envelope.
+var shot_sequence: Array = [0,0,0,0,0,0]
 var keys: Array = []
 var discoveries: Array = []
 var removed: Array = []
@@ -38,6 +42,7 @@ var actors: Variant = null
 var seal_drops: Array = []
 var legacy_exit_wardens: Array = []
 var level_load_error: String = ""
+var earned_supply: Dictionary = {}
 
 func new_campaign(mode: int) -> void:
 	level_load_error = ""
@@ -49,6 +54,8 @@ func new_campaign(mode: int) -> void:
 	ammo = [0, 90, 0, 0, 0, 0]
 	owned_weapons = [0, 1]
 	weapon = 1
+	shot_sequence = [0,0,0,0,0,0]
+	repeater_heat = 0.0
 	keys = []
 	discoveries = []
 	removed = []
@@ -58,6 +65,7 @@ func new_campaign(mode: int) -> void:
 	legacy_exit_wardens = []
 	yaw = null
 	pitch = null
+	_reset_earned_supply()
 	mark_checkpoint("entry", Vector3.ZERO)
 
 func damage(amount: int) -> void:
@@ -80,7 +88,7 @@ func mark_checkpoint(id: String, location: Vector3) -> void:
 func restore_checkpoint() -> void:
 	if not checkpoint.is_empty():
 		var document = to_dict()
-		for field in ["actors","yaw","pitch"]: document.erase(field)
+		for field in ["actors","yaw","pitch","shot_sequence","repeater_heat"]: document.erase(field)
 		document.merge(checkpoint,true)
 		var candidate = get_script().new()
 		if not candidate.from_dict(document): return
@@ -89,7 +97,7 @@ func restore_checkpoint() -> void:
 func restore_level_start() -> void:
 	if not level_start.is_empty():
 		var document = to_dict()
-		for field in ["actors","yaw","pitch"]: document.erase(field)
+		for field in ["actors","yaw","pitch","shot_sequence","repeater_heat"]: document.erase(field)
 		document.merge(level_start,true)
 		document.checkpoint = level_start.duplicate(true)
 		var candidate = get_script().new()
@@ -98,6 +106,7 @@ func restore_level_start() -> void:
 		checkpoint = level_start.duplicate(true)
 
 func complete_level() -> void:
+	repeater_heat = 0.0 # Existing new-chapter cold weapon, not reconstruction.
 	level_index = mini(8, level_index + 1)
 	_label_floor()
 	keys = []
@@ -108,7 +117,15 @@ func complete_level() -> void:
 	legacy_exit_wardens = []
 	yaw = null
 	pitch = null
+	_reset_earned_supply()
 	mark_checkpoint("entry", Vector3.ZERO)
+
+func _reset_earned_supply() -> void:
+	var layout = Layout.new()
+	if level_index < 8 and not layout.load_level(level_index):
+		earned_supply = {}
+		return
+	earned_supply = EarnedSupplies.fresh(layout)
 
 func _label_floor() -> void:
 	floor_revision = 0
@@ -118,9 +135,10 @@ func _label_floor() -> void:
 
 func _resources() -> Dictionary:
 	var data = {"health": health, "armor": armor, "ammo": ammo.duplicate(),
-		"owned_weapons": owned_weapons.duplicate(), "weapon": weapon,
+		"owned_weapons": owned_weapons.duplicate(), "weapon": weapon, "shot_sequence":shot_sequence.duplicate(), "repeater_heat":repeater_heat,
 		"keys": keys.duplicate(), "removed": removed.duplicate(), "seal_drops": seal_drops.duplicate(true), "legacy_exit_wardens": legacy_exit_wardens.duplicate(),
 		"checkpoint_id": checkpoint_id, "position": [position.x, position.y, position.z]}
+	if not earned_supply.is_empty(): data["earned_supply"] = earned_supply.duplicate(true)
 	if floor_revision > 0: data["floor_revision"] = floor_revision
 	if actors != null: data["actors"] = actors.duplicate(true)
 	if yaw != null: data["yaw"] = yaw
@@ -163,6 +181,9 @@ func from_dict(data: Dictionary) -> bool:
 	saved_checkpoint = data.checkpoint
 	saved_start = data.level_start
 	var snapshots = [data,saved_checkpoint,saved_start]
+	for snapshot in snapshots:
+		if not snapshot.has("shot_sequence"): snapshot["shot_sequence"] = [0,0,0,0,0,0]
+		if not snapshot.has("repeater_heat"): snapshot["repeater_heat"] = 0.0
 	var revision: int = 0
 	if int(data.version) == VERSION:
 		if snapshots.any(func(snapshot): return snapshot.has("floor_revision")): return false
@@ -183,6 +204,7 @@ func from_dict(data: Dictionary) -> bool:
 	for snapshot in snapshots:
 		if not _valid_actor_resources(snapshot,old_layout,int(data.difficulty)): return false
 		if not _valid_seal_resources(snapshot,old_layout): return false
+		if snapshot.has("earned_supply") and not EarnedSupplies.valid(snapshot.earned_supply,snapshot,old_layout,int(data.difficulty)): return false
 	if revision == 3:
 		var current_specs = actor_specs(layout)
 		for snapshot in snapshots:
@@ -197,6 +219,8 @@ func from_dict(data: Dictionary) -> bool:
 					actor.position = _shift_floor(actor.position,old_layout,layout,false,Enemy.capsule_radius(specs[actor.id].kind))
 			for drop in snapshot.get("seal_drops",[]):
 				drop.position = _shift_floor(drop.position,old_layout,layout,false)
+			for drop in snapshot.get("earned_supply",{}).get("loot_drops",[]):
+				drop.position = _shift_floor(drop.position,old_layout,layout,false)
 			if current_revision == 3:
 				if not _trench_migration_clearance(snapshot,layout,specs): return false
 			snapshot["floor_revision"] = current_revision
@@ -206,6 +230,9 @@ func from_dict(data: Dictionary) -> bool:
 	for snapshot in [data,saved_checkpoint,saved_start]:
 		_migrate_legacy_seal_drops(snapshot,layout)
 		if not _valid_seal_resources(snapshot,layout): return false
+		var supplies: Dictionary = EarnedSupplies.migrate(snapshot,layout,int(data.difficulty))
+		if supplies.is_empty(): return false
+		snapshot["earned_supply"] = supplies
 	floor_revision = current_revision
 	difficulty = int(data.difficulty)
 	level_index = int(data.level_index)
@@ -237,6 +264,8 @@ func _shift_floor(values: Array, old_layout, layout, player: bool, radius: float
 
 func _normalized_resources(data: Dictionary) -> Dictionary:
 	var result = data.duplicate(true)
+	result["repeater_heat"] = float(data.get("repeater_heat",0.0))
+	result["shot_sequence"] = data.get("shot_sequence",[0,0,0,0,0,0]).duplicate()
 	if result.has("floor_revision"): result.floor_revision = int(result.floor_revision)
 	var point = Vector3(data.position[0],data.position[1],data.position[2])
 	result.position = [point.x,point.y,point.z]
@@ -244,7 +273,7 @@ func _normalized_resources(data: Dictionary) -> Dictionary:
 	if result.has("pitch"): result.pitch = _native_pitch(float(result.pitch))
 	for field in ["health", "armor", "weapon"]:
 		result[field] = int(result[field])
-	for field in ["ammo", "owned_weapons"]:
+	for field in ["ammo", "owned_weapons", "shot_sequence"]:
 		result[field] = result[field].map(func(value): return int(value))
 	if result.has("actors"):
 		for actor in result.actors:
@@ -264,6 +293,8 @@ func _apply_resources(data: Dictionary) -> void:
 	ammo = data.ammo.map(func(value): return int(value))
 	owned_weapons = data.owned_weapons.map(func(value): return int(value))
 	weapon = int(data.weapon)
+	repeater_heat = float(data.get("repeater_heat",0.0))
+	shot_sequence = data.get("shot_sequence",[0,0,0,0,0,0]).map(func(value): return int(value))
 	keys = data.keys.duplicate()
 	removed = data.removed.duplicate()
 	checkpoint_id = data.checkpoint_id
@@ -273,6 +304,7 @@ func _apply_resources(data: Dictionary) -> void:
 	actors = _normalized_resources(data).actors if data.has("actors") else null
 	seal_drops = data.get("seal_drops",[]).duplicate(true)
 	legacy_exit_wardens = data.get("legacy_exit_wardens",[]).duplicate()
+	earned_supply = data.get("earned_supply",{}).duplicate(true)
 
 static func actor_specs(layout) -> Dictionary:
 	var specs = {}
@@ -292,6 +324,7 @@ static func actor_specs(layout) -> Dictionary:
 	return specs
 
 func _valid_actor_resources(data: Dictionary, layout, mode: int, allow_missing_adds: bool = false) -> bool:
+	if not EarnedSupplies.valid_removed(data.removed,layout): return false
 	if not data.has("actors"): return true
 	var records = data.actors
 	if not records is Array: return false
@@ -302,6 +335,7 @@ func _valid_actor_resources(data: Dictionary, layout, mode: int, allow_missing_a
 	var allowed_removals = {}
 	for field in ["enemies","pickups","interactions","doors"]:
 		for spec in layout.data[field]: allowed_removals[spec.id] = true
+	for tombstone in EarnedSupplies.chapter(layout).get("legacy_pickups",[]): allowed_removals[tombstone.id] = true
 	for group in layout.data.get("encounters",[]): allowed_removals["encounter:"+group.id] = true
 	for owner in owners:
 		for number in range(1,7):
@@ -460,6 +494,10 @@ func _valid_actor_pose(record: Dictionary, spec: Dictionary, layout) -> bool:
 	return true
 
 func _valid_resources(data: Dictionary) -> bool:
+	var heat: Variant = data.get("repeater_heat",0.0)
+	if not (heat is int or heat is float) or not is_finite(float(heat)) or heat < 0 or heat > 0.07: return false
+	var sequences: Variant = data.get("shot_sequence",[0,0,0,0,0,0])
+	if not _integers(sequences,0,2147483646,6) or sequences.size() != 6: return false
 	if not _integer(data.get("health"), 0, 200) or not _integer(data.get("armor"), 0, 200):
 		return false
 	if not _integers(data.get("ammo"), 0, 9999, 6) or data.ammo.size() != 6:

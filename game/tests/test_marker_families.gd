@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 const PurposeContract = preload("res://tests/test_marker_purposes.gd")
 const Player = preload("res://scripts/player.gd")
 const GLYPH_PATH = "res://assets/art/hud/marker_glyphs.png"
@@ -33,8 +34,7 @@ func check_families() -> bool:
 	var seen = {}
 	var purposes = {}
 	for index in range(8):
-		owner.state.new_campaign(1)
-		owner.state.level_index = index
+		owner.state = StaticSelectedLevel.fresh_selected(index,1)
 		owner.level = load("res://scripts/level.gd").new()
 		owner.add_child(owner.level)
 		if not expect(owner.level.layout.load_level(index),"Authored family map loads"): return false

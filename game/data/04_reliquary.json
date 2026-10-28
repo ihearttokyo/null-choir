@@ -514,247 +514,7 @@
     }
   ],
   "mission": "RECOVER BOTH REGISTERS / RETURN TO THE CATALOGUE",
-  "pickups": [
-    {
-      "id": "reliquary_entry_rivets",
-      "kind": "ammo",
-      "cell": [
-        18.5,
-        38.5
-      ],
-      "amount": 60,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_entry_scattergun",
-      "kind": "weapon",
-      "cell": [
-        19.5,
-        32.5
-      ],
-      "amount": 16,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_entry_health",
-      "kind": "health",
-      "cell": [
-        18.5,
-        37.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "reliquary_entry_armor",
-      "kind": "armor",
-      "cell": [
-        20.5,
-        37.5
-      ],
-      "amount": 40
-    },
-    {
-      "id": "reliquary_halo_approach_rivets",
-      "kind": "ammo",
-      "cell": [
-        9.5,
-        25.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_halo_approach_shells",
-      "kind": "ammo",
-      "cell": [
-        10.5,
-        25.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_halo_approach_health",
-      "kind": "health",
-      "cell": [
-        8.5,
-        25.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "reliquary_halo_approach_armor",
-      "kind": "armor",
-      "cell": [
-        9.5,
-        27.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "reliquary_halo_return_rivets",
-      "kind": "ammo",
-      "cell": [
-        15.5,
-        11.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_halo_return_shells",
-      "kind": "ammo",
-      "cell": [
-        14.5,
-        11.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_halo_recess_health",
-      "kind": "health",
-      "cell": [
-        2.75,
-        18.5
-      ],
-      "amount": 25
-    },
-    {
-      "id": "reliquary_wheel_approach_rivets",
-      "kind": "ammo",
-      "cell": [
-        29.5,
-        25.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_wheel_approach_shells",
-      "kind": "ammo",
-      "cell": [
-        30.5,
-        25.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_wheel_approach_health",
-      "kind": "health",
-      "cell": [
-        28.5,
-        25.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "reliquary_wheel_approach_armor",
-      "kind": "armor",
-      "cell": [
-        30.5,
-        28.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "reliquary_wheel_return_rivets",
-      "kind": "ammo",
-      "cell": [
-        23.5,
-        12.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_wheel_return_shells",
-      "kind": "ammo",
-      "cell": [
-        24.5,
-        13.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_wheel_recess_health",
-      "kind": "health",
-      "cell": [
-        36.5,
-        19.5
-      ],
-      "amount": 25
-    },
-    {
-      "id": "reliquary_catalogue_rivets",
-      "kind": "ammo",
-      "cell": [
-        20.5,
-        11.5
-      ],
-      "amount": 60,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_catalogue_shells",
-      "kind": "ammo",
-      "cell": [
-        19.5,
-        11.5
-      ],
-      "amount": 10,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_catalogue_health",
-      "kind": "health",
-      "cell": [
-        19.5,
-        12.5
-      ],
-      "amount": 40
-    },
-    {
-      "id": "reliquary_catalogue_armor",
-      "kind": "armor",
-      "cell": [
-        18.5,
-        12.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "reliquary_exit_rivets",
-      "kind": "ammo",
-      "cell": [
-        19.5,
-        10.5
-      ],
-      "amount": 40,
-      "weapon": 1
-    },
-    {
-      "id": "reliquary_exit_shells",
-      "kind": "ammo",
-      "cell": [
-        20.5,
-        10.5
-      ],
-      "amount": 10,
-      "weapon": 2
-    },
-    {
-      "id": "reliquary_exit_health",
-      "kind": "health",
-      "cell": [
-        18.5,
-        11.5
-      ],
-      "amount": 30
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "reliquary_enemy_00",
@@ -1746,18 +1506,26 @@
     },
     {
       "cell": [
-        12.85,
-        19.5
+        10.9804,
+        14.2
       ],
-      "height": 3.1,
+      "height": 2.9,
       "fixture_yaw": 270,
       "color": [
-        0.3,
-        0.65,
-        0.84
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "reliquary_enemy_04",
+      "threat_role": "seal_blood",
+      "target": [
+        11.5,
+        14.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1928,18 +1696,26 @@
     },
     {
       "cell": [
-        36.85,
-        17.5
+        34.9804,
+        16.2
       ],
-      "height": 3.1,
+      "height": 2.9,
       "fixture_yaw": 270,
       "color": [
-        0.32,
-        0.66,
-        0.85
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "reliquary_enemy_12",
+      "threat_role": "seal_ivory",
+      "target": [
+        35.5,
+        16.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2020,18 +1796,26 @@
     },
     {
       "cell": [
-        20.85,
-        3.5
+        18.2,
+        5.0196
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.84,
-        0.44,
-        0.16
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "reliquary_enemy_28",
+      "threat_role": "exit_warden",
+      "target": [
+        18.5,
+        4.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "id": "reliquary_halo_feed",

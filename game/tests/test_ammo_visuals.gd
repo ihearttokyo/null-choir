@@ -1,4 +1,5 @@
 extends SceneTree
+const WallClock = preload("res://tests/wall_clock_wait.gd")
 # Native/manual-clock checks are not real held-fire or pixels.
 var game
 const GROUP = "ammo_visuals"
@@ -144,11 +145,15 @@ func expect(condition: bool, detail: String) -> bool:
 
 func finish(status: int) -> void:
 	if is_instance_valid(game): game.show_title()
+	if is_instance_valid(game) and game.music != null: game.music.stop()
+	if is_instance_valid(game) and game.effects != null: game.effects.stop()
 	paused = false
 	# Match the established native effects/HUD grace before releasing playback.
-	await create_timer(0.1).timeout
+	await WallClock.seconds(self,0.1) # Mixer grace is real time, not fixed-FPS simulation time.
 	if is_instance_valid(game): game.free()
 	game = null
 	await process_frame
 	await process_frame
-	quit(status)
+	# Let the awaiting run() coroutine release its local Resource references
+	# before SceneTree performs the exit/leak check; do not suppress that check.
+	call_deferred("quit",status)

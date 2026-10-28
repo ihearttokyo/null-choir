@@ -1,0 +1,322 @@
+{
+  "intake_reservoir_entry": {
+    "id": "intake_reservoir_entry",
+    "chapter": "intake",
+    "family": "hanging-pressure-bulb",
+    "cell": [
+      14.5,
+      30.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "intake_reservoir_blood": {
+    "id": "intake_reservoir_blood",
+    "chapter": "intake",
+    "family": "hanging-pressure-bulb",
+    "cell": [
+      2.1325,
+      13.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "intake_reservoir_ivory": {
+    "id": "intake_reservoir_ivory",
+    "chapter": "intake",
+    "family": "hanging-pressure-bulb",
+    "cell": [
+      25.3,
+      11.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "intake_reservoir_final": {
+    "id": "intake_reservoir_final",
+    "chapter": "intake",
+    "family": "hanging-pressure-bulb",
+    "cell": [
+      14.8675,
+      9.7
+    ],
+    "yaw_degrees": 90.0
+  },
+  "foundry_reservoir_entry": {
+    "id": "foundry_reservoir_entry",
+    "chapter": "foundry",
+    "family": "refractory-ceramic-crucible",
+    "cell": [
+      14.5,
+      28.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "foundry_reservoir_blood": {
+    "id": "foundry_reservoir_blood",
+    "chapter": "foundry",
+    "family": "refractory-ceramic-crucible",
+    "cell": [
+      5.3,
+      10.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "foundry_reservoir_ivory": {
+    "id": "foundry_reservoir_ivory",
+    "chapter": "foundry",
+    "family": "refractory-ceramic-crucible",
+    "cell": [
+      27.5,
+      8.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "foundry_reservoir_final": {
+    "id": "foundry_reservoir_final",
+    "chapter": "foundry",
+    "family": "refractory-ceramic-crucible",
+    "cell": [
+      16.1325,
+      8.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "processional_reservoir_entry": {
+    "id": "processional_reservoir_entry",
+    "chapter": "processional",
+    "family": "capillary-organ",
+    "cell": [
+      20.1325,
+      29.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "processional_reservoir_blood": {
+    "id": "processional_reservoir_blood",
+    "chapter": "processional",
+    "family": "capillary-organ",
+    "cell": [
+      2.1325,
+      11.3
+    ],
+    "yaw_degrees": -90.0
+  },
+  "processional_reservoir_ivory": {
+    "id": "processional_reservoir_ivory",
+    "chapter": "processional",
+    "family": "capillary-organ",
+    "cell": [
+      31.8675,
+      12.3
+    ],
+    "yaw_degrees": 90.0
+  },
+  "processional_reservoir_final": {
+    "id": "processional_reservoir_final",
+    "chapter": "processional",
+    "family": "capillary-organ",
+    "cell": [
+      17.3,
+      6.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "reliquary_reservoir_entry": {
+    "id": "reliquary_reservoir_entry",
+    "chapter": "reliquary",
+    "family": "ivory-archive-vessel",
+    "cell": [
+      19.5,
+      39.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "reliquary_reservoir_blood": {
+    "id": "reliquary_reservoir_blood",
+    "chapter": "reliquary",
+    "family": "ivory-archive-vessel",
+    "cell": [
+      15.3,
+      19.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "reliquary_reservoir_ivory": {
+    "id": "reliquary_reservoir_ivory",
+    "chapter": "reliquary",
+    "family": "ivory-archive-vessel",
+    "cell": [
+      36.8675,
+      17.5
+    ],
+    "yaw_degrees": 90.0
+  },
+  "reliquary_reservoir_final": {
+    "id": "reliquary_reservoir_final",
+    "chapter": "reliquary",
+    "family": "ivory-archive-vessel",
+    "cell": [
+      17.7,
+      9.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "nursery_reservoir_entry": {
+    "id": "nursery_reservoir_entry",
+    "chapter": "nursery",
+    "family": "clinical-abstract-capsule",
+    "cell": [
+      4.5,
+      34.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "nursery_reservoir_blood": {
+    "id": "nursery_reservoir_blood",
+    "chapter": "nursery",
+    "family": "clinical-abstract-capsule",
+    "cell": [
+      11.3,
+      10.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "nursery_reservoir_ivory": {
+    "id": "nursery_reservoir_ivory",
+    "chapter": "nursery",
+    "family": "clinical-abstract-capsule",
+    "cell": [
+      23.8675,
+      30.5
+    ],
+    "yaw_degrees": 90.0
+  },
+  "nursery_reservoir_final": {
+    "id": "nursery_reservoir_final",
+    "chapter": "nursery",
+    "family": "clinical-abstract-capsule",
+    "cell": [
+      25.8675,
+      21.3
+    ],
+    "yaw_degrees": 90.0
+  },
+  "ossuary_reservoir_entry": {
+    "id": "ossuary_reservoir_entry",
+    "chapter": "ossuary",
+    "family": "ribbed-marrow-tank",
+    "cell": [
+      35.5,
+      22.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "ossuary_reservoir_blood": {
+    "id": "ossuary_reservoir_blood",
+    "chapter": "ossuary",
+    "family": "ribbed-marrow-tank",
+    "cell": [
+      11.3,
+      14.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "ossuary_reservoir_ivory": {
+    "id": "ossuary_reservoir_ivory",
+    "chapter": "ossuary",
+    "family": "ribbed-marrow-tank",
+    "cell": [
+      34.8675,
+      13.5
+    ],
+    "yaw_degrees": 90.0
+  },
+  "ossuary_reservoir_final": {
+    "id": "ossuary_reservoir_final",
+    "chapter": "ossuary",
+    "family": "ribbed-marrow-tank",
+    "cell": [
+      21.1325,
+      28.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "inversion_reservoir_entry": {
+    "id": "inversion_reservoir_entry",
+    "chapter": "inversion",
+    "family": "canted-supported-orbit-core",
+    "cell": [
+      18.5,
+      38.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "inversion_reservoir_blood": {
+    "id": "inversion_reservoir_blood",
+    "chapter": "inversion",
+    "family": "canted-supported-orbit-core",
+    "cell": [
+      13.1325,
+      21.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "inversion_reservoir_ivory": {
+    "id": "inversion_reservoir_ivory",
+    "chapter": "inversion",
+    "family": "canted-supported-orbit-core",
+    "cell": [
+      35.8675,
+      14.5
+    ],
+    "yaw_degrees": 90.0
+  },
+  "inversion_reservoir_final": {
+    "id": "inversion_reservoir_final",
+    "chapter": "inversion",
+    "family": "canted-supported-orbit-core",
+    "cell": [
+      34.5,
+      26.1325
+    ],
+    "yaw_degrees": 180.0
+  },
+  "heart_reservoir_entry": {
+    "id": "heart_reservoir_entry",
+    "chapter": "heart",
+    "family": "organic-valve-cage",
+    "cell": [
+      4.5,
+      7.8675
+    ],
+    "yaw_degrees": 0.0
+  },
+  "heart_reservoir_blood": {
+    "id": "heart_reservoir_blood",
+    "chapter": "heart",
+    "family": "organic-valve-cage",
+    "cell": [
+      2.1325,
+      14.5
+    ],
+    "yaw_degrees": -90.0
+  },
+  "heart_reservoir_ivory": {
+    "id": "heart_reservoir_ivory",
+    "chapter": "heart",
+    "family": "organic-valve-cage",
+    "cell": [
+      25.8675,
+      34.7
+    ],
+    "yaw_degrees": 90.0
+  },
+  "heart_reservoir_final": {
+    "id": "heart_reservoir_final",
+    "chapter": "heart",
+    "family": "organic-valve-cage",
+    "cell": [
+      33.3,
+      18.1325
+    ],
+    "yaw_degrees": 180.0
+  }
+}

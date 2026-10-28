@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # Read-only native bake diagnostic. Dumps polygon edge collisions without changing
 # mesh, navigation settings, collision, endpoints, or publication behavior.
 const Level = preload("res://scripts/level.gd")
@@ -10,7 +11,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
  var host = Host.new()
  root.add_child(host)
- host.state.new_campaign(1)
+ host.state = StaticSelectedLevel.fresh_selected(0,1)
  var level = Level.new()
  host.level = level
  host.add_child(level)

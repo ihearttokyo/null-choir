@@ -184,12 +184,18 @@ class NativeRivetTests(unittest.TestCase):
             write(root,v['LEDGER'],json.dumps(doc).encode())
             with self.assertRaises(Error):v['validate_ledger'](root)
 
-    def test_current_qualified_v5_alias_and_foreign_URI_negative(self):
+    def test_current_qualified_Player_consumption_and_foreign_URI_negative(self):
         current=(ROOT/'game/scripts/player.gd').read_bytes()
-        self.assertEqual(hashlib.sha256(current).hexdigest(),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
         self.assertEqual(v['validate_pistol_player_compatibility'](ROOT,current),self.player.encode())
         foreign=current.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol')
         with self.assertRaises(ValueError):v['validate_pistol_player_compatibility'](ROOT,foreign)
+
+    def test_historical_v5_one_byte_alias_stays_exact(self):
+        legacy=self.player.encode().replace(b'"asset":"native-v4/rivet_pistol"',b'"asset":"native-v5/rivet_pistol"',1)
+        self.assertEqual(hashlib.sha256(legacy).hexdigest(),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
+        guard=v['v5_guard'](ROOT);descriptor=json.loads((ROOT/'source/art/rivet-forward-v5/ledger.json').read_text())['player_compatibility']
+        self.assertEqual(guard['normalize_player'](ROOT,legacy,descriptor),self.player.encode())
+        with self.assertRaises(ValueError):guard['normalize_player'](ROOT,legacy.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol'),descriptor)
 
     def test_only_index1_runtime_alternate(self):
         v['validate_player'](self.player)
@@ -254,5 +260,63 @@ class NativeRivetTests(unittest.TestCase):
     def test_private_or_noncanonical_references_rejected(self):
         for path in ['/Users/private/source.blend','source/../secret.blend','source//file.blend']:
             with self.assertRaises(Error):v['safe_rel'](self.temporary(),path,label='negative')
+
+class V4ConsumptionDispatchTests(unittest.TestCase):
+    """Route/order UNIT proof, not a substitute actual96 qualification receipt."""
+    @classmethod
+    def setUpClass(cls):
+        cls.before=(ROOT/'source/art/rivet-forward-v5/provenance/player-before-v5.gd').read_bytes()
+        cls.retained=(ROOT/'source/art/consumer-qualification-v0096/provenance/player-v5-historical.gd').read_bytes()
+        cls.current=(ROOT/'game/scripts/player.gd').read_bytes()
+        cls.output=['game/assets/art/weapons/native-v5/rivet_pistol.png']
+
+    def route(self,current,qualifier=None):
+        guard=v['v5_guard'](ROOT).copy()
+        normalize=guard['normalize_consuming_player'];old_normalize=normalize.__globals__['normalize_player']
+        events=[]
+        def qualified(root,supplied):
+            events.append('qualified96')
+            if qualifier is not None:return qualifier(root,supplied)
+            if supplied!=self.current:raise ValueError('foreign/nonresident Player source')
+            return self.retained
+        def exact_old(root,current,descriptor):
+            events.append('frozen_one_byte_normalizer')
+            return old_normalize(root,current,descriptor)
+        # Only the dispatch/order unit replaces the independently tested full
+        # v5 art audit and actual96 qualifier. All historical descriptor/pair/
+        # one-byte checks execute unmodified; real positives remain above.
+        guard['validate']=lambda root,h:None
+        function=v['validate_pistol_player_compatibility']
+        with patch.dict(function.__globals__,{'v5_guard':lambda root:guard,'consumer_compatibility':lambda root:{'qualified_player_consumption96':qualified}}),patch.dict(normalize.__globals__,{'normalize_player':exact_old}):
+            result=v['validate_v4_player_consumption'](ROOT,current)
+        return result,events
+
+    def test_legacy_v4_route_does_not_require_later_qualification(self):
+        function=v['validate_v4_player_consumption']
+        with patch.dict(function.__globals__,{'validate_pistol_player_compatibility':lambda *args: self.fail('Unexpected later route')}):
+            self.assertEqual(function(ROOT,self.before),[])
+
+    def test_historical_v5_still_uses_exact_one_byte_normalizer(self):
+        result,events=self.route(self.retained)
+        self.assertEqual(result,self.output);self.assertEqual(events,['frozen_one_byte_normalizer'])
+
+    def test_current96_qualifies_before_exact_historical_normalization(self):
+        result,events=self.route(self.current)
+        self.assertEqual(result,self.output);self.assertEqual(events,['qualified96','frozen_one_byte_normalizer'])
+
+    def test_foreign_same_layout_cannot_borrow_current_qualification(self):
+        with self.assertRaisesRegex(ValueError,'foreign/nonresident'):self.route(self.current+b'\n# foreign Player bytes\n')
+
+    def test_receipt_or_current_source_failure_cannot_fall_back(self):
+        def refused(root,supplied):raise ValueError('receipt/source validation refused')
+        with self.assertRaisesRegex(ValueError,'receipt/source'):self.route(self.current,refused)
+
+    def test_qualified_route_cannot_return_wrong_historical_snapshot(self):
+        with self.assertRaises(ValueError):self.route(self.current,lambda root,supplied:self.retained+b'\n# forged history\n')
+
+    def test_wrong_layout_still_rejected_without_qualifier_alias(self):
+        function=v['validate_v4_player_consumption']
+        with patch.dict(function.__globals__,{'validate_pistol_player_compatibility':lambda *args:self.fail('Foreign layout routed')}):
+            with self.assertRaises(Error):function(ROOT,self.current.replace(b'painted-v3/scattergun',b'native-v5/rivet_pistol'))
 
 if __name__=='__main__':unittest.main()

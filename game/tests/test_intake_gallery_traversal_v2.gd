@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 ## Arranged, scripted-input geometry witness. Not earned combat, physical input,
 ## campaign completion, rendering or performance acceptance. Level keeps every
 ## production art/scenery/floor/wall/door collider; no Enemy instances are spawned.
@@ -66,7 +67,7 @@ func run() -> void:
 			return
 	host = Host.new()
 	root.add_child(host)
-	host.state.new_campaign(1)
+	host.state = StaticSelectedLevel.fresh_selected(0,1)
 	host.level = Level.new()
 	host.add_child(host.level)
 	if not expect(host.level.build(host,0) and host.level.layout.floor_revision() == 2,"Actual production Intake revision2 builds"):
