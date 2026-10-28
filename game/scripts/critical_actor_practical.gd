@@ -1,19 +1,24 @@
 extends OmniLight3D
-## Critical actor/corpse presentation only; follows the actual billboard's front.
+## Local actor readability; critical carriers retain their original brighter light; follows the actual billboard's front.
 ## No collision, gameplay, save or atlas writes. Walls clamp the emitter and cast shadows.
 var _source: Sprite3D
+var _ordinary_living_only: bool = false
 
-func bind(source: Sprite3D) -> void:
+func bind(source: Sprite3D, critical: bool = true) -> void:
 	_source=source
+	_ordinary_living_only=not critical
 	name="CarriedPractical"
 	light_color=Color(.95,.8,.6)
-	light_energy=1.4
+	light_energy=1.4 if critical else 0.65
 	omni_range=maxf(3.2,source.pixel_size*float(source.texture.get_height()/source.vframes)*.7)
-	shadow_enabled=true
-	set_meta("practical_source","critical_actor_billboard")
+	light_cull_mask=0xFFFFF if critical else 2
+	shadow_enabled=critical # No additional shadow maps for ordinary actors.
+	set_meta("practical_source","critical_actor_billboard" if critical else "ordinary_actor_billboard")
 
 func _physics_process(_delta: float) -> void:
 	if not is_instance_valid(_source) or not _source.is_inside_tree() or _source.is_queued_for_deletion():
+		hide();return
+	if _ordinary_living_only and _source.get_parent().hp <= 0:
 		hide();return
 	var camera: Camera3D=get_viewport().get_camera_3d()
 	if camera==null or not _source.is_visible_in_tree(): hide();return

@@ -109,8 +109,9 @@ func run() -> void:
 					game.player.cancel_actions()
 					game.player.rotation.y = deg_to_rad(yaw)
 					driver.reset()
-					driver.running = running
+					driver.running = true # Both modifier states must use the same fast oracle.
 					if running: Input.action_press("run")
+					else: Input.action_release("run")
 					if pattern != "strafe": Input.action_press("move_forward",strength)
 					if pattern != "forward": Input.action_press("move_right",strength)
 					for phase in ["start","reverse","stop"]:
@@ -150,7 +151,7 @@ func run() -> void:
 		push_error("Missing movement cases")
 		await finish(game,driver,1)
 		return
-	print("PASS native movement: ",cases," rotated analog/digital walk/run forward/strafe/diagonal start/reverse/coast-stop cases; real displacement/floor witnesses")
+	print("PASS native movement: ",cases," rotated analog/digital automatic-fast with legacy modifier held/released forward/strafe/diagonal start/reverse/coast-stop cases; real displacement/floor witnesses")
 	await finish(game,driver,0)
 
 func finish(game: Node, driver: Node, code: int) -> void:

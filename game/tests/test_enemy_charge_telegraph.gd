@@ -48,7 +48,7 @@ func run() -> void:
 	actor.stage="idle";tell._physics_process(0.04);actor.kind="nursery_warden";capsule.radius=1.0;capsule.height=5.4;collision.position.y=2.7;actor.variant=1;actor.stage="windup";tell._physics_process(0.04)
 	if not check(not tell.lane.visible,"Warden projectile variant must never claim a charge lane"): return
 	actor.variant=0;tell._physics_process(0.04)
-	if not check(is_equal_approx(tell.lane_nominal_distance,9.1) and is_equal_approx(tell.lane_radius,1.0),"Warden charge nominal range is actual13x.7, not brute range"): return
+	if not check(is_equal_approx(tell.lane_nominal_distance,10.4) and is_equal_approx(tell.lane_radius,1.0),"Warden charge nominal range is actual16x.65, not brute range"): return
 	host.queue_free();await process_frame;await process_frame
 	print("PASS synthetic charge corridor: real capsule floor/WORLD sweep, supported finite dots, actual nominal durations/speeds, locked aim/cache/pose invalidation, Warden variant gate; no damage-zone or visual acceptance claim")
 	quit(0)

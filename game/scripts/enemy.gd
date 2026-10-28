@@ -21,14 +21,15 @@ const CLUTCH_VENT_SECONDS := 1.1
 const CriticalPractical = preload("res://scripts/critical_actor_practical.gd")
 const EarnedSupplies = preload("res://scripts/earned_supplies.gd")
 const Telegraph = preload("res://scripts/enemy_telegraph.gd")
+const Motion = preload("res://scripts/enemy_motion.gd")
 const Projectile = preload("res://scripts/projectile.gd")
 const WINDUPS = {"crawler":0.25,"worker":0.45,"caster":0.70,"brute":0.80,"guardian":0.75,"summoner":1.20,"nursery_warden":1.00,"choir_avatar":1.05}
 const LATE = {
-	"brute":{"hp":210,"speed":3.1,"radius":0.62,"height":3.3,"scale":4.4,"cooldown":3.0,"recovery":0.8},
-	"guardian":{"hp":260,"speed":2.0,"radius":0.65,"height":3.7,"scale":4.7,"cooldown":2.6,"recovery":0.9},
+	"brute":{"hp":210,"speed":4.8,"radius":0.62,"height":3.3,"scale":4.4,"cooldown":3.0,"recovery":0.8},
+	"guardian":{"hp":260,"speed":3.2,"radius":0.65,"height":3.7,"scale":4.7,"cooldown":2.6,"recovery":0.9},
 	"summoner":{"hp":150,"speed":0.0,"radius":0.45,"height":4.2,"scale":5.6,"cooldown":3.8,"recovery":0.7},
-	"nursery_warden":{"hp":1200,"speed":2.0,"radius":1.0,"height":5.4,"scale":7.3,"cooldown":3.2,"recovery":0.9},
-	"choir_avatar":{"hp":1600,"speed":1.6,"radius":1.0,"height":5.6,"scale":7.6,"cooldown":3.0,"recovery":1.1}}
+	"nursery_warden":{"hp":1200,"speed":3.6,"radius":1.0,"height":5.4,"scale":7.3,"cooldown":3.2,"recovery":0.9},
+	"choir_avatar":{"hp":1600,"speed":2.8,"radius":1.0,"height":5.6,"scale":7.6,"cooldown":3.0,"recovery":1.1}}
 
 var game: Node
 var id: String
@@ -115,7 +116,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	champion = SealGuardians.profile(spec)
 	hp = health_cap(kind,game.state.difficulty,champion.get("health_multiplier",1.0))
 	max_hp = hp
-	speed = _profile.get("speed",5.4 if kind == "crawler" else 3.1)
+	speed = _profile.get("speed",Motion.REGULAR_SPEEDS.get(kind,0.0))
 	if kind == "summoner":
 		for number in range(1,7):
 			if "summon:"+id+":"+str(number) in game.state.removed or id+"_add_"+str(number) in game.state.removed: _summoned_total = number
@@ -149,6 +150,7 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 		if _worker_atlas_valid: sprite.vframes = rows
 	sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	sprite.shaded = true
+	sprite.layers = 2 # Actor-only ordinary readability lights never fill world architecture.
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 	var cell: int = 256 if kind in ["nursery_warden","choir_avatar"] else 128
@@ -158,12 +160,13 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	var critical: bool=not champion.is_empty()
 	for grant in EarnedSupplies.chapter(game.level.layout).get("grants",[]):
 		if grant.carrier==id: critical=true;break
-	if critical:
-		var practical := CriticalPractical.new()
-		practical.bind(sprite)
-		practical.set_meta("source_actor",id)
-		practical.set_meta("source_role","seal_bearer" if champion.has("seal") else "exit_warden" if not champion.is_empty() else "equipment_carrier")
-		add_child(practical)
+	# Every live threat retains local front readability when leaving a fixed light pool.
+	# Existing critical lighting stays brighter/shadowed; ordinary lights add no shadows.
+	var practical := CriticalPractical.new()
+	practical.bind(sprite,critical)
+	practical.set_meta("source_actor",id)
+	practical.set_meta("source_role","seal_bearer" if champion.has("seal") else "exit_warden" if not champion.is_empty() else "equipment_carrier" if critical else "ordinary_threat")
+	add_child(practical)
 	if not champion.is_empty(): champion_identity = SealGuardians.attach_identity(self,champion)
 	if kind == "worker": _worker_regions = WorkerHitRegions.bind(sprite,WORKER_REGION_MANIFEST)
 	if kind == "nursery_warden": _warden_node_binding = WardenPressureWindow.bind(sprite)
@@ -193,7 +196,7 @@ func _physics_process(delta: float) -> void:
 	var camera = game.player.camera
 	var view = global_basis.inverse()*(camera.global_position-global_position)
 	var direction_index = posmod(int(round(atan2(view.x,-view.z)/TAU*8)),8)
-	var frame = 4 if hp <= 0 else WorkerHitRegions.VENT_POSE if clutch_vent_time > 0 else 3 if telegraph_time > 0 or pose_time > 0 or (not _profile.is_empty() and (recovery_time > 0 or _rush_time > 0)) else 1+int(age*6)%2 if active and alerted else 0
+	var frame = 4 if hp <= 0 else WorkerHitRegions.VENT_POSE if clutch_vent_time > 0 else 3 if telegraph_time > 0 or pose_time > 0 or _rush_time > 0 or (not _profile.is_empty() and recovery_time > 0) else 1+int(age*6)%2 if active and alerted else 0
 	sprite.frame = frame*8+direction_index
 	sprite.modulate = Color(1.7,0.7,0.6) if hurt_time > 0 else Color.WHITE
 	if is_instance_valid(champion_identity): SealGuardians.present_identity(self,champion_identity)
@@ -235,10 +238,10 @@ func _physics_process(delta: float) -> void:
 		_rush_time = maxf(0,_rush_time-delta)
 		heading = _rush_direction
 		if _rush_time > 0:
-			var rush_speed: float = 15.0 if kind == "brute" else 13.0 if kind == "nursery_warden" else 9.0
+			var rush_speed: float = Motion.charge_speed(kind)
 			velocity.x = _rush_direction.x*rush_speed
 			velocity.z = _rush_direction.z*rush_speed
-		elif not _profile.is_empty(): _finish_charge()
+		else: _finish_charge()
 	elif alerted and stagger_time <= 0:
 		if speed > 0:
 			path_time -= delta
@@ -257,13 +260,13 @@ func _physics_process(delta: float) -> void:
 				move = (-move+side*0.5).normalized()
 			elif range_to_target < (18.0 if kind == "worker" else 24.0):
 				move = side
-				desired = 1.8 if kind == "worker" else 1.4
+				desired = Motion.STRAFE_SPEEDS[kind]
 		if _routing and delta > 0:
 			desired = minf(desired,heading.length()/delta)
 			arrived_waypoint = desired > 0 and heading.length() > .001 and heading.length() <= desired*delta+.00001
 		velocity.x = move.x*desired
 		velocity.z = move.z*desired
-		if kind in WINDUPS and attack_time <= 0 and recovery_time <= 0 and sight.is_empty() and range_to_target < (3.6 if kind == "crawler" else 30.0) and (kind != "summoner" or _summon_budget() > 0):
+		if kind in WINDUPS and attack_time <= 0 and recovery_time <= 0 and sight.is_empty() and range_to_target <= Motion.commit_range(kind,_attack_variant) and (kind != "summoner" or _summon_budget() > 0):
 			_begin_attack(aim)
 	if not _current_map() or not game.playing: return
 	if heading.length() > 0.2:
@@ -274,7 +277,7 @@ func _physics_process(delta: float) -> void:
 	if arrived_waypoint and Vector2(global_position.x-waypoint.x,global_position.z-waypoint.z).length_squared() < .000001: path_time = 0
 	if _rush_time > 0 and not _rush_hit: _try_melee()
 	if not is_instance_valid(self): return
-	if not _profile.is_empty() and hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
+	if hp > 0 and _rush_time > 0 and _current_map() and game.playing and (is_on_wall() or _rush_hit): _finish_charge()
 	if kind in ["worker","caster"] and sight.is_empty() and is_on_wall(): _strafe_sign = -_strafe_sign
 
 func combat_visual_state() -> Dictionary:
@@ -347,11 +350,11 @@ func _release_attack() -> void:
 		_rush_direction = _committed_aim-global_position
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
-		_rush_time = 0.18
+		_rush_time = Motion.charge_seconds(kind)
 		_rush_duration = _rush_time
 		_rush_hit = false
-		velocity.x = _rush_direction.x*9.0
-		velocity.z = _rush_direction.z*9.0
+		velocity.x = _rush_direction.x*Motion.charge_speed(kind)
+		velocity.z = _rush_direction.z*Motion.charge_speed(kind)
 	elif kind == "worker":
 		var shot = PhysicsRayQueryParameters3D.create(origin,origin+(_committed_aim-origin).normalized()*30.0,1|2|4)
 		shot.exclude = [get_rid()]
@@ -369,13 +372,13 @@ func _release_late_attack() -> void:
 		_rush_direction = _committed_aim-global_position
 		_rush_direction.y = 0
 		_rush_direction = _rush_direction.normalized()
-		_rush_time = 0.9 if kind == "brute" else 0.7
+		_rush_time = Motion.charge_seconds(kind)
 		_rush_duration = _rush_time
 		_rush_hit = false
 		recovery_time = 0
 		pose_time = _rush_time
-		velocity.x = _rush_direction.x*(15.0 if kind == "brute" else 13.0)
-		velocity.z = _rush_direction.z*(15.0 if kind == "brute" else 13.0)
+		velocity.x = _rush_direction.x*Motion.charge_speed(kind)
+		velocity.z = _rush_direction.z*Motion.charge_speed(kind)
 	elif kind == "guardian":
 		_fire_pattern(1)
 	elif kind == "summoner":
@@ -390,7 +393,7 @@ func _finish_charge() -> void:
 	_rush_time = 0
 	velocity.x = 0
 	velocity.z = 0
-	recovery_time = maxf(recovery_time,maxf(_profile.recovery,champion.get("recovery",0.0)))
+	recovery_time = maxf(recovery_time,maxf(_profile.get("recovery",0.45),champion.get("recovery",0.0)))
 	pose_time = maxf(pose_time,recovery_time)
 	_recovery_duration = maxf(recovery_time,pose_time)
 

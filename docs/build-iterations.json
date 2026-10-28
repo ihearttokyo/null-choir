@@ -30,6 +30,11 @@
       "ordinal": 96,
       "candidate": "earned-arsenal-momentum-local-horror",
       "status": "reserved"
+    },
+    {
+      "ordinal": 97,
+      "candidate": "readable-pursuit-autorun",
+      "status": "reserved"
     }
   ]
 }

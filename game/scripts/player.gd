@@ -104,7 +104,8 @@ func _physics_process(delta: float) -> void:
 	var axes := Vector2(Input.get_axis("move_left","move_right"),Input.get_axis("move_back","move_forward"))
 	var right := Vector2(basis.x.x,basis.x.z)
 	var forward := Vector2(-basis.z.x,-basis.z.z)
-	var travel: Vector2 = _ground_movement.travel(delta,axes,right,forward,Input.is_action_pressed("run"),is_on_floor())
+	# Automatic fast movement. The preserved legacy run binding has no speed effect.
+	var travel: Vector2 = _ground_movement.travel(delta,axes,right,forward,true,is_on_floor())
 	velocity.x = travel.x/delta
 	velocity.z = travel.y/delta
 	if not is_on_floor(): velocity.y -= delta*24

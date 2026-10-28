@@ -45,7 +45,7 @@ func run() -> void:
 	root.add_child(driver)
 	await physics_frame
 	await physics_frame
-	Input.action_press("run") # Original fast-slide velocity bound requires run, not slower walk.
+	Input.action_release("run") # Fast-slide velocity needs no modifier.
 	Input.action_press("move_right")
 	Input.action_press("move_forward")
 	driver.set_physics_process(true)
