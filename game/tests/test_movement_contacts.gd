@@ -27,7 +27,7 @@ func _initialize() -> void: call_deferred("run")
 
 func run() -> void:
 	preload("res://scripts/preferences.gd").new().apply_bindings()
-	for action in ["move_left","move_right","move_forward","move_back","fire","interact"]: Input.action_release(action)
+	for action in ["move_left","move_right","move_forward","move_back","run","fire","interact"]: Input.action_release(action)
 	var game := TestGame.new()
 	root.add_child(game)
 	game.state.new_campaign(1)
@@ -45,6 +45,7 @@ func run() -> void:
 	root.add_child(driver)
 	await physics_frame
 	await physics_frame
+	Input.action_press("run") # Original fast-slide velocity bound requires run, not slower walk.
 	Input.action_press("move_right")
 	Input.action_press("move_forward")
 	driver.set_physics_process(true)
@@ -58,7 +59,7 @@ func run() -> void:
 	# Add the crossing wall and rebuild a fresh start for corner contact.
 	add_box(game.level,Vector3(0,2,-4),Vector3(200,4,.2))
 	game.player.position = Vector3.ZERO
-	game.player.velocity = Vector3.ZERO
+	game.player.cancel_actions() # Fresh collision case also resets canonical movement phase.
 	driver.ticks = 0
 	driver.corner_limit = true
 	driver.touched_x = false
@@ -85,7 +86,7 @@ func add_box(level: Node3D, point: Vector3, size: Vector3) -> void:
 	level.add_child(body)
 
 func finish(game: Node, driver: Node, code: int) -> void:
-	for action in ["move_left","move_right","move_forward","move_back"]: Input.action_release(action)
+	for action in ["move_left","move_right","move_forward","move_back","run"]: Input.action_release(action)
 	game.free()
 	driver.free()
 	await process_frame

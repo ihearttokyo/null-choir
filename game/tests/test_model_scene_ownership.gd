@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 class WorldOwner extends Node3D:
 	var state = preload("res://scripts/campaign.gd").new()
 	var level
@@ -9,10 +10,10 @@ func _initialize(): call_deferred("run")
 func run():
 	owner = WorldOwner.new()
 	root.add_child(owner)
-	owner.state.new_campaign(1)
+	owner.state = StaticSelectedLevel.fresh_selected(0,1)
 	owner.level = load("res://scripts/level.gd").new()
 	owner.add_child(owner.level)
-	owner.level.build(owner, 0)
+	if not expect(owner.level.build(owner,0),"Fresh selected Intake fixture builds before scene ownership checks"): return
 	var path = "res://assets/art/world/conduit.glb"
 	if not expect(ResourceLoader.has_cached(path), "Level must retain the repeated native PackedScene"): return
 	var models = owner.level.get_children().filter(func(n): return n.scene_file_path == path)

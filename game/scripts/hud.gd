@@ -1,6 +1,7 @@
 extends Node2D
 
 const SealGuardians = preload("res://scripts/seal_guardians.gd")
+const Variation = preload("res://scripts/weapon_variation.gd")
 const Survey = preload("res://scripts/survey.gd")
 const AMMO_ATLAS = preload("res://assets/art/effects/ammo_vfx.png")
 const HUD_ATLAS = preload("res://assets/art/hud/hud_kit.png")
@@ -50,6 +51,7 @@ func _ready() -> void:
 	_label("AmmoCapacity",Rect2(428,348,44,12),7,HORIZONTAL_ALIGNMENT_RIGHT)
 	_label("AmmoStatus",Rect2(367,348,59,12),8)
 	_label("RecoveryProgress",Rect2(558,348,76,12),8,HORIZONTAL_ALIGNMENT_RIGHT)
+	_label("SupplyPrompt",Rect2(96,225,448,24),10,HORIZONTAL_ALIGNMENT_CENTER)
 	_label("InteractionPrompt",Rect2(128,250,384,32),12,HORIZONTAL_ALIGNMENT_CENTER)
 	_label("InteractionBinding",Rect2(96,286,448,30),11,HORIZONTAL_ALIGNMENT_CENTER)
 	message_label = _label("Transmission",Rect2(16,64,608,68),12)
@@ -128,7 +130,7 @@ func draw_state() -> Dictionary:
 		elif interaction.has("size"): prompt = "OPEN GATE"
 		else:
 			match interaction.get("kind",""):
-				"key": prompt = "RECOVER "+str(interaction.get("key","")).to_upper()+" SEAL"
+				"key": prompt = "WALK OVER TO RECOVER "+str(interaction.get("key","")).to_upper()+" SEAL"
 				"story": prompt = "READ MAINTENANCE RECORD"
 				"exit":
 					prompt = "DESCEND"
@@ -146,7 +148,7 @@ func draw_state() -> Dictionary:
 		"ammo":"TOOL" if state.weapon == 0 else "EMPTY" if empty else str(state.ammo[state.weapon]),
 		"capacity":"CAP %d" % capacity if state.weapon > 0 and capacity > 0 else "RESERVE" if state.weapon > 0 else "AMMO-FREE",
 		"ammo_status":"EMPTY" if empty else "LOW" if low else "CYCLING" if game.player.cooldown > 0 else "READY",
-		"prompt":prompt,"binding":game.preferences.binding_text("interact") if not prompt.is_empty() else ""}
+		"prompt":prompt,"binding":game.preferences.binding_text("interact") if not prompt.is_empty() and interaction.get("kind","") != "key" else ""}
 
 func _font_color(label: Label, color: Color) -> void:
 	if label.get_theme_color("font_color") != color:
@@ -156,7 +158,7 @@ func _process(_delta: float) -> void:
 	view = draw_state()
 	var active: bool = not view.is_empty() and game.playing
 	for id in labels:
-		if id not in ["InteractionPrompt","InteractionBinding","BossTitle","BossHealth","BossPhase","Transmission"]:
+		if id not in ["SupplyPrompt","InteractionPrompt","InteractionBinding","BossTitle","BossHealth","BossPhase","Transmission"]:
 			labels[id].visible = active
 	if not view.is_empty():
 		labels.LevelTitle.text = view.title
@@ -187,6 +189,9 @@ func _process(_delta: float) -> void:
 		labels.InteractionBinding.text = view.binding
 	labels.InteractionPrompt.visible = active and not view.get("prompt","").is_empty()
 	labels.InteractionBinding.visible = labels.InteractionPrompt.visible
+	var supply: Dictionary = game.supply_display() if game.has_method("supply_display") else {}
+	labels.SupplyPrompt.text = supply.get("text","")+" / "+supply.get("binding","") if not supply.is_empty() else ""
+	labels.SupplyPrompt.visible = active and not supply.is_empty()
 	for id in ["BossTitle","BossHealth","BossPhase"]: labels[id].visible = active and not view.get("boss",{}).is_empty()
 	message_label.text = game.message if game.message_time > 0 else ""
 	message_label.visible = not message_label.text.is_empty()
@@ -261,9 +266,11 @@ func _draw() -> void:
 			draw_texture_rect_region(weapon_texture,Rect2(Vector2(180,143)+sway+Vector2(0,player.recoil*8),Vector2(320,200)),Rect2(frame*320,0,320,200))
 			var flash_duration: float = minf(0.12,profile.interval)
 			var elapsed: float = player.shot_age()
-			if game.state.weapon > 0 and elapsed < flash_duration:
-				var flash_frame = mini(3,int(elapsed/flash_duration*4))
-				draw_texture_rect_region(AMMO_ATLAS,Rect2(Vector2(272,157)+sway,Vector2(96,96)),Rect2(flash_frame*64,0,64,64))
+			if game.state.weapon > 0 and elapsed < flash_duration and not game.settings.get("reduced_damage_flashes",false):
+				var style: Dictionary = Variation.muzzle(game.state.weapon,player.last_shot_sequence())
+				var flash_frame = mini(3,int(elapsed/flash_duration*4)+style.phase)
+				# Existing muzzle centre remains (320,205); pistol art registration is untouched.
+				draw_texture_rect_region(AMMO_ATLAS,Rect2(Vector2(320,205)+sway-style.size*.5,style.size),Rect2(flash_frame*64,0,64,64),style.tint)
 		_instrument_frame()
 		_instrument_art()
 		if game.playing:

@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # DRAFT arranged real AI/physics witness, not earned combat. No collider or actor-profile edits.
 class NativeGame extends "res://scripts/main.gd":
  func _ready()->void:set_process(false);set_physics_process(false)
@@ -24,9 +25,11 @@ func run()->void:
  if failures>0:quit(1);return
  preload("res://scripts/preferences.gd").new().apply_bindings()
  check(Engine.physics_ticks_per_second==60 and Engine.time_scale==1.0,"Unchanged production physics clock")
- game=NativeGame.new();root.add_child(game);game.state.new_campaign(1);game.state.level_index=5
+ game=NativeGame.new();root.add_child(game);game.state=StaticSelectedLevel.fresh_selected(5,1)
  game.level=game.Level.new();game.add_child(game.level)
- check(game.level.build(game,5),"Actual complete Ossuary3 world builds")
+ if not game.level.build(game,5):
+  check(false,"Actual complete Ossuary3 world builds")
+  game.level.free();game.free();quit(1);return
  game.player=game.Player.new();game.level.add_child(game.player);game.player.configure(game);game.player.set_physics_process(false)
  # Far enough ahead for normal worker pursuit, not its intended close-range retreat.
  game.player.position=game.level.layout.world_position([5.25,12])+Vector3.UP*.03

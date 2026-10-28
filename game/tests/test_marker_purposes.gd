@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # Independent test oracle; never read the runtime marker factory's mapping.
 const PURPOSE_ART = {
 	"ammo":"marker_ammo", "health":"marker_health", "armor":"marker_armor",
@@ -27,8 +28,7 @@ func check_purposes() -> bool:
 	root.add_child(owner)
 	var seen = {}
 	for index in range(8):
-		owner.state.new_campaign(1)
-		owner.state.level_index = index
+		owner.state = StaticSelectedLevel.fresh_selected(index,1)
 		owner.level = load("res://scripts/level.gd").new()
 		owner.add_child(owner.level)
 		var state_before: Dictionary = owner.state.to_dict().duplicate(true)

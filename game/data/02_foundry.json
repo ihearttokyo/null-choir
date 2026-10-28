@@ -446,122 +446,7 @@
     }
   ],
   "mission": "RECOVERY ORDER 02: temper both restraint seals. Ignore the heat beneath the vertebrae.",
-  "pickups": [
-    {
-      "id": "foundry_entry_ammo",
-      "kind": "ammo",
-      "cell": [
-        15,
-        29
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "foundry_junction_health",
-      "kind": "health",
-      "cell": [
-        10.5,
-        20.5
-      ],
-      "amount": 25
-    },
-    {
-      "id": "furnace_armor",
-      "kind": "armor",
-      "cell": [
-        4.5,
-        17.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "furnace_ammo",
-      "kind": "ammo",
-      "cell": [
-        6.5,
-        19.5
-      ],
-      "amount": 65,
-      "weapon": 1
-    },
-    {
-      "id": "furnace_health",
-      "kind": "health",
-      "cell": [
-        8.5,
-        18.5
-      ],
-      "amount": 25
-    },
-    {
-      "id": "north_ammo",
-      "kind": "ammo",
-      "cell": [
-        10.5,
-        7
-      ],
-      "amount": 50,
-      "weapon": 1
-    },
-    {
-      "id": "crucible_armor",
-      "kind": "armor",
-      "cell": [
-        27.5,
-        14.5
-      ],
-      "amount": 45
-    },
-    {
-      "id": "crucible_health",
-      "kind": "health",
-      "cell": [
-        22,
-        10
-      ],
-      "amount": 30
-    },
-    {
-      "id": "crucible_ammo",
-      "kind": "ammo",
-      "cell": [
-        23.5,
-        19.5
-      ],
-      "amount": 65,
-      "weapon": 1
-    },
-    {
-      "id": "foundry_gate_ammo",
-      "kind": "ammo",
-      "cell": [
-        12.5,
-        6.5
-      ],
-      "amount": 60,
-      "weapon": 1
-    },
-    {
-      "id": "foundry_gate_health",
-      "kind": "health",
-      "cell": [
-        15.5,
-        2.5
-      ],
-      "amount": 40
-    },
-    {
-      "id": "foundry_ramp_ammo",
-      "kind": "ammo",
-      "cell": [
-        23.5,
-        21.5
-      ],
-      "amount": 40,
-      "weapon": 1
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "foundry_enemy_00",
@@ -1614,18 +1499,26 @@
     },
     {
       "cell": [
-        3.15,
-        15.5
+        4.7696,
+        12.7
       ],
-      "height": 4.3,
+      "height": 2.9,
       "fixture_yaw": 90,
       "color": [
-        1,
-        0.48,
-        0.22
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "foundry_enemy_03",
+      "threat_role": "seal_blood",
+      "target": [
+        4.25,
+        13
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1644,18 +1537,26 @@
     },
     {
       "cell": [
-        9.5,
-        6.15
+        9.9804,
+        1.2
       ],
-      "height": 3.1,
-      "fixture_yaw": 0,
+      "height": 2.9,
+      "fixture_yaw": 270,
       "color": [
-        1,
+        0.88,
         0.48,
-        0.22
+        0.24
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "foundry_enemy_17",
+      "threat_role": "exit_warden",
+      "target": [
+        10.5,
+        1.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1706,18 +1607,26 @@
     },
     {
       "cell": [
-        28.85,
-        14
+        26.7,
+        10.3196
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.28,
-        0.72,
-        0.83
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "foundry_enemy_13",
+      "threat_role": "seal_ivory",
+      "target": [
+        27,
+        9.8
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [

@@ -19,7 +19,7 @@ func run() -> void:
 			if not expect(owner.state.level_index == index, "Campaign advances through all eight maps"): return
 			owner.level = load("res://scripts/level.gd").new()
 			owner.add_child(owner.level)
-			owner.level.build(owner, index)
+			if not expect(owner.level.build(owner,index),"Progressed actual Campaign has authoritative finite stock for selected map"): return
 			var observed = capture_ownership(owner.level)
 			if observed.is_empty(): return
 			print("OBSERVE world_ownership cycle=", cycle, " map=", index,

@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 const Main = preload("res://scripts/main.gd")
 const Level = preload("res://scripts/level.gd")
 const PurposeContract = preload("res://tests/test_marker_purposes.gd")
@@ -18,8 +19,7 @@ func run() -> void:
 
 func check_maps() -> bool:
 	for index in range(8):
-		game.state.new_campaign(1)
-		game.state.level_index = index
+		game.state = StaticSelectedLevel.fresh_selected(index,1)
 		game.level = Level.new()
 		root.add_child(game.level)
 		if not expect(game.level.build(game,index),"Actual authored level builds"): return false

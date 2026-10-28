@@ -1,6 +1,7 @@
 extends RefCounted
 # Named champions reuse the approved actor art and role attacks. Their committed
 # windup/recovery is explicit; seal state belongs to Campaign, never visual nodes.
+const CriticalPractical = preload("res://scripts/critical_actor_practical.gd")
 const CORPSE_SCALE = {"crawler":3.8,"worker":3.65,"caster":3.65,"brute":4.4,"guardian":4.7,"summoner":5.6,"nursery_warden":7.3,"choir_avatar":7.6}
 
 static func profile(spec: Dictionary) -> Dictionary:
@@ -94,3 +95,8 @@ static func _restore_corpse(game, key: Dictionary) -> void:
 	corpse.position = interaction_position(game,key)-Vector3.UP*.2
 	corpse.position.y += (cell/2.0-8)*corpse.pixel_size
 	game.level.add_child(corpse)
+	var practical := CriticalPractical.new()
+	practical.bind(corpse)
+	practical.set_meta("source_actor",spec.id)
+	practical.set_meta("source_role","seal_bearer_corpse")
+	corpse.add_child(practical)

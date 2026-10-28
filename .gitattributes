@@ -1,3 +1,6 @@
 # Preserve the upstream license bytes; CRLF is intentional only in these notices.
 game/audio/LICENSE-GeneralUser-GS.txt -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 licenses/audio/GeneralUser-GS-license.txt -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Opaque native evidence: preserve exact importer bytes, including final newlines.
+source/art/consumer-qualification-v0096/native/bytes/* -text -diff

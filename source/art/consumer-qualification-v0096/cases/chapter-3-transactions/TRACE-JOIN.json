@@ -1,0 +1,18 @@
+{
+  "validation": {
+    "status": "TRACE_CONTRACT_VALIDATION_ONLY_NOT_QUALIFICATION",
+    "case_id": "chapter-3-transactions",
+    "frames": 14,
+    "events": 14,
+    "motion_rows": 82,
+    "source_dependency_count": 47,
+    "art_dependency_count": 262,
+    "native_imports": "UNPINNED_SOURCE_CONFIG_ONLY",
+    "qualification": false,
+    "execution_authenticated": false,
+    "source_manifest_sha256": "1d0d32deac3e044eb2141dad0e0620866c4a6488044226362acdd68b3a9eb7af"
+  },
+  "fresh_import_join_sha256": "105986834310b234b523218be3ba791f2c482ac16e60a5a1ba5f8ea553639b7c",
+  "independent_pixels": "PENDING",
+  "qualification": false
+}

@@ -13,15 +13,38 @@ regions = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(regions)
 
 
+# Exact, declared current additions only; the original ordinary-body SHA below
+# remains the authority. This does not qualify current96 artwork or consumers.
+FINITE_DEATH_HOOK = '\n\t\tif game.has_method("earned_defeated") and not game.earned_defeated(self): return'
+NURSERY_WINDOW = (
+    '\n\t# A masked front-node precision bonus; ordinary damage and interruption stay identical.'
+    '\n\tif kind == "nursery_warden" and Engine.is_in_physics_frame() and WardenPressureWindow.eligible(_warden_node_binding,sprite,context.get("sprite_contact",{}),get_instance_id(),source,game.player,game,game.level,kind,telegraph_time,_committed_variant,context,Engine.get_physics_frames()):'
+    '\n\t\tamount = WardenPressureWindow.bonus_damage(amount)'
+)
+
+
 def ordinary_transaction_with_exact_death_hook(text):
+    if text.count('func take_damage(') != 1:
+        raise AssertionError('Exactly one ordinary damage function required')
     body = text.split('func take_damage(', 1)[1].split('\n\t# Leave the complete ordinary-hit', 1)[0]
+    live_guard = '\n\tif hp <= 0 or amount <= 0 or not _current_map() or not game.playing: return'
+    armor_guard = '\n\tif kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0:'
+    if body.count(NURSERY_WINDOW) != 1 or body.count(live_guard+NURSERY_WINDOW+armor_guard) != 1:
+        raise AssertionError('Exact Nursery-only current-physics/context block required before guardian armor')
+    if body.count(FINITE_DEATH_HOOK) != 1 or body.count('\n\tif hp == 0:'+FINITE_DEATH_HOOK+'\n\t\t_committed_variant = -1') != 1:
+        raise AssertionError('Exact finite-death false-return hook required first in hp==0 before reset')
     hook = '\n\t\tif game.has_method("guardian_defeated"): game.guardian_defeated(self)'
     if body.count(hook) != 1:
         raise AssertionError('Exactly one named seal-death hook required')
     death = body.split('\n\tif hp == 0:', 1)[1].split('\n\telif telegraph_time', 1)[0]
     if hook not in death or not death.index('game.state.removed.append(id)') < death.index(hook) < death.index('_event("death")'):
         raise AssertionError('Seal hook must follow recorded death, before notification, never live/nonlethal')
-    return body.replace(hook, '', 1).replace('\n\t\tclutch_vent_time = 0', '')
+    vent = '\n\t\tclutch_vent_time = 0'
+    if body.count(vent) != 1 or death.count('\n\t\tstagger_time = 0'+vent+'\n\t\trecovery_time = 0') != 1:
+        raise AssertionError('Exactly one ordinary Worker reset required in the recorded death branch')
+    for exact in [NURSERY_WINDOW, FINITE_DEATH_HOOK, hook, vent]:
+        body = body.replace(exact, '', 1)
+    return body
 
 
 class WorkerRegionContract(unittest.TestCase):
@@ -156,6 +179,54 @@ class WorkerRegionContract(unittest.TestCase):
         snapshot = source.split('func snapshot()', 1)[1].split('func restore_snapshot', 1)[0]
         self.assertNotIn('clutch', snapshot)
 
+
+    def test_exact_finite_death_hook_rejects_mutation_or_relocation(self):
+        source = (ROOT/'game/scripts/enemy.gd').read_text()
+        moved = source.replace(FINITE_DEATH_HOOK, '', 1).replace('\n\t\t_committed_variant = -1', '\n\t\t_committed_variant = -1'+FINITE_DEATH_HOOK, 1)
+        live = source.replace(FINITE_DEATH_HOOK, '', 1).replace('\n\tif hp == 0:', FINITE_DEATH_HOOK+'\n\tif hp == 0:', 1)
+        variants = [source.replace(FINITE_DEATH_HOOK, '', 1), source.replace(FINITE_DEATH_HOOK, FINITE_DEATH_HOOK*2, 1), moved, live]
+        for old,new in [('earned_defeated(self)', 'earned_defeated(null)'), ('earned_defeated(self)', 'earned_defeated(game.player)'), ('and not game.earned_defeated', 'and game.earned_defeated'), ('): return', '): pass')]:
+            variants.append(source.replace(FINITE_DEATH_HOOK, FINITE_DEATH_HOOK.replace(old,new), 1))
+        for number,bad in enumerate(variants):
+            with self.subTest(number=number), self.assertRaises(AssertionError):
+                ordinary_transaction_with_exact_death_hook(bad)
+
+    def test_exact_nursery_window_rejects_mutation_or_relocation(self):
+        source = (ROOT/'game/scripts/enemy.gd').read_text()
+        moved = source.replace(NURSERY_WINDOW, '', 1).replace('\n\thp = maxi(0,hp-amount)', NURSERY_WINDOW+'\n\thp = maxi(0,hp-amount)', 1)
+        variants = [source.replace(NURSERY_WINDOW, '', 1), source.replace(NURSERY_WINDOW, NURSERY_WINDOW*2, 1), moved]
+        changes = [('kind == "nursery_warden" and ', ''), ('kind == "nursery_warden"', 'kind == "worker"'), ('Engine.is_in_physics_frame() and ', ''), ('context.get("sprite_contact",{})', '{}'), ('source,game.player', 'game.player,source'), ('Engine.get_physics_frames()', '0'), ('bonus_damage(amount)', 'bonus_damage(amount)*2')]
+        for old,new in changes:
+            variants.append(source.replace(NURSERY_WINDOW, NURSERY_WINDOW.replace(old,new), 1))
+        for number,bad in enumerate(variants):
+            with self.subTest(number=number), self.assertRaises(AssertionError):
+                ordinary_transaction_with_exact_death_hook(bad)
+
+    def test_unknown_pipeline_mutations_survive_normalization_and_fail_frozen_hash(self):
+        source = (ROOT/'game/scripts/enemy.gd').read_text()
+        frozen = "c6daf26f01abfee086a8abe10e65a8e63148048f0630c0a8e3144e9e48915b9c"
+        for old,new in [('hp-amount', 'hp-amount*2'), ('amount*0.35', 'amount*0.50'), ('_counter_time = 1.4', '_counter_time = 0.0'), ('collision_layer = 0', 'collision_layer = 4'), ('source.get_parent() == game.level', 'true')]:
+            bad = source.replace(old,new,1)
+            self.assertNotEqual(bad,source)
+            with self.subTest(change=old):
+                self.assertNotEqual(regions.digest(ordinary_transaction_with_exact_death_hook(bad).rstrip().encode()),frozen)
+
+    def test_worker_consequence_and_five_field_actor_functions_exact_historical_source(self):
+        # Exact function bytes independently equal merged847c6cc3 before earned
+        # supplies/Nursery changes. These are source contracts, not art receipts.
+        import re
+        source = (ROOT/'game/scripts/enemy.gd').read_text()
+        expected = {'_try_worker_clutch':'b2f62ea4daf9b1a2270cfc6675dd0bfca015627b291252fc315cef1943b99f96',
+                    'snapshot':'29e774d4cd965f6156c98a2ff6a23438d7cc30933725bae003967d62067fdb17',
+                    'restore_snapshot':'3cf95d7ed1deb43b34fa39256c53ea5fa6b4af36b9ddb60c50c6c02422126dbf'}
+        for name,digest in expected.items():
+            body = re.search(r'^func '+name+r'\([^\n]*\n(.*?)(?=^func |\Z)', source, re.M|re.S).group(0)
+            with self.subTest(function=name): self.assertEqual(regions.digest(body.encode()),digest)
+        campaign = (ROOT/'game/scripts/campaign.gd').read_text()
+        self.assertIn('record.size() != 5',campaign)
+        self.assertIn('for field in ["id","hp","position","yaw","alerted"]:',campaign)
+        self.assertIn('var snapshots = [data,saved_checkpoint,saved_start]',campaign)
+        self.assertIn('for snapshot in [data,saved_checkpoint,saved_start]:',campaign)
 
     def test_legacy_export_patterns_do_not_cover_raw_mask(self):
         import fnmatch

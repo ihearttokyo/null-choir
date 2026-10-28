@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 class WorldOwner extends Node3D:
 	var state = preload("res://scripts/campaign.gd").new()
 	var level
@@ -11,10 +12,10 @@ func run() -> void:
 	var owner = WorldOwner.new()
 	root.add_child(owner)
 	for index in range(8):
-		owner.state.new_campaign(1)
+		owner.state = StaticSelectedLevel.fresh_selected(index,1)
 		owner.level = load("res://scripts/level.gd").new()
 		owner.add_child(owner.level)
-		owner.level.build(owner,index)
+		if not expect(owner.level.build(owner,index),"Fresh selected-level static fixture builds with authoritative finite state"): return
 		var expected = 0
 		for hero in owner.level.layout.data.heroes:
 			if hero.has("base"): expected += 1

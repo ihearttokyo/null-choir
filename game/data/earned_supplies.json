@@ -1,0 +1,4585 @@
+{
+  "schema": "null-choir-earned-supplies-registry-v1",
+  "revision": 1,
+  "legacy_pickup_count": 145,
+  "chapters": {
+    "intake": {
+      "revision": 1,
+      "legacy_map_sha256": "1f8d22f438f18b5c62b2a8d7a07d833b9c670368021d9254ab4cae07a2175627",
+      "legacy_pickups": [
+        {
+          "id": "entry_ammo",
+          "kind": "ammo",
+          "amount": 35,
+          "weapon": 1,
+          "cell": [
+            12,
+            27
+          ]
+        },
+        {
+          "id": "west_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            7.5,
+            23.5
+          ]
+        },
+        {
+          "id": "bell_armor",
+          "kind": "armor",
+          "amount": 40,
+          "cell": [
+            8.5,
+            13.5
+          ]
+        },
+        {
+          "id": "upper_ammo",
+          "kind": "ammo",
+          "amount": 45,
+          "weapon": 1,
+          "cell": [
+            5.5,
+            20.5
+          ]
+        },
+        {
+          "id": "nave_health",
+          "kind": "health",
+          "amount": 30,
+          "cell": [
+            12,
+            16
+          ]
+        },
+        {
+          "id": "siphon_ammo",
+          "kind": "ammo",
+          "amount": 40,
+          "weapon": 1,
+          "cell": [
+            23,
+            20.5
+          ]
+        },
+        {
+          "id": "siphon_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            21,
+            13
+          ]
+        },
+        {
+          "id": "gate_ammo",
+          "kind": "ammo",
+          "amount": 50,
+          "weapon": 1,
+          "cell": [
+            12.5,
+            10.5
+          ]
+        },
+        {
+          "id": "gate_health",
+          "kind": "health",
+          "amount": 40,
+          "cell": [
+            17,
+            3
+          ]
+        }
+      ],
+      "grants": [
+        {
+          "id": "intake:entry_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            35,
+            35,
+            48
+          ],
+          "carrier": "intake_enemy_00",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "entry_ammo",
+          "recovery_cell": [
+            8.5,
+            23.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "intake:bell_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            40,
+            40,
+            40
+          ],
+          "carrier": "intake_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "intake_siphon_draw",
+          "requires": [],
+          "legacy_alias": "bell_armor",
+          "recovery_cell": [
+            25,
+            11.75
+          ],
+          "optional": false
+        },
+        {
+          "id": "intake:upper_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "intake_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "intake_bell_release",
+          "requires": [],
+          "legacy_alias": "upper_ammo",
+          "recovery_cell": [
+            8.25,
+            14.85
+          ],
+          "optional": false
+        },
+        {
+          "id": "intake:siphon_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            40,
+            40,
+            54
+          ],
+          "carrier": "intake_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "intake_siphon_draw",
+          "requires": [],
+          "legacy_alias": "siphon_ammo",
+          "recovery_cell": [
+            25,
+            11.75
+          ],
+          "optional": false
+        },
+        {
+          "id": "intake:gate_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "intake_enemy_20",
+          "carrier_role": "worker",
+          "encounter": "intake_gate_release",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "gate_ammo",
+          "recovery_cell": [
+            17,
+            2
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "intake_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            7.5,
+            23.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "west_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "intake_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            12,
+            16
+          ],
+          "capacity": 30,
+          "aliases": [
+            "nave_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "intake_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            21,
+            13
+          ],
+          "capacity": 25,
+          "aliases": [
+            "siphon_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "intake_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            17,
+            3
+          ],
+          "capacity": 40,
+          "aliases": [
+            "gate_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "intake_enemy_00",
+          "encounters": [
+            "intake_bell_release",
+            "intake_bell_return",
+            "intake_siphon_draw",
+            "intake_siphon_return",
+            "intake_nave_response",
+            "intake_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "intake_enemy_00",
+          "encounters": [
+            "intake_siphon_draw",
+            "intake_siphon_return",
+            "intake_bell_release",
+            "intake_bell_return",
+            "intake_nave_response",
+            "intake_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "foundry": {
+      "revision": 1,
+      "legacy_map_sha256": "a462957fc24c6026d0803ea81951c1fc179933fdb5cf47fccbb9e2065fb9c6b2",
+      "legacy_pickups": [
+        {
+          "id": "foundry_entry_ammo",
+          "kind": "ammo",
+          "cell": [
+            15,
+            29
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "foundry_junction_health",
+          "kind": "health",
+          "cell": [
+            10.5,
+            20.5
+          ],
+          "amount": 25
+        },
+        {
+          "id": "furnace_armor",
+          "kind": "armor",
+          "cell": [
+            4.5,
+            17.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "furnace_ammo",
+          "kind": "ammo",
+          "cell": [
+            6.5,
+            19.5
+          ],
+          "amount": 65,
+          "weapon": 1
+        },
+        {
+          "id": "furnace_health",
+          "kind": "health",
+          "cell": [
+            8.5,
+            18.5
+          ],
+          "amount": 25
+        },
+        {
+          "id": "north_ammo",
+          "kind": "ammo",
+          "cell": [
+            10.5,
+            7
+          ],
+          "amount": 50,
+          "weapon": 1
+        },
+        {
+          "id": "crucible_armor",
+          "kind": "armor",
+          "cell": [
+            27.5,
+            14.5
+          ],
+          "amount": 45
+        },
+        {
+          "id": "crucible_health",
+          "kind": "health",
+          "cell": [
+            22,
+            10
+          ],
+          "amount": 30
+        },
+        {
+          "id": "crucible_ammo",
+          "kind": "ammo",
+          "cell": [
+            23.5,
+            19.5
+          ],
+          "amount": 65,
+          "weapon": 1
+        },
+        {
+          "id": "foundry_gate_ammo",
+          "kind": "ammo",
+          "cell": [
+            12.5,
+            6.5
+          ],
+          "amount": 60,
+          "weapon": 1
+        },
+        {
+          "id": "foundry_gate_health",
+          "kind": "health",
+          "cell": [
+            15.5,
+            2.5
+          ],
+          "amount": 40
+        },
+        {
+          "id": "foundry_ramp_ammo",
+          "kind": "ammo",
+          "cell": [
+            23.5,
+            21.5
+          ],
+          "amount": 40,
+          "weapon": 1
+        }
+      ],
+      "grants": [
+        {
+          "id": "foundry:foundry_entry_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "foundry_enemy_00",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "foundry_entry_ammo",
+          "recovery_cell": [
+            10.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:furnace_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "foundry_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "foundry_crucible_ascent",
+          "requires": [],
+          "legacy_alias": "furnace_armor",
+          "recovery_cell": [
+            27,
+            9.8
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:furnace_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            65,
+            65,
+            88
+          ],
+          "carrier": "foundry_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "foundry_furnace_crossfire",
+          "requires": [],
+          "legacy_alias": "furnace_ammo",
+          "recovery_cell": [
+            9.75,
+            16
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:north_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "foundry_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "foundry_furnace_crossfire",
+          "requires": [],
+          "legacy_alias": "north_ammo",
+          "recovery_cell": [
+            9.75,
+            16
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:crucible_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            45,
+            45,
+            45
+          ],
+          "carrier": "foundry_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "foundry_crucible_ascent",
+          "requires": [],
+          "legacy_alias": "crucible_armor",
+          "recovery_cell": [
+            27,
+            9.8
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:crucible_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            65,
+            65,
+            88
+          ],
+          "carrier": "foundry_enemy_22",
+          "carrier_role": "worker",
+          "encounter": "foundry_crucible_ascent",
+          "requires": [],
+          "legacy_alias": "crucible_ammo",
+          "recovery_cell": [
+            22.25,
+            10.75
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:foundry_gate_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "foundry_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "foundry_gate_release",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "foundry_gate_ammo",
+          "recovery_cell": [
+            15,
+            1.675
+          ],
+          "optional": false
+        },
+        {
+          "id": "foundry:foundry_ramp_ammo:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            40,
+            40,
+            54
+          ],
+          "carrier": "foundry_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "foundry_furnace_crossfire",
+          "requires": [],
+          "legacy_alias": "foundry_ramp_ammo",
+          "recovery_cell": [
+            9.75,
+            16
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "foundry_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            10.5,
+            20.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "foundry_junction_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "foundry_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            8.5,
+            18.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "furnace_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "foundry_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            22,
+            10
+          ],
+          "capacity": 30,
+          "aliases": [
+            "crucible_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "foundry_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            15.5,
+            2.5
+          ],
+          "capacity": 40,
+          "aliases": [
+            "foundry_gate_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "foundry_enemy_00",
+          "encounters": [
+            "foundry_furnace_crossfire",
+            "foundry_furnace_return",
+            "foundry_crucible_ascent",
+            "foundry_crucible_return",
+            "foundry_nave_response",
+            "foundry_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "foundry_enemy_00",
+          "encounters": [
+            "foundry_crucible_ascent",
+            "foundry_crucible_return",
+            "foundry_furnace_crossfire",
+            "foundry_furnace_return",
+            "foundry_nave_response",
+            "foundry_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "processional": {
+      "revision": 1,
+      "legacy_map_sha256": "641a54b8ea5acb52defd8b6e44a092c9f38ee64fe3780a737035848c49c3496a",
+      "legacy_pickups": [
+        {
+          "id": "processional_scattergun",
+          "kind": "weapon",
+          "weapon": 2,
+          "amount": 16,
+          "cell": [
+            20.5,
+            25.5
+          ]
+        },
+        {
+          "id": "processional_entry_rivets",
+          "kind": "ammo",
+          "cell": [
+            22.5,
+            30.5
+          ],
+          "amount": 35,
+          "weapon": 1
+        },
+        {
+          "id": "processional_nave_health",
+          "kind": "health",
+          "cell": [
+            15.5,
+            24.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "processional_organ_armor",
+          "kind": "armor",
+          "cell": [
+            2.7,
+            17.5
+          ],
+          "amount": 60
+        },
+        {
+          "id": "processional_organ_rivets",
+          "kind": "ammo",
+          "cell": [
+            9.5,
+            10.5
+          ],
+          "amount": 50,
+          "weapon": 1
+        },
+        {
+          "id": "processional_organ_shells",
+          "kind": "ammo",
+          "cell": [
+            3.5,
+            20.5
+          ],
+          "amount": 14,
+          "weapon": 2
+        },
+        {
+          "id": "processional_organ_health",
+          "kind": "health",
+          "cell": [
+            9.5,
+            18.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "processional_north_shells",
+          "kind": "ammo",
+          "cell": [
+            12.5,
+            8.5
+          ],
+          "amount": 12,
+          "weapon": 2
+        },
+        {
+          "id": "processional_palanquin_armor",
+          "kind": "armor",
+          "cell": [
+            30.5,
+            15.5
+          ],
+          "amount": 60
+        },
+        {
+          "id": "processional_palanquin_health",
+          "kind": "health",
+          "cell": [
+            23.5,
+            10.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "processional_palanquin_shells",
+          "kind": "ammo",
+          "cell": [
+            29.5,
+            20.5
+          ],
+          "amount": 16,
+          "weapon": 2
+        },
+        {
+          "id": "processional_palanquin_rivets",
+          "kind": "ammo",
+          "cell": [
+            28.6,
+            21.5
+          ],
+          "amount": 50,
+          "weapon": 1
+        },
+        {
+          "id": "processional_gate_shells",
+          "kind": "ammo",
+          "cell": [
+            15.5,
+            8.5
+          ],
+          "amount": 12,
+          "weapon": 2
+        },
+        {
+          "id": "processional_return_health",
+          "kind": "health",
+          "cell": [
+            24.5,
+            24.5
+          ],
+          "amount": 25
+        }
+      ],
+      "grants": [
+        {
+          "id": "processional:processional_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "processional_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_scattergun",
+          "recovery_cell": [
+            25.5,
+            24.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_scattergun:ammo",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "processional_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_scattergun",
+          "recovery_cell": [
+            25.5,
+            24.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            35,
+            35,
+            48
+          ],
+          "carrier": "processional_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_entry_rivets",
+          "recovery_cell": [
+            25.5,
+            24.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_organ_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            60,
+            60,
+            60
+          ],
+          "carrier": "processional_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_organ_armor",
+          "recovery_cell": [
+            30.5,
+            17.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_organ_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "processional_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "processional_organ_answer",
+          "requires": [],
+          "legacy_alias": "processional_organ_rivets",
+          "recovery_cell": [
+            10.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_organ_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            14,
+            14,
+            19
+          ],
+          "carrier": "processional_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "processional_organ_answer",
+          "requires": [],
+          "legacy_alias": "processional_organ_shells",
+          "recovery_cell": [
+            10.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_north_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            12,
+            12,
+            17
+          ],
+          "carrier": "processional_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "processional_organ_answer",
+          "requires": [],
+          "legacy_alias": "processional_north_shells",
+          "recovery_cell": [
+            10.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_palanquin_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            60,
+            60,
+            60
+          ],
+          "carrier": "processional_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_palanquin_armor",
+          "recovery_cell": [
+            30.5,
+            17.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_palanquin_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "processional_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_palanquin_shells",
+          "recovery_cell": [
+            30.5,
+            17.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_palanquin_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "processional_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "",
+          "requires": [],
+          "legacy_alias": "processional_palanquin_rivets",
+          "recovery_cell": [
+            30.5,
+            17.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "processional:processional_gate_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            12,
+            12,
+            17
+          ],
+          "carrier": "processional_enemy_25",
+          "carrier_role": "worker",
+          "encounter": "processional_gate_release",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "processional_gate_shells",
+          "recovery_cell": [
+            16.5,
+            7.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "processional_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            15.5,
+            24.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "processional_nave_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "processional_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            9.5,
+            18.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "processional_organ_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "processional_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            23.5,
+            10.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "processional_palanquin_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "processional_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            24.5,
+            24.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "processional_return_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "processional_enemy_13",
+          "encounters": [
+            "processional_organ_answer",
+            "processional_organ_return",
+            "processional_palanquin_escort",
+            "processional_palanquin_return",
+            "processional_nave_response",
+            "processional_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "processional_enemy_13",
+          "encounters": [
+            "processional_palanquin_escort",
+            "processional_palanquin_return",
+            "processional_organ_answer",
+            "processional_organ_return",
+            "processional_nave_response",
+            "processional_gate_release"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "reliquary": {
+      "revision": 1,
+      "legacy_map_sha256": "5da6b5c0be92b684d83d05cb9d05eac100ce7b341c4fe42fa32c21d22eb9f6f0",
+      "legacy_pickups": [
+        {
+          "id": "reliquary_entry_rivets",
+          "kind": "ammo",
+          "cell": [
+            18.5,
+            38.5
+          ],
+          "amount": 60,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_entry_scattergun",
+          "kind": "weapon",
+          "cell": [
+            19.5,
+            32.5
+          ],
+          "amount": 16,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_entry_health",
+          "kind": "health",
+          "cell": [
+            18.5,
+            37.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "reliquary_entry_armor",
+          "kind": "armor",
+          "cell": [
+            20.5,
+            37.5
+          ],
+          "amount": 40
+        },
+        {
+          "id": "reliquary_halo_approach_rivets",
+          "kind": "ammo",
+          "cell": [
+            9.5,
+            25.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_halo_approach_shells",
+          "kind": "ammo",
+          "cell": [
+            10.5,
+            25.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_halo_approach_health",
+          "kind": "health",
+          "cell": [
+            8.5,
+            25.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "reliquary_halo_approach_armor",
+          "kind": "armor",
+          "cell": [
+            9.5,
+            27.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "reliquary_halo_return_rivets",
+          "kind": "ammo",
+          "cell": [
+            15.5,
+            11.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_halo_return_shells",
+          "kind": "ammo",
+          "cell": [
+            14.5,
+            11.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_halo_recess_health",
+          "kind": "health",
+          "cell": [
+            2.75,
+            18.5
+          ],
+          "amount": 25
+        },
+        {
+          "id": "reliquary_wheel_approach_rivets",
+          "kind": "ammo",
+          "cell": [
+            29.5,
+            25.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_wheel_approach_shells",
+          "kind": "ammo",
+          "cell": [
+            30.5,
+            25.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_wheel_approach_health",
+          "kind": "health",
+          "cell": [
+            28.5,
+            25.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "reliquary_wheel_approach_armor",
+          "kind": "armor",
+          "cell": [
+            30.5,
+            28.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "reliquary_wheel_return_rivets",
+          "kind": "ammo",
+          "cell": [
+            23.5,
+            12.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_wheel_return_shells",
+          "kind": "ammo",
+          "cell": [
+            24.5,
+            13.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_wheel_recess_health",
+          "kind": "health",
+          "cell": [
+            36.5,
+            19.5
+          ],
+          "amount": 25
+        },
+        {
+          "id": "reliquary_catalogue_rivets",
+          "kind": "ammo",
+          "cell": [
+            20.5,
+            11.5
+          ],
+          "amount": 60,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_catalogue_shells",
+          "kind": "ammo",
+          "cell": [
+            19.5,
+            11.5
+          ],
+          "amount": 10,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_catalogue_health",
+          "kind": "health",
+          "cell": [
+            19.5,
+            12.5
+          ],
+          "amount": 40
+        },
+        {
+          "id": "reliquary_catalogue_armor",
+          "kind": "armor",
+          "cell": [
+            18.5,
+            12.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "reliquary_exit_rivets",
+          "kind": "ammo",
+          "cell": [
+            19.5,
+            10.5
+          ],
+          "amount": 40,
+          "weapon": 1
+        },
+        {
+          "id": "reliquary_exit_shells",
+          "kind": "ammo",
+          "cell": [
+            20.5,
+            10.5
+          ],
+          "amount": 10,
+          "weapon": 2
+        },
+        {
+          "id": "reliquary_exit_health",
+          "kind": "health",
+          "cell": [
+            18.5,
+            11.5
+          ],
+          "amount": 30
+        }
+      ],
+      "grants": [
+        {
+          "id": "reliquary:reliquary_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "reliquary_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_entry_rivets",
+          "recovery_cell": [
+            12,
+            20
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_entry_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "reliquary_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_entry_scattergun",
+          "recovery_cell": [
+            12,
+            20
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_entry_scattergun:ammo",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "reliquary_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_entry_scattergun",
+          "recovery_cell": [
+            12,
+            20
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_entry_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            40,
+            40,
+            40
+          ],
+          "carrier": "reliquary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_entry_armor",
+          "recovery_cell": [
+            35.5,
+            16.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_halo_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "reliquary_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_halo_approach_rivets",
+          "recovery_cell": [
+            4.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_halo_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "reliquary_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_halo_approach_shells",
+          "recovery_cell": [
+            4.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_halo_approach_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "reliquary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_halo_approach_armor",
+          "recovery_cell": [
+            35.5,
+            16.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_halo_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "reliquary_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "reliquary_halo_return_rivets",
+          "recovery_cell": [
+            18.5,
+            10.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_halo_return_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "reliquary_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "reliquary_halo_return_shells",
+          "recovery_cell": [
+            18.5,
+            10.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_wheel_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "reliquary_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_wheel_approach_rivets",
+          "recovery_cell": [
+            28.5,
+            15
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_wheel_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "reliquary_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_wheel_approach_shells",
+          "recovery_cell": [
+            28.5,
+            15
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_wheel_approach_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "reliquary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_wheel_approach_armor",
+          "recovery_cell": [
+            35.5,
+            16.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_wheel_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "reliquary_enemy_21",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "reliquary_wheel_return_rivets",
+          "recovery_cell": [
+            23.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_wheel_return_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "reliquary_enemy_21",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "reliquary_wheel_return_shells",
+          "recovery_cell": [
+            23.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_catalogue_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "reliquary_enemy_29",
+          "carrier_role": "worker",
+          "encounter": "reliquary_exit",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "reliquary_catalogue_rivets",
+          "recovery_cell": [
+            20.5,
+            5.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_catalogue_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            10,
+            10,
+            14
+          ],
+          "carrier": "reliquary_enemy_29",
+          "carrier_role": "worker",
+          "encounter": "reliquary_exit",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "reliquary_catalogue_shells",
+          "recovery_cell": [
+            20.5,
+            5.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_catalogue_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "reliquary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "reliquary_wheel_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_catalogue_armor",
+          "recovery_cell": [
+            35.5,
+            16.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_exit_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            40,
+            40,
+            54
+          ],
+          "carrier": "reliquary_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_exit_rivets",
+          "recovery_cell": [
+            4.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "reliquary:reliquary_exit_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            10,
+            10,
+            14
+          ],
+          "carrier": "reliquary_enemy_05",
+          "carrier_role": "worker",
+          "encounter": "reliquary_halo_commit",
+          "requires": [],
+          "legacy_alias": "reliquary_exit_shells",
+          "recovery_cell": [
+            4.5,
+            12.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "reliquary_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            18.5,
+            37.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "reliquary_entry_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "reliquary_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            8.5,
+            25.5
+          ],
+          "capacity": 85,
+          "aliases": [
+            "reliquary_halo_approach_health",
+            "reliquary_halo_recess_health",
+            "reliquary_exit_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "reliquary_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            28.5,
+            25.5
+          ],
+          "capacity": 55,
+          "aliases": [
+            "reliquary_wheel_approach_health",
+            "reliquary_wheel_recess_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "reliquary_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            19.5,
+            12.5
+          ],
+          "capacity": 40,
+          "aliases": [
+            "reliquary_catalogue_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "reliquary_enemy_06",
+          "encounters": [
+            "reliquary_halo_commit",
+            "reliquary_halo_return",
+            "reliquary_wheel_commit",
+            "reliquary_wheel_return",
+            "reliquary_catalogue",
+            "reliquary_exit"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "reliquary_enemy_06",
+          "encounters": [
+            "reliquary_wheel_commit",
+            "reliquary_wheel_return",
+            "reliquary_halo_commit",
+            "reliquary_halo_return",
+            "reliquary_catalogue",
+            "reliquary_exit"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "nursery": {
+      "revision": 1,
+      "legacy_map_sha256": "1046f2641ce3c4bc22784b7c34160fc1f588c99b4fc6452a2c1c58cda3ac7789",
+      "legacy_pickups": [
+        {
+          "id": "nursery_entry_rivets",
+          "kind": "ammo",
+          "cell": [
+            3.5,
+            33.5
+          ],
+          "amount": 60,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_entry_scattergun",
+          "kind": "weapon",
+          "cell": [
+            4.5,
+            26.5
+          ],
+          "amount": 16,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_entry_health",
+          "kind": "health",
+          "cell": [
+            3.5,
+            32.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "nursery_entry_armor",
+          "kind": "armor",
+          "cell": [
+            5.5,
+            32.5
+          ],
+          "amount": 40
+        },
+        {
+          "id": "nursery_repeater",
+          "kind": "weapon",
+          "cell": [
+            14.5,
+            21.5
+          ],
+          "amount": 60,
+          "weapon": 3
+        },
+        {
+          "id": "nursery_first_approach_rivets",
+          "kind": "ammo",
+          "cell": [
+            4.5,
+            18.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_first_approach_shells",
+          "kind": "ammo",
+          "cell": [
+            5.5,
+            18.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_first_approach_health",
+          "kind": "health",
+          "cell": [
+            3.5,
+            18.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "nursery_first_return_rivets",
+          "kind": "ammo",
+          "cell": [
+            14.5,
+            10.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_first_return_shells",
+          "kind": "ammo",
+          "cell": [
+            13.5,
+            10.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_first_armor",
+          "kind": "armor",
+          "cell": [
+            9.5,
+            13.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "nursery_second_approach_rivets",
+          "kind": "ammo",
+          "cell": [
+            17.5,
+            23.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_second_approach_shells",
+          "kind": "ammo",
+          "cell": [
+            18.5,
+            23.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_second_approach_health",
+          "kind": "health",
+          "cell": [
+            16.5,
+            23.5
+          ],
+          "amount": 30
+        },
+        {
+          "id": "nursery_second_return_rivets",
+          "kind": "ammo",
+          "cell": [
+            12.5,
+            29.5
+          ],
+          "amount": 45,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_second_return_shells",
+          "kind": "ammo",
+          "cell": [
+            13.5,
+            29.5
+          ],
+          "amount": 8,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_second_armor",
+          "kind": "armor",
+          "cell": [
+            22.5,
+            32.5
+          ],
+          "amount": 50
+        },
+        {
+          "id": "nursery_finale_rivets",
+          "kind": "ammo",
+          "cell": [
+            25.5,
+            20.5
+          ],
+          "amount": 60,
+          "weapon": 1
+        },
+        {
+          "id": "nursery_finale_shells",
+          "kind": "ammo",
+          "cell": [
+            26.5,
+            19.5
+          ],
+          "amount": 12,
+          "weapon": 2
+        },
+        {
+          "id": "nursery_finale_health",
+          "kind": "health",
+          "cell": [
+            24.5,
+            19.5
+          ],
+          "amount": 40
+        },
+        {
+          "id": "nursery_finale_armor",
+          "kind": "armor",
+          "cell": [
+            25.5,
+            21.5
+          ],
+          "amount": 60
+        },
+        {
+          "id": "nursery_repeater_supply",
+          "kind": "ammo",
+          "cell": [
+            24.5,
+            20.5
+          ],
+          "amount": 60,
+          "weapon": 3
+        }
+      ],
+      "grants": [
+        {
+          "id": "nursery:nursery_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "nursery_enemy_14",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_entry_rivets",
+          "recovery_cell": [
+            20.5,
+            33.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_entry_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "nursery_enemy_14",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_entry_scattergun",
+          "recovery_cell": [
+            20.5,
+            33.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_entry_scattergun:ammo",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "nursery_enemy_14",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_entry_scattergun",
+          "recovery_cell": [
+            20.5,
+            33.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_entry_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            40,
+            40,
+            40
+          ],
+          "carrier": "nursery_enemy_04",
+          "carrier_role": "brute",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_entry_armor",
+          "recovery_cell": [
+            9.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_repeater:unlock",
+          "kind": "unlock",
+          "weapon": 3,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "nursery_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_repeater",
+          "recovery_cell": [
+            1.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_repeater:ammo",
+          "kind": "ammo",
+          "weapon": 3,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "nursery_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_repeater",
+          "recovery_cell": [
+            1.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_first_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "nursery_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_first_approach_rivets",
+          "recovery_cell": [
+            1.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_first_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "nursery_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_first_approach_shells",
+          "recovery_cell": [
+            1.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_first_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "nursery_enemy_17",
+          "carrier_role": "summoner",
+          "encounter": "nursery_first_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "nursery_first_return_rivets",
+          "recovery_cell": [
+            13.5,
+            15.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_first_return_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "nursery_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "nursery_first_return_shells",
+          "recovery_cell": [
+            15.5,
+            17.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_first_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "nursery_enemy_04",
+          "carrier_role": "brute",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_first_armor",
+          "recovery_cell": [
+            9.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_second_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "nursery_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_second_approach_rivets",
+          "recovery_cell": [
+            17.5,
+            25.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_second_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "nursery_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_second_approach_shells",
+          "recovery_cell": [
+            17.5,
+            25.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_second_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "nursery_enemy_21",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "nursery_second_return_rivets",
+          "recovery_cell": [
+            13.5,
+            24.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_second_return_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "nursery_enemy_21",
+          "carrier_role": "worker",
+          "encounter": "nursery_second_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "nursery_second_return_shells",
+          "recovery_cell": [
+            13.5,
+            24.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_second_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            50,
+            50,
+            50
+          ],
+          "carrier": "nursery_enemy_12",
+          "carrier_role": "guardian",
+          "encounter": "nursery_second_commit",
+          "requires": [],
+          "legacy_alias": "nursery_second_armor",
+          "recovery_cell": [
+            22.5,
+            26.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_finale_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "nursery_enemy_26",
+          "carrier_role": "worker",
+          "encounter": "nursery_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "nursery_finale_rivets",
+          "recovery_cell": [
+            31.5,
+            5.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_finale_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            12,
+            12,
+            17
+          ],
+          "carrier": "nursery_enemy_26",
+          "carrier_role": "worker",
+          "encounter": "nursery_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "nursery_finale_shells",
+          "recovery_cell": [
+            31.5,
+            5.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_finale_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            60,
+            60,
+            60
+          ],
+          "carrier": "nursery_warden",
+          "carrier_role": "nursery_warden",
+          "encounter": "nursery_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "nursery_finale_armor",
+          "recovery_cell": [
+            30.5,
+            9.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "nursery:nursery_repeater_supply:supply",
+          "kind": "ammo",
+          "weapon": 3,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "nursery_enemy_06",
+          "carrier_role": "worker",
+          "encounter": "nursery_first_commit",
+          "requires": [],
+          "legacy_alias": "nursery_repeater_supply",
+          "recovery_cell": [
+            1.5,
+            11.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "nursery_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            3.5,
+            32.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "nursery_entry_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "nursery_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            3.5,
+            18.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "nursery_first_approach_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "nursery_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            16.5,
+            23.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "nursery_second_approach_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "nursery_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            24.5,
+            19.5
+          ],
+          "capacity": 40,
+          "aliases": [
+            "nursery_finale_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "nursery_enemy_14",
+          "encounters": [
+            "nursery_first_commit",
+            "nursery_first_return",
+            "nursery_second_commit",
+            "nursery_second_return",
+            "nursery_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "nursery_enemy_14",
+          "encounters": [
+            "nursery_second_commit",
+            "nursery_second_return",
+            "nursery_first_commit",
+            "nursery_first_return",
+            "nursery_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "ossuary": {
+      "revision": 1,
+      "legacy_map_sha256": "801186bf7b08c0643c7a252b8ae4ae0a62274c3e828638d5e1a13d7b9487ef22",
+      "legacy_pickups": [
+        {
+          "id": "ossuary_entry_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 60,
+          "cell": [
+            35.5,
+            23.5
+          ]
+        },
+        {
+          "id": "ossuary_entry_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 16,
+          "cell": [
+            34.5,
+            24.5
+          ]
+        },
+        {
+          "id": "ossuary_entry_health",
+          "kind": "health",
+          "amount": 30,
+          "cell": [
+            35.5,
+            25.5
+          ]
+        },
+        {
+          "id": "ossuary_entry_armor",
+          "kind": "armor",
+          "amount": 30,
+          "cell": [
+            34.5,
+            25.5
+          ]
+        },
+        {
+          "id": "ossuary_scattergun",
+          "kind": "weapon",
+          "weapon": 2,
+          "amount": 0,
+          "cell": [
+            34.5,
+            23.5
+          ]
+        },
+        {
+          "id": "ossuary_first_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 45,
+          "cell": [
+            12.5,
+            24.5
+          ]
+        },
+        {
+          "id": "ossuary_first_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            13.5,
+            24.5
+          ]
+        },
+        {
+          "id": "ossuary_first_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 45,
+          "cell": [
+            14.5,
+            13.5
+          ]
+        },
+        {
+          "id": "ossuary_first_return_health",
+          "kind": "health",
+          "amount": 20,
+          "cell": [
+            13.5,
+            13.5
+          ]
+        },
+        {
+          "id": "ossuary_second_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 45,
+          "cell": [
+            27.5,
+            20.5
+          ]
+        },
+        {
+          "id": "ossuary_second_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            28.5,
+            20.5
+          ]
+        },
+        {
+          "id": "ossuary_second_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 45,
+          "cell": [
+            22.5,
+            11.5
+          ]
+        },
+        {
+          "id": "ossuary_second_return_health",
+          "kind": "health",
+          "amount": 20,
+          "cell": [
+            23.5,
+            11.5
+          ]
+        },
+        {
+          "id": "ossuary_launcher",
+          "kind": "weapon",
+          "weapon": 4,
+          "amount": 8,
+          "cell": [
+            24.5,
+            22.5
+          ]
+        },
+        {
+          "id": "ossuary_repeater_ammo",
+          "kind": "ammo",
+          "weapon": 3,
+          "amount": 60,
+          "cell": [
+            23.5,
+            22.5
+          ]
+        },
+        {
+          "id": "ossuary_finale_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 60,
+          "cell": [
+            22.5,
+            27.5
+          ]
+        },
+        {
+          "id": "ossuary_finale_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 12,
+          "cell": [
+            21.5,
+            26.5
+          ]
+        },
+        {
+          "id": "ossuary_finale_health",
+          "kind": "health",
+          "amount": 35,
+          "cell": [
+            21.5,
+            27.5
+          ]
+        },
+        {
+          "id": "ossuary_finale_armor",
+          "kind": "armor",
+          "amount": 35,
+          "cell": [
+            23.5,
+            27.5
+          ]
+        },
+        {
+          "id": "ossuary_launcher_ammo",
+          "kind": "ammo",
+          "weapon": 4,
+          "amount": 8,
+          "cell": [
+            23.5,
+            26.5
+          ]
+        }
+      ],
+      "grants": [
+        {
+          "id": "ossuary:ossuary_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "ossuary_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "ossuary_second_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_entry_rivets",
+          "recovery_cell": [
+            25.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_entry_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "ossuary_enemy_15",
+          "carrier_role": "worker",
+          "encounter": "ossuary_second_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_entry_shells",
+          "recovery_cell": [
+            25.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_entry_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            30,
+            30,
+            30
+          ],
+          "carrier": "ossuary_enemy_00",
+          "carrier_role": "brute",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_entry_armor",
+          "recovery_cell": [
+            4.5,
+            21.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_scattergun",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_first_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_first_approach_rivets",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_first_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_first_approach_shells",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_first_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "ossuary_enemy_16",
+          "carrier_role": "summoner",
+          "encounter": "ossuary_first_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "ossuary_first_return_rivets",
+          "recovery_cell": [
+            18.5,
+            13.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_second_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "ossuary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "ossuary_second_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_second_approach_rivets",
+          "recovery_cell": [
+            32.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_second_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "ossuary_enemy_12",
+          "carrier_role": "worker",
+          "encounter": "ossuary_second_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_second_approach_shells",
+          "recovery_cell": [
+            32.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_second_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "ossuary_enemy_20",
+          "carrier_role": "worker",
+          "encounter": "ossuary_second_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "ossuary_second_return_rivets",
+          "recovery_cell": [
+            20.5,
+            11.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_launcher:unlock",
+          "kind": "unlock",
+          "weapon": 4,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_launcher",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_launcher:ammo",
+          "kind": "ammo",
+          "weapon": 4,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_launcher",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_repeater_ammo:supply",
+          "kind": "ammo",
+          "weapon": 3,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_repeater_ammo",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_finale_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "ossuary_enemy_22",
+          "carrier_role": "worker",
+          "encounter": "ossuary_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "ossuary_finale_rivets",
+          "recovery_cell": [
+            19.5,
+            32.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_finale_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            12,
+            12,
+            17
+          ],
+          "carrier": "ossuary_enemy_22",
+          "carrier_role": "worker",
+          "encounter": "ossuary_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "ossuary_finale_shells",
+          "recovery_cell": [
+            19.5,
+            32.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_finale_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            35,
+            35,
+            35
+          ],
+          "carrier": "ossuary_enemy_08",
+          "carrier_role": "guardian",
+          "encounter": "ossuary_second_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_finale_armor",
+          "recovery_cell": [
+            26.5,
+            15.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "ossuary:ossuary_launcher_ammo:supply",
+          "kind": "ammo",
+          "weapon": 4,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "ossuary_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "ossuary_first_commit",
+          "requires": [],
+          "legacy_alias": "ossuary_launcher_ammo",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "ossuary_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            35.5,
+            25.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "ossuary_entry_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "ossuary_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            13.5,
+            13.5
+          ],
+          "capacity": 20,
+          "aliases": [
+            "ossuary_first_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "ossuary_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            23.5,
+            11.5
+          ],
+          "capacity": 20,
+          "aliases": [
+            "ossuary_second_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "ossuary_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            21.5,
+            27.5
+          ],
+          "capacity": 35,
+          "aliases": [
+            "ossuary_finale_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "ossuary_enemy_15",
+          "encounters": [
+            "ossuary_first_commit",
+            "ossuary_first_return",
+            "ossuary_second_commit",
+            "ossuary_second_return",
+            "ossuary_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "ossuary_enemy_15",
+          "encounters": [
+            "ossuary_second_commit",
+            "ossuary_second_return",
+            "ossuary_first_commit",
+            "ossuary_first_return",
+            "ossuary_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "inversion": {
+      "revision": 1,
+      "legacy_map_sha256": "5715a4fff50fb2729ddc38fab661dfe17d5d0a66b87916609b1aa3bf116ff5ee",
+      "legacy_pickups": [
+        {
+          "id": "inversion_entry_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 80,
+          "cell": [
+            18.5,
+            35.5
+          ]
+        },
+        {
+          "id": "inversion_entry_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 16,
+          "cell": [
+            19.5,
+            35.5
+          ]
+        },
+        {
+          "id": "inversion_entry_health",
+          "kind": "health",
+          "amount": 30,
+          "cell": [
+            19.5,
+            36.5
+          ]
+        },
+        {
+          "id": "inversion_entry_armor",
+          "kind": "armor",
+          "amount": 35,
+          "cell": [
+            19.5,
+            37.5
+          ]
+        },
+        {
+          "id": "inversion_scattergun",
+          "kind": "weapon",
+          "weapon": 2,
+          "amount": 0,
+          "cell": [
+            18.5,
+            34.5
+          ]
+        },
+        {
+          "id": "inversion_first_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 55,
+          "cell": [
+            5.5,
+            25.5
+          ]
+        },
+        {
+          "id": "inversion_first_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            6.5,
+            25.5
+          ]
+        },
+        {
+          "id": "inversion_first_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 50,
+          "cell": [
+            12.5,
+            9.5
+          ]
+        },
+        {
+          "id": "inversion_first_return_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            11.5,
+            9.5
+          ]
+        },
+        {
+          "id": "inversion_second_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 55,
+          "cell": [
+            27.5,
+            23.5
+          ]
+        },
+        {
+          "id": "inversion_second_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            28.5,
+            23.5
+          ]
+        },
+        {
+          "id": "inversion_second_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 50,
+          "cell": [
+            21.5,
+            6.5
+          ]
+        },
+        {
+          "id": "inversion_second_return_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            22.5,
+            6.5
+          ]
+        },
+        {
+          "id": "inversion_disruptor",
+          "kind": "weapon",
+          "weapon": 5,
+          "amount": 30,
+          "cell": [
+            20.5,
+            26.5
+          ]
+        },
+        {
+          "id": "inversion_repeater_ammo",
+          "kind": "ammo",
+          "weapon": 3,
+          "amount": 75,
+          "cell": [
+            30.5,
+            29.5
+          ]
+        },
+        {
+          "id": "inversion_launcher_ammo",
+          "kind": "ammo",
+          "weapon": 4,
+          "amount": 8,
+          "cell": [
+            31.5,
+            29.5
+          ]
+        },
+        {
+          "id": "inversion_finale_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 75,
+          "cell": [
+            32.5,
+            27.5
+          ]
+        },
+        {
+          "id": "inversion_finale_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 12,
+          "cell": [
+            31.5,
+            27.5
+          ]
+        },
+        {
+          "id": "inversion_finale_health",
+          "kind": "health",
+          "amount": 35,
+          "cell": [
+            32.5,
+            26.5
+          ]
+        },
+        {
+          "id": "inversion_finale_armor",
+          "kind": "armor",
+          "amount": 35,
+          "cell": [
+            33.5,
+            26.5
+          ]
+        },
+        {
+          "id": "inversion_disruptor_ammo",
+          "kind": "ammo",
+          "weapon": 5,
+          "amount": 30,
+          "cell": [
+            33.5,
+            27.5
+          ]
+        }
+      ],
+      "grants": [
+        {
+          "id": "inversion:inversion_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            80,
+            80,
+            108
+          ],
+          "carrier": "inversion_enemy_16",
+          "carrier_role": "worker",
+          "encounter": "inversion_second_commit",
+          "requires": [],
+          "legacy_alias": "inversion_entry_rivets",
+          "recovery_cell": [
+            32.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_entry_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "inversion_enemy_16",
+          "carrier_role": "worker",
+          "encounter": "inversion_second_commit",
+          "requires": [],
+          "legacy_alias": "inversion_entry_shells",
+          "recovery_cell": [
+            32.5,
+            8.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_entry_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            35,
+            35,
+            35
+          ],
+          "carrier": "inversion_enemy_00",
+          "carrier_role": "brute",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_entry_armor",
+          "recovery_cell": [
+            4.5,
+            21.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_scattergun",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_first_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            55,
+            55,
+            75
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_first_approach_rivets",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_first_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_first_approach_shells",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_first_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "inversion_enemy_18",
+          "carrier_role": "summoner",
+          "encounter": "inversion_first_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "inversion_first_return_rivets",
+          "recovery_cell": [
+            14.5,
+            13.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_second_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            55,
+            55,
+            75
+          ],
+          "carrier": "inversion_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "inversion_second_commit",
+          "requires": [],
+          "legacy_alias": "inversion_second_approach_rivets",
+          "recovery_cell": [
+            34.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_second_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "inversion_enemy_13",
+          "carrier_role": "worker",
+          "encounter": "inversion_second_commit",
+          "requires": [],
+          "legacy_alias": "inversion_second_approach_shells",
+          "recovery_cell": [
+            34.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_second_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "inversion_enemy_21",
+          "carrier_role": "worker",
+          "encounter": "inversion_second_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "inversion_second_return_rivets",
+          "recovery_cell": [
+            19.5,
+            10.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_disruptor:unlock",
+          "kind": "unlock",
+          "weapon": 5,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_disruptor",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_disruptor:ammo",
+          "kind": "ammo",
+          "weapon": 5,
+          "quantities": [
+            30,
+            30,
+            41
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_disruptor",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_repeater_ammo:supply",
+          "kind": "ammo",
+          "weapon": 3,
+          "quantities": [
+            75,
+            75,
+            102
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_repeater_ammo",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_launcher_ammo:supply",
+          "kind": "ammo",
+          "weapon": 4,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "inversion_enemy_08",
+          "carrier_role": "worker",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_launcher_ammo",
+          "recovery_cell": [
+            2.5,
+            20.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_finale_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            75,
+            75,
+            102
+          ],
+          "carrier": "inversion_enemy_28",
+          "carrier_role": "worker",
+          "encounter": "inversion_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "inversion_finale_rivets",
+          "recovery_cell": [
+            40.5,
+            30.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_finale_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            12,
+            12,
+            17
+          ],
+          "carrier": "inversion_enemy_28",
+          "carrier_role": "worker",
+          "encounter": "inversion_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "inversion_finale_shells",
+          "recovery_cell": [
+            40.5,
+            30.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_finale_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            35,
+            35,
+            35
+          ],
+          "carrier": "inversion_enemy_09",
+          "carrier_role": "guardian",
+          "encounter": "inversion_second_commit",
+          "requires": [],
+          "legacy_alias": "inversion_finale_armor",
+          "recovery_cell": [
+            27.5,
+            19.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "inversion:inversion_disruptor_ammo:supply",
+          "kind": "ammo",
+          "weapon": 5,
+          "quantities": [
+            30,
+            30,
+            41
+          ],
+          "carrier": "inversion_enemy_05",
+          "carrier_role": "caster",
+          "encounter": "inversion_first_commit",
+          "requires": [],
+          "legacy_alias": "inversion_disruptor_ammo",
+          "recovery_cell": [
+            9.5,
+            14.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "inversion_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            19.5,
+            36.5
+          ],
+          "capacity": 30,
+          "aliases": [
+            "inversion_entry_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "inversion_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            11.5,
+            9.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "inversion_first_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "inversion_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            22.5,
+            6.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "inversion_second_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "inversion_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            32.5,
+            26.5
+          ],
+          "capacity": 35,
+          "aliases": [
+            "inversion_finale_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "inversion_enemy_16",
+          "encounters": [
+            "inversion_first_commit",
+            "inversion_first_return",
+            "inversion_second_commit",
+            "inversion_second_return",
+            "inversion_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "inversion_enemy_16",
+          "encounters": [
+            "inversion_second_commit",
+            "inversion_second_return",
+            "inversion_first_commit",
+            "inversion_first_return",
+            "inversion_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    },
+    "heart": {
+      "revision": 1,
+      "legacy_map_sha256": "10b550af12c7c8973445c54e63d10667201258a90c5f8decb9d40b392887092a",
+      "legacy_pickups": [
+        {
+          "id": "heart_entry_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 80,
+          "cell": [
+            5.5,
+            5.5
+          ]
+        },
+        {
+          "id": "heart_entry_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 16,
+          "cell": [
+            6.5,
+            5.5
+          ]
+        },
+        {
+          "id": "heart_entry_health",
+          "kind": "health",
+          "amount": 35,
+          "cell": [
+            5.5,
+            6.5
+          ]
+        },
+        {
+          "id": "heart_entry_armor",
+          "kind": "armor",
+          "amount": 40,
+          "cell": [
+            6.5,
+            6.5
+          ]
+        },
+        {
+          "id": "heart_scattergun",
+          "kind": "weapon",
+          "weapon": 2,
+          "amount": 0,
+          "cell": [
+            6.5,
+            4.5
+          ]
+        },
+        {
+          "id": "heart_first_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 60,
+          "cell": [
+            14.5,
+            18.5
+          ]
+        },
+        {
+          "id": "heart_first_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            15.5,
+            18.5
+          ]
+        },
+        {
+          "id": "heart_first_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 50,
+          "cell": [
+            14.5,
+            10.5
+          ]
+        },
+        {
+          "id": "heart_first_return_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            13.5,
+            9.5
+          ]
+        },
+        {
+          "id": "heart_second_approach_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 60,
+          "cell": [
+            23.5,
+            24.5
+          ]
+        },
+        {
+          "id": "heart_second_approach_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 8,
+          "cell": [
+            24.5,
+            24.5
+          ]
+        },
+        {
+          "id": "heart_second_return_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 50,
+          "cell": [
+            14.5,
+            32.5
+          ]
+        },
+        {
+          "id": "heart_second_return_health",
+          "kind": "health",
+          "amount": 25,
+          "cell": [
+            13.5,
+            31.5
+          ]
+        },
+        {
+          "id": "heart_repeater_ammo",
+          "kind": "ammo",
+          "weapon": 3,
+          "amount": 90,
+          "cell": [
+            22.5,
+            13.5
+          ]
+        },
+        {
+          "id": "heart_launcher_ammo",
+          "kind": "ammo",
+          "weapon": 4,
+          "amount": 10,
+          "cell": [
+            22.5,
+            14.5
+          ]
+        },
+        {
+          "id": "heart_disruptor_ammo",
+          "kind": "ammo",
+          "weapon": 5,
+          "amount": 45,
+          "cell": [
+            22.5,
+            15.5
+          ]
+        },
+        {
+          "id": "heart_finale_rivets",
+          "kind": "ammo",
+          "weapon": 1,
+          "amount": 80,
+          "cell": [
+            28.5,
+            19.5
+          ]
+        },
+        {
+          "id": "heart_finale_shells",
+          "kind": "ammo",
+          "weapon": 2,
+          "amount": 16,
+          "cell": [
+            29.5,
+            19.5
+          ]
+        },
+        {
+          "id": "heart_finale_health",
+          "kind": "health",
+          "amount": 40,
+          "cell": [
+            28.5,
+            18.5
+          ]
+        },
+        {
+          "id": "heart_finale_armor",
+          "kind": "armor",
+          "amount": 40,
+          "cell": [
+            29.5,
+            18.5
+          ]
+        },
+        {
+          "id": "heart_finale_launcher",
+          "kind": "weapon",
+          "weapon": 4,
+          "amount": 8,
+          "cell": [
+            30.5,
+            18.5
+          ]
+        },
+        {
+          "id": "heart_finale_disruptor",
+          "kind": "ammo",
+          "weapon": 5,
+          "amount": 30,
+          "cell": [
+            30.5,
+            19.5
+          ]
+        }
+      ],
+      "grants": [
+        {
+          "id": "heart:heart_entry_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            80,
+            80,
+            108
+          ],
+          "carrier": "heart_enemy_04",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_entry_rivets",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_entry_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "heart_enemy_04",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_entry_shells",
+          "recovery_cell": [
+            3.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_entry_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            40,
+            40,
+            40
+          ],
+          "carrier": "heart_enemy_00",
+          "carrier_role": "brute",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_entry_armor",
+          "recovery_cell": [
+            10.5,
+            18.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_scattergun:unlock",
+          "kind": "unlock",
+          "weapon": 2,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "heart_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_scattergun",
+          "recovery_cell": [
+            8.5,
+            14.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_first_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "heart_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_first_approach_rivets",
+          "recovery_cell": [
+            8.5,
+            14.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_first_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "heart_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_first_approach_shells",
+          "recovery_cell": [
+            8.5,
+            14.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_first_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "heart_enemy_20",
+          "carrier_role": "summoner",
+          "encounter": "heart_first_return",
+          "requires": [
+            "blood"
+          ],
+          "legacy_alias": "heart_first_return_rivets",
+          "recovery_cell": [
+            15.5,
+            12.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_second_approach_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            60,
+            60,
+            81
+          ],
+          "carrier": "heart_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "heart_second_commit",
+          "requires": [],
+          "legacy_alias": "heart_second_approach_rivets",
+          "recovery_cell": [
+            25.5,
+            36.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_second_approach_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "heart_enemy_18",
+          "carrier_role": "worker",
+          "encounter": "heart_second_commit",
+          "requires": [],
+          "legacy_alias": "heart_second_approach_shells",
+          "recovery_cell": [
+            25.5,
+            36.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_second_return_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            50,
+            50,
+            68
+          ],
+          "carrier": "heart_enemy_23",
+          "carrier_role": "worker",
+          "encounter": "heart_second_return",
+          "requires": [
+            "ivory"
+          ],
+          "legacy_alias": "heart_second_return_rivets",
+          "recovery_cell": [
+            14.5,
+            26.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_repeater_ammo:supply",
+          "kind": "ammo",
+          "weapon": 3,
+          "quantities": [
+            90,
+            90,
+            122
+          ],
+          "carrier": "heart_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_repeater_ammo",
+          "recovery_cell": [
+            8.5,
+            14.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_launcher_ammo:supply",
+          "kind": "ammo",
+          "weapon": 4,
+          "quantities": [
+            10,
+            10,
+            14
+          ],
+          "carrier": "heart_enemy_07",
+          "carrier_role": "worker",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_launcher_ammo",
+          "recovery_cell": [
+            8.5,
+            14.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_disruptor_ammo:supply",
+          "kind": "ammo",
+          "weapon": 5,
+          "quantities": [
+            45,
+            45,
+            61
+          ],
+          "carrier": "heart_enemy_05",
+          "carrier_role": "caster",
+          "encounter": "heart_first_commit",
+          "requires": [],
+          "legacy_alias": "heart_disruptor_ammo",
+          "recovery_cell": [
+            10.5,
+            13.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_rivets:supply",
+          "kind": "ammo",
+          "weapon": 1,
+          "quantities": [
+            80,
+            80,
+            108
+          ],
+          "carrier": "heart_enemy_30",
+          "carrier_role": "worker",
+          "encounter": "heart_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "heart_finale_rivets",
+          "recovery_cell": [
+            37.5,
+            9.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_shells:supply",
+          "kind": "ammo",
+          "weapon": 2,
+          "quantities": [
+            16,
+            16,
+            22
+          ],
+          "carrier": "heart_enemy_30",
+          "carrier_role": "worker",
+          "encounter": "heart_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "heart_finale_shells",
+          "recovery_cell": [
+            37.5,
+            9.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_armor:supply",
+          "kind": "armor",
+          "weapon": 0,
+          "quantities": [
+            40,
+            40,
+            40
+          ],
+          "carrier": "heart_enemy_10",
+          "carrier_role": "guardian",
+          "encounter": "heart_second_commit",
+          "requires": [],
+          "legacy_alias": "heart_finale_armor",
+          "recovery_cell": [
+            24.5,
+            28.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_launcher:unlock",
+          "kind": "unlock",
+          "weapon": 4,
+          "quantities": [
+            1,
+            1,
+            1
+          ],
+          "carrier": "heart_enemy_30",
+          "carrier_role": "worker",
+          "encounter": "heart_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "heart_finale_launcher",
+          "recovery_cell": [
+            37.5,
+            9.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_launcher:ammo",
+          "kind": "ammo",
+          "weapon": 4,
+          "quantities": [
+            8,
+            8,
+            11
+          ],
+          "carrier": "heart_enemy_30",
+          "carrier_role": "worker",
+          "encounter": "heart_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "heart_finale_launcher",
+          "recovery_cell": [
+            37.5,
+            9.5
+          ],
+          "optional": false
+        },
+        {
+          "id": "heart:heart_finale_disruptor:supply",
+          "kind": "ammo",
+          "weapon": 5,
+          "quantities": [
+            30,
+            30,
+            41
+          ],
+          "carrier": "heart_enemy_28",
+          "carrier_role": "caster",
+          "encounter": "heart_finale",
+          "requires": [
+            "blood",
+            "ivory"
+          ],
+          "legacy_alias": "heart_finale_disruptor",
+          "recovery_cell": [
+            40.5,
+            6.5
+          ],
+          "optional": false
+        }
+      ],
+      "stations": [
+        {
+          "id": "heart_reservoir_entry",
+          "name": "ENTRY RESERVOIR",
+          "cell": [
+            5.5,
+            6.5
+          ],
+          "capacity": 35,
+          "aliases": [
+            "heart_entry_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "heart_reservoir_blood",
+          "name": "BLOOD RESERVOIR",
+          "cell": [
+            13.5,
+            9.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "heart_first_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "heart_reservoir_ivory",
+          "name": "IVORY RESERVOIR",
+          "cell": [
+            13.5,
+            31.5
+          ],
+          "capacity": 25,
+          "aliases": [
+            "heart_second_return_health"
+          ],
+          "requires": []
+        },
+        {
+          "id": "heart_reservoir_final",
+          "name": "FINAL RESERVOIR",
+          "cell": [
+            28.5,
+            18.5
+          ],
+          "capacity": 40,
+          "aliases": [
+            "heart_finale_health"
+          ],
+          "requires": []
+        }
+      ],
+      "schedules": [
+        {
+          "order": [
+            "blood",
+            "ivory"
+          ],
+          "entry_carrier": "heart_enemy_04",
+          "encounters": [
+            "heart_first_commit",
+            "heart_first_return",
+            "heart_second_commit",
+            "heart_second_return",
+            "heart_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        },
+        {
+          "order": [
+            "ivory",
+            "blood"
+          ],
+          "entry_carrier": "heart_enemy_04",
+          "encounters": [
+            "heart_second_commit",
+            "heart_second_return",
+            "heart_first_commit",
+            "heart_first_return",
+            "heart_finale"
+          ],
+          "numeric_solvency": "UNQUALIFIED_PENDING_DETERMINISTIC_DAMAGE_AND_REACHABILITY"
+        }
+      ]
+    }
+  }
+}

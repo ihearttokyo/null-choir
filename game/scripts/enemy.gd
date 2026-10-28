@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SealGuardians = preload("res://scripts/seal_guardians.gd")
 const WorkerHitRegions = preload("res://scripts/worker_hit_regions.gd")
+const WardenPressureWindow = preload("res://scripts/warden_pressure_window.gd")
 const BODY_ATLASES := {
     "crawler": "res://assets/art/sprites/bodies-v1/crawler.png",
     "worker": "res://assets/art/sprites/bodies-v1/worker.png",
@@ -17,6 +18,8 @@ const WORKER_BEAUTY_PATH := "res://assets/art/sprites/bodies-v1/worker.png"
 const WORKER_REGION_MANIFEST := "res://assets/art/regions/worker-clutch-v1.json"
 const CLUTCH_VENT_SECONDS := 1.1
 
+const CriticalPractical = preload("res://scripts/critical_actor_practical.gd")
+const EarnedSupplies = preload("res://scripts/earned_supplies.gd")
 const Telegraph = preload("res://scripts/enemy_telegraph.gd")
 const Projectile = preload("res://scripts/projectile.gd")
 const WINDUPS = {"crawler":0.25,"worker":0.45,"caster":0.70,"brute":0.80,"guardian":0.75,"summoner":1.20,"nursery_warden":1.00,"choir_avatar":1.05}
@@ -71,6 +74,7 @@ var clutch_vent_time: float = 0.0
 var _worker_clutch_spent := false
 var _worker_regions: Dictionary = {}
 var _worker_atlas_valid := true
+var _warden_node_binding: Dictionary = {}
 
 static func health_cap(role: String, difficulty: int, multiplier: float = 1.0) -> int:
 	return int(LATE.get(role,{}).get("hp",50 if role == "crawler" else 90)*[0.85,1.0,1.3][difficulty]*multiplier)
@@ -151,8 +155,18 @@ func configure(owner_game: Node, spec: Dictionary) -> void:
 	sprite.pixel_size = _profile.get("scale",3.8 if kind == "crawler" else 3.65)/float(cell)
 	sprite.position.y = (cell/2.0-8)*sprite.pixel_size
 	add_child(sprite)
+	var critical: bool=not champion.is_empty()
+	for grant in EarnedSupplies.chapter(game.level.layout).get("grants",[]):
+		if grant.carrier==id: critical=true;break
+	if critical:
+		var practical := CriticalPractical.new()
+		practical.bind(sprite)
+		practical.set_meta("source_actor",id)
+		practical.set_meta("source_role","seal_bearer" if champion.has("seal") else "exit_warden" if not champion.is_empty() else "equipment_carrier")
+		add_child(practical)
 	if not champion.is_empty(): champion_identity = SealGuardians.attach_identity(self,champion)
 	if kind == "worker": _worker_regions = WorkerHitRegions.bind(sprite,WORKER_REGION_MANIFEST)
+	if kind == "nursery_warden": _warden_node_binding = WardenPressureWindow.bind(sprite)
 	if kind in ["worker","brute","nursery_warden"]:
 		var tell = Telegraph.new()
 		tell.name = "CommittedShotTell"
@@ -472,6 +486,9 @@ func _attack(victim: Node, amount: int, context: Dictionary = {}) -> void:
 
 func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 	if hp <= 0 or amount <= 0 or not _current_map() or not game.playing: return
+	# A masked front-node precision bonus; ordinary damage and interruption stay identical.
+	if kind == "nursery_warden" and Engine.is_in_physics_frame() and WardenPressureWindow.eligible(_warden_node_binding,sprite,context.get("sprite_contact",{}),get_instance_id(),source,game.player,game,game.level,kind,telegraph_time,_committed_variant,context,Engine.get_physics_frames()):
+		amount = WardenPressureWindow.bonus_damage(amount)
 	if kind == "guardian" and telegraph_time <= 0 and pose_time <= 0 and recovery_time <= 0:
 		var incoming := Vector3.ZERO
 		if context.is_empty():
@@ -492,6 +509,7 @@ func take_damage(amount: int, source: Node3D, context: Dictionary = {}) -> void:
 	if not _current_map(): return
 	if source != self and _valid_target(source) and source.get_parent() == game.level: target = source
 	if hp == 0:
+		if game.has_method("earned_defeated") and not game.earned_defeated(self): return
 		_committed_variant = -1
 		_released = false
 		telegraph_time = 0

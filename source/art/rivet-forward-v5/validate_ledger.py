@@ -35,6 +35,11 @@ def normalize_player(root,current,descriptor):
  need(value.get("exact_old_utf8")==a.decode() and value.get("exact_new_utf8")==b.decode() and type(value.get("occurrences")) is int and value["occurrences"]==1 and type(value.get("changed_bytes")) is int and value["changed_bytes"]==1,"Only the exact one-byte URI replacement")
  need(current==old.replace(a,b,1) and current.replace(b,a,1)==old,"All unrelated Player bytes must roundtrip")
  return old
+def normalize_consuming_player(root,current,descriptor,h):
+ # Preserve normalize_player's original exact one-byte API without widening it.
+ if c.sha(current)==NEW_PLAYER:return normalize_player(root,current,descriptor)
+ retained=h["consumer_compatibility"](root)["qualified_player_consumption96"](root,current)
+ return normalize_player(root,retained,descriptor)
 BRIDGE_SHA="269bfe871808e1eaeb6281ca2c78af1e7e6baaf16c93e49e915a1c1f0c1d7b27"
 SOURCE_PBR_SHA="a2e44bb23ae92e1f7374b66d10b422e5500e6eaf13a1c1b322df512510caa3fe"
 def validate_metadata_bridge(root,value):
@@ -115,7 +120,7 @@ def validate(root,h):
    data=record(root,row["images"][prefix],FAMILY+"proof/"+prefix+row["pose"]+".png");c.rgba(data,[640,360])
  independent=proofs["independent"]
  need(independent.get("review_role")=="independent" and independent.get("numeric_rating_included") is False and independent.get("full_hud_receipt_sha256")==value["qualification"]["full-hud"]["sha256"],"Independent actual fullcontext acceptance, no private ratings")
- normalize_player(root,(root/"game/scripts/player.gd").read_bytes(),value["player_compatibility"])
+ normalize_consuming_player(root,(root/"game/scripts/player.gd").read_bytes(),value["player_compatibility"],h)
  family=root/"game/assets/art/weapons/native-v5"
  need({x.relative_to(root).as_posix() for x in family.rglob("*.png")}=={OUTPUT},"Exactly one new runtime atlas owner")
  return {"status":"STRUCTURAL_QUALIFIED_RIVET_V5","runtime_outputs":[OUTPUT],"historical_Player_evidence_scope":"Only exact one-byte weaponURI compatibility; no fresh body/Worker/gameplay qualification"}

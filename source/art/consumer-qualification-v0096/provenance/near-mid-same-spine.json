@@ -1,0 +1,362 @@
+[
+  {
+    "family": "A",
+    "requested": 6,
+    "proof": {
+      "chapter": "reliquary",
+      "arrangement": "PROSPECTIVE_NEW_RELIQUARY_A",
+      "actor_id": "reliquary_enemy_05",
+      "normal_worker_original_cell": [
+        4.5,
+        12.5
+      ],
+      "original_actor_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "worker_yaw_degrees": -155.556,
+      "player_foot": [
+        86,
+        0.04,
+        108
+      ],
+      "worker_foot": [
+        86,
+        0.03,
+        114
+      ],
+      "foot_distance": 6.000008333327546,
+      "eye": [
+        86,
+        1.59,
+        108
+      ],
+      "actual_opaque_source_pixel_point": [
+        86.01425748351375,
+        1.641132294765201,
+        113.99984461530349
+      ],
+      "eye_to_pixel_distance": 6.0000794324067375,
+      "witness": {
+        "frame": 5,
+        "pose_row": 0,
+        "direction_index": 5,
+        "texture_pixel": [
+          703,
+          63
+        ],
+        "frame_pixel": [
+          63,
+          63
+        ],
+        "alpha": 255,
+        "pixel_size": 0.028515625,
+        "camera_yaw": -3.139216349270032,
+        "camera_pitch": 0.0085220394599154,
+        "center": [
+          86,
+          1.626875,
+          114
+        ],
+        "right": [
+          -0.9999971765902186,
+          0.0,
+          0.002376302083334143
+        ],
+        "up": [
+          -2.025069500246003e-05,
+          0.9999636876414886,
+          -0.008521912246963317
+        ]
+      },
+      "ray_terrain": {
+        "min_floor_clearance": 1.59,
+        "min_roof_clearance": 10.358867705234799,
+        "samples": 50,
+        "step_max": 0.125,
+        "wall_inward_envelope": 0.13,
+        "exact_floor_roof_triangles": "all current ordinary floor+roof triangles clear for center and9outline rays"
+      },
+      "outline_9rays_min_floor": 0.16692801604342677,
+      "outline_9rays_min_roof": 8.913178016043426,
+      "static_proxy_count": 24,
+      "visible_art_permesh_bounds_count": 316,
+      "healing_station_count": 4,
+      "all_gates": "CLOSED; no removal/ignored collision",
+      "other_actors": "original source spawn conservative capsule and billboard-square blockers retained",
+      "scope": "SOURCE_CANDIDATE_NATIVE_UNRUN"
+    },
+    "rejection": null
+  },
+  {
+    "family": "A",
+    "requested": 24,
+    "proof": {
+      "chapter": "reliquary",
+      "arrangement": "PROSPECTIVE_NEW_RELIQUARY_A",
+      "actor_id": "reliquary_enemy_05",
+      "normal_worker_original_cell": [
+        4.5,
+        12.5
+      ],
+      "original_actor_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "worker_yaw_degrees": -155.556,
+      "player_foot": [
+        86,
+        0.04,
+        90
+      ],
+      "worker_foot": [
+        86,
+        0.03,
+        114
+      ],
+      "foot_distance": 24.000002083333243,
+      "eye": [
+        86,
+        1.59,
+        90
+      ],
+      "actual_opaque_source_pixel_point": [
+        86.01425779193796,
+        1.6411327801407083,
+        113.99996115308011
+      ],
+      "eye_to_pixel_distance": 24.000019858224913,
+      "witness": {
+        "frame": 5,
+        "pose_row": 0,
+        "direction_index": 5,
+        "texture_pixel": [
+          703,
+          63
+        ],
+        "frame_pixel": [
+          63,
+          63
+        ],
+        "alpha": 255,
+        "pixel_size": 0.028515625,
+        "camera_yaw": -3.140998578034016,
+        "camera_pitch": 0.002130532354813287,
+        "center": [
+          86,
+          1.626875,
+          114
+        ],
+        "right": [
+          -0.9999998235371222,
+          0.0,
+          0.0005940755208332458
+        ],
+        "up": [
+          -1.2656961608026686e-06,
+          0.9999977304168011,
+          -0.0021305303670466447
+        ]
+      },
+      "ray_terrain": {
+        "min_floor_clearance": 1.59,
+        "min_roof_clearance": 6.380327091317309,
+        "samples": 194,
+        "step_max": 0.125,
+        "wall_inward_envelope": 0.13,
+        "exact_floor_roof_triangles": "all current ordinary floor+roof triangles clear for center and9outline rays"
+      },
+      "outline_9rays_min_floor": 0.16687831359147065,
+      "outline_9rays_min_roof": 5.541349073172253,
+      "static_proxy_count": 24,
+      "visible_art_permesh_bounds_count": 316,
+      "healing_station_count": 4,
+      "all_gates": "CLOSED; no removal/ignored collision",
+      "other_actors": "original source spawn conservative capsule and billboard-square blockers retained",
+      "scope": "SOURCE_CANDIDATE_NATIVE_UNRUN"
+    },
+    "rejection": null
+  },
+  {
+    "family": "B",
+    "requested": 6,
+    "proof": {
+      "chapter": "reliquary",
+      "arrangement": "PROSPECTIVE_NEW_RELIQUARY_B",
+      "actor_id": "reliquary_enemy_05",
+      "normal_worker_original_cell": [
+        4.5,
+        12.5
+      ],
+      "original_actor_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "worker_yaw_degrees": -155.556,
+      "player_foot": [
+        86,
+        0.04,
+        112
+      ],
+      "worker_foot": [
+        86,
+        0.03,
+        118
+      ],
+      "foot_distance": 6.000008333327546,
+      "eye": [
+        86,
+        1.59,
+        112
+      ],
+      "actual_opaque_source_pixel_point": [
+        86.01425748351375,
+        1.641132294765201,
+        117.99984461530349
+      ],
+      "eye_to_pixel_distance": 6.0000794324067375,
+      "witness": {
+        "frame": 5,
+        "pose_row": 0,
+        "direction_index": 5,
+        "texture_pixel": [
+          703,
+          63
+        ],
+        "frame_pixel": [
+          63,
+          63
+        ],
+        "alpha": 255,
+        "pixel_size": 0.028515625,
+        "camera_yaw": -3.139216349270032,
+        "camera_pitch": 0.0085220394599154,
+        "center": [
+          86,
+          1.626875,
+          118
+        ],
+        "right": [
+          -0.9999971765902186,
+          0.0,
+          0.002376302083334143
+        ],
+        "up": [
+          -2.025069500246003e-05,
+          0.9999636876414886,
+          -0.008521912246963317
+        ]
+      },
+      "ray_terrain": {
+        "min_floor_clearance": 1.59,
+        "min_roof_clearance": 10.358867705234799,
+        "samples": 50,
+        "step_max": 0.125,
+        "wall_inward_envelope": 0.13,
+        "exact_floor_roof_triangles": "all current ordinary floor+roof triangles clear for center and9outline rays"
+      },
+      "outline_9rays_min_floor": 0.16692801604342677,
+      "outline_9rays_min_roof": 8.913178016043426,
+      "static_proxy_count": 24,
+      "visible_art_permesh_bounds_count": 316,
+      "healing_station_count": 4,
+      "all_gates": "CLOSED; no removal/ignored collision",
+      "other_actors": "original source spawn conservative capsule and billboard-square blockers retained",
+      "scope": "SOURCE_CANDIDATE_NATIVE_UNRUN"
+    },
+    "rejection": null
+  },
+  {
+    "family": "B",
+    "requested": 24,
+    "proof": {
+      "chapter": "reliquary",
+      "arrangement": "PROSPECTIVE_NEW_RELIQUARY_B",
+      "actor_id": "reliquary_enemy_05",
+      "normal_worker_original_cell": [
+        4.5,
+        12.5
+      ],
+      "original_actor_foot": [
+        18.0,
+        -2.97,
+        50.0
+      ],
+      "worker_yaw_degrees": -155.556,
+      "player_foot": [
+        86,
+        0.04,
+        94
+      ],
+      "worker_foot": [
+        86,
+        0.03,
+        118
+      ],
+      "foot_distance": 24.000002083333243,
+      "eye": [
+        86,
+        1.59,
+        94
+      ],
+      "actual_opaque_source_pixel_point": [
+        86.01425779193796,
+        1.6411327801407083,
+        117.99996115308011
+      ],
+      "eye_to_pixel_distance": 24.000019858224913,
+      "witness": {
+        "frame": 5,
+        "pose_row": 0,
+        "direction_index": 5,
+        "texture_pixel": [
+          703,
+          63
+        ],
+        "frame_pixel": [
+          63,
+          63
+        ],
+        "alpha": 255,
+        "pixel_size": 0.028515625,
+        "camera_yaw": -3.140998578034016,
+        "camera_pitch": 0.002130532354813287,
+        "center": [
+          86,
+          1.626875,
+          118
+        ],
+        "right": [
+          -0.9999998235371222,
+          0.0,
+          0.0005940755208332458
+        ],
+        "up": [
+          -1.2656961608026686e-06,
+          0.9999977304168011,
+          -0.0021305303670466447
+        ]
+      },
+      "ray_terrain": {
+        "min_floor_clearance": 1.59,
+        "min_roof_clearance": 6.3888050652266495,
+        "samples": 194,
+        "step_max": 0.125,
+        "wall_inward_envelope": 0.13,
+        "exact_floor_roof_triangles": "all current ordinary floor+roof triangles clear for center and9outline rays"
+      },
+      "outline_9rays_min_floor": 0.16687831359147065,
+      "outline_9rays_min_roof": 5.789535052265895,
+      "static_proxy_count": 24,
+      "visible_art_permesh_bounds_count": 316,
+      "healing_station_count": 4,
+      "all_gates": "CLOSED; no removal/ignored collision",
+      "other_actors": "original source spawn conservative capsule and billboard-square blockers retained",
+      "scope": "SOURCE_CANDIDATE_NATIVE_UNRUN"
+    },
+    "rejection": null
+  }
+]

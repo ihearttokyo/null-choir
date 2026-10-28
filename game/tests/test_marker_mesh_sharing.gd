@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 const PurposeContract = preload("res://tests/test_marker_purposes.gd")
 
 class MarkerOwner extends Node:
@@ -21,8 +22,7 @@ func check_sharing() -> bool:
 	owner = MarkerOwner.new()
 	root.add_child(owner)
 	for index in range(8):
-		owner.state.new_campaign(1)
-		owner.state.level_index = index
+		owner.state = StaticSelectedLevel.fresh_selected(index,1)
 		owner.level = load("res://scripts/level.gd").new()
 		owner.add_child(owner.level)
 		if not expect(owner.level.layout.load_level(index),"Authored map must load"): return false

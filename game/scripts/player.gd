@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const GroundMovement = preload("res://scripts/ground_movement.gd")
+const Variation = preload("res://scripts/weapon_variation.gd")
 const Projectile = preload("res://scripts/projectile.gd")
 const SpriteHitQuery = preload("res://scripts/sprite_hit_query.gd")
 const WEAPONS = [
@@ -22,7 +24,12 @@ var dry_fire_time: float = 0.0
 var shot_flash: float = 0.0
 var stride: float = 0.0
 var recoil: float = 0.0
-var _repeater_spread: float = 0.0
+# No initializer/setter on construction: restoring/recreating Player keeps saved heat.
+var _repeater_spread: float:
+	get: return float(game.state.repeater_heat) if game != null else 0.0
+	set(value):
+		if game != null: game.state.repeater_heat = clampf(value,0.0,0.07)
+var _visual_sequence: Array[int] = [0,0,0,0,0,0]
 var active_play_time: float = 0.0
 var _last_shots: Array[float] = [-INF,-INF,-INF,-INF,-INF,-INF]
 var _repeat_weapon: int = -1
@@ -30,6 +37,7 @@ var _fire_pressed: bool = false
 var _weapon_intent: int = -1
 var _fire_release_required: bool = false
 var _interact_release_required: bool = false
+var _ground_movement = GroundMovement.new()
 
 func configure(owner_game: Node) -> void:
 	game = owner_game
@@ -54,6 +62,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _current_map() or not game.playing: return
 	if event is InputEventMouseMotion:
 		look(event.screen_relative * game.settings.sensitivity * 0.002)
+	if game.has_method("queue_use_asset_input") and game.queue_use_asset_input(self,event):
+		_fire_pressed = false
+		if event.is_action_pressed("fire"): _fire_release_required = true
+		return
 	if event.is_action_released("interact"): _interact_release_required = false
 	if event.is_action_pressed("interact") and not event.is_echo() and not _interact_release_required and game.has_method("_queue_interaction_input"):
 		game._queue_interaction_input(self)
@@ -88,14 +100,20 @@ func _physics_process(delta: float) -> void:
 	dry_fire_time = maxf(0,dry_fire_time-delta)
 	shot_flash = maxf(0,shot_flash-delta)
 	recoil = move_toward(recoil,0,delta*7)
-	var axes = Input.get_vector("move_left","move_right","move_forward","move_back")
-	var direction = basis * Vector3(axes.x,0,axes.y)
-	var planar := Vector2(velocity.x,velocity.z).move_toward(Vector2(direction.x,direction.z)*9.0,delta*50)
-	velocity.x = planar.x
-	velocity.z = planar.y
+	# Action strengths honor remaps/analog input without normalizing digital diagonals.
+	var axes := Vector2(Input.get_axis("move_left","move_right"),Input.get_axis("move_back","move_forward"))
+	var right := Vector2(basis.x.x,basis.x.z)
+	var forward := Vector2(-basis.z.x,-basis.z.z)
+	var travel: Vector2 = _ground_movement.travel(delta,axes,right,forward,Input.is_action_pressed("run"),is_on_floor())
+	velocity.x = travel.x/delta
+	velocity.z = travel.y/delta
 	if not is_on_floor(): velocity.y -= delta*24
 	else: velocity.y = -0.5
 	move_and_slide()
+	for index in get_slide_collision_count():
+		var normal := get_slide_collision(index).get_normal()
+		if absf(normal.y) >= cos(floor_max_angle): continue # Preserve walkable slopes/ceilings.
+		_ground_movement.block(Vector2(normal.x,normal.z))
 	var stick = Input.get_vector("look_left","look_right","look_up","look_down")
 	look(stick * delta * 2.6 * game.settings.sensitivity)
 	stride += Vector2(velocity.x,velocity.z).length()*delta
@@ -141,6 +159,9 @@ func shot_age(index: int = -1) -> float:
 	if index < 0: index = game.state.weapon
 	return active_play_time-_last_shots[index]
 
+func last_shot_sequence(index: int = -1) -> int:
+	return _visual_sequence[game.state.weapon if index < 0 else index]
+
 func weapon_frame() -> int:
 	var age := shot_age()
 	var interval: float = WEAPONS[game.state.weapon].interval
@@ -155,6 +176,7 @@ func _end_repeat() -> void:
 
 func cancel_actions() -> void:
 	velocity = Vector3.ZERO
+	_ground_movement.reset() # Existing pause/restore cancellation must not revive old momentum.
 	if game.has_method("clear_observations"): game.clear_observations()
 	_end_repeat()
 	_fire_pressed = false
@@ -162,6 +184,7 @@ func cancel_actions() -> void:
 	if game != null and game.has_method("_cancel_interaction_input"): game._cancel_interaction_input(self)
 	_fire_release_required = Input.is_action_pressed("fire")
 	_interact_release_required = Input.is_action_pressed("interact")
+	if game != null and game.has_method("cancel_supply_input"): game.cancel_supply_input()
 
 func fire() -> bool:
 	if not Engine.is_in_physics_frame(): return false
@@ -184,6 +207,10 @@ func fire() -> bool:
 		_end_repeat()
 		return false
 	if cooldown > 0: return false
+	# Same accepted-fire transaction as ammo/cooldown, before reentrant callbacks.
+	var sequence: int = game.state.shot_sequence[index]
+	game.state.shot_sequence[index] = (sequence+1)%Variation.PERIOD
+	_visual_sequence[index] = sequence
 	if index > 0: game.state.ammo[index] -= 1
 	var weapon = WEAPONS[index]
 	var held := Input.is_action_pressed("fire") and not _fire_release_required
@@ -215,7 +242,7 @@ func fire() -> bool:
 	if index == 4:
 		var projectile = Projectile.new()
 		game.level.add_child(projectile)
-		projectile.configure(game,self,origin,origin+direction*weapon.range,weapon.damage)
+		projectile.configure(game,self,origin,origin+direction*weapon.range,weapon.damage,sequence)
 		return true
 	if index == 5:
 		var endpoint: Vector3 = origin+direction*weapon.range
@@ -225,34 +252,35 @@ func fire() -> bool:
 			if hit.is_empty(): break
 			if (hit.collider.collision_layer & 1) != 0 or not hit.collider.has_method("take_damage"):
 				endpoint = hit.position
-				if game.has_method("impact"): game.impact(hit.position)
+				_weapon_impact(hit,index,sequence)
 				break
 			if actor_hit == weapon.pellets-1: endpoint = hit.position
 			# The shared query skips transparent texels before selecting a victim, so
 			# holes never consume the three-victim limit. The finite wall query remains.
 			excluded.append(hit.collider.get_rid())
-			var accepted: bool = _damage_shot_target(hit.collider, weapon.damage, {"attack_kind":"piercing","sprite_contact":_sprite_contact(hit),"weapon":index,"origin":origin,"incoming_direction":direction,"hit_position":hit.position}, original_map)
+			var accepted: bool = _damage_shot_target(hit.collider, weapon.damage, {"attack_kind":"piercing","sprite_contact":_sprite_contact(hit),"weapon":index,"shot_tick":Engine.get_physics_frames(),"shot_sequence":sequence,"origin":origin,"incoming_direction":direction,"hit_position":hit.position}, original_map)
 			if not _shot_current(original_map): break
 			if accepted and game.has_method("hit_feedback"): game.hit_feedback()
-			if accepted and _shot_current(original_map) and game.has_method("impact"): game.impact(hit.position)
+			if accepted and _shot_current(original_map): _weapon_impact(hit,index,sequence)
 		if _shot_current(original_map) and game.has_method("ammo_visuals"):
 			var visuals = game.ammo_visuals()
-			if visuals != null: visuals.trace(index,origin,endpoint)
+			if visuals != null: visuals.trace(index,origin,endpoint,sequence)
 		return true
 	var right = direction.cross(camera.global_basis.y).normalized()
 	var up = right.cross(direction).normalized()
 	for pellet in range(weapon.pellets):
 		if not _shot_current(original_map): break
 		var spread = SPREAD[pellet] if weapon.pellets > 1 else Vector2.ZERO
+		if index == 2: spread = Variation.scatter(sequence,pellet,spread)
 		if index == 3:
-			spread = Vector2.from_angle(randf()*TAU)*_repeater_spread*sqrt(randf())
+			spread = Variation.disk(sequence,index,0)*_repeater_spread
 			_repeater_spread = minf(0.07,_repeater_spread+0.004)
 		var ray_direction = (direction+right*spread.x+up*spread.y).normalized()
 		var endpoint: Vector3 = origin+ray_direction*weapon.range
 		var hit = SpriteHitQuery.cast(space, origin, endpoint, camera, actors, excluded, 1|4)
 		if index > 0 and game.has_method("ammo_visuals"):
 			var visuals = game.ammo_visuals()
-			if visuals != null: visuals.trace(index,origin,hit.position if not hit.is_empty() else endpoint)
+			if visuals != null: visuals.trace(index,origin,hit.position if not hit.is_empty() else endpoint,sequence)
 		if not _shot_current(original_map): break
 		if not hit.is_empty() and is_instance_valid(hit.get("collider")):
 			var accepted_contact: bool = not hit.collider.has_method("take_damage")
@@ -261,12 +289,17 @@ func fire() -> bool:
 				if index == 2:
 					var falloff = clampf((origin.distance_to(hit.position)-weapon.useful_range)/(weapon.range-weapon.useful_range),0,1)
 					damage = maxi(1,int(round(weapon.damage*lerpf(1.0,0.2,falloff))))
-				accepted_contact = _damage_shot_target(hit.collider, damage, {"attack_kind":"melee" if index == 0 else "hitscan","sprite_contact":_sprite_contact(hit),"weapon":index,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position}, original_map)
+				accepted_contact = _damage_shot_target(hit.collider, damage, {"attack_kind":"melee" if index == 0 else "hitscan","sprite_contact":_sprite_contact(hit),"weapon":index,"shot_tick":Engine.get_physics_frames(),"shot_sequence":sequence,"origin":origin,"incoming_direction":ray_direction,"hit_position":hit.position}, original_map)
 				if not _shot_current(original_map): break
 				if accepted_contact and game.has_method("hit_feedback"): game.hit_feedback()
 			if not _shot_current(original_map): break
-			if accepted_contact and game.has_method("impact"): game.impact(hit.position)
+			if accepted_contact and _shot_current(original_map): _weapon_impact(hit,index,sequence)
 	return true
+
+func _weapon_impact(hit: Dictionary, weapon: int, sequence: int) -> void:
+	if game.has_method("weapon_impact"):
+		game.weapon_impact(hit.position,weapon,sequence,"flesh" if is_instance_valid(hit.get("collider")) and hit.collider.has_method("take_damage") else "structure")
+	elif game.has_method("impact"): game.impact(hit.position) # Existing nonvisual test-host API.
 
 func _sprite_contact(hit: Dictionary) -> Dictionary:
 	# Forward the existing query's actual accepted texel; never recast a headbox.

@@ -1,6 +1,11 @@
 extends SceneTree
 
 const WallClock = preload("res://tests/wall_clock_wait.gd")
+const MIGRATION_DEFAULTS = {
+	"run":[{"kind":"key","code":KEY_SHIFT,"shift":false,"alt":false,"ctrl":false,"meta":false},{"kind":"joy","code":JOY_BUTTON_LEFT_STICK}],
+	"use_asset":[{"kind":"key","code":KEY_SPACE,"shift":false,"alt":false,"ctrl":false,"meta":false},{"kind":"joy","code":JOY_BUTTON_X}],
+	"survey":[{"kind":"key","code":KEY_M,"shift":false,"alt":false,"ctrl":false,"meta":false},{"kind":"joy","code":JOY_BUTTON_BACK}]
+}
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -108,6 +113,35 @@ func run() -> void:
 	prefs.apply_bindings()
 	if not expect(InputMap.action_get_events("interact").size() == 2,"Repeated apply adds no duplicates"): return
 	var frozen = prefs.to_dict()
+	if not expect(frozen.version == 4 and frozen.bindings.run.size() == 2,"Run action is remappable in both device families"): return
+	for version in [1,2,3]:
+		var legacy = frozen.duplicate(true)
+		legacy.version = version
+		for action in prefs.V4_ADDITIONS: legacy.bindings.erase(action)
+		if version <= 2: legacy.values.erase("sound_test_reduced_motion")
+		if version == 1: legacy.values.erase("reduced_damage_flashes")
+		for missing_survey in ([false,true] if version == 1 else [false]):
+			var historical = legacy.duplicate(true)
+			if missing_survey: historical.bindings.erase("survey")
+			# Missing historical actions gain native integer defaults, unlike the
+			# FLOAT codes in the JSON-loaded snapshot. All existing values stay exact.
+			var expected = frozen.duplicate(true)
+			for action in prefs.V4_ADDITIONS: expected.bindings[action] = MIGRATION_DEFAULTS[action].duplicate(true)
+			if missing_survey: expected.bindings.survey = MIGRATION_DEFAULTS.survey.duplicate(true)
+			if not expect(prefs.from_dict(historical) and prefs.bindings.move_forward == frozen.bindings.move_forward and prefs.bindings.interact == frozen.bindings.interact,"Preserve old custom actions during run migration v"+str(version)): return
+			if prefs.to_dict() != expected:
+				print("PREF_MIGRATION_DIFF version=",version," missing_survey=",missing_survey," actual=",JSON.stringify(prefs.to_dict())," expected=",JSON.stringify(expected))
+			if not expect(prefs.to_dict() == expected,"Migration adds only exact defaults and preserves current options"): return
+		var before_invalid = prefs.to_dict()
+		for action in prefs.V4_ADDITIONS:
+			var injected = legacy.duplicate(true)
+			injected.bindings[action] = frozen.bindings[action].duplicate(true)
+			if not expect(not prefs.from_dict(injected) and prefs.to_dict() == before_invalid,"Reject forged modern action in old envelope "+action): return
+	frozen = prefs.to_dict() # Freeze the actual committed image for atomic-refusal checks.
+	for action in prefs.V4_ADDITIONS:
+		var missing_action = frozen.duplicate(true)
+		missing_action.bindings.erase(action)
+		if not expect(not prefs.from_dict(missing_action) and prefs.to_dict() == frozen,"Modern envelope cannot silently migrate missing "+action): return
 	for mutation in ["volume","nonfinite","version","fraction","object","unknown"]:
 		var invalid = frozen.duplicate(true)
 		match mutation:

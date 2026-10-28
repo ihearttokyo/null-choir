@@ -143,12 +143,17 @@ class Contract(unittest.TestCase):
   old=historical_player_bytes();self.assertEqual(v.sha(old),v.WORKER['player'])
   current=(self.worker_root/'game/scripts/player.gd').read_bytes()
   self.assertEqual(H['validate_pistol_player_compatibility'](self.worker_root,current),old)
- def test_current_v5_Player_forwarding_exact_alias_foreign_negative(self):
+ def test_current_Player_qualified_consumption_and_foreign_negative(self):
   current=(P/'game/scripts/player.gd').read_bytes()
-  self.assertEqual(v.sha(current),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
   self.assertEqual(H['validate_pistol_player_compatibility'](P,current),historical_player_bytes())
   foreign=current.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol')
   with self.assertRaises(ValueError):H['validate_pistol_player_compatibility'](P,foreign)
+ def test_historical_v5_one_byte_alias_stays_exact(self):
+  before=historical_player_bytes();legacy=before.replace(b'"asset":"native-v4/rivet_pistol"',b'"asset":"native-v5/rivet_pistol"',1)
+  self.assertEqual(v.sha(legacy),'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7')
+  guard=H['v5_guard'](P);descriptor=json.loads((P/'source/art/rivet-forward-v5/ledger.json').read_text())['player_compatibility']
+  self.assertEqual(guard['normalize_player'](P,legacy,descriptor),before)
+  with self.assertRaises(ValueError):guard['normalize_player'](P,legacy.replace(b'native-v5/rivet_pistol',b'native-v6/rivet_pistol'),descriptor)
  def actual_worker_raw_case(self,f=0):
   if not self.worker_available:self.skipTest('Actual Worker payload absent; no synthetic source qualification')
   con=v.contract('worker');pose=con['poses'][f//8];name='raw-'+pose+'-'+str(f%8).zfill(2)+'.png'

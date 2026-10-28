@@ -82,6 +82,8 @@ This is an incremental early playable preview, not a completed Alpha 4 or full-g
 
 ## Development status
 
+**Current development candidate: Null Choir v0.096 (not yet released).** It combines the merged seal bearers/exit wardens and eight volumetric wall families with differentiated shot effects, finite monster-earned equipment, automatic collection, eight textured 3D healing-machine families at 32 floor-bolted service points, finite Space healing and live stock gauges, a precision-damage opportunity on the Nursery Warden’s exposed pressure node, Doom-inspired momentum and source-local lighting. Scoped source and native gameplay checks and independent intended-use review passed for this increment. The matching export, signing, notarization and release remain in preparation; full-campaign balance and human play are not certified. The verified download above remains the current playable build; these candidate features are not being claimed for that older package.
+
 The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. Preview 06.1 adds the forward-aiming native Rivet Pistol and live Pixel Music Garden while retaining Preview 06’s eight gate assemblies, the other five weapon atlases, chapter art and Ossuary crossing. Original authoring sources and earlier assets remain retained; the broader campaign and art roadmap remain in progress.
 
 The new Rivet atlas consists of actual native Blender renders with its matching editable source. The other five refreshed weapon atlases retain their separate raster provenance and editable design companions; they are not relabeled as Blender renders. Earlier cathedral-style SoundTest work stays preserved in `source/prototypes/resonance-20261026/`, separate from the original procedural pixel garden. [DESIGN.md](DESIGN.md) remains the full project brief.
@@ -96,7 +98,7 @@ Open `game/project.godot` in Godot 4.7.2, or run:
 godot --path game
 ```
 
-WASD moves, mouse looks, left click fires, E interacts, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
+WASD moves, mouse looks, left click fires, E interacts with doors and contextual assets, Q/Tab cycles weapons, 1–6 selects acquired weapons, and Escape pauses. In the v0.096 development candidate, walk over enemy drops and seals to collect them; Space uses a nearby finite healing machine. Those candidate controls do not apply to the older download above. Gamepad defaults use left/right sticks, right trigger, A and shoulder buttons. Settings includes sensitivity, separate music/effects gains, optional motion effects and native control rebinding. Save-and-title/quit preserve the session if saving fails and offer an explicit discard choice.
 
 With Python 3.11 or newer, matching Godot 4.7.2 Mac export templates, Xcode and Apple's Metal Toolchain installed:
 
@@ -106,7 +108,7 @@ python3 tests/test_build_source.py --allow-window
 python3 tests/test_macos.py
 ```
 
-Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The build and native source-preservation test refuse by default before creating outputs or launching Godot. Use `--allow-window` only when opening and activating a Godot graphics window is intended; license generation and import remain headless. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes `builds/macos/NULL CHOIR-arm64.zip`. It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
+Shader baking requires a native macOS GPU export; headless export cannot bake these libraries. The build and native source-preservation test refuse by default before creating outputs or launching Godot. Use `--allow-window` only when opening and activating a Godot graphics window is intended; license generation and import remain headless. The builder copies the game into a temporary local folder, imports it separately, exports without rewriting the editable project, thins the official engine to arm64, applies a local ad-hoc signature, verifies it, and writes the ledger-named archive under `builds/macos/` (currently `Null-Choir-v0.096.zip`). It leaves installed templates and global configuration unchanged. This is a development app, without Developer ID signing or notarization. Extract the ZIP with Finder or `ditto`; cloud-folder metadata may invalidate signatures on copied app directories.
 
 Build validation retains a 300-second deadline and terminates its isolated process group on timeout. The deadline fixture verifies that no live owned descendant survives.
 

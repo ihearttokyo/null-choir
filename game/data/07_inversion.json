@@ -575,212 +575,7 @@
       ]
     }
   ],
-  "pickups": [
-    {
-      "id": "inversion_entry_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 80,
-      "cell": [
-        18.5,
-        35.5
-      ]
-    },
-    {
-      "id": "inversion_entry_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 16,
-      "cell": [
-        19.5,
-        35.5
-      ]
-    },
-    {
-      "id": "inversion_entry_health",
-      "kind": "health",
-      "amount": 30,
-      "cell": [
-        19.5,
-        36.5
-      ]
-    },
-    {
-      "id": "inversion_entry_armor",
-      "kind": "armor",
-      "amount": 35,
-      "cell": [
-        19.5,
-        37.5
-      ]
-    },
-    {
-      "id": "inversion_scattergun",
-      "kind": "weapon",
-      "weapon": 2,
-      "amount": 0,
-      "cell": [
-        18.5,
-        34.5
-      ]
-    },
-    {
-      "id": "inversion_first_approach_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 55,
-      "cell": [
-        5.5,
-        25.5
-      ]
-    },
-    {
-      "id": "inversion_first_approach_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 8,
-      "cell": [
-        6.5,
-        25.5
-      ]
-    },
-    {
-      "id": "inversion_first_return_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 50,
-      "cell": [
-        12.5,
-        9.5
-      ]
-    },
-    {
-      "id": "inversion_first_return_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        11.5,
-        9.5
-      ]
-    },
-    {
-      "id": "inversion_second_approach_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 55,
-      "cell": [
-        27.5,
-        23.5
-      ]
-    },
-    {
-      "id": "inversion_second_approach_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 8,
-      "cell": [
-        28.5,
-        23.5
-      ]
-    },
-    {
-      "id": "inversion_second_return_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 50,
-      "cell": [
-        21.5,
-        6.5
-      ]
-    },
-    {
-      "id": "inversion_second_return_health",
-      "kind": "health",
-      "amount": 25,
-      "cell": [
-        22.5,
-        6.5
-      ]
-    },
-    {
-      "id": "inversion_disruptor",
-      "kind": "weapon",
-      "weapon": 5,
-      "amount": 30,
-      "cell": [
-        20.5,
-        26.5
-      ]
-    },
-    {
-      "id": "inversion_repeater_ammo",
-      "kind": "ammo",
-      "weapon": 3,
-      "amount": 75,
-      "cell": [
-        30.5,
-        29.5
-      ]
-    },
-    {
-      "id": "inversion_launcher_ammo",
-      "kind": "ammo",
-      "weapon": 4,
-      "amount": 8,
-      "cell": [
-        31.5,
-        29.5
-      ]
-    },
-    {
-      "id": "inversion_finale_rivets",
-      "kind": "ammo",
-      "weapon": 1,
-      "amount": 75,
-      "cell": [
-        32.5,
-        27.5
-      ]
-    },
-    {
-      "id": "inversion_finale_shells",
-      "kind": "ammo",
-      "weapon": 2,
-      "amount": 12,
-      "cell": [
-        31.5,
-        27.5
-      ]
-    },
-    {
-      "id": "inversion_finale_health",
-      "kind": "health",
-      "amount": 35,
-      "cell": [
-        32.5,
-        26.5
-      ]
-    },
-    {
-      "id": "inversion_finale_armor",
-      "kind": "armor",
-      "amount": 35,
-      "cell": [
-        33.5,
-        26.5
-      ]
-    },
-    {
-      "id": "inversion_disruptor_ammo",
-      "kind": "ammo",
-      "weapon": 5,
-      "amount": 30,
-      "cell": [
-        33.5,
-        27.5
-      ]
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "inversion_enemy_00",
@@ -1877,18 +1672,26 @@
     },
     {
       "cell": [
-        11.85,
-        20.5
+        10.9243,
+        19.0757
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 90,
       "color": [
-        0.3,
-        0.65,
-        0.85
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "inversion_enemy_02",
+      "threat_role": "seal_blood",
+      "target": [
+        10.5,
+        19.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2013,18 +1816,26 @@
     },
     {
       "cell": [
-        35.85,
-        14.5
+        34.9804,
+        14.2
       ],
-      "height": 3.1,
+      "height": 2.9,
       "fixture_yaw": 270,
       "color": [
-        0.3,
-        0.65,
-        0.85
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "inversion_enemy_17",
+      "threat_role": "seal_ivory",
+      "target": [
+        35.5,
+        14.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2165,18 +1976,26 @@
     },
     {
       "cell": [
-        41.85,
-        30.5
+        38.2,
+        32.0196
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.82,
-        0.42,
-        0.16
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 4.2,
-      "range": 20
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "inversion_enemy_26",
+      "threat_role": "exit_warden",
+      "target": [
+        38.5,
+        31.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [

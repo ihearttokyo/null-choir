@@ -411,142 +411,7 @@
     }
   ],
   "mission": "RECOVERY ORDER 03: restore both air-feed seals. Do not follow the melody.",
-  "pickups": [
-    {
-      "id": "processional_scattergun",
-      "kind": "weapon",
-      "weapon": 2,
-      "amount": 16,
-      "cell": [
-        20.5,
-        25.5
-      ]
-    },
-    {
-      "id": "processional_entry_rivets",
-      "kind": "ammo",
-      "cell": [
-        22.5,
-        30.5
-      ],
-      "amount": 35,
-      "weapon": 1
-    },
-    {
-      "id": "processional_nave_health",
-      "kind": "health",
-      "cell": [
-        15.5,
-        24.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "processional_organ_armor",
-      "kind": "armor",
-      "cell": [
-        2.7,
-        17.5
-      ],
-      "amount": 60
-    },
-    {
-      "id": "processional_organ_rivets",
-      "kind": "ammo",
-      "cell": [
-        9.5,
-        10.5
-      ],
-      "amount": 50,
-      "weapon": 1
-    },
-    {
-      "id": "processional_organ_shells",
-      "kind": "ammo",
-      "cell": [
-        3.5,
-        20.5
-      ],
-      "amount": 14,
-      "weapon": 2
-    },
-    {
-      "id": "processional_organ_health",
-      "kind": "health",
-      "cell": [
-        9.5,
-        18.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "processional_north_shells",
-      "kind": "ammo",
-      "cell": [
-        12.5,
-        8.5
-      ],
-      "amount": 12,
-      "weapon": 2
-    },
-    {
-      "id": "processional_palanquin_armor",
-      "kind": "armor",
-      "cell": [
-        30.5,
-        15.5
-      ],
-      "amount": 60
-    },
-    {
-      "id": "processional_palanquin_health",
-      "kind": "health",
-      "cell": [
-        23.5,
-        10.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "processional_palanquin_shells",
-      "kind": "ammo",
-      "cell": [
-        29.5,
-        20.5
-      ],
-      "amount": 16,
-      "weapon": 2
-    },
-    {
-      "id": "processional_palanquin_rivets",
-      "kind": "ammo",
-      "cell": [
-        28.6,
-        21.5
-      ],
-      "amount": 50,
-      "weapon": 1
-    },
-    {
-      "id": "processional_gate_shells",
-      "kind": "ammo",
-      "cell": [
-        15.5,
-        8.5
-      ],
-      "amount": 12,
-      "weapon": 2
-    },
-    {
-      "id": "processional_return_health",
-      "kind": "health",
-      "cell": [
-        24.5,
-        24.5
-      ],
-      "amount": 25
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "processional_enemy_00",
@@ -1672,18 +1537,26 @@
     },
     {
       "cell": [
-        2.15,
-        16.5
+        4.0196,
+        16.2
       ],
-      "height": 4.3,
+      "height": 2.9,
       "fixture_yaw": 90,
       "color": [
-        0.82,
-        0.35,
-        0.13
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "processional_enemy_05",
+      "threat_role": "seal_blood",
+      "target": [
+        3.5,
+        16.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1748,18 +1621,26 @@
     },
     {
       "cell": [
-        31.85,
-        12.5
+        29.7,
+        11.0196
       ],
-      "height": 4.3,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.22,
+        0.34,
         0.62,
-        0.8
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "processional_enemy_18",
+      "threat_role": "seal_ivory",
+      "target": [
+        30,
+        10.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1839,18 +1720,26 @@
     },
     {
       "cell": [
-        15.15,
-        2.5
+        16.0196,
+        2.2
       ],
-      "height": 3.1,
+      "height": 2.9,
       "fixture_yaw": 90,
       "color": [
-        0.82,
-        0.35,
-        0.13
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "processional_enemy_23",
+      "threat_role": "exit_warden",
+      "target": [
+        15.5,
+        2.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [

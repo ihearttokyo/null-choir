@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # DRAFT arranged world physics + real actor-profile navigation. No spawned enemies/earned play.
 const Level=preload("res://scripts/level.gd")
 const Campaign=preload("res://scripts/campaign.gd")
@@ -15,7 +16,7 @@ func ray_y(x:float,z:float,top:float,bottom:float)->float:
  var hit=host.level.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(x,top,z),Vector3(x,bottom,z),1))
  return hit.position.y if not hit.is_empty() else -INF
 func run()->void:
- host=Host.new();root.add_child(host);host.state.new_campaign(1);host.state.level_index=5
+ host=Host.new();root.add_child(host);host.state=StaticSelectedLevel.fresh_selected(5,1)
  host.level=Level.new();host.add_child(host.level)
  if check(host.level.build(host,5),"Build unchanged production Level with explicit V3 surface recipe"):
   await physics_frame;await physics_frame

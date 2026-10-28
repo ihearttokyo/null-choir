@@ -1,0 +1,309 @@
+{
+  "method": "built-in image_gen",
+  "role": "Actual proposed shared runtime material atlas, not a machine poster or Pro result",
+  "source": "raw/texture-atlas.png",
+  "sha256": "580ef04e926d59e735bad0c933da87019ac3902df2ecfb04e630db70e0da5795",
+  "bytes": 3292268,
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "prompt_sha256": "92deeee9b4e8f776833f8ff62c9130b5a55255d35c0cda6507836d0e84d99c24",
+  "reference_sha256": "f593a958d88fad35eb4fbd18e20f17b7b9b16468119d883f28247e33de61145e",
+  "tiles": [
+    {
+      "index": 0,
+      "name": "dark_iron",
+      "uv_top_left": [
+        0.0,
+        0.0
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        0.0,
+        0.0,
+        313.5,
+        313.5
+      ]
+    },
+    {
+      "index": 1,
+      "name": "ivory",
+      "uv_top_left": [
+        0.25,
+        0.0
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        313.5,
+        0.0,
+        627.0,
+        313.5
+      ]
+    },
+    {
+      "index": 2,
+      "name": "brass",
+      "uv_top_left": [
+        0.5,
+        0.0
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        627.0,
+        0.0,
+        940.5,
+        313.5
+      ]
+    },
+    {
+      "index": 3,
+      "name": "crimson_glass",
+      "uv_top_left": [
+        0.75,
+        0.0
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        940.5,
+        0.0,
+        1254.0,
+        313.5
+      ]
+    },
+    {
+      "index": 4,
+      "name": "blue_glass",
+      "uv_top_left": [
+        0.0,
+        0.25
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        0.0,
+        313.5,
+        313.5,
+        627.0
+      ]
+    },
+    {
+      "index": 5,
+      "name": "green_glass",
+      "uv_top_left": [
+        0.25,
+        0.25
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        313.5,
+        313.5,
+        627.0,
+        627.0
+      ]
+    },
+    {
+      "index": 6,
+      "name": "amber_glass",
+      "uv_top_left": [
+        0.5,
+        0.25
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        627.0,
+        313.5,
+        940.5,
+        627.0
+      ]
+    },
+    {
+      "index": 7,
+      "name": "dark_cavity",
+      "uv_top_left": [
+        0.75,
+        0.25
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        940.5,
+        313.5,
+        1254.0,
+        627.0
+      ]
+    },
+    {
+      "index": 8,
+      "name": "oxidized_steel",
+      "uv_top_left": [
+        0.0,
+        0.5
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        0.0,
+        627.0,
+        313.5,
+        940.5
+      ]
+    },
+    {
+      "index": 9,
+      "name": "parchment",
+      "uv_top_left": [
+        0.25,
+        0.5
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        313.5,
+        627.0,
+        627.0,
+        940.5
+      ]
+    },
+    {
+      "index": 10,
+      "name": "control_markings",
+      "uv_top_left": [
+        0.5,
+        0.5
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        627.0,
+        627.0,
+        940.5,
+        940.5
+      ]
+    },
+    {
+      "index": 11,
+      "name": "bone",
+      "uv_top_left": [
+        0.75,
+        0.5
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        940.5,
+        627.0,
+        1254.0,
+        940.5
+      ]
+    },
+    {
+      "index": 12,
+      "name": "red_fluid",
+      "uv_top_left": [
+        0.0,
+        0.75
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        0.0,
+        940.5,
+        313.5,
+        1254.0
+      ]
+    },
+    {
+      "index": 13,
+      "name": "pale_fluid",
+      "uv_top_left": [
+        0.25,
+        0.75
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        313.5,
+        940.5,
+        627.0,
+        1254.0
+      ]
+    },
+    {
+      "index": 14,
+      "name": "gasket",
+      "uv_top_left": [
+        0.5,
+        0.75
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        627.0,
+        940.5,
+        940.5,
+        1254.0
+      ]
+    },
+    {
+      "index": 15,
+      "name": "hazard_stripe",
+      "uv_top_left": [
+        0.75,
+        0.75
+      ],
+      "uv_size": [
+        0.25,
+        0.25
+      ],
+      "pixel_boundary_box": [
+        940.5,
+        940.5,
+        1254.0,
+        1254.0
+      ]
+    }
+  ],
+  "grid_note": "Native1254 square is not divisible by4; normalized UV quarters with safe padding are valid. No resize/crop or claimed integer tile borders.",
+  "art_acceptance": "UNRUN in actual game; no9.2 claim",
+  "native8K_or_blend_claim": false,
+  "raster_edits": "NONE; exact generated PNG copied, UV regions are data only",
+  "reference": "references/eight-healing-rigs-reference.png",
+  "public_provenance_note": "Source path is repository-relative; unmodified original generated bytes and original local-path provenance retained privately. This derived public metadata does not claim byte equality with the private provenance JSON."
+}

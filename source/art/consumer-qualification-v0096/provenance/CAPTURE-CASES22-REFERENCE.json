@@ -1,0 +1,395 @@
+{
+  "status": "PROPOSAL_ONLY_NO_CAPTURE_NATIVE_OR_SOURCE_STAGE",
+  "reused_native_index_sha256": "b1a24c134a14821893dcbdc8333f1501f8e912a4f1e9126defe1552360fc1a3a",
+  "jobs": [
+    {
+      "id": "chapter-0-routes",
+      "mode": "routes",
+      "chapter": 0,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-0-transactions",
+      "mode": "transactions",
+      "chapter": 0,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-1-routes",
+      "mode": "routes",
+      "chapter": 1,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-1-transactions",
+      "mode": "transactions",
+      "chapter": 1,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-2-routes",
+      "mode": "routes",
+      "chapter": 2,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-2-transactions",
+      "mode": "transactions",
+      "chapter": 2,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-3-routes",
+      "mode": "routes",
+      "chapter": 3,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-3-transactions",
+      "mode": "transactions",
+      "chapter": 3,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-4-routes",
+      "mode": "routes",
+      "chapter": 4,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-4-transactions",
+      "mode": "transactions",
+      "chapter": 4,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-5-routes",
+      "mode": "routes",
+      "chapter": 5,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-5-transactions",
+      "mode": "transactions",
+      "chapter": 5,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-6-routes",
+      "mode": "routes",
+      "chapter": 6,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-6-transactions",
+      "mode": "transactions",
+      "chapter": 6,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "chapter-7-routes",
+      "mode": "routes",
+      "chapter": 7,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 12,
+      "coverage": [
+        "entry+entryreservoir",
+        "loopAphysicalmovement3orderedframes+bloodreservoir",
+        "loopBphysicalmovement3orderedframes+ivoryreservoir",
+        "return/exitgate+finalreservoir",
+        "threat/tell againstdarkarchitecture",
+        "correctsolidwallbay/floorreturns"
+      ],
+      "whole_loop_traversal_claim": false
+    },
+    {
+      "id": "chapter-7-transactions",
+      "mode": "transactions",
+      "chapter": 7,
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 14,
+      "coverage": [
+        "ordinaryequippedcarrier\u2192productiondeath/drop\u2192physicalwalkover+inventory",
+        "reservoirbefore\u2192productionSpaceedge+realphysicstick\u2192finitehealth/stockafter",
+        "BLOODbearerlive\u2192death/drop\u2192physicalauto-key",
+        "IVORYbearerlive\u2192death/drop\u2192physicalauto-key",
+        "exitwardenlive/commit\u2192actualdefeat\u2192gatecondition"
+      ],
+      "earnedcombat_claim": false
+    },
+    {
+      "id": "weapon-0-roles",
+      "mode": "weapon-roles",
+      "weapon": 0,
+      "preferred_ranges_m": [
+        2.0,
+        3.5,
+        8.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    },
+    {
+      "id": "weapon-1-roles",
+      "mode": "weapon-roles",
+      "weapon": 1,
+      "preferred_ranges_m": [
+        6.0,
+        24.0,
+        70.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    },
+    {
+      "id": "weapon-2-roles",
+      "mode": "weapon-roles",
+      "weapon": 2,
+      "preferred_ranges_m": [
+        6.0,
+        16.0,
+        30.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    },
+    {
+      "id": "weapon-3-roles",
+      "mode": "weapon-roles",
+      "weapon": 3,
+      "preferred_ranges_m": [
+        6.0,
+        24.0,
+        70.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    },
+    {
+      "id": "weapon-4-roles",
+      "mode": "weapon-roles",
+      "weapon": 4,
+      "preferred_ranges_m": [
+        6.0,
+        24.0,
+        60.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    },
+    {
+      "id": "weapon-5-roles",
+      "mode": "weapon-roles",
+      "weapon": 5,
+      "preferred_ranges_m": [
+        4.0,
+        14.0,
+        26.0
+      ],
+      "seconds": 30,
+      "RSS": 1073741824,
+      "max_frames": 6,
+      "normal_reduced_pairs": true,
+      "actual_authored_target_and_standing_LOS_only": true,
+      "missing_range_context_reported_not_silently_replaced": true,
+      "role_notes": "Impactbeyond2.7/Choirbeyond24 showfinite-rangenocontact; Marrowactualbirth/travel/contactnotfakehitscan; allactualquery/ammo/hit/timingrecorded"
+    }
+  ],
+  "job_count": 22,
+  "max_lossless_640x360_PNGs": 244,
+  "PNG_bytes_cap": 25165824,
+  "total_output_plus_new_cache_cap": 33554432,
+  "initial_code_backup_bound": 131072,
+  "fresh_method_specific_capture_reserve": 33554432,
+  "proposed_native_observer": {
+    "planned": 0.1,
+    "request": 0.5,
+    "max_gap": 0.75,
+    "RSS": 1073741824,
+    "seconds_per_job": 30,
+    "source": "existingreviewedGENERAL57f28a49+actualtests08PASS"
+  },
+  "no_template_export": true,
+  "template_old_path_superseded": true,
+  "source_fixture_only": "One newlyowned C/tests/qualify_v0096_gameplay_context.gd, sourcehash/stat+EXCL; no clone/assets/world edits",
+  "camera": "productionPlayer1.55m/fov85/HUDweapon640x360; oldverifiedstanding/outlineLOS routines; no freecamera/unhide/globalfill",
+  "motion": "RealphysicsInputaction steering on2shortauthoredloopsegments/chapter; feet/displacement/velocity/actions/ticks logged, 3orderedframes/segment. Anyarrangedrelocationexplicit+productionreset_supply_sweep; nevercountsastraversal/pickup.",
+  "claims": "SOURCEarrangedconsumerpixel/transactionevidence, notearnedcampaign/fullloopreach/physicalhumaninput/sustainedperformance/balance. Missingphysicalprefix/economy/humanaxeshonestlyremainopen.",
+  "stop": "Parser/source/ownership/resourcefailurestopsdependentjobs; missingvalidstandingLOS orinsufficientactualrangereportscoveragegap; no automaticreframe/brightness/capchange/retry",
+  "quality_acceptance": "Independentactualoriginal640review; authornoscores/nopassclaim",
+  "weapon_aim": "Actualcrosshair/current-maskhitpoint; offaxisidentityportraitframingdoesNOTredirectshots ormanufacturecontact"
+}

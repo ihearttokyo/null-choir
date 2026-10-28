@@ -8,6 +8,7 @@ import struct
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 TOOL = Path(__file__).resolve().parents[1] / "tools" / "threshold_art_ledger.py"
 spec = importlib.util.spec_from_file_location("threshold_art_ledger", TOOL)
@@ -427,6 +428,68 @@ class MainSelftestCompatibilityTests(unittest.TestCase):
         self.descriptor["replacements"].pop()
         with self.assertRaises(validator.ContractError):
             self.compatibility()
+
+class Qualified96ThresholdSourceTests(unittest.TestCase):
+    """Dispatch/source-only UNIT proof, not fabricated native qualification."""
+    @classmethod
+    def setUpClass(cls):
+        cls.repository = TOOL.parents[1]
+        cls.value = json.loads((cls.repository/'source/art/consumer-qualification-v0096/current-consumers.json').read_text())
+        cls.parent = json.loads((cls.repository/'source/art/consumer-qualification-v0094/current-consumers.json').read_text())
+
+    def compat(self, value=None, events=None):
+        value = dict(self.value, historical_sources=self.parent['historical_sources']) if value is None else value
+        events = [] if events is None else events
+        def qualify(root): events.append('qualified96'); return value
+        def record(root, row):
+            events.append(row['path'])
+            data = (root/row['path']).read_bytes()
+            if digest(data) != row['sha256'] or len(data) != row['bytes']:
+                raise ValueError('Resident/receipt source mismatch')
+            return data
+        return {'qualify':qualify,'record':record}
+
+    def test_Main_Level_exact_current_before_exact_history(self):
+        for relative in [validator.MAIN_SOURCE,'game/scripts/level.gd']:
+            events=[];expected=self.parent['historical_sources'][relative]
+            with patch.object(validator,'_current_consumer_compatibility',return_value=self.compat(events=events)):
+                old=validator._qualified96_threshold_source(self.repository,relative,(self.repository/relative).read_bytes(),expected['sha256'])
+            self.assertEqual(digest(old),expected['sha256']);self.assertEqual(events,['qualified96',relative,expected['path']])
+
+    def test_foreign_supplied_or_receipt_or_history_cannot_alias(self):
+        relative=validator.MAIN_SOURCE;current=(self.repository/relative).read_bytes();expected=validator.SELFTEST_MAIN_SHA
+        with patch.object(validator,'_current_consumer_compatibility',return_value=self.compat()),self.assertRaises(ValueError):
+            validator._qualified96_threshold_source(self.repository,relative,current+b' foreign',expected)
+        for group in ['current_sources','historical_sources']:
+            value=dict(self.value,historical_sources=self.parent['historical_sources']);value=json.loads(json.dumps(value));value[group][relative]['sha256']='0'*64
+            with self.subTest(group=group),patch.object(validator,'_current_consumer_compatibility',return_value=self.compat(value)),self.assertRaises(ValueError):
+                validator._qualified96_threshold_source(self.repository,relative,current,expected)
+
+    def test_wrong_generation_and_unscoped_source_refused(self):
+        with patch.object(validator,'_current_consumer_compatibility',return_value=self.compat({'schema':'old94','status':'historical'})),self.assertRaises(ValueError):
+            validator._qualified96_threshold_source(self.repository,validator.MAIN_SOURCE,b'foreign',validator.SELFTEST_MAIN_SHA)
+        with self.assertRaises(ValueError):validator._qualified96_threshold_source(self.repository,'game/scripts/gate_art.gd',b'foreign','0'*64)
+
+    def test_exact_old_Main_descriptor_still_reconstructs(self):
+        ref=json.loads((self.repository/'source/art/living-thresholds-v3/ledger.json').read_text())['native_code_compatibility']
+        with patch.object(validator,'_current_consumer_compatibility',return_value=self.compat()):
+            value=validator._main_selftest_compatibility(self.repository,ref,set())
+        self.assertEqual(value['historical_sha256'],validator.HISTORICAL_MAIN_SHA);self.assertEqual(value['current_sha256'],validator.SELFTEST_MAIN_SHA)
+        self.assertEqual(value['scope'],validator.MAIN_COMPATIBILITY_SCOPE)
+
+    def test_exact_fixture_inverse_matches_historical_success_path(self):
+        current=(self.repository/validator.GATE_FIXTURE_SOURCE).read_bytes()
+        old=validator._gate_fixture_source_compatibility(current)
+        self.assertEqual(digest(old),validator.GATE_FIXTURE_HISTORICAL_SHA)
+
+    def test_fixture_missing_extra_foreign_and_function_inverse_guards(self):
+        current=(self.repository/validator.GATE_FIXTURE_SOURCE).read_bytes()
+        guard=validator.GATE_FIXTURE_INVERSE_EDITS[1][2]
+        mutations=[current.replace(guard,b'',1),current.replace(guard,guard*2,1),current.replace(b'func _level(',b'func unrelated('),current+b'\n# unrelated runtime change\n']
+        for changed in mutations:
+            with self.subTest(kind=digest(changed)),self.assertRaises(ValueError):validator._gate_fixture_source_compatibility(changed)
+            # Prove count/seam/inverse-hash checks are independent of the first pin.
+            with patch.object(validator,'GATE_FIXTURE_CURRENT_SHA',digest(changed)),self.assertRaises(ValueError):validator._gate_fixture_source_compatibility(changed)
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,7 +2,8 @@ extends RefCounted
 
 const SAVE_PATH = "user://preferences.json"
 const DEFAULTS = {"sensitivity":1.0,"invert_y":false,"head_bob":true,"camera_shake":true,"reduced_damage_flashes":false,"auto_aim":false,"music_volume":0.65,"effects_volume":0.8,"sound_test_reduced_motion":false}
-const ACTIONS = ["move_forward","move_back","move_left","move_right","interact","pause","fire","weapon_previous","weapon_next","look_left","look_right","look_up","look_down","weapon_1","weapon_2","weapon_3","weapon_4","weapon_5","weapon_6","survey"]
+const ACTIONS = ["move_forward","move_back","move_left","move_right","interact","pause","fire","weapon_previous","weapon_next","look_left","look_right","look_up","look_down","weapon_1","weapon_2","weapon_3","weapon_4","weapon_5","weapon_6","survey","run","use_asset"]
+const V4_ADDITIONS = ["run","use_asset"] # One joint v4 transition.
 var values: Dictionary = DEFAULTS.duplicate()
 var bindings: Dictionary = default_bindings()
 
@@ -14,6 +15,10 @@ static func default_bindings() -> Dictionary:
 	result.weapon_previous.append(_key(KEY_Q))
 	result.weapon_next.append(_key(KEY_TAB))
 	result.survey.append(_key(KEY_M))
+	result.run.append(_key(KEY_SHIFT))
+	result.run.append({"kind":"joy","code":JOY_BUTTON_LEFT_STICK})
+	result.use_asset.append(_key(KEY_SPACE))
+	result.use_asset.append({"kind":"joy","code":JOY_BUTTON_X})
 	for i in 6: result["weapon_"+str(i+1)].append(_key(KEY_1+i))
 	result.fire.append({"kind":"mouse","code":MOUSE_BUTTON_LEFT})
 	for bind in [["move_left",0,-1],["move_right",0,1],["move_forward",1,-1],["move_back",1,1],["look_left",2,-1],["look_right",2,1],["look_up",3,-1],["look_down",3,1],["fire",5,1]]:
@@ -87,10 +92,10 @@ func _event(binding: Dictionary) -> InputEvent:
 	return event
 
 func to_dict() -> Dictionary:
-	return {"version":3,"values":values.duplicate(),"bindings":bindings.duplicate(true)}
+	return {"version":4,"values":values.duplicate(),"bindings":bindings.duplicate(true)}
 
 func from_dict(data: Dictionary) -> bool:
-	if data.size() != 3 or not _integer(data.get("version"),1,3): return false
+	if data.size() != 3 or not _integer(data.get("version"),1,4): return false
 	var options = data.get("values")
 	var controls = data.get("bindings")
 	if not options is Dictionary: return false
@@ -103,6 +108,19 @@ func from_dict(data: Dictionary) -> bool:
 		if options.size() != 8 or options.has("sound_test_reduced_motion"): return false
 		options = options.duplicate()
 		options.sound_test_reduced_motion = DEFAULTS.sound_test_reduced_motion
+	# One shared v4 transition. V1 also predates survey; reject injected new
+	# actions in old envelopes before adding defaults to a private copy.
+	if data.version <= 3:
+		if not controls is Dictionary: return false
+		var old_count: int = ACTIONS.size()-V4_ADDITIONS.size()
+		if data.version==1:
+			# Historical v1 legitimately exists both before and after survey.
+			if controls.size()!=old_count and (controls.size()!=old_count-1 or controls.has("survey")): return false
+		elif controls.size()!=old_count: return false
+		for action in V4_ADDITIONS:
+			if controls.has(action): return false
+		controls=controls.duplicate(true)
+		for action in V4_ADDITIONS: controls[action]=default_bindings()[action]
 	# One additive action; retain all existing v1 user bindings.
 	if data.version == 1 and controls is Dictionary and controls.size() == ACTIONS.size()-1 and not controls.has("survey"):
 		controls = controls.duplicate(true)

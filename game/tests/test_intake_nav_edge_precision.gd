@@ -1,4 +1,5 @@
 extends SceneTree
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # Actual production bake regression for distinct detailed slope-seam edges.
 const Level = preload("res://scripts/level.gd")
 const Campaign = preload("res://scripts/campaign.gd")
@@ -9,7 +10,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
  var host = Host.new()
  root.add_child(host)
- host.state.new_campaign(1)
+ host.state = StaticSelectedLevel.fresh_selected(0,1)
  var level = Level.new()
  host.level = level
  host.add_child(level)

@@ -1,0 +1,2659 @@
+{
+  "family": "capillary-organ",
+  "units": "meters",
+  "front": "-Z",
+  "parts": [
+    {
+      "name": "FloorPlinth",
+      "role": "base",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.415,
+          0.0,
+          -0.25999999999999995
+        ],
+        "max": [
+          0.415,
+          0.09,
+          0.31
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          0.39,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          0.342,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          0.39,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          0.342,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          0.165,
+          0.08499999999999999
+        ],
+        "max": [
+          0.0,
+          0.23500000000000001,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.28500000000000003,
+          0.12,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.215,
+          0.2,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_2",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          0.08499999999999999,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.25,
+          0.155,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_-0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3625,
+          0.14,
+          0.125
+        ],
+        "max": [
+          -0.2775,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_-0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3375,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          -0.3025,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.18,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.2775,
+          0.14,
+          0.125
+        ],
+        "max": [
+          0.3625,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.3025,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          0.3375,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.18,
+          0.035
+        ],
+        "max": [
+          0.39,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          0.39,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Header",
+      "role": "cap",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          1.16,
+          0.06999999999999999
+        ],
+        "max": [
+          0.38,
+          1.26,
+          0.22999999999999998
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "HeaderIvoryInlay",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          1.1875,
+          0.042499999999999996
+        ],
+        "max": [
+          0.25,
+          1.2425000000000002,
+          0.0675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.035,
+          0.37,
+          -0.035
+        ],
+        "max": [
+          0.035,
+          0.38,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.0,
+          0.345,
+          -0.035
+        ],
+        "max": [
+          0.27,
+          0.41500000000000004,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.23500000000000001,
+          0.345,
+          -0.19
+        ],
+        "max": [
+          0.30500000000000005,
+          0.41500000000000004,
+          0.0
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveHousing",
+      "role": "valve",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.19867076127786348,
+          0.305,
+          -0.27
+        ],
+        "max": [
+          0.34132923872213655,
+          0.455,
+          -0.12
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_00",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.34354600252416284,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.39238666487320323,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_01",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.30977207793864214,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.37366058945872394,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_02",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.26534125718815466,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.32715874281184537,
+          0.5023866648732032,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_03",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.21284125718815466,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2746587428118454,
+          0.5023866648732032,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_04",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1663394105412761,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2302279220613579,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_05",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1476133351267968,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.1964539974758372,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_06",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1476133351267968,
+          0.32284125718815465,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.19645399747583717,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_07",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.16633941054127607,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.23022792206135784,
+          0.3402279220613579,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_08",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2128412571881546,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2746587428118454,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_09",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.26534125718815466,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.32715874281184537,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_10",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.30977207793864214,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.37366058945872394,
+          0.3402279220613578,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_11",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.34354600252416284,
+          0.3228412571881546,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.39238666487320323,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.27,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.36,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.258,
+          0.38,
+          -0.307
+        ],
+        "max": [
+          0.28200000000000003,
+          0.47,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.18000000000000002,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.27,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_3",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.258,
+          0.29000000000000004,
+          -0.307
+        ],
+        "max": [
+          0.28200000000000003,
+          0.38,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "DialFace",
+      "role": "control",
+      "tileIndex": 10,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          0.22600000000000003,
+          0.336,
+          -0.31
+        ],
+        "max": [
+          0.314,
+          0.424,
+          -0.3
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockNeedle",
+      "role": "stock_indicator",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.004,
+          -0.0020000000000000018,
+          -0.0045
+        ],
+        "max": [
+          0.004,
+          0.046,
+          0.0045
+        ]
+      },
+      "translation": [
+        0.27,
+        0.38,
+        -0.317
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryVessel0",
+      "role": "vessel",
+      "tileIndex": 4,
+      "triangles": 76,
+      "boundsLocal": {
+        "min": [
+          -0.305,
+          0.47,
+          -0.08083980388508806
+        ],
+        "max": [
+          -0.135,
+          1.14,
+          0.08083980388508806
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryFeed0_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.245,
+          0.29,
+          -0.025
+        ],
+        "max": [
+          -0.195,
+          0.49,
+          0.025
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryFeed0_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.22,
+          0.26499999999999996,
+          -0.025
+        ],
+        "max": [
+          0.0,
+          0.315,
+          0.025
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "NeedleCrown0",
+      "role": "vessel",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.29000000000000004,
+          1.12,
+          -0.07
+        ],
+        "max": [
+          -0.15,
+          1.24,
+          0.07
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_00",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.13253179576903915,
+          0.412,
+          -0.003041157148172164
+        ],
+        "max": [
+          0.17528892943276675,
+          0.448,
+          0.06427050632658653
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_01",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.10017575646872917,
+          0.412,
+          0.052568866341548885
+        ],
+        "max": [
+          0.16078205372292434,
+          0.448,
+          0.12179756782671307
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_02",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.05256886634154889,
+          0.412,
+          0.10017575646872914
+        ],
+        "max": [
+          0.12179756782671311,
+          0.448,
+          0.16078205372292434
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_03",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.003041157148172154,
+          0.412,
+          0.13253179576903915
+        ],
+        "max": [
+          0.06427050632658654,
+          0.448,
+          0.17528892943276675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_04",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.06427050632658651,
+          0.412,
+          0.13253179576903915
+        ],
+        "max": [
+          0.0030411571481721742,
+          0.448,
+          0.17528892943276675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_05",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.12179756782671307,
+          0.412,
+          0.10017575646872917
+        ],
+        "max": [
+          -0.05256886634154887,
+          0.448,
+          0.16078205372292434
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_06",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.16078205372292434,
+          0.412,
+          0.05256886634154889
+        ],
+        "max": [
+          -0.10017575646872916,
+          0.448,
+          0.12179756782671311
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_07",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.17528892943276675,
+          0.412,
+          -0.0030411571481721443
+        ],
+        "max": [
+          -0.13253179576903915,
+          0.448,
+          0.06427050632658654
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_08",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.17528892943276675,
+          0.412,
+          -0.06427050632658651
+        ],
+        "max": [
+          -0.13253179576903915,
+          0.448,
+          0.003041157148172183
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_09",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.16078205372292434,
+          0.412,
+          -0.12179756782671307
+        ],
+        "max": [
+          -0.10017575646872919,
+          0.448,
+          -0.05256886634154887
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_10",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.12179756782671311,
+          0.412,
+          -0.16078205372292428
+        ],
+        "max": [
+          -0.05256886634154897,
+          0.448,
+          -0.10017575646872914
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_11",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.06427050632658662,
+          0.412,
+          -0.17528892943276675
+        ],
+        "max": [
+          0.0030411571481721448,
+          0.448,
+          -0.1325317957690391
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_12",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.003041157148172197,
+          0.412,
+          -0.17528892943276675
+        ],
+        "max": [
+          0.06427050632658657,
+          0.448,
+          -0.13253179576903912
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_13",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.05256886634154892,
+          0.412,
+          -0.1607820537229243
+        ],
+        "max": [
+          0.12179756782671305,
+          0.448,
+          -0.10017575646872919
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_14",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.10017575646872914,
+          0.412,
+          -0.12179756782671312
+        ],
+        "max": [
+          0.16078205372292428,
+          0.448,
+          -0.05256886634154898
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing0.43_15",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1325317957690391,
+          0.412,
+          -0.06427050632658664
+        ],
+        "max": [
+          0.17528892943276675,
+          0.448,
+          0.003041157148172172
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_00",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.13253179576903915,
+          1.022,
+          -0.003041157148172164
+        ],
+        "max": [
+          0.17528892943276675,
+          1.058,
+          0.06427050632658653
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_01",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.10017575646872917,
+          1.022,
+          0.052568866341548885
+        ],
+        "max": [
+          0.16078205372292434,
+          1.058,
+          0.12179756782671307
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_02",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.05256886634154889,
+          1.022,
+          0.10017575646872914
+        ],
+        "max": [
+          0.12179756782671311,
+          1.058,
+          0.16078205372292434
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_03",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.003041157148172154,
+          1.022,
+          0.13253179576903915
+        ],
+        "max": [
+          0.06427050632658654,
+          1.058,
+          0.17528892943276675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_04",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.06427050632658651,
+          1.022,
+          0.13253179576903915
+        ],
+        "max": [
+          0.0030411571481721742,
+          1.058,
+          0.17528892943276675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_05",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.12179756782671307,
+          1.022,
+          0.10017575646872917
+        ],
+        "max": [
+          -0.05256886634154887,
+          1.058,
+          0.16078205372292434
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_06",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.16078205372292434,
+          1.022,
+          0.05256886634154889
+        ],
+        "max": [
+          -0.10017575646872916,
+          1.058,
+          0.12179756782671311
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_07",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.17528892943276675,
+          1.022,
+          -0.0030411571481721443
+        ],
+        "max": [
+          -0.13253179576903915,
+          1.058,
+          0.06427050632658654
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_08",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.17528892943276675,
+          1.022,
+          -0.06427050632658651
+        ],
+        "max": [
+          -0.13253179576903915,
+          1.058,
+          0.003041157148172183
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_09",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.16078205372292434,
+          1.022,
+          -0.12179756782671307
+        ],
+        "max": [
+          -0.10017575646872919,
+          1.058,
+          -0.05256886634154887
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_10",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.12179756782671311,
+          1.022,
+          -0.16078205372292428
+        ],
+        "max": [
+          -0.05256886634154897,
+          1.058,
+          -0.10017575646872914
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_11",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.06427050632658662,
+          1.022,
+          -0.17528892943276675
+        ],
+        "max": [
+          0.0030411571481721448,
+          1.058,
+          -0.1325317957690391
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_12",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.003041157148172197,
+          1.022,
+          -0.17528892943276675
+        ],
+        "max": [
+          0.06427050632658657,
+          1.058,
+          -0.13253179576903912
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_13",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.05256886634154892,
+          1.022,
+          -0.1607820537229243
+        ],
+        "max": [
+          0.12179756782671305,
+          1.058,
+          -0.10017575646872919
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_14",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.10017575646872914,
+          1.022,
+          -0.12179756782671312
+        ],
+        "max": [
+          0.16078205372292428,
+          1.058,
+          -0.05256886634154898
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRing1.04_15",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1325317957690391,
+          1.022,
+          -0.06427050632658664
+        ],
+        "max": [
+          0.17528892943276675,
+          1.058,
+          0.003041157148172172
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRib-0.15",
+      "role": "open_housing_support",
+      "tileIndex": 1,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.16799999999999998,
+          0.43,
+          -0.018
+        ],
+        "max": [
+          -0.132,
+          1.06,
+          0.018
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryCenterRib0.15",
+      "role": "open_housing_support",
+      "tileIndex": 1,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.132,
+          0.43,
+          -0.018
+        ],
+        "max": [
+          0.16799999999999998,
+          1.06,
+          0.018
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryFeed1_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.025,
+          0.29,
+          -0.025
+        ],
+        "max": [
+          0.025,
+          0.49,
+          0.025
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "NeedleCrown1",
+      "role": "vessel",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.07,
+          1.12,
+          -0.07
+        ],
+        "max": [
+          0.07,
+          1.24,
+          0.07
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryVessel2",
+      "role": "vessel",
+      "tileIndex": 4,
+      "triangles": 76,
+      "boundsLocal": {
+        "min": [
+          0.135,
+          0.47,
+          -0.08083980388508806
+        ],
+        "max": [
+          0.305,
+          1.14,
+          0.08083980388508806
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryFeed2_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.195,
+          0.29,
+          -0.025
+        ],
+        "max": [
+          0.245,
+          0.49,
+          0.025
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "CapillaryFeed2_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.0,
+          0.26499999999999996,
+          -0.025
+        ],
+        "max": [
+          0.22,
+          0.315,
+          0.025
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "NeedleCrown2",
+      "role": "vessel",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.15,
+          1.12,
+          -0.07
+        ],
+        "max": [
+          0.29000000000000004,
+          1.24,
+          0.07
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockVolume",
+      "role": "stock",
+      "tileIndex": 13,
+      "triangles": 92,
+      "boundsLocal": {
+        "min": [
+          -0.12,
+          0,
+          -0.12
+        ],
+        "max": [
+          0.12,
+          1,
+          0.12
+        ]
+      },
+      "translation": [
+        0,
+        0.42,
+        0
+      ],
+      "scale": [
+        1,
+        0.59,
+        1
+      ]
+    },
+    {
+      "name": "Manifold0.48",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.305,
+          0.4475,
+          -0.09
+        ],
+        "max": [
+          0.305,
+          0.5125,
+          0.07
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Manifold1.04",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.305,
+          1.0075,
+          -0.09
+        ],
+        "max": [
+          0.305,
+          1.0725,
+          0.07
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          0.25,
+          0.122
+        ],
+        "max": [
+          0.028,
+          1.13,
+          0.178
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          1.1019999999999999,
+          0.0
+        ],
+        "max": [
+          0.028,
+          1.158,
+          0.15
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "TopCoupling",
+      "role": "cap",
+      "tileIndex": 2,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.06,
+          1.11,
+          -0.06
+        ],
+        "max": [
+          0.06,
+          1.18,
+          0.06
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "useTarget": [
+    0.27,
+    0.38,
+    -0.33
+  ],
+  "stock": {
+    "bottomMeters": 0.42,
+    "fullHeightMeters": 0.59,
+    "localBottom": 0,
+    "localTop": 1,
+    "emptyState": {
+      "visible": false,
+      "scalePolicy": "preserve-full-authored-scale",
+      "scaleY": 0.59,
+      "renderedVolume": 0,
+      "geometricVolumeRemains": true
+    },
+    "partialFraction": 0.5,
+    "axis": "Y"
+  }
+}

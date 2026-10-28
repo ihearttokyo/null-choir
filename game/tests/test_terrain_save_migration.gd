@@ -6,6 +6,10 @@ const LEGACY_CODEC_EXIT_WARDENS = {
 	0:"intake_enemy_19", 1:"foundry_enemy_17", 2:"processional_enemy_23",
 	3:"reliquary_enemy_28", 5:"ossuary_enemy_25", 6:"inversion_enemy_26"}
 
+# Independent literal oracle: these staged inputs retire only seal IDs and summoned adds;
+# every authored supply carrier lives and no historical health alias was consumed.
+const LEGACY_CODEC_EARNED = [{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"intake_reservoir_blood":25,"intake_reservoir_entry":30,"intake_reservoir_ivory":25,"intake_reservoir_final":40}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"foundry_reservoir_entry":25,"foundry_reservoir_blood":25,"foundry_reservoir_ivory":30,"foundry_reservoir_final":40}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"processional_reservoir_entry":30,"processional_reservoir_blood":30,"processional_reservoir_ivory":30,"processional_reservoir_final":25}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"reliquary_reservoir_entry":30,"reliquary_reservoir_blood":85,"reliquary_reservoir_ivory":55,"reliquary_reservoir_final":40}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"nursery_reservoir_entry":30,"nursery_reservoir_blood":30,"nursery_reservoir_ivory":30,"nursery_reservoir_final":40}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"ossuary_reservoir_entry":30,"ossuary_reservoir_blood":20,"ossuary_reservoir_ivory":20,"ossuary_reservoir_final":35}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"inversion_reservoir_entry":30,"inversion_reservoir_blood":25,"inversion_reservoir_ivory":25,"inversion_reservoir_final":35}},{"version":1,"revision":1,"loot_drops":[],"loot_claimed":[],"healing_remaining":{"heart_reservoir_entry":35,"heart_reservoir_blood":25,"heart_reservoir_ivory":25,"heart_reservoir_final":40}}]
+
 func run() -> void:
 	var fixture: String = OS.get_environment("NULL_CHOIR_TERRAIN_FIXTURE_ROOT")
 	var private_home: String = fixture.get_base_dir().get_base_dir()+"/home"
@@ -180,11 +184,15 @@ func run() -> void:
 	quit(0 if failures == 0 else 1)
 
 func expected_legacy_codec(document: Dictionary, index: int) -> Dictionary:
+	if index < 0 or index >= LEGACY_CODEC_EARNED.size(): return {}
 	var expected = document.duplicate(true)
 	for snapshot in [expected,expected.checkpoint,expected.level_start]:
-		if snapshot.has("seal_drops") or snapshot.has("legacy_exit_wardens"): return {}
+		if snapshot.has("seal_drops") or snapshot.has("legacy_exit_wardens") or snapshot.has("shot_sequence") or snapshot.has("repeater_heat") or snapshot.has("earned_supply"): return {}
 		# Every authored bearer is living in this input. Both old floor seals were
 		# collected, so no pending corpse is invented or enemy death fabricated.
+		snapshot["shot_sequence"] = [0,0,0,0,0,0]
+		snapshot["repeater_heat"] = 0.0
+		snapshot["earned_supply"] = LEGACY_CODEC_EARNED[index].duplicate(true)
 		snapshot["seal_drops"] = []
 		snapshot["legacy_exit_wardens"] = [LEGACY_CODEC_EXIT_WARDENS[index]] if LEGACY_CODEC_EXIT_WARDENS.has(index) else []
 	return expected
@@ -194,7 +202,7 @@ func canonical_codec_equal(actual: Dictionary, expected: Dictionary) -> bool:
 
 func check_canonical_parity_negatives(expected: Dictionary) -> void:
 	for envelope in ["current","checkpoint","level_start"]:
-		for defect in ["health","ammo","actor","seal_drops","legacy_exit_wardens","foreign-field"]:
+		for defect in ["health","ammo","actor","seal_drops","legacy_exit_wardens","shot-sequence","repeater-heat","earned-stock","earned-missing","earned-foreign","earned-duplicate","foreign-field"]:
 			var bad = expected.duplicate(true)
 			var target: Dictionary = bad if envelope == "current" else bad[envelope]
 			match defect:
@@ -203,6 +211,12 @@ func check_canonical_parity_negatives(expected: Dictionary) -> void:
 				"actor": target.actors[0].hp -= 1
 				"seal_drops": target.seal_drops = [{"guardian":"foreign","position":[0,0,0]}]
 				"legacy_exit_wardens": target.legacy_exit_wardens = ["foreign"]
+				"shot-sequence": target.shot_sequence[1] += 1
+				"repeater-heat": target.repeater_heat = 0.01
+				"earned-stock": target.earned_supply.healing_remaining[target.earned_supply.healing_remaining.keys()[0]] -= 1
+				"earned-missing": target.erase("earned_supply")
+				"earned-foreign": target.earned_supply.healing_remaining["foreign"] = 1
+				"earned-duplicate": target.earned_supply.loot_claimed = ["foreign","foreign"]
 				"foreign-field": target["unapproved"] = true
 			expect(not canonical_codec_equal(bad,expected),"Complete canonical parity rejects "+envelope+" "+defect)
 
@@ -252,6 +266,9 @@ func staged_document(index: int, mode: int) -> Dictionary:
 		# image. The old collector recorded both ownership and pickup retirement.
 		snapshot.erase("seal_drops")
 		snapshot.erase("legacy_exit_wardens")
+		snapshot.erase("shot_sequence")
+		snapshot.erase("repeater_heat")
+		snapshot.erase("earned_supply")
 		snapshot.keys = keys
 		for key in layout.data.interactions:
 			if key.kind == "key" and not key.id in snapshot.removed: snapshot.removed.append(key.id)

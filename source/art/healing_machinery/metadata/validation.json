@@ -1,0 +1,498 @@
+{
+  "evidence": "source-only stdlib geometry binary checks plus installed Pillow PNG verification; no engine import or external validator",
+  "textureAudit": {
+    "sha256": "580ef04e926d59e735bad0c933da87019ac3902df2ecfb04e630db70e0da5795",
+    "bytes": 3292268,
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "pngColorType": 2,
+    "decodedAlphaExtrema": [
+      255,
+      255
+    ],
+    "baseColorInterpretation": "sRGB texture; COLOR_0 linear multiplicative facet value",
+    "gltfAlphaMode": "OPAQUE (default); image alpha ignored",
+    "quarterUVContract": "normalized 0.25 tile width with 4% per-tile inset; no integer boundary/resampling assumption"
+  },
+  "families": [
+    {
+      "family": "canted-supported-orbit-core",
+      "nodes": 76,
+      "triangles": 1748,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.56,
+          "transformDeterminant": 0.56,
+          "geometricBottom": 0.44,
+          "geometricTop": 1.0,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.28,
+          "transformDeterminant": 0.28,
+          "geometricBottom": 0.44,
+          "geometricTop": 0.72,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.56,
+          "transformDeterminant": 0.56,
+          "geometricBottom": 0.44,
+          "geometricTop": 1.0,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {
+        "continuousDrain": {
+          "drainYBounds": [
+            0.33001428842544556,
+            0.4949857294559479
+          ],
+          "outletMaxY": 0.41499999165534973,
+          "stockBottom": 0.44,
+          "stockOverlapMeters": 0.054985729455947874,
+          "centerlineEndpoints": [
+            [
+              0,
+              0.37,
+              0
+            ],
+            [
+              -0.09000000000000001,
+              0.455,
+              0
+            ]
+          ],
+          "stockBottomCenter": [
+            -0.09000000078231096,
+            0.44,
+            9.665524807572404e-19
+          ]
+        }
+      },
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "capillary-organ",
+      "nodes": 96,
+      "triangles": 2256,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.59,
+          "transformDeterminant": 0.59,
+          "geometricBottom": 0.42,
+          "geometricTop": 1.01,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.295,
+          "transformDeterminant": 0.295,
+          "geometricBottom": 0.42,
+          "geometricTop": 0.715,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.59,
+          "transformDeterminant": 0.59,
+          "geometricBottom": 0.42,
+          "geometricTop": 1.01,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {
+        "sideAssemblyClearances": [
+          {
+            "fraction": 0.5,
+            "part": "CapillaryVessel0",
+            "innerAbsX": 0.13500000536441803,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.015000008046627045
+          },
+          {
+            "fraction": 0.5,
+            "part": "CapillaryFeed0_0",
+            "innerAbsX": 0.19499999284744263,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.07499999552965164
+          },
+          {
+            "fraction": 0.5,
+            "part": "CapillaryVessel2",
+            "innerAbsX": 0.13500000536441803,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.015000008046627045
+          },
+          {
+            "fraction": 0.5,
+            "part": "CapillaryFeed2_0",
+            "innerAbsX": 0.19499999284744263,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.07499999552965164
+          },
+          {
+            "fraction": 1.0,
+            "part": "CapillaryVessel0",
+            "innerAbsX": 0.13500000536441803,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.015000008046627045
+          },
+          {
+            "fraction": 1.0,
+            "part": "CapillaryFeed0_0",
+            "innerAbsX": 0.19499999284744263,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.07499999552965164
+          },
+          {
+            "fraction": 1.0,
+            "part": "CapillaryVessel2",
+            "innerAbsX": 0.13500000536441803,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.015000008046627045
+          },
+          {
+            "fraction": 1.0,
+            "part": "CapillaryFeed2_0",
+            "innerAbsX": 0.19499999284744263,
+            "stockMaxRadius": 0.11999999731779099,
+            "minimumGapMeters": 0.07499999552965164
+          }
+        ],
+        "centralOpenHousing": {
+          "stockMaxRadiusMeters": 0.11999999731779099,
+          "supportMinRadiusMeters": 0.13199999928474426,
+          "radialClearanceMeters": 0.012000001966953278,
+          "closedCentralHousingMesh": false
+        }
+      },
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "clinical-abstract-capsule",
+      "nodes": 56,
+      "triangles": 1404,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.64,
+          "transformDeterminant": 0.64,
+          "geometricBottom": 0.41,
+          "geometricTop": 1.05,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.32,
+          "transformDeterminant": 0.32,
+          "geometricBottom": 0.41,
+          "geometricTop": 0.73,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.64,
+          "transformDeterminant": 0.64,
+          "geometricBottom": 0.41,
+          "geometricTop": 1.05,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {
+        "fixedBaffles": {
+          "role": "structural_baffle",
+          "tileIndices": [
+            11,
+            11,
+            11
+          ],
+          "fluidTilesForbidden": [
+            12,
+            13
+          ]
+        }
+      },
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "hanging-pressure-bulb",
+      "nodes": 122,
+      "triangles": 2732,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.58,
+          "transformDeterminant": 0.58,
+          "geometricBottom": 0.43,
+          "geometricTop": 1.01,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.29,
+          "transformDeterminant": 0.29,
+          "geometricBottom": 0.43,
+          "geometricTop": 0.72,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.58,
+          "transformDeterminant": 0.58,
+          "geometricBottom": 0.43,
+          "geometricTop": 1.01,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {
+        "continuousDrain": {
+          "drainYBounds": [
+            0.3700000047683716,
+            0.4449999928474426
+          ],
+          "outletMaxY": 0.41499999165534973,
+          "stockBottom": 0.43,
+          "stockOverlapMeters": 0.014999992847442634,
+          "centerlineEndpoints": [
+            [
+              0,
+              0.37,
+              0
+            ],
+            [
+              -7.42846311098484e-18,
+              0.445,
+              0
+            ]
+          ],
+          "stockBottomCenter": [
+            -1.067810416808565e-18,
+            0.43,
+            1.0678103478768474e-18
+          ]
+        }
+      },
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "ivory-archive-vessel",
+      "nodes": 59,
+      "triangles": 1488,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2896212339401245,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.62,
+          "transformDeterminant": 0.62,
+          "geometricBottom": 0.42,
+          "geometricTop": 1.04,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.31,
+          "transformDeterminant": 0.31,
+          "geometricBottom": 0.42,
+          "geometricTop": 0.73,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.62,
+          "transformDeterminant": 0.62,
+          "geometricBottom": 0.42,
+          "geometricTop": 1.04,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {},
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "organic-valve-cage",
+      "nodes": 97,
+      "triangles": 2360,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.61,
+          "transformDeterminant": 0.61,
+          "geometricBottom": 0.41,
+          "geometricTop": 1.02,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.305,
+          "transformDeterminant": 0.305,
+          "geometricBottom": 0.41,
+          "geometricTop": 0.715,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.61,
+          "transformDeterminant": 0.61,
+          "geometricBottom": 0.41,
+          "geometricTop": 1.02,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {},
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "refractory-ceramic-crucible",
+      "nodes": 57,
+      "triangles": 1384,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.58,
+          "transformDeterminant": 0.58,
+          "geometricBottom": 0.43,
+          "geometricTop": 1.01,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.29,
+          "transformDeterminant": 0.29,
+          "geometricBottom": 0.43,
+          "geometricTop": 0.72,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.58,
+          "transformDeterminant": 0.58,
+          "geometricBottom": 0.43,
+          "geometricTop": 1.01,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {},
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    },
+    {
+      "family": "ribbed-marrow-tank",
+      "nodes": 163,
+      "triangles": 3512,
+      "extentXYZMeters": [
+        0.8299999833106995,
+        1.2599999904632568,
+        0.6315000021904706
+      ],
+      "stockTransformChecks": [
+        {
+          "fraction": 0,
+          "visible": false,
+          "scaleY": 0.67,
+          "transformDeterminant": 0.67,
+          "geometricBottom": 0.39,
+          "geometricTop": 1.06,
+          "renderedEmpty": true
+        },
+        {
+          "fraction": 0.5,
+          "visible": true,
+          "scaleY": 0.335,
+          "transformDeterminant": 0.335,
+          "geometricBottom": 0.39,
+          "geometricTop": 0.7250000000000001,
+          "renderedEmpty": false
+        },
+        {
+          "fraction": 1,
+          "visible": true,
+          "scaleY": 0.67,
+          "transformDeterminant": 0.67,
+          "geometricBottom": 0.39,
+          "geometricTop": 1.06,
+          "renderedEmpty": false
+        }
+      ],
+      "reviewBatch01Assertions": {},
+      "sourceBinaryChecks": "PASS",
+      "externalAtlasExists": true
+    }
+  ],
+  "heldUnrun": [
+    "Blender import/master save",
+    "Godot importer/material behavior",
+    "640x360 in-game visibility/readability",
+    "full/half/empty actual runtime stock hookup",
+    "collision/save integration",
+    "native8K masters"
+  ]
+}

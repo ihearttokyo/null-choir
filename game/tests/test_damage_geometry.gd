@@ -1,7 +1,15 @@
 extends SceneTree
 
 class NativeGame extends "res://scripts/main.gd":
-	func _ready() -> void: set_process(false)
+	var shot_call_log: Array[int] = []
+	func _ready() -> void:
+		set_process(false)
+		# Apply production defaults only; never load a user's saved preferences.
+		var default_preferences = Preferences.new()
+		default_preferences.apply_bindings()
+	func shot(weapon: int) -> void:
+		shot_call_log.append(weapon)
+		super.shot(weapon)
 
 var failures := 0
 
@@ -53,7 +61,8 @@ func run() -> void:
 	await check_open_windows()
 	await check_blasts()
 	await check_context()
-	if failures == 0: print("PASS native damage geometry/identity, armor windows, blasts and cover; manually stepped synthetic arena, not physical/GPU/campaign acceptance")
+	await check_controlled_rivet_range()
+	if failures == 0: print("PASS native damage geometry/identity, armor windows, blasts, cover and controlled 70m Rivet; manually stepped/test-built arena, not authored-route/physical/GPU acceptance")
 	quit(0 if failures == 0 else 1)
 
 func expect(condition: bool, detail: String) -> void:
@@ -217,6 +226,110 @@ func check_context() -> void:
 	guardian.call("take_damage",14,source,{"incoming_direction":Vector3(0,0,1)})
 	expect(hp-guardian.hp == 4 and guardian.target == null,"Retired-map source retains valid incoming geometry but cannot cause retaliation")
 	await dispose(game)
+
+
+func check_controlled_rivet_range() -> void:
+	# Purpose-built, collision-backed test arena: this is not campaign geometry.
+	# Loaded Level metadata only supplies the real Main/Enemy execution context.
+	var game = fixture()
+	game.settings.auto_aim = false
+	game.state.weapon = 1
+	game.state.ammo[1] = 12
+	game.state.shot_sequence[1] = 0
+	game.player.position = Vector3(0,0.04,0)
+	game.player.rotation = Vector3.ZERO
+	game.player.camera.rotation = Vector3.ZERO
+	game.player.weapon_cooldowns[1] = 0
+	var floor_body = game.level._box(Vector3(20,.2,160),Vector3(0,-.1,-80),null,true)
+	expect(floor_body is StaticBody3D and floor_body.get_child_count() > 0,"Controlled Rivet lane has an actual static floor and collision shape")
+	var victim = _controlled_rivet_worker(game,70.0)
+	await physics_frame
+	await physics_frame
+	expect(Engine.is_in_physics_frame(),"Controlled 70m shot is fired during native physics")
+	var camera_origin: Vector3 = game.player.camera.global_position
+	var victim_hp: int = victim.hp
+	var ammo_before: int = game.state.ammo[1]
+	var sequence_before: int = game.state.shot_sequence[1]
+	expect(is_equal_approx(float(game.Player.WEAPONS[1].range),140.0),"Rivet maximum range remains the production 140m value")
+	expect(InputMap.has_action("fire"),"Production default fire action exists before Actual Player.fire accepts controlled Rivet shot")
+	expect(game.player.fire(),"Actual Player.fire accepts controlled Rivet shot")
+	var observation: Dictionary = game.aim_observation
+	var contact: Dictionary = observation.get("contact",{})
+	var hit_position: Vector3 = contact.get("position",Vector3(INF,INF,INF))
+	expect(game.shot_call_log == [1],"Actual Player.fire traverses NativeGame.shot and its super Main.shot implementation")
+	expect(victim.hp == victim_hp-22,"Actual 70m visible-sprite contact applies exact worker Rivet damage")
+	expect(game.state.ammo[1] == ammo_before-1 and game.state.shot_sequence[1] == sequence_before+1,"Real fire transaction consumes exactly one finite round and advances one shot sequence")
+	expect(contact.get("collider") == victim and contact.get("coverage","") == "visible_sprite" and contact.has("sprite_pixel"),"70m contact is the actual opaque SpriteHitQuery texel, not a capsule/effect claim")
+	expect(hit_position.is_finite() and camera_origin.distance_to(hit_position) >= 69.0 and camera_origin.distance_to(hit_position) <= 71.0,"Measured 70m hit position is within the original long-range test band")
+	expect(not observation.get("assisted",true) and observation.get("manual_direction",Vector3.ZERO).dot(observation.get("direction",Vector3.ZERO)) > .99999,"70m test retains the straight physical ray without aim assistance or bend")
+	expect(game.player.camera.global_position.distance_to(victim.sprite.global_position) >= 69.0,"Actual target sprite remains at its authored 70m fixture position")
+	await dispose(game)
+
+	# Opaque physical cover must win the same real Main/Player query at 70m.
+	game = fixture()
+	game.settings.auto_aim = false
+	game.state.weapon = 1
+	game.state.ammo[1] = 12
+	game.player.position = Vector3(0,0.04,0)
+	game.player.rotation = Vector3.ZERO
+	game.player.camera.rotation = Vector3.ZERO
+	game.player.weapon_cooldowns[1] = 0
+	game.level._box(Vector3(20,.2,160),Vector3(0,-.1,-80),null,true)
+	game.level._box(Vector3(8,5,.2),Vector3(0,2.5,-35),null,true)
+	victim = _controlled_rivet_worker(game,70.0)
+	await physics_frame
+	await physics_frame
+	victim_hp = victim.hp
+	ammo_before = game.state.ammo[1]
+	expect(InputMap.has_action("fire"),"Production default fire action exists before Real Player.fire accepts covered controlled shot")
+	expect(game.player.fire(),"Real Player.fire accepts covered controlled shot")
+	contact = game.aim_observation.get("contact",{})
+	expect(contact.get("collider") is StaticBody3D and (contact.collider.collision_layer & 1) != 0,"Actual opaque wall intercepts 70m ray before sprite coverage")
+	expect(victim.hp == victim_hp and game.state.ammo[1] == ammo_before-1,"Wall-negative consumes a fired round but causes no through-wall damage")
+	expect(game.shot_call_log == [1],"Wall-negative still traverses actual Main.shot")
+	await dispose(game)
+
+	# A real 145m target lies beyond the production Rivet's unchanged 140m ray.
+	game = fixture()
+	game.settings.auto_aim = false
+	game.state.weapon = 1
+	game.state.ammo[1] = 12
+	game.player.position = Vector3(0,0.04,0)
+	game.player.rotation = Vector3.ZERO
+	game.player.camera.rotation = Vector3.ZERO
+	game.player.weapon_cooldowns[1] = 0
+	game.level._box(Vector3(20,.2,300),Vector3(0,-.1,-150),null,true)
+	victim = _controlled_rivet_worker(game,145.0)
+	await physics_frame
+	await physics_frame
+	victim_hp = victim.hp
+	ammo_before = game.state.ammo[1]
+	expect(InputMap.has_action("fire"),"Production default fire action exists before Actual Player.fire accepts uncapped-range negative shot transaction")
+	expect(game.player.fire(),"Actual Player.fire accepts uncapped-range negative shot transaction")
+	observation = game.aim_observation
+	contact = observation.get("contact",{})
+	expect(float(observation.get("range",0)) == 140.0 and observation.get("actor_id","").is_empty(),"Beyond-cap observation uses exactly 140m and does not resolve the 145m target")
+	expect(contact.is_empty() and victim.hp == victim_hp,"Actual query has no 145m sprite hit or damage past the 140m endpoint")
+	expect(game.state.ammo[1] == ammo_before-1 and game.shot_call_log == [1],"Beyond-cap negative still records the real shot/ammo transaction")
+	await dispose(game)
+
+func _controlled_rivet_worker(game, distance: float):
+	var actor = game.Enemy.new()
+	game.level.add_child(actor)
+	actor.configure(game,{"id":"controlled_rivet_"+str(int(distance)),"kind":"worker","cell":[.5,.5],"yaw":0})
+	actor.position = Vector3(0,0,-distance)
+	actor.active = true
+	actor.set_physics_process(false)
+	# Actual Sprite3D/alpha-query input in a purpose-built controlled atlas.
+	# This opaque test texture validates geometry, not production art quality.
+	var image := Image.create(1024,640,false,Image.FORMAT_RGBA8)
+	image.fill(Color.WHITE)
+	actor.sprite.texture = ImageTexture.create_from_image(image)
+	actor.sprite.hframes = 8
+	actor.sprite.vframes = 5
+	actor.sprite.frame = 0
+	game.enemies = [actor]
+	return actor
 
 func opaque_guardian_contact(actor) -> void:
 	# Fixture-only opacity, not replacement game art: a solid2m square centred

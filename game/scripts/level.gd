@@ -1,6 +1,7 @@
 extends Node3D
 
 const Layout = preload("res://scripts/level_data.gd")
+const HealingMachinery = preload("res://scripts/healing_machinery.gd")
 const Routes = preload("res://scripts/navigation_routes.gd")
 const Landmarks = preload("res://scripts/level_landmarks.gd")
 const GateArt = preload("res://scripts/gate_art.gd")
@@ -17,10 +18,13 @@ var game: Node
 var doors: Dictionary = {}
 var markers: Dictionary = {}
 var machine_lights: Dictionary = {}
+var healing_stations: Dictionary = {}
+var healing_machinery = HealingMachinery.new()
 var gate_presentations: Dictionary = {}
 var floor_bodies: Array[StaticBody3D] = []
 # Instances retain meshes, not their PackedScene; keep one owner per art ID.
 var _model_scenes: Dictionary = {}
+var _threat_stand_resources: Dictionary = {}
 
 func build(owner_game: Node, index: int) -> bool:
 	if not layout.load_level(index):
@@ -47,6 +51,11 @@ func build(owner_game: Node, index: int) -> bool:
 		if spec.id in game.state.removed:
 			continue
 		markers[spec.id] = _place_marker(spec)
+	# Fixed visible machinery/collision participates in nav AND later safe player/actor placement.
+	if not healing_machinery.build(self,game.state.earned_supply):
+		layout.load_error=healing_machinery.error
+		return false
+	_build_healing_practicals()
 	refresh_machine_lights()
 	_build_navigation()
 	return true
@@ -276,12 +285,13 @@ func _build_environment() -> void:
 	environment.background_mode = Environment.BG_COLOR
 	environment.background_color = Color(0.025,0.04,0.045)
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color(0.42,0.48,0.52)
-	environment.ambient_light_energy = 0.4
+	# No global fill: creature surfaces are revealed only by nearby sources.
+	environment.ambient_light_color = Color.BLACK
+	environment.ambient_light_energy = 0.0
 	environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR
 	environment.fog_enabled = true
 	environment.fog_mode = Environment.FOG_MODE_DEPTH
-	environment.fog_light_color = Color(0.045,0.07,0.085)
+	environment.fog_light_color = Color(0.008,0.009,0.012)
 	environment.fog_depth_begin = 16
 	environment.fog_depth_end = 68
 	environment.fog_density = 0.72
@@ -290,21 +300,101 @@ func _build_environment() -> void:
 	world.environment = environment
 	add_child(world)
 	for spec in layout.data.lights:
+		# Old broad atmosphere lamps were room fill, not visible practical sources.
+		if str(spec.get("id","")).begins_with("atmosphere_"): continue
 		var light = SpotLight3D.new() if spec.has("target") else OmniLight3D.new()
 		light.position = layout.world_position(spec.cell)+Vector3.UP*spec.height
 		light.light_color = Color(spec.color[0],spec.color[1],spec.color[2])
-		light.light_energy = spec.energy
+		# Keep each chapter's authored colors, positions and machine-state cues.
+		# Shadowed hero feeds retain reach; sconces become smaller pools of light.
+		var threat_practical: bool = spec.get("threat_stand",false)
+		var reach: float = 0.9 if spec.get("shadow",false) or threat_practical else 0.72
+		# Existing visible threat sconces reveal the body, not only its unlit label.
+		if threat_practical: light.light_color = light.light_color.lerp(Color(0.78,0.82,0.88),0.4)
+		light.light_energy = spec.energy*(1.8 if threat_practical else 1.0)
 		light.shadow_enabled = spec.get("shadow",false)
 		add_child(light)
 		if spec.has("id"): machine_lights[spec.id] = light
 		if light is SpotLight3D:
-			light.spot_range = spec.range
-			light.spot_angle = 48
-			light.look_at(layout.world_position(spec.target)+Vector3.UP*2.5)
+			light.spot_range = spec.range*reach
+			light.spot_angle = 66 if threat_practical else 48
+			var target_height: float = 2.5
+			if threat_practical:
+				target_height = 1.6
+				for actor in layout.data.enemies:
+					if actor.id != spec.threat_for: continue
+					if actor.kind in ["nursery_warden","choir_avatar"]: target_height = 3.4
+					elif actor.kind in ["brute","guardian","summoner"]: target_height = 2.1
+					break
+			light.look_at(layout.world_position(spec.target)+Vector3.UP*target_height)
 		else:
-			light.omni_range = spec.range
+			light.omni_range = spec.range*reach
 		if spec.has("fixture_yaw"):
+			if spec.get("threat_stand",false):
+				_build_threat_practical_stand(spec,layout.world_position(spec.cell))
 			_place_model("lumen_sconce",layout.world_position(spec.cell)+Vector3.UP*(spec.height-1.0),spec.fixture_yaw)
+
+func _build_healing_practicals() -> void:
+	# The visible ivory header is the utility lamp. Keep its steady local pool
+	# outside the exact imported hierarchy; stock, collision and inputs stay owned.
+	for id in healing_stations:
+		var station: Dictionary = healing_stations[id]
+		var header: MeshInstance3D = station.nodes.HeaderIvoryInlay
+		var source: Vector3 = header.to_global(header.mesh.get_aabb().get_center())
+		var practical := SpotLight3D.new()
+		practical.name = "HealingPractical_"+id
+		practical.position = to_local(source+station.root.global_basis*Vector3(0,-0.06,-0.12))
+		practical.rotation.x = -PI/2.0 # Downward; reveals the base and nearby approach.
+		practical.light_color = Color(0.9,0.72,0.48)
+		practical.light_energy = 1.35
+		practical.spot_range = 4.0
+		practical.spot_angle = 70
+		practical.shadow_enabled = false
+		practical.set_meta("source_station",id)
+		practical.set_meta("practical_source","HeaderIvoryInlay")
+		add_child(practical)
+		machine_lights["healing_practical_"+id] = practical
+
+func _build_threat_practical_stand(spec: Dictionary, floor_point: Vector3) -> void:
+	# Code-native, non-colliding brass/bone stand supports the existing sconce in open arenas.
+	if _threat_stand_resources.is_empty():
+		var foot = CylinderMesh.new()
+		foot.top_radius = 0.20
+		foot.bottom_radius = 0.24
+		foot.height = 0.12
+		foot.radial_segments = 8
+		var shaft = CylinderMesh.new()
+		shaft.top_radius = 0.065
+		shaft.bottom_radius = 0.09
+		shaft.height = 1.76
+		shaft.radial_segments = 8
+		var collar = CylinderMesh.new()
+		collar.top_radius = 0.18
+		collar.bottom_radius = 0.18
+		collar.height = 0.16
+		collar.radial_segments = 8
+		_threat_stand_resources = {
+			"foot_mesh":foot,"shaft_mesh":shaft,"collar_mesh":collar,
+			"foot_material":_material(Color(0.12,0.09,0.08)),
+			"shaft_material":_material(Color(0.20,0.15,0.12)),
+			"collar_material":_material(Color(0.34,0.22,0.14))
+		}
+	var stand = Node3D.new()
+	stand.name = "ThreatPracticalStand_"+str(spec.get("threat_for","unknown"))
+	stand.position = floor_point
+	add_child(stand)
+	_add_threat_stand_piece(stand,"Foot",_threat_stand_resources.foot_mesh,_threat_stand_resources.foot_material,0.06)
+	_add_threat_stand_piece(stand,"Shaft",_threat_stand_resources.shaft_mesh,_threat_stand_resources.shaft_material,0.94)
+	_add_threat_stand_piece(stand,"SconceCollar",_threat_stand_resources.collar_mesh,_threat_stand_resources.collar_material,1.88)
+
+func _add_threat_stand_piece(parent: Node3D, label: String, mesh: Mesh, material: Material, y: float) -> void:
+	var piece = MeshInstance3D.new()
+	piece.name = label
+	piece.mesh = mesh
+	piece.material_override = material
+	piece.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	piece.position.y = y
+	parent.add_child(piece)
 
 func apply_encounter_cue(spec: Dictionary, _restoring: bool) -> void:
 	# Steady feed light: no flicker, motion, audio or text to replay on restoration.

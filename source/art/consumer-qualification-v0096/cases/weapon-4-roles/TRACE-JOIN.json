@@ -1,0 +1,18 @@
+{
+  "validation": {
+    "status": "TRACE_CONTRACT_VALIDATION_ONLY_NOT_QUALIFICATION",
+    "case_id": "weapon-4-roles",
+    "frames": 6,
+    "events": 18,
+    "motion_rows": 0,
+    "source_dependency_count": 47,
+    "art_dependency_count": 262,
+    "native_imports": "UNPINNED_SOURCE_CONFIG_ONLY",
+    "qualification": false,
+    "execution_authenticated": false,
+    "source_manifest_sha256": "1d0d32deac3e044eb2141dad0e0620866c4a6488044226362acdd68b3a9eb7af"
+  },
+  "fresh_import_join_sha256": "705ae8accbe614baf25e3da4b18016574a6adb9893f43d9ac4799b0b40c2efa5",
+  "independent_pixels": "PENDING",
+  "qualification": false
+}

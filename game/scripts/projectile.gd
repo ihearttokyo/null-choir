@@ -11,11 +11,13 @@ var shooter: CollisionObject3D
 var velocity: Vector3
 var lifetime: float = 4.0
 var blast_damage: int = 0
+var visual_sequence: int = 0
 
-func configure(owner_game: Node, source: CollisionObject3D, origin: Vector3, destination: Vector3, marrow_damage: int = 0) -> void:
+func configure(owner_game: Node, source: CollisionObject3D, origin: Vector3, destination: Vector3, marrow_damage: int = 0, sequence: int = 0) -> void:
 	game = owner_game
 	shooter = source
 	blast_damage = marrow_damage
+	visual_sequence = sequence
 	global_position = origin
 	velocity = (destination-origin).normalized()*(MARROW_SPEED if blast_damage > 0 else SPEED)
 	if blast_damage > 0:
@@ -92,7 +94,9 @@ func _physics_process(delta: float) -> void:
 						# Legacy nonvisual callback acceptance is not HP-decrease proof.
 						accepted_contact = not original_victim.has_method("visual_hit_sprite")
 		if accepted_contact and _current_map() and game.level == original_map and game.player == original_player and game.playing and game.has_method("impact"):
-			game.impact(hit.position)
+			if blast_damage > 0 and shooter == original_player and game.has_method("weapon_impact"):
+				game.weapon_impact(hit.position,4,visual_sequence,"flesh" if is_instance_valid(hit.get("collider")) and hit.collider.has_method("take_damage") else "structure")
+			else: game.impact(hit.position)
 		return
 	global_position = end
 	lifetime = maxf(0,lifetime-delta)

@@ -16,20 +16,31 @@ spec.loader.exec_module(c)
 class CurrentConsumers(unittest.TestCase):
     def test_actual_exact_generation_and_honest_scope(self):
         v = c.qualify(ROOT)
-        self.assertEqual(v['native_observation']['frame_count'], 8)
-        self.assertEqual(v['historical_native_observation']['frame_count'], 48)
-        self.assertIs(v['scope']['old94_wall_rendering_reused_as_current95'], False)
-        self.assertEqual([r['chapter'] for r in v['native_observation']['chapters']], list(range(8)))
-        self.assertTrue(all(len(r['frames']) == 1 and r['strict_supervision'] == 'PASS'
-                            for r in v['native_observation']['chapters']))
-        for key in ['new_three_pose_pistol_ABA_qualification', 'new_body_fullmatrix_or_555_qualification',
-                    'new_gate_opening_or_fullview_qualification', 'new_art_grade_or_final_visual_acceptance',
-                    'earned_combat_or_performance_or_package_qualification']:
-            self.assertIs(v['scope'][key], False)
-        self.assertIn('idle only', v['scope']['pistol_pose_observed'])
-        self.assertIn('visual correction', v['scope']['occlusion_limits'])
+        if v['schema'] == 'null-choir-exact-current-art-consumers-v0096-v1':
+            jobs = v['native_observation']['jobs']
+            self.assertEqual({r['id'] for r in jobs}, set(c.EXPECTED96_JOBS))
+            self.assertEqual(len(jobs), 22)
+            self.assertTrue(all(r['frames'] for r in jobs))
+            for key in ['new_three_pose_pistol_ABA_qualification', 'new_body_fullmatrix_or_555_qualification',
+                        'new_gate_opening_or_fullview_qualification', 'new_art_grade_or_final_visual_acceptance',
+                        'earned_combat_or_performance_or_package_qualification']:
+                self.assertIs(v['scope'][key], False)
+        else:
+            self.assertEqual(v['native_observation']['frame_count'], 8)
+            self.assertEqual(v['historical_native_observation']['frame_count'], 48)
+            self.assertIs(v['scope']['old94_wall_rendering_reused_as_current95'], False)
+            self.assertEqual([r['chapter'] for r in v['native_observation']['chapters']], list(range(8)))
+            self.assertTrue(all(len(r['frames']) == 1 and r['strict_supervision'] == 'PASS'
+                                for r in v['native_observation']['chapters']))
+            for key in ['new_three_pose_pistol_ABA_qualification', 'new_body_fullmatrix_or_555_qualification',
+                        'new_gate_opening_or_fullview_qualification', 'new_art_grade_or_final_visual_acceptance',
+                        'earned_combat_or_performance_or_package_qualification']:
+                self.assertIs(v['scope'][key], False)
+            self.assertIn('idle only', v['scope']['pistol_pose_observed'])
+            self.assertIn('visual correction', v['scope']['occlusion_limits'])
 
     def test_foreign_current_consumer_asset_and_import_refuse(self):
+        c.qualify(ROOT) # A refused baseline cannot prove a foreign-source negative.
         read = c.read_resident
         for target in ['game/scripts/main.gd', 'game/scripts/hud.gd', 'game/scripts/enemy.gd',
                        'game/scripts/level.gd', 'game/scripts/player.gd',
@@ -59,6 +70,10 @@ class CurrentConsumers(unittest.TestCase):
 
     def test_historical_sources_are_explicit_snapshots_not_current_hash_swaps(self):
         v = c.qualify(ROOT)
+        if v['schema'] == 'null-choir-exact-current-art-consumers-v0096-v1':
+            # Current qualification already verified the immutable94 parent;
+            # historical-source semantics belong to that exact retained record.
+            v = c.pinned_receipt(ROOT, c.RECEIPT, c.RECEIPT_SHA)
         for relative, row in v['historical_sources'].items():
             old = c.historical(ROOT, relative, row['sha256'])
             self.assertEqual(hashlib.sha256(old).hexdigest(), row['sha256'])

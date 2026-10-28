@@ -1,0 +1,2127 @@
+{
+  "family": "canted-supported-orbit-core",
+  "units": "meters",
+  "front": "-Z",
+  "parts": [
+    {
+      "name": "FloorPlinth",
+      "role": "base",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.415,
+          0.0,
+          -0.25999999999999995
+        ],
+        "max": [
+          0.415,
+          0.09,
+          0.31
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_-0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          -0.25,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_-0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.342,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          -0.298,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_-0.19",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          -0.25657395614066075
+        ],
+        "max": [
+          0.39,
+          0.12,
+          -0.12342604385933924
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_-0.19",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          -0.20905255888325766
+        ],
+        "max": [
+          0.342,
+          0.14,
+          -0.17094744111674234
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorFlange_0.32_0.22",
+      "role": "base",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.09,
+          0.15342604385933922
+        ],
+        "max": [
+          0.39,
+          0.12,
+          0.2865739561406608
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "AnchorBolt_0.32_0.22",
+      "role": "fastener",
+      "tileIndex": 0,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.298,
+          0.12,
+          0.20094744111674234
+        ],
+        "max": [
+          0.342,
+          0.14,
+          0.23905255888325766
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          0.165,
+          0.08499999999999999
+        ],
+        "max": [
+          0.0,
+          0.23500000000000001,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.28500000000000003,
+          0.12,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.215,
+          0.2,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "FloorConduit_2",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          0.08499999999999999,
+          0.08499999999999999
+        ],
+        "max": [
+          -0.25,
+          0.155,
+          0.155
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_-0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3625,
+          0.14,
+          0.125
+        ],
+        "max": [
+          -0.2775,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_-0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.3375,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          -0.3025,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          0.18,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_-0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.39,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          -0.25,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearColumn_0.32",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.2775,
+          0.14,
+          0.125
+        ],
+        "max": [
+          0.3625,
+          1.2200000000000002,
+          0.235
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnInset_0.32",
+      "role": "structure",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.3025,
+          0.2700000000000001,
+          0.10600000000000001
+        ],
+        "max": [
+          0.3375,
+          1.09,
+          0.124
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_0.22",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          0.18,
+          0.035
+        ],
+        "max": [
+          0.39,
+          0.26,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ColumnBracket_0.32_1.14",
+      "role": "structure",
+      "tileIndex": 2,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          0.25,
+          1.0999999999999999,
+          0.035
+        ],
+        "max": [
+          0.39,
+          1.18,
+          0.225
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Header",
+      "role": "cap",
+      "tileIndex": 8,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.38,
+          1.16,
+          0.06999999999999999
+        ],
+        "max": [
+          0.38,
+          1.26,
+          0.22999999999999998
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "HeaderIvoryInlay",
+      "role": "structure",
+      "tileIndex": 1,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.25,
+          1.1875,
+          0.042499999999999996
+        ],
+        "max": [
+          0.25,
+          1.2425000000000002,
+          0.0675
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.035,
+          0.37,
+          -0.035
+        ],
+        "max": [
+          0.035,
+          0.38,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.0,
+          0.345,
+          -0.035
+        ],
+        "max": [
+          0.22,
+          0.41500000000000004,
+          0.035
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Outlet_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.185,
+          0.345,
+          -0.19
+        ],
+        "max": [
+          0.255,
+          0.41500000000000004,
+          0.0
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveHousing",
+      "role": "valve",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.1486707612778635,
+          0.305,
+          -0.27
+        ],
+        "max": [
+          0.2913292387221365,
+          0.455,
+          -0.12
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_00",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.29354600252416285,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.34238666487320324,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_01",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.25977207793864215,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.32366058945872395,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_02",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.21534125718815464,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2771587428118454,
+          0.5023866648732033,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_03",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.16284125718815468,
+          0.45354600252416283,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.22465874281184536,
+          0.5023866648732032,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_04",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.11633941054127608,
+          0.41977207793864213,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.18022792206135788,
+          0.4836605894587239,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_05",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.09761333512679678,
+          0.37534125718815464,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.14645399747583715,
+          0.43715874281184536,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_06",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.09761333512679678,
+          0.32284125718815465,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.14645399747583715,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_07",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.11633941054127606,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.18022792206135782,
+          0.3402279220613579,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_08",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.1628412571881546,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.22465874281184534,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_09",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2153412571881546,
+          0.2576133351267968,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.2771587428118454,
+          0.3064539974758372,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_10",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.25977207793864215,
+          0.2763394105412761,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.3236605894587239,
+          0.3402279220613578,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveWheel_11",
+      "role": "brace",
+      "tileIndex": 1,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2935460025241628,
+          0.3228412571881546,
+          -0.3105884572681199
+        ],
+        "max": [
+          0.34238666487320324,
+          0.38465874281184537,
+          -0.27941154273188007
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_0",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.22,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.31,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_1",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.208,
+          0.38,
+          -0.307
+        ],
+        "max": [
+          0.232,
+          0.47,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_2",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.13,
+          0.368,
+          -0.307
+        ],
+        "max": [
+          0.22,
+          0.392,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "ValveSpoke_3",
+      "role": "plumbing",
+      "tileIndex": 2,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          0.20799999999999996,
+          0.29000000000000004,
+          -0.307
+        ],
+        "max": [
+          0.232,
+          0.38,
+          -0.283
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "DialFace",
+      "role": "control",
+      "tileIndex": 10,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          0.176,
+          0.336,
+          -0.31
+        ],
+        "max": [
+          0.264,
+          0.424,
+          -0.3
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockNeedle",
+      "role": "stock_indicator",
+      "tileIndex": 0,
+      "triangles": 12,
+      "boundsLocal": {
+        "min": [
+          -0.004,
+          -0.0020000000000000018,
+          -0.0045
+        ],
+        "max": [
+          0.004,
+          0.046,
+          0.0045
+        ]
+      },
+      "translation": [
+        0.22,
+        0.38,
+        -0.317
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_00",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2970168210463668,
+          0.6161079389318785,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.3971624846206037,
+          0.7481590610882736,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_01",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.31487905744187805,
+          0.7399792393710504,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.3977970923938795,
+          0.8582891342104724,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_02",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.28896724762222115,
+          0.8474408525654187,
+          -0.034641016151377546
+        ],
+        "max": [
+          0.39363804452404016,
+          0.9740431664687477,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_03",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.24319617726165535,
+          0.9449889495288117,
+          -0.034641016151377546
+        ],
+        "max": [
+          0.3628198345939236,
+          1.0737132094929693,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_04",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.18176143727052702,
+          1.0260171656567374,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.30636630457522374,
+          1.1504655375658595,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_05",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.10967699523310245,
+          1.085992999843199,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.22729737766526606,
+          1.1980801684508071,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_06",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.031395012408946876,
+          1.1223214414131135,
+          -0.03464101615137754
+        ],
+        "max": [
+          0.13146174490549686,
+          1.2118200004299289,
+          0.03464101615137754
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_07",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.06676421873893396,
+          1.1121708236062635,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.044404941591990155,
+          1.2111046301628097,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_08",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.16747307813083886,
+          1.0660790629309413,
+          -0.03464101615137755
+        ],
+        "max": [
+          -0.03857848569038086,
+          1.1861366402715035,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_09",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.25536748154999467,
+          0.9958799231025686,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.12033429538739432,
+          1.1299248716099148,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_10",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.3253475501444133,
+          0.9057505507365489,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.19440098468740422,
+          1.046906872072327,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_11",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.37351840167767575,
+          0.80189370063149,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.254856887324847,
+          0.9426795941158019,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_12",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.3971624846206037,
+          0.6918409389117264,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.29701682104636673,
+          0.8238920610681215,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_13",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.3977970923938795,
+          0.5817108657895277,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.314879057441878,
+          0.7000207606289496,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_14",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.3936380445240401,
+          0.4659568335312524,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.28896724762222126,
+          0.5925591474345813,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_15",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.36281983459392375,
+          0.3662867905070306,
+          -0.03464101615137754
+        ],
+        "max": [
+          -0.24319617726165546,
+          0.49501105047118843,
+          0.03464101615137754
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_16",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.30636630457522385,
+          0.28953446243414027,
+          -0.034641016151377546
+        ],
+        "max": [
+          -0.18176143727052696,
+          0.4139828343432627,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_17",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.22729737766526603,
+          0.24191983154919283,
+          -0.03464101615137755
+        ],
+        "max": [
+          -0.10967699523310248,
+          0.3540070001568008,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_18",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.13146174490549692,
+          0.22817999957007118,
+          -0.03464101615137755
+        ],
+        "max": [
+          -0.03139501240894703,
+          0.3176785585868864,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_19",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          -0.044404941591990196,
+          0.22889536983719033,
+          -0.034641016151377546
+        ],
+        "max": [
+          0.06676421873893394,
+          0.32782917639373654,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_20",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.03857848569038087,
+          0.25386335972849644,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.1674730781308389,
+          0.3739209370690586,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_21",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.12033429538739429,
+          0.3100751283900851,
+          -0.034641016151377546
+        ],
+        "max": [
+          0.2553674815499945,
+          0.4441200768974312,
+          0.034641016151377546
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_22",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.19440098468740402,
+          0.3930931279276728,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.3253475501444132,
+          0.5342494492634507,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "SupportedOrbit_23",
+      "role": "brace",
+      "tileIndex": 2,
+      "triangles": 20,
+      "boundsLocal": {
+        "min": [
+          0.2548568873248469,
+          0.4973204058841977,
+          -0.03464101615137755
+        ],
+        "max": [
+          0.3735184016776758,
+          0.63810629936851,
+          0.03464101615137755
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "OrbitBearing0.39",
+      "role": "plumbing",
+      "tileIndex": 1,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.33657395614066077,
+          0.32,
+          -0.07
+        ],
+        "max": [
+          -0.20342604385933927,
+          0.46,
+          0.16
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "OrbitBearing1.05",
+      "role": "plumbing",
+      "tileIndex": 1,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          0.20342604385933927,
+          0.98,
+          -0.07
+        ],
+        "max": [
+          0.33657395614066077,
+          1.12,
+          0.16
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "StockVolume",
+      "role": "stock",
+      "tileIndex": 4,
+      "triangles": 92,
+      "boundsLocal": {
+        "min": [
+          -0.21460119433707878,
+          0,
+          -0.14470210596843255
+        ],
+        "max": [
+          0.21670210596843253,
+          1,
+          0.14470210596843255
+        ]
+      },
+      "translation": [
+        0,
+        0.44,
+        0
+      ],
+      "scale": [
+        1,
+        0.56,
+        1
+      ]
+    },
+    {
+      "name": "StockDrainConnection",
+      "role": "drain_connection",
+      "tileIndex": 2,
+      "triangles": 36,
+      "boundsLocal": {
+        "min": [
+          -0.12776429431300443,
+          0.33001427660976,
+          -0.05230810839623345
+        ],
+        "max": [
+          0.03776429431300441,
+          0.49498572339024,
+          0.05230810839623345
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_0",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          0.25,
+          0.122
+        ],
+        "max": [
+          0.028,
+          1.13,
+          0.178
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "RearFeed_1",
+      "role": "plumbing",
+      "tileIndex": 8,
+      "triangles": 28,
+      "boundsLocal": {
+        "min": [
+          -0.028,
+          1.1019999999999999,
+          0.0
+        ],
+        "max": [
+          0.028,
+          1.158,
+          0.15
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "TopCoupling",
+      "role": "cap",
+      "tileIndex": 2,
+      "triangles": 44,
+      "boundsLocal": {
+        "min": [
+          -0.06,
+          1.11,
+          -0.06
+        ],
+        "max": [
+          0.06,
+          1.18,
+          0.06
+        ]
+      },
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "useTarget": [
+    0.22,
+    0.38,
+    -0.33
+  ],
+  "stock": {
+    "bottomMeters": 0.44,
+    "fullHeightMeters": 0.56,
+    "localBottom": 0,
+    "localTop": 1,
+    "emptyState": {
+      "visible": false,
+      "scalePolicy": "preserve-full-authored-scale",
+      "scaleY": 0.56,
+      "renderedVolume": 0,
+      "geometricVolumeRemains": true
+    },
+    "partialFraction": 0.5,
+    "axis": "Y"
+  }
+}

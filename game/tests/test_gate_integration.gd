@@ -22,7 +22,11 @@ func _level(main: Node, index: int = 0) -> Node:
 	var level = LevelSource.new()
 	root.add_child(level)
 	main.level = level
-	check(level.build(main,index),"Actual current Level builds")
+	if not level.build(main,index):
+		check(false,"Actual current Level builds")
+		main.level = null
+		level.free()
+		return null
 	var routes = level.get_node_or_null("NavigationRoutes")
 	if routes != null:
 		routes.set_process(false)
@@ -89,6 +93,7 @@ func run() -> void:
 	main.state.new_campaign(1)
 	for step in range(map_index):main.state.complete_level()
 	var level = _level(main,map_index)
+	if level == null: main.free();quit(1);return
 	check(main.state.level_index==map_index and level.layout.data.id==chapter,"Actual selected map/state identity, not a default Intake proxy")
 	# Actual fresh-level entry boundary, not an Intake checkpoint pasted onto map1.
 	main.state.mark_checkpoint("entry",level.layout.world_position(level.layout.data.spawn))
@@ -159,6 +164,7 @@ func run() -> void:
 	check(not id in main.state.removed and main.state.keys.is_empty(),"Existing earlier checkpoint restores its original closed-gate resources")
 	await _retire_level(level)
 	level = _level(main,map_index)
+	if level == null: main.free();quit(1);return
 	check(level.doors.has(id) and level.doors[id].collision_layer==1,"Checkpoint-rebuilt actual Level restores the original closed blocker")
 	rig = _gate_rig(level,id)
 	check(rig is Node3D and level.gate_presentations[id].cover.visible and not rig.released_closure.visible,"Checkpoint-rebuilt production gate hydrates closed, not stale-open")
@@ -167,6 +173,7 @@ func run() -> void:
 	main.state = serialized
 	await _retire_level(level)
 	level = _level(main,map_index)
+	if level == null: main.free();quit(1);return
 	check(id in main.state.removed and not level.doors.has(id),"Loaded removed-ID creates no collision body or door registry entry")
 	rig = _gate_rig(level,id)
 	check(rig is Node3D and not level.gate_presentations[id].cover.visible and rig.released_closure.visible,"Loaded removed-ID reconstructs its final released art directly")

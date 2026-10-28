@@ -576,9 +576,29 @@ def check():
         file = ROOT / relative
         assert file not in owned_outputs, 'duplicate replacement actor ownership'
         owned_outputs.add(file)
+    # New96 outputs have a separate exact current-source/native-consumption
+    # owner. Never whitelist a directory or rewrite historical art catalogs.
+    compat = native_guard['consumer_compatibility'](ROOT)
+    current96 = compat['qualify96'](ROOT)
+    registry_path = 'game/data/healing_machinery_registry.json'
+    registry = json.loads(compat['record'](ROOT, current96['current_sources'][registry_path]))
+    families = registry['families']
+    assert len(families) == 8
+    new96 = {f'game/assets/art/healing_machinery/models/{family}.glb' for family in families}
+    new96.update({'game/assets/art/healing_machinery/raw/texture-atlas.png',
+                  'game/assets/art/regions/nursery-warden-node-v1.json'})
+    assert len(new96) == 10
+    for relative in new96:
+        records = current96['current_sources'] if relative.endswith('.json') else current96['current_art_resources']
+        row = records[relative]
+        assert row['path'] == relative
+        compat['record'](ROOT, row)  # Full bytes/hash, not mere path existence.
+        file = ROOT / relative
+        assert file not in owned_outputs, 'duplicate96 runtime output ownership'
+        owned_outputs.add(file)
     actual = {p for p in (ROOT / 'game/assets/art').rglob('*') if p.suffix in ('.png', '.glb', '.json', '.regions')}
     actual.add(ROOT / 'game/assets/art/hud/hud_kit.json')
-    assert actual == owned_outputs, 'manifest/output parity'
+    assert actual == owned_outputs, ('manifest/output parity', sorted(str(p.relative_to(ROOT)) for p in actual-owned_outputs), sorted(str(p.relative_to(ROOT)) for p in owned_outputs-actual))
     assert foundry_bytes < 4 * 1024 * 1024, 'two Foundry GLBs exceed their runtime budget'
     assert processional_bytes < 4 * 1024 * 1024, 'two Processional GLBs exceed their runtime budget'
     assert all(total < 8 * 1024 * 1024 for total in religious_bytes.values()), 'seven religious-aesthetic GLBs in a level exceed their runtime budget'

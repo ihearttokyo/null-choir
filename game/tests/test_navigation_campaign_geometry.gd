@@ -1,5 +1,6 @@
 extends SceneTree
 
+const StaticSelectedLevel = preload("res://tests/fixtures/static_selected_level.gd")
 # Cold native geometry and varied server queries, not Enemy AI or game FPS.
 const Level = preload("res://scripts/level.gd")
 const Enemy = preload("res://scripts/enemy.gd")
@@ -18,13 +19,15 @@ func run() -> void:
 	var host := Host.new()
 	root.add_child(host)
 	for index in range(8):
-		host.state.new_campaign(1)
-		host.state.level_index = index
+		host.state = StaticSelectedLevel.fresh_selected(index,1)
 		var level = Level.new()
 		host.level = level
 		host.add_child(level)
 		var construction_started := Time.get_ticks_usec()
-		level.build(host,index)
+		if not level.build(host,index):
+			expect(false,"Fresh selected-level navigation fixture builds")
+			quit(1)
+			return
 		var routes = level.get_node("NavigationRoutes")
 		var profiles := {}
 		var records: Dictionary = {}

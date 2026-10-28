@@ -531,220 +531,7 @@
     }
   ],
   "mission": "STABILIZE BOTH GARDENS / RETURN TO THE DELIVERY GALLERY",
-  "pickups": [
-    {
-      "id": "nursery_entry_rivets",
-      "kind": "ammo",
-      "cell": [
-        3.5,
-        33.5
-      ],
-      "amount": 60,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_entry_scattergun",
-      "kind": "weapon",
-      "cell": [
-        4.5,
-        26.5
-      ],
-      "amount": 16,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_entry_health",
-      "kind": "health",
-      "cell": [
-        3.5,
-        32.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "nursery_entry_armor",
-      "kind": "armor",
-      "cell": [
-        5.5,
-        32.5
-      ],
-      "amount": 40
-    },
-    {
-      "id": "nursery_repeater",
-      "kind": "weapon",
-      "cell": [
-        14.5,
-        21.5
-      ],
-      "amount": 60,
-      "weapon": 3
-    },
-    {
-      "id": "nursery_first_approach_rivets",
-      "kind": "ammo",
-      "cell": [
-        4.5,
-        18.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_first_approach_shells",
-      "kind": "ammo",
-      "cell": [
-        5.5,
-        18.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_first_approach_health",
-      "kind": "health",
-      "cell": [
-        3.5,
-        18.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "nursery_first_return_rivets",
-      "kind": "ammo",
-      "cell": [
-        14.5,
-        10.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_first_return_shells",
-      "kind": "ammo",
-      "cell": [
-        13.5,
-        10.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_first_armor",
-      "kind": "armor",
-      "cell": [
-        9.5,
-        13.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "nursery_second_approach_rivets",
-      "kind": "ammo",
-      "cell": [
-        17.5,
-        23.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_second_approach_shells",
-      "kind": "ammo",
-      "cell": [
-        18.5,
-        23.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_second_approach_health",
-      "kind": "health",
-      "cell": [
-        16.5,
-        23.5
-      ],
-      "amount": 30
-    },
-    {
-      "id": "nursery_second_return_rivets",
-      "kind": "ammo",
-      "cell": [
-        12.5,
-        29.5
-      ],
-      "amount": 45,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_second_return_shells",
-      "kind": "ammo",
-      "cell": [
-        13.5,
-        29.5
-      ],
-      "amount": 8,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_second_armor",
-      "kind": "armor",
-      "cell": [
-        22.5,
-        32.5
-      ],
-      "amount": 50
-    },
-    {
-      "id": "nursery_finale_rivets",
-      "kind": "ammo",
-      "cell": [
-        25.5,
-        20.5
-      ],
-      "amount": 60,
-      "weapon": 1
-    },
-    {
-      "id": "nursery_finale_shells",
-      "kind": "ammo",
-      "cell": [
-        26.5,
-        19.5
-      ],
-      "amount": 12,
-      "weapon": 2
-    },
-    {
-      "id": "nursery_finale_health",
-      "kind": "health",
-      "cell": [
-        24.5,
-        19.5
-      ],
-      "amount": 40
-    },
-    {
-      "id": "nursery_finale_armor",
-      "kind": "armor",
-      "cell": [
-        25.5,
-        21.5
-      ],
-      "amount": 60
-    },
-    {
-      "id": "nursery_repeater_supply",
-      "kind": "ammo",
-      "cell": [
-        24.5,
-        20.5
-      ],
-      "amount": 60,
-      "weapon": 3
-    }
-  ],
+  "pickups": [],
   "enemies": [
     {
       "id": "nursery_enemy_00",
@@ -1798,18 +1585,26 @@
     },
     {
       "cell": [
-        10.85,
-        12.5
+        9.2,
+        12.0196
       ],
-      "height": 3.1,
-      "fixture_yaw": 270,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.82,
-        0.42,
-        0.16
+        0.95,
+        0.4,
+        0.2
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "nursery_enemy_04",
+      "threat_role": "seal_blood",
+      "target": [
+        9.5,
+        11.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -1950,18 +1745,26 @@
     },
     {
       "cell": [
-        20.15,
-        23.5
+        22.0757,
+        26.9243
       ],
-      "height": 3.1,
-      "fixture_yaw": 90,
+      "height": 2.9,
+      "fixture_yaw": 0,
       "color": [
-        0.82,
-        0.42,
-        0.16
+        0.34,
+        0.62,
+        0.78
       ],
-      "energy": 3.8,
-      "range": 15
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "nursery_enemy_12",
+      "threat_role": "seal_ivory",
+      "target": [
+        22.5,
+        26.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
@@ -2041,18 +1844,26 @@
     },
     {
       "cell": [
-        30.5,
-        4.15
+        29.9804,
+        9.2
       ],
-      "height": 3.1,
-      "fixture_yaw": 0,
+      "height": 2.9,
+      "fixture_yaw": 270,
       "color": [
-        0.3,
-        0.65,
-        0.85
+        0.88,
+        0.48,
+        0.24
       ],
-      "energy": 4.2,
-      "range": 20
+      "energy": 1.45,
+      "range": 8.0,
+      "threat_for": "nursery_warden",
+      "threat_role": "exit_warden",
+      "target": [
+        30.5,
+        9.5
+      ],
+      "threat_stand": true,
+      "shadow": false
     },
     {
       "cell": [
