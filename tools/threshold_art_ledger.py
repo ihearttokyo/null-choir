@@ -274,7 +274,7 @@ def _check_glb(data: bytes, *, label: str) -> dict:
 
 CURRENT_MAIN_SHA = "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1"
 CURRENT_LEVEL_SHA = "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871"
-CURRENT_CONSUMER_HELPER_SHA = "9ba815bc1ef886536641147958521eb969dee2f26d137e6ea13d557c0d5d8e1e"
+CURRENT_CONSUMER_HELPER_SHA = "25a8648955c1406180e4e753ae96a5c1a2bd404ec71a5af48e8fe48b9b5ed5ad"
 def _current_consumer_compatibility(root):
     import runpy
     path = safe_rel(root, "tools/art_consumer_compatibility.py", label="current consumer helper", roots={"tools"})
@@ -293,7 +293,7 @@ def _qualified96_generation(root):
     value = compat['qualify'](root)
     if (not isinstance(value, dict)
             or value.get('schema') != 'null-choir-exact-current-art-consumers-v0096-v1'
-            or value.get('status') != 'ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED'):
+            or not compat['qualified96_generation96'](value)):
         fail("Full exact actual96 qualification required before historical threshold reuse")
     return compat, value
 

@@ -1550,8 +1550,73 @@ func _verify_registered_weapon(weapon: int, checks: Dictionary, key: String) -> 
 	for name in owned_checks: checks[key+"_"+name]=owned_checks[name]
 	return checks[key+"_pickup"] and checks[key+"_finite_ammo_conservation"] and checks[key+"_typed_snapshot"] and ResourceLoader.exists("res://assets/art/weapons/"+Player.WEAPONS[weapon].asset+".png")
 
+func _export_wall_architecture_checks() -> Dictionary:
+	# Source-profile presence/ownership check, not a new wall-art or physics grade.
+	# Existing wall-native contracts own detailed winding/contact qualification.
+	var checks := {"wall_family":false,"wall_chunks":false,"wall_draw_geometry":false,"wall_collision":false}
+	var walls = Level.WallArchitecture
+	var layout = level.layout
+	var chapter: String = layout.data.id
+	if not walls.FAMILIES.has(chapter): return checks
+	checks.wall_family = true
+	var size: float = layout.data.cell_size
+	var closure_top: float = walls._highest_support(layout)+3.0
+	var expected: Dictionary = {}
+	for cell in layout.tiles:
+		for direction in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+			if layout.is_walkable(cell+direction): continue
+			var point := Vector2(cell)+Vector2(0.5,0.5)+Vector2(direction)*0.5
+			var edge := Vector2(-direction.y,direction.x)*0.5
+			var a: float = layout.height_at(point-edge)
+			var b: float = layout.height_at(point+edge)
+			var bottom: float = minf(a,b)
+			var height: float = maxf(layout.roof_height(cell)+absf(a-b),closure_top-bottom)
+			var key := Vector2i(floori(cell.x/float(walls.CHUNK_CELLS)),floori(cell.y/float(walls.CHUNK_CELLS)))
+			var name: String = "WallArchitecture_"+str(key.x)+"_"+str(key.y)
+			if not expected.has(name): expected[name] = {"counts":[0,0,0],"bounds":[null,null,null]}
+			var chunk: Dictionary = expected[name]
+			for part in walls.profile(chapter,size,height,absi(cell.x*17+cell.y*31+direction.x+direction.y)):
+				var material: int = int(part[6])
+				chunk.counts[material] += 36
+				var vertices: PackedVector3Array = walls._vertices(part,Vector3(point.x*size,bottom,point.y*size),Vector3(-direction.y,0,direction.x),Vector3(direction.x,0,direction.y))
+				for vertex in vertices:
+					chunk.bounds[material] = AABB(vertex,Vector3.ZERO) if chunk.bounds[material] == null else chunk.bounds[material].expand(vertex)
+	var actual: Dictionary = {}
+	for node in level.get_children():
+		if str(node.name).begins_with("WallArchitecture_"): actual[str(node.name)] = node
+	checks.wall_chunks = not expected.is_empty() and actual.size()==expected.size() and expected.keys().all(func(name): return actual.has(name))
+	if not checks.wall_chunks: return checks
+	var draw_valid: bool = true
+	var collision_valid: bool = true
+	for name in expected:
+		var root = actual[name]
+		var chunk: Dictionary = expected[name]
+		if not root is StaticBody3D or root.get_parent()!=level or root.transform!=Transform3D.IDENTITY:
+			draw_valid=false;collision_valid=false;continue
+		var meshes: Array = root.get_children().filter(func(node): return node is MeshInstance3D)
+		var colliders: Array = root.get_children().filter(func(node): return node is CollisionShape3D)
+		if not root.is_visible_in_tree() or meshes.size()!=3 or root.get_child_count()!=4: draw_valid=false
+		if meshes.size()==3:
+			for index in range(3):
+				var mesh: MeshInstance3D = meshes[index]
+				if not mesh.is_visible_in_tree() or mesh.transform!=Transform3D.IDENTITY or not mesh.mesh is ArrayMesh or mesh.mesh.get_surface_count()!=1 or not mesh.material_override is StandardMaterial3D:
+					draw_valid=false;continue
+				var arrays: Array = mesh.mesh.surface_get_arrays(0)
+				var bounds: AABB = mesh.mesh.get_aabb()
+				var wanted: AABB = chunk.bounds[index]
+				if arrays[Mesh.ARRAY_VERTEX].size()!=chunk.counts[index] or arrays[Mesh.ARRAY_NORMAL].size()!=chunk.counts[index] or arrays[Mesh.ARRAY_TEX_UV].size()!=chunk.counts[index] or not bounds.position.is_equal_approx(wanted.position) or not bounds.size.is_equal_approx(wanted.size) or mesh.material_override.cull_mode!=BaseMaterial3D.CULL_BACK or mesh.material_override.transparency!=BaseMaterial3D.TRANSPARENCY_DISABLED: draw_valid=false
+		var expected_faces: int = int(chunk.counts[0])+int(chunk.counts[1])+int(chunk.counts[2])
+		if root.collision_layer!=1 or colliders.size()!=1:
+			collision_valid=false
+		else:
+			var collider: CollisionShape3D = colliders[0]
+			if collider.disabled or collider.transform!=Transform3D.IDENTITY or not collider.shape is ConcavePolygonShape3D or not collider.shape.backface_collision or collider.shape.get_faces().size()!=expected_faces: collision_valid=false
+	checks.wall_draw_geometry=draw_valid
+	checks.wall_collision=collision_valid
+	return checks
+
 func _export_art_checks() -> Dictionary:
-	var expected_art = {"ribbed_wall":1,"conduit":1}
+	var expected_art = {}
 	for art in Level.PURPOSE_ART.values()+Level.AMMO_ART+["marker_ivorykey"]: expected_art[art] = 0
 	for spec in level.layout.data.heroes: expected_art[spec.id] = expected_art.get(spec.id,0)+1
 	for spec in level.layout.data.scenery: expected_art[spec.art] = expected_art.get(spec.art,0)+1
@@ -1569,7 +1634,17 @@ func _export_art_checks() -> Dictionary:
 			var visual_only = not nodes.any(func(part): return part is CollisionObject3D or part is CollisionShape3D or part is CollisionPolygon3D)
 			if visual_only and not meshes.is_empty() and meshes.all(func(part): return part.mesh is ArrayMesh and part.mesh.get_surface_count() > 0):
 				marker_models[node.get_instance_id()] = art
-	var checks = {}
+	var checks = _export_wall_architecture_checks()
+	# Retired boundary kit remains a real loadable asset, not a required world placement.
+	for legacy in ["ribbed_wall","conduit"]:
+		var resource = load("res://assets/art/world/"+legacy+".glb")
+		var valid: bool = resource is PackedScene
+		if valid:
+			var instance = resource.instantiate()
+			var legacy_meshes: Array = ([instance]+instance.find_children("*","MeshInstance3D",true,false)).filter(func(node): return node is MeshInstance3D)
+			valid = not legacy_meshes.is_empty() and legacy_meshes.any(func(node): return node.mesh != null and node.mesh.get_surface_count()>0)
+			instance.free()
+		checks["retained_asset_"+legacy] = valid
 	var marker_ids = []
 	var remaining = 0
 	for spec in level.layout.data.pickups+level.layout.data.interactions:
@@ -1754,11 +1829,14 @@ func _verify_export() -> void:
 	await get_tree().create_timer(0.1).timeout
 	await get_tree().process_frame
 	await get_tree().process_frame
+	var export_failed: bool = false
 	for check in checks:
 		if not checks[check]:
+			export_failed = true
 			push_error("Export workflow failed: "+check)
-			get_tree().quit(1)
-			return
+	if export_failed:
+		get_tree().quit(1)
+		return
 	print("PASS packaged title Ogg resource/transport/decoded PCM; audible-loop approval pending")
 	print("PASS packaged title, start, fire, pause, checkpoint restoration, Foundry and Processional scene/art/recorded PCM, scattergun/caster flight, retained MIDI sources and notices")
 	print("PASS packaged full8 scenes/art/recorded PCM: intake,foundry,processional,reliquary,nursery,ossuary,inversion,heart")

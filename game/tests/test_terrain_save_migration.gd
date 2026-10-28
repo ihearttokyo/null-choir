@@ -130,14 +130,17 @@ func run() -> void:
 							for snapshot in [bad,bad.checkpoint,bad.level_start]: snapshot.floor_revision = 0
 					var untouched = var_to_bytes(bad)
 					expect(not state.from_dict(bad) and state.to_dict() == migrated and var_to_bytes(bad) == untouched,"Atomic live/input rejection "+envelope+" "+defect)
+			# Disk JSON preserves the exact earned book values, not native INT tags.
+			# Every OTHER codec field retains its existing strict native comparison.
+			var disk_expected = expected_disk_codec(migrated)
 			var save_path = "user://migration.json"
 			var save_error = state.save_progress(save_path)
 			var loaded = again.load_progress(save_path)
-			if save_error != OK or not loaded or again.to_dict() != migrated:
+			if save_error != OK or not loaded or again.to_dict() != disk_expected:
 				print("DISK_TRACE save_error=",save_error," loaded=",loaded)
-				for field in migrated:
-					if again.to_dict().get(field) != migrated[field]: print("DISK_DIFF ",field," expected=",migrated[field]," actual=",again.to_dict().get(field))
-			expect(save_error == OK and loaded and again.to_dict() == migrated,"Actual v2 atomic disk codec is idempotent")
+				for field in disk_expected:
+					if again.to_dict().get(field) != disk_expected[field]: print("DISK_DIFF ",field," expected=",disk_expected[field]," actual=",again.to_dict().get(field))
+			expect(save_error == OK and loaded and again.to_dict() == disk_expected,"Actual v2 atomic disk codec is idempotent")
 			for values in [[0.0,0.0,0.0],[-64.0,-100.0,-64.0]]:
 				var recoverable = document.duplicate(true)
 				for snapshot in [recoverable,recoverable.checkpoint,recoverable.level_start]: snapshot.position = values.duplicate()
@@ -195,6 +198,17 @@ func expected_legacy_codec(document: Dictionary, index: int) -> Dictionary:
 		snapshot["earned_supply"] = LEGACY_CODEC_EARNED[index].duplicate(true)
 		snapshot["seal_drops"] = []
 		snapshot["legacy_exit_wardens"] = [LEGACY_CODEC_EXIT_WARDENS[index]] if LEGACY_CODEC_EXIT_WARDENS.has(index) else []
+	return expected
+
+func expected_disk_codec(native_image: Dictionary) -> Dictionary:
+	# Campaign.save_progress uses this exact full-precision JSON codec. Unlike
+	# native resources, earned_supply intentionally retains parsed JSON numbers
+	# on load (Campaign._apply_resources); Dictionary equality is type-strict.
+	# Adapt ONLY the three earned books, never normalize arbitrary resources,
+	# omit fields, compare a subset, or admit an epsilon/value mutation.
+	var expected = native_image.duplicate(true)
+	for snapshot in [expected,expected.checkpoint,expected.level_start]:
+		snapshot.earned_supply = JSON.parse_string(JSON.stringify(snapshot.earned_supply,"",true,true))
 	return expected
 
 func canonical_codec_equal(actual: Dictionary, expected: Dictionary) -> bool:

@@ -8,6 +8,7 @@ import struct
 import sys
 import tempfile
 import unittest
+import runpy
 from unittest.mock import patch
 
 TOOL = Path(__file__).resolve().parents[1] / "tools" / "threshold_art_ledger.py"
@@ -436,6 +437,16 @@ class Qualified96ThresholdSourceTests(unittest.TestCase):
         cls.repository = TOOL.parents[1]
         cls.value = json.loads((cls.repository/'source/art/consumer-qualification-v0096/current-consumers.json').read_text())
         cls.parent = json.loads((cls.repository/'source/art/consumer-qualification-v0094/current-consumers.json').read_text())
+        cls.consumer = runpy.run_path(str(cls.repository/'tools/art_consumer_compatibility.py'))
+        pin = cls.consumer['MAIN96_VERIFIER_DERIVATION']
+        # UNIT qualifier result only; real full22 joins run in consumer tests.
+        observed = cls.value['current_sources']
+        cls.value = {**cls.value, 'status':'ACTUAL96_GAMEPLAY_WITH_VERIFIER_ONLY_SOURCE_DERIVATION',
+            'observed_current_sources':observed,
+            'current_sources':{**observed, 'game/scripts/main.gd':pin['derived_main']},
+            'verifier_source_derivation':{**pin, 'status':'VERIFIER_ONLY_SOURCE_DERIVATION_NOT_NEW_OBSERVATION',
+                'outside_verifier_bytes_exact':True,'new_frames_claimed':False,
+                'new_native_import_claimed':False,'new_gameplay_observation_claimed':False}}
 
     def compat(self, value=None, events=None):
         value = dict(self.value, historical_sources=self.parent['historical_sources']) if value is None else value
@@ -447,7 +458,8 @@ class Qualified96ThresholdSourceTests(unittest.TestCase):
             if digest(data) != row['sha256'] or len(data) != row['bytes']:
                 raise ValueError('Resident/receipt source mismatch')
             return data
-        return {'qualify':qualify,'record':record}
+        return {'qualify':qualify,'record':record,
+                'qualified96_generation96':self.consumer['qualified96_generation96']}
 
     def test_Main_Level_exact_current_before_exact_history(self):
         for relative in [validator.MAIN_SOURCE,'game/scripts/level.gd']:

@@ -1,0 +1,6 @@
+# Reviewed PyPI Pillow12.2.0 binaries only; Ubuntu x86_64 CPython3.12/3.14.
+# https://pypi.org/pypi/pillow/12.2.0/json
+# cp312-cp312 / cp314-cp314; manylinux_2_27_x86_64.manylinux_2_28_x86_64.
+Pillow==12.2.0 \
+    --hash=sha256:62f5409336adb0663b7caa0da5c7d9e7bdbaae9ce761d34669420c2a801b2780 \
+    --hash=sha256:4bfd07bc812fbd20395212969e41931001fd59eb55a60658b0e5710872e95286

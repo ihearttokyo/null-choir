@@ -664,6 +664,11 @@ def validate_capture_context_join96(root, receipt, base):
     def observed_record(evidence_root, row):
         return _observe96(evidence_root, row['path'], portable_record(evidence_root, row))
     portable.record = observed_record
+    if getattr(base, '_main_derivation96', None) is not None:
+        original_load_producer = portable.load_producer
+        def captured_load_producer(*args, **kwargs):
+            return _project_captured_main96(original_load_producer(*args, **kwargs), root, base)
+        portable.load_producer = captured_load_producer
     for job in index['jobs']:
         _observe_png_directory96(root, 'source/art/consumer-qualification-v0096/cases/' + job['id'])
     result = portable.validate_bundle(root, root, index, validate_fresh_import_join96,
@@ -694,6 +699,98 @@ def validate_capture_context_join96(root, receipt, base):
 
 
 CAPTURE96_SOURCE_DEPENDENCIES = {'producer': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/later22_producer.py', 'bytes': 70308, 'sha256': '571839218a1bd6e6e223ec54f6403bcd51cb25692cceb056a0373a7ecb72d61a'}, 'fixture': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/qualify_v0096_gameplay_context.gd', 'bytes': 86098, 'sha256': 'c7b4fae75e27a35eab50b671241f820e926e615917282d25f53fd713cecd32d3'}, 'case_schema': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/CASE-SCHEMA.json', 'bytes': 35259, 'sha256': 'c92c312298fee77e7f662a5072b2163cc0a44cb6ac00d381d72b1401b353a539'}, 'source_manifest': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/CURRENT-SOURCE-PINS.json', 'bytes': 72406, 'sha256': '1d0d32deac3e044eb2141dad0e0620866c4a6488044226362acdd68b3a9eb7af'}, 'station_view_map': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/STATION-VIEW-MAP.json', 'bytes': 11226, 'sha256': 'ec1f9260b933928cf587b7b4f1440f34b72a5b8cd8ca2d9af04c78ee608aea72'}, 'original22_contract': {'path': 'work/earned-arsenal-prep/consumer96-producer-v1/CAPTURE-CASES22-REFERENCE.json', 'bytes': 14365, 'sha256': '136325f20b9c0b8081e596728252acf8acdc2fb8d5198aa10c1dbafdec771617'}, 'source_scout': {'path': 'work/earned-arsenal-prep/authored-rivet70-source-scout/PROPOSED-ENCOUNTER.json', 'bytes': 8966, 'sha256': 'bc9db94dc5519af61bba231a652028f8998c6d484e9a26cd317b0618a0c8dd5d'}, 'source_scout_report': {'path': 'work/earned-arsenal-prep/authored-rivet70-source-scout/REPORT.md', 'bytes': 8274, 'sha256': 'bd8a15f3a446b6b5f144ce140763ab8d77cbc12c2ebd7bdaa6fcd6f43b3d3f20'}, 'source_scout_near_mid': {'path': 'work/earned-arsenal-prep/authored-rivet70-source-scout/near-mid-same-spine.json', 'bytes': 9104, 'sha256': 'cf891524d4bd316888d78e2e0c737e8ce104d2b87b407d56e4579b48dc2feb58'}, 'source_scout_review': {'path': 'work/preview07-local-control/reviews/cohort-ledger-review/authored-rivet70-source-review.md', 'bytes': 5428, 'sha256': '1a76218f2fe085a8018c26e0f43374ecf64790d52e7fb9106d6d8ad7b047e723'}}
+
+
+# Explicit test-only source derivation; raw capture receipts/manifests stay immutable.
+MAIN96_VERIFIER_DERIVATION = {'schema': 'null-choir-v096-verifier-only-main-derivation-v1', 'observed_main': {'path': 'game/scripts/main.gd', 'bytes': 95728, 'sha256': 'e34dffae3eb0b73c3a3a72d11a81d4bbb402266603007a2e281bc1b3ef081f9b'}, 'observed_snapshot': {'path': 'source/art/consumer-qualification-v0096/provenance/main-v96-capture.gd', 'bytes': 95728, 'sha256': 'e34dffae3eb0b73c3a3a72d11a81d4bbb402266603007a2e281bc1b3ef081f9b'}, 'derived_main': {'path': 'game/scripts/main.gd', 'bytes': 100753, 'sha256': '89a4fe9dbda378bae34573176c684faffdcf7b572e5793a849e5a720f91cf380'}, 'changed_functions': {'_export_art_checks': {'old_sha256': '30140f5a374d0d8ef27e28a39204a2993e08e8f7a7eedad4c1e3cb73ef031900', 'new_sha256': 'caa3fe75990b244ca621a9f3e3dc21fe59157ba38252c0c9724d694c7a36c181'}, '_verify_export': {'old_sha256': 'e481aec2c782ec3a8a4f6befddeda63b043313f53587a66e667472f86b26be37', 'new_sha256': 'c79ff47fa6dc4a68b8b42f3fe650dd4e0fdc1ce04dc78ae32296218acc5aafde'}}, 'added_functions': {'_export_wall_architecture_checks': 'ce627e9c6501b93a7ca445803ecf9f426258af83180fdd64980809e92e38e3dc'}}
+
+
+def _verifier_function_span96(raw, name):
+    pattern = rb'(?ms)^func ' + re.escape(name.encode()) + rb'\([^\n]*\n.*?(?=^func |\Z)'
+    matches = list(re.finditer(pattern, raw))
+    _require(len(matches) == 1, 'Exactly one approved verifier function required: ' + name)
+    match = matches[0]
+    # Refuse a new top-level declaration hidden between function declarations.
+    _require(all(not line.strip() or line.startswith((b'\t', b'#'))
+                 for line in match.group().splitlines()[1:]),
+             'Unapproved top-level payload in verifier function span')
+    return match
+
+
+def verifier_main_derivation96(root, observed_row, base):
+    """Exact finite source equivalence, never a new frame/native observation."""
+    pin = MAIN96_VERIFIER_DERIVATION
+    _require(observed_row == pin['observed_main'], 'Observed Main derivation record drift')
+    resident = base.read_resident(root, observed_row['path'])
+    if len(resident) == observed_row['bytes'] and sha(resident) == observed_row['sha256']:
+        return None
+    target = pin['derived_main']
+    _require(len(resident) == target['bytes'] and sha(resident) == target['sha256'],
+             'Exact approved verifier-only resident Main drift')
+    old = base.record(root, pin['observed_snapshot'])
+    _require(len(old) == observed_row['bytes'] and sha(old) == observed_row['sha256'],
+             'Captured full Main snapshot drift')
+    replacements = []
+    for name, hashes in pin['changed_functions'].items():
+        before = _verifier_function_span96(old, name)
+        after = _verifier_function_span96(resident, name)
+        _require(sha(before.group()) == hashes['old_sha256']
+                 and sha(after.group()) == hashes['new_sha256'],
+                 'Explicit old/new verifier function pin drift')
+        replacements.append((after.start(), after.end(), before.group()))
+    for name, digest in pin['added_functions'].items():
+        _require(not re.search(rb'(?m)^func ' + re.escape(name.encode()) + rb'\(', old),
+                 'Added verifier function already present in captured Main')
+        after = _verifier_function_span96(resident, name)
+        _require(sha(after.group()) == digest, 'Explicit added verifier function pin drift')
+        replacements.append((after.start(), after.end(), b''))
+    inverse = resident
+    for begin, end, replacement in sorted(replacements, reverse=True):
+        inverse = inverse[:begin] + replacement + inverse[end:]
+    _require(inverse == old, 'Bytes outside approved verifier functions changed')
+    return {**pin, 'status': 'VERIFIER_ONLY_SOURCE_DERIVATION_NOT_NEW_OBSERVATION',
+            'outside_verifier_bytes_exact': True, 'new_frames_claimed': False,
+            'new_native_import_claimed': False, 'new_gameplay_observation_claimed': False}
+
+
+def _verifier_snapshot_path96(root, derivation):
+    return Path(root) / derivation['observed_snapshot']['path']
+
+
+def _observed_main_reader96(root, derivation, base):
+    """Historical read view ONLY after exact derived resident source proof."""
+    view = type('_ObservedMainReader96', (), {})()
+    for name in ('read_resident', 'record', 'pinned_receipt', 'sha', 'function'):
+        setattr(view, name, getattr(base, name))
+    def captured_record(evidence_root, row):
+        if row == derivation['observed_main']:
+            _require(verifier_main_derivation96(evidence_root, row, base) == derivation,
+                     'Verifier derivation changed during historical source read')
+            return base.record(evidence_root, derivation['observed_snapshot'])
+        return base.record(evidence_root, row)
+    view.record = captured_record
+    view._main_derivation96 = derivation
+    view._actual_reader96 = base
+    return view
+
+
+def _project_captured_main96(producer, root, base):
+    """One private producer source path projection, never patch its validators."""
+    derivation = getattr(base, '_main_derivation96', None)
+    if derivation is None:
+        return producer
+    regular = producer._regular
+    def projected(project, relative):
+        current_path = regular(project, relative) # Preserve original resident/symlink gates.
+        if relative != derivation['observed_main']['path']:
+            return current_path
+        _require(Path(project).resolve() == Path(root).resolve(), 'Main projection root drift')
+        _require(verifier_main_derivation96(root, derivation['observed_main'],
+                                          base._actual_reader96) == derivation,
+                 'Main projection lacks exact current verifier derivation')
+        return _verifier_snapshot_path96(root, derivation)
+    producer._regular = projected
+    return producer
 
 
 def _qualify96_uncached(root, base=None):
@@ -741,6 +838,9 @@ def _qualify96_uncached(root, base=None):
     current = v.get('current_sources')
     _require(type(current) is dict and REQUIRED96_SOURCES.issubset(current),
              'Incomplete v096 code/render/ballistics/local-light/map/UI dependency set')
+    main_derivation = verifier_main_derivation96(root, current['game/scripts/main.gd'], base)
+    if main_derivation is not None:
+        base = _observed_main_reader96(root, main_derivation, base)
     for relative, row in current.items():
         _require(relative == row.get('path'), 'Current source path association mismatch')
         base.record(root, row)
@@ -886,6 +986,11 @@ def _qualify96_uncached(root, base=None):
              and public_join.get('native_import_status') == v['native_import_status'],
              'Complete pinned actual public source/native/context join required')
     # Preserve historical() callers without promoting their bytes or images.
+    if main_derivation is not None:
+        v = {**v, 'status': 'ACTUAL96_GAMEPLAY_WITH_VERIFIER_ONLY_SOURCE_DERIVATION',
+             'observed_current_sources': current,
+             'current_sources': {**current, 'game/scripts/main.gd': main_derivation['derived_main']},
+             'verifier_source_derivation': main_derivation}
     return {**v, 'historical_sources': historical_sources,
             'historical_native_observation': parent95['native_observation'],
             'v0094_historical_native_observation': parent94['native_observation']}
@@ -920,6 +1025,27 @@ def historical96(root, relative, expected_sha, base=None):
 PLAYER_V5_HISTORICAL = {'path':'source/art/consumer-qualification-v0096/provenance/player-v5-historical.gd','bytes':15851,'sha256':'0a1c0959513a068d13a0ac0f3b5a6ad3dca2064155028a568155e11b8f83a5a7'}
 PLAYER_PRE_V5 = {'path':'source/art/rivet-forward-v5/provenance/player-before-v5.gd','bytes':15851,'sha256':'d3ff20a302f8ead0f6808683e6ccdd9a2b3f10f711b019fe9808a788faef7bff'}
 
+def qualified96_generation96(value):
+    """Result-shape gate only; consumers MUST call full qualify96 first."""
+    if type(value) is not dict or value.get('schema') != 'null-choir-exact-current-art-consumers-v0096-v1':
+        return False
+    if value.get('status') == 'ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED':
+        return 'verifier_source_derivation' not in value and 'observed_current_sources' not in value
+    if value.get('status') != 'ACTUAL96_GAMEPLAY_WITH_VERIFIER_ONLY_SOURCE_DERIVATION':
+        return False
+    expected = {**MAIN96_VERIFIER_DERIVATION,
+                'status': 'VERIFIER_ONLY_SOURCE_DERIVATION_NOT_NEW_OBSERVATION',
+                'outside_verifier_bytes_exact': True, 'new_frames_claimed': False,
+                'new_native_import_claimed': False, 'new_gameplay_observation_claimed': False}
+    observed = value.get('observed_current_sources')
+    current = value.get('current_sources')
+    main = 'game/scripts/main.gd'
+    return (value.get('verifier_source_derivation') == expected
+            and type(observed) is dict and set(observed) == REQUIRED96_SOURCES
+            and observed.get(main) == MAIN96_VERIFIER_DERIVATION['observed_main']
+            and current == {**observed, main: MAIN96_VERIFIER_DERIVATION['derived_main']})
+
+
 def qualified_player_consumption96(root, supplied):
     """Return old v5 art-consumer bytes ONLY after complete actual96 qualification.
 
@@ -928,8 +1054,7 @@ def qualified_player_consumption96(root, supplied):
     until Root finalizes them. Historical bytes establish no gameplay equivalence.
     """
     value = qualify96(root)
-    _require(type(value) is dict and value.get('schema') == 'null-choir-exact-current-art-consumers-v0096-v1'
-             and value.get('status') == 'ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED',
+    _require(qualified96_generation96(value),
              'Fully qualified actual96 Player consumption required')
     row = value.get('current_sources', {}).get('game/scripts/player.gd')
     _require(type(row) is dict and row.get('path') == 'game/scripts/player.gd',
