@@ -29,7 +29,7 @@ This tracked Markdown file is the source of truth for **what to do next and what
 
 ### Maintenance during agentic loops
 
-1. Read this file and reconcile actual source, branch, uncommitted work and evidence before choosing the next block.
+1. Read this file and reconcile actual source, branch, uncommitted work and evidence before choosing the next block. Check current native Goal status and direct user holds; a roadmap or delegated task does not authorize resuming a paused run.
 2. Select the highest-priority meaningful unfinished scope; record its owner, candidate, required gates and next action. Delegate only bounded nonoverlapping work with this file and the priority ID in the packet.
 3. Fold approved new ideas/requirements into the relevant stable item. Preserve the full scope; record unresolved decisions instead of quietly dropping them.
 4. Update the current work item and acceptance/release row when implementation, evidence, blockers or delivery changes. Retain failed evidence and distinguish unrun checks.
@@ -41,7 +41,7 @@ This tracked Markdown file is the source of truth for **what to do next and what
 - GitHub baseline: `a9679651df223dbe34465f27319bc59e2704326c`.
 - Canonical working repository: `/Volumes/Backup (Biz)/Null Choir/repository`.
 - Current branch: `feature/v0097-readable-pursuit-autorun`.
-- Local candidate: **v0.097**, gameplay/test candidate commit `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`. Implemented but **not accepted, pushed, merged or released**.
+- Local candidate: **v0.097**, source/test candidate commit `6bbf5323d43cc25db342002aabf379ab097c1435` (runtime unchanged from `c5d2d62`). Implemented but **not accepted, pushed, merged or released**.
 - [Existing live Site](https://null-choir.jaymoney.chatgpt.site/) remains version14 matching v0.096. Do not recreate retired GitHub Pages or publish a duplicate Site.
 - Historical project work, originals and temporary fixtures are preserved on the external drive with compatibility links. Installed user apps and saves remain untouched.
 
@@ -49,12 +49,18 @@ This tracked Markdown file is the source of truth for **what to do next and what
 
 - **Outcome:** readable ordinary creatures, faster role-specific pursuit/dodgeable lunges, automatic fast movement with **no slow-walk modifier**.
 - **Owner:** lead/integrator; no implementation worker is currently active. Reconcile live worker state before delegating.
-- **Candidate:** local branch `feature/v0097-readable-pursuit-autorun`, gameplay/test commit `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`. It has not been pushed or released; a fresh GitHub-main checkout does not contain these local fixes yet.
+- **Candidate:** local branch `feature/v0097-readable-pursuit-autorun`, source/test commit `6bbf5323d43cc25db342002aabf379ab097c1435` (runtime unchanged from `c5d2d62`). It has not been pushed or released; a fresh GitHub-main checkout does not contain these local fixes yet.
 - **Evidence obtained:**270 arranged native movement cases, native collision/charge/dodge/pose checks,32 direction selections,13 independent pace/direction/finite-commitment observations across all roles,274 finite-supply state checks, repaired production checkpoint/save/Continue/focus-loss checks and local-light configuration checks. See the candidate notes and evidence locations below; these are not current rendered visibility acceptance.
 - **Next action:** obtain current-source640×360 moving ordinary-threat visibility evidence in all eight chapters, including dark-pool transitions, near/mid views, occluded negatives, reduced effects and aggregate Mobile light cost. Preserve user window/input state and use isolated test profiles.
 - **Remaining delivery gates:** affected recovery/save/art-consumer qualification, independent intended-use acceptance, coherent PR/required checks, actual signed/notarized package and matching README/same Site.
 - **Known workspace detail:** nine normal editor-generated healing-machine `.import` sidecars are uncommitted. Preserve them and their recovery records; do not stage them accidentally or restore minimal descriptors and run without reimport.
 - **Rendered route held:** macOS TCC requested Godot access to removable volumes while the hidden Metal pilot opened the external-drive project. Codex Full access does not grant that separate application permission. Human approval is needed; no privacy controls or execution-location workarounds are authorized. Both failed pilots are retained and produced no game pixels. Independent headless source/physics work can continue; no feature acceptance or release is claimed.
+
+### Independent P02 preparation — retained, not accepted
+
+Two editable Intake scene candidates and actual 1280×720 CPU previews are retained under `source/art/chapter-native-v1/` (currently untracked), with private receipts in external `work/chapter-masters-native/pilot01/` and `pilot02/`. Existing selected references were inspected. Pilot 1's independent review found structural composition/craft failures; pilot 2 removes the helper cube and foreground ceiling, but the stair still obscures the heart and the bell/architecture remain below the selected direction. Neither is an accepted master, an actual 8K render, a runtime replacement or part of v0.097. An 8K scene setting alone does not meet P02.
+
+On authorized resumption, reassess the structural composition and craft before another bounded preview; do not scale a rejected preview to 8K or replace accepted runtime paintings. Preserve the selected references, original sources, both rejected candidates and their receipts.
 
 ## Execution order
 
@@ -204,9 +210,9 @@ Add one row per coherent major block; retain links to exact evidence. Mark a par
 | Block | State | Exact source / evidence | Next action |
 |---|---|---|---|
 | v0.096 accepted foundations | Delivered; scoped, not whole Goal | [Release notes](releases/v0.096.md); public release above | Preserve; reopen only demonstrated affected regressions |
-| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Human approval of Godot removable-volume access, then current rendered all-chapter visibility/resource checks, remaining recovery/compatibility review, independent acceptance and matching release |
+| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `6bbf5323d43cc25db342002aabf379ab097c1435`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Human approval of Godot removable-volume access, then current rendered all-chapter visibility/resource checks, remaining recovery/compatibility review, independent acceptance and matching release |
 |16-apparatus machinery tranche | Staged; unaccepted, not integrated | External `work/local-lead-20261029/chapter-consequences/` | Recheck exact candidate and qualify real world/route consequences before promotion |
-| Native8K/editable chapter masters | Unproved | Existing paintings and originals retained | Inspect selected references; author true masters and consumed derivatives |
+| Native8K/editable chapter masters | Two Intake pilot scenes/previews retained; unaccepted, no actual 8K render | Untracked `source/art/chapter-native-v1/`; external `work/chapter-masters-native/`; accepted paintings unchanged | Structural composition/craft reassessment, then bounded preview before true masters and consumed derivatives |
 
 ## Resume notes and source references
 
