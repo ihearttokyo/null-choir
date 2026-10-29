@@ -27,6 +27,13 @@ func run() -> void:
 		push_error("Direction fixture must release its native recorded-audio playback before exit")
 		quit(1)
 		return
+	# stop() above returned to title; release that new playback as well.
+	game.music.stop()
+	game.effects.stop()
+	var drain_until: int = Time.get_ticks_usec()+100000
+	while Time.get_ticks_usec() < drain_until:
+		OS.delay_msec(2)
+		await process_frame
 	game.queue_free()
 	paused = false
 	await process_frame
