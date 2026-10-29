@@ -50,11 +50,11 @@ This tracked Markdown file is the source of truth for **what to do next and what
 - **Outcome:** readable ordinary creatures, faster role-specific pursuit/dodgeable lunges, automatic fast movement with **no slow-walk modifier**.
 - **Owner:** lead/integrator; no implementation worker is currently active. Reconcile live worker state before delegating.
 - **Candidate:** local branch `feature/v0097-readable-pursuit-autorun`, gameplay/test commit `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`. It has not been pushed or released; a fresh GitHub-main checkout does not contain these local fixes yet.
-- **Evidence obtained:**270 arranged native movement cases, native collision/charge/dodge/pose checks,32 direction selections and local-light configuration checks. See the candidate notes and evidence locations below; these are not current rendered visibility acceptance.
+- **Evidence obtained:**270 arranged native movement cases, native collision/charge/dodge/pose checks,32 direction selections,13 independent pace/direction/finite-commitment observations across all roles,274 finite-supply state checks, repaired production checkpoint/save/Continue/focus-loss checks and local-light configuration checks. See the candidate notes and evidence locations below; these are not current rendered visibility acceptance.
 - **Next action:** obtain current-source640×360 moving ordinary-threat visibility evidence in all eight chapters, including dark-pool transitions, near/mid views, occluded negatives, reduced effects and aggregate Mobile light cost. Preserve user window/input state and use isolated test profiles.
 - **Remaining delivery gates:** affected recovery/save/art-consumer qualification, independent intended-use acceptance, coherent PR/required checks, actual signed/notarized package and matching README/same Site.
 - **Known workspace detail:** nine normal editor-generated healing-machine `.import` sidecars are uncommitted. Preserve them and their recovery records; do not stage them accidentally or restore minimal descriptors and run without reimport.
-- **Blocked?** No verified external blocker is recorded. Required rendered/build checks are unfinished work, not a PASS and not automatically a blocker.
+- **Rendered route held:** macOS TCC requested Godot access to removable volumes while the hidden Metal pilot opened the external-drive project. Codex Full access does not grant that separate application permission. Human approval is needed; no privacy controls or execution-location workarounds are authorized. Both failed pilots are retained and produced no game pixels. Independent headless source/physics work can continue; no feature acceptance or release is claimed.
 
 ## Execution order
 
@@ -77,7 +77,7 @@ This tracked Markdown file is the source of truth for **what to do next and what
 - [ ] Inspect moving current-source output at640×360 across all eight chapters, near/mid distance, dark-pool transitions, occluded negatives and reduced effects. Measure aggregate Mobile lighting cost; do not infer sustained FPS.
 - [ ] Qualify affected recovery, saves, combat/art-consumer contracts and the actual portable build; independently accept and deliver through P10.
 
-**Evidence already obtained, not final acceptance:**270 arranged native movement cases with legacy modifier held/released; native slide/corner checks; real crawler AI contact/dodge/wall-stop/full-charge-pose checks; brute/Warden grounding and shared finite charge-lane checks; ordinary enemy telegraphs; enemy damage/infighting/death;32 atlas-direction selections. Headless fixed-clock evidence is not rendered visibility or human feel. Light configuration/ownership checks are not pixel acceptance. Failed attempts and their diagnoses remain retained.
+**Evidence already obtained, not final acceptance:**13 independent pace/direction/finite-commitment observations (all eight roles, ranged-strafe and Warden alternate-attack admission),274 finite-supply state checks and actual checkpoint disk-failure/Continue/focus-loss cases, plus270 arranged native movement cases with legacy modifier held/released; native slide/corner checks; real crawler AI contact/dodge/wall-stop/full-charge-pose checks; brute/Warden grounding and shared finite charge-lane checks; ordinary enemy telegraphs; enemy damage/infighting/death;32 atlas-direction selections. Headless fixed-clock evidence is not rendered visibility or human feel. Light configuration/ownership checks are not pixel acceptance. Failed attempts and their diagnoses remain retained.
 
 See [player-fix candidate notes](POST-V0096-PLAYER-FIXES.md).
 
@@ -204,7 +204,7 @@ Add one row per coherent major block; retain links to exact evidence. Mark a par
 | Block | State | Exact source / evidence | Next action |
 |---|---|---|---|
 | v0.096 accepted foundations | Delivered; scoped, not whole Goal | [Release notes](releases/v0.096.md); public release above | Preserve; reopen only demonstrated affected regressions |
-| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Current rendered all-chapter visibility/resource checks, recovery/compatibility review, independent acceptance and matching release |
+| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `c5d2d62130e376bc0d2cf1d002d244e7ce1dfced`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Human approval of Godot removable-volume access, then current rendered all-chapter visibility/resource checks, remaining recovery/compatibility review, independent acceptance and matching release |
 |16-apparatus machinery tranche | Staged; unaccepted, not integrated | External `work/local-lead-20261029/chapter-consequences/` | Recheck exact candidate and qualify real world/route consequences before promotion |
 | Native8K/editable chapter masters | Unproved | Existing paintings and originals retained | Inspect selected references; author true masters and consumed derivatives |
 
