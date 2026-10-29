@@ -1,5 +1,7 @@
 # NULL CHOIR — implementation brief
 
+Current work order and acceptance/release state: [Major Feature Priorities](docs/MAJOR-FEATURE-PRIORITIES.md). This document retains its requirements/implementation role; the roadmap consolidates current work and approved additions.
+
 Status: Jared approved this brief and implementation start on 2026-09-30. The eight-level expansion, unique-art requirement, and performance targets are accepted. Limited Intake GPU samples are recorded in [SCENERY.md](docs/SCENERY.md); full-campaign performance acceptance remains open. On 2026-10-02 Jared approved the presented MIDI palette and foreground validation of the dedicated game window, and reiterated full approval to execute the defined scope without repeated confirmation.
 
 ## Outcome and value

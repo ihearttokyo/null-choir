@@ -1,5 +1,7 @@
 # Game project checkpoint
 
+> Historical record. For the maintained priorities, current candidate, acceptance state and next action, start with [Major Feature Priorities](docs/MAJOR-FEATURE-PRIORITIES.md). Older release/status/hold statements below are dated evidence, not current instructions.
+
 Date: 2026-10-03
 Thread: `01a0f03f-e2f6-7be1-926a-af974a4ed8b7`
 

@@ -94,6 +94,8 @@ This is a work-in-progress update, not a completed Alpha 4 or full-goal release.
 
 ## Development status
 
+**Development roadmap:** [Major feature priorities and current work](docs/MAJOR-FEATURE-PRIORITIES.md). This is the maintained backlog and acceptance/release register. Agents and contributors start with [AGENTS.md](AGENTS.md); the roadmap distinguishes delivered features from prototypes, local candidates and unfinished requirements.
+
 **Current release: Null Choir v0.096.** The exact package and shipping source snapshot are linked above. Source and feature-evidence details are in the release notes; matching package qualification is recorded separately. This remains a work-in-progress game: full-campaign balance, human play and sustained performance are not certified.
 
 The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. The retained Preview 06.1 release introduced the forward-aiming native Rivet Pistol and live Pixel Music Garden; v0.096 retains them, Preview 06's eight gate assemblies, chapter art and the Ossuary crossing. Original authoring sources and earlier assets remain preserved; the broader campaign and art roadmap remain in progress.

@@ -1,5 +1,16 @@
 # NULL CHOIR agent workflow
 
+## Start here: canonical priorities and handoff
+
+Read [docs/MAJOR-FEATURE-PRIORITIES.md](docs/MAJOR-FEATURE-PRIORITIES.md) first on every new assignment or resume. It is the **single maintained roadmap, priority order and acceptance/release register**. Do not reconstruct the backlog from chat history or treat an old plan/checkpoint as current status.
+
+Then read [DESIGN.md](DESIGN.md) for the product requirements and [ARCHITECTURE.md](ARCHITECTURE.md) for implementation boundaries; follow only the linked contracts/evidence relevant to the selected priority. Latest direct user instructions and safety/authority boundaries still take precedence. Historical documents retain evidence, not superseded launch holds, model rules or release status.
+
+Use the roadmap's stable IDs (P01–P10) in task handoffs and PR descriptions. Before editing, reconcile the actual branch, diff, current work item, owned files and existing workers. Give every delegated agent this roadmap path, its priority ID and explicit ownership; workers are not alone and must preserve others' edits. Do not require this chat's context to discover the job.
+
+When work changes, update the roadmap's current work/acceptance register with the exact candidate, evidence actually obtained, remaining gates and next concrete action. Add new approved requirements to the relevant item instead of starting a competing backlog. Keep private raw evidence/numerical reviews outside public Git, but record their scope and location honestly. Missing local evidence is a gap, not permission to invent a PASS. Check off major work only after its independent acceptance and matching delivery; source, merge and release are different states.
+
+
 ## Current authority
 
 The latest direct user instructions take precedence over the historical permissions below. On 2026-10-28 Jared explicitly released the NULL CHOIR Mac-work holds and requested independent 9.2+ acceptance, v0.096 production, the matching existing marketing-page update, and then a message to Angus. Native/Metal/app and needed Blender/GPU/art work may now run at any time, serialized with fresh resource admission. Preserve storage/cost/security/ownership controls and unrelated retrieval or sync holds. Work in this local canonical checkout; no new paid API/account/runner fallback or messaging unrelated user-owned chats.
@@ -14,7 +25,7 @@ On 2026-10-16 Jared authorized a public Suno-equipped playtest and its link to A
 
 ## Hill-climbing
 
-Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.md for measured evidence. Keep the complete eight-level, original-art and current soundtrack brief intact; DESIGN.md records the authorized Suno replacement and preservation of MIDI sources.
+Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult linked current evidence; CHECKPOINT.md retains historical measurements, not the current work queue. Keep the complete eight-level, original-art and current soundtrack brief intact; DESIGN.md records the authorized Suno replacement and preservation of MIDI sources.
 
 1. Reconcile the current source and retained effects; preserve a rollback commit and freeze the regression or measurement contract.
 2. Reproduce deterministic defects with the narrowest real failing check. Change the shared cause, retain assertions and prove GREEN.
