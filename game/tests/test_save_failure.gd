@@ -3,6 +3,21 @@ extends SceneTree
 const WallClock = preload("res://tests/wall_clock_wait.gd")
 const PassivePhysicsStep = preload("res://tests/passive_physics_step.gd")
 
+class FixturePhysicsAction extends Node:
+	var action: Callable
+	var done: bool = false
+	func _physics_process(_delta: float) -> void:
+		set_physics_process(false)
+		action.call()
+		done = true
+
+func in_physics(action: Callable) -> void:
+	var driver = FixturePhysicsAction.new()
+	driver.action = action
+	root.add_child(driver)
+	while not driver.done: await physics_frame
+	driver.free()
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -18,15 +33,36 @@ func run() -> void:
 	game.set_process(false)
 	game.player.set_physics_process(false)
 	for actor in game.enemies: actor.set_physics_process(false)
+	# Arrange the checkpoint's real prerequisites through production death and
+	# walk-over collection, rather than forging keys on living seal bearers.
+	await physics_frame
+	await physics_frame
+	for key in game.level.layout.data.interactions:
+		if key.kind != "key": continue
+		var bearer
+		for actor in game.enemies:
+			if actor.id == key.seal_bearer: bearer = actor
+		if not is_instance_valid(bearer): push_error("Owned seal bearer fixture required");quit(1);return
+		await in_physics(func(): bearer.take_damage(99999,game.player))
+		if bearer.hp != 0 or game.earned_recovery_only: push_error("Production bearer death must commit");quit(1);return
+		var point: Vector3 = game.SealGuardians.interaction_position(game,key)
+		game.player.position = Vector3(point.x,game.level.layout.capsule_floor_support(Vector2(point.x,point.z),.32)+.04,point.z)
+		game.reset_supply_sweep()
+		if not await PassivePhysicsStep.scan(game): quit(1);return
+		if not await PassivePhysicsStep.scan(game): quit(1);return
+		if not key.key in game.state.keys or not key.id in game.state.removed:
+			push_error("Production walk-over seal pickup required for save fixture");quit(1);return
 	game.state.ammo[1] = 17
 	for spec in game.level.layout.data.interactions:
 		if spec.kind != "checkpoint": continue
-		game.state.keys = spec.get("requires",[]).duplicate()
-		game.player.position = game.level.layout.world_position(spec.cell)
+		if not game._has_keys(spec.get("requires",[])): push_error("Checkpoint prerequisites must be genuinely owned in arranged fixture");quit(1);return
+		game.player.position = game.level.layout.world_position(spec.cell)+Vector3.UP*.04
+		game.reset_supply_sweep()
 		if not await PassivePhysicsStep.scan(game):
 			quit(1)
 			return
 		game._process(0)
+		print("SAVE_FAILURE_CHECKPOINT_DIAGNOSTIC ",JSON.stringify({"expected":spec.id,"actual":game.state.checkpoint_id,"message":game.message,"playing":game.playing,"placement_pending":game.placement_pending,"player_position":str(game.player.position),"floor_revision":game.state.floor_revision,"actors":game.enemies.size()}))
 		if game.state.checkpoint_id != spec.id or not game.message.begins_with("RECOVERY MEMORY ONLY: SAVE FAILED"):
 			push_error("Actual automatic checkpoint disk failure must never display stored-success feedback")
 			quit(1)

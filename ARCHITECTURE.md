@@ -1,5 +1,7 @@
 # Runtime and authoring layout
 
+Current work order and acceptance/release state: [Major Feature Priorities](docs/MAJOR-FEATURE-PRIORITIES.md). This document retains its requirements/implementation role; the roadmap consolidates current work and approved additions.
+
 [DESIGN.md](DESIGN.md) owns requirements. This file owns implementation boundaries.
 
 - `game/`: Godot runtime project, imported sprites, world models, compressed Suno recordings, preserved MIDI, and the pinned legacy synthesizer dependency. No Blender invocation or host audio library is required during play.

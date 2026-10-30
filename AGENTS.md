@@ -1,6 +1,21 @@
 # NULL CHOIR agent workflow
 
+## Start here: canonical priorities and handoff
+
+Read [docs/MAJOR-FEATURE-PRIORITIES.md](docs/MAJOR-FEATURE-PRIORITIES.md) first on every new assignment or resume. It is the **single maintained roadmap, priority order and acceptance/release register**. Do not reconstruct the backlog from chat history or treat an old plan/checkpoint as current status.
+
+Then read [DESIGN.md](DESIGN.md) for the product requirements and [ARCHITECTURE.md](ARCHITECTURE.md) for implementation boundaries; follow only the linked contracts/evidence relevant to the selected priority. Latest direct user instructions and safety/authority boundaries still take precedence. Historical documents retain evidence, not superseded launch holds, model rules or release status.
+
+Use the roadmap's stable IDs (P01–P10) in task handoffs and PR descriptions. Before editing, reconcile the actual branch, diff, current work item, owned files and existing workers. Give every delegated agent this roadmap path, its priority ID and explicit ownership; workers are not alone and must preserve others' edits. Do not require this chat's context to discover the job.
+
+When work changes, update the roadmap's current work/acceptance register with the exact candidate, evidence actually obtained, remaining gates and next concrete action. Add new approved requirements to the relevant item instead of starting a competing backlog. Keep private raw evidence/numerical reviews outside public Git, but record their scope and location honestly. Missing local evidence is a gap, not permission to invent a PASS. Check off major work only after its independent acceptance and matching delivery; source, merge and release are different states.
+
+
 ## Current authority
+
+On 2026-10-30 Jared authorized finishing and delivering **v0.097**, reconciling/merging this project's open PRs with proper Git hygiene, updating the **same existing Site**, then telling Angus what actually changed with an honest recommendation about whether this preview merits his time. Frame it as a voluntary demonstration of Jared's development/delivery workflow, not an obligation to beta-test; preserve his openness to adapting or synthesizing workflows. Pause the native Goal after that delivery boundary; do not advance P02 or v0.098 automatically. This supersedes the old no-new-Angus-notification restriction for this specific v0.097 notification, not unrelated sends.
+
+Jared permits Luna coding only with a lead-supplied design and checked work; Sol owns design/integration/review. His latest direction is Sol High for the lead; Terra may handle Computer Use, not as a presumed better coding substitute. Preserve runtime availability, security, billing and no-silent-substitution constraints. Routine authorized work needs no repeated confirmation; genuine platform permissions and mandatory external-action safeguards remain in force.
 
 The latest direct user instructions take precedence over the historical permissions below. On 2026-10-28 Jared explicitly released the NULL CHOIR Mac-work holds and requested independent 9.2+ acceptance, v0.096 production, the matching existing marketing-page update, and then a message to Angus. Native/Metal/app and needed Blender/GPU/art work may now run at any time, serialized with fresh resource admission. Preserve storage/cost/security/ownership controls and unrelated retrieval or sync holds. Work in this local canonical checkout; no new paid API/account/runner fallback or messaging unrelated user-owned chats.
 
@@ -14,7 +29,7 @@ On 2026-10-16 Jared authorized a public Suno-equipped playtest and its link to A
 
 ## Hill-climbing
 
-Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult CHECKPOINT.md for measured evidence. Keep the complete eight-level, original-art and current soundtrack brief intact; DESIGN.md records the authorized Suno replacement and preservation of MIDI sources.
+Read DESIGN.md and ARCHITECTURE.md before changing behavior; consult linked current evidence; CHECKPOINT.md retains historical measurements, not the current work queue. Keep the complete eight-level, original-art and current soundtrack brief intact; DESIGN.md records the authorized Suno replacement and preservation of MIDI sources.
 
 1. Reconcile the current source and retained effects; preserve a rollback commit and freeze the regression or measurement contract.
 2. Reproduce deterministic defects with the narrowest real failing check. Change the shared cause, retain assertions and prove GREEN.
@@ -33,7 +48,7 @@ For sparse Git worktrees created without checkout, materialize the base index be
 
 ## Workers and completion
 
-Jared’s latest project model direction (2026-10-28): the next lead thread must use gpt-6.1-sol at medium reasoning. Do not use Astra models, gpt-6.1-terra, or extra-high/xhigh, max or ultra reasoning. Other available models and low/medium/high efforts are permitted as appropriate; there are no additional project model-family/version restrictions. Preserve permissions, billing boundaries and task continuity; never silently substitute on capacity errors. Actual telemetry governs profile claims. Partition file ownership, pass current source/evidence and authority, and tell workers they are not alone. Parent owns integration, tests and PR hygiene. Serialize heavy/native jobs until headroom is measured. Jared removed the fixed 8 GB reserve on 2026-10-08. Size-preflight the next operation against actual free space; clear only verified disposable, inactive development caches, preserving originals, saves, releases, Git work and validation evidence.
+Jared’s current project model direction is recorded in Current authority above (2026-10-30), superseding the 2026-10-28 medium-lead/Terra exclusion. Do not use Astra models or extra-high/xhigh, max or ultra reasoning. Luna implementation requires lead design and verification; Sol remains responsible for the code and delivery. Preserve permissions, billing boundaries and task continuity; never silently substitute on capacity errors. Actual telemetry governs profile claims. Partition file ownership, pass current source/evidence and authority, and tell workers they are not alone. Parent owns integration, tests and PR hygiene. Serialize heavy/native jobs until headroom is measured. Jared removed the fixed 8 GB reserve on 2026-10-08. Size-preflight the next operation against actual free space; clear only verified disposable, inactive development caches, preserving originals, saves, releases, Git work and validation evidence.
 
 Never spawn a subagent using Max or Ultra reasoning effort. Use fresh contexts for new separable components; resume existing components without discarding their IDs, pending work or evidence.
 

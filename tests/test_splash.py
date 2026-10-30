@@ -1,12 +1,16 @@
-"""Current hosted playtest delivery plus retained static-page/privacy/license contracts.
+"""Current hosted v0.097 delivery plus historical README, static-page/privacy/license contracts.
 GitHub Pages is retired. docs/ is historical material, NOT the current download host.
-v0.096 primary must be pinned to its matching verified standalone artifact;06.1 stays immutable history.
+The v0.096 README is an exact pinned provenance snapshot;06.1 stays immutable history.
 """
 from pathlib import Path
 from html.parser import HTMLParser
+import hashlib
+import json
 import re
 ROOT=Path(__file__).resolve().parents[1]
 SITE='https://null-choir.jaymoney.chatgpt.site'
+HISTORICAL_README_COMMIT='a9679651df223dbe34465f27319bc59e2704326c'
+HISTORICAL_README_SHA256='07e8bbf8ab3021a23b215fca5cfe09f473fa0074b3bfc200af4d80d89f0f3da7'
 PREVIEW061_DOWNLOAD='https://github.com/ihearttokyo/null-choir/releases/download/v0.2.3-alpha.4/NULL-CHOIR-0.2.3-alpha.4-major-features-preview-06-1-Apple-Silicon.zip'
 PREVIEW061_SHA256='b65e081ea4d81c8a49728d8f465990c0aa2318b3d7a778084f4f6d699fc8a95a'
 PREVIEW061_ZIP_BYTES='289931781'
@@ -27,9 +31,69 @@ EXPORT_SOURCE='94be1cd0ec80339c16b583e352b4b30222623b7f'
 EXPORT_GAME_TREE='b84318807da8dbf760f31a3d77d0780b3611c550'
 EXPORTABLE_FILES=504
 EXPORTABLE_PROJECTION_SHA256='96bb842cdcbc7e7b0bbccbf693f710234b3627f7d1139724dcca8821f32b4de4'
-readme=(ROOT/'README.md').read_text()
+# Exact pre-v0.097 README retained as historical evidence; these assertions do
+# not describe the current primary release or download destination.
+historical_readme_path=ROOT/'docs/releases/provenance/README-v0.096.md'
+historical_readme=historical_readme_path.read_text()
+readme=historical_readme
+assert hashlib.sha256(historical_readme_path.read_bytes()).hexdigest()==HISTORICAL_README_SHA256, 'Historical v0.096 README snapshot must remain byte-exact'
+assert HISTORICAL_README_COMMIT=='a9679651df223dbe34465f27319bc59e2704326c'
 release=(ROOT/'docs/releases/v0.096.md').read_text()
 preview061_release=(ROOT/'docs/releases/major-features-preview-06-1.md').read_text()
+current_readme=(ROOT/'README.md').read_text()
+current_release=(ROOT/'docs/releases/v0.097.md').read_text()
+artifact_raw=(ROOT/'docs/releases/v0.097-artifact.json').read_bytes()
+assert hashlib.sha256(artifact_raw).hexdigest()=='073b0caa0e53ab0fc0c7a68c07a1124a9c7b22e573b4e3fc5465c2094d63a246', 'Exact actually verified97 artifact manifest required; no metadata-only rebaseline'
+artifact=json.loads(artifact_raw)
+assert artifact['schema']=='null-choir-verified-release-artifact-v1'
+assert artifact['version']=='0.097'
+download97=artifact['download_url']
+archive=artifact['archive'];pck=artifact['pck']
+source_projection=artifact['source_projection'];exported_projection=artifact['exported_projection']
+editor_delta=artifact['editor_project_delta'];verification=artifact['verification'];evidence=artifact['evidence']
+assert archive['filename']=='Null-Choir-v0.097.zip'
+assert download97=='https://github.com/ihearttokyo/null-choir/releases/download/v0.097/Null-Choir-v0.097.zip'
+assert isinstance(archive['bytes'],int) and archive['bytes']>0
+assert re.fullmatch(r'[0-9a-f]{64}',archive['sha256'])
+assert isinstance(pck['bytes'],int) and pck['bytes']>0 and re.fullmatch(r'[0-9a-f]{64}',pck['sha256'])
+assert artifact['source_commit']=='e8f2de5c4728938632552813de84703885145486'
+for projection in (source_projection,exported_projection):
+    assert projection['files']==506 and re.fullmatch(r'[0-9a-f]{64}',projection['sha256'])
+assert len(editor_delta['removed_settings'])==2
+assert editor_delta['removed_settings']==[
+    'renderer/rendering_method.mobile="mobile"',
+    'textures/default_filters/use_nearest_mipmap_filter=false',
+]
+assert re.fullmatch(r'[0-9a-f]{64}',editor_delta['before_sha256'])
+assert re.fullmatch(r'[0-9a-f]{64}',editor_delta['after_sha256'])
+assert all(verification[k] is True for k in ['developer_id','notarized','stapled','gatekeeper','packed_resource'])
+assert evidence=={'source_native_frames':326,'source_native_chapters':8,'actual_pck_render_frames':16,
+                  'actual_pck_renderer':'mobile/metal','physical_input':False,'sustained_fps':False,
+                  'listening':False,'full_campaign':False}
+current_primary=current_readme.split('## Playtest download',1)[1].split('### ',1)[0]
+assert re.search(r'\[Enter the NULL CHOIR download page\]\('+re.escape(SITE)+r'/?\)',current_primary)
+assert 'ihearttokyo.github.io' not in current_primary
+assert re.search(r'\[Download[^\]]*v0\.097[^\]]*\]\('+re.escape(download97)+r'\)',current_primary)
+assert archive['sha256'] in current_primary and format(archive['bytes'],',')+' bytes' in current_primary
+assert pck['sha256'] in current_primary
+assert 'macOS 14' in current_primary and 'Apple Silicon' in current_primary
+assert artifact['source_commit']+'/game' in current_primary
+assert 'https://github.com/ihearttokyo/null-choir/tree/'+artifact['source_commit'] in current_primary
+assert 'work-in-progress update' in current_primary and 'not a completed campaign' in current_primary
+assert all(word in current_primary for word in ['Developer ID-signed','Apple-notarized','stapled','Gatekeeper','packed-resource'])
+assert 'Keep system security protections enabled.' in current_primary
+assert 'no slow-walk modifier' in current_readme.lower() and 'shift' in current_readme.lower()
+assert 'physical input, human listening and sustained fps remain unverified' in current_readme.lower()
+assert 'genuine native8k/editable chapter masters remain unfinished' in current_readme.lower()
+assert download97 in current_release and archive['sha256'] in current_release
+assert str(archive['bytes']) in current_release and pck['sha256'] in current_release
+assert artifact['source_commit'] in current_release and str(source_projection['files'])+' files' in current_release
+assert source_projection['sha256'] in current_release and exported_projection['sha256'] in current_release
+assert 'editorconfig' in current_release.lower()
+assert all(setting in current_release for setting in editor_delta['removed_settings'])
+assert editor_delta['before_sha256'] in current_release and editor_delta['after_sha256'] in current_release
+assert all(word in current_release.lower() for word in ['physical input, human listening and sustained fps remain unverified',
+    'genuine native8k/editable chapter masters remain unfinished','not a completed campaign'])
 assert '__V0096_' not in readme+release+SHA256+ZIP_BYTES+ZIP_BYTES_DISPLAY+PCK_SHA256+EXPORT_SOURCE+EXPORT_GAME_TREE+EXPORTABLE_PROJECTION_SHA256, 'v0.096 actual artifact/source/security metadata is pending; never publish an unfilled draft'
 for digest in [EXPORT_SOURCE,EXPORT_GAME_TREE]:
     assert re.fullmatch(r'[0-9a-f]{40}',digest), 'Exact export snapshot/game-tree identities required'
@@ -111,7 +175,7 @@ assert len([t for t,a in dom.tags if t=='h1'])==1
 assert not any(t in ['script','iframe','video','audio']for t,a in dom.tags)
 assert 'Illustrated key art'in text and 'not a gameplay screenshot'in text
 assert '© 2026 ihearttokyo'in text
-for private in ['/Users/','whatsapp.net','Jared','Bland']:assert private not in text and private not in readme
+for private in ['/Users/','whatsapp.net','Jared','Bland']:assert private not in text and private not in readme and private not in current_readme
 css=(ROOT/'docs/site-assets/splash.css').read_text()
 for rule in [':focus-visible','max-width:760px','@media(max-width:480px)','repeat(2,minmax(0,1fr))','.skip:hover{color:var(--ink)}','@media(max-width:1100px)']:
     assert rule in css, 'Retain actual historical responsive/focus rule: '+rule
@@ -130,4 +194,4 @@ for retired in ['deploy-pages','upload-pages-artifact','pages: write','id-token:
     assert retired not in workflow, 'Retired GitHubPages deployment must not be reintroduced'
 agents=(ROOT/'AGENTS.md').read_text()
 assert 'matching tested standalone build'in agents and 'unverified build'in agents
-print('PASS current ChatGPT Site/verified v0.096/immutable Preview06.1 and Preview06 rollback contract, historical page accessibility/privacy, license parity and non-deploying CI')
+print('PASS current97 ChatGPT Site/verified artifact and immutable96/Preview06.1/Preview06 historical rollback contract, historical page accessibility/privacy, license parity and non-deploying CI')

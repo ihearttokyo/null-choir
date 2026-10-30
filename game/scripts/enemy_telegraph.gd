@@ -1,4 +1,5 @@
 extends Node3D
+const Motion = preload("res://scripts/enemy_motion.gd")
 # Committed worker shot / brute and Warden charge intent. No gameplay writes.
 # Depth-tested geometry (no through-wall HUD), at most30 world-ray queries/sec.
 var beam: MeshInstance3D
@@ -127,7 +128,7 @@ func _build_lane(actor: Node3D) -> void:
 			collider = child;break
 	if collider == null: return
 	lane_radius = collider.shape.radius
-	lane_nominal_distance = 15.0*0.9 if actor.get("kind") == "brute" else 13.0*0.7
+	lane_nominal_distance = Motion.charge_distance(str(actor.get("kind")))
 	var aim: Vector3 = actor.get("_committed_aim")
 	var direction := aim-actor.global_position
 	direction.y = 0.0

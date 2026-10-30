@@ -8,13 +8,24 @@ Original single-player cosmic-horror FPS for Apple Silicon Macs. Godot presents 
 
 [![NULL CHOIR: an occupied cathedral-city held by vast restraints above an abyss](https://raw.githubusercontent.com/ihearttokyo/null-choir/73a9990096ae6dc0b9f0c4c81f2a856ae88d2601/game/assets/art/title/pro-series-v2.jpg)](https://null-choir.jaymoney.chatgpt.site)
 
-[Download Null Choir v0.096 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.096/Null-Choir-v0.096.zip). **A work-in-progress update, not a completed campaign.** Requires macOS 14 or newer. Developer ID-signed and Apple-notarized; stapled, packed-resource qualified and verified by codesign, stapler and Gatekeeper on the release Mac. Keep system security protections enabled.
+[Download Null Choir v0.097 for Apple Silicon](https://github.com/ihearttokyo/null-choir/releases/download/v0.097/Null-Choir-v0.097.zip). **A work-in-progress update, not a completed campaign.** Requires macOS 14 or newer. Developer ID-signed and Apple-notarized; stapled, packed-resource qualified and verified by codesign, stapler and Gatekeeper on the release Mac. Keep system security protections enabled.
 
-Archive size: **295,933,561 bytes**
+Archive size: **295,900,142 bytes** · SHA-256: `d673e789d85ae67ea0590f85843c6380bad497c919bc799874591dacd5ea22d8`
 
-SHA-256: `c2870e2d5720b5670d75d03726772883f246b29d15687c326fb6bca24c0648e5`
+PCK SHA-256: `6b7c97179908fe0ff8d1640e0283dcae0ac38df107c90c8c562b023bbc6c4b8d`
 
-[Shipping source snapshot (exported)](https://github.com/ihearttokyo/null-choir/tree/94be1cd0ec80339c16b583e352b4b30222623b7f/game) · [v0.096 release details and PCK identity](docs/releases/v0.096.md) · [Earlier builds](https://github.com/ihearttokyo/null-choir/releases).
+[Shipping source snapshot before editor normalization](https://github.com/ihearttokyo/null-choir/tree/e8f2de5c4728938632552813de84703885145486/game) · [v0.097 release details and exact artifact](docs/releases/v0.097.md) · [Earlier builds](https://github.com/ihearttokyo/null-choir/releases).
+
+### What changed in v0.097
+
+- **Fast movement by default:** automatic fast Doom-inspired acceleration, friction and momentum. No slow-walk modifier. Shift and old saved run bindings cannot slow you down; analog input remains proportional.
+- **Readable ordinary creatures:** bounded local actor lighting retains shaded artwork and dark architecture without global ambient fill. Critical bearers and wardens keep their existing stronger practicals.
+- **Faster pursuit and committed lunges:** roles close distance more urgently; crawlers lunge with locked aim, wall collision, one contact and recovery. Brute/Warden charge admission follows finite reach rather than committing from across a room.
+- **Preserved content:** the eight chapters, finite earned supplies, saves, original art, offline Suno soundtrack and Pixel Music Garden remain. This is a focused playability update, not eight new maps or a new art tranche.
+
+Current-source arranged Mobile/Metal evidence covers all eight chapters, including ordinary near/mid views, motion, reduced effects and occluded controls. The signed package passes its own eight-chapter resource/combat/recovery diagnostics. Physical input, human listening and sustained FPS remain unverified. Genuine native8K/editable chapter masters remain unfinished.
+
+[Immediate rollback: Null Choir v0.096](https://github.com/ihearttokyo/null-choir/releases/download/v0.096/Null-Choir-v0.096.zip) — 295,933,561 bytes; SHA-256 `c2870e2d5720b5670d75d03726772883f246b29d15687c326fb6bca24c0648e5`. Older release descriptions below remain historical; prior builds are not replaced.
 
 ### What changed in v0.096
 
@@ -94,9 +105,11 @@ This is a work-in-progress update, not a completed Alpha 4 or full-goal release.
 
 ## Development status
 
-**Current release: Null Choir v0.096.** The exact package and shipping source snapshot are linked above. Source and feature-evidence details are in the release notes; matching package qualification is recorded separately. This remains a work-in-progress game: full-campaign balance, human play and sustained performance are not certified.
+**Development roadmap:** [Major feature priorities and current work](docs/MAJOR-FEATURE-PRIORITIES.md). This is the maintained backlog and acceptance/release register. Agents and contributors start with [AGENTS.md](AGENTS.md); the roadmap distinguishes delivered features from prototypes, local candidates and unfinished requirements.
 
-The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. The retained Preview 06.1 release introduced the forward-aiming native Rivet Pistol and live Pixel Music Garden; v0.096 retains them, Preview 06's eight gate assemblies, chapter art and the Ossuary crossing. Original authoring sources and earlier assets remain preserved; the broader campaign and art roadmap remain in progress.
+**Current release: Null Choir v0.097.** The exact package and shipping source snapshot are linked above. Source and feature-evidence details are in the release notes; matching package qualification is recorded separately. This remains a work-in-progress game: full-campaign balance, human play and sustained performance are not certified.
+
+The source contains eight authored maps, offline selected Suno recordings, finite sprite-aware combat and saved campaign recovery. The retained Preview 06.1 release introduced the forward-aiming native Rivet Pistol and live Pixel Music Garden; v0.097 retains them, Preview 06's eight gate assemblies, chapter art and the Ossuary crossing. Original authoring sources and earlier assets remain preserved; the broader campaign and art roadmap remain in progress.
 
 The new Rivet atlas consists of actual native Blender renders with its matching editable source. The other five refreshed weapon atlases retain their separate raster provenance and editable design companions; they are not relabeled as Blender renders. Earlier cathedral-style SoundTest work stays preserved in `source/prototypes/resonance-20261026/`, separate from the original procedural pixel garden. [DESIGN.md](DESIGN.md) remains the full project brief.
 

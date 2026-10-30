@@ -6,8 +6,10 @@ class State extends RefCounted:
 	var health := 100
 	var removed: Array=[]
 class Layout extends RefCounted:
+	var data: Dictionary = {}
 	func world_position(_cell) -> Vector3:return Vector3.ZERO
 	func capsule_floor_support(_point,_radius) -> float:return 0.0
+	func capsule_floor_support_at_y(_point,_radius,_height,_tolerance) -> float:return 0.0
 class Room extends Node3D:
 	var layout=Layout.new()
 class Viewer extends Node3D:
@@ -41,7 +43,7 @@ func run() -> void:
 			if not check(actor.telegraph_time>0 and actor._rush_time==0,"Grounding case must remain genuine committed windup"):return
 		print("MEASURE actual_",role," start_y=",start_y," settled_y=",actor.global_position.y," on_floor=",actor.is_on_floor()," visible_frames=",visible_frames," nominal=",tell.lane_nominal_distance," clipped=",tell.lane_clipped_distance," radius=",tell.lane_radius)
 		if not check(actor.is_on_floor() and actor.global_position.y<start_y and visible_frames>=10,"Real gravity/slide settling must retain readable supported lane"):return
-		var expected: float=13.5 if role=="brute" else 9.1
+		var expected: float=13.5 if role=="brute" else 10.4
 		if not check(is_equal_approx(tell.lane_clipped_distance,expected) and tell.lane_points.size()==48,"Unmodified real capsule floor skin must not silently clip nominal flat-ground corridor to zero"):return
 		actor.queue_free();await process_frame;await physics_frame
 	host.queue_free();await process_frame;await process_frame

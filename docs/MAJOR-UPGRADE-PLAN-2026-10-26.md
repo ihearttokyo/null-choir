@@ -1,5 +1,7 @@
 # NULL CHOIR — next major upgrade series
 
+> Historical record. For the maintained priorities, current candidate, acceptance state and next action, start with [Major Feature Priorities](MAJOR-FEATURE-PRIORITIES.md). Older release/status/hold statements below are dated evidence, not current instructions.
+
 Plan dated 26 October 2026; status updated 28 October 2026. Public baseline: Major Features Preview06.1; immediate rollback: Preview06. Preview06.1: the matching signed/notarized/stapled Apple Silicon archive is publicly available and locally installed; the broader major-feature goal remains in progress. This plan preserves the full major-feature goal, distinguishes shipped work from working/prototype work, and prioritizes changes a player will actually notice.
 
 ## Current goal update — 27 October 2026

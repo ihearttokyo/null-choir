@@ -579,7 +579,9 @@ def check():
     # New96 outputs have a separate exact current-source/native-consumption
     # owner. Never whitelist a directory or rewrite historical art catalogs.
     compat = native_guard['consumer_compatibility'](ROOT)
-    current96 = compat['qualify96'](ROOT)
+    current96 = compat['qualify'](ROOT)
+    assert (compat['qualified96_generation96'](current96)
+            or compat['qualified97_generation97'](current96)), 'Exact96/97 consumption generation required'
     registry_path = 'game/data/healing_machinery_registry.json'
     registry = json.loads(compat['record'](ROOT, current96['current_sources'][registry_path]))
     families = registry['families']

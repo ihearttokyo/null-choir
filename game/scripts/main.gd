@@ -1074,6 +1074,7 @@ func show_controls() -> void:
 	label.add_theme_font_size_override("font_size",12)
 	menu.add_child(label)
 	for action in Preferences.ACTIONS:
+		if action == "run": continue # Obsolete binding retained on disk, not a movement modifier.
 		var button = Button.new()
 		button.text = _control_text(action)
 		button.clip_text = true

@@ -1,0 +1,1921 @@
+{
+  "current_art_resources": {
+    "game/assets/art/effects/ammo_vfx.png": {
+      "bytes": 13752,
+      "path": "game/assets/art/effects/ammo_vfx.png",
+      "sha256": "5d27dbae8431b9a11bcfdc3c93eccf00e17e94975201eafe0a277c46e9ac2d88"
+    },
+    "game/assets/art/effects/ammo_vfx.png.import": {
+      "bytes": 947,
+      "path": "game/assets/art/effects/ammo_vfx.png.import",
+      "sha256": "92e7a50f3c0ed51577be0761b4b37856a6dd776b58d1cba3b1471c022b87407b"
+    },
+    "game/assets/art/effects/shot_travel.png": {
+      "bytes": 12211,
+      "path": "game/assets/art/effects/shot_travel.png",
+      "sha256": "0f386803d9b8c852b3cfabe270493b7d00039b3a5a3e84649fac5ce691480746"
+    },
+    "game/assets/art/effects/shot_travel.png.import": {
+      "bytes": 956,
+      "path": "game/assets/art/effects/shot_travel.png.import",
+      "sha256": "b631d455e69fe10136e33691c09ca9881de60724426983dfdf9d1eb42ded70cb"
+    },
+    "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb": {
+      "bytes": 350812,
+      "path": "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb",
+      "sha256": "22181845495694999ce3290503b50a4b9f49e4c5992e58608f24902d155f1ab4"
+    },
+    "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb.import": {
+      "bytes": 1279,
+      "path": "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb.import",
+      "sha256": "6eaf2431a82dd16cced403e1cf5c2de70ed6f327fb86ff26bfae58c99e8a5eed"
+    },
+    "game/assets/art/healing_machinery/models/capillary-organ.glb": {
+      "bytes": 449404,
+      "path": "game/assets/art/healing_machinery/models/capillary-organ.glb",
+      "sha256": "086b1ba1a5f10a738225ac67e169aabce4db018f12b4409325b292e954118134"
+    },
+    "game/assets/art/healing_machinery/models/capillary-organ.glb.import": {
+      "bytes": 1244,
+      "path": "game/assets/art/healing_machinery/models/capillary-organ.glb.import",
+      "sha256": "fdb244ad030b556e92ce0e0bdd310c709d1738b38d199951405853cf7eeaf110"
+    },
+    "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb": {
+      "bytes": 276084,
+      "path": "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb",
+      "sha256": "2da44db2f0ca40128f39d5af4b20dc8c91222b5cdb78c0ea74014c54c48b2d3c"
+    },
+    "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb.import": {
+      "bytes": 1274,
+      "path": "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb.import",
+      "sha256": "649aad77e1f1aa7efa2c1ac72e389b22b8fbf46b4dd1a9f1f30c9650d5a45f18"
+    },
+    "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb": {
+      "bytes": 553480,
+      "path": "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb",
+      "sha256": "1d52624f9adb70116b5709f450bc729f346269ca5fc6340b267e433ce345c1c9"
+    },
+    "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb.import": {
+      "bytes": 1262,
+      "path": "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb.import",
+      "sha256": "7f74ba8def5f8155b3f501fb88d46fff59f65dbde9ace9ade7aa956855851610"
+    },
+    "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb": {
+      "bytes": 292532,
+      "path": "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb",
+      "sha256": "328fed17bbe6181248e3a54064fed91be54efc4124c57a1289c15e35d785bf14"
+    },
+    "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb.import": {
+      "bytes": 1259,
+      "path": "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb.import",
+      "sha256": "905fbc2b1296f580e97111986fd6a1c93cf3d303b7e3c17f1fc9f17ec2cdd0e7"
+    },
+    "game/assets/art/healing_machinery/models/organic-valve-cage.glb": {
+      "bytes": 468400,
+      "path": "game/assets/art/healing_machinery/models/organic-valve-cage.glb",
+      "sha256": "90f1b2ed0f0c3f761137d432ae076aa3612ad27e08029bebc5232e5f6d2e7301"
+    },
+    "game/assets/art/healing_machinery/models/organic-valve-cage.glb.import": {
+      "bytes": 1253,
+      "path": "game/assets/art/healing_machinery/models/organic-valve-cage.glb.import",
+      "sha256": "3decd648120abaaee9dfeb399f20eabcafd970ed6c4212b98cd6202c619a491e"
+    },
+    "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb": {
+      "bytes": 274116,
+      "path": "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb",
+      "sha256": "ec4945b09c05665950295a3c13cfc696075a476176d9812b64e22212813b1338"
+    },
+    "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb.import": {
+      "bytes": 1280,
+      "path": "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb.import",
+      "sha256": "d110ef9b97577a085ae22760f0fc73665a6769e37acddba76a385512a464f860"
+    },
+    "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb": {
+      "bytes": 716200,
+      "path": "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb",
+      "sha256": "5165edaba4ab5e74d1ec8f051b7a7c143f426b7eb8ef856d6ed3d7559761723b"
+    },
+    "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb.import": {
+      "bytes": 1252,
+      "path": "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb.import",
+      "sha256": "1720013ee01360e6451da74a996a50dbeb182d955f1f46db121b5ec62afff700"
+    },
+    "game/assets/art/healing_machinery/raw/texture-atlas.png": {
+      "bytes": 3292268,
+      "path": "game/assets/art/healing_machinery/raw/texture-atlas.png",
+      "sha256": "580ef04e926d59e735bad0c933da87019ac3902df2ecfb04e630db70e0da5795"
+    },
+    "game/assets/art/healing_machinery/raw/texture-atlas.png.import": {
+      "bytes": 977,
+      "path": "game/assets/art/healing_machinery/raw/texture-atlas.png.import",
+      "sha256": "b0bcd9d2489f2d017837616ecca3278542797402d588413ec8a6066fbbd25301"
+    },
+    "game/assets/art/hud/hud_kit.json": {
+      "bytes": 6559,
+      "path": "game/assets/art/hud/hud_kit.json",
+      "sha256": "9cad4cb605335f1f39c4aa33499036e6bfb405bf8e049f5f5039e43c0a2a098b"
+    },
+    "game/assets/art/hud/hud_kit.png": {
+      "bytes": 25712,
+      "path": "game/assets/art/hud/hud_kit.png",
+      "sha256": "3dfc6910639952edbac1c83cc445b5e2a28780adef4275969cdd37e13fe18885"
+    },
+    "game/assets/art/hud/hud_kit.png.import": {
+      "bytes": 940,
+      "path": "game/assets/art/hud/hud_kit.png.import",
+      "sha256": "2ede529197d7dcf7f4f890ef5b9382ff6439165186434a187ab1eaf36471271f"
+    },
+    "game/assets/art/hud/marker_glyphs.json": {
+      "bytes": 5881,
+      "path": "game/assets/art/hud/marker_glyphs.json",
+      "sha256": "d378bfb81d506beba384ac8d8366080a3bfe11068d0a080648cf151eb10e71c4"
+    },
+    "game/assets/art/hud/marker_glyphs.png": {
+      "bytes": 2782,
+      "path": "game/assets/art/hud/marker_glyphs.png",
+      "sha256": "f414a3748493a9a21f03882cacff1f7f98a3d379e5185f8f1174682090936eb2"
+    },
+    "game/assets/art/hud/marker_glyphs.png.import": {
+      "bytes": 957,
+      "path": "game/assets/art/hud/marker_glyphs.png.import",
+      "sha256": "6c3238539728338a32cce9a940d835d979bb4290c8bced5db33f6561863ce36c"
+    },
+    "game/assets/art/sprites/bodies-v1/brute.png": {
+      "bytes": 207292,
+      "path": "game/assets/art/sprites/bodies-v1/brute.png",
+      "sha256": "dea9b732adf116b8201d0f9d9ec62238109790a87f6a7f8b01b383978e567e21"
+    },
+    "game/assets/art/sprites/bodies-v1/brute.png.import": {
+      "bytes": 948,
+      "path": "game/assets/art/sprites/bodies-v1/brute.png.import",
+      "sha256": "f1640582b68b5258ff524658f1728369e819a26b3443e31d14b9c844b941c4ea"
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png": {
+      "bytes": 214723,
+      "path": "game/assets/art/sprites/bodies-v1/caster.png",
+      "sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6"
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png.import": {
+      "bytes": 951,
+      "path": "game/assets/art/sprites/bodies-v1/caster.png.import",
+      "sha256": "b8b330e06b6742c77f04425ff3b441dfe96032252bac313177e9a4230cc5d519"
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png": {
+      "bytes": 564352,
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png",
+      "sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902"
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png.import": {
+      "bytes": 969,
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png.import",
+      "sha256": "82a33c2b1749e6fd5a7c1bc565260361202f10ef628d539dd868b5b2b11e4279"
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png": {
+      "bytes": 121328,
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png",
+      "sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56"
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png.import": {
+      "bytes": 955,
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png.import",
+      "sha256": "cbaad65919b6dbb91a83f3c387686a7711be091e4915f2266b747a8734a67118"
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png": {
+      "bytes": 188104,
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png",
+      "sha256": "3b519f6b5557204a43bfb94e7b4df8543a6f3d0d7bb02e1e0748f33d6ab5a63a"
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png.import": {
+      "bytes": 958,
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png.import",
+      "sha256": "a477dfb74f9fc36a3a0710888179154fdd575c7dfde7146cc20c91c26ef31ccb"
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png": {
+      "bytes": 767835,
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png",
+      "sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506"
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png.import": {
+      "bytes": 976,
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png.import",
+      "sha256": "5f3d7d5848e40d11b3fc0c8a3863d06756116f4a8764a48c36b9c7486ee65750"
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png": {
+      "bytes": 201859,
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png",
+      "sha256": "7499061d847bf8a4bd2bcf11ae4e62df01149ebed8c92740155d474079c84368"
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png.import": {
+      "bytes": 957,
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png.import",
+      "sha256": "9e247ed1891f6a18bb8da9b341419394f74b567daedef7ab4ec81b965a3f5ca0"
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png": {
+      "bytes": 262272,
+      "path": "game/assets/art/sprites/bodies-v1/worker.png",
+      "sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52"
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png.import": {
+      "bytes": 951,
+      "path": "game/assets/art/sprites/bodies-v1/worker.png.import",
+      "sha256": "96a420cf8b92988d05f207e88474afa8c5be10e36a6e51805f122b2dbf812654"
+    },
+    "game/assets/art/textures/cathedral_kit_atlas.png": {
+      "bytes": 268046,
+      "path": "game/assets/art/textures/cathedral_kit_atlas.png",
+      "sha256": "640b1b783d2116a9d5657544ebf3c1964792d8a779269d13560a621f08c0f140"
+    },
+    "game/assets/art/textures/cathedral_kit_atlas.png.import": {
+      "bytes": 980,
+      "path": "game/assets/art/textures/cathedral_kit_atlas.png.import",
+      "sha256": "89ec224814e9045920f5b99f0071d77a5e563c4b6e813172b874df815b94ad9c"
+    },
+    "game/assets/art/textures/floor.png": {
+      "bytes": 3237,
+      "path": "game/assets/art/textures/floor.png",
+      "sha256": "2131e8803f74768a0ee3783ba1a08fae6bb5d58ec63e9f8cec0c49ea5f47f8a1"
+    },
+    "game/assets/art/textures/floor.png.import": {
+      "bytes": 938,
+      "path": "game/assets/art/textures/floor.png.import",
+      "sha256": "d9a5f0c7f1a51be7fc277ee2692204d639692242b430f0c5fc860962de88fd6e"
+    },
+    "game/assets/art/textures/grate.png": {
+      "bytes": 2678,
+      "path": "game/assets/art/textures/grate.png",
+      "sha256": "f4696d6f9aa916849f028b4f08bfcf9a2fd1cc9caa16755b37e2aabea41e328c"
+    },
+    "game/assets/art/textures/grate.png.import": {
+      "bytes": 939,
+      "path": "game/assets/art/textures/grate.png.import",
+      "sha256": "25978bced6faead735ff97eb2ffe84039c163900166a062a94e734dab5808682"
+    },
+    "game/assets/art/textures/surface_atlas.png": {
+      "bytes": 9694,
+      "path": "game/assets/art/textures/surface_atlas.png",
+      "sha256": "d0d91e4c262814faa2fa4f7b319f22ef247b4068bc998ce5cc904123be141f39"
+    },
+    "game/assets/art/textures/surface_atlas.png.import": {
+      "bytes": 963,
+      "path": "game/assets/art/textures/surface_atlas.png.import",
+      "sha256": "2b9a681cdc8411d5b0d40f3283bbe3fbb99ff2cf9bb31af55d6dc6a378499aae"
+    },
+    "game/assets/art/textures/wall.png": {
+      "bytes": 3182,
+      "path": "game/assets/art/textures/wall.png",
+      "sha256": "1da3d44e80befd4de0fba29cef47e6c73cc66443b6e86c41f016bafdbc00325c"
+    },
+    "game/assets/art/textures/wall.png.import": {
+      "bytes": 936,
+      "path": "game/assets/art/textures/wall.png.import",
+      "sha256": "83cef14b429101385f22d0a3e3be64a8d0af9dbbcc050d32f070f0a1768fca37"
+    },
+    "game/assets/art/thresholds-v3/foundry_threshold.glb": {
+      "bytes": 8771724,
+      "path": "game/assets/art/thresholds-v3/foundry_threshold.glb",
+      "sha256": "15b052c3cc67396e64509913d13d872632e4eba853bcf85e3459274a0d745481"
+    },
+    "game/assets/art/thresholds-v3/foundry_threshold.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/thresholds-v3/foundry_threshold.glb.import",
+      "sha256": "a1d113f63dd31df7fc705df94289c9ec916596f6bbe20ba3e7b28516c337ca83"
+    },
+    "game/assets/art/thresholds-v3/heart_threshold.glb": {
+      "bytes": 7742432,
+      "path": "game/assets/art/thresholds-v3/heart_threshold.glb",
+      "sha256": "d9d4ee9fd0616d54ff5730fb4a5d2dbc62abf4678665b0dcca20333d4dcffbc3"
+    },
+    "game/assets/art/thresholds-v3/heart_threshold.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/thresholds-v3/heart_threshold.glb.import",
+      "sha256": "8bf22d954482907fe60b89407b966213282ca8a04bc6a04a9fb66a05e8e7762e"
+    },
+    "game/assets/art/thresholds-v3/intake_threshold.glb": {
+      "bytes": 7668288,
+      "path": "game/assets/art/thresholds-v3/intake_threshold.glb",
+      "sha256": "0a894d4d468fe1f9e1765539e90cc14bff9496f5012acb25c544c10cea521294"
+    },
+    "game/assets/art/thresholds-v3/intake_threshold.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/thresholds-v3/intake_threshold.glb.import",
+      "sha256": "3af86a2fe970684401b0074d5d3b6808906ff9ecdd0184747231cca6d208ec04"
+    },
+    "game/assets/art/thresholds-v3/inversion_threshold.glb": {
+      "bytes": 7486576,
+      "path": "game/assets/art/thresholds-v3/inversion_threshold.glb",
+      "sha256": "d29c5d66c623b51d2f5c5ad9e5bdba984f12e611c452db5477e0b3ce39ae1a72"
+    },
+    "game/assets/art/thresholds-v3/inversion_threshold.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/thresholds-v3/inversion_threshold.glb.import",
+      "sha256": "29b8b2d5ba8eaf8b038a97d2c37bbf6269ab5fe3e13bbbb2a66bfdbd79a71b6f"
+    },
+    "game/assets/art/thresholds-v3/nursery_threshold.glb": {
+      "bytes": 7985956,
+      "path": "game/assets/art/thresholds-v3/nursery_threshold.glb",
+      "sha256": "acf8fa0e37cef98e8cfe96bbf5962e3585771e809823a05832bd835ceb42eecd"
+    },
+    "game/assets/art/thresholds-v3/nursery_threshold.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/thresholds-v3/nursery_threshold.glb.import",
+      "sha256": "f6f2136014332c7edbc1f9b5d2828fe55d824fa9c1e22673a7dc75cf86f109e8"
+    },
+    "game/assets/art/thresholds-v3/ossuary_threshold.glb": {
+      "bytes": 7820244,
+      "path": "game/assets/art/thresholds-v3/ossuary_threshold.glb",
+      "sha256": "f706327b168bbcdb71ed433d951385057b72f751f6cba14ec038fff2fdd57ede"
+    },
+    "game/assets/art/thresholds-v3/ossuary_threshold.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/thresholds-v3/ossuary_threshold.glb.import",
+      "sha256": "de8be75670f0d5ffad2ec915978aaaec023f9581fa4828d3d1d4fb404d8e98ca"
+    },
+    "game/assets/art/thresholds-v3/processional_threshold.glb": {
+      "bytes": 7611864,
+      "path": "game/assets/art/thresholds-v3/processional_threshold.glb",
+      "sha256": "c1c302efeb6c1a17ed54d79caaab8eb7e32a0d259ff3f571a4338aba295c85d8"
+    },
+    "game/assets/art/thresholds-v3/processional_threshold.glb.import": {
+      "bytes": 1207,
+      "path": "game/assets/art/thresholds-v3/processional_threshold.glb.import",
+      "sha256": "2822de22d9ca88289ffb7a1cb2c4bdad94f7c9f36e50d141820b6218836ab877"
+    },
+    "game/assets/art/thresholds-v3/reliquary_threshold.glb": {
+      "bytes": 8228204,
+      "path": "game/assets/art/thresholds-v3/reliquary_threshold.glb",
+      "sha256": "b87da8187530454775308d01bc9d0b234421a2c7058b89df76583def708f2416"
+    },
+    "game/assets/art/thresholds-v3/reliquary_threshold.glb.import": {
+      "bytes": 1197,
+      "path": "game/assets/art/thresholds-v3/reliquary_threshold.glb.import",
+      "sha256": "581fb7c70de7fed9455df4c3c7c05957ac58fe39cb6349186b8803c759a2a9db"
+    },
+    "game/assets/art/weapons/choir_disruptor.png": {
+      "bytes": 66190,
+      "path": "game/assets/art/weapons/choir_disruptor.png",
+      "sha256": "f702ba423035c1a2cdeee3f928368861bea281adaae1aaf6e2b1c857780d98f3"
+    },
+    "game/assets/art/weapons/choir_disruptor.png.import": {
+      "bytes": 968,
+      "path": "game/assets/art/weapons/choir_disruptor.png.import",
+      "sha256": "ad833c3093dcaa3d64a336d9160548fae1cf0d915e52c3c5e2b99405095a159b"
+    },
+    "game/assets/art/weapons/impact_tool.png": {
+      "bytes": 25620,
+      "path": "game/assets/art/weapons/impact_tool.png",
+      "sha256": "0a566362f4436f1814203fa76ce21e43ca3db59f4f31ded676cd3a85f3c056f7"
+    },
+    "game/assets/art/weapons/impact_tool.png.import": {
+      "bytes": 956,
+      "path": "game/assets/art/weapons/impact_tool.png.import",
+      "sha256": "38a058601c1f8ef6983383a55c33ad0c472ae9006e8cd8054e03a6858c962b46"
+    },
+    "game/assets/art/weapons/marrow_launcher.png": {
+      "bytes": 42925,
+      "path": "game/assets/art/weapons/marrow_launcher.png",
+      "sha256": "b097be18884c2a6f3b8ceceed3f9e7b0f68b335fecfa72896d076ded31497d59"
+    },
+    "game/assets/art/weapons/marrow_launcher.png.import": {
+      "bytes": 968,
+      "path": "game/assets/art/weapons/marrow_launcher.png.import",
+      "sha256": "d554c260dea835b8117706a4632e66cfc00dc13011423bb210e0c8b6be3293fa"
+    },
+    "game/assets/art/weapons/rivet_pistol.png": {
+      "bytes": 34219,
+      "path": "game/assets/art/weapons/rivet_pistol.png",
+      "sha256": "e774365b70615e5e1efeff1cb0b3264100fc9ed43735a8d389f1048329d47a17"
+    },
+    "game/assets/art/weapons/rivet_pistol.png.import": {
+      "bytes": 959,
+      "path": "game/assets/art/weapons/rivet_pistol.png.import",
+      "sha256": "c961935675d1f925df5530c3719cb3f545b3cdc9c520214c20b01e9a7469e456"
+    },
+    "game/assets/art/weapons/sawtooth_repeater.png": {
+      "bytes": 29000,
+      "path": "game/assets/art/weapons/sawtooth_repeater.png",
+      "sha256": "c73ffea95cc61d77d6148b2bc8c76154150c5ed307a03560376d098c37b2a233"
+    },
+    "game/assets/art/weapons/sawtooth_repeater.png.import": {
+      "bytes": 973,
+      "path": "game/assets/art/weapons/sawtooth_repeater.png.import",
+      "sha256": "37df0b12d01855f4f645f64a3365657b168663a105cdc60b4af90f328997b0d5"
+    },
+    "game/assets/art/weapons/scattergun.png": {
+      "bytes": 43437,
+      "path": "game/assets/art/weapons/scattergun.png",
+      "sha256": "78177df17e91aca29057858fc7f73f54cd634c97361d7714b82993fdf24bb1b6"
+    },
+    "game/assets/art/weapons/scattergun.png.import": {
+      "bytes": 953,
+      "path": "game/assets/art/weapons/scattergun.png.import",
+      "sha256": "321b481bb27d7c8a31b7f420a28bda0390b2515ce56ef96a764dea43e7c5d498"
+    },
+    "game/assets/art/world/cathedral_lancet_bay.glb": {
+      "bytes": 561936,
+      "path": "game/assets/art/world/cathedral_lancet_bay.glb",
+      "sha256": "cdcd9143c327b523f418d4309972d4811abc852afcf76ae597a55455165249f4"
+    },
+    "game/assets/art/world/cathedral_lancet_bay.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/cathedral_lancet_bay.glb.import",
+      "sha256": "9b22bd59bf9d639d3cb146592f89e325596e278d48bb6eb7b9676a71c9594a79"
+    },
+    "game/assets/art/world/cathedral_skeletal_dado.glb": {
+      "bytes": 983220,
+      "path": "game/assets/art/world/cathedral_skeletal_dado.glb",
+      "sha256": "726c95e6ebf025e11b1a03d437d307a9889eaf8b8dc4634095b2d5c98850484a"
+    },
+    "game/assets/art/world/cathedral_skeletal_dado.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/cathedral_skeletal_dado.glb.import",
+      "sha256": "925fdc79d8613fb4f776d045474e3cb553184b8440e6e86695a647c6a51582ff"
+    },
+    "game/assets/art/world/cathedral_vault_6m.glb": {
+      "bytes": 685144,
+      "path": "game/assets/art/world/cathedral_vault_6m.glb",
+      "sha256": "c64a835883fb8010dd65334c96fd81e38c2e2c968ec0d44cdbe349757b210937"
+    },
+    "game/assets/art/world/cathedral_vault_6m.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/cathedral_vault_6m.glb.import",
+      "sha256": "4be0628bbacaf7f2734e445d4cb66dfe85613f9b362e05af5db40928d3c2ff74"
+    },
+    "game/assets/art/world/cathedral_vault_9m.glb": {
+      "bytes": 685144,
+      "path": "game/assets/art/world/cathedral_vault_9m.glb",
+      "sha256": "ddeb1208004d25b1f6ba37ebfb6e5d58674b21f2697d6f1edc33be51eebfeaac"
+    },
+    "game/assets/art/world/cathedral_vault_9m.glb.import": {
+      "bytes": 1185,
+      "path": "game/assets/art/world/cathedral_vault_9m.glb.import",
+      "sha256": "1806f6a51195d9528eede974ce866ea663da5f129f1dc308b19932a34ce926c8"
+    },
+    "game/assets/art/world/conduit.glb": {
+      "bytes": 232364,
+      "path": "game/assets/art/world/conduit.glb",
+      "sha256": "21749d90da038832125fa3363a672388cc1ff15402f11112821ffa0605ea7949"
+    },
+    "game/assets/art/world/conduit.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/conduit.glb.import",
+      "sha256": "c68efa0c5e34493c342e24444b9cc68dab922ebe7bb9813dc02a4c95805935bf"
+    },
+    "game/assets/art/world/containment_capsule.glb": {
+      "bytes": 550936,
+      "path": "game/assets/art/world/containment_capsule.glb",
+      "sha256": "b594376e4d239b8a09c48e7f0efe569185922a0475c6dae0e95882d2f445def7"
+    },
+    "game/assets/art/world/containment_capsule.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/containment_capsule.glb.import",
+      "sha256": "013ff9fffee41c1a2e04bc9b430e360180112a9ae4a8413ebe3488b6d3142be1"
+    },
+    "game/assets/art/world/drain_altar.glb": {
+      "bytes": 277620,
+      "path": "game/assets/art/world/drain_altar.glb",
+      "sha256": "976389135c9a3776a46fd7d170a2415d6b8316b690f6986e8115089b6bc3293e"
+    },
+    "game/assets/art/world/drain_altar.glb.import": {
+      "bytes": 1165,
+      "path": "game/assets/art/world/drain_altar.glb.import",
+      "sha256": "20f7b0771a5ec1404aac13953213404737877614d822bc2e6eb65207c3819a66"
+    },
+    "game/assets/art/world/foundry_bound_furnace.glb": {
+      "bytes": 934144,
+      "path": "game/assets/art/world/foundry_bound_furnace.glb",
+      "sha256": "56af0d47c99351c896c3144708f1ee83535737c281a3fd389a9d5bd9d07b76ee"
+    },
+    "game/assets/art/world/foundry_bound_furnace.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/foundry_bound_furnace.glb.import",
+      "sha256": "c776537bbf84fb00e9471ea52902a2f06bbc3ed8f8a46f3070f7a3eae1f04431"
+    },
+    "game/assets/art/world/foundry_cross_spine.glb": {
+      "bytes": 2035956,
+      "path": "game/assets/art/world/foundry_cross_spine.glb",
+      "sha256": "22b5a60497d114d9a063e6c4db4c1181ff2842bd86474fdc14d97e8bab980630"
+    },
+    "game/assets/art/world/foundry_cross_spine.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/foundry_cross_spine.glb.import",
+      "sha256": "ab4adacd61ed667d5157ec5ba8ce5cc7881b71972357e82b728819540c13a18d"
+    },
+    "game/assets/art/world/foundry_lamp_manifold.glb": {
+      "bytes": 1106204,
+      "path": "game/assets/art/world/foundry_lamp_manifold.glb",
+      "sha256": "54a5f2a73e44ea3750a57f6d2101b52a8c9addf197839fd232d4d21ff93cdd2e"
+    },
+    "game/assets/art/world/foundry_lamp_manifold.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/foundry_lamp_manifold.glb.import",
+      "sha256": "d05d9847f4ae13d197f9b94ab9b7d0508e9c9cd0d0766d618a9aeb899e7e8ddb"
+    },
+    "game/assets/art/world/foundry_pressure_canopy.glb": {
+      "bytes": 955508,
+      "path": "game/assets/art/world/foundry_pressure_canopy.glb",
+      "sha256": "9b8a1845fab53dc1531a0d7a63310cb6f978bd5347a58e0d84886028a14f1a77"
+    },
+    "game/assets/art/world/foundry_pressure_canopy.glb.import": {
+      "bytes": 1200,
+      "path": "game/assets/art/world/foundry_pressure_canopy.glb.import",
+      "sha256": "fb27b11b2a9f0b4463061a00eba9fa25bc23a86d0748c00aae0112b608a10f79"
+    },
+    "game/assets/art/world/foundry_slag_wheel.glb": {
+      "bytes": 807560,
+      "path": "game/assets/art/world/foundry_slag_wheel.glb",
+      "sha256": "fe934f7ec5629a01d604271a25cd9b675b9ff4ac3e3a39628064ed60db3e2c8d"
+    },
+    "game/assets/art/world/foundry_slag_wheel.glb.import": {
+      "bytes": 1185,
+      "path": "game/assets/art/world/foundry_slag_wheel.glb.import",
+      "sha256": "33fb476bd22e067649d3634ee5569732e677735f64271b968c48365514714b28"
+    },
+    "game/assets/art/world/foundry_solar_crucible.glb": {
+      "bytes": 484124,
+      "path": "game/assets/art/world/foundry_solar_crucible.glb",
+      "sha256": "95ad0c528642850a949636f55593f744da42cac5a5f5eb91ec671f8f9291a10f"
+    },
+    "game/assets/art/world/foundry_solar_crucible.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/world/foundry_solar_crucible.glb.import",
+      "sha256": "cb1a1b9b7562cd118e076018f1500c1310704a5cde5edc972722697226faf0a8"
+    },
+    "game/assets/art/world/foundry_tower_cluster.glb": {
+      "bytes": 1282948,
+      "path": "game/assets/art/world/foundry_tower_cluster.glb",
+      "sha256": "1968fd1f85357041179cb37a5addcff99da09a50941894d6bde56d18297b463f"
+    },
+    "game/assets/art/world/foundry_tower_cluster.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/foundry_tower_cluster.glb.import",
+      "sha256": "f3cffaf6b4559114a78858b5a902a5349893a090ff0ede523d72b405ca066711"
+    },
+    "game/assets/art/world/heart_arterial_vault.glb": {
+      "bytes": 992156,
+      "path": "game/assets/art/world/heart_arterial_vault.glb",
+      "sha256": "caf69b34361d3e90524b50c7a57afab76dd15c6481f3ebb030cfecf3f2c9d9b0"
+    },
+    "game/assets/art/world/heart_arterial_vault.glb.import": {
+      "bytes": 1191,
+      "path": "game/assets/art/world/heart_arterial_vault.glb.import",
+      "sha256": "ef5353d37b9620ee8bb6f04a5bc722eafd20dd6dd96b9d274a596b6b779bce4d"
+    },
+    "game/assets/art/world/heart_bound_gate.glb": {
+      "bytes": 943336,
+      "path": "game/assets/art/world/heart_bound_gate.glb",
+      "sha256": "faae5b499afc31d60d6126a0e9412fc339487d5f5d9864ec8a32bd623fc33f26"
+    },
+    "game/assets/art/world/heart_bound_gate.glb.import": {
+      "bytes": 1180,
+      "path": "game/assets/art/world/heart_bound_gate.glb.import",
+      "sha256": "bec253a9bd3d9b362dca5141d7c0205d2e0d4341d546df003a9c6cb4b4bce91a"
+    },
+    "game/assets/art/world/heart_cell_crown.glb": {
+      "bytes": 937200,
+      "path": "game/assets/art/world/heart_cell_crown.glb",
+      "sha256": "9704b2ab2d9f44779da2cba2871dd4aa1c24ace253e7f6a0aa3760176652470a"
+    },
+    "game/assets/art/world/heart_cell_crown.glb.import": {
+      "bytes": 1180,
+      "path": "game/assets/art/world/heart_cell_crown.glb.import",
+      "sha256": "f2424a7eadc815a03ba490c78020f3312d72672909e4bdc2dbae358efe5e46e5"
+    },
+    "game/assets/art/world/heart_mouth_restraint.glb": {
+      "bytes": 857288,
+      "path": "game/assets/art/world/heart_mouth_restraint.glb",
+      "sha256": "32c16a0cc222b57b4464553b0ae722cf27e4f98f0035d6446d1a9ed03a38c55d"
+    },
+    "game/assets/art/world/heart_mouth_restraint.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/heart_mouth_restraint.glb.import",
+      "sha256": "6b50d7a139bf926a27f87a501da6f468192284285874257a37f0905593b1c105"
+    },
+    "game/assets/art/world/heart_pulse_mandala.glb": {
+      "bytes": 438004,
+      "path": "game/assets/art/world/heart_pulse_mandala.glb",
+      "sha256": "37af1da557ef6d6538d6d191f657e2afab6b7fa43cf1dbac58e73a5a4dd3d489"
+    },
+    "game/assets/art/world/heart_pulse_mandala.glb.import": {
+      "bytes": 1188,
+      "path": "game/assets/art/world/heart_pulse_mandala.glb.import",
+      "sha256": "9944318c7de6dcb630e3b3ecbb05d4488bd13488b1b6eabd9cf033445ee9616f"
+    },
+    "game/assets/art/world/heart_seven_reservoirs.glb": {
+      "bytes": 1371600,
+      "path": "game/assets/art/world/heart_seven_reservoirs.glb",
+      "sha256": "c2f1963581438c0e507df9b4380640e09ff40e0065e04384336f704aac085387"
+    },
+    "game/assets/art/world/heart_seven_reservoirs.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/world/heart_seven_reservoirs.glb.import",
+      "sha256": "89d4a6b5ef126e8907e2e97771d3d5dc4f8512e1f7b9d79ed7c42d48bbeb2467"
+    },
+    "game/assets/art/world/heart_tower_cluster.glb": {
+      "bytes": 1252008,
+      "path": "game/assets/art/world/heart_tower_cluster.glb",
+      "sha256": "f0acfc3bea2403d15d3e105ebfb171cd98ed88cfb1476b82f59773c1059380c7"
+    },
+    "game/assets/art/world/heart_tower_cluster.glb.import": {
+      "bytes": 1188,
+      "path": "game/assets/art/world/heart_tower_cluster.glb.import",
+      "sha256": "5c9fb68f4b47d70d5f8fcaefe7ff5f809ca34396c8c87b43dfd460904ec95be1"
+    },
+    "game/assets/art/world/heart_winged_seal.glb": {
+      "bytes": 711244,
+      "path": "game/assets/art/world/heart_winged_seal.glb",
+      "sha256": "b90c7ff3e9d4c88ce0846d8e483cbe7a25a9d9eff38b1c2b0e0af43e202528f7"
+    },
+    "game/assets/art/world/heart_winged_seal.glb.import": {
+      "bytes": 1182,
+      "path": "game/assets/art/world/heart_winged_seal.glb.import",
+      "sha256": "cd17190befb343b632f9334397f71cd8834f7db021132572db1e91fa45483156"
+    },
+    "game/assets/art/world/intake_ascending_engine.glb": {
+      "bytes": 1385380,
+      "path": "game/assets/art/world/intake_ascending_engine.glb",
+      "sha256": "5d0a82331e2c6f99a8841b7bcfe57a7583946e8310b6e31b860caef949cfec4c"
+    },
+    "game/assets/art/world/intake_ascending_engine.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/intake_ascending_engine.glb.import",
+      "sha256": "6ce1419eaa231db182e4ac9abd61abb7aba13f1abf35cc6075d1f067e66f0872"
+    },
+    "game/assets/art/world/intake_bound_gate.glb": {
+      "bytes": 1062104,
+      "path": "game/assets/art/world/intake_bound_gate.glb",
+      "sha256": "6cf3a84dc2a0155fada0d72985c1f3c7907f7a89b5ddfb8c7d4630628dda56b6"
+    },
+    "game/assets/art/world/intake_bound_gate.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/intake_bound_gate.glb.import",
+      "sha256": "dd63263e8d8a058267b43fb8bd963f549ada703578dca181f42752d8f83ad0fa"
+    },
+    "game/assets/art/world/intake_pressure_screen.glb": {
+      "bytes": 736148,
+      "path": "game/assets/art/world/intake_pressure_screen.glb",
+      "sha256": "4492646c9cf3592fba31108e19b06acc39d717d05b8123b11137fa3a13c909db"
+    },
+    "game/assets/art/world/intake_pressure_screen.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/world/intake_pressure_screen.glb.import",
+      "sha256": "79ec41c28963e714ad6287d130714db6181e0b9df5f03504c8d65ac57ecc55b0"
+    },
+    "game/assets/art/world/intake_seven_lamps.glb": {
+      "bytes": 1275472,
+      "path": "game/assets/art/world/intake_seven_lamps.glb",
+      "sha256": "43389ab40acc09836d268b6537bc8b1a6fb3945df898df31fc0372eb2685a28b"
+    },
+    "game/assets/art/world/intake_seven_lamps.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/intake_seven_lamps.glb.import",
+      "sha256": "8558ead12fd1f11a6d31601e5a5ffcab41d2791fcd4d2de252952989fe710f9a"
+    },
+    "game/assets/art/world/intake_solar_seal.glb": {
+      "bytes": 1006356,
+      "path": "game/assets/art/world/intake_solar_seal.glb",
+      "sha256": "125d11c0a46772b62ae9ee08990d8656e889852465bb17aa8ac62c7652a9b85d"
+    },
+    "game/assets/art/world/intake_solar_seal.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/intake_solar_seal.glb.import",
+      "sha256": "f7d647294fb00d47fd32776fdc854a02b8aac875a3814ef5674d674163b39212"
+    },
+    "game/assets/art/world/intake_throat_frame.glb": {
+      "bytes": 1983760,
+      "path": "game/assets/art/world/intake_throat_frame.glb",
+      "sha256": "bfa50b8934e599e9757b79efad008f164aea66bcf7d364bd928f715ad69ef8bc"
+    },
+    "game/assets/art/world/intake_throat_frame.glb.import": {
+      "bytes": 1188,
+      "path": "game/assets/art/world/intake_throat_frame.glb.import",
+      "sha256": "25c87676e1e6509a70c86da27e1e2cca9d47bb6e03863d9f6d5e26490ed7405a"
+    },
+    "game/assets/art/world/intake_wheel_reservoir.glb": {
+      "bytes": 864340,
+      "path": "game/assets/art/world/intake_wheel_reservoir.glb",
+      "sha256": "9555e11e6992e9d6b68966317c0c9080d65a6fd878764c727f1b0da78b6e2dca"
+    },
+    "game/assets/art/world/intake_wheel_reservoir.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/world/intake_wheel_reservoir.glb.import",
+      "sha256": "7a1dcf698430d65de3a412ece07315d4314b35ac0f168163b9ec3bdd9e40b229"
+    },
+    "game/assets/art/world/inversion_bound_gate.glb": {
+      "bytes": 519328,
+      "path": "game/assets/art/world/inversion_bound_gate.glb",
+      "sha256": "746bbdce3235baad3eb8c9d8f3e7172e26ee2b86456a2d27700f5d6384fff369"
+    },
+    "game/assets/art/world/inversion_bound_gate.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/inversion_bound_gate.glb.import",
+      "sha256": "53f7d450c38dc495be274b00d7b54a6e322c48500775dddbdb16a7321660eb19"
+    },
+    "game/assets/art/world/inversion_cell_prism.glb": {
+      "bytes": 1063132,
+      "path": "game/assets/art/world/inversion_cell_prism.glb",
+      "sha256": "8009b62ed6b0209c1b087714ee9b4dda9ab5551388e16b53824c93574e9883e0"
+    },
+    "game/assets/art/world/inversion_cell_prism.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/inversion_cell_prism.glb.import",
+      "sha256": "7a4ce2b43d34adf402556e50c21511402ed856af65a8a6fc52e586c3205e0b53"
+    },
+    "game/assets/art/world/inversion_cosmic_membrane.glb": {
+      "bytes": 1034768,
+      "path": "game/assets/art/world/inversion_cosmic_membrane.glb",
+      "sha256": "a435b9f3fb62254d4e2118e5d55ee38200850d1a1fa100c11f393fae50c7f399"
+    },
+    "game/assets/art/world/inversion_cosmic_membrane.glb.import": {
+      "bytes": 1207,
+      "path": "game/assets/art/world/inversion_cosmic_membrane.glb.import",
+      "sha256": "40d81c0d46ce4b40cfb0a31799ba8cce5b31e149fd7ec7aa094a0fce1d77f597"
+    },
+    "game/assets/art/world/inversion_seven_vessels.glb": {
+      "bytes": 1257268,
+      "path": "game/assets/art/world/inversion_seven_vessels.glb",
+      "sha256": "0ed44f3c9167b7ddae574c2edd99815dd32e3f75b8e7225f1dac60f6fb37336e"
+    },
+    "game/assets/art/world/inversion_seven_vessels.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/inversion_seven_vessels.glb.import",
+      "sha256": "4c70936ecd692bdc0fd4168d93a6738c45e898dc3233eb7716d37b8ae294c550"
+    },
+    "game/assets/art/world/inversion_surgical_cradle.glb": {
+      "bytes": 539452,
+      "path": "game/assets/art/world/inversion_surgical_cradle.glb",
+      "sha256": "bb58b2932a78e0a1fb229447b3c079524135067c495644eb9af52c9e39847cbd"
+    },
+    "game/assets/art/world/inversion_surgical_cradle.glb.import": {
+      "bytes": 1207,
+      "path": "game/assets/art/world/inversion_surgical_cradle.glb.import",
+      "sha256": "3dbb96aad2298e9c369b9cdfe401499f62d75fdccf1139c55f3cc75d24e6906b"
+    },
+    "game/assets/art/world/inversion_tilted_gyroscope.glb": {
+      "bytes": 644408,
+      "path": "game/assets/art/world/inversion_tilted_gyroscope.glb",
+      "sha256": "2137e1b5e8e510ffaecb0427c25c3d71b5c54942f73a258f8dc4fc9d62f8e2b4"
+    },
+    "game/assets/art/world/inversion_tilted_gyroscope.glb.import": {
+      "bytes": 1210,
+      "path": "game/assets/art/world/inversion_tilted_gyroscope.glb.import",
+      "sha256": "40c91823c355cda7fdfaa38b14223e6e4fc7aca8f612deba9aa4e8beb3961158"
+    },
+    "game/assets/art/world/inversion_tower_cluster.glb": {
+      "bytes": 1306716,
+      "path": "game/assets/art/world/inversion_tower_cluster.glb",
+      "sha256": "5224dbf9e293c50a3808baa3dab3d336bc59f00e46f4fe05ba35118dec82c43a"
+    },
+    "game/assets/art/world/inversion_tower_cluster.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/inversion_tower_cluster.glb.import",
+      "sha256": "68ce6368d908040c45d4a857542fa0452b4f0d7a41fb5aeca140a7c6d63a1194"
+    },
+    "game/assets/art/world/inversion_winged_cradle.glb": {
+      "bytes": 728584,
+      "path": "game/assets/art/world/inversion_winged_cradle.glb",
+      "sha256": "837ee0d4210dab3de237aa2e7669358c85fa87baed226da71ea84527e8b90516"
+    },
+    "game/assets/art/world/inversion_winged_cradle.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/inversion_winged_cradle.glb.import",
+      "sha256": "be30d2733ea105852cfb238269ade825ad966ff5b9064919dea70bc3f456b786"
+    },
+    "game/assets/art/world/marker_ammo.glb": {
+      "bytes": 81172,
+      "path": "game/assets/art/world/marker_ammo.glb",
+      "sha256": "67d4b3cb37715551e9a126bd3680c1132002d4b3481ab48ea00273ecb9ef342f"
+    },
+    "game/assets/art/world/marker_ammo.glb.import": {
+      "bytes": 1164,
+      "path": "game/assets/art/world/marker_ammo.glb.import",
+      "sha256": "49d385ba8e9bfc7ec5469a17b179e6f0173a473e45ca89ed082f579f6b194790"
+    },
+    "game/assets/art/world/marker_ammo_choir.glb": {
+      "bytes": 24324,
+      "path": "game/assets/art/world/marker_ammo_choir.glb",
+      "sha256": "e4fb459837c383857298374db83745993eb0aa018f5eb23766de3f00c319018f"
+    },
+    "game/assets/art/world/marker_ammo_choir.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/marker_ammo_choir.glb.import",
+      "sha256": "18dbd1f0414ecf9cd6418cc1b8d45df0792de70cf52189eb77ec7eb1d4730935"
+    },
+    "game/assets/art/world/marker_ammo_marrow.glb": {
+      "bytes": 18564,
+      "path": "game/assets/art/world/marker_ammo_marrow.glb",
+      "sha256": "a041e1ecca0321e0391716774437aabdaa1ed91e1cb496e3818f62a82ab9ab5a"
+    },
+    "game/assets/art/world/marker_ammo_marrow.glb.import": {
+      "bytes": 1185,
+      "path": "game/assets/art/world/marker_ammo_marrow.glb.import",
+      "sha256": "0e46758a2fcfefb613cb2edbd6099b2feb00e05d4db04f0ca946f3420e64096c"
+    },
+    "game/assets/art/world/marker_ammo_sawtooth.glb": {
+      "bytes": 24896,
+      "path": "game/assets/art/world/marker_ammo_sawtooth.glb",
+      "sha256": "85c4925e1b989a1f5ef7e7ea97b48413db521ee28fbc0987f2d8593738d58f9e"
+    },
+    "game/assets/art/world/marker_ammo_sawtooth.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/marker_ammo_sawtooth.glb.import",
+      "sha256": "183aedd8939bccf5a199ccab7f44715bcba33abf2f27c20675a2deabf8f7dc2b"
+    },
+    "game/assets/art/world/marker_ammo_shells.glb": {
+      "bytes": 55804,
+      "path": "game/assets/art/world/marker_ammo_shells.glb",
+      "sha256": "865745333429cd7d5242b96459cb5a94e8a6411a663e3461da7ec94b427b0ba8"
+    },
+    "game/assets/art/world/marker_ammo_shells.glb.import": {
+      "bytes": 1185,
+      "path": "game/assets/art/world/marker_ammo_shells.glb.import",
+      "sha256": "6d100e3eabcc5d99928d8dce661575cf1b3aeb2beac24ffe5147e86f334f765c"
+    },
+    "game/assets/art/world/marker_armor.glb": {
+      "bytes": 51264,
+      "path": "game/assets/art/world/marker_armor.glb",
+      "sha256": "a0544bcba64a32e13585da78fff08b4892ae6c37d58841e7ce404100ce7ca4c2"
+    },
+    "game/assets/art/world/marker_armor.glb.import": {
+      "bytes": 1168,
+      "path": "game/assets/art/world/marker_armor.glb.import",
+      "sha256": "4114064d93bad8bb823e15e720a135ed4b337539c43ff0410bf3c3ed5762a49f"
+    },
+    "game/assets/art/world/marker_checkpoint.glb": {
+      "bytes": 52548,
+      "path": "game/assets/art/world/marker_checkpoint.glb",
+      "sha256": "ee4731f42ad44bce933682bce9d0feeb058faf63f53c05d49e04b08c1c873d6f"
+    },
+    "game/assets/art/world/marker_checkpoint.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/marker_checkpoint.glb.import",
+      "sha256": "ca67ca0261ac1a9349e75a1aa30b487ca6af502c7656df870300b70958676105"
+    },
+    "game/assets/art/world/marker_exit.glb": {
+      "bytes": 109052,
+      "path": "game/assets/art/world/marker_exit.glb",
+      "sha256": "44b7214f50343c697ece1cbae00147a32123cbaab0cafef7ae259b5054e5f111"
+    },
+    "game/assets/art/world/marker_exit.glb.import": {
+      "bytes": 1165,
+      "path": "game/assets/art/world/marker_exit.glb.import",
+      "sha256": "72a99abf5bf648dbc9c65cc853922dd13fe51009a6b263ec0cf4ce5845d039d5"
+    },
+    "game/assets/art/world/marker_health.glb": {
+      "bytes": 49316,
+      "path": "game/assets/art/world/marker_health.glb",
+      "sha256": "0cf41b8e217852c36eefa2cbb39ec6f7e76f8d8ae6516f45258435c231f86fb0"
+    },
+    "game/assets/art/world/marker_health.glb.import": {
+      "bytes": 1171,
+      "path": "game/assets/art/world/marker_health.glb.import",
+      "sha256": "fe8586d708fb348c1b3075a1879e0e1d21f8feeb9096054b0298a79eb89b1384"
+    },
+    "game/assets/art/world/marker_ivorykey.glb": {
+      "bytes": 29740,
+      "path": "game/assets/art/world/marker_ivorykey.glb",
+      "sha256": "c46f7d4ee5c4c90f5ed68fcfe9f39e85cb127b744757f7dcd1432acc8998ef62"
+    },
+    "game/assets/art/world/marker_ivorykey.glb.import": {
+      "bytes": 1176,
+      "path": "game/assets/art/world/marker_ivorykey.glb.import",
+      "sha256": "6d523255ad549e764866ca7c7584b8bd30c545b983d6e062c2f67141d38679b1"
+    },
+    "game/assets/art/world/marker_key.glb": {
+      "bytes": 49268,
+      "path": "game/assets/art/world/marker_key.glb",
+      "sha256": "ae5966d692afd0badd02a93a4e8b547544256cd0a2ec9b8558fbba26ea357e16"
+    },
+    "game/assets/art/world/marker_key.glb.import": {
+      "bytes": 1162,
+      "path": "game/assets/art/world/marker_key.glb.import",
+      "sha256": "2d575e9f89316f7b66f8466822a354fb3e51b66b0ac62607e75c781c59dc7569"
+    },
+    "game/assets/art/world/marker_story.glb": {
+      "bytes": 33236,
+      "path": "game/assets/art/world/marker_story.glb",
+      "sha256": "420c49d230fa0d307cd9c81e3f1ddea18fda6df748fe51394ad96f54dbe00160"
+    },
+    "game/assets/art/world/marker_story.glb.import": {
+      "bytes": 1167,
+      "path": "game/assets/art/world/marker_story.glb.import",
+      "sha256": "b1f16d3d72e8847d08f9ca2981691efed378b72fc32a9af484fa48bc179aca9b"
+    },
+    "game/assets/art/world/marker_weapon.glb": {
+      "bytes": 79404,
+      "path": "game/assets/art/world/marker_weapon.glb",
+      "sha256": "0206b0782f9cbfbea1d593ec6ebbcd422b6a0c7a82d6fb6489bbddd8598102b4"
+    },
+    "game/assets/art/world/marker_weapon.glb.import": {
+      "bytes": 1171,
+      "path": "game/assets/art/world/marker_weapon.glb.import",
+      "sha256": "a2279d24bf7e9e2c192ad223ab42ef6e86974ff3c7d669e13777e8097514a7e1"
+    },
+    "game/assets/art/world/marrow_crucible.glb": {
+      "bytes": 1966772,
+      "path": "game/assets/art/world/marrow_crucible.glb",
+      "sha256": "ffc24d287b174a372323ed8f5cc8fd544b6fe5869534be88e076431afa82745b"
+    },
+    "game/assets/art/world/marrow_crucible.glb.import": {
+      "bytes": 1177,
+      "path": "game/assets/art/world/marrow_crucible.glb.import",
+      "sha256": "212fcc04bac18c85dc6941ee7137f6c0b78e9f1e0682b58f83a412a3b7e22f93"
+    },
+    "game/assets/art/world/nursery_bound_gate.glb": {
+      "bytes": 491244,
+      "path": "game/assets/art/world/nursery_bound_gate.glb",
+      "sha256": "a3b955df8ded7fb160a6625deb45d64d91ecaa61259c4aec1df754b11cb75870"
+    },
+    "game/assets/art/world/nursery_bound_gate.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/nursery_bound_gate.glb.import",
+      "sha256": "c2467129f44bb7fb316ee8203cd4c66986f86eaf84d2ca1b8548a973977a4b70"
+    },
+    "game/assets/art/world/nursery_cell_canopy.glb": {
+      "bytes": 1497396,
+      "path": "game/assets/art/world/nursery_cell_canopy.glb",
+      "sha256": "7677cd2a2da96f8d8c276594c4e7169a6d6856840a8879d380d35ede214230d2"
+    },
+    "game/assets/art/world/nursery_cell_canopy.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/nursery_cell_canopy.glb.import",
+      "sha256": "5b17351cbb0987abbbd22c4b5bd1b7a2276daa52ca5048344cbcd5b1f5942203"
+    },
+    "game/assets/art/world/nursery_gestation_engine.glb": {
+      "bytes": 1588276,
+      "path": "game/assets/art/world/nursery_gestation_engine.glb",
+      "sha256": "53088d099b14f1e3c7e43212993c5fbaa34699229170a44e60d66ba44bb3c258"
+    },
+    "game/assets/art/world/nursery_gestation_engine.glb.import": {
+      "bytes": 1204,
+      "path": "game/assets/art/world/nursery_gestation_engine.glb.import",
+      "sha256": "4f953729c1e49b701eb9947407cec4b5865442aa8be6f287a5c74ad413b78a49"
+    },
+    "game/assets/art/world/nursery_growth_vault.glb": {
+      "bytes": 1187816,
+      "path": "game/assets/art/world/nursery_growth_vault.glb",
+      "sha256": "9c4c25c5519c7d8812d0296309ea6a61a015e03969d48085bdb757e011f4efd6"
+    },
+    "game/assets/art/world/nursery_growth_vault.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/nursery_growth_vault.glb.import",
+      "sha256": "8e78a075079543a8c4d5ca3e5ddad0c33e8ac0d807d81577d8f6fbf0e8fdb667"
+    },
+    "game/assets/art/world/nursery_seed_orrery.glb": {
+      "bytes": 1709560,
+      "path": "game/assets/art/world/nursery_seed_orrery.glb",
+      "sha256": "dac86cb4bdda2e33f596d70cbc00657d58867c99d05ff439cd908af44818a6e1"
+    },
+    "game/assets/art/world/nursery_seed_orrery.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/nursery_seed_orrery.glb.import",
+      "sha256": "dfd511e9ab6a3cabbded31d753704f53ce36f9d146e7cf6ba43809de62c4d4e3"
+    },
+    "game/assets/art/world/nursery_seven_vessels.glb": {
+      "bytes": 1185576,
+      "path": "game/assets/art/world/nursery_seven_vessels.glb",
+      "sha256": "a5094a9484350a2fc3ab32e80f71e4b1c502a690da5d157fa64bcf983a6bd0f0"
+    },
+    "game/assets/art/world/nursery_seven_vessels.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/nursery_seven_vessels.glb.import",
+      "sha256": "bbbddf4366e413204a5de36bb8b03210350c700ff5d73bef4abdc7e59449df63"
+    },
+    "game/assets/art/world/nursery_tower_cluster.glb": {
+      "bytes": 989000,
+      "path": "game/assets/art/world/nursery_tower_cluster.glb",
+      "sha256": "5e824da16dc43c17234fab663688a99b794555321fb611d886036913be9a7a67"
+    },
+    "game/assets/art/world/nursery_tower_cluster.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/nursery_tower_cluster.glb.import",
+      "sha256": "a5e5d7be88fe834ffa386e223902e4c1b16464f28c33a91e48bb3b64332e231e"
+    },
+    "game/assets/art/world/nursery_winged_cradle.glb": {
+      "bytes": 702100,
+      "path": "game/assets/art/world/nursery_winged_cradle.glb",
+      "sha256": "bb377b3b2695b93990d1546c109b39c6f174bc5e3f5c2944d0cafceb3d5a8569"
+    },
+    "game/assets/art/world/nursery_winged_cradle.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/nursery_winged_cradle.glb.import",
+      "sha256": "bc700a8dba62256e8aac98fbc16885ce3fe3360a65b9495b43ae320ab3f8c6b7"
+    },
+    "game/assets/art/world/ossified_palanquin.glb": {
+      "bytes": 1907352,
+      "path": "game/assets/art/world/ossified_palanquin.glb",
+      "sha256": "0d8bb1c4ceedc0613e67f792b93fb6b90a47c25721d10c95e8069505e3f3f137"
+    },
+    "game/assets/art/world/ossified_palanquin.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/ossified_palanquin.glb.import",
+      "sha256": "3c07d2b390a0f49bb31335ccf7872cc31ef35afd1ebfd61da0ccec32f299135b"
+    },
+    "game/assets/art/world/ossuary_bone_mandala.glb": {
+      "bytes": 1318748,
+      "path": "game/assets/art/world/ossuary_bone_mandala.glb",
+      "sha256": "30c61d32c508b45b43ef6f983b951b88ce2822a2990f097e008dac4de72cd604"
+    },
+    "game/assets/art/world/ossuary_bone_mandala.glb.import": {
+      "bytes": 1191,
+      "path": "game/assets/art/world/ossuary_bone_mandala.glb.import",
+      "sha256": "8f8204e13166efece5df36f396370c4ac806aab230f5fff0ba6b11b9140c4d23"
+    },
+    "game/assets/art/world/ossuary_bound_gate.glb": {
+      "bytes": 704944,
+      "path": "game/assets/art/world/ossuary_bound_gate.glb",
+      "sha256": "a9c16f1a5be82a88bf8555f3fba9acbfa0cb92b8e0b8bf417861d2fd509c7002"
+    },
+    "game/assets/art/world/ossuary_bound_gate.glb.import": {
+      "bytes": 1185,
+      "path": "game/assets/art/world/ossuary_bound_gate.glb.import",
+      "sha256": "2f66bf6f11a63196712ea4c3291b53eb9347d1ed2858f67c7512a3dddcf20fce"
+    },
+    "game/assets/art/world/ossuary_cell_archive.glb": {
+      "bytes": 810960,
+      "path": "game/assets/art/world/ossuary_cell_archive.glb",
+      "sha256": "a72c39c7cf614ffce0a88b1a09ea6d20e975fd040eda19584ec4d385cc699b4d"
+    },
+    "game/assets/art/world/ossuary_cell_archive.glb.import": {
+      "bytes": 1191,
+      "path": "game/assets/art/world/ossuary_cell_archive.glb.import",
+      "sha256": "20d7264810d9d543414ae14def876c09158d4d43e0b434f432f02c2c20cac6eb"
+    },
+    "game/assets/art/world/ossuary_rib_bridge.glb": {
+      "bytes": 764272,
+      "path": "game/assets/art/world/ossuary_rib_bridge.glb",
+      "sha256": "3e3b213231d2ad5d6d1fb248d26dd0441665ae9b90e15199908f469cbbdcaa1d"
+    },
+    "game/assets/art/world/ossuary_rib_bridge.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/ossuary_rib_bridge.glb.import",
+      "sha256": "5fbe67cec1be14182e7a04dc1879e0e1572c8069db533dba8afe86bbc1c3f0ee"
+    },
+    "game/assets/art/world/ossuary_seven_reservoirs.glb": {
+      "bytes": 1936144,
+      "path": "game/assets/art/world/ossuary_seven_reservoirs.glb",
+      "sha256": "bd1c24c7585a1416d0d6ac6aa457f35a16f01ad23abf445ce9cfa07e8953bcf6"
+    },
+    "game/assets/art/world/ossuary_seven_reservoirs.glb.import": {
+      "bytes": 1204,
+      "path": "game/assets/art/world/ossuary_seven_reservoirs.glb.import",
+      "sha256": "ea2314a1b2eee3dded8b5df553255b359deae0820088d69f23805534c9ce1e50"
+    },
+    "game/assets/art/world/ossuary_sorting_vault.glb": {
+      "bytes": 1431700,
+      "path": "game/assets/art/world/ossuary_sorting_vault.glb",
+      "sha256": "218ad1258e26cf6a3da7def70330b0d2d2f19a09809d68c30e1731532468e82d"
+    },
+    "game/assets/art/world/ossuary_sorting_vault.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/ossuary_sorting_vault.glb.import",
+      "sha256": "0db42e52291911480711583a596af05d90173b24e3bb6e2bf1b8b5a0b909f82b"
+    },
+    "game/assets/art/world/ossuary_tower_cluster.glb": {
+      "bytes": 908148,
+      "path": "game/assets/art/world/ossuary_tower_cluster.glb",
+      "sha256": "1e3f738bae4e87df4da1824ac2fb74d4e0632479d92271a67c71faba4c350fc2"
+    },
+    "game/assets/art/world/ossuary_tower_cluster.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/ossuary_tower_cluster.glb.import",
+      "sha256": "550ab78de87548983fccf480a261d0284e41e9e699752a0042387d65c5b174de"
+    },
+    "game/assets/art/world/ossuary_winged_sarcophagus.glb": {
+      "bytes": 738360,
+      "path": "game/assets/art/world/ossuary_winged_sarcophagus.glb",
+      "sha256": "28e1a21885b64a72065a6b37ef543101a89a1827fba1d6588534f9f973093622"
+    },
+    "game/assets/art/world/ossuary_winged_sarcophagus.glb.import": {
+      "bytes": 1209,
+      "path": "game/assets/art/world/ossuary_winged_sarcophagus.glb.import",
+      "sha256": "bd8de3be980fff8f6dd291376827e1def93b95c4d6ee7764fb0b055698e2748e"
+    },
+    "game/assets/art/world/processional_acoustic_canopy.glb": {
+      "bytes": 741332,
+      "path": "game/assets/art/world/processional_acoustic_canopy.glb",
+      "sha256": "f60f81e80e8483a8c60bb52b206afec7a14f6b221904a9abb19689f8b1c2c1d4"
+    },
+    "game/assets/art/world/processional_acoustic_canopy.glb.import": {
+      "bytes": 1216,
+      "path": "game/assets/art/world/processional_acoustic_canopy.glb.import",
+      "sha256": "d3ed99194735cc339cebd1a3d42708d3e361bc2cfc641d928dad5fb42032be86"
+    },
+    "game/assets/art/world/processional_bound_drums.glb": {
+      "bytes": 970248,
+      "path": "game/assets/art/world/processional_bound_drums.glb",
+      "sha256": "de966360bf77e5080ff1db08ae5110e04085fed72f5af7ac87031f1b26b0d944"
+    },
+    "game/assets/art/world/processional_bound_drums.glb.import": {
+      "bytes": 1204,
+      "path": "game/assets/art/world/processional_bound_drums.glb.import",
+      "sha256": "056bd6c4cea6c2c93f5b6a4a1fe83b7b390fafaf7a8416521f41c6d81d501cf3"
+    },
+    "game/assets/art/world/processional_gong_carousel.glb": {
+      "bytes": 733532,
+      "path": "game/assets/art/world/processional_gong_carousel.glb",
+      "sha256": "cd409054e325066fe91f0a82acedf8355ef8e4f0aeec406f5c170389a497b58d"
+    },
+    "game/assets/art/world/processional_gong_carousel.glb.import": {
+      "bytes": 1210,
+      "path": "game/assets/art/world/processional_gong_carousel.glb.import",
+      "sha256": "066dac317b1c969887bd23dbaded63e25d4d3057eae225c4ec965d442c4e5286"
+    },
+    "game/assets/art/world/processional_pipe_choir.glb": {
+      "bytes": 1139796,
+      "path": "game/assets/art/world/processional_pipe_choir.glb",
+      "sha256": "519c9e457213fab0376959495f0f4f1164cc25b06fb15da38f1c21ecfed356bf"
+    },
+    "game/assets/art/world/processional_pipe_choir.glb.import": {
+      "bytes": 1200,
+      "path": "game/assets/art/world/processional_pipe_choir.glb.import",
+      "sha256": "19587ce5b10b736fcd74ad41981f24ed26e242cedf936e83ffec06abe6a92c2e"
+    },
+    "game/assets/art/world/processional_reed_chariot.glb": {
+      "bytes": 1364528,
+      "path": "game/assets/art/world/processional_reed_chariot.glb",
+      "sha256": "f0d110d25c252a11506f8d2e63638953d141e28d43a6ae16638643f215710fca"
+    },
+    "game/assets/art/world/processional_reed_chariot.glb.import": {
+      "bytes": 1206,
+      "path": "game/assets/art/world/processional_reed_chariot.glb.import",
+      "sha256": "123d574210956262418c5b3e4de4c919cdbb30e82bfbda8aecbc6c4f73d99525"
+    },
+    "game/assets/art/world/processional_seven_reeds.glb": {
+      "bytes": 1281996,
+      "path": "game/assets/art/world/processional_seven_reeds.glb",
+      "sha256": "769df623e0e2ccd5b1af2944b8427202198f0408a1aa27fdfd6f8f8d36de69d3"
+    },
+    "game/assets/art/world/processional_seven_reeds.glb.import": {
+      "bytes": 1204,
+      "path": "game/assets/art/world/processional_seven_reeds.glb.import",
+      "sha256": "9834e2c700f8d82dea68867bde74e32777e7449356b57ef750e64b54fce84a75"
+    },
+    "game/assets/art/world/processional_winged_sarcophagus.glb": {
+      "bytes": 1200664,
+      "path": "game/assets/art/world/processional_winged_sarcophagus.glb",
+      "sha256": "4dbbaa981dcec611af304d5dc014f9f109696e62c2551c7638a7744170036c52"
+    },
+    "game/assets/art/world/processional_winged_sarcophagus.glb.import": {
+      "bytes": 1225,
+      "path": "game/assets/art/world/processional_winged_sarcophagus.glb.import",
+      "sha256": "bd5e8dd640a6e9f4c137e306ddc36e19b113b075f6b49eef2d1749851f526356"
+    },
+    "game/assets/art/world/reliquary_bound_gate.glb": {
+      "bytes": 630152,
+      "path": "game/assets/art/world/reliquary_bound_gate.glb",
+      "sha256": "a77a1e219c4158e189160df8b8289e27d00756c48e0c733caf1e648a400f4c8b"
+    },
+    "game/assets/art/world/reliquary_bound_gate.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/reliquary_bound_gate.glb.import",
+      "sha256": "f740079d9c110adb478bfd840b56c8c763005fa61bc6e403df3592da5f72de0a"
+    },
+    "game/assets/art/world/reliquary_cell_vault.glb": {
+      "bytes": 823344,
+      "path": "game/assets/art/world/reliquary_cell_vault.glb",
+      "sha256": "eff36e3c6b4b89843cab3e346ccea256cffe80fc72e5c1ec2d750d754394585d"
+    },
+    "game/assets/art/world/reliquary_cell_vault.glb.import": {
+      "bytes": 1192,
+      "path": "game/assets/art/world/reliquary_cell_vault.glb.import",
+      "sha256": "b2f343b806e6233c3072fff13396f3c1aed0c76d48443506b53fd525aca71ce6"
+    },
+    "game/assets/art/world/reliquary_face_halo.glb": {
+      "bytes": 898744,
+      "path": "game/assets/art/world/reliquary_face_halo.glb",
+      "sha256": "88ab77b66efba75076358e641fc6a4e5c3a8011773c9291c76e5f8042c4c0a9f"
+    },
+    "game/assets/art/world/reliquary_face_halo.glb.import": {
+      "bytes": 1189,
+      "path": "game/assets/art/world/reliquary_face_halo.glb.import",
+      "sha256": "4f202c550ec902b91190fc5b2cd70d73168f1690a4bfcf8dccc1a0ce36e2e9de"
+    },
+    "game/assets/art/world/reliquary_memory_wheel.glb": {
+      "bytes": 1759336,
+      "path": "game/assets/art/world/reliquary_memory_wheel.glb",
+      "sha256": "010e31a34b0c1b4229df3c70560bdeeba13750a2a3e6364b1706e4e48742e666"
+    },
+    "game/assets/art/world/reliquary_memory_wheel.glb.import": {
+      "bytes": 1198,
+      "path": "game/assets/art/world/reliquary_memory_wheel.glb.import",
+      "sha256": "ec687841e0d052b723867065e2e72a3044968b98d7100e19a510c705b2c85714"
+    },
+    "game/assets/art/world/reliquary_seven_vessels.glb": {
+      "bytes": 1421772,
+      "path": "game/assets/art/world/reliquary_seven_vessels.glb",
+      "sha256": "c8f7df280f6178a3c50f22e9bf52636d574009f766aa4a85501d8751af31b670"
+    },
+    "game/assets/art/world/reliquary_seven_vessels.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/reliquary_seven_vessels.glb.import",
+      "sha256": "0a0575025b56e3538992ed26baa3dd0a20649b19ba25d59db1a14befec813da3"
+    },
+    "game/assets/art/world/reliquary_tower_cluster.glb": {
+      "bytes": 1268164,
+      "path": "game/assets/art/world/reliquary_tower_cluster.glb",
+      "sha256": "112fabc87b545e761b0cfda0b53f06197e6564460cc8dcb1f34ce7d4e8bb87cf"
+    },
+    "game/assets/art/world/reliquary_tower_cluster.glb.import": {
+      "bytes": 1201,
+      "path": "game/assets/art/world/reliquary_tower_cluster.glb.import",
+      "sha256": "d8fef08d03cb9c2936179e0e27c78bef1d6b678e5a02e6bfa436a790eb58ef22"
+    },
+    "game/assets/art/world/reliquary_winged_seal.glb": {
+      "bytes": 712848,
+      "path": "game/assets/art/world/reliquary_winged_seal.glb",
+      "sha256": "0783ca0cb69fa294ccd656c3a049cd60b1c0f825d424897ebcd53248ca5a4c5a"
+    },
+    "game/assets/art/world/reliquary_winged_seal.glb.import": {
+      "bytes": 1195,
+      "path": "game/assets/art/world/reliquary_winged_seal.glb.import",
+      "sha256": "6c3b5582388835341c68150b2dcd204038a0fa774a6525542a035cb2d282e520"
+    },
+    "game/assets/art/world/ribbed_wall.glb": {
+      "bytes": 222464,
+      "path": "game/assets/art/world/ribbed_wall.glb",
+      "sha256": "a635605e0a9c1e9df05589f87b4263664fa8ad060253d9155912cb72a64f40b1"
+    },
+    "game/assets/art/world/ribbed_wall.glb.import": {
+      "bytes": 1165,
+      "path": "game/assets/art/world/ribbed_wall.glb.import",
+      "sha256": "b5ac79b28b14f16a81aaa4098a8ee912f454e2f752879efd27f4b85e5ad008ae"
+    },
+    "game/assets/art/world/siphon_heart.glb": {
+      "bytes": 1440216,
+      "path": "game/assets/art/world/siphon_heart.glb",
+      "sha256": "84f0dfc6da1010b7a6c802d1f31e0c8654b856d09408e0242b7baa96c96f5289"
+    },
+    "game/assets/art/world/siphon_heart.glb.import": {
+      "bytes": 1168,
+      "path": "game/assets/art/world/siphon_heart.glb.import",
+      "sha256": "45b2e8a1aedcd732a47eef4c78f4cc645d2e3ee9ab2c6d9a1eb0aa9630f060ab"
+    },
+    "game/assets/art/world/skin_bell.glb": {
+      "bytes": 1283784,
+      "path": "game/assets/art/world/skin_bell.glb",
+      "sha256": "bbfb0c8a7b8bb23d9a695c6aa110ffcb68f22d310be733010e438bc12a60a054"
+    },
+    "game/assets/art/world/skin_bell.glb.import": {
+      "bytes": 1158,
+      "path": "game/assets/art/world/skin_bell.glb.import",
+      "sha256": "85649073369c61c2690b83bbcf6a3e9cee84249f4d478f74b65d53ade9358a96"
+    },
+    "game/assets/art/world/suspended_cadaver.glb": {
+      "bytes": 442012,
+      "path": "game/assets/art/world/suspended_cadaver.glb",
+      "sha256": "2d099d6144860d8eddc0c576b89656dda45465dfc56517689a4d04bab84128ae"
+    },
+    "game/assets/art/world/suspended_cadaver.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/suspended_cadaver.glb.import",
+      "sha256": "742a0770794c8c15a60fa48e8abb0e9e35c312d33026247c01833b9b76c46cb0"
+    },
+    "game/assets/art/world/vault_span.glb": {
+      "bytes": 283092,
+      "path": "game/assets/art/world/vault_span.glb",
+      "sha256": "ed1c66a4ac0427a6550a8703ee7da02362f5923c8c50f6910b4050cb0a2512bc"
+    },
+    "game/assets/art/world/vault_span.glb.import": {
+      "bytes": 1161,
+      "path": "game/assets/art/world/vault_span.glb.import",
+      "sha256": "742c72390ff1b4de9b8f608d8c95ebcfb18dd3542cf4b8e974743ec78d9d8056"
+    },
+    "game/assets/art/world/vertebral_furnace.glb": {
+      "bytes": 2126524,
+      "path": "game/assets/art/world/vertebral_furnace.glb",
+      "sha256": "f89a725f584265ec73d59e715570cdd9367db00c21572692d4c2756ff7f625ad"
+    },
+    "game/assets/art/world/vertebral_furnace.glb.import": {
+      "bytes": 1183,
+      "path": "game/assets/art/world/vertebral_furnace.glb.import",
+      "sha256": "eb7aae118e61e58e96c45a5adfae0a5076bdccf06760e9c2386db8abbf9557d0"
+    },
+    "game/assets/art/world/walking_bone_organ.glb": {
+      "bytes": 1804628,
+      "path": "game/assets/art/world/walking_bone_organ.glb",
+      "sha256": "acd5ed3fec4e92fed8fab89ade235f52dbe3a48423e9c7b346ec99756574662d"
+    },
+    "game/assets/art/world/walking_bone_organ.glb.import": {
+      "bytes": 1186,
+      "path": "game/assets/art/world/walking_bone_organ.glb.import",
+      "sha256": "49393f4ed1de423bfd07092a39bdb9451b77c6b8d131561c95c57e7c9f7c6f4a"
+    },
+    "game/assets/art/world/witness_relief.glb": {
+      "bytes": 293196,
+      "path": "game/assets/art/world/witness_relief.glb",
+      "sha256": "2fd2f96e259efbbd801e0d0d2e6c143c1da09b7753f49afac3ac4e1dead9c5b3"
+    },
+    "game/assets/art/world/witness_relief.glb.import": {
+      "bytes": 1174,
+      "path": "game/assets/art/world/witness_relief.glb.import",
+      "sha256": "f6af715894302a68b87a080fba43d42b12d3e21862926ad0684029e9cf04947a"
+    }
+  },
+  "current_sources": {
+    "game/assets/art/regions/nursery-warden-node-v1.json": {
+      "bytes": 5729,
+      "path": "game/assets/art/regions/nursery-warden-node-v1.json",
+      "sha256": "5f53ebe53f7ed792164ddba81df7e0a2a8d94638a0c085aaa2bc059623481ac7"
+    },
+    "game/data/01_intake.json": {
+      "bytes": 41827,
+      "path": "game/data/01_intake.json",
+      "sha256": "7dade0cbfbbe7b84a1f759e272672cb42c193d9e0b569db079e2df921c2954ea"
+    },
+    "game/data/02_foundry.json": {
+      "bytes": 29426,
+      "path": "game/data/02_foundry.json",
+      "sha256": "6d131dd3c1e1486b3908e9bb7452323833652c5b5f143f86b6d855e8a9aa9b0a"
+    },
+    "game/data/03_processional.json": {
+      "bytes": 31125,
+      "path": "game/data/03_processional.json",
+      "sha256": "324b7ba389b764157e52ff61dc0d6fff6de33468215438a39e2b6dd42812a661"
+    },
+    "game/data/04_reliquary.json": {
+      "bytes": 30897,
+      "path": "game/data/04_reliquary.json",
+      "sha256": "9376691329821ac29fa1ad4ff3307a0553ea228c8944ab1d84001d255071945f"
+    },
+    "game/data/05_nursery.json": {
+      "bytes": 30374,
+      "path": "game/data/05_nursery.json",
+      "sha256": "773c1dbc4adaf2ef9e2650c855e9f887c7e9ea84f5c87b70a8d829e4719e3a1f"
+    },
+    "game/data/06_ossuary.json": {
+      "bytes": 31169,
+      "path": "game/data/06_ossuary.json",
+      "sha256": "41f449966c2566fd285bc825371fe9770897ea2a75be67208e2d3c1264eb171d"
+    },
+    "game/data/07_inversion.json": {
+      "bytes": 32243,
+      "path": "game/data/07_inversion.json",
+      "sha256": "e3800b0f4adad7767e3dafa11a7318010b39498ae77bd6d45be22d7effcca974"
+    },
+    "game/data/08_heart.json": {
+      "bytes": 33180,
+      "path": "game/data/08_heart.json",
+      "sha256": "a090490786e7f0d76bd18c8cc3a95cda8dcbfe081cfb98f71c887a2b71af15c6"
+    },
+    "game/data/earned_supplies.json": {
+      "bytes": 109826,
+      "path": "game/data/earned_supplies.json",
+      "sha256": "c79fada58cccd0faf3926074d3dbad7f51b4e7e8c0521e95a04ac07891388d49"
+    },
+    "game/data/healing_machine_placements.json": {
+      "bytes": 6773,
+      "path": "game/data/healing_machine_placements.json",
+      "sha256": "8bc49e8072cb08d54736a94111ae60ae673e455218f76d4b433304d4eba7401b"
+    },
+    "game/data/healing_machinery_registry.json": {
+      "bytes": 72534,
+      "path": "game/data/healing_machinery_registry.json",
+      "sha256": "d70175911d55e38f9f929bf379f7b0fdc9cb612a0263f8f50ec2fc79a33e83c5"
+    },
+    "game/export_presets.cfg": {
+      "bytes": 571,
+      "path": "game/export_presets.cfg",
+      "sha256": "bede02c4306b5293570d53f6c35245af7bc1f83edb1eadb228a9dd0348c3c683"
+    },
+    "game/project.godot": {
+      "bytes": 714,
+      "path": "game/project.godot",
+      "sha256": "d26d41d3bd3640f3bd37d9e597aafdf47e3ce2cb196f12875077ed89ff262e74"
+    },
+    "game/scripts/ammo_visuals.gd": {
+      "bytes": 6715,
+      "path": "game/scripts/ammo_visuals.gd",
+      "sha256": "6be8b328fed2ba77d3f0e5b7da8b96f784d0f1c69f3cd14e287cccd192729ea5"
+    },
+    "game/scripts/build_info.gd": {
+      "bytes": 404,
+      "path": "game/scripts/build_info.gd",
+      "sha256": "207af32025dbc2fc0117e64b94ea95ab146529ea05f700d0aab6b381e3603884"
+    },
+    "game/scripts/campaign.gd": {
+      "bytes": 28598,
+      "path": "game/scripts/campaign.gd",
+      "sha256": "31ad05aa3ba8cea0c3121133806e287cc647c3c50b21941c44acc359de82e3d7"
+    },
+    "game/scripts/critical_actor_practical.gd": {
+      "bytes": 1857,
+      "path": "game/scripts/critical_actor_practical.gd",
+      "sha256": "a125c07f87fee22bb9a5183709b2ebe105fba9c38e25bac2284f3e4515960b7f"
+    },
+    "game/scripts/earned_supplies.gd": {
+      "bytes": 11058,
+      "path": "game/scripts/earned_supplies.gd",
+      "sha256": "a19fc3dcc05a077bc66720152f103ee20b7d649bdfbeddf67c857d1e61ec0bdb"
+    },
+    "game/scripts/earned_supply_runtime.gd": {
+      "bytes": 12691,
+      "path": "game/scripts/earned_supply_runtime.gd",
+      "sha256": "76f0d259fab2f260e7ae9ba8c52e2f50de43f8f2c68039ab18dcb95e7ab4c5f4"
+    },
+    "game/scripts/enemy.gd": {
+      "bytes": 32271,
+      "path": "game/scripts/enemy.gd",
+      "sha256": "8b5fe0425b1708a1e531bf572287cba6faf1635a7ed55528419a9312af0cb606"
+    },
+    "game/scripts/enemy_motion.gd": {
+      "bytes": 1202,
+      "path": "game/scripts/enemy_motion.gd",
+      "sha256": "55dc2fdbe8855e6d43c6691ff89ad1f73774a857f2ee5b6c8b2475981041c8c8"
+    },
+    "game/scripts/enemy_telegraph.gd": {
+      "bytes": 7516,
+      "path": "game/scripts/enemy_telegraph.gd",
+      "sha256": "26cc6b1c230bf2e4fe64a3c4c4da975dfd019e7ae9a467136973e6139897126e"
+    },
+    "game/scripts/floors_v0.gd": {
+      "bytes": 6201,
+      "path": "game/scripts/floors_v0.gd",
+      "sha256": "1d9b89d64a9e5d25019496981ed1b61a3842a2e8c0e2c9c58904e6061826672d"
+    },
+    "game/scripts/floors_v1.gd": {
+      "bytes": 3363,
+      "path": "game/scripts/floors_v1.gd",
+      "sha256": "8be6068b2153d539ae4e52176869c9ff857aa327d012a348b45499a6e8d0a8eb"
+    },
+    "game/scripts/gate_art.gd": {
+      "bytes": 8504,
+      "path": "game/scripts/gate_art.gd",
+      "sha256": "6271f88a1c7e301b7e983cc47aa2052f03de220e10ab6829e02ae87d77aaf753"
+    },
+    "game/scripts/gate_visual.gd": {
+      "bytes": 1488,
+      "path": "game/scripts/gate_visual.gd",
+      "sha256": "cfdd15d22e012e6794669a46038bbf5fd3b1cf708e22018a4058f75f327fe53f"
+    },
+    "game/scripts/ground_movement.gd": {
+      "bytes": 2015,
+      "path": "game/scripts/ground_movement.gd",
+      "sha256": "aaa36dc23aca845a6e12af14d03510e9a8fdd8b18361574b7fa2563daadb8663"
+    },
+    "game/scripts/healing_machinery.gd": {
+      "bytes": 21492,
+      "path": "game/scripts/healing_machinery.gd",
+      "sha256": "2e7e00aaa2b133d7aaf69e7b9563cd8400e6098801b6a8386df8cd74fb7a80af"
+    },
+    "game/scripts/healing_machinery_post_import.gd": {
+      "bytes": 2104,
+      "path": "game/scripts/healing_machinery_post_import.gd",
+      "sha256": "26b0dce197cc76f7d2252bc7a36fceb0ff2a6485ff077fd216ab482ce9d4de33"
+    },
+    "game/scripts/hud.gd": {
+      "bytes": 20583,
+      "path": "game/scripts/hud.gd",
+      "sha256": "866472f3a8509aca53ddbe1ac17dd114e8fcce3c2071bf70950a63ace931b629"
+    },
+    "game/scripts/level.gd": {
+      "bytes": 19480,
+      "path": "game/scripts/level.gd",
+      "sha256": "62c5800a3519d7cee1842d343bec77c9a49b829446b144334885a02edc42b207"
+    },
+    "game/scripts/level_data.gd": {
+      "bytes": 17264,
+      "path": "game/scripts/level_data.gd",
+      "sha256": "f3fdf8ca58cb12e2dd32ef372bc3e62ea20c270baeb5b67ac56488c4a3be5339"
+    },
+    "game/scripts/level_landmarks.gd": {
+      "bytes": 4620,
+      "path": "game/scripts/level_landmarks.gd",
+      "sha256": "3d2afcf734f0a59e434af646d63ee063e56ce3397f7f9aeeb106eab3c0d2409b"
+    },
+    "game/scripts/level_schema.gd": {
+      "bytes": 23276,
+      "path": "game/scripts/level_schema.gd",
+      "sha256": "ca53997bd447ef6a4d81642eb2cce99701cef025c764f7863338d5d4d2e38be0"
+    },
+    "game/scripts/main.gd": {
+      "bytes": 100846,
+      "path": "game/scripts/main.gd",
+      "sha256": "d177435fc13bb722b21ca5828c4de8d0e929dc98340d4fc2ece7d0ef37effa8c"
+    },
+    "game/scripts/narrative.gd": {
+      "bytes": 22096,
+      "path": "game/scripts/narrative.gd",
+      "sha256": "8abb636ac216a03b6331a52de4f8084368f9dc213dba9786d762029e446607cc"
+    },
+    "game/scripts/navigation_routes.gd": {
+      "bytes": 10796,
+      "path": "game/scripts/navigation_routes.gd",
+      "sha256": "98437688747d361d154cf7aab70814ca6d5e533220304bd34b0239344e5cc41f"
+    },
+    "game/scripts/ossuary_surfaces_v3.gd": {
+      "bytes": 13048,
+      "path": "game/scripts/ossuary_surfaces_v3.gd",
+      "sha256": "729196c49b42d25fb31beb37e09edfb70a5a222af80067aa6253a63ee50e6740"
+    },
+    "game/scripts/player.gd": {
+      "bytes": 18055,
+      "path": "game/scripts/player.gd",
+      "sha256": "9d4d4cc08c73f149ec541c51405b429d22071e3daefbde9603b945fd2723281b"
+    },
+    "game/scripts/preferences.gd": {
+      "bytes": 8794,
+      "path": "game/scripts/preferences.gd",
+      "sha256": "f58d0acdaa492a334e2ffc2cccfe8d65977a1438fa82721293283861ef4987f9"
+    },
+    "game/scripts/projectile.gd": {
+      "bytes": 7336,
+      "path": "game/scripts/projectile.gd",
+      "sha256": "944c7e882eba9dc15e0999b6960aa60ac439411d60dfb9449d913f5f88148f5e"
+    },
+    "game/scripts/seal_guardians.gd": {
+      "bytes": 5247,
+      "path": "game/scripts/seal_guardians.gd",
+      "sha256": "63272b7c87a8349f78ad541c41cde94c9b707ec72a2d6601042c8166962f8e81"
+    },
+    "game/scripts/sprite_hit_query.gd": {
+      "bytes": 12631,
+      "path": "game/scripts/sprite_hit_query.gd",
+      "sha256": "de2d7d85351738e7b65b6c66335b9bd82e2731edc5a2e3de69b9a8719b2df4b4"
+    },
+    "game/scripts/survey.gd": {
+      "bytes": 7967,
+      "path": "game/scripts/survey.gd",
+      "sha256": "464f6574418058530ef623640a7d53f3ed99be3392246d1307c06937f1c976fc"
+    },
+    "game/scripts/wall_architecture.gd": {
+      "bytes": 11149,
+      "path": "game/scripts/wall_architecture.gd",
+      "sha256": "b91cbd6883867b348ceaa1a7d179f47716ac2b41041a58317d7b27e866457177"
+    },
+    "game/scripts/warden_pressure_window.gd": {
+      "bytes": 9608,
+      "path": "game/scripts/warden_pressure_window.gd",
+      "sha256": "8d2d6b9ff2114e431ed5168a40310122a21519bb9bcdc0bf0cde2a0a16b00e7e"
+    },
+    "game/scripts/weapon_variation.gd": {
+      "bytes": 1619,
+      "path": "game/scripts/weapon_variation.gd",
+      "sha256": "86c03937fd117689066d4f8fd8c77206d22d24b87fa0e3f35519307221f03f74"
+    },
+    "game/scripts/worker_hit_regions.gd": {
+      "bytes": 10504,
+      "path": "game/scripts/worker_hit_regions.gd",
+      "sha256": "563f0440b8b00b5469ae450b894402a55a9a144e1015156beb15afe6517f0f67"
+    }
+  },
+  "current_weapon_art_resources": {
+    "game/assets/art/weapons/native-v5/rivet_pistol.png": {
+      "bytes": 32743,
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png",
+      "sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001"
+    },
+    "game/assets/art/weapons/native-v5/rivet_pistol.png.import": {
+      "bytes": 970,
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png.import",
+      "sha256": "6ff9a7e4cf594b18f88de5f68c1ea6ca1d1aeb173524a0918e5312fc98a37a37"
+    },
+    "game/assets/art/weapons/painted-v3/choir_disruptor.png": {
+      "bytes": 153229,
+      "path": "game/assets/art/weapons/painted-v3/choir_disruptor.png",
+      "sha256": "f3ddc8d03ef74a9fd8766d9dcb08290c89da94960a5cf5519715a6d95020b6a2"
+    },
+    "game/assets/art/weapons/painted-v3/choir_disruptor.png.import": {
+      "bytes": 978,
+      "path": "game/assets/art/weapons/painted-v3/choir_disruptor.png.import",
+      "sha256": "0a7a2fad85d331d5cfaabd46c06731a196c63e5424bac999350c453ade403fb8"
+    },
+    "game/assets/art/weapons/painted-v3/impact_tool.png": {
+      "bytes": 123879,
+      "path": "game/assets/art/weapons/painted-v3/impact_tool.png",
+      "sha256": "b23cdf22e843b0b8be0075ce09859737fbb36263011da0cf368469ade9924b8c"
+    },
+    "game/assets/art/weapons/painted-v3/impact_tool.png.import": {
+      "bytes": 967,
+      "path": "game/assets/art/weapons/painted-v3/impact_tool.png.import",
+      "sha256": "a22802d03aebb866cf1b897442f2db1cd95cff486fdadb415806d1cd9e8de2b0"
+    },
+    "game/assets/art/weapons/painted-v3/marrow_launcher.png": {
+      "bytes": 169288,
+      "path": "game/assets/art/weapons/painted-v3/marrow_launcher.png",
+      "sha256": "46687d1d52efa42effb5687ba2d0edaaf4349dee980f9183e5e0a3e05682ea2d"
+    },
+    "game/assets/art/weapons/painted-v3/marrow_launcher.png.import": {
+      "bytes": 979,
+      "path": "game/assets/art/weapons/painted-v3/marrow_launcher.png.import",
+      "sha256": "c73fe11ffc93b97a87ccfe77544ba3ce7c5281c8a274d42a05a42e84764d0750"
+    },
+    "game/assets/art/weapons/painted-v3/sawtooth_repeater.png": {
+      "bytes": 119935,
+      "path": "game/assets/art/weapons/painted-v3/sawtooth_repeater.png",
+      "sha256": "a998012594b6509197bd3645c1a2bc73a2ec643bfc47bbad11c7a8da7980a6d4"
+    },
+    "game/assets/art/weapons/painted-v3/sawtooth_repeater.png.import": {
+      "bytes": 984,
+      "path": "game/assets/art/weapons/painted-v3/sawtooth_repeater.png.import",
+      "sha256": "b4834ee30ed53bb0d48141cc5624e71d1d4ebd84ffc44de95fa925eeb316c96e"
+    },
+    "game/assets/art/weapons/painted-v3/scattergun.png": {
+      "bytes": 157349,
+      "path": "game/assets/art/weapons/painted-v3/scattergun.png",
+      "sha256": "bdb98c9d3574185647968b3b6a8679c255d5bbd29e872a718dab66a43398b798"
+    },
+    "game/assets/art/weapons/painted-v3/scattergun.png.import": {
+      "bytes": 964,
+      "path": "game/assets/art/weapons/painted-v3/scattergun.png.import",
+      "sha256": "25ecb5da09513deffe8c4e012e0d6c4eb001aeba3c3f1ed163a7abb18dd11167"
+    }
+  },
+  "historical96_snapshots": {
+    "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb.import": {
+      "observed96": {
+        "bytes": 417,
+        "path": "game/assets/art/healing_machinery/models/canted-supported-orbit-core.glb.import",
+        "sha256": "80bc5719373ca1fb4077592333ada7d25e5e66ecd35565167207e4c3663303c7"
+      },
+      "snapshot": {
+        "bytes": 417,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/canted-supported-orbit-core.glb.import",
+        "sha256": "80bc5719373ca1fb4077592333ada7d25e5e66ecd35565167207e4c3663303c7"
+      }
+    },
+    "game/assets/art/healing_machinery/models/capillary-organ.glb.import": {
+      "observed96": {
+        "bytes": 405,
+        "path": "game/assets/art/healing_machinery/models/capillary-organ.glb.import",
+        "sha256": "469a86d97cc3e84d33bac17886cb1ef9381da65c50dd6873f1479917ab09b383"
+      },
+      "snapshot": {
+        "bytes": 405,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/capillary-organ.glb.import",
+        "sha256": "469a86d97cc3e84d33bac17886cb1ef9381da65c50dd6873f1479917ab09b383"
+      }
+    },
+    "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb.import": {
+      "observed96": {
+        "bytes": 415,
+        "path": "game/assets/art/healing_machinery/models/clinical-abstract-capsule.glb.import",
+        "sha256": "b870cd2e43e8a4ceb0a0e2ddc319853bb3defd8c701a2b6383fbbf5286e90357"
+      },
+      "snapshot": {
+        "bytes": 415,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/clinical-abstract-capsule.glb.import",
+        "sha256": "b870cd2e43e8a4ceb0a0e2ddc319853bb3defd8c701a2b6383fbbf5286e90357"
+      }
+    },
+    "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb.import": {
+      "observed96": {
+        "bytes": 411,
+        "path": "game/assets/art/healing_machinery/models/hanging-pressure-bulb.glb.import",
+        "sha256": "4f50e171d65d43346b33028de905e3d049677d46e6d5bf23089956fd578275af"
+      },
+      "snapshot": {
+        "bytes": 411,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/hanging-pressure-bulb.glb.import",
+        "sha256": "4f50e171d65d43346b33028de905e3d049677d46e6d5bf23089956fd578275af"
+      }
+    },
+    "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb.import": {
+      "observed96": {
+        "bytes": 410,
+        "path": "game/assets/art/healing_machinery/models/ivory-archive-vessel.glb.import",
+        "sha256": "4f361e40bdefc294db4e46036c3f9a659f520240975f49d4493da5fe40da192c"
+      },
+      "snapshot": {
+        "bytes": 410,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/ivory-archive-vessel.glb.import",
+        "sha256": "4f361e40bdefc294db4e46036c3f9a659f520240975f49d4493da5fe40da192c"
+      }
+    },
+    "game/assets/art/healing_machinery/models/organic-valve-cage.glb.import": {
+      "observed96": {
+        "bytes": 408,
+        "path": "game/assets/art/healing_machinery/models/organic-valve-cage.glb.import",
+        "sha256": "2bc3a194082cb24ae6c87b20962e1c75475de229727f0a96737522f9ed6edbeb"
+      },
+      "snapshot": {
+        "bytes": 408,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/organic-valve-cage.glb.import",
+        "sha256": "2bc3a194082cb24ae6c87b20962e1c75475de229727f0a96737522f9ed6edbeb"
+      }
+    },
+    "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb.import": {
+      "observed96": {
+        "bytes": 417,
+        "path": "game/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb.import",
+        "sha256": "2e87ef61e8afe9c0c2cd626898d8ccafaddaeb7048cdbbec4511855750ff8087"
+      },
+      "snapshot": {
+        "bytes": 417,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/refractory-ceramic-crucible.glb.import",
+        "sha256": "2e87ef61e8afe9c0c2cd626898d8ccafaddaeb7048cdbbec4511855750ff8087"
+      }
+    },
+    "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb.import": {
+      "observed96": {
+        "bytes": 408,
+        "path": "game/assets/art/healing_machinery/models/ribbed-marrow-tank.glb.import",
+        "sha256": "ac93f91d61ec767d1e0ed63b0c5ad51412aa49cdce058c176345a8ede79f2d54"
+      },
+      "snapshot": {
+        "bytes": 408,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/models/ribbed-marrow-tank.glb.import",
+        "sha256": "ac93f91d61ec767d1e0ed63b0c5ad51412aa49cdce058c176345a8ede79f2d54"
+      }
+    },
+    "game/assets/art/healing_machinery/raw/texture-atlas.png.import": {
+      "observed96": {
+        "bytes": 590,
+        "path": "game/assets/art/healing_machinery/raw/texture-atlas.png.import",
+        "sha256": "e121afdd724fb6d0651ece4c33940b9fb1b3adf17a7aa2af5de8f63eea087875"
+      },
+      "snapshot": {
+        "bytes": 590,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/assets/art/healing_machinery/raw/texture-atlas.png.import",
+        "sha256": "e121afdd724fb6d0651ece4c33940b9fb1b3adf17a7aa2af5de8f63eea087875"
+      }
+    },
+    "game/export_presets.cfg": {
+      "observed96": {
+        "bytes": 571,
+        "path": "game/export_presets.cfg",
+        "sha256": "5ddc832147b3299d5a964f29e492f4bef43d0849ef6882db34ecc47a40ee4c90"
+      },
+      "snapshot": {
+        "bytes": 571,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/export_presets.cfg",
+        "sha256": "5ddc832147b3299d5a964f29e492f4bef43d0849ef6882db34ecc47a40ee4c90"
+      }
+    },
+    "game/project.godot": {
+      "observed96": {
+        "bytes": 714,
+        "path": "game/project.godot",
+        "sha256": "3369bf470b1d4b89aa1873c5ec440e6a4babe43c3a9a4b7b23d4811bcae518e1"
+      },
+      "snapshot": {
+        "bytes": 714,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/project.godot",
+        "sha256": "3369bf470b1d4b89aa1873c5ec440e6a4babe43c3a9a4b7b23d4811bcae518e1"
+      }
+    },
+    "game/scripts/build_info.gd": {
+      "observed96": {
+        "bytes": 404,
+        "path": "game/scripts/build_info.gd",
+        "sha256": "185ce819532c1561f3e5d87ece9842b68f0fe182a7533b99efa53e5b8c4efa59"
+      },
+      "snapshot": {
+        "bytes": 404,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/scripts/build_info.gd",
+        "sha256": "185ce819532c1561f3e5d87ece9842b68f0fe182a7533b99efa53e5b8c4efa59"
+      }
+    },
+    "game/scripts/critical_actor_practical.gd": {
+      "observed96": {
+        "bytes": 1479,
+        "path": "game/scripts/critical_actor_practical.gd",
+        "sha256": "e3ab688fbb46fc14fad2b98e516b524040f9f39b934f368ed68616f7e0ccc097"
+      },
+      "snapshot": {
+        "bytes": 1479,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/scripts/critical_actor_practical.gd",
+        "sha256": "e3ab688fbb46fc14fad2b98e516b524040f9f39b934f368ed68616f7e0ccc097"
+      }
+    },
+    "game/scripts/enemy.gd": {
+      "observed96": {
+        "bytes": 31968,
+        "path": "game/scripts/enemy.gd",
+        "sha256": "60dda298a79eec5ae05a3aee0094171bf70ff46e5f69626636aab36741b13f8c"
+      },
+      "snapshot": {
+        "bytes": 31968,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/scripts/enemy.gd",
+        "sha256": "60dda298a79eec5ae05a3aee0094171bf70ff46e5f69626636aab36741b13f8c"
+      }
+    },
+    "game/scripts/main.gd": {
+      "observed96": {
+        "bytes": 95728,
+        "path": "game/scripts/main.gd",
+        "sha256": "e34dffae3eb0b73c3a3a72d11a81d4bbb402266603007a2e281bc1b3ef081f9b"
+      },
+      "snapshot": {
+        "bytes": 95728,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/scripts/main.gd",
+        "sha256": "e34dffae3eb0b73c3a3a72d11a81d4bbb402266603007a2e281bc1b3ef081f9b"
+      }
+    },
+    "game/scripts/player.gd": {
+      "observed96": {
+        "bytes": 17999,
+        "path": "game/scripts/player.gd",
+        "sha256": "4e3c45222c3334dee5b5b14c6fd99770aac5ed2aa992db9ea23eeb8a0058a71d"
+      },
+      "snapshot": {
+        "bytes": 17999,
+        "path": "source/art/consumer-qualification-v0097/provenance/historical96/scripts/player.gd",
+        "sha256": "4e3c45222c3334dee5b5b14c6fd99770aac5ed2aa992db9ea23eeb8a0058a71d"
+      }
+    }
+  },
+  "parent_qualification": {
+    "bytes": 294008,
+    "path": "source/art/consumer-qualification-v0096/current-consumers.json",
+    "sha256": "b05491c85ba9c2e64f4277548b16b2276c8c65037ee5fc0f2b3f0949d7634b38"
+  },
+  "schema": "null-choir-v097-source-bound-historical-reuse-v1",
+  "scope": {
+    "historical96_is_current97": false,
+    "new_native_observation": false,
+    "qualification": false
+  },
+  "status": "SOURCE_BOUND_PENDING_CURRENT97_CAPTURE",
+  "unchanged_runtime_assets": {
+    "game/assets/art/sprites/bodies-v1/brute.png": {
+      "bytes": 207292,
+      "path": "game/assets/art/sprites/bodies-v1/brute.png",
+      "sha256": "dea9b732adf116b8201d0f9d9ec62238109790a87f6a7f8b01b383978e567e21"
+    },
+    "game/assets/art/sprites/bodies-v1/brute.png.import": {
+      "bytes": 948,
+      "path": "game/assets/art/sprites/bodies-v1/brute.png.import",
+      "sha256": "f1640582b68b5258ff524658f1728369e819a26b3443e31d14b9c844b941c4ea"
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png": {
+      "bytes": 214723,
+      "path": "game/assets/art/sprites/bodies-v1/caster.png",
+      "sha256": "9ed72cb6475d010ea5cc99fc3d05beb94ba0d77c29627221fa061f7b78da48f6"
+    },
+    "game/assets/art/sprites/bodies-v1/caster.png.import": {
+      "bytes": 951,
+      "path": "game/assets/art/sprites/bodies-v1/caster.png.import",
+      "sha256": "b8b330e06b6742c77f04425ff3b441dfe96032252bac313177e9a4230cc5d519"
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png": {
+      "bytes": 564352,
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png",
+      "sha256": "79ad9e2925056f26ea0972b5ecfff6ab00118384fed9ee0055493c4b251f1902"
+    },
+    "game/assets/art/sprites/bodies-v1/choir_avatar.png.import": {
+      "bytes": 969,
+      "path": "game/assets/art/sprites/bodies-v1/choir_avatar.png.import",
+      "sha256": "82a33c2b1749e6fd5a7c1bc565260361202f10ef628d539dd868b5b2b11e4279"
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png": {
+      "bytes": 121328,
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png",
+      "sha256": "e19d50a32fddf41a258cff7b9714751a8b0bd07ea770614c09dae7f6ec59ee56"
+    },
+    "game/assets/art/sprites/bodies-v1/crawler.png.import": {
+      "bytes": 955,
+      "path": "game/assets/art/sprites/bodies-v1/crawler.png.import",
+      "sha256": "cbaad65919b6dbb91a83f3c387686a7711be091e4915f2266b747a8734a67118"
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png": {
+      "bytes": 188104,
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png",
+      "sha256": "3b519f6b5557204a43bfb94e7b4df8543a6f3d0d7bb02e1e0748f33d6ab5a63a"
+    },
+    "game/assets/art/sprites/bodies-v1/guardian.png.import": {
+      "bytes": 958,
+      "path": "game/assets/art/sprites/bodies-v1/guardian.png.import",
+      "sha256": "a477dfb74f9fc36a3a0710888179154fdd575c7dfde7146cc20c91c26ef31ccb"
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png": {
+      "bytes": 767835,
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png",
+      "sha256": "516a2abc8ecf4bcbd8fea5074ca1b74982f2422c74b2e638a3f3077c01aa2506"
+    },
+    "game/assets/art/sprites/bodies-v1/nursery_warden.png.import": {
+      "bytes": 976,
+      "path": "game/assets/art/sprites/bodies-v1/nursery_warden.png.import",
+      "sha256": "5f3d7d5848e40d11b3fc0c8a3863d06756116f4a8764a48c36b9c7486ee65750"
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png": {
+      "bytes": 201859,
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png",
+      "sha256": "7499061d847bf8a4bd2bcf11ae4e62df01149ebed8c92740155d474079c84368"
+    },
+    "game/assets/art/sprites/bodies-v1/summoner.png.import": {
+      "bytes": 957,
+      "path": "game/assets/art/sprites/bodies-v1/summoner.png.import",
+      "sha256": "9e247ed1891f6a18bb8da9b341419394f74b567daedef7ab4ec81b965a3f5ca0"
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png": {
+      "bytes": 262272,
+      "path": "game/assets/art/sprites/bodies-v1/worker.png",
+      "sha256": "b42bdcd0e00fe8b2d759241a9a8e3e8780da0eb8a70e01e670e4c4341d49ec52"
+    },
+    "game/assets/art/sprites/bodies-v1/worker.png.import": {
+      "bytes": 951,
+      "path": "game/assets/art/sprites/bodies-v1/worker.png.import",
+      "sha256": "96a420cf8b92988d05f207e88474afa8c5be10e36a6e51805f122b2dbf812654"
+    },
+    "game/assets/art/weapons/native-v5/rivet_pistol.png": {
+      "bytes": 32743,
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png",
+      "sha256": "6f0dec2a2b9634a69ed6f44a7056e20ac41a74a4cabbd6116a0a7716c809f001"
+    },
+    "game/assets/art/weapons/native-v5/rivet_pistol.png.import": {
+      "bytes": 970,
+      "path": "game/assets/art/weapons/native-v5/rivet_pistol.png.import",
+      "sha256": "6ff9a7e4cf594b18f88de5f68c1ea6ca1d1aeb173524a0918e5312fc98a37a37"
+    }
+  }
+}
