@@ -1,0 +1,48 @@
+{
+  "schema": "null-choir-verified-release-artifact-v1",
+  "version": "0.097",
+  "download_url": "https://github.com/ihearttokyo/null-choir/releases/download/v0.097/Null-Choir-v0.097.zip",
+  "archive": {
+    "filename": "Null-Choir-v0.097.zip",
+    "bytes": 295900142,
+    "sha256": "d673e789d85ae67ea0590f85843c6380bad497c919bc799874591dacd5ea22d8"
+  },
+  "pck": {
+    "bytes": 276540112,
+    "sha256": "6b7c97179908fe0ff8d1640e0283dcae0ac38df107c90c8c562b023bbc6c4b8d"
+  },
+  "source_commit": "e8f2de5c4728938632552813de84703885145486",
+  "source_projection": {
+    "files": 506,
+    "sha256": "82ebbb660b3e9225f4467024b64fead26d1ba06d0bdb33790307cd5a774b2b7c"
+  },
+  "exported_projection": {
+    "files": 506,
+    "sha256": "8ced1884bb5679e1628e73c99213d1d6e561f0eb4455569bcde880a46113c01a"
+  },
+  "editor_project_delta": {
+    "before_sha256": "d26d41d3bd3640f3bd37d9e597aafdf47e3ce2cb196f12875077ed89ff262e74",
+    "after_sha256": "0dcf876de0c7e64be9b47eeeb8662ee3b3ac555e8ee2ac8d7b55d9465b9fe4a8",
+    "removed_settings": [
+      "renderer/rendering_method.mobile=\"mobile\"",
+      "textures/default_filters/use_nearest_mipmap_filter=false"
+    ]
+  },
+  "verification": {
+    "developer_id": true,
+    "notarized": true,
+    "stapled": true,
+    "gatekeeper": true,
+    "packed_resource": true
+  },
+  "evidence": {
+    "source_native_frames": 326,
+    "source_native_chapters": 8,
+    "actual_pck_render_frames": 16,
+    "actual_pck_renderer": "mobile/metal",
+    "physical_input": false,
+    "sustained_fps": false,
+    "listening": false,
+    "full_campaign": false
+  }
+}
