@@ -17,7 +17,13 @@ spec.loader.exec_module(c)
 class CurrentConsumers(unittest.TestCase):
     def test_actual_exact_generation_and_honest_scope(self):
         v = c.qualify(ROOT)
-        if v['schema'] == 'null-choir-exact-current-art-consumers-v0096-v1':
+        if v['schema'] == 'null-choir-exact-current-art-consumers-v0097-v1':
+            self.assertEqual(v['status'], 'ACTUAL_CURRENT97_ORDINARY_THREAT_CONTEXTS_OBSERVED')
+            self.assertEqual(len(v['native_observation']['frames']),214)
+            self.assertEqual(v['scope'],c.SCOPE97)
+            self.assertEqual(len(v['historical_native_observation']['jobs']),22)
+            self.assertIs(v['historical96_reuse']['current97_observation_claimed'],False)
+        elif v['schema'] == 'null-choir-exact-current-art-consumers-v0096-v1':
             jobs = v['native_observation']['jobs']
             self.assertEqual({r['id'] for r in jobs}, set(c.EXPECTED96_JOBS))
             self.assertEqual(len(jobs), 22)
@@ -71,7 +77,8 @@ class CurrentConsumers(unittest.TestCase):
 
     def test_historical_sources_are_explicit_snapshots_not_current_hash_swaps(self):
         v = c.qualify(ROOT)
-        if v['schema'] == 'null-choir-exact-current-art-consumers-v0096-v1':
+        if v['schema'] in ('null-choir-exact-current-art-consumers-v0096-v1',
+                           'null-choir-exact-current-art-consumers-v0097-v1'):
             # Current qualification already verified the immutable94 parent;
             # historical-source semantics belong to that exact retained record.
             v = c.pinned_receipt(ROOT, c.RECEIPT, c.RECEIPT_SHA)
@@ -142,7 +149,7 @@ class ArtCIDependencyContract(unittest.TestCase):
             self.assertIn(flag,workflow)
         self.assertIn("assert PIL.__version__ == '12.2.0'",workflow)
         self.assertIn('      - .github/requirements-art-ci.txt',workflow)
-        self.assertEqual((ROOT/'tools/art_consumer_compatibility.py').read_text().count('from PIL import Image'),2)
+        self.assertEqual((ROOT/'tools/art_consumer_compatibility.py').read_text().count('from PIL import Image'),4)
         self.assertEqual((ROOT/'source/art/consumer-qualification-v0096/provenance/later22_producer.py').read_text().count('from PIL import Image'),1)
         self.assertIn("python: ['3.12', '3.14']",workflow)
         self.assertIn('    timeout-minutes: 12',workflow)
@@ -163,7 +170,9 @@ class ArtCIDependencyContract(unittest.TestCase):
 # Exact verifier-only derivation; existing observation remains historical source.
 PIN=c.MAIN96_VERIFIER_DERIVATION
 OLD=c.record(ROOT,PIN['observed_snapshot'])
-NEW=c.read_resident(ROOT,'game/scripts/main.gd')
+# Historical verifier-only unit fixture, not the changed current97 Main.
+NEW=c.read_resident(ROOT,'source/art/consumer-qualification-v0097/provenance/main-v96-verifier-only.gd')
+assert c.sha(NEW) == PIN['derived_main']['sha256']
 class VerifierDerivationReader:
  def __init__(self,resident=NEW,snapshot=OLD):self.resident=resident;self.snapshot=snapshot
  def read_resident(self,root,path):
@@ -217,40 +226,165 @@ class Derivation(unittest.TestCase):
   self.assertEqual(producer._regular(ROOT,'game/scripts/main.gd'),ROOT/PIN['observed_snapshot']['path'])
   with self.assertRaisesRegex(ValueError,'root drift'):producer._regular(ROOT/'foreign','game/scripts/main.gd')
   self.assertEqual(len(paths),3)
- def test_derived_generation_retained22_Player_and_threshold_consumption(self):
-  # Derived resident Main and the immutable observed generation are distinct.
-  # Existing46othercode/262art/22contexts/244PNGs/imports remain strict;
-  # this performs retained evidence validation, not new native execution.
-  self.assertEqual(c.sha((ROOT/'game/scripts/main.gd').read_bytes()),PIN['derived_main']['sha256'])
-  result=c.qualify96(ROOT)
-  self.assertEqual(result['status'],'ACTUAL96_GAMEPLAY_WITH_VERIFIER_ONLY_SOURCE_DERIVATION')
-  self.assertEqual(result['current_sources']['game/scripts/main.gd'],PIN['derived_main'])
-  self.assertEqual(result['observed_current_sources']['game/scripts/main.gd'],PIN['observed_main'])
-  self.assertEqual(len(result['native_observation']['jobs']),22)
-  self.assertEqual(sum(len(j['frames'])for j in result['native_observation']['jobs']),244)
-  self.assertEqual(c.sha((ROOT/c.RECEIPT96).read_bytes()),c.RECEIPT96_SHA)
-  self.assertTrue(c.qualified96_generation96(result))
-  # Full22 qualification above is real retained-evidence validation. Only reuse
-  # its completed result at downstream call boundaries, never fabricate native.
-  player=c.read_resident(ROOT,'game/scripts/player.gd')
-  with patch.object(c,'qualify96',return_value=result):
-   retained=c.qualified_player_consumption96(ROOT,player)
-   self.assertEqual(c.sha(retained),c.PLAYER_V5_HISTORICAL['sha256'])
-   with self.assertRaisesRegex(ValueError,'Supplied Player'):c.qualified_player_consumption96(ROOT,player+b'foreign')
-  spec=importlib.util.spec_from_file_location('derived_threshold',ROOT/'tools/threshold_art_ledger.py');threshold=importlib.util.module_from_spec(spec);spec.loader.exec_module(threshold)
-  compat={'qualify':lambda root:result,'record':c.record,'qualified96_generation96':c.qualified96_generation96}
+ def test_current97_is_not_a_verifier_only96_derivation(self):
+  with self.assertRaisesRegex(ValueError,'resident Main drift'):
+   c.verifier_main_derivation96(ROOT,PIN['observed_main'],VerifierDerivationReader(c.read_resident(ROOT,'game/scripts/main.gd')))
+
+
+class Source97Scaffolding(unittest.TestCase):
+ """Static binding and strict historical reuse; NOT current97 native acceptance."""
+ def test_exact_static_inventory_and_scope(self):
+  value=c.validate_source97(ROOT)
+  self.assertEqual(set(value['current_sources']),c.REQUIRED97_SOURCES)
+  self.assertEqual(len(value['current_art_resources']),262)
+  self.assertEqual(set(value['historical96_snapshots']),c.HISTORICAL96_PATHS97)
+  self.assertIs(value['scope']['new_native_observation'],False)
+  self.assertIs(value['scope']['qualification'],False)
+ def test_source_import_and_historical_mutation_refuse_before_receipt(self):
+  source=c.validate_source97(ROOT);read=c.read_resident
+  targets=['game/scripts/enemy_motion.gd','game/scripts/enemy_telegraph.gd',
+           'game/scripts/player.gd','game/scripts/main.gd',
+           'game/assets/art/weapons/native-v5/rivet_pistol.png',
+           'game/assets/art/healing_machinery/models/capillary-organ.glb.import',
+           source['historical96_snapshots']['game/scripts/player.gd']['snapshot']['path']]
+  for target in targets:
+   with self.subTest(target=target),patch.object(c,'read_resident',side_effect=lambda r,p:read(r,p)+(b'foreign' if p==target else b'')):
+    with self.assertRaisesRegex(ValueError,'drift'):c.validate_source97(ROOT)
+ def test_source_contract_rehash_or_receipt_pin_alone_cannot_qualify(self):
+  read=c.read_resident;raw=read(ROOT,c.SOURCE97)
+  with patch.object(c,'read_resident',side_effect=lambda r,p:raw+b' ' if p==c.SOURCE97 else read(r,p)):
+   with self.assertRaisesRegex(ValueError,'receipt'):c.validate_source97(ROOT)
+  if c.RECEIPT97_SHA is None:
+   with self.assertRaisesRegex(ValueError,'remains unpinned'):c.qualify97(ROOT)
+   with patch.object(c,'RECEIPT97_SHA','0'*64),self.assertRaises((ValueError,FileNotFoundError)):
+    c.qualify97(ROOT)
+ def test_historical_view_only_exact_rows_and_root(self):
+  value=c.validate_source97(ROOT);view=c._historical96_reader97(ROOT,value)
+  for relative,binding in value['historical96_snapshots'].items():
+   old=view.record(ROOT,binding['observed96'])
+   self.assertEqual(c.sha(old),binding['snapshot']['sha256'])
+   with self.assertRaisesRegex(ValueError,'record drift'):view.record(ROOT,dict(binding['observed96'],sha256='0'*64))
+  with self.assertRaisesRegex(ValueError,'root drift'):view.read_resident(ROOT/'foreign','game/scripts/player.gd')
+  self.assertEqual(view.read_resident(ROOT,'game/scripts/enemy_motion.gd'),c.read_resident(ROOT,'game/scripts/enemy_motion.gd'))
+ def test_full_retained96_evidence_is_explicitly_historical(self):
+  result=c.validate_historical96_reuse97(ROOT)
+  self.assertEqual(result['status'],'HISTORICAL96_REVALIDATED_NOT_CURRENT97')
+  self.assertIs(result['current97_observation_claimed'],False)
+  old=result['qualification']
+  self.assertEqual(old['status'],'ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED')
+  self.assertEqual(len(old['native_observation']['jobs']),22)
+  self.assertEqual(sum(len(j['frames']) for j in old['native_observation']['jobs']),244)
+  self.assertFalse(c.qualified97_generation97(old))
+ def test_public97_contract_has_no_private_paths_or_quality_numbers(self):
+  raw=c.read_resident(ROOT,c.SOURCE97).decode().lower()
+  for token in ['/users/','/private/','/tmp/','/home/','argv','home=','rating','rubric','score']:
+   self.assertNotIn(token,raw)
+
+
+class Current97Joins(unittest.TestCase):
+ """Exact retained technical evidence and refusals; no engine/visual grading."""
+ def test_actual_portable_join_and_historical_Player_binding(self):
+  value=c.qualify97(ROOT)
+  self.assertTrue(c.qualified97_generation97(value))
+  self.assertFalse(c.qualified96_generation96(value))
+  self.assertEqual(value['scope'],c.SCOPE97)
+  current=c.read_resident(ROOT,'game/scripts/player.gd')
+  # Reuse the completed strict result only at downstream boundaries.
+  with patch.object(c,'qualify',return_value=value):
+   old=c.qualified_player_consumption96(ROOT,current)
+   self.assertEqual(c.sha(old),c.PLAYER_V5_HISTORICAL['sha256'])
+   with self.assertRaisesRegex(ValueError,'Supplied Player'):
+    c.qualified_player_consumption96(ROOT,current+b'foreign')
+  self.assertNotEqual(old,current)
+ def test_missing_changed_or_self_rehashed97_receipt_refuses(self):
+  raw=c.read_resident(ROOT,c.RECEIPT97);read=c.read_resident
+  for mode in ('missing','source','frame','scope'):
+   value=json.loads(raw)
+   if mode=='source':value['current_sources']['game/scripts/enemy_motion.gd']['sha256']='0'*64
+   if mode=='frame':value['native_observation']['frames'].pop()
+   if mode=='scope':value['scope']['human_input_or_listening']=True
+   changed=json.dumps(value).encode()
+   def altered(root,path):
+    if path!=c.RECEIPT97:return read(root,path)
+    if mode=='missing':raise FileNotFoundError('missing97 receipt')
+    return changed
+   with self.subTest(mode=mode),patch.object(c,'read_resident',side_effect=altered):
+    with self.assertRaises((ValueError,FileNotFoundError)):c.qualify97(ROOT)
+ def test_unknown_missing_partial_report_and_native_identity_refuse(self):
+  receipt=c.pinned_receipt(ROOT,c.RECEIPT97,c.RECEIPT97_SHA);contract=c.validate_source97(ROOT)
+  read=c._public97_json
+  for mode in ('unknown_frame','missing_frame','partial','native'):
+   def altered(root,row):
+    value=copy.deepcopy(read(root,row))
+    if row==c.PUBLIC97_BINDINGS['trace']:
+     if mode=='unknown_frame':value['frames'][0]['file']='foreign.png'
+     if mode=='missing_frame':value['frames'].pop()
+     if mode=='partial':value['completed_chapters'].pop()
+    if row==c.PUBLIC97_BINDINGS['native_identity'] and mode=='native':value['rendering_driver']='foreign'
+    return value
+   with self.subTest(mode=mode),patch.object(c,'_public97_json',side_effect=altered):
+    with self.assertRaises(ValueError):c.validate_capture_context_join97(ROOT,receipt,contract)
+ def test_frame_producer_trace_and_memo_replay_tamper_refuse(self):
+  # Warm a real completed audit, then alter actual read bytes underneath it.
+  value=c.qualify97(ROOT);read=Path.read_bytes
+  targets=[ROOT/value['native_observation']['frames'][0]['path'],
+           ROOT/value['native_observation']['supplement']['frames'][0]['path'],
+           ROOT/c.PUBLIC97_BINDINGS['producer']['path'],
+           ROOT/c.PUBLIC97_SUPPLEMENT_BINDINGS['producer']['path'],
+           ROOT/c.PUBLIC97_BINDINGS['trace']['path'],
+           ROOT/'game/scripts/enemy_motion.gd',
+           ROOT/'game/assets/art/weapons/painted-v3/impact_tool.png']
+  for target in targets:
+   with self.subTest(target=str(target.relative_to(ROOT))),patch.object(Path,'read_bytes',lambda path:read(path)+(b'foreign' if path==target else b'')):
+    with self.assertRaises(ValueError):c.qualify97(ROOT)
+ def test_threshold_dispatch_is_explicit97_and_exact_source_only(self):
+  value=c.qualify97(ROOT)
+  spec=importlib.util.spec_from_file_location('threshold97',ROOT/'tools/threshold_art_ledger.py')
+  threshold=importlib.util.module_from_spec(spec);spec.loader.exec_module(threshold)
+  compat={'qualify':lambda root:value,'record':c.record,
+          'qualified96_generation96':c.qualified96_generation96,
+          'qualified97_generation97':c.qualified97_generation97}
   with patch.object(threshold,'_current_consumer_compatibility',return_value=compat):
-   for relative in ['game/scripts/main.gd','game/scripts/level.gd']:
-    historical=result['historical_sources'][relative]
-    old=threshold._qualified96_threshold_source(ROOT,relative,c.read_resident(ROOT,relative),historical['sha256'])
-    self.assertEqual(c.sha(old),historical['sha256'])
-    with self.assertRaisesRegex(ValueError,'Supplied threshold'):threshold._qualified96_threshold_source(ROOT,relative,c.read_resident(ROOT,relative)+b'foreign',historical['sha256'])
-  for field in ['verifier_source_derivation','observed_current_sources','current_sources']:
-   bad=copy.deepcopy(result)
-   if field=='verifier_source_derivation':bad[field]['new_frames_claimed']=True
-   else:bad[field]['game/scripts/main.gd']['sha256']='0'*64
-   self.assertFalse(c.qualified96_generation96(bad))
-  bad=copy.deepcopy(result);bad['status']='ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED';self.assertFalse(c.qualified96_generation96(bad))
+   for relative in ('game/scripts/main.gd','game/scripts/level.gd'):
+    current=c.read_resident(ROOT,relative);row=value['historical_sources'][relative]
+    old=threshold._qualified96_threshold_source(ROOT,relative,current,row['sha256'])
+    self.assertEqual(c.sha(old),row['sha256'])
+    with self.assertRaisesRegex(ValueError,'Supplied threshold'):
+     threshold._qualified96_threshold_source(ROOT,relative,current+b'foreign',row['sha256'])
+ def test_unknown_source_directory_member_refuses_even_after_memo(self):
+  c.qualify97(ROOT)
+  glob=Path.glob
+  def extra(path,pattern):
+   rows=list(glob(path,pattern))
+   if path==ROOT/'game/scripts' and pattern=='*.gd':rows.append(path/'foreign.gd')
+   return iter(rows)
+  with patch.object(Path,'glob',extra),self.assertRaisesRegex(ValueError,'foreign source script'):
+   c.qualify97(ROOT)
+ def test_receipt_and_public_metadata_privacy(self):
+  paths=[c.RECEIPT97,*[row['path'] for key,row in c.PUBLIC97_BINDINGS.items() if key!='producer'],
+         *[row['path'] for key,row in c.PUBLIC97_SUPPLEMENT_BINDINGS.items() if key not in ('producer','base_producer')]]
+  for path in paths:
+   raw=c.read_resident(ROOT,path).decode().lower()
+   for token in ('/users/','/private/','/tmp/','/home/','argv','home=','rating','rubric','score'):
+    self.assertNotIn(token,raw)
+ def test_supplement_missing_unknown_UI_and_timing_controls_refuse(self):
+  receipt=c.pinned_receipt(ROOT,c.RECEIPT97,c.RECEIPT97_SHA);contract=c.validate_source97(ROOT)
+  read=c._public97_json
+  for mode in ('partial','unknown_frame','UI','timing'):
+   def altered(root,row):
+    value=copy.deepcopy(read(root,row))
+    if row==c.PUBLIC97_SUPPLEMENT_BINDINGS['trace']:
+     if mode=='partial':value['completed_chapters'].pop()
+     if mode=='unknown_frame':value['frames'][0]['file']='foreign.png'
+     if mode=='UI':
+      drain=next(x for x in value['arrangements'] if x['kind']=='natural_UI_transient_drain_before_pair')
+      drain['damage_flash']=.5
+     if mode=='timing':
+      event=next(x for x in value['events'] if x['kind']=='warmed_alternating_draw_readback_not_GPU_or_FPS')
+      event['batches'][1]['energy']=.65
+    return value
+   with self.subTest(mode=mode),patch.object(c,'_public97_json',side_effect=altered):
+    with self.assertRaises(ValueError):c.validate_supplement_join97(ROOT,receipt,contract)
 
 
 if __name__ == '__main__':

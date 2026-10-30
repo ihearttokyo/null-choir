@@ -274,7 +274,7 @@ def _check_glb(data: bytes, *, label: str) -> dict:
 
 CURRENT_MAIN_SHA = "c4519db809f974a2e11810742e72cdf926f4a1d515629565a6b73819aa0adcd1"
 CURRENT_LEVEL_SHA = "93e6b9456e9348c1ba35b01d45b2338d71bbfd2aed0ac9f9d4607aca2437e871"
-CURRENT_CONSUMER_HELPER_SHA = "25a8648955c1406180e4e753ae96a5c1a2bd404ec71a5af48e8fe48b9b5ed5ad"
+CURRENT_CONSUMER_HELPER_SHA = "c36805df8ba2a145548722f78608b3310a567c00b272767689e5b8b2078faf46"
 def _current_consumer_compatibility(root):
     import runpy
     path = safe_rel(root, "tools/art_consumer_compatibility.py", label="current consumer helper", roots={"tools"})
@@ -291,22 +291,25 @@ MAIN_SELFTEST_REPLACEMENTS = [{'function': '_verify_export', 'before': '\t\t\tch
 def _qualified96_generation(root):
     compat = _current_consumer_compatibility(root)
     value = compat['qualify'](root)
-    if (not isinstance(value, dict)
-            or value.get('schema') != 'null-choir-exact-current-art-consumers-v0096-v1'
-            or not compat['qualified96_generation96'](value)):
-        fail("Full exact actual96 qualification required before historical threshold reuse")
+    qualified = (isinstance(value, dict) and (
+        (value.get('schema') == 'null-choir-exact-current-art-consumers-v0096-v1'
+         and compat['qualified96_generation96'](value)) or
+        (value.get('schema') == 'null-choir-exact-current-art-consumers-v0097-v1'
+         and compat['qualified97_generation97'](value))))
+    if not qualified:
+        fail("Full exact actual96/97 qualification required before historical threshold reuse")
     return compat, value
 
 
 def _qualified96_threshold_source(root, relative, supplied, expected_sha):
     """No source alias: current supplied=resident=receipt, then exact history."""
     if relative not in (MAIN_SOURCE, "game/scripts/level.gd"):
-        fail("Only Main/Level may consume the qualified96 threshold source bridge")
+        fail("Only Main/Level may consume the qualified96/97 threshold source bridge")
     compat, value = _qualified96_generation(root)
     row = value.get('current_sources', {}).get(relative)
     if (not isinstance(row, dict) or row.get('path') != relative
             or type(supplied) is not bytes or supplied != compat['record'](root, row)):
-        fail("Supplied threshold source differs from exact resident/final96 receipt")
+        fail("Supplied threshold source differs from exact resident/final96/97 receipt")
     historical = value.get('historical_sources', {}).get(relative)
     if not isinstance(historical, dict) or historical.get('sha256') != expected_sha:
         fail("Only the exact retained historical threshold source is supported")

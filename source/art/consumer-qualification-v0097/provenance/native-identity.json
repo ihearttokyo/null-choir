@@ -1,0 +1,10 @@
+{
+  "engine": "Godot",
+  "executable_bytes": 351312912,
+  "executable_sha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "execution_authenticated": false,
+  "rendering_driver": "metal",
+  "rendering_method": "mobile",
+  "schema": "null-choir-v097-native-engine-identity-v1",
+  "version": "4.7.2"
+}

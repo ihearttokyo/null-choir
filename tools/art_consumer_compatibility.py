@@ -31,6 +31,13 @@ def _observe_png_directory96(root, relative):
         observed['directories'][relative] = tuple(sorted(
             p.name for p in (Path(root) / relative).glob('*.png')))
 
+
+def _observe_source_directory97(root):
+    observed = _QUALIFY96_READS.get()
+    if observed is not None:
+        observed.setdefault('source_directories', {})['game/scripts'] = tuple(sorted(
+            path.name for path in (Path(root) / 'game/scripts').glob('*.gd')))
+
 RECEIPT = 'source/art/consumer-qualification-v0094/current-consumers.json'
 RECEIPT_SHA = 'dad9f63a2c5eb0c73b139186deb9a74990b118f8b38b85cda1f2ac97642060d4'
 RECEIPT95 = 'source/art/consumer-qualification-v0095/current-consumers.json'
@@ -98,6 +105,9 @@ def qualify(root):
         build95 = later.get('current_source_overrides', {}).get('game/scripts/build_info.gd', {}).get('sha256')
         hud94 = parent.get('current_sources', {}).get('game/scripts/hud.gd', {}).get('sha256')
         if current_build != build95 or current_hud != hud94:
+            observed96 = pinned_receipt(root, RECEIPT96, RECEIPT96_SHA)
+            if current_build != observed96['current_sources']['game/scripts/build_info.gd']['sha256']:
+                return qualify97(root)
             return qualify96(root)
         if (later['schema'] != 'null-choir-exact-current-art-consumers-v0095-v1'
                 or later['status'] != 'ACTUAL_CURRENT95_CORRECTED_WALLS_WITH_HISTORICAL_UNCHANGED_ART'
@@ -664,10 +674,14 @@ def validate_capture_context_join96(root, receipt, base):
     def observed_record(evidence_root, row):
         return _observe96(evidence_root, row['path'], portable_record(evidence_root, row))
     portable.record = observed_record
-    if getattr(base, '_main_derivation96', None) is not None:
+    if (getattr(base, '_main_derivation96', None) is not None
+            or getattr(base, '_historical96_snapshots', None) is not None):
         original_load_producer = portable.load_producer
         def captured_load_producer(*args, **kwargs):
-            return _project_captured_main96(original_load_producer(*args, **kwargs), root, base)
+            producer = original_load_producer(*args, **kwargs)
+            if getattr(base, '_historical96_snapshots', None) is not None:
+                return _project_historical96_for97(producer, root, base)
+            return _project_captured_main96(producer, root, base)
         portable.load_producer = captured_load_producer
     for job in index['jobs']:
         _observe_png_directory96(root, 'source/art/consumer-qualification-v0096/cases/' + job['id'])
@@ -1053,9 +1067,9 @@ def qualified_player_consumption96(root, supplied):
     qualify96 owns every actual producer/native/source join and remains closed
     until Root finalizes them. Historical bytes establish no gameplay equivalence.
     """
-    value = qualify96(root)
-    _require(qualified96_generation96(value),
-             'Fully qualified actual96 Player consumption required')
+    value = qualify(root)
+    _require(qualified96_generation96(value) or qualified97_generation97(value),
+             'Fully qualified actual96/97 Player consumption required')
     row = value.get('current_sources', {}).get('game/scripts/player.gd')
     _require(type(row) is dict and row.get('path') == 'game/scripts/player.gd',
              'Final96 receipt must bind the current Player source')
@@ -1071,6 +1085,591 @@ def qualified_player_consumption96(root, supplied):
              and retained.replace(new_uri, old_uri, 1) == before,
              'Historical v5 snapshot must preserve exact original one-byte proof')
     return retained
+
+
+# Additive v097: exact current source and explicitly historical96 source views.
+# The actual current97 receipt remains closed until real reviewed captures exist.
+PREFIX97 = 'source/art/consumer-qualification-v0097/'
+SOURCE97 = PREFIX97 + 'source-contract.json'
+SOURCE97_SHA = 'a26e8a034d13875f32ba91d094c691350b7990d84d640133c24b6a7d8bf546c3'
+RECEIPT97 = PREFIX97 + 'current-consumers.json'
+RECEIPT97_SHA = 'aea22f5443352ef82a5b2ad7d5728e44579caed30127560c52447fda5307db87'
+PUBLIC97_SUPPLEMENT_BINDINGS = {'producer': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/producer.gd', 'bytes': 4991, 'sha256': 'ef184f0a1f95af204931ae33a9e0ecbbac4b8679dd7f5568e9e09348b4b14e49'}, 'base_producer': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/base-producer.gd', 'bytes': 22198, 'sha256': '89fd8e1ba8ea3cbcdd5d37edfdcc81f52a325f27ddeaf4b7785e8c15a888230c'}, 'trace': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/result.json', 'bytes': 362586, 'sha256': 'e9e9a1b4f58f5df1f45e1e899b3e1779a2f1e9ccda5b5e3d2a49c88797d64506'}, 'script_sources': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/source.json', 'bytes': 4020, 'sha256': '4a85695cd25a0e602d1736a64d765f7cb4622bd5c01c258b4034372f6d098ef1'}, 'tracked_game': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/tracked-game.json', 'bytes': 78944, 'sha256': '18e0dd82fc02a9f1ad425e5f439a1679d0f48fd12c016718884200e5e915a753'}, 'supervision': {'path': 'source/art/consumer-qualification-v0097/supplement/provenance/supervision.json', 'bytes': 110, 'sha256': 'fe82c0f24594f34ec6d37c7fddd380a8db91f8f5ee1735bee1c08814eb0e5424'}}
+PUBLIC97_BINDINGS = {'producer': {'path': 'source/art/consumer-qualification-v0097/provenance/producer.gd', 'bytes': 22198, 'sha256': '89fd8e1ba8ea3cbcdd5d37edfdcc81f52a325f27ddeaf4b7785e8c15a888230c'}, 'trace': {'path': 'source/art/consumer-qualification-v0097/provenance/result.json', 'bytes': 533827, 'sha256': '111eabd51fdac3ce7224809ff272ecf94cbe85ca8cb96c7a9cdc8c00312f7c15'}, 'script_sources': {'path': 'source/art/consumer-qualification-v0097/provenance/source.json', 'bytes': 4020, 'sha256': '4a85695cd25a0e602d1736a64d765f7cb4622bd5c01c258b4034372f6d098ef1'}, 'tracked_game': {'path': 'source/art/consumer-qualification-v0097/provenance/tracked-game.json', 'bytes': 78944, 'sha256': '18e0dd82fc02a9f1ad425e5f439a1679d0f48fd12c016718884200e5e915a753'}, 'native_identity': {'path': 'source/art/consumer-qualification-v0097/provenance/native-identity.json', 'bytes': 326, 'sha256': '34bb56058d3af44e4eb79d938950c0457de08e1e922c0d8835cf1fcc1d2524b7'}, 'supervision': {'path': 'source/art/consumer-qualification-v0097/provenance/supervision.json', 'bytes': 110, 'sha256': 'fe82c0f24594f34ec6d37c7fddd380a8db91f8f5ee1735bee1c08814eb0e5424'}}
+REQUIRED97_SOURCES = REQUIRED96_SOURCES | {
+    'game/scripts/enemy_motion.gd', 'game/scripts/enemy_telegraph.gd'}
+HISTORICAL96_PATHS97 = {
+    'game/export_presets.cfg', 'game/project.godot', 'game/scripts/build_info.gd',
+    'game/scripts/critical_actor_practical.gd', 'game/scripts/enemy.gd',
+    'game/scripts/main.gd', 'game/scripts/player.gd',
+    *(f'game/assets/art/healing_machinery/models/{name}.glb.import' for name in (
+        'canted-supported-orbit-core', 'capillary-organ', 'clinical-abstract-capsule',
+        'hanging-pressure-bulb', 'ivory-archive-vessel', 'organic-valve-cage',
+        'refractory-ceramic-crucible', 'ribbed-marrow-tank')),
+    'game/assets/art/healing_machinery/raw/texture-atlas.png.import'}
+
+
+def validate_source97(root):
+    """Static exact-byte binding only; never a rendered-evidence or PASS claim."""
+    contract = pinned_receipt(root, SOURCE97, SOURCE97_SHA)
+    prior = pinned_receipt(root, RECEIPT96, RECEIPT96_SHA)
+    _require(type(contract) is dict and set(contract) == {
+        'schema', 'status', 'parent_qualification', 'current_sources',
+        'current_art_resources', 'unchanged_runtime_assets', 'current_weapon_art_resources',
+        'historical96_snapshots', 'scope'}
+        and contract['schema'] == 'null-choir-v097-source-bound-historical-reuse-v1'
+        and contract['status'] == 'SOURCE_BOUND_PENDING_CURRENT97_CAPTURE'
+        and contract['parent_qualification'] == {
+            'path': RECEIPT96, 'bytes': len(read_resident(root, RECEIPT96)), 'sha256': RECEIPT96_SHA}
+        and contract['scope'] == {'historical96_is_current97': False,
+                                  'new_native_observation': False, 'qualification': False},
+        'Exact distinct97 static contract and immutable96 parent required')
+    sources, art = contract['current_sources'], contract['current_art_resources']
+    _require(type(sources) is dict and set(sources) == REQUIRED97_SOURCES
+             and type(art) is dict and set(art) == set(prior['current_art_resources']),
+             'Exact49 current97 source and262 art dependency inventory required')
+    _require(contract['unchanged_runtime_assets'] == prior['unchanged_runtime_assets'],
+             'Exact inherited weapon/body asset inventory required')
+    for relative, row in {**sources, **art, **contract['unchanged_runtime_assets']}.items():
+        _require(row.get('path') == relative, 'Current97 path association mismatch')
+        record(root, row)
+    player = record(root, sources['game/scripts/player.gd'])
+    weapon_assets = re.findall(rb'"asset":"([^"]+)"', player)
+    _require(weapon_assets == [b'painted-v3/impact_tool', b'native-v5/rivet_pistol',
+        b'painted-v3/scattergun', b'painted-v3/sawtooth_repeater',
+        b'painted-v3/marrow_launcher', b'painted-v3/choir_disruptor'],
+        'Current97 Player must retain exact six actual weapon art bindings')
+    weapon_art = contract['current_weapon_art_resources']
+    expected_weapon_art = {'game/assets/art/weapons/' + asset.decode() + '.png' + suffix
+                           for asset in weapon_assets for suffix in ('', '.import')}
+    _require(type(weapon_art) is dict and set(weapon_art) == expected_weapon_art,
+             'Every currently consumed weapon PNG/import must be byte bound')
+    for relative, row in weapon_art.items():
+        _require(row.get('path') == relative, 'Current97 weapon art path association mismatch')
+        record(root, row)
+    snapshots = contract['historical96_snapshots']
+    observed = {**prior['current_sources'], **prior['current_art_resources']}
+    _require(type(snapshots) is dict and set(snapshots) == HISTORICAL96_PATHS97,
+             'Only exact seven96 code/config and nine96 sidecar snapshots allowed')
+    for relative, binding in snapshots.items():
+        _require(type(binding) is dict and set(binding) == {'observed96', 'snapshot'}
+                 and binding['observed96'] == observed[relative]
+                 and binding['snapshot']['path'] == PREFIX97 + 'provenance/historical96/' + relative.removeprefix('game/')
+                 and {k: binding['snapshot'][k] for k in ('bytes', 'sha256')}
+                     == {k: observed[relative][k] for k in ('bytes', 'sha256')},
+                 'Historical96 snapshot must equal original96 receipt, not rewritten97 source')
+        record(root, binding['snapshot'])
+    # All unaffected source/art dependencies retain their exact original96 rows.
+    for relative, row in observed.items():
+        if relative not in snapshots:
+            _require((sources if relative in sources else art)[relative] == row,
+                     'Unexpected source/art difference outside enumerated97 changes')
+    return contract
+
+
+def _historical96_reader97(root, contract):
+    """Finite historical-only view; cannot qualify current97 by source alias."""
+    view = type('_Historical96Reader97', (), {})()
+    snapshots = contract['historical96_snapshots']
+    exact_root = str(Path(root).absolute())
+    def historical_read(evidence_root, relative):
+        _require(str(Path(evidence_root).absolute()) == exact_root, 'Historical96 projection root drift')
+        binding = snapshots.get(relative)
+        if binding is not None:
+            return record(evidence_root, binding['snapshot'])
+        return read_resident(evidence_root, relative)
+    def historical_record(evidence_root, row):
+        binding = snapshots.get(row.get('path'))
+        if binding is not None:
+            _require(row == binding['observed96'], 'Historical96 projected record drift')
+        raw = historical_read(evidence_root, row['path'])
+        _require(set(row) == {'path', 'bytes', 'sha256'} and type(row['bytes']) is int
+                 and len(raw) == row['bytes'] and sha(raw) == row['sha256'],
+                 'Exact historical96 dependency drift: ' + row['path'])
+        return raw
+    view.read_resident = historical_read
+    view.record = historical_record
+    view.pinned_receipt = pinned_receipt
+    view.sha = sha
+    view.function = function
+    view._historical96_snapshots = snapshots
+    return view
+
+
+def _project_historical96_for97(producer, root, base):
+    """Project only sixteen historical96 producer paths; validators unchanged."""
+    regular = producer._regular
+    def projected(project, relative):
+        resident = regular(project, relative) # Keep original no-follow gates.
+        binding = base._historical96_snapshots.get(relative)
+        if binding is None:
+            return resident
+        _require(Path(project).resolve() == Path(root).resolve(), 'Historical96 producer root drift')
+        record(root, binding['snapshot'])
+        return Path(root) / binding['snapshot']['path']
+    producer._regular = projected
+    # The unchanged producer has exactly one direct project/path read outside
+    # _regular: its literal96 display-name check. Feed that SAME validator a
+    # finite one-path view; do not replace its regex/result with a96 constant.
+    original_version = producer.source_build_version
+    class BuildSourceView:
+        def __init__(self, project):
+            self.project = project
+        def __truediv__(self, relative):
+            _require(relative == 'game/scripts/build_info.gd',
+                     'Only historical96 build identity direct read is projected')
+            return projected(self.project, relative)
+    def historical_version(project=Path(root)):
+        return original_version(BuildSourceView(project))
+    producer.source_build_version = historical_version
+    return producer
+
+
+def validate_historical96_reuse97(root, contract=None):
+    """Revalidate all22 old contexts under original96 sources, NOT current97."""
+    checked = validate_source97(root)
+    _require(contract is None or contract == checked, 'Historical96 contract drift')
+    value = qualify96(root, _historical96_reader97(root, checked))
+    _require(value['status'] == 'ACTUAL_CURRENT96_MOVING_CONTEXTS_OBSERVED',
+             'Historical96 view must preserve original observation identity')
+    return {'status': 'HISTORICAL96_REVALIDATED_NOT_CURRENT97',
+            'receipt': checked['parent_qualification'], 'qualification': value,
+            'current97_observation_claimed': False}
+
+
+def _qualify97_uncached(root):
+    """Distinct actual97 generation; no source normalization or historical pixels."""
+    contract = validate_source97(root)
+    _require(type(RECEIPT97_SHA) is str and re.fullmatch('[0-9a-f]{64}', RECEIPT97_SHA),
+             'v097 actual current-source frame/trace/native receipt remains unpinned')
+    value = pinned_receipt(root, RECEIPT97, RECEIPT97_SHA)
+    _require(type(value) is dict and set(value) == {
+        'schema', 'status', 'source_contract', 'parent_qualification',
+        'current_sources', 'current_art_resources', 'current_weapon_art_resources',
+        'unchanged_runtime_assets', 'native_observation', 'historical96_reuse', 'scope'}
+        and value['schema'] == 'null-choir-exact-current-art-consumers-v0097-v1'
+        and value['status'] == 'ACTUAL_CURRENT97_ORDINARY_THREAT_CONTEXTS_OBSERVED'
+        and value['source_contract'] == {
+            'path': SOURCE97, 'bytes': len(read_resident(root, SOURCE97)), 'sha256': SOURCE97_SHA}
+        and value['parent_qualification'] == contract['parent_qualification'],
+        'Exact distinct actual97 receipt schema/source/historical parent required')
+    for group in ('current_sources', 'current_art_resources', 'current_weapon_art_resources',
+                  'unchanged_runtime_assets'):
+        _require(value[group] == contract[group], 'Current97 receipt/source inventory drift')
+    join = validate_capture_context_join97(root, value, contract)
+    validate_supplement_join97(root, value, contract)
+    historical_result = validate_historical96_reuse97(root, contract)
+    expected_reuse = {'status': historical_result['status'],
+                     'receipt': historical_result['receipt'],
+                     'current97_observation_claimed': False}
+    _require(value['historical96_reuse'] == expected_reuse,
+             'Old96 qualification must remain explicit historical reuse')
+    _require(value['scope'] == SCOPE97, 'Current97 scope must preserve exact non-claims')
+    _require(join['status'] == 'PUBLIC97_FRAME_TRACE_SOURCE_NATIVE_JOIN_VALIDATED',
+             'Actual97 public graphical evidence required')
+    return {**value, 'historical_sources': historical_result['qualification']['historical_sources'],
+            'historical_native_observation': historical_result['qualification']['native_observation']}
+
+
+def qualify97(root):
+    """Successful97 audit reuse requires rereading every mutable dependency.
+
+    This is the same strict content-footprint replay as96, including all506
+    captured game files, source snapshots, producer/trace/native artifacts,
+    every current97 and historical96 PNG and exact PNG directory memberships.
+    No stat shortcut, cached failure, caller reader or patched validator bypass.
+    """
+    import copy
+    if any(globals().get(name) is not value for name, value in _MEMO96_FUNCTIONS.items()):
+        return _qualify97_uncached(root)
+    key = ('97', *_memo96_key(root))
+    store = _memo96_store()
+    prior = store.get(key)
+    if prior is not None:
+        if _memo96_replay(root, prior['observed']):
+            return copy.deepcopy(prior['value'])
+        del store[key]
+    observed = {'root': str(Path(root).absolute()), 'files': {}, 'directories': {}}
+    token = _QUALIFY96_READS.set(observed)
+    try:
+        value = _qualify97_uncached(root)
+    finally:
+        _QUALIFY96_READS.reset(token)
+    _require(_memo96_replay(root, observed), 'Dependency changed during97 audit; result not reusable')
+    if len(store) >= 8:
+        store.pop(next(iter(store)))
+    store[key] = {'observed': observed, 'value': copy.deepcopy(value)}
+    return value
+
+
+def qualified97_generation97(value):
+    """Result-shape gate only; consumers MUST call full qualify97 first."""
+    return (type(value) is dict
+            and value.get('schema') == 'null-choir-exact-current-art-consumers-v0097-v1'
+            and value.get('status') == 'ACTUAL_CURRENT97_ORDINARY_THREAT_CONTEXTS_OBSERVED'
+            and value.get('scope') == SCOPE97
+            and value.get('source_contract', {}).get('sha256') == SOURCE97_SHA
+            and value.get('historical96_reuse') == {
+                'status': 'HISTORICAL96_REVALIDATED_NOT_CURRENT97',
+                'receipt': value.get('parent_qualification'),
+                'current97_observation_claimed': False}
+            and 'verifier_source_derivation' not in value
+            and 'observed_current_sources' not in value)
+
+
+SCOPE97 = {
+    'arranged_current97_ordinary_threat_visibility': True,
+    'actual_short_AI_motion_not_earned_combat': True,
+    'aggregate_offscreen_CPU_timing_samples_not_FPS': True,
+    'supplemental_offcenter_crawler_caster_views': True,
+    'warmed_alternating_forced_draw_sync_readback_latency_not_exclusive_GPU_or_FPS': True,
+    'GPU_timing_available': False,
+    'evidence_is_execution_authentication': False,
+    'historical96_frames_or_sources_are_current97': False,
+    'new_three_pose_pistol_ABA_qualification': False,
+    'new_body_fullmatrix_or_555_qualification': False,
+    'new_gate_opening_or_fullview_qualification': False,
+    'new_art_grade_or_final_visual_acceptance': False,
+    'earned_combat_or_performance_or_package_qualification': False,
+    'full_authored_loop_traversal': False,
+    'human_input_or_listening': False,
+    'sustained_performance': False,
+    'native8K_or_editable_master_qualification': False,
+    'new_native_import_cache_qualification': False}
+
+
+def _public97_bytes(root, row):
+    _require(type(row) is dict and type(row.get('path')) is str
+             and row['path'].startswith(PREFIX97), 'Exact public97 artifact namespace required')
+    raw = record(root, row)
+    # Reuse the exact existing portable privacy scanner, not a redactor.
+    import importlib.util
+    binding = PUBLIC96_BINDINGS['portable_module']
+    record(root, binding)
+    spec = importlib.util.spec_from_file_location('_public97_privacy', Path(root) / binding['path'])
+    portable = importlib.util.module_from_spec(spec); spec.loader.exec_module(portable)
+    portable.privacy(raw)
+    return raw
+
+
+def _public97_json(root, row):
+    return json.loads(_public97_bytes(root, row))
+
+
+def _ordinary_roster97(root, contract):
+    supplies = json.loads(record(root, contract['current_sources']['game/data/earned_supplies.json']))
+    roster = {}
+    for chapter, name in enumerate(LEVEL_IDS):
+        layout = json.loads(record(root, contract['current_sources'][f'game/data/{chapter+1:02d}_{name}.json']))
+        carriers = {grant.get('carrier') for grant in supplies['chapters'][name]['grants']}
+        for role in ('worker', 'crawler', 'caster', 'brute'):
+            eligible = [actor for actor in layout['enemies'] if actor['kind'] == role
+                        and not actor.get('seal_guardian') and not actor.get('door_warden')
+                        and not actor.get('encounter') and actor['id'] not in carriers]
+            if eligible:
+                roster[(chapter, role)] = eligible[0]['id']
+    _require({chapter for chapter, role in roster} == set(range(8)),
+             'All eight source-derived ordinary threat chapters required')
+    return roster
+
+
+def validate_capture_context_join97(root, receipt, contract):
+    """Portable actual97 byte/pixel/state joins; not execution authentication."""
+    import math
+    pins = PUBLIC97_BINDINGS
+    _require(type(pins) is dict and set(pins) == {
+        'producer', 'trace', 'script_sources', 'tracked_game', 'native_identity', 'supervision'},
+        'Final actual97 public artifact bindings remain UNPINNED')
+    observation = receipt['native_observation']
+    _require(type(observation) is dict and set(observation) == {
+        'mode', 'resolution', 'artifacts', 'frames', 'chapter_roles', 'GPU_timing_available', 'supplement'}
+        and observation['mode'] == 'actual_arranged_current97_ordinary_threat_contexts'
+        and observation['resolution'] == [640, 360] and observation['artifacts'] == pins
+        and observation['GPU_timing_available'] is False,
+        'Distinct actual97 observation/artifact and timing limits required')
+    for row in pins.values():
+        _require(row['path'].startswith(PREFIX97), 'Current97 artifact outside exact public namespace')
+        record(root, row)
+    producer = _public97_bytes(root, pins['producer'])
+    _require(producer == read_resident(root, 'game/tests/qualify_v0097_visibility.gd'),
+             'Captured97 producer differs from exact current fixture')
+    trace = _public97_json(root, pins['trace'])
+    tracked = _public97_json(root, pins['tracked_game'])
+    scripts = _public97_json(root, pins['script_sources'])
+    native = _public97_json(root, pins['native_identity'])
+    supervision = _public97_json(root, pins['supervision'])
+    _require(type(tracked) is dict and tracked and all(
+        type(path) is str and path.startswith('game/') and not path.startswith('game/tests/')
+        and type(row) is dict and set(row) == {'bytes', 'sha256'} for path, row in tracked.items()),
+        'Exact captured exportable tracked-game byte inventory required')
+    for relative, row in tracked.items():
+        record(root, {'path': relative, **row})
+    for group in ('current_sources', 'current_art_resources', 'current_weapon_art_resources', 'unchanged_runtime_assets'):
+        for relative, row in contract[group].items():
+            _require(tracked.get(relative) == {k: row[k] for k in ('bytes', 'sha256')},
+                     'Actual captured source/art manifest must join current97 contract')
+    expected_scripts = {path: row['sha256'] for path, row in tracked.items()
+                        if path.startswith('game/scripts/') and path.endswith('.gd')}
+    _observe_source_directory97(root)
+    _require(scripts == expected_scripts
+             and {str(p.relative_to(root)) for p in (Path(root) / 'game/scripts').glob('*.gd')}
+                 == set(scripts), 'Missing/foreign source script outside actual97 capture refused')
+    _require(type(native) is dict and set(native) == {
+        'schema', 'engine', 'version', 'executable_bytes', 'executable_sha256',
+        'rendering_method', 'rendering_driver', 'execution_authenticated'}
+        and native['schema'] == 'null-choir-v097-native-engine-identity-v1'
+        and native['engine'] == 'Godot' and native['version'] == '4.7.2'
+        and type(native['executable_bytes']) is int and native['executable_bytes'] > 0
+        and re.fullmatch('[0-9a-f]{64}', native['executable_sha256'])
+        and native['rendering_method'] == 'mobile' and native['rendering_driver'] == 'metal'
+        and native['execution_authenticated'] is False,
+        'Exact retained native97 binary identity and honest non-authentication required')
+    _require(supervision == {'launcher_exit': 0, 'fault': None, 'native_report_exists': True,
+                            'execution_authenticated': False},
+             'Actual completed no-fault97 supervision summary required')
+    _require(type(trace) is dict and set(trace) == {
+        'arranged', 'arrangements', 'completed_chapters', 'earned_combat', 'events', 'failed',
+        'frames', 'hardware_input', 'hidden_manual_draw', 'motion', 'performance_claim',
+        'rendering_driver', 'rendering_method', 'required_chapters', 'resolution', 'schema', 'status'}
+        and trace.get('schema') == 'null-choir-v097-ordinary-threat-native-context-v1'
+        and trace.get('status') == 'CAPTURED_PENDING_INDEPENDENT_REVIEW'
+        and trace.get('failed') is False and trace.get('resolution') == [640, 360]
+        and trace.get('required_chapters') == list(range(8))
+        and trace.get('completed_chapters') == list(range(8))
+        and trace.get('arranged') is True and trace.get('earned_combat') is False
+        and trace.get('hardware_input') is False and trace.get('performance_claim') is False
+        and trace.get('hidden_manual_draw') is True
+        and trace.get('rendering_method') == native['rendering_method']
+        and trace.get('rendering_driver') == native['rendering_driver'],
+        'Actual full eight-chapter completed97 trace and native identity required')
+    roster = _ordinary_roster97(root, contract)
+    expected_roles = [{'chapter': chapter, 'role': role, 'actor': actor}
+                      for (chapter, role), actor in roster.items()]
+    _require(observation['chapter_roles'] == expected_roles,
+             'Actual97 role coverage must derive from ordinary active source actors')
+    expected_files = {}
+    suffixes = ('mid-off-control', 'mid-current', 'mid-hidden-control', 'mid-reduced',
+                'near-current', 'motion-00', 'motion-11', 'motion-23', 'motion-35')
+    for (chapter, role), actor in roster.items():
+        for suffix in suffixes + (('occluded-present', 'occluded-hidden') if role == 'worker' else ()):
+            expected_files[f'chapter-{chapter}-{role}-{suffix}.png'] = (chapter, role, actor, suffix)
+    frames = observation['frames']; emitted = trace.get('frames')
+    _require(type(frames) is list and type(emitted) is list and len(frames) == len(expected_files)
+             and len(emitted) == len(expected_files), 'Every actual97 near/mid/moving/control/occluded frame required')
+    by_file = {frame.get('file'): frame for frame in emitted}
+    _require(len(by_file) == len(emitted) and set(by_file) == set(expected_files),
+             'Missing/foreign/duplicate actual97 frame refused')
+    _require([Path(frame['path']).name for frame in frames] == [frame['file'] for frame in emitted],
+             'Receipt frame order must match exact emitted97 trace order')
+    directory = PREFIX97 + 'frames'
+    _observe_png_directory96(root, directory)
+    _require({p.name for p in (Path(root) / directory).glob('*.png')} == set(expected_files),
+             'Unexpected PNG membership outside exact actual97 frame inventory')
+    old96 = pinned_receipt(root, RECEIPT96, RECEIPT96_SHA)
+    historical_pixels = {frame[key] for job in old96['native_observation']['jobs']
+                         for frame in job['frames'] for key in ('sha256', 'rgba_sha256')}
+    for frame in frames:
+        _require(type(frame) is dict and set(frame) == {
+            'path', 'bytes', 'sha256', 'rgba_sha256', 'width', 'height'}
+            and frame['path'] == directory + '/' + Path(frame['path']).name
+            and frame['width'] == 640 and frame['height'] == 360,
+            'Exact current97 public lossless frame record required')
+        filename = Path(frame['path']).name
+        state = by_file[filename]; chapter, role, actor, suffix = expected_files[filename]
+        _require(set(state) == {'actor', 'actor_position', 'camera', 'chapter', 'file', 'light_energy',
+            'physics_tick', 'player_foot', 'reduced_effects', 'role', 'sha256', 'sprite_corners', 'sprite_visible'}
+                 and state.get('sha256') == frame['sha256'] and state.get('chapter') == chapter
+                 and state.get('role') == role and state.get('actor') == actor
+                 and state.get('sprite_visible') is (suffix not in ('mid-hidden-control', 'occluded-hidden'))
+                 and state.get('reduced_effects') is (suffix == 'mid-reduced')
+                 and type(state.get('light_energy')) in (float, int)
+                 and abs(state['light_energy'] - (0 if suffix == 'mid-off-control' else .65)) < .000001
+                 and type(state.get('physics_tick')) is int,
+                 'Exact97 PNG/state/actor/light/hidden/reduced relationships required')
+        _require(frame['sha256'] not in historical_pixels and frame['rgba_sha256'] not in historical_pixels,
+                 'Historical96 PNG/pixel reuse is not current97 graphical evidence')
+        png = _public97_bytes(root, {k: frame[k] for k in ('path', 'bytes', 'sha256')})
+        from io import BytesIO
+        from PIL import Image
+        with Image.open(BytesIO(png)) as decoded:
+            _require(decoded.format == 'PNG' and decoded.size == (640, 360)
+                     and getattr(decoded, 'n_frames', 1) == 1,
+                     'Actual97 frame must decode as640x360 lossless PNG')
+            _require(sha(decoded.convert('RGBA').tobytes()) == frame['rgba_sha256'],
+                     'Actual97 decoded RGBA drift')
+    motion = trace.get('motion'); events = trace.get('events')
+    _require(type(motion) is list and len(motion) == len(roster) * 36 and type(events) is list,
+             'All actual short AI motion rows and aggregate timing events required')
+    for (chapter, role), actor in roster.items():
+        rows = [row for row in motion if row.get('chapter') == chapter and row.get('role') == role]
+        _require(len(rows) == 36 and [row.get('tick') for row in rows] == list(range(36))
+                 and all(row.get('actor') == actor for row in rows), 'Exact per-role36tick actual97 motion join required')
+        approaches = [row for row in events if row.get('kind') == 'actual_AI_short_approach_not_earned_combat'
+                      and row.get('chapter') == chapter and row.get('role') == role]
+        _require(len(approaches) == 1 and approaches[0].get('actor') == actor
+                 and approaches[0].get('end') == by_file[f'chapter-{chapter}-{role}-motion-35.png']['actor_position']
+                 and approaches[0].get('start') == by_file[f'chapter-{chapter}-{role}-mid-current.png']['actor_position']
+                 and approaches[0].get('start') != approaches[0].get('end'),
+                 'Actual97 short AI approach must move and join its final source actor state')
+        physics_ticks = []
+        for tick in (0, 11, 23, 35):
+            state = by_file[f'chapter-{chapter}-{role}-motion-{tick:02d}.png']
+            physics_ticks.append(state['physics_tick'])
+        # snap() awaits real warm draws while production AI remains active.
+        # Its pixels/state therefore follow, not coincide with, the sample row
+        # naming that phase. Do not invent a same-physics-tick relationship.
+        _require(all(a < b for a, b in zip(physics_ticks, physics_ticks[1:])),
+                 'Actual97 moving capture phases need increasing real physics ticks')
+    timing = [row for row in events if row.get('kind') == 'aggregate_light_cost_offscreen_not_FPS']
+    _require(len(events) == len(roster) + 24 and len(timing) == 24,
+             'Only actual per-role motion and eight-chapter aggregate timing events required')
+    for chapter in range(8):
+        rows = [row for row in timing if row.get('chapter') == chapter]
+        layout = json.loads(record(root, contract['current_sources'][f'game/data/{chapter+1:02d}_{LEVEL_IDS[chapter]}.json']))
+        supplies = json.loads(record(root, contract['current_sources']['game/data/earned_supplies.json']))
+        carriers = {grant.get('carrier') for grant in supplies['chapters'][LEVEL_IDS[chapter]]['grants']}
+        ordinary_count = sum(not actor.get('seal_guardian') and not actor.get('door_warden')
+                             and actor['id'] not in carriers for actor in layout['enemies'])
+        _require([row.get('variant') for row in rows] == ['all_current', 'ordinary_off', 'all_current_repeat']
+                 and all(type(row.get('ordinary_lights')) is int and row['ordinary_lights'] == ordinary_count
+                         and type(row.get('samples')) is list and len(row['samples']) == 20 for row in rows),
+                 'Exact all/off/repeat20sample aggregate CPU light timing required per chapter')
+        for row in rows:
+            for sample in row['samples']:
+                _require(type(sample) is dict and set(sample) == {'cpu_render_ms', 'gpu_render_ms'}
+                         and type(sample['cpu_render_ms']) in (int, float)
+                         and math.isfinite(sample['cpu_render_ms']) and sample['cpu_render_ms'] > 0
+                         and sample['gpu_render_ms'] == 0,
+                         'Actual positive CPU timings with explicitly unavailable GPU timing required')
+    return {'status': 'PUBLIC97_FRAME_TRACE_SOURCE_NATIVE_JOIN_VALIDATED',
+            'chapters': 8, 'roles': len(roster), 'frames': len(frames),
+            'execution_authenticated': False}
+
+
+def validate_supplement_join97(root, receipt, contract):
+    """Independent offcenter emitter and warmed total draw/readback observations."""
+    pins = PUBLIC97_SUPPLEMENT_BINDINGS
+    _require(type(pins) is dict and set(pins) == {
+        'producer', 'base_producer', 'trace', 'script_sources', 'tracked_game', 'supervision'},
+        'Actual97 offcenter supplement bindings remain UNPINNED')
+    observation = receipt['native_observation']['supplement']
+    _require(type(observation) is dict and set(observation) == {'artifacts', 'frames', 'chapter_roles'}
+             and observation['artifacts'] == pins, 'Exact actual97 supplemental observation binding required')
+    for row in pins.values():
+        _public97_bytes(root, row)
+    _require(record(root, pins['producer']) == read_resident(root, 'game/tests/qualify_v0097_visibility_supplement.gd')
+             and record(root, pins['base_producer']) == record(root, PUBLIC97_BINDINGS['producer']),
+             'Exact supplemental producer and unchanged captured base fixture required')
+    for key in ('script_sources', 'tracked_game'):
+        _require(record(root, pins[key]) == record(root, PUBLIC97_BINDINGS[key]),
+                 'Supplement must capture the same exact current97 source/art generation')
+    _require(_public97_json(root, pins['supervision']) == {
+        'launcher_exit': 0, 'fault': None, 'native_report_exists': True, 'execution_authenticated': False},
+        'Completed no-fault supplemental native supervision required')
+    trace = _public97_json(root, pins['trace'])
+    base_trace = _public97_json(root, PUBLIC97_BINDINGS['trace'])
+    _require(type(trace) is dict and set(trace) == set(base_trace)
+        and trace['schema'] == 'null-choir-v097-offcenter-supplement-v1'
+        and trace['required_chapters'] == list(range(8)) and trace['completed_chapters'] == list(range(8))
+        and trace['status'] == 'CAPTURED_PENDING_INDEPENDENT_REVIEW' and trace['failed'] is False
+        and trace['arranged'] is True and trace['earned_combat'] is False and trace['hardware_input'] is False
+        and trace['performance_claim'] is False and trace['hidden_manual_draw'] is True
+        and trace['resolution'] == [640, 360] and trace['rendering_method'] == 'mobile'
+        and trace['rendering_driver'] == 'metal', 'Actual completed eight-chapter offcenter native trace required')
+    roster = {key: actor for key, actor in _ordinary_roster97(root, contract).items()
+              if key[1] in ('crawler', 'caster')}
+    _require(observation['chapter_roles'] == [{'chapter': chapter, 'role': role, 'actor': actor}
+             for (chapter, role), actor in roster.items()], 'Source-derived offcenter role roster required')
+    suffixes = ('mid-off-control', 'mid-current', 'mid-hidden-control', 'mid-reduced',
+                'motion-00', 'motion-11', 'motion-23', 'motion-35')
+    expected = {f'chapter-{chapter}-{role}-offcenter-{suffix}.png': (chapter, role, actor, suffix)
+                for (chapter, role), actor in roster.items() for suffix in suffixes}
+    emitted, frames = trace['frames'], observation['frames']
+    _require(type(emitted) is list and type(frames) is list
+             and len(emitted) == len(expected) and len(frames) == len(expected),
+             'Every actual97 offcenter control/reduced/motion frame required')
+    by_file = {frame.get('file'): frame for frame in emitted}
+    _require(set(by_file) == set(expected) and len(by_file) == len(emitted)
+             and [Path(frame['path']).name for frame in frames] == [frame['file'] for frame in emitted],
+             'Exact unique ordered supplemental frame emission required')
+    directory = PREFIX97 + 'supplement/frames'
+    _observe_png_directory96(root, directory)
+    _require({p.name for p in (Path(root) / directory).glob('*.png')} == set(expected),
+             'Foreign/missing supplemental PNG directory member refused')
+    old96 = pinned_receipt(root, RECEIPT96, RECEIPT96_SHA)
+    historical_pixels = {frame[key] for job in old96['native_observation']['jobs']
+                         for frame in job['frames'] for key in ('sha256', 'rgba_sha256')}
+    historical_pixels.update(frame[key] for frame in receipt['native_observation']['frames']
+                             for key in ('sha256', 'rgba_sha256'))
+    for frame in frames:
+        _require(type(frame) is dict and set(frame) == {
+            'path', 'bytes', 'sha256', 'rgba_sha256', 'width', 'height'}
+            and frame['path'] == directory + '/' + Path(frame['path']).name
+            and frame['width'] == 640 and frame['height'] == 360,
+            'Exact lossless public supplemental97 frame record required')
+        state = by_file[Path(frame['path']).name]
+        chapter, role, actor, suffix = expected[Path(frame['path']).name]
+        _require(set(state) == set(base_trace['frames'][0])
+                 and state['sha256'] == frame['sha256'] and state['chapter'] == chapter
+                 and state['role'] == role and state['actor'] == actor
+                 and state['sprite_visible'] is (suffix != 'mid-hidden-control')
+                 and state['reduced_effects'] is (suffix == 'mid-reduced')
+                 and type(state['light_energy']) in (int, float)
+                 and abs(state['light_energy'] - (0 if suffix == 'mid-off-control' else .65)) < .000001
+                 and type(state['physics_tick']) is int,
+                 'Exact supplemental pixel/light/hidden/reduced/actor trace join required')
+        _require(frame['sha256'] not in historical_pixels and frame['rgba_sha256'] not in historical_pixels,
+                 'Old96/base97 pixels are not new supplemental graphical evidence')
+        png = _public97_bytes(root, {k: frame[k] for k in ('path', 'bytes', 'sha256')})
+        from io import BytesIO
+        from PIL import Image
+        with Image.open(BytesIO(png)) as decoded:
+            _require(decoded.format == 'PNG' and decoded.size == (640, 360)
+                     and getattr(decoded, 'n_frames', 1) == 1
+                     and sha(decoded.convert('RGBA').tobytes()) == frame['rgba_sha256'],
+                     'Supplemental97 PNG/decoded pixel drift')
+    _require(len(trace['motion']) == len(roster) * 36 and len(trace['events']) == len(roster) + 8,
+             'All supplemental motion and eight warmed draw/readback events required')
+    for (chapter, role), actor in roster.items():
+        prefix = f'chapter-{chapter}-{role}-offcenter-'
+        rows = [row for row in trace['motion'] if row.get('chapter') == chapter and row.get('role') == role]
+        _require(len(rows) == 36 and [row.get('tick') for row in rows] == list(range(36))
+                 and all(row.get('actor') == actor for row in rows), 'Exact supplemental36tick source actor trace required')
+        event = [row for row in trace['events'] if row.get('kind') == 'actual_AI_short_approach_not_earned_combat'
+                 and row.get('chapter') == chapter and row.get('role') == role]
+        _require(len(event) == 1 and event[0]['actor'] == actor
+                 and event[0]['start'] == by_file[prefix+'mid-current.png']['actor_position']
+                 and event[0]['end'] == by_file[prefix+'motion-35.png']['actor_position']
+                 and event[0]['start'] != event[0]['end'], 'Actual supplemental AI movement/frame endpoint join required')
+        ticks = [by_file[prefix+f'motion-{tick:02d}.png']['physics_tick'] for tick in (0, 11, 23, 35)]
+        _require(all(a < b for a, b in zip(ticks, ticks[1:])), 'Supplemental moving frames must progress through physics')
+        drains = [row for row in trace['arrangements'] if row.get('kind') == 'natural_UI_transient_drain_before_pair'
+                  and row.get('chapter') == chapter and row.get('role') == role]
+        _require(len(drains) == 1 and drains[0]['damage_flash'] == 0 and drains[0]['hit_flash'] == 0
+                 and drains[0]['weapon_hidden'] is False and drains[0]['fov'] == 85
+                 and type(drains[0]['camera_eye']) is list and len(drains[0]['camera_eye']) == 3
+                 and all(abs(a-b) < .000001 for a,b in zip(drains[0]['camera_eye'], [0, 1.55, 0])),
+                 'Actual naturally drained UI pair must retain production eye/FOV/pistol')
+    timing = [row for row in trace['events'] if row.get('kind') == 'warmed_alternating_draw_readback_not_GPU_or_FPS']
+    _require(len(timing) == 8 and {row['chapter'] for row in timing} == set(range(8)),
+             'All eight warmed standing-view draw/readback series required')
+    counts = {row['chapter']: row['ordinary_lights'] for row in base_trace['events']
+              if row['kind'] == 'aggregate_light_cost_offscreen_not_FPS'}
+    for event in timing:
+        _require(event['ordinary_lights'] == counts[event['chapter']]
+                 and type(event['batches']) is list and len(event['batches']) == 8,
+                 'Same source ordinary-light population and eight alternating batches required')
+        for index, batch in enumerate(event['batches']):
+            _require(batch['batch'] == index and abs(batch['energy'] - (.65 if index % 2 == 0 else 0)) < .000001
+                     and type(batch['samples']) is list and len(batch['samples']) == 8,
+                     'Exact warmed alternating on/off eight-sample batches required')
+            for sample in batch['samples']:
+                _require(type(sample) is dict and set(sample) == {'draw_and_readback_usec', 'width', 'height'}
+                         and type(sample['draw_and_readback_usec']) is int and sample['draw_and_readback_usec'] > 0
+                         and sample['width'] == 640 and sample['height'] == 360,
+                         'Actual forced draw/synchronization/readback latency, not GPU/FPS, required')
+    return {'status': 'PUBLIC97_SUPPLEMENT_TRACE_FRAME_TIMING_JOIN_VALIDATED',
+            'chapters': 8, 'roles': len(roster), 'frames': len(frames), 'execution_authenticated': False}
 
 
 # Shared only inside this Python process: legacy ledgers load this helper through
@@ -1106,6 +1705,9 @@ def _memo96_replay(root, observed):
             return False
     for relative, expected in observed['directories'].items():
         if tuple(sorted(p.name for p in (Path(root) / relative).glob('*.png'))) != expected:
+            return False
+    for relative, expected in observed.get('source_directories', {}).items():
+        if tuple(sorted(p.name for p in (Path(root) / relative).glob('*.gd'))) != expected:
             return False
     return True
 

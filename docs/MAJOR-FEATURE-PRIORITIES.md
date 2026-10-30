@@ -1,6 +1,6 @@
 # NULL CHOIR — Major Feature Priorities
 
-Updated: 29 October 2026 (JST)
+Updated: 30 October 2026 (JST)
 
 This is the working checklist for the native Goal. Read it first, execute the highest-priority unfinished major block, and update its status and evidence as work progresses. Preserve accepted work; do not restart completed features or replace implementation with repeated planning.
 
@@ -51,10 +51,11 @@ This tracked Markdown file is the source of truth for **what to do next and what
 - **Owner:** lead/integrator; no implementation worker is currently active. Reconcile live worker state before delegating.
 - **Candidate:** local branch `feature/v0097-readable-pursuit-autorun`, source/test commit `6bbf5323d43cc25db342002aabf379ab097c1435` (runtime unchanged from `c5d2d62`). It has not been pushed or released; a fresh GitHub-main checkout does not contain these local fixes yet.
 - **Evidence obtained:**270 arranged native movement cases, native collision/charge/dodge/pose checks,32 direction selections,13 independent pace/direction/finite-commitment observations across all roles,274 finite-supply state checks, repaired production checkpoint/save/Continue/focus-loss checks and local-light configuration checks. See the candidate notes and evidence locations below; these are not current rendered visibility acceptance.
-- **Next action:** obtain current-source640×360 moving ordinary-threat visibility evidence in all eight chapters, including dark-pool transitions, near/mid views, occluded negatives, reduced effects and aggregate Mobile light cost. Preserve user window/input state and use isolated test profiles.
+- **Next action:** finish the independent review’s bounded supplemental visibility/cost evidence, additive v0.097 art-consumer compatibility and actual package qualification; then deliver the coherent release. Preserve user window/input state and isolated test profiles.
 - **Remaining delivery gates:** affected recovery/save/art-consumer qualification, independent intended-use acceptance, coherent PR/required checks, actual signed/notarized package and matching README/same Site.
 - **Known workspace detail:** nine normal editor-generated healing-machine `.import` sidecars are uncommitted. Preserve them and their recovery records; do not stage them accidentally or restore minimal descriptors and run without reimport.
-- **Rendered route held:** macOS TCC requested Godot access to removable volumes while the hidden Metal pilot opened the external-drive project. Codex Full access does not grant that separate application permission. Human approval is needed; no privacy controls or execution-location workarounds are authorized. Both failed pilots are retained and produced no game pixels. Independent headless source/physics work can continue; no feature acceptance or release is claimed.
+- **Rendered route reopened:** Godot's macOS removable-volume permission is now recorded as allowed. No privacy control was changed by the agent. Current-source hidden Mobile/Metal output completed all eight chapters: 214 frames and 792 short-motion observations. Independent review confirms Worker improvement and sampled occlusion but requires supplemental off-center crawler/caster views, drained UI overlays and better bounded aggregate-cost evidence before acceptance. GPU timing returned unsupported zeros; no FPS or GPU-overhead benefit is inferred. Failed/partial captures remain retained.
+- **Current delivery boundary:** Jared authorized finishing v0.097, proper scoped PR reconciliation/merge, the matching actual signed/notarized build, the same Site update and an honest workflow-demo message to Angus; then **pause the Goal**. There were no open NULL CHOIR PRs at the initial 30 October inspection. Do not advance P02/v0.098 after that boundary without resumption.
 
 ### Independent P02 preparation — retained, not accepted
 
@@ -210,7 +211,7 @@ Add one row per coherent major block; retain links to exact evidence. Mark a par
 | Block | State | Exact source / evidence | Next action |
 |---|---|---|---|
 | v0.096 accepted foundations | Delivered; scoped, not whole Goal | [Release notes](releases/v0.096.md); public release above | Preserve; reopen only demonstrated affected regressions |
-| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `6bbf5323d43cc25db342002aabf379ab097c1435`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Human approval of Godot removable-volume access, then current rendered all-chapter visibility/resource checks, remaining recovery/compatibility review, independent acceptance and matching release |
+| v0.097 readable pursuit / automatic fast movement | Implemented, partially native-tested; not accepted/released | `6bbf5323d43cc25db342002aabf379ab097c1435`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Finish supplemental off-center/overlay-free visibility and bounded cost checks, current compatibility/package review, independent acceptance and matching release; then the authorized Angus message and Goal pause |
 |16-apparatus machinery tranche | Staged; unaccepted, not integrated | External `work/local-lead-20261029/chapter-consequences/` | Recheck exact candidate and qualify real world/route consequences before promotion |
 | Native8K/editable chapter masters | Two Intake pilot scenes/previews retained; unaccepted, no actual 8K render | Untracked `source/art/chapter-native-v1/`; external `work/chapter-masters-native/`; accepted paintings unchanged | Structural composition/craft reassessment, then bounded preview before true masters and consumed derivatives |
 
