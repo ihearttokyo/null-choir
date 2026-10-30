@@ -1,6 +1,6 @@
-# v0.097 candidate — readable pursuit and automatic fast movement
+# v0.097 — readable pursuit and automatic fast movement
 
-Status: local implementation, not released or independently accepted. Public v0.096 remains the current qualified download.
+Status: independently accepted and publicly released as v0.097. The same Site is version15; v0.096 remains an unchanged rollback. PR116 integration and the authorized owner notification/pause handoff are tracked in the canonical roadmap.
 
 Jared reported ordinary creatures becoming invisible, sluggish pursuit and a run-key requirement. Automatic fast movement has **no slow-walk modifier**. The old `run` preference binding remains serialized for compatibility but has no movement effect and is omitted from the controls menu. Existing analog strength, 35Hz-inspired acceleration, friction, collision/slide and pause safety remain unchanged. This is Doom-inspired movement, not exact engine/input parity.
 
@@ -8,7 +8,7 @@ Ordinary live actors now carry a bounded front-facing readability light. It is u
 
 Crawler, worker, caster, brute, guardian, Warden and Avatar pursuit speeds increase while the summoner retains its stationary role. Crawler lunges commit at18m/s for0.32s with locked aim, readable windup, native collision and single-contact recovery. Brute and Warden charge ranges now derive from their actual finite travel and contact reach; their displayed charge lanes share that authority. The Warden's alternate ranged attack remains separate. Crawler attack pose now persists throughout its longer lunge.
 
-## Evidence so far
+## Earlier native evidence (before final qualification)
 
 - Normal Godot4.7.2 headless import: exit0, no script/import errors.
 -270 arranged native movement start/reverse/coast-stop cases across rotated digital/analog directions, with the legacy modifier held/released: PASS. Native wall-slide/corner checks: PASS.
@@ -20,7 +20,7 @@ Crawler, worker, caster, brute, guardian, Warden and Avatar pursuit speeds incre
 - Local-light configuration/ownership microtest: PASS. This does not establish rendered visibility.
 - All32 atlas-direction selections pass cleanly after fixing the fixture to stop its newly started title playback and drain the native mixer before disposal. The earlier shutdown-leak failure remains retained. A separate failed diagnostic after restoring minimal authoring import sidecars was terminated; normal editor reimport restored the native remaps before the clean run.
 
-These use isolated test profiles and arranged fixed-clock native physics; they do not establish physical human control feel, rendered quality, sustained FPS, earned campaign balance, save/Continue qualification or a standalone package. Prior v0.096 screenshots are historical, not images of this changed gameplay source. Required current-pixel checks, affected recovery/art qualification, independent review, signing/notarization, release/README and the same live Site update remain open. Original artwork/audio, saves and rollback builds remain preserved.
+These earlier cases used isolated profiles and arranged fixed-clock physics; alone they did not establish rendered quality, physical human feel, sustained FPS, an earned campaign or a standalone package. Prior v0.096 screenshots remain historical. The current qualification below supplies the separate rendered, compatibility and actual package evidence; no old image is relabeled. Original artwork/audio, saves and rollback builds remain preserved.
 
 ## Historical rendered-validation gate (cleared 30 October)
 
@@ -35,4 +35,4 @@ The exact current97 technical bridge preserves historical94/95/96 source/frames,
 
 The signed arm64 application passes its production packaged eight-chapter resource/audio/combat/finite-supply/checkpoint diagnostics. Separately, the matching official engine loads the actual release PCK for270 movement cases, crawler charge/dodge/wall/pose,13 pace observations and local-light state, plus16 Mobile/Metal standing views across eight chapters. These PCK checks are not shipping-template window or physical-input observations. An attempted external-script invocation in the release template timed out without assertions; it is retained as an unsupported-route diagnostic, not a PASS or a demonstrated gameplay failure.
 
-Apple accepted the exact signed package; stapling, codesign, Gatekeeper and system distribution checks pass. The GitHub-hosted draft asset was downloaded and its exact SHA/CRC/signature/ticket/Gatekeeper rechecked. [Exact v0.097 artifact and source derivation](releases/v0.097.md) records the package,506-file projections and editor configuration normalization, whose effective settings match in exact4.7.2 native getters. Public release, final coherent PR/CI/merge, same Site update and authorized Angus workflow-demo message remain delivery gates. Pause the native Goal at that boundary; broader P02–P10 scope is not complete.
+Apple accepted the exact signed package; stapling, codesign, Gatekeeper and system distribution checks pass. The GitHub-hosted draft asset was downloaded and its exact SHA/CRC/signature/ticket/Gatekeeper rechecked. [Exact v0.097 artifact and source derivation](releases/v0.097.md) records the package,506-file projections and editor configuration normalization, whose effective settings match in exact4.7.2 native getters. P01 now passes independent frozen-rubric acceptance; the exact public archive download matches and the same Site is natively deployed as version15. Extra anonymous Site HTTP was blocked by Cloudflare1010; no browser-pixel QA is inferred. Final coherent PR116 integration and the authorized Angus workflow-demo message remain owner handoff actions. Pause the native Goal at that boundary; broader P02–P10 scope is not complete.

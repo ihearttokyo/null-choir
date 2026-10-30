@@ -37,25 +37,22 @@ This tracked Markdown file is the source of truth for **what to do next and what
 
 ## Current baseline
 
-- Public qualified release: [Null Choir v0.096](https://github.com/ihearttokyo/null-choir/releases/tag/v0.096), Developer ID signed, notarized, stapled and packed-resource tested. This is not full-goal completion.
-- GitHub baseline: `a9679651df223dbe34465f27319bc59e2704326c`.
+- Public qualified release: [Null Choir v0.097 — Read the Threat](https://github.com/ihearttokyo/null-choir/releases/tag/v0.097). Developer ID-signed, notarized, stapled and packed-resource tested; anonymous public ZIP download matches the verified bytes. This is **P01 delivery, not full-goal completion**.
+- Frozen shipping source: `e8f2de5c4728938632552813de84703885145486`; [exact archive/PCK and source projection](releases/v0.097.md). Later documentation commits do not change the506-file production projection.
+- Source integration: [PR116](https://github.com/ihearttokyo/null-choir/pull/116), delivery branch `feature/v0097-readable-pursuit-autorun`. Use the live PR record for its exact head, checks and merge identity rather than guessing a future merge SHA.
 - Canonical working repository: `/Volumes/Backup (Biz)/Null Choir/repository`.
-- Current branch: `feature/v0097-readable-pursuit-autorun`.
-- Local candidate: **v0.097**, source/test candidate commit `e8f2de5c4728938632552813de84703885145486` (P01 runtime behavior unchanged; reviewed importer metadata now committed). Pushed; independently reviewed source/render evidence and signed/notarized package are ready for final acceptance. **Not merged or publicly released**; the GitHub asset is draft-only.
-- [Existing live Site](https://null-choir.jaymoney.chatgpt.site/) remains version14 matching v0.096. Do not recreate retired GitHub Pages or publish a duplicate Site.
-- Historical project work, originals and temporary fixtures are preserved on the external drive with compatibility links. Installed user apps and saves remain untouched.
+- [Same existing Site](https://null-choir.jaymoney.chatgpt.site/) is natively confirmed public **version15**, source `1e6f00af409afe5cb3305fa071e110fdc68d642c`, matching v0.097. Browser-pixel QA and an extra anonymous Site HTTP fetch remain unverified: the latter meets Cloudflare1010; no security/access change was made. Native deployment/source identity and static/local HTTP checks are distinct from browser QA.
+- v0.096 and all earlier rollback archives, original art/audio, editable work and user saves remain retained. Project work remains on the external drive with compatibility links.
 
-## Current work item — P01 / v0.097
+## Current handoff — finish the v0.097 delivery boundary, then pause
 
-- **Outcome:** readable ordinary creatures, faster role-specific pursuit/dodgeable lunges, automatic fast movement with **no slow-walk modifier**.
-- **Owner:** lead/integrator; no implementation worker is currently active. Reconcile live worker state before delegating.
-- **Candidate:** local branch `feature/v0097-readable-pursuit-autorun`, source/test commit `e8f2de5c4728938632552813de84703885145486` (P01 runtime behavior unchanged; reviewed importer metadata now committed). It is pushed but not merged or publicly released; GitHub main still lacks these fixes. The exact GitHub draft archive has been downloaded and verified.
-- **Evidence obtained:**270 arranged native movement cases, native collision/charge/dodge/pose checks,32 direction selections,13 independent pace/direction/finite-commitment observations across all roles,274 finite-supply state checks, repaired production checkpoint/save/Continue/focus-loss checks and local-light configuration checks. See the candidate notes and evidence locations below; these are not current rendered visibility acceptance.
-- **Next action:** finish final acceptance and the coherent release PR/CI/merge, publish the qualified package and same Site, send the authorized Angus message, then pause. Preserve user window/input state and isolated test profiles.
-- **Remaining delivery gates:** affected recovery/save/art-consumer qualification, independent intended-use acceptance, coherent PR/required checks, actual signed/notarized package and matching README/same Site.
-- **Importer disposition:** nine normal editor-generated healing-machine `.import` descriptors were independently reviewed and intentionally committed. Fresh native import/export and actual PCK consumers pass; original raw GLB/PNG assets are unchanged. Historical minimal descriptors remain preserved in the explicit historical96 projection.
-- **Rendered route reopened:** Godot's macOS removable-volume permission is now recorded as allowed. No privacy control was changed by the agent. Current-source hidden Mobile/Metal output completed all eight chapters: 214 frames and 792 short-motion observations. Independent review confirms Worker improvement, sampled occlusion and the completed off-center crawler/caster supplement with naturally drained overlays. Warmed alternating draw/readback observations are retained within their bounded scope. GPU timing returned unsupported zeros; no FPS or GPU-overhead benefit is inferred. Failed/partial captures remain retained.
-- **Current delivery boundary:** Jared authorized finishing v0.097, proper scoped PR reconciliation/merge, the matching actual signed/notarized build, the same Site update and an honest workflow-demo message to Angus; then **pause the Goal**. There were no open NULL CHOIR PRs at the initial 30 October inspection. Do not advance P02/v0.098 after that boundary without resumption.
+- **P01 outcome:** independently accepted and published: readable ordinary creatures, faster role-specific pursuit/dodgeable finite lunges and automatic fast movement with **no slow-walk modifier**. The private frozen-rubric acceptance passes the unrounded9.2 stopping rule and every floor; numerical assessments remain outside public Git. Freeze these source/artifact identities; do not reopen for optional polishing.
+- **Evidence:**326 current-source arranged Mobile/Metal PNGs across eight chapters, including supplemental off-center/overlay-free small-body views;270 native movement cases, crawler contact/dodge/wall/pose and13 pace observations;274 finite-supply state checks and production save-failure/Continue/focus-loss checks. Actual signed-app production diagnostics pass eight scenes/art/audio/weapon/finite-supply/checkpoint cases. Separately, actual release-PCK physics and16 Mobile/Metal PCK standing views pass using the matching official engine, not a shipping-template window.
+- **Cost limits:**512 warmed alternating draw/readback observations establish bounded renderer-plus-synchronization work. Unsupported GPU zeros prove no GPU cost; no causal light-overhead gain, human input/listening, sustained FPS or played campaign is claimed.
+- **Import/compatibility:** the nine normal importer descriptors were independently reviewed and intentionally committed; fresh native import/export and actual PCK consumption pass. Historical94/95/96 source/frame evidence remains explicitly historical, with strict current97 byte/inventory/tamper joins.
+- **Delivery owner:** lead/integrator. No implementation worker remains active. PR116's first exact-head CI wave passed both Python art matrices, native terrain fixtures and splash; Codex GitHub review completed without findings. Any final documentation head must receive applicable exact-head checks/review before SHA-bound merge. Preserve all untracked P02/private work; no blanket staging or force cleanup.
+- **Remaining owner actions:** finish final PR116 integration hygiene, send the expressly authorized one-message Angus update with an honest optional-workflow-demo recommendation, then **pause the native Goal**. Private notification/run state lives in the operational checkpoint; do not infer permission to resend from this public checklist.
+- **Stop boundary:** Jared's30October instruction stops after v0.097 delivery. Do **not** start P02, v0.098 or another upgrade until he resumes. The full Goal remains unfinished; do not mark it complete.
 
 ### Independent P02 preparation — retained, not accepted
 
@@ -65,28 +62,28 @@ On authorized resumption, reassess the structural composition and craft before a
 
 ## Execution order
 
-1. Finish **P01**: the player-reported v0.096 visibility, pursuit/lunge and automatic-fast-movement fixes; qualify and deliver v0.097 before calling them shipped.
-2. Advance **P02 and P03** as the next coherent major art/world block. Choose from actual source and rendered evidence, not catalog counts. Preserve the staged machinery work until it can meet its own contract.
+1. **P01 is accepted and published as v0.097.** Finish only the current integration/notification/pause handoff above. Do not begin another feature automatically.
+2. **After an explicit resumption**, advance **P02 and P03** as the next coherent major art/world block. Choose from actual source and rendered evidence, not catalog counts. Preserve the staged machinery work until it can meet its own contract.
 3. Close substantive gaps in **P04–P08**, reusing delivered foundations and unaffected evidence.
 4. Apply **P09 and P10** to every affected increment. Deliver each accepted major block, then continue to the next; do not endlessly polish a passing feature.
 
 ---
 
-## [ ] P01 — Readable threats, frightening pursuit and automatic fast movement
+## [x] P01 — Readable threats, frightening pursuit and automatic fast movement
 
-**Status: implemented locally; qualification and delivery open. Highest immediate priority.**
+**Status: independently accepted and published in v0.097; frozen within this scoped playability increment. Final integration/owner notification is tracked above.**
 
 - [x] v0.096 provides eight directional enemy/boss runtime bodies, role-specific attack tells, earned seal bearers and exit wardens.
 - [x] v0.096 provides Doom-inspired acceleration, friction, momentum and native collision/slide foundations.
-- [ ] Deliver automatic fast movement with **no slow-walk modifier**. Shift, the legacy run binding and its controller equivalent must not slow the player. Preserve analog strength and existing input/pause safety; keep old serialized preferences compatible without advertising an obsolete control.
-- [ ] Keep ordinary creatures readable when they leave fixed light pools. Preserve shaded original artwork, alpha/hit coverage, local darkness and depth/occlusion; no global fill or fullbright replacement.
-- [ ] Deliver faster role-specific pursuit and genuinely fast, readable, dodgeable lunges. Preserve locked aim, wall/ground collision, finite reach, one contact per charge, recovery and distinct ranged/summoning roles.
-- [ ] Inspect moving current-source output at640×360 across all eight chapters, near/mid distance, dark-pool transitions, occluded negatives and reduced effects. Measure aggregate Mobile lighting cost; do not infer sustained FPS.
-- [ ] Qualify affected recovery, saves, combat/art-consumer contracts and the actual portable build; independently accept and deliver through P10.
+- [x] Deliver automatic fast movement with **no slow-walk modifier**. Shift, the legacy run binding and its controller equivalent must not slow the player. Preserve analog strength and existing input/pause safety; keep old serialized preferences compatible without advertising an obsolete control.
+- [x] Keep ordinary creatures readable when they leave fixed light pools. Preserve shaded original artwork, alpha/hit coverage, local darkness and depth/occlusion; no global fill or fullbright replacement.
+- [x] Deliver faster role-specific pursuit and genuinely fast, readable, dodgeable lunges. Preserve locked aim, wall/ground collision, finite reach, one contact per charge, recovery and distinct ranged/summoning roles.
+- [x] Inspect moving current-source output at640×360 across all eight chapters, near/mid distance, dark-pool transitions, occluded negatives and reduced effects. Measure aggregate Mobile lighting cost; do not infer sustained FPS.
+- [x] Qualify affected recovery, saves, combat/art-consumer contracts and the actual portable build; independently accept and deliver through P10.
 
-**Evidence already obtained, not final acceptance:**13 independent pace/direction/finite-commitment observations (all eight roles, ranged-strafe and Warden alternate-attack admission),274 finite-supply state checks and actual checkpoint disk-failure/Continue/focus-loss cases, plus270 arranged native movement cases with legacy modifier held/released; native slide/corner checks; real crawler AI contact/dodge/wall-stop/full-charge-pose checks; brute/Warden grounding and shared finite charge-lane checks; ordinary enemy telegraphs; enemy damage/infighting/death;32 atlas-direction selections. Headless fixed-clock evidence is not rendered visibility or human feel. Light configuration/ownership checks are not pixel acceptance. Failed attempts and their diagnoses remain retained.
+**Earlier partial evidence, not sufficient alone:**13 independent pace/direction/finite-commitment observations (all eight roles, ranged-strafe and Warden alternate-attack admission),274 finite-supply state checks and actual checkpoint disk-failure/Continue/focus-loss cases, plus270 arranged native movement cases with legacy modifier held/released; native slide/corner checks; real crawler AI contact/dodge/wall-stop/full-charge-pose checks; brute/Warden grounding and shared finite charge-lane checks; ordinary enemy telegraphs; enemy damage/infighting/death;32 atlas-direction selections. Headless fixed-clock evidence is not rendered visibility or human feel. Light configuration/ownership checks are not pixel acceptance. Failed attempts and their diagnoses remain retained.
 
-See [player-fix candidate notes](POST-V0096-PLAYER-FIXES.md).
+The current326-frame set and strict technical joins supplement—not relabel—the older evidence. See [player-fix notes](POST-V0096-PLAYER-FIXES.md) and [exact release/evidence limits](releases/v0.097.md).
 
 ## [ ] P02 — Coherent title, chapter and runtime art with true native8K/editable masters
 
@@ -191,7 +188,7 @@ Seven aesthetic directions: Christian, Buddhist, Shinto, Islamic, Hindu, Jewish 
 
 ## [ ] P10 — Coherent releases, actual builds and matching README/Site
 
-**Status: v0.096 complete; v0.097 and subsequent upgrades not delivered. Applies to every accepted major increment.**
+**Status: v0.096 retained; v0.097 package and same Site published, final integration/owner handoff above. Subsequent upgrades remain unfinished. Applies to every accepted major increment.**
 
 For each major release:
 
@@ -202,7 +199,7 @@ For each major release:
 - [ ] Verify Developer ID signing, notarization, stapling, system checks, archive identity and actual downloadable bytes. A source merge or signing-only milestone is not a delivered build.
 - [ ] Update the repository README, release notes and **same existing Site** with truthful player-facing copy and actual captures matching the qualified package. Preserve its public audience and rollback URLs.
 - [ ] Retain originals, editable masters, audio, user saves, recovery history and previous releases. External notifications require their own exact authorization; do not resend the completed v0.096 Angus notification.
-- [ ] Freeze the passing increment, update this checklist and continue the next major priority.
+- [ ] Freeze the passing increment and update this checklist; continue the next major priority only when authorized. The current30October boundary requires a Goal pause.
 
 ## Working acceptance and release register
 
@@ -210,8 +207,8 @@ Add one row per coherent major block; retain links to exact evidence. Mark a par
 
 | Block | State | Exact source / evidence | Next action |
 |---|---|---|---|
-| v0.096 accepted foundations | Delivered; scoped, not whole Goal | [Release notes](releases/v0.096.md); public release above | Preserve; reopen only demonstrated affected regressions |
-| v0.097 readable pursuit / automatic fast movement | Source/render/compatibility and signed/notarized package qualified; final acceptance/public delivery open | `e8f2de5c4728938632552813de84703885145486`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Finish final acceptance, coherent PR/CI/merge, publish matching package/Site, authorized Angus message and Goal pause |
+| v0.096 accepted foundations | Delivered; scoped, not whole Goal | [Release notes](releases/v0.096.md); [retained public release](https://github.com/ihearttokyo/null-choir/releases/tag/v0.096) | Preserve; reopen only demonstrated affected regressions |
+| v0.097 readable pursuit / automatic fast movement | Independently accepted; package and same Site published; frozen | `e8f2de5c4728938632552813de84703885145486`; external `work/behavior-checks/`; [candidate notes](POST-V0096-PLAYER-FIXES.md) | Finish PR116 integration and authorized owner notification, then Goal pause; do not reopen accepted P01 |
 |16-apparatus machinery tranche | Staged; unaccepted, not integrated | External `work/local-lead-20261029/chapter-consequences/` | Recheck exact candidate and qualify real world/route consequences before promotion |
 | Native8K/editable chapter masters | Two Intake pilot scenes/previews retained; unaccepted, no actual 8K render | Untracked `source/art/chapter-native-v1/`; external `work/chapter-masters-native/`; accepted paintings unchanged | Structural composition/craft reassessment, then bounded preview before true masters and consumed derivatives |
 
